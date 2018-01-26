@@ -1,0 +1,1521 @@
+<oifits>
+<version>VERSION_1</version>
+<filename>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</filename>
+<local_filename>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</local_filename>
+<size>184320</size>
+<md5sum>1ba5c2a69f3d5f5106caad84a015e5a8</md5sum>
+<hdu>
+<keywords>
+<keyword><name>CRPIX1</name><value>1.0</value><description>Reference pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>CRPIX2</name><value>1.0</value><description>Reference pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>CRVAL1</name><value>-4.848136811095E-8</value><description>Coordinate at reference pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>CRVAL2</name><value>-4.848136811095E-8</value><description>Coordinate at reference pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>CDELT1</name><value>1.227376407872E-9</value><description>Coord. incr. per pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>CDELT2</name><value>1.227376407872E-9</value><description>Coord. incr. per pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>CUNIT1</name><value>deg</value><description> Physical units for CDELT1 and CRVAL1</description><type>A</type><unit></unit></keyword>
+<keyword><name>CUNIT2</name><value>deg</value><description> Physical units for CDELT2 and CRVAL2</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATAMIN</name><value>1.543399775983E-05</value><description>Minimum data value</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATAMAX</name><value>0.14965708553791046</value><description>Maximum data value</description><type>A</type><unit></unit></keyword>
+<keyword><name>CROTA1</name><value>0</value><description> Rotation angle.</description><type>A</type><unit></unit></keyword>
+<keyword><name>CROTA2</name><value>0</value><description> Rotation angle.</description><type>A</type><unit></unit></keyword>
+</keywords>
+</hdu>
+<OI_TARGET>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_TARGET</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>1</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+</keywords>
+<rows>1</rows><columns>
+<column><name>TARGET_ID</name><description>index number</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TARGET</name><description>target name</description><type>A</type><unit></unit></column>
+<column><name>RAEP0</name><description>RA at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>0.0</min><max>0.0</max></column>
+<column><name>DECEP0</name><description>DEC at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>-60.0</min><max>-60.0</max></column>
+<column><name>EQUINOX</name><description>equinox</description><type>E</type><unit>yr|year|years</unit><min>2000.0</min><max>2000.0</max></column>
+<column><name>RA_ERR</name><description>error in RA at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>0.0</min><max>0.0</max></column>
+<column><name>DEC_ERR</name><description>error in DEC at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>0.0</min><max>0.0</max></column>
+<column><name>SYSVEL</name><description>systemic radial velocity</description><type>D</type><unit>m/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second</unit><min>0.0</min><max>0.0</max></column>
+<column><name>VELTYP</name><description>reference for radial velocity</description><type>A</type><unit></unit></column>
+<column><name>VELDEF</name><description>definition of radial velocity</description><type>A</type><unit></unit></column>
+<column><name>PMRA</name><description>proper motion in RA</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PMDEC</name><description>proper motion in DEC</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PMRA_ERR</name><description>error of proper motion in RA</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PMDEC_ERR</name><description>error of proper motion in DEC</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PARALLAX</name><description>parallax</description><type>E</type><unit>deg|degree|degrees</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PARA_ERR</name><description>error in parallax</description><type>E</type><unit>deg|degree|degrees</unit><min>0.0</min><max>0.0</max></column>
+<column><name>SPECTYP</name><description>spectral type</description><type>A</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TARGET</th><th>RAEP0</th><th>DECEP0</th><th>EQUINOX</th><th>RA_ERR</th><th>DEC_ERR</th><th>SYSVEL</th><th>VELTYP</th><th>VELDEF</th><th>PMRA</th><th>PMDEC</th><th>PMRA_ERR</th><th>PMDEC_ERR</th><th>PARALLAX</th><th>PARA_ERR</th><th>SPECTYP</th></tr>
+<tr><td>1</td><td>CLUSTER</td><td>0.0</td><td>-60.0</td><td>2000.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>GEOCENTR</td><td>OPTICAL</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>Unknown</td></tr>
+</table>
+</OI_TARGET>
+<metadata>
+  <target>
+    <target_name>CLUSTER</target_name>
+    <s_ra>0.0</s_ra>
+    <s_dec>-60.0</s_dec>
+    <t_exptime>120.0</t_exptime>
+    <t_min>2457608.3125</t_min>
+    <t_max>2457608.479166667</t_max>
+    <em_res_power>5.314634</em_res_power>
+    <em_min>2.179E-6</em_min>
+    <em_max>2.179E-6</em_max>
+    <facility_name>VLTI_1</facility_name>
+    <instrument_name>PRIMAMBR</instrument_name>
+    <nb_vis>54</nb_vis>
+    <nb_vis2>54</nb_vis2>
+    <nb_t3>0</nb_t3>
+    <nb_channels>1</nb_channels>
+  </target>
+  <target>
+    <target_name>CLUSTER</target_name>
+    <s_ra>0.0</s_ra>
+    <s_dec>-60.0</s_dec>
+    <t_exptime>120.0</t_exptime>
+    <t_min>2457608.5</t_min>
+    <t_max>2457608.6875</t_max>
+    <em_res_power>5.314634</em_res_power>
+    <em_min>2.179E-6</em_min>
+    <em_max>2.179E-6</em_max>
+    <facility_name>VLTI_1</facility_name>
+    <instrument_name>PRIMAMBR</instrument_name>
+    <nb_vis>60</nb_vis>
+    <nb_vis2>60</nb_vis2>
+    <nb_t3>0</nb_t3>
+    <nb_channels>1</nb_channels>
+  </target>
+</metadata>
+<OI_ARRAY>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_ARRAY</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>2</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_1</value><description>array name for cross-referencing</description><type>A</type><unit></unit></keyword>
+<keyword><name>FRAME</name><value>Geocentric</value><description>coordinate frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>ARRAYX</name><value>1942014.1545180853</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYY</name><value>-5455311.818167002</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYZ</name><value>-2654530.4375114734</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+</keywords>
+<rows>2</rows><columns>
+<column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
+<column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
+<column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
+<column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-68.33377753186052</min><max>0.0</max></column>
+</columns>
+<table>
+<tr>
+<th>TEL_NAME</th><th>STA_NAME</th><th>STA_INDEX</th><th>DIAMETER</th><th>STAXYZ</th></tr>
+<tr><td>AT1</td><td>A0</td><td>1</td><td>1.8</td><td>-55.811603344981414 -14.641622248318622 0.0</td></tr>
+<tr><td>AT2</td><td>B1</td><td>4</td><td>1.8</td><td>-68.33377753186052 -1.8630754751734742 0.0</td></tr>
+</table>
+</OI_ARRAY>
+<OI_ARRAY>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_ARRAY</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>2</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>2</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_2</value><description>array name for cross-referencing</description><type>A</type><unit></unit></keyword>
+<keyword><name>FRAME</name><value>Geocentric</value><description>coordinate frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>ARRAYX</name><value>1942014.1545180853</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYY</name><value>-5455311.818167002</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYZ</name><value>-2654530.4375114734</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+</keywords>
+<rows>2</rows><columns>
+<column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
+<column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>15</max></column>
+<column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
+<column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-90.78660190549294</min><max>31.242553648086183</max></column>
+</columns>
+<table>
+<tr>
+<th>TEL_NAME</th><th>STA_NAME</th><th>STA_INDEX</th><th>DIAMETER</th><th>STAXYZ</th></tr>
+<tr><td>AT1</td><td>A0</td><td>1</td><td>1.8</td><td>-55.811603344981414 -14.641622248318622 0.0</td></tr>
+<tr><td>AT2</td><td>D2</td><td>15</td><td>1.8</td><td>-90.78660190549294 31.242553648086183 0.0</td></tr>
+</table>
+</OI_ARRAY>
+<OI_ARRAY>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_ARRAY</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>2</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>3</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_3</value><description>array name for cross-referencing</description><type>A</type><unit></unit></keyword>
+<keyword><name>FRAME</name><value>Geocentric</value><description>coordinate frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>ARRAYX</name><value>1942014.1545180853</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYY</name><value>-5455311.818167002</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYZ</name><value>-2654530.4375114734</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+</keywords>
+<rows>2</rows><columns>
+<column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
+<column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>18</min><max>24</max></column>
+<column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
+<column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-95.5014776162963</min><max>80.62763013930758</max></column>
+</columns>
+<table>
+<tr>
+<th>TEL_NAME</th><th>STA_NAME</th><th>STA_INDEX</th><th>DIAMETER</th><th>STAXYZ</th></tr>
+<tr><td>AT1</td><td>G1</td><td>18</td><td>1.8</td><td>-95.5014776162963 66.71572732949897 0.0</td></tr>
+<tr><td>AT2</td><td>J3</td><td>24</td><td>1.8</td><td>36.19305914286633 80.62763013930758 0.0</td></tr>
+</table>
+</OI_ARRAY>
+<OI_ARRAY>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_ARRAY</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>2</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>4</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_4</value><description>array name for cross-referencing</description><type>A</type><unit></unit></keyword>
+<keyword><name>FRAME</name><value>Geocentric</value><description>coordinate frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>ARRAYX</name><value>1942014.1545180853</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYY</name><value>-5455311.818167002</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYZ</name><value>-2654530.4375114734</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+</keywords>
+<rows>2</rows><columns>
+<column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
+<column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>15</min><max>23</max></column>
+<column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
+<column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-90.78660190549294</min><max>114.45958217307238</max></column>
+</columns>
+<table>
+<tr>
+<th>TEL_NAME</th><th>STA_NAME</th><th>STA_INDEX</th><th>DIAMETER</th><th>STAXYZ</th></tr>
+<tr><td>AT1</td><td>D2</td><td>15</td><td>1.8</td><td>-90.78660190549294 31.242553648086183 0.0</td></tr>
+<tr><td>AT2</td><td>J2</td><td>23</td><td>1.8</td><td>-62.1512697357479 114.45958217307238 0.0</td></tr>
+</table>
+</OI_ARRAY>
+<OI_ARRAY>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_ARRAY</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>2</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>5</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_5</value><description>array name for cross-referencing</description><type>A</type><unit></unit></keyword>
+<keyword><name>FRAME</name><value>Geocentric</value><description>coordinate frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>ARRAYX</name><value>1942014.1545180853</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYY</name><value>-5455311.818167002</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYZ</name><value>-2654530.4375114734</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+</keywords>
+<rows>2</rows><columns>
+<column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
+<column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>18</min><max>22</max></column>
+<column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
+<column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-95.5014776162963</min><max>106.64805474365541</max></column>
+</columns>
+<table>
+<tr>
+<th>TEL_NAME</th><th>STA_NAME</th><th>STA_INDEX</th><th>DIAMETER</th><th>STAXYZ</th></tr>
+<tr><td>AT1</td><td>G1</td><td>18</td><td>1.8</td><td>-95.5014776162963 66.71572732949897 0.0</td></tr>
+<tr><td>AT2</td><td>J1</td><td>22</td><td>1.8</td><td>-39.44434990457164 106.64805474365541 0.0</td></tr>
+</table>
+</OI_ARRAY>
+<OI_ARRAY>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_ARRAY</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>2</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>6</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_6</value><description>array name for cross-referencing</description><type>A</type><unit></unit></keyword>
+<keyword><name>FRAME</name><value>Geocentric</value><description>coordinate frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>ARRAYX</name><value>1942014.1545180853</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYY</name><value>-5455311.818167002</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYZ</name><value>-2654530.4375114734</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+</keywords>
+<rows>2</rows><columns>
+<column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
+<column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>30</max></column>
+<column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
+<column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-55.811603344981414</min><max>121.5351487803091</max></column>
+</columns>
+<table>
+<tr>
+<th>TEL_NAME</th><th>STA_NAME</th><th>STA_INDEX</th><th>DIAMETER</th><th>STAXYZ</th></tr>
+<tr><td>AT1</td><td>A0</td><td>1</td><td>1.8</td><td>-55.811603344981414 -14.641622248318622 0.0</td></tr>
+<tr><td>AT2</td><td>M0</td><td>30</td><td>1.8</td><td>-8.950965308173842 121.5351487803091 0.0</td></tr>
+</table>
+</OI_ARRAY>
+<OI_WAVELENGTH>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_WAVELENGTH</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>1</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of detector for cross-referencing</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>1</rows><columns>
+<column><name>EFF_WAVE</name><description>effective wavelength of channel</description><type>E</type><unit>m|meter|meters</unit><min>2.179E-6</min><max>2.179E-6</max></column>
+<column><name>EFF_BAND</name><description>effective bandpass of channel</description><type>E</type><unit>m|meter|meters</unit><min>4.1E-7</min><max>4.1E-7</max></column>
+</columns>
+<table>
+<tr>
+<th>EFF_WAVE</th><th>EFF_BAND</th></tr>
+<tr><td>2.179E-6</td><td>4.1E-7</td></tr>
+</table>
+</OI_WAVELENGTH>
+<OI_VIS>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_1</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-12</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.7052673474776464</min><max>0.863086723516492</max></column>
+<column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
+<column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-3.600498551267398</min><max>0.9145399528914274</max></column>
+<column><name>VISPHIERR</name><description>error in visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>1.9852875169007782</min><max>2.4211708253921356</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-13.80279238513562</min><max>-0.06906334264946423</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-2.803207650609828</min><max>17.64510327772443</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VISAMP</th><th>VISAMPERR</th><th>VISPHI</th><th>VISPHIERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.7841464263697447</td><td>0.03</td><td>0.004679499657431335</td><td>2.190214024631524</td><td>-9.711212936920592</td><td>-2.803207650609828</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.7494602912423323</td><td>0.03</td><td>-0.9010287755582435</td><td>2.273962831341547</td><td>-10.908448344930363</td><td>-1.6327881716453847</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.7324263010968054</td><td>0.03</td><td>-1.8764944368188348</td><td>2.344395823428293</td><td>-11.91903717736512</td><td>-0.33704750229744107</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.71769213080527</td><td>0.03</td><td>-1.9565094464675112</td><td>2.3950236940674197</td><td>-12.725687979113744</td><td>1.0618438753342776</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.7052673474776464</td><td>0.03</td><td>-2.834860420777321</td><td>2.4211708253921356</td><td>-13.314598731312461</td><td>2.539950541932531</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.7118382422897043</td><td>0.03</td><td>-2.732122368570908</td><td>2.4207888303578624</td><td>-13.675693007714248</td><td>4.071981682623227</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.7213210459559677</td><td>0.03</td><td>-2.1916008169815124</td><td>2.3948470198688074</td><td>-13.80279238513562</td><td>5.631723819829877</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.7299630231569885</td><td>0.03</td><td>-1.8208047250951904</td><td>2.3472351007707637</td><td>-13.693722157990294</td><td>7.192489333142653</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.7584543510639207</td><td>0.03</td><td>-0.6249034461689751</td><td>2.284195013706166</td><td>-13.350348548104707</td><td>8.72757309190282</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.7804953237571305</td><td>0.03</td><td>-0.2845401161072887</td><td>2.21337277142668</td><td>-12.778546773145148</td><td>10.21070938739237</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.8010544187019016</td><td>0.03</td><td>0.43820355924752</td><td>2.142699208638568</td><td>-11.988100520014582</td><td>11.616521346392407</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.8278773570519117</td><td>0.03</td><td>0.9145399528914274</td><td>2.0793978188500293</td><td>-10.992534543257175</td><td>12.920955136519737</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.8481308305594889</td><td>0.03</td><td>0.7869312033542515</td><td>2.0293646558956744</td><td>-9.808883252758283</td><td>14.101691533967902</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.8571277406507537</td><td>0.03</td><td>0.6332139508669591</td><td>1.9969862043931017</td><td>-8.45739925026848</td><td>15.138527811614587</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.863086723516492</td><td>0.03</td><td>-0.4536447473697476</td><td>1.9852875169007782</td><td>-6.961206801772516</td><td>16.013723413283945</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.8567317240139822</td><td>0.03</td><td>-0.5111253315733622</td><td>1.9962297919481393</td><td>-5.3459061748870775</td><td>16.71230349958134</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.8480685302793718</td><td>0.03</td><td>-2.0334595530421913</td><td>2.030996004512414</td><td>-3.6391356111841144</td><td>17.22231517154723</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.8254081095834099</td><td>0.03</td><td>-3.188349352548787</td><td>2.090156739668881</td><td>-1.8700984282147877</td><td>17.535031988072337</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.7951130414952254</td><td>0.03</td><td>-3.600498551267398</td><td>2.1736518286195383</td><td>-0.06906334264946423</td><td>17.64510327772443</td><td>4 1</td><td>false</td></tr>
+</table>
+</OI_VIS>
+<OI_VIS2>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS2</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_1</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-12</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.4982087792217097</min><max>0.7610280626608384</max></column>
+<column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.042596087001355934</min><max>0.05194834614411298</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-13.80279238513562</min><max>-0.06906334264946423</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-2.803207650609828</min><max>17.64510327772443</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VIS2DATA</th><th>VIS2ERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.6182627468465178</td><td>0.04708781971245888</td><td>-9.711212936920592</td><td>-2.803207650609828</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.5662631843624037</td><td>0.04535360108005995</td><td>-10.908448344930363</td><td>-1.6327881716453847</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.5325873321975952</td><td>0.04399103687735376</td><td>-11.91903717736512</td><td>-0.33704750229744107</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.5188024872163799</td><td>0.04306112017973422</td><td>-12.725687979113744</td><td>1.0618438753342776</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.4982087792217097</td><td>0.042596087001355934</td><td>-13.314598731312461</td><td>2.539950541932531</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.499336262356458</td><td>0.042602808568107206</td><td>-13.675693007714248</td><td>4.071981682623227</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.5098509454147373</td><td>0.04306429691245911</td><td>-13.80279238513562</td><td>5.631723819829877</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.5409127290964176</td><td>0.04393782416157738</td><td>-13.693722157990294</td><td>7.192489333142653</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.568795761615204</td><td>0.045150437026921425</td><td>-13.350348548104707</td><td>8.72757309190282</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.6043192088823874</td><td>0.04659513501517949</td><td>-12.778546773145148</td><td>10.21070938739237</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.6489165010390222</td><td>0.048132002246398645</td><td>-11.988100520014582</td><td>11.616521346392407</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.6789308829328221</td><td>0.04959724502384231</td><td>-10.992534543257175</td><td>12.920955136519737</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.7190557208017316</td><td>0.05082004499483606</td><td>-9.808883252758283</td><td>14.101691533967902</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.7380534949703973</td><td>0.051644023827841536</td><td>-8.45739925026848</td><td>15.138527811614587</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.7610280626608384</td><td>0.05194834614411298</td><td>-6.961206801772516</td><td>16.013723413283945</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.73696920837263</td><td>0.05166359280857155</td><td>-5.3459061748870775</td><td>16.71230349958134</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.7157218152984532</td><td>0.050779225017878564</td><td>-3.6391356111841144</td><td>17.22231517154723</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.671864117017912</td><td>0.049341947025411226</td><td>-1.8700984282147877</td><td>17.535031988072337</td><td>4 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.6246739292336638</td><td>0.0474466065658024</td><td>-0.06906334264946423</td><td>17.64510327772443</td><td>4 1</td><td>false</td></tr>
+</table>
+</OI_VIS2>
+<OI_VIS>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>2</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_2</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-13</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.1660860996916096</min><max>0.8678748402361691</max></column>
+<column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
+<column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-96.23282325674154</min><max>8.446480537001182</max></column>
+<column><name>VISPHIERR</name><description>error in visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>1.9842248370949191</min><max>9.943215278088426</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-48.09298007299763</min><max>-4.093634081399388</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-15.98503074694543</min><max>57.439116151500045</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>15</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VISAMP</th><th>VISAMPERR</th><th>VISPHI</th><th>VISPHIERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.4853117010763557</td><td>0.03</td><td>-80.7622526500916</td><td>3.5228690156050364</td><td>-31.02459376516004</td><td>-15.98503074694543</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.5901166508606328</td><td>0.03</td><td>-83.81778387974452</td><td>2.9239270444104206</td><td>-35.56434789319493</td><td>-12.205289007484161</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.6632289008083101</td><td>0.03</td><td>-86.90269292878176</td><td>2.5986444905660235</td><td>-39.495586168477175</td><td>-7.94471422331479</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.7214011185086421</td><td>0.03</td><td>-90.41692454621989</td><td>2.386475157015634</td><td>-42.751044014171555</td><td>-3.2762060102489485</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.7752042973642812</td><td>0.03</td><td>-93.03133544075514</td><td>2.2239816052509473</td><td>-45.275019643954785</td><td>1.7203561618328038</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.8193019125820944</td><td>0.03</td><td>-95.23954143358364</td><td>2.0953366714929094</td><td>-47.02432713502304</td><td>6.959479728857385</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.8587436564242327</td><td>0.03</td><td>-96.23282325674154</td><td>2.008053644106541</td><td>-47.969035351204475</td><td>12.351521834033536</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.8678748402361691</td><td>0.03</td><td>-96.19953332084619</td><td>1.9842248370949191</td><td>-48.09298007299763</td><td>17.804223141985197</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.8366456081432411</td><td>0.03</td><td>-95.35859394859044</td><td>2.0662556919911457</td><td>-47.39404057184863</td><td>23.224286421558897</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.7320158830542098</td><td>0.03</td><td>-94.36371067244589</td><td>2.3434487599101654</td><td>-45.884175896404805</td><td>28.518972887315694</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.560032898803141</td><td>0.03</td><td>-91.66841532552782</td><td>3.047021634186938</td><td>-43.589220249876554</td><td>33.59768898586207</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.346727142350365</td><td>0.03</td><td>-84.26115992439155</td><td>4.963169750265433</td><td>-40.5484409596579</td><td>38.37353647666578</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.1660860996916096</td><td>0.03</td><td>-46.13830642722587</td><td>9.943215278088426</td><td>-36.813866602467776</td><td>42.76479928504408</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.2367049328237544</td><td>0.03</td><td>7.043125530817376</td><td>7.199857340417571</td><td>-32.449396780977324</td><td>46.69634168685755</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.3729532029805604</td><td>0.03</td><td>8.446480537001182</td><td>4.5839453801730174</td><td>-27.529708783891884</td><td>50.100893901581706</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.4819594365006785</td><td>0.03</td><td>-4.636881468680758</td><td>3.5698159951499293</td><td>-22.138979836836796</td><td>52.9202030969024</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.5590302362736665</td><td>0.03</td><td>-20.381411218418677</td><td>3.081847115529938</td><td>-16.369446806688593</td><td>55.10603011082751</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.5823523293968532</td><td>0.03</td><td>-33.79074758445323</td><td>2.9651544220348485</td><td>-10.319828003209887</td><td>56.620974837123036</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.5154374619692392</td><td>0.03</td><td>-42.14580963537539</td><td>3.3484217749203293</td><td>-4.093634081399388</td><td>57.439116151500045</td><td>15 1</td><td>false</td></tr>
+</table>
+</OI_VIS>
+<OI_VIS2>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS2</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>2</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_2</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-13</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.030440256722399417</min><max>0.7570833418131621</max></column>
+<column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.010372138210747388</min><max>0.051976167819037654</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-48.09298007299763</min><max>-4.093634081399388</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-15.98503074694543</min><max>57.439116151500045</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>15</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VIS2DATA</th><th>VIS2ERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.2354559849122729</td><td>0.02927511714648172</td><td>-31.02459376516004</td><td>-15.98503074694543</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.3451768154382707</td><td>0.035271879755243256</td><td>-35.56434789319493</td><td>-12.205289007484161</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.4326109742664681</td><td>0.039686999702327266</td><td>-39.495586168477175</td><td>-7.94471422331479</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.5212093492985034</td><td>0.0432153684149466</td><td>-42.751044014171555</td><td>-3.2762060102489485</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.5931329870483179</td><td>0.04637286696978369</td><td>-45.275019643954785</td><td>1.7203561618328038</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.6791885845361552</td><td>0.049219967619841834</td><td>-47.02432713502304</td><td>6.959479728857385</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.7333995036374438</td><td>0.051359386451767665</td><td>-47.969035351204475</td><td>12.351521834033536</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.7570833418131621</td><td>0.051976167819037654</td><td>-48.09298007299763</td><td>17.804223141985197</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.7062052809995106</td><td>0.049912701280529666</td><td>-47.39404057184863</td><td>23.224286421558897</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.5306418053319433</td><td>0.04400881507966135</td><td>-45.884175896404805</td><td>28.518972887315694</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.3156586263994582</td><td>0.03384695466760867</td><td>-43.589220249876554</td><td>33.59768898586207</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.12001361510183949</td><td>0.02077954378208253</td><td>-40.5484409596579</td><td>38.37353647666578</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.030440256722399417</td><td>0.010372138210747388</td><td>-36.813866602467776</td><td>42.76479928504408</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.05617120172008892</td><td>0.014324228696115635</td><td>-32.449396780977324</td><td>46.69634168685755</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.13777245380986522</td><td>0.022498610818887096</td><td>-27.529708783891884</td><td>50.100893901581706</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.23507967461438267</td><td>0.028890117379626087</td><td>-22.138979836836796</td><td>52.9202030969024</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.31219433473206576</td><td>0.0334644773920961</td><td>-16.369446806688593</td><td>55.10603011082751</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.3394206548613093</td><td>0.034781461079107366</td><td>-10.319828003209887</td><td>56.620974837123036</td><td>15 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.25857772240584853</td><td>0.030800302368121486</td><td>-4.093634081399388</td><td>57.439116151500045</td><td>15 1</td><td>false</td></tr>
+</table>
+</OI_VIS2>
+<OI_VIS>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>3</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_3</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-14</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.20268467309171267</min><max>0.9594445763958096</max></column>
+<column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
+<column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-139.45732939571644</min><max>76.90384914854795</max></column>
+<column><name>VISPHIERR</name><description>error in visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>1.7983174740457675</min><max>8.413072186081953</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-56.02664822770429</min><max>45.3789387917301</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-108.88387648020381</min><max>-66.91445808602725</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>18</min><max>24</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VISAMP</th><th>VISAMPERR</th><th>VISPHI</th><th>VISPHIERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.3929264191641564</td><td>0.03</td><td>76.90384914854795</td><td>4.405747159848096</td><td>45.3789387917301</td><td>-89.1763724734734</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.5877162156929273</td><td>0.03</td><td>51.979613063789316</td><td>2.9318411917996365</td><td>40.571789688023756</td><td>-94.05513383956978</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.8375753647894526</td><td>0.03</td><td>43.12473290821041</td><td>2.0625149281296213</td><td>35.07044601413011</td><td>-98.34876140638852</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.9594445763958096</td><td>0.03</td><td>42.60503674207201</td><td>1.7983174740457675</td><td>28.96903728557009</td><td>-101.98379001584293</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.8694516591019847</td><td>0.03</td><td>44.71770125503749</td><td>1.9787894358742761</td><td>22.37196029731946</td><td>-104.89802332060488</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.6036447316953016</td><td>0.03</td><td>44.800378179826915</td><td>2.851327070452582</td><td>15.392092865702484</td><td>-107.04159798085175</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.30301444425030316</td><td>0.03</td><td>23.39227686602798</td><td>5.66994849444045</td><td>8.14886245765897</td><td>-108.3778368398356</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.3054497897415058</td><td>0.03</td><td>-35.15835620833911</td><td>5.637685825784013</td><td>0.7662027536733991</td><td>-108.88387648020381</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.5092331057029708</td><td>0.03</td><td>-47.783967096245384</td><td>3.3805585393940527</td><td>-6.629566891859056</td><td>-108.55105842340892</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.6414413767881244</td><td>0.03</td><td>-43.925327062450336</td><td>2.678493473740322</td><td>-13.911902809808609</td><td>-107.38507727867736</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.6679726806113971</td><td>0.03</td><td>-38.05717140210346</td><td>2.571931520119662</td><td>-20.956202213574183</td><td>-105.4058833066665</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.6025504248650534</td><td>0.03</td><td>-34.51661158860662</td><td>2.865191175231242</td><td>-27.641935187308583</td><td>-102.64734106497369</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.4667719926867536</td><td>0.03</td><td>-36.32149491065708</td><td>3.66646631679633</td><td>-33.854706986195836</td><td>-99.15664997616668</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.31913053559385507</td><td>0.03</td><td>-46.24284379299071</td><td>5.383233592757646</td><td>-39.488215362251225</td><td>-94.99353673257738</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.2135983919021748</td><td>0.03</td><td>-75.16740095100165</td><td>8.2005988604831</td><td>-44.44606942525682</td><td>-90.22923335603669</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.20268467309171267</td><td>0.03</td><td>-114.03038483273376</td><td>8.413072186081953</td><td>-48.64343891761779</td><td>-84.94525839823159</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.2610620714030212</td><td>0.03</td><td>-135.19110563516554</td><td>6.589549983618599</td><td>-52.00850568358916</td><td>-79.23202213568482</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.30146508358850993</td><td>0.03</td><td>-139.45732939571644</td><td>5.672369593167191</td><td>-54.483692497832365</td><td>-73.18727962485687</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.3036261081897317</td><td>0.03</td><td>-132.53250468187937</td><td>5.573166629067592</td><td>-56.02664822770429</td><td>-66.91445808602725</td><td>24 18</td><td>false</td></tr>
+</table>
+</OI_VIS>
+<OI_VIS2>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS2</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>3</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_3</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-14</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.03975910198113945</min><max>0.9170381099978511</max></column>
+<column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.01225859006584584</min><max>0.05734938608560918</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-56.02664822770429</min><max>45.3789387917301</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-108.88387648020381</min><max>-66.91445808602725</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>18</min><max>24</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VIS2DATA</th><th>VIS2ERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.15036380358690124</td><td>0.023408606845042836</td><td>45.3789387917301</td><td>-89.1763724734734</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.3399118343330368</td><td>0.03517666762170122</td><td>40.571789688023756</td><td>-94.05513383956978</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.6890372145785925</td><td>0.050003227475823954</td><td>35.07044601413011</td><td>-98.34876140638852</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.9170381099978511</td><td>0.05734938608560918</td><td>28.96903728557009</td><td>-101.98379001584293</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.7536672918884875</td><td>0.05211893759579419</td><td>22.37196029731946</td><td>-104.89802332060488</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.3668342822514875</td><td>0.03616996597558985</td><td>15.392092865702484</td><td>-107.04159798085175</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.09381226839656856</td><td>0.018189301582663846</td><td>8.14886245765897</td><td>-108.3778368398356</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.093479792074869</td><td>0.018293393124510608</td><td>0.7662027536733991</td><td>-108.88387648020381</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.2599530731186652</td><td>0.03050750398838948</td><td>-6.629566891859056</td><td>-108.55105842340892</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.41635870443660583</td><td>0.03850388441661247</td><td>-13.911902809808609</td><td>-107.38507727867736</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.44717865027206055</td><td>0.040099202609698494</td><td>-20.956202213574183</td><td>-105.4058833066665</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.3626617295303399</td><td>0.03599494652053179</td><td>-27.641935187308583</td><td>-102.64734106497369</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.22203825843430353</td><td>0.02812855600257165</td><td>-33.854706986195836</td><td>-99.15664997616668</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.10313744986245794</td><td>0.019158076896811194</td><td>-39.488215362251225</td><td>-94.99353673257738</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.04468555303945846</td><td>0.012576203869758922</td><td>-44.44606942525682</td><td>-90.22923335603669</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.03975910198113945</td><td>0.01225859006584584</td><td>-48.64343891761779</td><td>-84.94525839823159</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.06636520997031814</td><td>0.015650902319571426</td><td>-52.00850568358916</td><td>-79.23202213568482</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.09331197161786692</td><td>0.018181537967444705</td><td>-54.483692497832365</td><td>-73.18727962485687</td><td>24 18</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.09386695091144492</td><td>0.0185051712944751</td><td>-56.02664822770429</td><td>-66.91445808602725</td><td>24 18</td><td>false</td></tr>
+</table>
+</OI_VIS2>
+<OI_VIS>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>4</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_4</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-15</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.22233662822490544</min><max>0.881564172162074</max></column>
+<column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
+<column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-176.35644235311653</min><max>-50.50548144065057</max></column>
+<column><name>VISPHIERR</name><description>error in visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>1.9626263079079889</min><max>7.541604325950813</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-84.06266926629401</min><max>-20.821088930119927</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-83.55220703127542</min><max>49.61220548134999</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>15</min><max>23</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VISAMP</th><th>VISAMPERR</th><th>VISPHI</th><th>VISPHIERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.8728238439269018</td><td>0.03</td><td>-55.987477479483715</td><td>1.9789326216066736</td><td>-20.821088930119927</td><td>-83.55220703127542</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.7549071667979247</td><td>0.03</td><td>-50.50548144065057</td><td>2.2855173884387305</td><td>-31.274200577465113</td><td>-80.59515837909231</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.4322379264552815</td><td>0.03</td><td>-53.05631273072351</td><td>3.9101252267531517</td><td>-41.19220198208335</td><td>-76.48179841809103</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.22941280412376885</td><td>0.03</td><td>-99.4308521943452</td><td>7.471965194760985</td><td>-50.405393390152135</td><td>-71.28250787764311</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.37910196964193815</td><td>0.03</td><td>-139.98382539000062</td><td>4.562387831787137</td><td>-58.75613454230019</td><td>-65.08624806041132</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.5541653643813433</td><td>0.03</td><td>-141.427432780861</td><td>3.1166906726639683</td><td>-66.10154194215137</td><td>-57.99903868979625</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.6883799161644263</td><td>0.03</td><td>-137.81908815107965</td><td>2.498483340783741</td><td>-72.31593363256259</td><td>-50.1421438830748</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.8041427839096662</td><td>0.03</td><td>-135.62508994777062</td><td>2.145185352105053</td><td>-77.292979648756</td><td>-41.649997288732735</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.881564172162074</td><td>0.03</td><td>-135.40536759474963</td><td>1.9626263079079889</td><td>-80.9475213534967</td><td>-32.6679018894671</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.8685625040661856</td><td>0.03</td><td>-136.37398306591663</td><td>1.9791155978216086</td><td>-83.21702852498619</td><td>-23.349543827866672</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.7521106596991103</td><td>0.03</td><td>-141.18241070809535</td><td>2.280511782442016</td><td>-84.06266926629401</td><td>-13.85436279390235</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.5733531628498378</td><td>0.03</td><td>-153.54091983260636</td><td>3.0018258685513826</td><td>-83.46997442988051</td><td>-4.344823967626805</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.421795084893206</td><td>0.03</td><td>-173.30260687585118</td><td>4.072639355610303</td><td>-81.44908518872272</td><td>5.016361805100132</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.29051905011359824</td><td>0.03</td><td>-176.35644235311653</td><td>5.762358549059431</td><td>-78.03457951803325</td><td>14.069022040296051</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.26673626961756897</td><td>0.03</td><td>-120.01859583931602</td><td>6.365530746221242</td><td>-73.28488055651742</td><td>22.658263211465187</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.603235627126172</td><td>0.03</td><td>-88.04098618963674</td><td>2.855807917486773</td><td>-67.28125697027207</td><td>30.63712102078129</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.8290133788631211</td><td>0.03</td><td>-85.60176561250488</td><td>2.092165535243258</td><td>-60.126432423376784</td><td>37.86907499896962</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.6508695283616306</td><td>0.03</td><td>-89.79183431069043</td><td>2.638633357633796</td><td>-51.942827947521096</td><td>44.23038440838695</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.22233662822490544</td><td>0.03</td><td>-84.00642221381958</td><td>7.541604325950813</td><td>-42.87046728421068</td><td>49.61220548134999</td><td>23 15</td><td>false</td></tr>
+</table>
+</OI_VIS>
+<OI_VIS2>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS2</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>4</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_4</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-15</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.049082936777199895</min><max>0.7733425522696797</max></column>
+<column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.01367512781977536</min><max>0.05254816095555119</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-84.06266926629401</min><max>-20.821088930119927</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-83.55220703127542</min><max>49.61220548134999</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>15</min><max>23</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VIS2DATA</th><th>VIS2ERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.7505819770793279</td><td>0.05211516652841678</td><td>-20.821088930119927</td><td>-83.55220703127542</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.5641587786650207</td><td>0.04512431349034688</td><td>-31.274200577465113</td><td>-80.59515837909231</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.19015368914929456</td><td>0.02637572894543487</td><td>-41.19220198208335</td><td>-76.48179841809103</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.055312018552987806</td><td>0.013802580771636905</td><td>-50.405393390152135</td><td>-71.28250787764311</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.143017474563155</td><td>0.02260491806615004</td><td>-58.75613454230019</td><td>-65.08624806041132</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.3036350204425283</td><td>0.03309035575076705</td><td>-66.10154194215137</td><td>-57.99903868979625</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.46835218177084365</td><td>0.0412780031149605</td><td>-72.31593363256259</td><td>-50.1421438830748</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.6375374844458347</td><td>0.048076220090886405</td><td>-77.292979648756</td><td>-41.649997288732735</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.7733425522696797</td><td>0.05254816095555119</td><td>-80.9475213534967</td><td>-32.6679018894671</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.7474912121529838</td><td>0.05211034829752487</td><td>-83.21702852498619</td><td>-23.349543827866672</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.5608566087289023</td><td>0.04522335903615109</td><td>-84.06266926629401</td><td>-13.85436279390235</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.32557607881136097</td><td>0.034356557521878404</td><td>-83.46997442988051</td><td>-4.344823967626805</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.1762940864691198</td><td>0.02532323491435036</td><td>-81.44908518872272</td><td>5.016361805100132</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.087569524822328</td><td>0.017897602560740015</td><td>-78.03457951803325</td><td>14.069022040296051</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.07269700545060777</td><td>0.01620169742872901</td><td>-73.28488055651742</td><td>22.658263211465187</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.359415677249029</td><td>0.0361132142298663</td><td>-67.28125697027207</td><td>30.63712102078129</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.6731809533248492</td><td>0.049294571288096896</td><td>-60.126432423376784</td><td>37.86907499896962</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.4243365201902182</td><td>0.03908553752842439</td><td>-51.942827947521096</td><td>44.23038440838695</td><td>23 15</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.049082936777199895</td><td>0.01367512781977536</td><td>-42.87046728421068</td><td>49.61220548134999</td><td>23 15</td><td>false</td></tr>
+</table>
+</OI_VIS2>
+<OI_VIS>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>5</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_5</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-16</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.30055037697247194</min><max>0.8087555515454591</max></column>
+<column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
+<column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-94.59321462982216</min><max>40.2659625466018</max></column>
+<column><name>VISPHIERR</name><description>error in visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>2.131986149742729</min><max>5.791373783632686</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-46.26259247287164</min><max>6.300722978269773</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-65.54346822581891</min><max>-1.2708491959203627</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>18</min><max>22</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VISAMP</th><th>VISAMPERR</th><th>VISPHI</th><th>VISPHIERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.5812331631454386</td><td>0.03</td><td>40.2659625466018</td><td>2.9805841129225024</td><td>6.300722978269773</td><td>-65.17081071366827</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.417448291646891</td><td>0.03</td><td>33.17056769867207</td><td>4.106886883126335</td><td>0.2645058245543126</td><td>-65.54346822581891</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.30055037697247194</td><td>0.03</td><td>1.1740752294035635</td><td>5.791373783632686</td><td>-5.776237097154134</td><td>-65.23060966058408</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.3781385877810177</td><td>0.03</td><td>-36.45300932745544</td><td>4.517708318255114</td><td>-11.718147000654806</td><td>-64.23758811475568</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.5477095593156921</td><td>0.03</td><td>-49.109041955301855</td><td>3.128579728558047</td><td>-17.459556160090138</td><td>-62.58139446230047</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.6848250072148763</td><td>0.03</td><td>-50.171076476552294</td><td>2.513538900649325</td><td>-22.90222747292284</td><td>-60.29036663579555</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.7645824326611783</td><td>0.03</td><td>-48.007833953142026</td><td>2.2525855354869937</td><td>-27.953035323996765</td><td>-57.40370475654535</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.7987424002534567</td><td>0.03</td><td>-45.38574703138552</td><td>2.1535225413115975</td><td>-32.525558990631566</td><td>-53.97080040963772</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.8087555515454591</td><td>0.03</td><td>-42.08267880817355</td><td>2.131986149742729</td><td>-36.541561325148045</td><td>-50.050391540229136</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.7986515803378513</td><td>0.03</td><td>-39.81827087131741</td><td>2.1498075185984944</td><td>-39.93232741415643</td><td>-45.70955743101786</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.7819093903995361</td><td>0.03</td><td>-38.20045495447917</td><td>2.195036661674974</td><td>-42.63984030977581</td><td>-41.02257095711911</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.7589298134038761</td><td>0.03</td><td>-38.438682166567794</td><td>2.2711002668401368</td><td>-44.617773715697766</td><td>-36.06962775657942</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.7203472033423814</td><td>0.03</td><td>-40.38159414565555</td><td>2.385939103205264</td><td>-45.83228464296021</td><td>-30.935474060775306</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.6732047020163495</td><td>0.03</td><td>-45.58305695630633</td><td>2.536557830725326</td><td>-46.26259247287164</td><td>-25.707956662898326</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.6405253372668988</td><td>0.03</td><td>-53.93838226879949</td><td>2.6817360719128285</td><td>-45.901334519158404</td><td>-20.47651983496778</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.6276628618355256</td><td>0.03</td><td>-66.24135934996197</td><td>2.7280935329952274</td><td>-44.754692005568174</td><td>-15.330674911537848</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.6578383072563052</td><td>0.03</td><td>-79.00201322993662</td><td>2.628757383295516</td><td>-42.84228430341783</td><td>-10.358468725946196</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.6883126298262608</td><td>0.03</td><td>-89.69569203225566</td><td>2.5044527128056835</td><td>-40.19683323871075</td><td>-5.644977104584278</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.6713670935116463</td><td>0.03</td><td>-94.59321462982216</td><td>2.5490977628367353</td><td>-36.86360321262168</td><td>-1.2708491959203627</td><td>22 18</td><td>false</td></tr>
+</table>
+</OI_VIS>
+<OI_VIS2>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS2</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>5</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_5</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-16</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.08772351211433908</min><max>0.6484942069562986</max></column>
+<column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.017807934175310222</min><max>0.048373861685730636</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-46.26259247287164</min><max>6.300722978269773</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-65.54346822581891</min><max>-1.2708491959203627</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>18</min><max>22</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VIS2DATA</th><th>VIS2ERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.3348509916001404</td><td>0.034601406709648425</td><td>6.300722978269773</td><td>-65.17081071366827</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.1743258773633146</td><td>0.025112063238771125</td><td>0.2645058245543126</td><td>-65.54346822581891</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.08772351211433908</td><td>0.017807934175310222</td><td>-5.776237097154134</td><td>-65.23060966058408</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.14830332994527995</td><td>0.022828477594892902</td><td>-11.718147000654806</td><td>-64.23758811475568</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.3041772462942218</td><td>0.03296460760841201</td><td>-17.459556160090138</td><td>-62.58139446230047</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.4727559760147435</td><td>0.04103075671393265</td><td>-22.90222747292284</td><td>-60.29036663579555</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.5755222040952999</td><td>0.04578401197149286</td><td>-27.953035323996765</td><td>-57.40370475654535</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.6480590816248346</td><td>0.04789009687390393</td><td>-32.525558990631566</td><td>-53.97080040963772</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.6484942069562986</td><td>0.048373861685730636</td><td>-36.541561325148045</td><td>-50.050391540229136</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.6381353256412048</td><td>0.04797285442130298</td><td>-39.93232741415643</td><td>-45.70955743101786</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.6163912550401062</td><td>0.04698436473714775</td><td>-42.63984030977581</td><td>-41.02257095711911</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.5713276461018025</td><td>0.045410766151262875</td><td>-44.617773715697766</td><td>-36.06962775657942</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.513810995979472</td><td>0.04322507770001355</td><td>-45.83228464296021</td><td>-30.935474060775306</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.4507697659758068</td><td>0.040658407970953915</td><td>-46.26259247287164</td><td>-25.707956662898326</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.41242851288287263</td><td>0.03845732777498343</td><td>-45.901334519158404</td><td>-20.47651983496778</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.3910390122573641</td><td>0.03780383695654199</td><td>-44.754692005568174</td><td>-15.330674911537848</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.4342750143200961</td><td>0.039232377920801975</td><td>-42.84228430341783</td><td>-10.358468725946196</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.4750848909702334</td><td>0.04117961684651303</td><td>-40.19683323871075</td><td>-5.644977104584278</td><td>22 18</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.44755310201697035</td><td>0.040458394584591544</td><td>-36.86360321262168</td><td>-1.2708491959203627</td><td>22 18</td><td>false</td></tr>
+</table>
+</OI_VIS2>
+<OI_VIS>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>6</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_6</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-17</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.13124025178356077</min><max>0.8997031919726902</max></column>
+<column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
+<column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-180.2246069532392</min><max>179.31552191246428</max></column>
+<column><name>VISPHIERR</name><description>error in visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>1.9149191646198414</min><max>13.295441798425479</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-137.5606707431637</min><max>-34.071107288366555</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-136.72622722288406</min><max>81.18469838110761</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>30</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VISAMP</th><th>VISAMPERR</th><th>VISPHI</th><th>VISPHIERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.34832275089087217</td><td>0.03</td><td>-27.58650305949954</td><td>4.984721595255198</td><td>-34.071107288366555</td><td>-136.72622722288406</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.7636034506818548</td><td>0.03</td><td>-93.52870780500072</td><td>2.2488022318922316</td><td>-51.176672038030645</td><td>-131.8873668702216</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.8997031919726902</td><td>0.03</td><td>-91.27305403614068</td><td>1.9149191646198414</td><td>-67.40658974026994</td><td>-125.15630773363797</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.46762484907973273</td><td>0.03</td><td>-108.18661296308527</td><td>3.667307550865201</td><td>-82.48316200341584</td><td>-116.64822010116225</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.5037004926774119</td><td>0.03</td><td>-180.2246069532392</td><td>3.4212917956177553</td><td>-96.14842449603042</td><td>-106.50867971107365</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.717602477690738</td><td>0.03</td><td>170.38729414164465</td><td>2.3780068853262284</td><td>-108.16856078813844</td><td>-94.9111769106583</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.714155225007176</td><td>0.03</td><td>175.8421395356195</td><td>2.401185963280266</td><td>-118.33790301517057</td><td>-82.05414818826654</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.6686650031096577</td><td>0.03</td><td>179.31552191246428</td><td>2.5553479251118416</td><td>-126.482450912148</td><td>-68.15758086998026</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.6188594170639417</td><td>0.03</td><td>171.23682307170026</td><td>2.7726431524794366</td><td>-132.4628490064581</td><td>-53.45924907547173</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.6350954845464087</td><td>0.03</td><td>146.718283323112</td><td>2.712896355525571</td><td>-136.1767710286277</td><td>-38.21064533689244</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.8271047570201298</td><td>0.03</td><td>130.2467729071017</td><td>2.0877575162465742</td><td>-137.5606707431637</td><td>-22.67267749192115</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.8866965860500038</td><td>0.03</td><td>128.5147337015128</td><td>1.9428617285008378</td><td>-136.59086924226096</td><td>-7.11120447832387</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.5682764226973128</td><td>0.03</td><td>128.45658986539752</td><td>2.9990187644506276</td><td>-133.28396009847964</td><td>8.207512586181352</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.13124025178356077</td><td>0.03</td><td>127.55744057362473</td><td>13.295441798425479</td><td>-127.69652544411831</td><td>23.021366205470045</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.29315466087155573</td><td>0.03</td><td>-162.22921344135233</td><td>5.846184699731093</td><td>-119.92416783524261</td><td>37.076887236940024</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.806972216553916</td><td>0.03</td><td>-173.69180764553693</td><td>2.1400101615386826</td><td>-110.09987446544504</td><td>50.133581818816246</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.6056027360022986</td><td>0.03</td><td>-171.18068306962292</td><td>2.8620594024288994</td><td>-98.39174171809157</td><td>61.9680462868031</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.38991584417876746</td><td>0.03</td><td>-87.81436131062507</td><td>4.37126857403602</td><td>-85.0000989905971</td><td>72.37778967271993</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.6458108682381895</td><td>0.03</td><td>-104.65891737818289</td><td>2.658243034624288</td><td>-70.1540810028938</td><td>81.18469838110761</td><td>30 1</td><td>false</td></tr>
+</table>
+</OI_VIS>
+<OI_VIS2>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS2</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>19</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>6</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI_6</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-08-17</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PRIMAMBR</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>19</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.018378790059992066</min><max>0.8125340255023689</max></column>
+<column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.0077569745095467</min><max>0.05385731420366379</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-137.5606707431637</min><max>-34.071107288366555</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-136.72622722288406</min><max>81.18469838110761</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>30</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VIS2DATA</th><th>VIS2ERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>1</td><td>-4.5</td><td>2457608.3125</td><td>120.0</td><td>0.11545863297828675</td><td>0.02068970175219348</td><td>-34.071107288366555</td><td>-136.72622722288406</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-4.0</td><td>2457608.333333333</td><td>120.0</td><td>0.5844010869896015</td><td>0.04586103733842725</td><td>-51.176672038030645</td><td>-131.8873668702216</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.5</td><td>2457608.354166667</td><td>120.0</td><td>0.8125340255023689</td><td>0.05385731420366379</td><td>-67.40658974026994</td><td>-125.15630773363797</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-3.0</td><td>2457608.375</td><td>120.0</td><td>0.22240839359628595</td><td>0.028122103666821427</td><td>-82.48316200341584</td><td>-116.64822010116225</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.5</td><td>2457608.395833333</td><td>120.0</td><td>0.25655899350377587</td><td>0.030144287387485574</td><td>-96.14842449603042</td><td>-106.50867971107365</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-2.0</td><td>2457608.416666667</td><td>120.0</td><td>0.5290729447909416</td><td>0.04336926177966044</td><td>-108.16856078813844</td><td>-94.9111769106583</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.5</td><td>2457608.4375</td><td>120.0</td><td>0.5124544067939746</td><td>0.042950610531913465</td><td>-118.33790301517057</td><td>-82.05414818826654</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-1.0</td><td>2457608.458333333</td><td>120.0</td><td>0.45388012236905206</td><td>0.04035943681486517</td><td>-126.482450912148</td><td>-68.15758086998026</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>-0.5</td><td>2457608.479166667</td><td>120.0</td><td>0.3841802427383634</td><td>0.03719642141157689</td><td>-132.4628490064581</td><td>-53.45924907547173</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.0</td><td>2457608.5</td><td>120.0</td><td>0.39903664110934933</td><td>0.038015607530855436</td><td>-136.1767710286277</td><td>-38.21064533689244</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>0.5</td><td>2457608.520833333</td><td>120.0</td><td>0.6795478472433498</td><td>0.04939865014063623</td><td>-137.5606707431637</td><td>-22.67267749192115</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.0</td><td>2457608.541666667</td><td>120.0</td><td>0.7853010902701458</td><td>0.05308272925996015</td><td>-136.59086924226096</td><td>-7.11120447832387</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>1.5</td><td>2457608.5625</td><td>120.0</td><td>0.3229516000021865</td><td>0.03438871551790386</td><td>-133.28396009847964</td><td>8.207512586181352</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.0</td><td>2457608.583333333</td><td>120.0</td><td>0.018378790059992066</td><td>0.0077569745095467</td><td>-127.69652544411831</td><td>23.021366205470045</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>2.5</td><td>2457608.604166667</td><td>120.0</td><td>0.08714000921596804</td><td>0.017640975853583953</td><td>-119.92416783524261</td><td>37.076887236940024</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.0</td><td>2457608.625</td><td>120.0</td><td>0.6454448716856444</td><td>0.04819248290363035</td><td>-110.09987446544504</td><td>50.133581818816246</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>3.5</td><td>2457608.645833333</td><td>120.0</td><td>0.35774254293951013</td><td>0.03603433354179316</td><td>-98.39174171809157</td><td>61.9680462868031</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.0</td><td>2457608.666666667</td><td>120.0</td><td>0.1534205208594412</td><td>0.023593243328978383</td><td>-85.0000989905971</td><td>72.37778967271993</td><td>30 1</td><td>false</td></tr>
+<tr><td>1</td><td>4.5</td><td>2457608.6875</td><td>120.0</td><td>0.4130859596076497</td><td>0.03879720619229413</td><td>-70.1540810028938</td><td>81.18469838110761</td><td>30 1</td><td>false</td></tr>
+</table>
+</OI_VIS2>
+<checkReport>
+Analysing File: A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits
+SEVERE	Missing keyword 'RGL_PRIO'
+Analysing table [OI_ARRAY#3]
+SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
+SEVERE	Invalid ARRAYX keyword '0.0'
+SEVERE	Invalid ARRAYY keyword '0.0'
+SEVERE	Invalid ARRAYZ keyword '0.0'
+SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+Analysing table [OI_ARRAY#4]
+SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
+SEVERE	Invalid ARRAYX keyword '0.0'
+SEVERE	Invalid ARRAYY keyword '0.0'
+SEVERE	Invalid ARRAYZ keyword '0.0'
+SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+Analysing table [OI_ARRAY#5]
+SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
+SEVERE	Invalid ARRAYX keyword '0.0'
+SEVERE	Invalid ARRAYY keyword '0.0'
+SEVERE	Invalid ARRAYZ keyword '0.0'
+SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+Analysing table [OI_ARRAY#6]
+SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
+SEVERE	Invalid ARRAYX keyword '0.0'
+SEVERE	Invalid ARRAYY keyword '0.0'
+SEVERE	Invalid ARRAYZ keyword '0.0'
+SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+Analysing table [OI_ARRAY#7]
+SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
+SEVERE	Invalid ARRAYX keyword '0.0'
+SEVERE	Invalid ARRAYY keyword '0.0'
+SEVERE	Invalid ARRAYZ keyword '0.0'
+SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+Analysing table [OI_ARRAY#8]
+SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
+SEVERE	Invalid ARRAYX keyword '0.0'
+SEVERE	Invalid ARRAYY keyword '0.0'
+SEVERE	Invalid ARRAYZ keyword '0.0'
+SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+Analysing table [OI_VIS#10]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS2#11]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS#12]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS2#13]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS#14]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS2#15]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS#16]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS2#17]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS#18]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS2#19]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS#20]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+Analysing table [OI_VIS2#21]
+SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+
+0 warnings, 43 severe errors
+</checkReport>
+<rules>
+  <rule>
+    <name>GENERIC_KEYWORD_MANDATORY</name>
+    <description>check if the required keyword is present</description>
+    <paragraph>V1-V2.Tables</paragraph>
+  </rule>
+  <rule>
+    <name>GENERIC_KEYWORD_VAL_ACCEPTED_STR</name>
+    <description>check if the keyword value matches the 'accepted' values (string)</description>
+    <paragraph>V1-V2.Tables</paragraph>
+  </rule>
+  <rule>
+    <name>GENERIC_MJD_RANGE</name>
+    <description>check if the MJD value is within 'normal' range (1933 - 2150)</description>
+    <paragraph>V2.6.1§1</paragraph>
+  </rule>
+  <rule>
+    <name>OI_ARRAY_XYZ</name>
+    <description>check if the ARRAY_XYZ keyword values corresponds to a proper coordinate on earth</description>
+    <paragraph>V1.6.1.3</paragraph>
+  </rule>
+  <rule>
+    <name>OI_ARRAY_XYZ_FIX</name>
+    <description>fix the ARRAY_XYZ keyword values (to VLTI or CHARA according to the ARRNAME keyword) when the ARRAY_XYZ keyword values are incorrect</description>
+    <paragraph>V1.6.1.3</paragraph>
+  </rule>
+</rules>
+<failures>
+  <profile>
+  </profile>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_MANDATORY</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <member>RGL_PRIO</member>
+    <message>Missing keyword 'RGL_PRIO'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>3</extNb>
+    <member>FRAME</member>
+    <data>
+      <value>Geocentric</value>
+      <expected>GEOCENTRIC|SKY</expected>
+      <message>Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>3</extNb>
+    <member>ARRAYX</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYX keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>3</extNb>
+    <member>ARRAYY</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYY keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>3</extNb>
+    <member>ARRAYZ</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYZ keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ_FIX</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>3</extNb>
+    <data>
+      <value>VLTI</value>
+      <message>Fixed ARRAY_X/Y/Z to 'VLTI'.</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>4</extNb>
+    <member>FRAME</member>
+    <data>
+      <value>Geocentric</value>
+      <expected>GEOCENTRIC|SKY</expected>
+      <message>Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>4</extNb>
+    <member>ARRAYX</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYX keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>4</extNb>
+    <member>ARRAYY</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYY keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>4</extNb>
+    <member>ARRAYZ</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYZ keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ_FIX</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>4</extNb>
+    <data>
+      <value>VLTI</value>
+      <message>Fixed ARRAY_X/Y/Z to 'VLTI'.</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>5</extNb>
+    <member>FRAME</member>
+    <data>
+      <value>Geocentric</value>
+      <expected>GEOCENTRIC|SKY</expected>
+      <message>Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>5</extNb>
+    <member>ARRAYX</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYX keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>5</extNb>
+    <member>ARRAYY</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYY keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>5</extNb>
+    <member>ARRAYZ</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYZ keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ_FIX</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>5</extNb>
+    <data>
+      <value>VLTI</value>
+      <message>Fixed ARRAY_X/Y/Z to 'VLTI'.</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>6</extNb>
+    <member>FRAME</member>
+    <data>
+      <value>Geocentric</value>
+      <expected>GEOCENTRIC|SKY</expected>
+      <message>Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>6</extNb>
+    <member>ARRAYX</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYX keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>6</extNb>
+    <member>ARRAYY</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYY keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>6</extNb>
+    <member>ARRAYZ</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYZ keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ_FIX</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>6</extNb>
+    <data>
+      <value>VLTI</value>
+      <message>Fixed ARRAY_X/Y/Z to 'VLTI'.</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>7</extNb>
+    <member>FRAME</member>
+    <data>
+      <value>Geocentric</value>
+      <expected>GEOCENTRIC|SKY</expected>
+      <message>Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>7</extNb>
+    <member>ARRAYX</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYX keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>7</extNb>
+    <member>ARRAYY</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYY keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>7</extNb>
+    <member>ARRAYZ</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYZ keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ_FIX</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>7</extNb>
+    <data>
+      <value>VLTI</value>
+      <message>Fixed ARRAY_X/Y/Z to 'VLTI'.</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>8</extNb>
+    <member>FRAME</member>
+    <data>
+      <value>Geocentric</value>
+      <expected>GEOCENTRIC|SKY</expected>
+      <message>Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>8</extNb>
+    <member>ARRAYX</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYX keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>8</extNb>
+    <member>ARRAYY</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYY keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>8</extNb>
+    <member>ARRAYZ</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYZ keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ_FIX</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>8</extNb>
+    <data>
+      <value>VLTI</value>
+      <message>Fixed ARRAY_X/Y/Z to 'VLTI'.</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS</extName>
+    <extNb>10</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>11</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS</extName>
+    <extNb>12</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>13</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS</extName>
+    <extNb>14</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>15</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS</extName>
+    <extNb>16</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>17</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS</extName>
+    <extNb>18</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>19</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS</extName>
+    <extNb>20</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_MJD_RANGE</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>21</extNb>
+    <member>MJD</member>
+    <data>
+      <value>2457608.3125</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+    <data>
+      <value>2457608.6875</value>
+      <expected>27073.5 - 106332.5</expected>
+      <message>MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]</message>
+    </data>
+  </failure>
+</failures>
+</oifits>

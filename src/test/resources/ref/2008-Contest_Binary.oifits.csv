@@ -1,0 +1,4 @@
+# filename       2008-Contest_Binary.oifits
+# local_filename 2008-Contest_Binary.oifits
+target_name	s_ra	s_dec	t_exptime	t_min	t_max	em_res_power	em_min	em_max	facility_name	instrument_name	nb_vis	nb_vis2	nb_t3	nb_channels	
+Gam_Vic	217.8125	45.10547222243415	0.0	54231.20833333349	54231.30833333731	45.50003	1.5E-6	1.75E-6	CHARA	MIRC_H	0	75	100	8	

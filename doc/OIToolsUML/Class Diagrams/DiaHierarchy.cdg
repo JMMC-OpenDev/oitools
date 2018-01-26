@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="DiaHierarchy">
+  <ClassDiagramComponents>
+    <Class name="FITSHDU" package="" visibility="public" xPosition="675.0" yPosition="194.0">
+      <Fields>
+        <Field name="EXTNAME" type="KEYWORD" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getKeywordsDesc" returnType="void" visibility="public"/>
+        <Method name="getKeywordsValue" returnType="void" visibility="public"/>
+        <Method name="setKeywordValue" returnType="void" visibility="public"/>
+        <Method name="getHeaderCards" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FITSTABLE" package="" visibility="public" xPosition="544.0" yPosition="408.0">
+      <Fields>
+        <Field name="KEYWORD_NAXIS2" type="Object" visibility="private"/>
+        <Field name="KEYWORD_EXTVER" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getColumnsDesc" returnType="void" visibility="public"/>
+        <Method name="getColumnsValue" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FITSIMAGEHDU" package="" visibility="public" xPosition="788.0" yPosition="408.0">
+      <Fields>
+        <Field name="KEYWORD_HDUNAME" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_PRIMARYHDU" package="" visibility="public" xPosition="787.0" yPosition="538.0">
+      <Fields>
+        <Field name="KEYWORD_ORIGIN" type="Object" visibility="private"/>
+        <Field name="KEYWORD_DATE" type="Object" visibility="private"/>
+        <Field name="KEYWORD_DATE_OBS" type="Object" visibility="private"/>
+        <Field name="KEYWORD_CONTENT" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="MODELBASE" package="" visibility="public" xPosition="860.0" yPosition="27.0">
+      <Fields>
+        <Field name="UNDEFINED_TYPE" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="isUndefined" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="OI_TABLE" package="" visibility="public" xPosition="520.0" yPosition="652.0">
+      <Fields>
+        <Field name="KEYWORD_EXTNAME_1" type="Object" visibility="private"/>
+        <Field name="KEYWORD_EXTNAME_2" type="Object" visibility="private"/>
+        <Field name="KEYWORD_OI_REVN_1" type="Object" visibility="private"/>
+        <Field name="KEYWORD_OI_REVN_2" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_TARGET" package="" visibility="public" xPosition="48.0" yPosition="951.0">
+      <Fields>
+        <Field name="TARGET_ID" type="COLUMN" visibility="private"/>
+        <Field name="TARGET" type="COLUMN" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_ARRAY" package="" visibility="public" xPosition="455.0" yPosition="951.0">
+      <Fields>
+        <Field name="ARRNAME" type="KEYWORD" visibility="private"/>
+        <Field name="STA_INDEX" type="COLUMN" visibility="private"/>
+        <Field name="STA_NAME" type="COLUMN" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getArrayXYZ" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="OI_WAVELENGTH" package="" visibility="public" xPosition="233.0" yPosition="951.0">
+      <Fields>
+        <Field name="INSNAME" type="KEYWORD" visibility="private"/>
+        <Field name="COLUMN_EFF_WAVE" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_CORR" package="" visibility="public" xPosition="634.0" yPosition="951.0">
+      <Fields>
+        <Field name="CORRNAME" type="KEYWORD" visibility="private"/>
+        <Field name="KEYWORD_NDATA" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_ABSTRACTDATA" package="" visibility="public" xPosition="899.0" yPosition="772.0">
+      <Fields>
+        <Field name="ARRNAME" type="REF" visibility="private"/>
+        <Field name="TARGET_ID" type="REF" visibility="private"/>
+        <Field name="STA_INDEX" type="REF" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_DATA" package="" visibility="public" xPosition="878.0" yPosition="942.0">
+      <Fields>
+        <Field name="KEYWORD_DATE_OBS" type="Object" visibility="private"/>
+        <Field name="COLUMN_MJD" type="Object" visibility="private"/>
+        <Field name="INSNAME" type="REF" visibility="private"/>
+        <Field name="CORRNAME" type="REF" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_INSPOL" package="" visibility="public" xPosition="1188.0" yPosition="942.0">
+      <Fields>
+        <Field name="KEYWORD_NPOL" type="Object" visibility="private"/>
+        <Field name="INSNAME" type="REF" visibility="private"/>
+        <Field name="STA_INDEX" type="REF" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_VIS" package="" visibility="public" xPosition="650.0" yPosition="1172.0">
+      <Fields>
+        <Field name="STA_INDEX" type="REF" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_T3" package="" visibility="public" xPosition="1030.0" yPosition="1172.0">
+      <Fields>
+        <Field name="STA_INDEX" type="REF" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_VIS2" package="" visibility="public" xPosition="841.0" yPosition="1172.0">
+      <Fields>
+        <Field name="STA_INDEX" type="REF" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OI_SPECTRUM" package="" visibility="public" xPosition="1217.0" yPosition="1172.0">
+      <Fields>
+        <Field name="STA_INDEX" type="REF" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="CELLMETA" package="" visibility="public" xPosition="116.0" yPosition="6.0">
+      <Fields>
+        <Field name="type" type="Object" visibility="private"/>
+        <Field name="name" type="Object" visibility="private"/>
+        <Field name="desc" type="Object" visibility="private"/>
+        <Field name="dataType" type="Object" visibility="private"/>
+        <Field name="optional" type="Object" visibility="private"/>
+        <Field name="unit" type="Object" visibility="private"/>
+        <Field name="acceptedValuesInteger" type="Object" visibility="private"/>
+        <Field name="acceptedValuesString" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="COLUMNMETA" package="" visibility="public" xPosition="19.0" yPosition="267.0">
+      <Fields>
+        <Field name="repeat" type="Object" visibility="private"/>
+        <Field name="dataRange" type="Object" visibility="private"/>
+        <Field name="is3D" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="KEYWORDMETA" package="" visibility="public" xPosition="243.0" yPosition="267.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ARRAYCOLUMNMETA" package="" visibility="public" xPosition="8.0" yPosition="431.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="WAVECOLUMNMETA" package="" visibility="public" xPosition="10.0" yPosition="555.0">
+      <Fields>
+        <Field name="expression" type="Object" visibility="private"/>
+        <Field name="oiAbsData" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="FITSIMAGEFILE" package="" visibility="public" xPosition="1124.0" yPosition="194.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="getPrimaryImageHDU" returnType="void" visibility="public"/>
+        <Method name="setPrimaryImageHdu" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="OIFITSFILE" package="" visibility="public" xPosition="1142.0" yPosition="408.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="addOiTable" returnType="void" visibility="public"/>
+        <Method name="removeOiTable" returnType="void" visibility="public"/>
+        <Method name="registerOiTable" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="ARRAYCOLUMNMETA" target="COLUMNMETA"/>
+    <IsRelation name="is" source="OI_WAVELENGTH" target="OI_TABLE"/>
+    <IsRelation name="is" source="OI_INSPOL" target="OI_ABSTRACTDATA"/>
+    <IsRelation name="is" source="FITSIMAGEHDU" target="FITSHDU"/>
+    <IsRelation name="is" source="WAVECOLUMNMETA" target="ARRAYCOLUMNMETA"/>
+    <IsRelation name="is" source="OIFITSFILE" target="FITSIMAGEFILE"/>
+    <IsRelation name="is" source="FITSTABLE" target="FITSHDU"/>
+    <IsRelation name="is" source="OI_VIS2" target="OI_DATA"/>
+    <IsRelation name="is" source="KEYWORDMETA" target="CELLMETA"/>
+    <IsRelation name="is" source="OI_PRIMARYHDU" target="FITSIMAGEHDU"/>
+    <IsRelation name="is" source="OI_TARGET" target="OI_TABLE"/>
+    <IsRelation name="is" source="OI_ABSTRACTDATA" target="OI_TABLE"/>
+    <IsRelation name="is" source="OI_VIS" target="OI_DATA"/>
+    <IsRelation name="is" source="OI_CORR" target="OI_TABLE"/>
+    <IsRelation name="is" source="FITSHDU" target="MODELBASE"/>
+    <IsRelation name="is" source="OI_ARRAY" target="OI_TABLE"/>
+    <IsRelation name="is" source="FITSIMAGEFILE" target="MODELBASE"/>
+    <IsRelation name="is" source="OI_DATA" target="OI_ABSTRACTDATA"/>
+    <IsRelation name="is" source="OI_TABLE" target="FITSTABLE"/>
+    <IsRelation name="is" source="COLUMNMETA" target="CELLMETA"/>
+    <IsRelation name="is" source="OI_T3" target="OI_DATA"/>
+    <IsRelation name="is" source="OI_SPECTRUM" target="OI_DATA"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

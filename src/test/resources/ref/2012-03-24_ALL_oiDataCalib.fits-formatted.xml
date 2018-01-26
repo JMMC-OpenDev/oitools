@@ -1,0 +1,844 @@
+<oifits>
+<version>VERSION_1</version>
+<filename>2012-03-24_ALL_oiDataCalib.fits</filename>
+<local_filename>2012-03-24_ALL_oiDataCalib.fits</local_filename>
+<size>74880</size>
+<md5sum>6fbfc29d1fc36910965405b70ba1a508</md5sum>
+<hdu>
+<keywords>
+<keyword><name>COMMENT</name><value></value><description>FITS (Flexible Image Transport System) format is defined in 'Astronomy</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>and Astrophysics', volume 376, page 359; bibcode: 2001A&amp;A...376..359H</description><type>A</type><unit></unit></keyword>
+</keywords>
+</hdu>
+<OI_TARGET>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_TARGET</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>18</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+</keywords>
+<rows>18</rows><columns>
+<column><name>TARGET_ID</name><description>index number</description><type>I</type><unit></unit><min>1</min><max>18</max></column>
+<column><name>TARGET</name><description>target name</description><type>A</type><unit></unit></column>
+<column><name>RAEP0</name><description>RA at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>78.074793</min><max>242.823592</max></column>
+<column><name>DECEP0</name><description>DEC at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>-71.63731</min><max>-3.92126</max></column>
+<column><name>EQUINOX</name><description>equinox</description><type>E</type><unit>yr|year|years</unit><min>2000.0</min><max>2000.0</max></column>
+<column><name>RA_ERR</name><description>error in RA at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>0.0</min><max>0.0</max></column>
+<column><name>DEC_ERR</name><description>error in DEC at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>0.0</min><max>0.0</max></column>
+<column><name>SYSVEL</name><description>systemic radial velocity</description><type>D</type><unit>m/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second</unit><min>0.0</min><max>0.0</max></column>
+<column><name>VELTYP</name><description>reference for radial velocity</description><type>A</type><unit></unit></column>
+<column><name>VELDEF</name><description>definition of radial velocity</description><type>A</type><unit></unit></column>
+<column><name>PMRA</name><description>proper motion in RA</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PMDEC</name><description>proper motion in DEC</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PMRA_ERR</name><description>error of proper motion in RA</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PMDEC_ERR</name><description>error of proper motion in DEC</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PARALLAX</name><description>parallax</description><type>E</type><unit>deg|degree|degrees</unit><min>0.0</min><max>0.0</max></column>
+<column><name>PARA_ERR</name><description>error in parallax</description><type>E</type><unit>deg|degree|degrees</unit><min>0.0</min><max>0.0</max></column>
+<column><name>SPECTYP</name><description>spectral type</description><type>A</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TARGET</th><th>RAEP0</th><th>DECEP0</th><th>EQUINOX</th><th>RA_ERR</th><th>DEC_ERR</th><th>SYSVEL</th><th>VELTYP</th><th>VELDEF</th><th>PMRA</th><th>PMDEC</th><th>PMRA_ERR</th><th>PMDEC_ERR</th><th>PARALLAX</th><th>PARA_ERR</th><th>SPECTYP</th></tr>
+<tr><td>1</td><td>HD100546</td><td>173.356</td><td>-70.195</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>2</td><td>HD141569</td><td>237.491</td><td>-3.921</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>3</td><td>HD33904</td><td>78.233</td><td>-16.206</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>4</td><td>HD56022</td><td>108.306</td><td>-45.183</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>5</td><td>HD60863</td><td>113.845</td><td>-28.369</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>6</td><td>HD73495</td><td>129.467</td><td>-26.255</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>7</td><td>HD98922</td><td>170.632</td><td>-53.37</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>8</td><td>HD_101053</td><td>174.354</td><td>-53.739</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>9</td><td>HD_101966</td><td>175.903</td><td>-68.479</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>10</td><td>HD139614</td><td>235.193</td><td>-42.498</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>11</td><td>HD142527</td><td>239.175</td><td>-42.323</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>12</td><td>HD_145191</td><td>242.824</td><td>-41.12</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>13</td><td>HD33802</td><td>78.075</td><td>-11.869</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>14</td><td>HD_57758</td><td>110.369</td><td>-28.191</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>15</td><td>HD_77450</td><td>135.43</td><td>-25.433</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>16</td><td>HD_92899</td><td>160.315</td><td>-71.637</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>17</td><td>HD95881</td><td>165.49</td><td>-71.513</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td>18</td><td>V856_SCO</td><td>242.143</td><td>-39.105</td><td>2000</td><td>0</td><td>0</td><td>0</td><td>UNKNOWN</td><td>OPTICAL</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td></td></tr>
+</table>
+</OI_TARGET>
+<metadata>
+  <target>
+    <target_name>HD100546</target_name>
+    <s_ra>173.355751</s_ra>
+    <s_dec>-70.19478</s_dec>
+    <t_exptime>1265991.75</t_exptime>
+    <t_min>56011.17129793822</t_min>
+    <t_max>56011.249449971234</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD141569</target_name>
+    <s_ra>237.490608</s_ra>
+    <s_dec>-3.92126</s_dec>
+    <t_exptime>1582489.6875</t_exptime>
+    <t_min>56011.357316887064</t_min>
+    <t_max>56011.357316887064</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>6</nb_vis2>
+    <nb_t3>4</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD33904</target_name>
+    <s_ra>78.233221</s_ra>
+    <s_dec>-16.20555</s_dec>
+    <t_exptime>112179.19921875</t_exptime>
+    <t_min>56011.045605412</t_min>
+    <t_max>56011.045605412</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>6</nb_vis2>
+    <nb_t3>4</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD56022</target_name>
+    <s_ra>108.305645</s_ra>
+    <s_dec>-45.18293</s_dec>
+    <t_exptime>112179.19921875</t_exptime>
+    <t_min>56011.060937824586</t_min>
+    <t_max>56011.060937824586</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>6</nb_vis2>
+    <nb_t3>4</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD60863</target_name>
+    <s_ra>113.845364</s_ra>
+    <s_dec>-28.36936</s_dec>
+    <t_exptime>112179.19921875</t_exptime>
+    <t_min>56011.06838605525</t_min>
+    <t_max>56011.06838605525</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>6</nb_vis2>
+    <nb_t3>4</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD73495</target_name>
+    <s_ra>129.467417</s_ra>
+    <s_dec>-26.25503</s_dec>
+    <t_exptime>112179.19921875</t_exptime>
+    <t_min>56011.07587596831</t_min>
+    <t_max>56011.09891218288</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD98922</target_name>
+    <s_ra>170.632072</s_ra>
+    <s_dec>-53.36982</s_dec>
+    <t_exptime>413337.578125</t_exptime>
+    <t_min>56011.20000867732</t_min>
+    <t_max>56011.27911440757</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD_101053</target_name>
+    <s_ra>174.354101</s_ra>
+    <s_dec>-53.73861</s_dec>
+    <t_exptime>413337.578125</t_exptime>
+    <t_min>56011.208515445156</t_min>
+    <t_max>56011.29246032867</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD_101966</target_name>
+    <s_ra>175.902797</s_ra>
+    <s_dec>-68.4787</s_dec>
+    <t_exptime>1265991.75</t_exptime>
+    <t_min>56011.18301272318</t_min>
+    <t_max>56011.26463779257</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD139614</target_name>
+    <s_ra>235.193232</s_ra>
+    <s_dec>-42.49829</s_dec>
+    <t_exptime>1582489.6875</t_exptime>
+    <t_min>56011.37154052601</t_min>
+    <t_max>56011.37154052601</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>6</nb_vis2>
+    <nb_t3>4</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD142527</target_name>
+    <s_ra>239.174568</s_ra>
+    <s_dec>-42.32316</s_dec>
+    <t_exptime>1265991.75</t_exptime>
+    <t_min>56011.31258797232</t_min>
+    <t_max>56011.38474081331</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD_145191</target_name>
+    <s_ra>242.823592</s_ra>
+    <s_dec>-41.12009</s_dec>
+    <t_exptime>1265991.75</t_exptime>
+    <t_min>56011.33866324843</t_min>
+    <t_max>56011.40893077873</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD33802</target_name>
+    <s_ra>78.074793</s_ra>
+    <s_dec>-11.86934</s_dec>
+    <t_exptime>112179.19921875</t_exptime>
+    <t_min>56011.03619696394</t_min>
+    <t_max>56011.03619696394</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>6</nb_vis2>
+    <nb_t3>4</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD_57758</target_name>
+    <s_ra>110.368736</s_ra>
+    <s_dec>-28.19117</s_dec>
+    <t_exptime>112179.19921875</t_exptime>
+    <t_min>56011.084186950386</t_min>
+    <t_max>56011.084186950386</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>6</nb_vis2>
+    <nb_t3>4</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD_77450</target_name>
+    <s_ra>135.429746</s_ra>
+    <s_dec>-25.43273</s_dec>
+    <t_exptime>112179.19921875</t_exptime>
+    <t_min>56011.09162274575</t_min>
+    <t_max>56011.11395695192</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD_92899</target_name>
+    <s_ra>160.315269</s_ra>
+    <s_dec>-71.63731</s_dec>
+    <t_exptime>1265991.75</t_exptime>
+    <t_min>56011.15417600854</t_min>
+    <t_max>56011.23535332909</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>HD95881</target_name>
+    <s_ra>165.490058</s_ra>
+    <s_dec>-71.51342</s_dec>
+    <t_exptime>1582489.6875</t_exptime>
+    <t_min>56011.140340249716</t_min>
+    <t_max>56011.22311514445</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>12</nb_vis2>
+    <nb_t3>8</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+  <target>
+    <target_name>V856_SCO</target_name>
+    <s_ra>242.142974</s_ra>
+    <s_dec>-39.10511</s_dec>
+    <t_exptime>949493.8125</t_exptime>
+    <t_min>56011.32654192015</t_min>
+    <t_max>56011.43041401478</t_max>
+    <em_res_power>17.910574</em_res_power>
+    <em_min>1.5884629E-6</em_min>
+    <em_max>1.7604805E-6</em_max>
+    <facility_name>VLTI</facility_name>
+    <instrument_name>PIONIER_Pnat(1.5884629/1.7604805)</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>18</nb_vis2>
+    <nb_t3>12</nb_t3>
+    <nb_channels>3</nb_channels>
+  </target>
+</metadata>
+<OI_ARRAY>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_ARRAY</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>4</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI</value><description>array name for cross-referencing</description><type>A</type><unit></unit></keyword>
+<keyword><name>FRAME</name><value>GEOCENTRIC</value><description>coordinate frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>ARRAYX</name><value>1942014.1545180853</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYY</name><value>-5455311.818167002</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYZ</name><value>-2654530.4375114734</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+</keywords>
+<rows>4</rows><columns>
+<column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
+<column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
+<column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>0.0</min><max>0.0</max></column>
+<column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>0.0</min><max>0.0</max></column>
+</columns>
+<table>
+<tr>
+<th>TEL_NAME</th><th>STA_NAME</th><th>STA_INDEX</th><th>DIAMETER</th><th>STAXYZ</th></tr>
+<tr><td>AT1</td><td>A1</td><td>1</td><td>0</td><td>0 0 0</td></tr>
+<tr><td>AT4</td><td>G1</td><td>2</td><td>0</td><td>0 0 0</td></tr>
+<tr><td>AT2</td><td>I1</td><td>3</td><td>0</td><td>0 0 0</td></tr>
+<tr><td>AT3</td><td>K0</td><td>4</td><td>0</td><td>0 0 0</td></tr>
+</table>
+</OI_ARRAY>
+<OI_WAVELENGTH>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_WAVELENGTH</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>3</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PIONIER_Pnat(1.5884629/1.7604805)</value><description>name of detector for cross-referencing</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>3</rows><columns>
+<column><name>EFF_WAVE</name><description>effective wavelength of channel</description><type>E</type><unit>m|meter|meters</unit><min>1.5884629E-6</min><max>1.7604805E-6</max></column>
+<column><name>EFF_BAND</name><description>effective bandpass of channel</description><type>E</type><unit>m|meter|meters</unit><min>9.35E-8</min><max>9.35E-8</max></column>
+</columns>
+<table>
+<tr>
+<th>EFF_WAVE</th><th>EFF_BAND</th></tr>
+<tr><td>1.588E-6</td><td>9.35E-8</td></tr>
+<tr><td>1.675E-6</td><td>9.35E-8</td></tr>
+<tr><td>1.76E-6</td><td>9.35E-8</td></tr>
+</table>
+</OI_WAVELENGTH>
+<OI_VIS2>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS2</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>180</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2012-03-25</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PIONIER_Pnat(1.5884629/1.7604805)</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>180</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>18</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>56011.03619696394</min><max>56011.43041401478</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>112179.19921875</min><max>1582489.6875</max></column>
+<column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.09327034498991685</min><max>1.0997977563885757</max></column>
+<column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.0024906806261090846</min><max>0.11688465573641209</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-118.20290379182208</min><max>106.22295527687027</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-83.4126163666237</min><max>38.57228315654466</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VIS2DATA</th><th>VIS2ERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>0.785 0.832 0.883</td><td>0.06 0.064 0.065</td><td>43.97</td><td>-34.816</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>0.817 0.829 0.837</td><td>0.072 0.048 0.033</td><td>-95.782</td><td>-36.22</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>0.841 0.813 0.823</td><td>0.022 0.02 0.017</td><td>-51.812</td><td>-71.036</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>0.855 0.823 0.764</td><td>0.051 0.045 0.027</td><td>-20.559</td><td>-41.752</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>0.859 0.904 0.809</td><td>0.027 0.024 0.046</td><td>75.223</td><td>-5.533</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>0.849 0.802 0.891</td><td>0.031 0.024 0.021</td><td>31.253</td><td>29.283</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>0.983 0.985 0.986</td><td>0.038 0.021 0.028</td><td>70.866</td><td>-12.376</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>0.962 0.976 0.966</td><td>0.028 0.023 0.021</td><td>-51.373</td><td>-68.402</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>0.999 0.999 0.998</td><td>0.04 0.027 0.02</td><td>30.524</td><td>27.318</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>1.019 1.016 1.005</td><td>0.033 0.047 0.027</td><td>-20.849</td><td>-41.085</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>0.967 0.973 0.944</td><td>0.091 0.061 0.038</td><td>-91.716</td><td>-28.708</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>1.005 0.993 0.985</td><td>0.055 0.038 0.029</td><td>40.343</td><td>-39.694</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>0.926 0.992 0.995</td><td>0.045 0.02 0.021</td><td>-50.563</td><td>-61.28</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>1.078 1.061 1.046</td><td>0.055 0.04 0.03</td><td>63.845</td><td>-46.043</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>0.942 0.973 0.995</td><td>0.033 0.02 0.02</td><td>33.486</td><td>22.978</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>1.055 1.074 1.034</td><td>0.052 0.048 0.044</td><td>-17.077</td><td>-38.302</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>1.1 1.064 1.045</td><td>0.093 0.07 0.04</td><td>-114.409</td><td>-15.236</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>1.005 0.97 0.987</td><td>0.027 0.021 0.021</td><td>97.331</td><td>-23.066</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>0.984 0.986 0.975</td><td>0.033 0.021 0.02</td><td>33.437</td><td>29.415</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>0.983 0.983 0.981</td><td>0.022 0.025 0.02</td><td>-49.857</td><td>-72.375</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>0.946 0.957 0.95</td><td>0.079 0.063 0.035</td><td>-115.748</td><td>-33.958</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>0.984 0.97 0.997</td><td>0.023 0.042 0.032</td><td>-16.42</td><td>-42.959</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>0.967 0.982 0.962</td><td>0.026 0.028 0.021</td><td>99.328</td><td>-9.001</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>0.944 0.971 0.988</td><td>0.046 0.034 0.028</td><td>65.891</td><td>-38.416</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>0.982 0.93 0.938</td><td>0.028 0.043 0.035</td><td>-12.957</td><td>-44.686</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>1.041 1.006 1.001</td><td>0.033 0.021 0.023</td><td>32.185</td><td>33.192</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>0.913 0.948 0.95</td><td>0.059 0.032 0.029</td><td>73.05</td><td>-30.541</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>0.991 0.96 0.98</td><td>0.054 0.02 0.02</td><td>-45.142</td><td>-77.878</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>0.944 0.949 0.983</td><td>0.052 0.047 0.023</td><td>105.235</td><td>2.651</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>0.852 0.847 0.902</td><td>0.072 0.06 0.051</td><td>-118.192</td><td>-47.336</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>0.961 0.976 0.984</td><td>0.029 0.02 0.02</td><td>33.298</td><td>26.927</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>0.987 0.989 1.007</td><td>0.037 0.038 0.037</td><td>-18.384</td><td>-41.663</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>0.935 0.957 0.943</td><td>0.079 0.065 0.03</td><td>-110.43</td><td>-25.522</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>0.928 0.97 0.981</td><td>0.038 0.023 0.022</td><td>92.047</td><td>-16.141</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>0.967 0.978 0.975</td><td>0.04 0.029 0.023</td><td>58.748</td><td>-43.068</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>0.958 0.955 0.955</td><td>0.032 0.02 0.02</td><td>-51.682</td><td>-68.59</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>0.961 0.964 0.971</td><td>0.035 0.032 0.039</td><td>73.165</td><td>-30.222</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>0.979 0.96 0.975</td><td>0.049 0.036 0.022</td><td>105.305</td><td>3.12</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>1 0.999 1.033</td><td>0.052 0.034 0.034</td><td>-12.874</td><td>-44.753</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>1.024 1.016 1.008</td><td>0.028 0.021 0.021</td><td>32.14</td><td>33.342</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>0.954 0.945 0.937</td><td>0.067 0.056 0.027</td><td>-118.179</td><td>-47.873</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>0.993 1 0.995</td><td>0.031 0.02 0.02</td><td>-45.014</td><td>-78.095</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>1.074 0.983 1.018</td><td>0.108 0.028 0.035</td><td>102.03</td><td>-4.016</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>0.953 0.975 1.013</td><td>0.062 0.062 0.028</td><td>-117.303</td><td>-39.762</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>1.016 1.011 1.005</td><td>0.026 0.021 0.021</td><td>33.184</td><td>31.089</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>0.986 1.013 1.003</td><td>0.048 0.023 0.035</td><td>68.846</td><td>-35.105</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>1.007 1.01 0.99</td><td>0.026 0.033 0.047</td><td>-15.273</td><td>-43.778</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>0.988 0.994 0.995</td><td>0.064 0.024 0.024</td><td>-48.457</td><td>-74.867</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>0.916 0.921 0.915</td><td>0.07 0.066 0.031</td><td>-117.435</td><td>-40.743</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>1.004 0.996 1</td><td>0.028 0.021 0.021</td><td>33.141</td><td>31.367</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>0.964 0.968 0.925</td><td>0.117 0.027 0.026</td><td>102.301</td><td>-3.162</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>0.991 0.942 0.981</td><td>0.032 0.053 0.051</td><td>-15.134</td><td>-43.905</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>0.976 0.975 1.007</td><td>0.027 0.023 0.035</td><td>69.16</td><td>-34.529</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>1.028 0.977 0.976</td><td>0.064 0.02 0.023</td><td>-48.274</td><td>-75.272</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>0.487 0.445 0.428</td><td>0.013 0.013 0.012</td><td>76.482</td><td>-13.761</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>0.637 0.619 0.608</td><td>0.025 0.032 0.014</td><td>-8.893</td><td>-31.542</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>0.666 0.671 0.63</td><td>0.027 0.017 0.015</td><td>29.347</td><td>25.576</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>0.326 0.301 0.283</td><td>0.022 0.011 6.607E-3</td><td>-114.722</td><td>-43.356</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>0.354 0.339 0.327</td><td>0.03 8.401E-3 7.457E-3</td><td>105.829</td><td>11.814</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>0.468 0.445 0.431</td><td>0.021 9.359E-3 9.067E-3</td><td>-38.241</td><td>-57.117</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>1.011 1.003 1</td><td>0.034 0.021 0.021</td><td>74.039</td><td>-26.424</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>1.033 1.007 1.004</td><td>0.042 0.021 0.021</td><td>-43.907</td><td>-50.057</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>0.985 0.986 0.98</td><td>0.024 0.021 0.02</td><td>-117.947</td><td>-23.633</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>0.999 1.001 1</td><td>0.022 0.021 0.021</td><td>31.731</td><td>20.365</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>1.003 1.001 0.999</td><td>0.03 0.023 0.022</td><td>-12.176</td><td>-29.692</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>0.978 0.988 0.982</td><td>0.023 0.024 0.022</td><td>105.77</td><td>-6.059</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>0.489 0.433 0.392</td><td>0.02 0.013 8.745E-3</td><td>75.952</td><td>-18.337</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>0.476 0.421 0.374</td><td>0.014 0.01 0.011</td><td>-116.181</td><td>-37.987</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>0.61 0.585 0.553</td><td>0.027 0.019 0.013</td><td>-9.999</td><td>-31.784</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>0.581 0.558 0.516</td><td>0.013 0.012 0.011</td><td>30.231</td><td>24.541</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>0.563 0.51 0.475</td><td>0.029 0.011 0.01</td><td>-40.229</td><td>-56.325</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>0.437 0.387 0.363</td><td>0.013 0.01 9.18E-3</td><td>106.182</td><td>6.203</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>0.958 0.981 0.985</td><td>0.039 0.022 0.021</td><td>-41.187</td><td>-56.933</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>0.967 0.973 0.984</td><td>0.028 0.021 0.026</td><td>-116.771</td><td>-36.022</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>0.979 0.979 0.983</td><td>0.024 0.022 0.022</td><td>75.583</td><td>-20.911</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>0.998 0.995 0.997</td><td>0.023 0.021 0.021</td><td>30.64</td><td>24.467</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>0.995 0.993 0.999</td><td>0.026 0.032 0.023</td><td>-10.548</td><td>-32.466</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>0.986 0.979 0.989</td><td>0.027 0.022 0.03</td><td>106.223</td><td>3.556</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>0.335 0.317 0.285</td><td>7.309E-3 7.057E-3 5.856E-3</td><td>32.705</td><td>25.13</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>0.164 0.128 0.105</td><td>8.732E-3 3.286E-3 3.217E-3</td><td>104.103</td><td>-10.931</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>0.188 0.16 0.137</td><td>4.405E-3 3.554E-3 3.049E-3</td><td>71.399</td><td>-36.061</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>0.151 0.121 0.093</td><td>0.011 6.364E-3 4.247E-3</td><td>-118.107</td><td>-26.729</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>0.166 0.141 0.124</td><td>5.471E-3 3.617E-3 2.667E-3</td><td>-46.708</td><td>-62.79</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>0.329 0.275 0.272</td><td>0.036 0.029 0.021</td><td>-14.003</td><td>-37.66</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>0.931 0.938 0.944</td><td>0.02 0.022 0.02</td><td>-118.156</td><td>-27.498</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>0.97 0.973 0.975</td><td>0.02 0.02 0.02</td><td>71.708</td><td>-35.415</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>0.971 0.974 0.976</td><td>0.021 0.027 0.023</td><td>-46.448</td><td>-62.912</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>0.992 0.993 0.993</td><td>0.024 0.025 0.025</td><td>32.623</td><td>25.281</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>0.992 0.993 0.994</td><td>0.082 0.081 0.099</td><td>-13.824</td><td>-37.631</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>0.948 0.953 0.958</td><td>0.025 0.023 0.02</td><td>104.331</td><td>-10.133</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>0.536 0.505 0.495</td><td>0.017 0.013 0.012</td><td>-50.85</td><td>-34.571</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>0.335 0.316 0.298</td><td>0.019 0.016 7.003E-3</td><td>-113.656</td><td>14.439</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>0.319 0.318 0.29</td><td>0.016 8.074E-3 6.842E-3</td><td>96.283</td><td>-39.333</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>0.67 0.657 0.659</td><td>0.028 0.029 0.023</td><td>-17.374</td><td>-24.894</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>0.379 0.388 0.342</td><td>0.011 0.01 0.013</td><td>62.807</td><td>-49.01</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>0.678 0.692 0.67</td><td>0.017 0.015 0.014</td><td>33.476</td><td>9.677</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>0.969 0.973 0.976</td><td>0.032 0.027 0.021</td><td>-106.666</td><td>32.107</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>0.989 0.983 0.988</td><td>0.026 0.025 0.021</td><td>-52.098</td><td>-26.233</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>0.97 0.985 0.983</td><td>0.024 0.021 0.021</td><td>87.47</td><td>-54.015</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>0.979 0.984 0.988</td><td>0.044 0.045 0.028</td><td>-19.195</td><td>-21.907</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>0.993 0.999 0.998</td><td>0.022 0.025 0.025</td><td>54.568</td><td>-58.341</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>0.997 1.002 1.001</td><td>0.023 0.021 0.024</td><td>32.902</td><td>4.326</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>0.447 0.395 0.362</td><td>0.02 8.583E-3 9.027E-3</td><td>94.976</td><td>-41.319</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>0.607 0.572 0.553</td><td>0.015 0.013 0.012</td><td>-17.717</td><td>-25.235</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>0.579 0.562 0.527</td><td>0.017 0.013 0.011</td><td>33.444</td><td>9.497</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>0.464 0.424 0.398</td><td>0.013 0.011 9.786E-3</td><td>61.531</td><td>-50.817</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>0.431 0.389 0.354</td><td>0.017 0.011 7.513E-3</td><td>-112.693</td><td>16.084</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>0.508 0.474 0.442</td><td>0.021 0.01 9.427E-3</td><td>-51.161</td><td>-34.732</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>1.027 1.012 1.008</td><td>0.041 0.024 0.022</td><td>-110.716</td><td>19.608</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>1.013 1.009 1.006</td><td>0.036 0.021 0.021</td><td>-51.626</td><td>-34.237</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>1.019 1.007 1.007</td><td>0.023 0.021 0.021</td><td>33.32</td><td>8.826</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>1.013 1.013 1.015</td><td>0.024 0.022 0.022</td><td>-18.306</td><td>-25.41</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>0.988 0.972 0.983</td><td>0.027 0.02 0.021</td><td>92.411</td><td>-45.018</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>0.998 0.989 0.99</td><td>0.022 0.021 0.021</td><td>59.091</td><td>-53.844</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>0.223 0.197 0.167</td><td>5.111E-3 4.267E-3 4.264E-3</td><td>-52.154</td><td>-42.586</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>0.389 0.381 0.34</td><td>0.011 8.025E-3 6.957E-3</td><td>32.156</td><td>11.875</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>0.398 0.37 0.342</td><td>0.015 8.489E-3 7.35E-3</td><td>-19.997</td><td>-30.711</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>0.166 0.134 0.112</td><td>4.446E-3 2.939E-3 3.234E-3</td><td>81.306</td><td>-48.817</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>0.186 0.156 0.136</td><td>4.809E-3 3.285E-3 2.874E-3</td><td>49.149</td><td>-60.692</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>0.152 0.128 0.106</td><td>6.725E-3 3.324E-3 2.782E-3</td><td>-101.303</td><td>18.106</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>0.963 0.972 0.973</td><td>0.022 0.02 0.021</td><td>48.022</td><td>-61.545</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>0.975 0.975 0.974</td><td>0.024 0.022 0.023</td><td>-52.108</td><td>-41.399</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>0.957 0.978 0.979</td><td>0.036 0.026 0.025</td><td>31.974</td><td>11.181</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>0.959 0.98 0.984</td><td>0.035 0.022 0.022</td><td>-20.135</td><td>-30.218</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>0.913 0.93 0.938</td><td>0.04 0.026 0.026</td><td>-100.13</td><td>20.145</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>0.97 0.986 0.981</td><td>0.025 0.023 0.03</td><td>79.995</td><td>-50.363</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>0.371 0.344 0.318</td><td>7.99E-3 7.809E-3 0.011</td><td>101.885</td><td>27.694</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>0.403 0.383 0.342</td><td>0.01 0.012 9.643E-3</td><td>-30.379</td><td>-83.22</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>0.68 0.629 0.57</td><td>0.024 0.016 0.012</td><td>25.538</td><td>38.572</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>0.446 0.428 0.406</td><td>9.386E-3 9.986E-3 8.308E-3</td><td>76.348</td><td>-10.878</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>0.65 0.604 0.596</td><td>0.026 0.013 0.013</td><td>-4.841</td><td>-44.648</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>0.328 0.299 0.274</td><td>0.011 9.357E-3 0.011</td><td>-106.726</td><td>-72.342</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>0.188 0.161 0.136</td><td>4.691E-3 3.413E-3 2.963E-3</td><td>-108.498</td><td>-69.617</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>0.242 0.216 0.196</td><td>5.058E-3 5.005E-3 4.364E-3</td><td>76.604</td><td>-13.796</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>0.579 0.569 0.557</td><td>0.015 0.013 0.013</td><td>-5.589</td><td>-45.164</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>0.671 0.659 0.647</td><td>0.023 0.018 0.014</td><td>26.305</td><td>38.249</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>0.18 0.154 0.137</td><td>4.018E-3 3.219E-3 2.857E-3</td><td>102.909</td><td>24.453</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>0.323 0.312 0.293</td><td>7.412E-3 6.42E-3 6.184E-3</td><td>-31.894</td><td>-83.413</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>1.008 1.003 1.005</td><td>0.023 0.021 0.021</td><td>27.589</td><td>36.924</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>0.966 0.965 0.972</td><td>0.02 0.02 0.02</td><td>104.396</td><td>20.519</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>0.982 0.985 0.99</td><td>0.02 0.022 0.021</td><td>76.806</td><td>-16.404</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>0.999 1 0.999</td><td>0.026 0.026 0.021</td><td>-6.909</td><td>-44.512</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>0.986 0.987 0.99</td><td>0.026 0.024 0.024</td><td>-34.498</td><td>-81.436</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>0.966 0.968 0.972</td><td>0.021 0.023 0.022</td><td>-111.305</td><td>-65.031</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>0.962 0.972 0.971</td><td>0.024 0.022 0.022</td><td>106.185</td><td>9.909</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>1.031 0.978 0.974</td><td>0.032 0.034 0.026</td><td>-10.973</td><td>-42.617</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>0.983 0.977 0.964</td><td>0.024 0.024 0.023</td><td>30.942</td><td>33.249</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>0.983 0.98 0.968</td><td>0.023 0.022 0.022</td><td>75.243</td><td>-23.34</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>0.981 0.953 0.976</td><td>0.048 0.026 0.024</td><td>-41.916</td><td>-75.866</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>0.958 0.964 0.956</td><td>0.028 0.024 0.027</td><td>-117.159</td><td>-52.526</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>0.627 0.57 0.537</td><td>0.024 0.019 0.02</td><td>-13.247</td><td>-41.87</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>0.488 0.436 0.367</td><td>0.014 0.013 0.013</td><td>-118.202</td><td>-38.295</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>0.61 0.578 0.51</td><td>0.015 0.015 0.013</td><td>32.336</td><td>29.792</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>0.55 0.469 0.423</td><td>0.021 0.012 0.011</td><td>-45.583</td><td>-71.662</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>0.518 0.469 0.409</td><td>0.017 0.013 0.011</td><td>104.955</td><td>-3.575</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>0.559 0.506 0.435</td><td>0.015 0.013 0.011</td><td>72.618</td><td>-33.367</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>0.64 0.609 0.594</td><td>0.023 0.016 0.018</td><td>-13.476</td><td>-41.795</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>0.446 0.426 0.389</td><td>0.011 0.01 9.282E-3</td><td>72.272</td><td>-34.027</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>0.434 0.422 0.382</td><td>0.017 0.01 0.013</td><td>-45.931</td><td>-71.335</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>0.339 0.308 0.275</td><td>8.677E-3 0.012 7.354E-3</td><td>-118.203</td><td>-37.308</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>0.379 0.35 0.312</td><td>0.014 8.582E-3 7.43E-3</td><td>104.727</td><td>-4.487</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>0.608 0.608 0.56</td><td>0.016 0.019 0.016</td><td>32.454</td><td>29.54</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>0.239 0.21 0.185</td><td>5.746E-3 4.819E-3 3.93E-3</td><td>71.593</td><td>-34.884</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>0.35 0.341 0.325</td><td>8.404E-3 7.26E-3 6.892E-3</td><td>-46.541</td><td>-72.252</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>0.648 0.624 0.623</td><td>0.015 0.014 0.015</td><td>-13.889</td><td>-42.392</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>0.15 0.127 0.104</td><td>3.445E-3 3.155E-3 2.818E-3</td><td>-118.134</td><td>-37.368</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>0.168 0.141 0.117</td><td>3.762E-3 3.006E-3 2.491E-3</td><td>104.245</td><td>-5.024</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>0.673 0.669 0.663</td><td>0.016 0.015 0.014</td><td>32.652</td><td>29.86</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>0.994 0.995 0.996</td><td>0.021 0.022 0.021</td><td>33.057</td><td>27.95</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>0.961 0.964 0.968</td><td>0.024 0.02 0.02</td><td>-117.628</td><td>-31.156</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>0.981 0.983 0.984</td><td>0.022 0.021 0.02</td><td>-47.948</td><td>-69.236</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>0.973 0.975 0.978</td><td>0.021 0.02 0.02</td><td>102.738</td><td>-10.13</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>0.994 0.995 0.995</td><td>0.022 0.022 0.021</td><td>-14.89</td><td>-41.286</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>0.983 0.985 0.986</td><td>0.022 0.02 0.02</td><td>69.681</td><td>-38.08</td><td>1 2</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>0.372 0.365 0.349</td><td>9.78E-3 9.425E-3 8.857E-3</td><td>-50.454</td><td>-65.782</td><td>4 2</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>0.664 0.641 0.645</td><td>0.018 0.017 0.017</td><td>-16.971</td><td>-40.334</td><td>4 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>0.179 0.148 0.125</td><td>5.126E-3 3.91E-3 3.553E-3</td><td>97.675</td><td>-18.494</td><td>1 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>0.142 0.121 0.102</td><td>4.154E-3 3.206E-3 2.703E-3</td><td>-114.646</td><td>-21.84</td><td>4 1</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>0.685 0.681 0.674</td><td>0.022 0.019 0.018</td><td>33.483</td><td>25.448</td><td>2 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>0.251 0.217 0.192</td><td>8.047E-3 6.552E-3 4.838E-3</td><td>64.192</td><td>-43.942</td><td>1 2</td><td>F F F</td></tr>
+</table>
+</OI_VIS2>
+<OI_T3>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_T3</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>120</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>VLTI</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2012-03-25</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>PIONIER_Pnat(1.5884629/1.7604805)</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>120</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>18</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>56011.03619696394</min><max>56011.43041401478</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>112179.19921875</min><max>1582489.6875</max></column>
+<column><name>T3AMP</name><description>triple product amplitude</description><type>D</type><unit></unit><min>1.0</min><max>1.0</max></column>
+<column><name>T3AMPERR</name><description>error in triple product amplitude</description><type>D</type><unit></unit><min>4.743416489778228E9</min><max>6.324555319704304E9</max></column>
+<column><name>T3PHI</name><description>triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-18.228949519793332</min><max>7.096015675539547</max></column>
+<column><name>T3PHIERR</name><description>error in triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>0.19154795417015413</min><max>3.6438421522745026</max></column>
+<column><name>U1COORD</name><description>U coordinate of baseline AB of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>-118.20290379182208</min><max>76.80642776115819</max></column>
+<column><name>V1COORD</name><description>V coordinate of baseline AB of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>-83.4126163666237</min><max>32.10747923968978</max></column>
+<column><name>U2COORD</name><description>U coordinate of baseline BC of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>25.537640298541337</min><max>106.22295527687027</max></column>
+<column><name>V2COORD</name><description>V coordinate of baseline BC of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>-61.5446420192412</min><max>38.57228315654466</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>T3AMP</th><th>T3AMPERR</th><th>T3PHI</th><th>T3PHIERR</th><th>U1COORD</th><th>V1COORD</th><th>U2COORD</th><th>V2COORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-2.334 -1.132 4.032</td><td>0.888 1.177 0.857</td><td>-51.812</td><td>-71.036</td><td>31.253</td><td>29.283</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-1.874 5.448 2.112</td><td>3.585 2.479 2.167</td><td>43.97</td><td>-34.816</td><td>31.253</td><td>29.283</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>3.158 -0.17 4.967</td><td>3.017 2.799 2.1</td><td>-95.782</td><td>-36.22</td><td>75.223</td><td>-5.533</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>13</td><td>0</td><td>56011.036</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>3.79 5.418 3.607</td><td>1.749 1.279 0.58</td><td>-95.782</td><td>-36.22</td><td>43.97</td><td>-34.816</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-2.311 -0.78 -0.885</td><td>2.916 2.217 1.144</td><td>40.343</td><td>-39.694</td><td>30.524</td><td>27.318</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-0.118 -0.171 0.063</td><td>0.386 0.922 0.597</td><td>-51.373</td><td>-68.402</td><td>30.524</td><td>27.318</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>0.847 1.769 0.025</td><td>1.704 1.245 0.487</td><td>-91.716</td><td>-28.708</td><td>40.343</td><td>-39.694</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>3</td><td>0</td><td>56011.046</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>1.667 2.255 0.653</td><td>2.936 2.781 2.082</td><td>-91.716</td><td>-28.708</td><td>70.866</td><td>-12.376</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-1.638 -1.327 -0.945</td><td>0.728 0.927 0.524</td><td>-50.563</td><td>-61.28</td><td>33.486</td><td>22.978</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>4.766 3.417 3.58</td><td>2.973 2.797 2.108</td><td>-114.409</td><td>-15.236</td><td>97.331</td><td>-23.066</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>2.426 1.178 0.581</td><td>1.431 1.256 0.5</td><td>-114.409</td><td>-15.236</td><td>63.845</td><td>-46.043</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>4</td><td>0</td><td>56011.061</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-4.334 -3.241 -4.337</td><td>2.847 2.251 1.45</td><td>63.845</td><td>-46.043</td><td>33.486</td><td>22.978</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-0.156 -0.958 -0.236</td><td>1.441 1.26 0.835</td><td>-115.748</td><td>-33.958</td><td>65.891</td><td>-38.416</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>0.049 -0.095 0.569</td><td>0.589 0.928 0.543</td><td>-49.857</td><td>-72.375</td><td>33.437</td><td>29.415</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>1.468 1.693 0.289</td><td>2.88 2.42 1.164</td><td>65.891</td><td>-38.416</td><td>33.437</td><td>29.415</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>5</td><td>0</td><td>56011.068</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>0.029 -1.344 0.316</td><td>2.964 2.785 2.087</td><td>-115.748</td><td>-33.958</td><td>99.328</td><td>-9.001</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-3.896 -4.409 -0.096</td><td>3.049 2.853 2.37</td><td>-118.192</td><td>-47.336</td><td>105.235</td><td>2.651</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>0.639 -0.847 -0.397</td><td>1.52 1.307 0.599</td><td>-118.192</td><td>-47.336</td><td>73.05</td><td>-30.541</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>3.903 4.099 0.704</td><td>2.969 2.272 1.214</td><td>73.05</td><td>-30.541</td><td>32.185</td><td>33.192</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.076</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-0.149 0.458 0.708</td><td>0.604 1.566 1.379</td><td>-45.142</td><td>-77.878</td><td>32.185</td><td>33.192</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>0.076 0.726 0.452</td><td>1.478 1.267 0.559</td><td>-110.43</td><td>-25.522</td><td>58.748</td><td>-43.068</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>1.295 1.025 0.952</td><td>3.029 2.815 2.109</td><td>-110.43</td><td>-25.522</td><td>92.047</td><td>-16.141</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>0.164 0.029 0.152</td><td>0.595 0.982 0.546</td><td>-51.682</td><td>-68.59</td><td>33.298</td><td>26.927</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>14</td><td>0</td><td>56011.084</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-0.724 1.562 -0.368</td><td>2.879 2.262 1.196</td><td>58.748</td><td>-43.068</td><td>33.298</td><td>26.927</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>0.619 0.824 0.202</td><td>0.486 0.997 0.539</td><td>-45.014</td><td>-78.095</td><td>32.14</td><td>33.342</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-2.816 -3.706 -2.831</td><td>3.033 3.644 2.1</td><td>-118.179</td><td>-47.873</td><td>105.305</td><td>3.12</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-1.402 -1.05 -0.115</td><td>1.434 1.275 0.519</td><td>-118.179</td><td>-47.873</td><td>73.165</td><td>-30.222</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.092</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>2.192 4.359 1.691</td><td>2.872 2.698 1.194</td><td>73.165</td><td>-30.222</td><td>32.14</td><td>33.342</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>0.686 1.321 0.732</td><td>1.003 0.953 0.896</td><td>-48.457</td><td>-74.867</td><td>33.184</td><td>31.089</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>2.584 4.509 1.369</td><td>2.864 2.418 1.187</td><td>68.846</td><td>-35.105</td><td>33.184</td><td>31.089</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-2.676 -3.676 -0.913</td><td>3.056 3.107 2.144</td><td>-117.303</td><td>-39.762</td><td>102.03</td><td>-4.016</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>6</td><td>0</td><td>56011.099</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-0.318 -0.72 0.269</td><td>1.436 1.275 0.539</td><td>-117.303</td><td>-39.762</td><td>68.846</td><td>-35.105</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-3.595 -2.902 -2.944</td><td>3.119 2.893 2.166</td><td>-117.435</td><td>-40.743</td><td>102.301</td><td>-3.162</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>-2.217 -1.765 -1.176</td><td>1.519 1.348 0.593</td><td>-117.435</td><td>-40.743</td><td>69.16</td><td>-34.529</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>0.498 1.598 0.02</td><td>0.985 0.995 0.649</td><td>-48.274</td><td>-75.272</td><td>33.141</td><td>31.367</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>15</td><td>0</td><td>56011.114</td><td>112179.199</td><td>1 1 1</td><td>4.743E9 4.743E9 4.743E9</td><td>1.664 3.133 1.495</td><td>3.024 2.422 1.582</td><td>69.16</td><td>-34.529</td><td>33.141</td><td>31.367</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>2.021 -0.891 -0.414</td><td>1.034 0.785 0.516</td><td>76.482</td><td>-13.761</td><td>29.347</td><td>25.576</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>0.158 -0.521 -0.553</td><td>1.226 0.4 0.709</td><td>-38.241</td><td>-57.117</td><td>29.347</td><td>25.576</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-2.415 -2.696 -2.394</td><td>1.511 1.063 0.638</td><td>-114.722</td><td>-43.356</td><td>105.829</td><td>11.814</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.14</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-0.373 -2.593 -2.681</td><td>0.866 1.185 0.409</td><td>-114.722</td><td>-43.356</td><td>76.482</td><td>-13.761</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>0.628 -0.191 -0.249</td><td>0.688 0.7 0.267</td><td>-117.947</td><td>-23.633</td><td>74.039</td><td>-26.424</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>0.092 -0.184 0.057</td><td>0.619 0.665 0.44</td><td>74.039</td><td>-26.424</td><td>31.731</td><td>20.365</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-0.472 -0.143 -0.011</td><td>1.181 0.293 0.495</td><td>-43.907</td><td>-50.057</td><td>31.731</td><td>20.365</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.154</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>0.633 -0.221 -0.126</td><td>0.995 1.247 0.704</td><td>-117.947</td><td>-23.633</td><td>105.77</td><td>-6.059</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-1.352 -3.149 -2.814</td><td>1.635 0.722 0.522</td><td>75.952</td><td>-18.337</td><td>30.231</td><td>24.541</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>0.518 0.756 1.268</td><td>1.161 0.942 0.514</td><td>-116.181</td><td>-37.987</td><td>106.182</td><td>6.203</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>1.869 0.722 1.421</td><td>1.04 0.337 0.661</td><td>-40.229</td><td>-56.325</td><td>30.231</td><td>24.541</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.171</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-2.609 -3.233 -4.031</td><td>1.037 0.785 0.424</td><td>-116.181</td><td>-37.987</td><td>75.952</td><td>-18.337</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>0.536 -1.025 -0.069</td><td>0.926 0.59 1.022</td><td>-41.187</td><td>-56.933</td><td>30.64</td><td>24.467</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-0.195 -0.565 0.137</td><td>1.123 0.937 0.526</td><td>-116.771</td><td>-36.022</td><td>106.223</td><td>3.556</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-0.213 0.214 0.301</td><td>0.757 0.713 0.533</td><td>75.583</td><td>-20.911</td><td>30.64</td><td>24.467</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.183</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-0.987 0.247 0.335</td><td>1.45 0.787 0.559</td><td>-116.771</td><td>-36.022</td><td>75.583</td><td>-20.911</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>1 1 1</td><td>6.325E9 6.325E9 6.325E9</td><td>-5.587 -6.008 -5.574</td><td>0.71 0.529 0.518</td><td>-118.107</td><td>-26.729</td><td>71.399</td><td>-36.061</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>1 1 1</td><td>6.325E9 6.325E9 6.325E9</td><td>-1.924 -2.241 -1.798</td><td>1.327 0.942 0.48</td><td>71.399</td><td>-36.061</td><td>32.705</td><td>25.13</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>1 1 1</td><td>6.325E9 6.325E9 6.325E9</td><td>3.683 1.658 1.217</td><td>1.039 0.764 2.059</td><td>-118.107</td><td>-26.729</td><td>104.103</td><td>-10.931</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.2</td><td>413337.578</td><td>1 1 1</td><td>6.325E9 6.325E9 6.325E9</td><td>7.096 5.682 5.329</td><td>0.533 0.457 0.488</td><td>-46.708</td><td>-62.79</td><td>32.705</td><td>25.13</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>1 1 1</td><td>6.325E9 6.325E9 6.325E9</td><td>0 0 0</td><td>0.663 0.614 0.476</td><td>-118.156</td><td>-27.498</td><td>104.331</td><td>-10.133</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>1 1 1</td><td>6.325E9 6.325E9 6.325E9</td><td>0 0 0</td><td>0.302 0.432 0.513</td><td>-46.448</td><td>-62.912</td><td>32.623</td><td>25.281</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>1 1 1</td><td>6.325E9 6.325E9 6.325E9</td><td>0 0 0</td><td>0.517 0.355 0.33</td><td>-118.156</td><td>-27.498</td><td>71.708</td><td>-35.415</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.209</td><td>413337.578</td><td>1 1 1</td><td>6.325E9 6.325E9 6.325E9</td><td>0 0 0</td><td>0.813 0.437 0.223</td><td>71.708</td><td>-35.415</td><td>32.623</td><td>25.281</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-0.26 -1.524 0.949</td><td>1.069 1.17 0.534</td><td>-50.85</td><td>-34.571</td><td>33.476</td><td>9.677</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-0.346 -0.54 -1.206</td><td>2.785 0.855 1.595</td><td>-113.656</td><td>14.439</td><td>62.807</td><td>-49.01</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-1.186 -2.704 -2.701</td><td>2.598 0.848 0.607</td><td>62.807</td><td>-49.01</td><td>33.476</td><td>9.677</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>17</td><td>0</td><td>56011.223</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>2.729 0.169 1.981</td><td>1.698 1.943 0.761</td><td>-113.656</td><td>14.439</td><td>96.283</td><td>-39.333</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>1.645 1.078 0.346</td><td>1.772 0.942 0.463</td><td>-106.666</td><td>32.107</td><td>87.47</td><td>-54.015</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>0.711 -0.558 -0.837</td><td>0.735 0.715 0.503</td><td>54.568</td><td>-58.341</td><td>32.902</td><td>4.326</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>0.6 0.182 0.191</td><td>0.926 0.431 0.545</td><td>-52.098</td><td>-26.233</td><td>32.902</td><td>4.326</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>16</td><td>0</td><td>56011.235</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>1.4 1.499 -0.46</td><td>0.893 0.756 0.38</td><td>-106.666</td><td>32.107</td><td>54.568</td><td>-58.341</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>0.279 -1.281 -1.096</td><td>1.652 1.648 0.498</td><td>-112.693</td><td>16.084</td><td>94.976</td><td>-41.319</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-3.053 -3.647 -5.643</td><td>0.795 0.837 0.404</td><td>-112.693</td><td>16.084</td><td>61.531</td><td>-50.817</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-0.792 -1.739 -0.662</td><td>0.942 0.718 1.182</td><td>-51.161</td><td>-34.732</td><td>33.444</td><td>9.497</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>1</td><td>0</td><td>56011.249</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-3.849 -4.046 -4.719</td><td>0.742 0.769 0.504</td><td>61.531</td><td>-50.817</td><td>33.444</td><td>9.497</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>0.866 0.318 0.743</td><td>0.825 0.26 0.413</td><td>-51.626</td><td>-34.237</td><td>33.32</td><td>8.826</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>1.173 0.847 -0.066</td><td>0.71 0.911 0.329</td><td>-110.716</td><td>19.608</td><td>59.091</td><td>-53.844</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>0.03 -0.429 0.236</td><td>0.59 0.653 0.438</td><td>59.091</td><td>-53.844</td><td>33.32</td><td>8.826</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>9</td><td>0</td><td>56011.265</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>1.837 0.943 0.331</td><td>0.987 0.888 0.552</td><td>-110.716</td><td>19.608</td><td>92.411</td><td>-45.018</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-3.263 -2.965 -2.411</td><td>0.617 0.674 0.715</td><td>49.149</td><td>-60.692</td><td>32.156</td><td>11.875</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>4.048 3.248 3.374</td><td>0.861 0.336 0.484</td><td>-52.154</td><td>-42.586</td><td>32.156</td><td>11.875</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-2.31 -1.503 -3.264</td><td>1.091 0.734 0.329</td><td>-101.303</td><td>18.106</td><td>49.149</td><td>-60.692</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>7</td><td>0</td><td>56011.279</td><td>1582489.688</td><td>1 1 1</td><td>5.323E9 4.83E9 4.83E9</td><td>3.588 4.248 2.284</td><td>1.453 0.944 0.482</td><td>-101.303</td><td>18.106</td><td>81.306</td><td>-48.817</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-0.598 0.91 -0.262</td><td>0.726 0.891 0.424</td><td>-100.13</td><td>20.145</td><td>48.022</td><td>-61.545</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-1.483 -1.057 -0.444</td><td>0.685 0.8 0.865</td><td>48.022</td><td>-61.545</td><td>31.974</td><td>11.181</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>0.544 -0.248 -0.44</td><td>0.79 0.265 0.415</td><td>-52.108</td><td>-41.399</td><td>31.974</td><td>11.181</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>8</td><td>0</td><td>56011.292</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>0.468 1.335 -0.205</td><td>1.431 1.193 0.386</td><td>-100.13</td><td>20.145</td><td>79.995</td><td>-50.363</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-5.904 -6.476 -8.615</td><td>1.192 0.75 0.732</td><td>-106.726</td><td>-72.342</td><td>76.348</td><td>-10.878</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-5.796 -6.238 -6.476</td><td>0.957 1.804 0.644</td><td>-106.726</td><td>-72.342</td><td>101.885</td><td>27.694</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-4.195 -3.885 -2.732</td><td>1.161 1.137 0.557</td><td>-30.379</td><td>-83.22</td><td>25.538</td><td>38.572</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.313</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-3.325 -3.524 -4.472</td><td>0.764 0.625 0.835</td><td>76.348</td><td>-10.878</td><td>25.538</td><td>38.572</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-12.864 -13.28 -12.245</td><td>0.645 0.913 0.464</td><td>-108.498</td><td>-69.617</td><td>76.604</td><td>-13.796</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-9.542 -9.163 -8.915</td><td>0.783 0.255 0.387</td><td>-31.894</td><td>-83.413</td><td>26.305</td><td>38.249</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-11.228 -11.341 -9.548</td><td>1.005 0.974 0.447</td><td>-108.498</td><td>-69.617</td><td>102.909</td><td>24.453</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.327</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-10.225 -10.597 -11.208</td><td>1.052 0.857 0.469</td><td>76.604</td><td>-13.796</td><td>26.305</td><td>38.249</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>0.047 0.333 -0.564</td><td>0.485 0.808 0.645</td><td>76.806</td><td>-16.404</td><td>27.589</td><td>36.924</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-0.152 -0.506 0.541</td><td>0.915 0.871 0.582</td><td>-111.305</td><td>-65.031</td><td>104.396</td><td>20.519</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-0.317 -0.531 0.269</td><td>0.561 0.674 0.204</td><td>-111.305</td><td>-65.031</td><td>76.806</td><td>-16.404</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.339</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-1.003 -0.091 -0.561</td><td>0.756 0.466 0.474</td><td>-34.498</td><td>-81.436</td><td>27.589</td><td>36.924</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-2.488 -1.183 -1.512</td><td>1.638 0.393 0.48</td><td>-41.916</td><td>-75.866</td><td>30.942</td><td>33.249</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>1.854 0.953 1.989</td><td>0.849 0.747 0.391</td><td>-117.159</td><td>-52.526</td><td>75.243</td><td>-23.34</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-0.615 -0.45 1.347</td><td>1.126 1.034 0.866</td><td>-117.159</td><td>-52.526</td><td>106.185</td><td>9.909</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>2</td><td>0</td><td>56011.357</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-0.359 0.033 -0.821</td><td>0.633 0.663 0.679</td><td>75.243</td><td>-23.34</td><td>30.942</td><td>33.249</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>0.684 0.442 8.297E-3</td><td>1.341 0.964 0.563</td><td>-118.202</td><td>-38.295</td><td>104.955</td><td>-3.575</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-1.44 -1.87 -2.728</td><td>0.709 0.694 0.484</td><td>72.618</td><td>-33.367</td><td>32.336</td><td>29.792</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>0.516 -0.258 0.286</td><td>0.825 0.622 0.477</td><td>-45.583</td><td>-71.662</td><td>32.336</td><td>29.792</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>10</td><td>0</td><td>56011.372</td><td>1582489.688</td><td>1 1 1</td><td>4.83E9 4.83E9 4.83E9</td><td>-1.689 -0.929 -3.441</td><td>0.779 0.732 0.36</td><td>-118.202</td><td>-38.295</td><td>72.618</td><td>-33.367</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-0.757 -3.487 -5.539</td><td>1.11 0.729 0.288</td><td>-118.203</td><td>-37.308</td><td>72.272</td><td>-34.027</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-3.385 -3.703 -4.899</td><td>1.199 0.949 0.424</td><td>-118.203</td><td>-37.308</td><td>104.727</td><td>-4.487</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-5.008 -3.267 -3.57</td><td>1.302 1.535 0.517</td><td>-45.931</td><td>-71.335</td><td>32.454</td><td>29.54</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>11</td><td>0</td><td>56011.385</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-1.781 -2.871 -4.264</td><td>0.569 0.778 0.681</td><td>72.272</td><td>-34.027</td><td>32.454</td><td>29.54</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-16.131 -17.528 -18.229</td><td>0.615 0.724 0.363</td><td>-118.134</td><td>-37.368</td><td>71.593</td><td>-34.884</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-13.859 -15.412 -15.08</td><td>0.962 0.9 0.385</td><td>-118.134</td><td>-37.368</td><td>104.245</td><td>-5.024</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-8.306 -8.914 -8.796</td><td>1.07 0.637 0.503</td><td>71.593</td><td>-34.884</td><td>32.652</td><td>29.86</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.397</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-5.979 -6.332 -5.852</td><td>0.98 0.23 0.487</td><td>-46.541</td><td>-72.252</td><td>32.652</td><td>29.86</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>1.099 1.033 0.82</td><td>0.823 0.658 0.623</td><td>69.681</td><td>-38.08</td><td>33.057</td><td>27.95</td><td>1 2 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-0.895 -1.269 -1.161</td><td>0.912 0.942 0.617</td><td>-117.628</td><td>-31.156</td><td>102.738</td><td>-10.13</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>-0.175 0.119 -0.089</td><td>0.585 0.863 0.543</td><td>-117.628</td><td>-31.156</td><td>69.681</td><td>-38.08</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>12</td><td>0</td><td>56011.409</td><td>1265991.75</td><td>1 1 1</td><td>5.323E9 5.323E9 5.323E9</td><td>0.329 0.06 -0.019</td><td>0.792 0.192 0.356</td><td>-47.948</td><td>-69.236</td><td>33.057</td><td>27.95</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>1 1 1</td><td>6.055E9 6.055E9 6.055E9</td><td>-4.661 -4.812 -4.385</td><td>0.787 0.297 0.4</td><td>-50.454</td><td>-65.782</td><td>33.483</td><td>25.448</td><td>4 2 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>1 1 1</td><td>6.055E9 6.055E9 6.055E9</td><td>-14.514 -15.617 -16.473</td><td>0.735 0.94 0.377</td><td>-114.646</td><td>-21.84</td><td>64.192</td><td>-43.942</td><td>4 1 2</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>1 1 1</td><td>6.055E9 6.055E9 6.055E9</td><td>-14.277 -15.007 -16.816</td><td>1.275 0.923 0.486</td><td>-114.646</td><td>-21.84</td><td>97.675</td><td>-18.494</td><td>4 1 3</td><td>F F F</td></tr>
+<tr><td>18</td><td>0</td><td>56011.43</td><td>949493.812</td><td>1 1 1</td><td>6.055E9 6.055E9 6.055E9</td><td>-5.925 -5.448 -4.887</td><td>0.593 0.802 0.489</td><td>64.192</td><td>-43.942</td><td>33.483</td><td>25.448</td><td>1 2 3</td><td>F F F</td></tr>
+</table>
+</OI_T3>
+<checkReport>
+Analysing File: 2012-03-24_ALL_oiDataCalib.fits
+Analysing table [OI_ARRAY#3]
+SEVERE	Invalid ARRAYX keyword '0.0'
+SEVERE	Invalid ARRAYY keyword '0.0'
+SEVERE	Invalid ARRAYZ keyword '0.0'
+SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+
+0 warnings, 4 severe errors
+</checkReport>
+<rules>
+  <rule>
+    <name>OI_ARRAY_XYZ</name>
+    <description>check if the ARRAY_XYZ keyword values corresponds to a proper coordinate on earth</description>
+    <paragraph>V1.6.1.3</paragraph>
+  </rule>
+  <rule>
+    <name>OI_ARRAY_XYZ_FIX</name>
+    <description>fix the ARRAY_XYZ keyword values (to VLTI or CHARA according to the ARRNAME keyword) when the ARRAY_XYZ keyword values are incorrect</description>
+    <paragraph>V1.6.1.3</paragraph>
+  </rule>
+</rules>
+<failures>
+  <profile>
+  </profile>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>2012-03-24_ALL_oiDataCalib.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>3</extNb>
+    <member>ARRAYX</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYX keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>2012-03-24_ALL_oiDataCalib.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>3</extNb>
+    <member>ARRAYY</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYY keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>2012-03-24_ALL_oiDataCalib.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>3</extNb>
+    <member>ARRAYZ</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYZ keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ_FIX</rule>
+    <file>2012-03-24_ALL_oiDataCalib.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>3</extNb>
+    <data>
+      <value>VLTI</value>
+      <message>Fixed ARRAY_X/Y/Z to 'VLTI'.</message>
+    </data>
+  </failure>
+</failures>
+</oifits>

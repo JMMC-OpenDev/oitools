@@ -1,0 +1,5 @@
+# filename       testdata_opt.fits
+# local_filename testdata_opt.fits
+target_name	s_ra	s_dec	t_exptime	t_min	t_max	em_res_power	em_min	em_max	facility_name	instrument_name	nb_vis	nb_vis2	nb_t3	nb_channels	
+alp_aur	79.172	45.998	60.0	51836.958449	51836.972222	6.668	1.667E-6	1.667E-6	COAST	COAST_NICMOS	1	2	1	1	
+alp_aur	79.172	45.998	100.0	51836.101222	51836.101222	6.668	1.667E-6	1.667E-6		COAST_NICMOS	0	0	0	1	

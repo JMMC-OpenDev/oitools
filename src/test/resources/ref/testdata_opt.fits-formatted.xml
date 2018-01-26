@@ -1,0 +1,422 @@
+<oifits>
+<version>VERSION_2</version>
+<filename>testdata_opt.fits</filename>
+<local_filename>testdata_opt.fits</local_filename>
+<size>72000</size>
+<md5sum>003cc6369b9a7ab63de553e676a77918</md5sum>
+<hdu>
+<keywords>
+<keyword><name>COMMENT</name><value></value><description>FITS (Flexible Image Transport System) format is defined in 'Astronomy</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>and Astrophysics', volume 376, page 359; bibcode: 2001A&amp;A...376..359H</description><type>A</type><unit></unit></keyword>
+</keywords>
+</hdu>
+<OI_TARGET>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_TARGET</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>1</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>2</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+</keywords>
+<rows>1</rows><columns>
+<column><name>TARGET_ID</name><description>index number</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TARGET</name><description>target name</description><type>A</type><unit></unit></column>
+<column><name>RAEP0</name><description>RA at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>79.172</min><max>79.172</max></column>
+<column><name>DECEP0</name><description>DEC at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>45.998</min><max>45.998</max></column>
+<column><name>EQUINOX</name><description>equinox</description><type>E</type><unit>yr|year|years</unit><min>2000.0</min><max>2000.0</max></column>
+<column><name>RA_ERR</name><description>error in RA at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>1.0E-4</min><max>1.0E-4</max></column>
+<column><name>DEC_ERR</name><description>error in DEC at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>1.0E-4</min><max>1.0E-4</max></column>
+<column><name>SYSVEL</name><description>systemic radial velocity</description><type>D</type><unit>m/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second</unit><min>30200.0</min><max>30200.0</max></column>
+<column><name>VELTYP</name><description>reference for radial velocity</description><type>A</type><unit></unit></column>
+<column><name>VELDEF</name><description>definition of radial velocity</description><type>A</type><unit></unit></column>
+<column><name>PMRA</name><description>proper motion in RA</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>2.098E-5</min><max>2.098E-5</max></column>
+<column><name>PMDEC</name><description>proper motion in DEC</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>-1.1861E-4</min><max>-1.1861E-4</max></column>
+<column><name>PMRA_ERR</name><description>error of proper motion in RA</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>2.2E-7</min><max>2.2E-7</max></column>
+<column><name>PMDEC_ERR</name><description>error of proper motion in DEC</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>1.4E-7</min><max>1.4E-7</max></column>
+<column><name>PARALLAX</name><description>parallax</description><type>E</type><unit>deg|degree|degrees</unit><min>2.147E-5</min><max>2.147E-5</max></column>
+<column><name>PARA_ERR</name><description>error in parallax</description><type>E</type><unit>deg|degree|degrees</unit><min>2.5E-7</min><max>2.5E-7</max></column>
+<column><name>SPECTYP</name><description>spectral type</description><type>A</type><unit></unit></column>
+<column><name>CATEGORY</name><description>'CAL' or 'SCI'</description><type>A</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TARGET</th><th>RAEP0</th><th>DECEP0</th><th>EQUINOX</th><th>RA_ERR</th><th>DEC_ERR</th><th>SYSVEL</th><th>VELTYP</th><th>VELDEF</th><th>PMRA</th><th>PMDEC</th><th>PMRA_ERR</th><th>PMDEC_ERR</th><th>PARALLAX</th><th>PARA_ERR</th><th>SPECTYP</th><th>CATEGORY</th></tr>
+<tr><td>1</td><td>alp_aur</td><td>79.172</td><td>45.998</td><td>2000</td><td>1E-4</td><td>1E-4</td><td>30200</td><td>HELIOCEN</td><td>OPTICAL</td><td>2.098E-5</td><td>-1.186E-4</td><td>2.2E-7</td><td>1.4E-7</td><td>2.147E-5</td><td>2.5E-7</td><td>G5III+G8III</td><td>SCI</td></tr>
+</table>
+</OI_TARGET>
+<metadata>
+  <target>
+    <target_name>alp_aur</target_name>
+    <s_ra>79.172</s_ra>
+    <s_dec>45.998</s_dec>
+    <t_exptime>60.0</t_exptime>
+    <t_min>51836.958449</t_min>
+    <t_max>51836.972222</t_max>
+    <em_res_power>6.668</em_res_power>
+    <em_min>1.667E-6</em_min>
+    <em_max>1.667E-6</em_max>
+    <facility_name>COAST</facility_name>
+    <instrument_name>COAST_NICMOS</instrument_name>
+    <nb_vis>1</nb_vis>
+    <nb_vis2>2</nb_vis2>
+    <nb_t3>1</nb_t3>
+    <nb_channels>1</nb_channels>
+  </target>
+  <target>
+    <target_name>alp_aur</target_name>
+    <s_ra>79.172</s_ra>
+    <s_dec>45.998</s_dec>
+    <t_exptime>100.0</t_exptime>
+    <t_min>51836.101222</t_min>
+    <t_max>51836.101222</t_max>
+    <em_res_power>6.668</em_res_power>
+    <em_min>1.667E-6</em_min>
+    <em_max>1.667E-6</em_max>
+    <facility_name></facility_name>
+    <instrument_name>COAST_NICMOS</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>0</nb_vis2>
+    <nb_t3>0</nb_t3>
+    <nb_channels>1</nb_channels>
+  </target>
+</metadata>
+<OI_ARRAY>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_ARRAY</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>4</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>2</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>COAST</value><description>array name for cross-referencing</description><type>A</type><unit></unit></keyword>
+<keyword><name>FRAME</name><value>GEOCENTRIC</value><description>coordinate frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>ARRAYX</name><value>3920635.0</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYY</name><value>2889.0</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYZ</name><value>5013987.0</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+</keywords>
+<rows>4</rows><columns>
+<column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
+<column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
+<column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>0.4</min><max>0.4</max></column>
+<column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-11.24</min><max>8.727</max></column>
+<column><name>FOV</name><description>Photometric field of view (arcsee)</description><type>D</type><unit>arcsec|as|arcsecond|arcseconds</unit><min>0.5</min><max>0.5</max></column>
+<column><name>FOVTYPE</name><description>Model for FOV: 'FWHM' or 'RADIUS'</description><type>A</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TEL_NAME</th><th>STA_NAME</th><th>STA_INDEX</th><th>DIAMETER</th><th>STAXYZ</th><th>FOV</th><th>FOVTYPE</th></tr>
+<tr><td>TEL2</td><td>C</td><td>1</td><td>0.4</td><td>0 0 0</td><td>0.5</td><td>RADIUS</td></tr>
+<tr><td>TEL4</td><td>W4</td><td>2</td><td>0.4</td><td>4.474 -9.605 -3.481</td><td>0.5</td><td>RADIUS</td></tr>
+<tr><td>TEL3</td><td>E3</td><td>3</td><td>0.4</td><td>3.632 8.434 -2.816</td><td>0.5</td><td>RADIUS</td></tr>
+<tr><td>TEL1</td><td>N3</td><td>4</td><td>0.4</td><td>-11.24 0.307 8.727</td><td>0.5</td><td>RADIUS</td></tr>
+</table>
+</OI_ARRAY>
+<OI_WAVELENGTH>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_WAVELENGTH</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>1</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>2</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>COAST_NICMOS</value><description>name of detector for cross-referencing</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>1</rows><columns>
+<column><name>EFF_WAVE</name><description>effective wavelength of channel</description><type>E</type><unit>m|meter|meters</unit><min>1.667E-6</min><max>1.667E-6</max></column>
+<column><name>EFF_BAND</name><description>effective bandpass of channel</description><type>E</type><unit>m|meter|meters</unit><min>2.5E-7</min><max>2.5E-7</max></column>
+</columns>
+<table>
+<tr>
+<th>EFF_WAVE</th><th>EFF_BAND</th></tr>
+<tr><td>1.667E-6</td><td>2.5E-7</td></tr>
+</table>
+</OI_WAVELENGTH>
+<OI_CORR>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_CORR</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>3</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>CORRNAME</name><value>TEST</value><description>name of correlated data set</description><type>A</type><unit></unit></keyword>
+<keyword><name>NDATA</name><value>8</value><description>Number of correlated data</description><type>J</type><unit></unit></keyword>
+</keywords>
+<rows>3</rows><columns>
+<column><name>IINDX</name><description>Frist index of correlation matrix element</description><type>J</type><unit></unit><min>1</min><max>2</max></column>
+<column><name>JINDX</name><description>Second index of correlation matrix element</description><type>J</type><unit></unit><min>2</min><max>8</max></column>
+<column><name>CORR</name><description>Matrix element (IINDX, JINDX)</description><type>D</type><unit></unit><min>0.056</min><max>0.345</max></column>
+</columns>
+<table>
+<tr>
+<th>IINDX</th><th>JINDX</th><th>CORR</th></tr>
+<tr><td>1</td><td>2</td><td>0.123</td></tr>
+<tr><td>1</td><td>8</td><td>0.345</td></tr>
+<tr><td>2</td><td>8</td><td>0.056</td></tr>
+</table>
+</OI_CORR>
+<OI_INSPOL>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_INSPOL</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>7</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>COAST</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>NPOL</name><value>1</value><description>Number of polarisation type int this table</description><type>J</type><unit></unit></keyword>
+<keyword><name>ORIENT</name><value>LABORATORY</value><description>Orientation of Jones matrix, could be 'NORTH' (for on-sky orientation), or 'LABORATORY</description><type>A</type><unit></unit></keyword>
+<keyword><name>MODEL</name><value>NOMINAL</value><description>A string keyword that describe the way the Jones matrix is estimated</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2000-10-19</value><description> UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>HISTORY</name><value></value><description>File modified by user 'kempsc' with fv  on 2017-09-04T09:34:18</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>7</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>INSNAME</name><description>name of corresponding detector</description><type>A</type><unit></unit></column>
+<column><name>MJD_OBS</name><description>Modified Julian day, start of time lapse</description><type>D</type><unit>day|days</unit><min>51836.958102</min><max>51836.971643</max></column>
+<column><name>MJD_END</name><description>Modified Julian day, end of time lapse</description><type>D</type><unit>day|days</unit><min>51836.958796</min><max>51836.972801</max></column>
+<column><name>JXX</name><description>Complex Jones matrix component along X axis</description><type>C</type><unit></unit></column>
+<column><name>JYY</name><description>Complex Jones matrix component along Y axis</description><type>C</type><unit></unit></column>
+<column><name>JXY</name><description>Complex Jones matrix component between X and Y axis</description><type>C</type><unit></unit></column>
+<column><name>JYX</name><description>Complex Jones matrix component between Y and X axis</description><type>C</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station number contributing to the data</description><type>I</type><unit></unit><min>1</min><max>3</max></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>INSNAME</th><th>MJD_OBS</th><th>MJD_END</th><th>JXX</th><th>JYY</th><th>JXY</th><th>JYX</th><th>STA_INDEX</th></tr>
+<tr><td>1</td><td>COAST_NICMOS</td><td>51836.958</td><td>51836.959</td><td>0,0.31</td><td>1,0.5</td><td>1,-1</td><td>0,-0.23</td><td>1</td></tr>
+<tr><td>1</td><td>COAST_NICMOS</td><td>51836.958</td><td>51836.959</td><td>0,0.31</td><td>1,0.5</td><td>1,-1</td><td>0,-0.23</td><td>2</td></tr>
+<tr><td>1</td><td>COAST_NICMOS</td><td>51836.96</td><td>51836.961</td><td>1,0</td><td>0,0.5</td><td>0,-1</td><td>1,0.23</td><td>1</td></tr>
+<tr><td>1</td><td>COAST_NICMOS</td><td>51836.96</td><td>51836.961</td><td>1,0</td><td>0,0.5</td><td>0,-1</td><td>1,0.23</td><td>3</td></tr>
+<tr><td>1</td><td>COAST_NICMOS</td><td>51836.972</td><td>51836.973</td><td>0,0.31</td><td>1,0.5</td><td>1,-1</td><td>0,-0.23</td><td>1</td></tr>
+<tr><td>1</td><td>COAST_NICMOS</td><td>51836.972</td><td>51836.973</td><td>0,0.31</td><td>1,0.5</td><td>1,-1</td><td>0,-0.23</td><td>2</td></tr>
+<tr><td>1</td><td>COAST_NICMOS</td><td>51836.972</td><td>51836.973</td><td>0,0.31</td><td>1,0.5</td><td>1,-1</td><td>0,-0.23</td><td>3</td></tr>
+</table>
+</OI_INSPOL>
+<OI_VIS>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>1</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>2</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>COAST</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2000-10-19</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>COAST_NICMOS</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+<keyword><name>CORRNAME</name><value>TEST</value><description>Identifies corresponding OI_CORR table</description><type>A</type><unit></unit></keyword>
+<keyword><name>AMPTYP</name><value>absolute</value><description>'absolute, 'differential', correlated flux'</description><type>A</type><unit></unit></keyword>
+<keyword><name>PHITYP</name><value>absolute</value><description>'absolute, 'differential'</description><type>A</type><unit></unit></keyword>
+<keyword><name>AMPORDER</name><value>1</value><description>Polynomial fit order for differential chromatic amplitudes</description><type>J</type><unit></unit></keyword>
+<keyword><name>PHIORDER</name><value>2</value><description>Polynomial fit order for differential chromatic phases</description><type>J</type><unit></unit></keyword>
+</keywords>
+<rows>1</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>51836.960394</min><max>51836.960394</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>60.0</min><max>60.0</max></column>
+<column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.0445</min><max>0.0445</max></column>
+<column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.0091</min><max>0.0091</max></column>
+<column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>17.03</min><max>17.03</max></column>
+<column><name>VISPHIERR</name><description>error in visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>15.15</min><max>15.15</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>0.95628</min><max>0.95628</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-9.15497</min><max>-9.15497</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>3</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+<column><name>CORRINDX_VISAMP</name><description>Index into correlation matrix for 1st VISAMP element</description><type>J</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>CORRINDX_VISPHI</name><description>Index into correlation matrix for 1st VISPHI element</description><type>J</type><unit></unit><min>2</min><max>2</max></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VISAMP</th><th>VISAMPERR</th><th>VISPHI</th><th>VISPHIERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th><th>CORRINDX_VISAMP</th><th>CORRINDX_VISPHI</th></tr>
+<tr><td>1</td><td>0</td><td>51836.96</td><td>60</td><td>0.044</td><td>9.1E-3</td><td>17.03</td><td>15.15</td><td>0.956</td><td>-9.155</td><td>1 3</td><td>F</td><td>1</td><td>2</td></tr>
+</table>
+</OI_VIS>
+<OI_VIS2>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS2</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>2</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>2</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>COAST</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2000-10-19</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>COAST_NICMOS</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+<keyword><name>CORRNAME</name><value>TEST</value><description>Identifies corresponding OI_CORR table</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>2</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>51836.958449</min><max>51836.960394</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>60.0</min><max>60.0</max></column>
+<column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.51</min><max>0.677</max></column>
+<column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.064</min><max>0.071</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-8.52302</min><max>0.95628</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-9.15497</min><max>3.29268</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>3</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+<column><name>CORRINDX_VIS2DATA</name><description>Index into correlation matrix for 1st VIS2DATA element</description><type>J</type><unit></unit><min>3</min><max>4</max></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VIS2DATA</th><th>VIS2ERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th><th>CORRINDX_VIS2DATA</th></tr>
+<tr><td>1</td><td>0</td><td>51836.958</td><td>60</td><td>0.677</td><td>0.064</td><td>-8.523</td><td>3.293</td><td>1 2</td><td>F</td><td>3</td></tr>
+<tr><td>1</td><td>0</td><td>51836.96</td><td>60</td><td>0.51</td><td>0.071</td><td>0.956</td><td>-9.155</td><td>1 3</td><td>F</td><td>4</td></tr>
+</table>
+</OI_VIS2>
+<OI_T3>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_T3</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>1</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>2</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>COAST</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2000-10-19</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>COAST_NICMOS</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+<keyword><name>CORRNAME</name><value>TEST</value><description>Identifies corresponding OI_CORR table</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>1</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>51836.972222</min><max>51836.972222</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>100.0</min><max>100.0</max></column>
+<column><name>T3AMP</name><description>triple product amplitude</description><type>D</type><unit></unit><min>0.00345</min><max>0.00345</max></column>
+<column><name>T3AMPERR</name><description>error in triple product amplitude</description><type>D</type><unit></unit><min>1.2E-4</min><max>1.2E-4</max></column>
+<column><name>T3PHI</name><description>triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>3.533</min><max>3.533</max></column>
+<column><name>T3PHIERR</name><description>error in triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>2.561</min><max>2.561</max></column>
+<column><name>U1COORD</name><description>U coordinate of baseline AB of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>-8.52302</min><max>-8.52302</max></column>
+<column><name>V1COORD</name><description>V coordinate of baseline AB of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>3.29268</min><max>3.29268</max></column>
+<column><name>U2COORD</name><description>U coordinate of baseline BC of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>9.8931</min><max>9.8931</max></column>
+<column><name>V2COORD</name><description>V coordinate of baseline BC of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>-12.18141</min><max>-12.18141</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>1</min><max>3</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+<column><name>CORRINDX_T3AMP</name><description>Index into correlation matrix for 1st T3AMP element</description><type>J</type><unit></unit><min>5</min><max>5</max></column>
+<column><name>CORRINDX_T3PHI</name><description>Index into correlation matrix for 1st T3PHI element</description><type>J</type><unit></unit><min>6</min><max>6</max></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>T3AMP</th><th>T3AMPERR</th><th>T3PHI</th><th>T3PHIERR</th><th>U1COORD</th><th>V1COORD</th><th>U2COORD</th><th>V2COORD</th><th>STA_INDEX</th><th>FLAG</th><th>CORRINDX_T3AMP</th><th>CORRINDX_T3PHI</th></tr>
+<tr><td>1</td><td>0</td><td>51836.972</td><td>100</td><td>3.45E-3</td><td>1.2E-4</td><td>3.533</td><td>2.561</td><td>-8.523</td><td>3.293</td><td>9.893</td><td>-12.181</td><td>1 2 3</td><td>F</td><td>5</td><td>6</td></tr>
+</table>
+</OI_T3>
+<OI_FLUX>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_FLUX</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>2</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2000-10-19</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>COAST_NICMOS</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+<keyword><name>CORRNAME</name><value>TEST</value><description>Identifies corresponding OI_CORR table</description><type>A</type><unit></unit></keyword>
+<keyword><name>CALSTAT</name><value>C</value><description>'C': Spectrum is calibred, 'U': Uncalibred</description><type>A</type><unit></unit></keyword>
+<keyword><name>FOV</name><value>0.5</value><description>Area on sky over which flux is integrated</description><type>D</type><unit>arcsec|as|arcsecond|arcseconds</unit></keyword>
+<keyword><name>FOVTYPE</name><value>RADIUS</value><description>Model for FOV: 'FWHM' or 'RADIUS'</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>2</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>51836.101222</min><max>51836.972222</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>100.0</min><max>100.0</max></column>
+<column><name>FLUXDATA</name><description>flux per telescope</description><type>D</type><unit>Jy</unit><min>1.2678</min><max>1.3781</max></column>
+<column><name>FLUXERR</name><description>error in flux</description><type>D</type><unit>Jy</unit><min>0.0134</min><max>0.0635</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+<column><name>CORRINDX_FLUXDATA</name><description>Index into correlation matrix for 1st FLUXDATA element</description><type>J</type><unit></unit><min>7</min><max>8</max></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>MJD</th><th>INT_TIME</th><th>FLUXDATA</th><th>FLUXERR</th><th>FLAG</th><th>CORRINDX_FLUXDATA</th></tr>
+<tr><td>1</td><td>51836.972</td><td>100</td><td>1.268</td><td>0.013</td><td>F</td><td>7</td></tr>
+<tr><td>1</td><td>51836.101</td><td>100</td><td>1.378</td><td>0.064</td><td>F</td><td>8</td></tr>
+</table>
+</OI_FLUX>
+<checkReport>
+Analysing File: testdata_opt.fits
+Analysing HDU [HDU#0]
+SEVERE	OBSTECH keyword must be present
+SEVERE	PROCSOFT keyword must be present
+SEVERE	PROG_ID keyword must be present
+SEVERE	REFERENC keyword must be present
+Analysing table [OI_INSPOL#9]
+SEVERE	Can't check repeat for column 'JXX'
+SEVERE	Can't check repeat for column 'JXY'
+SEVERE	Can't check repeat for column 'JYX'
+SEVERE	Can't check repeat for column 'JYY'
+
+0 warnings, 8 severe errors
+</checkReport>
+<rules>
+  <rule>
+    <name>GENERIC_COL_DIM</name>
+    <description>check if the dimension of column values &gt;= 1</description>
+    <paragraph>JMMC</paragraph>
+  </rule>
+  <rule>
+    <name>PRIMARYHDU_TYPE_ATOMIC</name>
+    <description>check if supplementary keywords are present, when OIFITS contains only one target observed on a single interferometer</description>
+    <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
+  </rule>
+</rules>
+<failures>
+  <profile>
+  </profile>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
+    <file>testdata_opt.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>OBSTECH</member>
+    <message>OBSTECH keyword must be present</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
+    <file>testdata_opt.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>PROCSOFT</member>
+    <message>PROCSOFT keyword must be present</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
+    <file>testdata_opt.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>PROG_ID</member>
+    <message>PROG_ID keyword must be present</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
+    <file>testdata_opt.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>REFERENC</member>
+    <message>REFERENC keyword must be present</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_COL_DIM</rule>
+    <file>testdata_opt.fits</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>9</extNb>
+    <member>JXX</member>
+    <message>Can't check repeat for column 'JXX'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_COL_DIM</rule>
+    <file>testdata_opt.fits</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>9</extNb>
+    <member>JXY</member>
+    <message>Can't check repeat for column 'JXY'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_COL_DIM</rule>
+    <file>testdata_opt.fits</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>9</extNb>
+    <member>JYX</member>
+    <message>Can't check repeat for column 'JYX'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_COL_DIM</rule>
+    <file>testdata_opt.fits</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>9</extNb>
+    <member>JYY</member>
+    <message>Can't check repeat for column 'JYY'</message>
+  </failure>
+</failures>
+</oifits>

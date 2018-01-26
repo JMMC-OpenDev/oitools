@@ -1,0 +1,502 @@
+<oifits>
+<version>VERSION_1</version>
+<filename>2008-Contest_Binary.oifits</filename>
+<local_filename>2008-Contest_Binary.oifits</local_filename>
+<size>83520</size>
+<md5sum>068c140a28d5433051c7a6ce69612ca8</md5sum>
+<hdu>
+<keywords>
+<keyword><name>COMMENT</name><value></value><description>FITS (Flexible Image Transport System) format defined in Astronomy and</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>Astrophysics Supplement Series v44/p363, v44/p371, v73/p359, v73/p365.</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>Contact the NASA Science Office of Standards and Technology for the</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>FITS Definition document #100 and other FITS information.</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>Binary Extensions conform to OI-DATA standard for exchange of</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>optical interferometry data currently described at</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>http://www.mrao.cam.ac.uk/~jsy1001/exchange/.</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>This file was created by WRITE_OIDATA.PRO by IDL (library can be</description><type>A</type><unit></unit></keyword>
+<keyword><name>COMMENT</name><value></value><description>obtained from www.astro.lsa.umich.edu/~monnier).</description><type>A</type><unit></unit></keyword>
+</keywords>
+</hdu>
+<OI_TARGET>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_TARGET</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>1</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+</keywords>
+<rows>1</rows><columns>
+<column><name>TARGET_ID</name><description>index number</description><type>I</type><unit></unit><min>0</min><max>0</max></column>
+<column><name>TARGET</name><description>target name</description><type>A</type><unit></unit></column>
+<column><name>RAEP0</name><description>RA at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>217.8125</min><max>217.8125</max></column>
+<column><name>DECEP0</name><description>DEC at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>45.10547222243415</min><max>45.10547222243415</max></column>
+<column><name>EQUINOX</name><description>equinox</description><type>E</type><unit>yr|year|years</unit><min>2000.0</min><max>2000.0</max></column>
+<column><name>RA_ERR</name><description>error in RA at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>-1.0</min><max>-1.0</max></column>
+<column><name>DEC_ERR</name><description>error in DEC at mean equinox</description><type>D</type><unit>deg|degree|degrees</unit><min>-1.0</min><max>-1.0</max></column>
+<column><name>SYSVEL</name><description>systemic radial velocity</description><type>D</type><unit>m/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second</unit><min>-1.0</min><max>-1.0</max></column>
+<column><name>VELTYP</name><description>reference for radial velocity</description><type>A</type><unit></unit></column>
+<column><name>VELDEF</name><description>definition of radial velocity</description><type>A</type><unit></unit></column>
+<column><name>PMRA</name><description>proper motion in RA</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>-1.0</min><max>-1.0</max></column>
+<column><name>PMDEC</name><description>proper motion in DEC</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>-1.0</min><max>-1.0</max></column>
+<column><name>PMRA_ERR</name><description>error of proper motion in RA</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>-1.0</min><max>-1.0</max></column>
+<column><name>PMDEC_ERR</name><description>error of proper motion in DEC</description><type>D</type><unit>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</unit><min>-1.0</min><max>-1.0</max></column>
+<column><name>PARALLAX</name><description>parallax</description><type>E</type><unit>deg|degree|degrees</unit><min>-1.0</min><max>-1.0</max></column>
+<column><name>PARA_ERR</name><description>error in parallax</description><type>E</type><unit>deg|degree|degrees</unit><min>-1.0</min><max>-1.0</max></column>
+<column><name>SPECTYP</name><description>spectral type</description><type>A</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TARGET</th><th>RAEP0</th><th>DECEP0</th><th>EQUINOX</th><th>RA_ERR</th><th>DEC_ERR</th><th>SYSVEL</th><th>VELTYP</th><th>VELDEF</th><th>PMRA</th><th>PMDEC</th><th>PMRA_ERR</th><th>PMDEC_ERR</th><th>PARALLAX</th><th>PARA_ERR</th><th>SPECTYP</th></tr>
+<tr><td>0</td><td>Gam_Vic</td><td>217.812</td><td>45.105</td><td>2000</td><td>-1</td><td>-1</td><td>-1</td><td>LSR</td><td>OPTICAL</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>Unknown</td></tr>
+</table>
+</OI_TARGET>
+<metadata>
+  <target>
+    <target_name>Gam_Vic</target_name>
+    <s_ra>217.8125</s_ra>
+    <s_dec>45.10547222243415</s_dec>
+    <t_exptime>0.0</t_exptime>
+    <t_min>54231.20833333349</t_min>
+    <t_max>54231.30833333731</t_max>
+    <em_res_power>45.50003</em_res_power>
+    <em_min>1.5E-6</em_min>
+    <em_max>1.75E-6</em_max>
+    <facility_name>CHARA</facility_name>
+    <instrument_name>MIRC_H</instrument_name>
+    <nb_vis>0</nb_vis>
+    <nb_vis2>75</nb_vis2>
+    <nb_t3>100</nb_t3>
+    <nb_channels>8</nb_channels>
+  </target>
+</metadata>
+<OI_ARRAY>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_ARRAY</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>6</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>CHARA</value><description>array name for cross-referencing</description><type>A</type><unit></unit></keyword>
+<keyword><name>FRAME</name><value>GEOCENTRIC</value><description>coordinate frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>ARRAYX</name><value>-2476998.047780274</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYY</name><value>-4647390.089884061</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+<keyword><name>ARRAYZ</name><value>3582240.6122966344</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
+</keywords>
+<rows>6</rows><columns>
+<column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
+<column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
+<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>0</min><max>5</max></column>
+<column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.0</min><max>1.0</max></column>
+<column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-93.06554195842023</min><max>249.62211993641506</max></column>
+</columns>
+<table>
+<tr>
+<th>TEL_NAME</th><th>STA_NAME</th><th>STA_INDEX</th><th>DIAMETER</th><th>STAXYZ</th></tr>
+<tr><td>S1</td><td>S1</td><td>0</td><td>1</td><td>0 0 0</td></tr>
+<tr><td>S2</td><td>S2</td><td>1</td><td>1</td><td>3.56 18.902 28.129</td></tr>
+<tr><td>E1</td><td>E1</td><td>2</td><td>1</td><td>193.841 97.21 249.622</td></tr>
+<tr><td>W1</td><td>W1</td><td>3</td><td>1</td><td>-93.066 197.608 172.8</td></tr>
+<tr><td>W2</td><td>W2</td><td>4</td><td>1</td><td>-8.398 131.113 165.087</td></tr>
+<tr><td>E2</td><td>E2</td><td>5</td><td>1</td><td>134.588 102.809 221.444</td></tr>
+</table>
+</OI_ARRAY>
+<OI_WAVELENGTH>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_WAVELENGTH</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>8</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>MIRC_H</value><description>name of detector for cross-referencing</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>8</rows><columns>
+<column><name>EFF_WAVE</name><description>effective wavelength of channel</description><type>E</type><unit>m|meter|meters</unit><min>1.5E-6</min><max>1.75E-6</max></column>
+<column><name>EFF_BAND</name><description>effective bandpass of channel</description><type>E</type><unit>m|meter|meters</unit><min>3.5714265E-8</min><max>3.5714265E-8</max></column>
+</columns>
+<table>
+<tr>
+<th>EFF_WAVE</th><th>EFF_BAND</th></tr>
+<tr><td>1.5E-6</td><td>3.571E-8</td></tr>
+<tr><td>1.536E-6</td><td>3.571E-8</td></tr>
+<tr><td>1.571E-6</td><td>3.571E-8</td></tr>
+<tr><td>1.607E-6</td><td>3.571E-8</td></tr>
+<tr><td>1.643E-6</td><td>3.571E-8</td></tr>
+<tr><td>1.679E-6</td><td>3.571E-8</td></tr>
+<tr><td>1.714E-6</td><td>3.571E-8</td></tr>
+<tr><td>1.75E-6</td><td>3.571E-8</td></tr>
+</table>
+</OI_WAVELENGTH>
+<OI_VIS2>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_VIS2</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>75</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>CHARA</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2007-05-11</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>MIRC_H</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>75</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>0</min><max>0</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>18000.0</min><max>26640.000343322754</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>54231.20833333349</min><max>54231.30833333731</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>3.623561642598361E-4</min><max>1.0163370370864868</max></column>
+<column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>2.6190056814812124E-4</min><max>0.12863819301128387</max></column>
+<column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-303.37229872444675</min><max>246.60017210558712</max></column>
+<column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-114.96461061854029</min><max>307.20113736198914</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>0</min><max>5</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>VIS2DATA</th><th>VIS2ERR</th><th>UCOORD</th><th>VCOORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.58 0.589 0.609 0.696 0.734 0.65 0.636 0.65</td><td>0.092 0.092 0.092 0.093 0.093 0.094 0.094 0.095</td><td>4.937</td><td>33.022</td><td>0 1</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.643 0.522 0.587 0.63 0.578 0.6 0.611 0.683</td><td>0.092 0.092 0.093 0.093 0.094 0.095 0.096 0.096</td><td>1.96</td><td>33.408</td><td>0 1</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.566 0.682 0.526 0.429 0.55 0.569 0.795 0.591</td><td>0.092 0.093 0.094 0.095 0.096 0.096 0.097 0.098</td><td>-1.065</td><td>33.458</td><td>0 1</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.75 0.645 0.645 0.843 0.737 0.797 0.76 0.644</td><td>0.094 0.095 0.096 0.097 0.098 0.099 0.1 0.101</td><td>-4.065</td><td>33.171</td><td>0 1</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.538 0.62 0.695 0.586 0.687 0.748 0.639 0.694</td><td>0.097 0.098 0.099 0.1 0.101 0.102 0.104 0.105</td><td>-6.963</td><td>32.555</td><td>0 1</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>3.117E-3 4.779E-3 2.243E-3 7.08E-4 1.231E-3 7.253E-3 0.012 0.025</td><td>6.934E-4 8.052E-4 6.352E-4 3.672E-4 3.78E-4 1.009E-3 2.379E-3 4.331E-3</td><td>200.449</td><td>234.79</td><td>0 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>2.358E-3 3.627E-3 6.495E-3 3.738E-3 2.914E-3 1.197E-3 3.491E-3 7.544E-3</td><td>5.29E-4 7.181E-4 9.458E-4 8.928E-4 6.083E-4 3.956E-4 6.338E-4 1.578E-3</td><td>184.991</td><td>256.339</td><td>0 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>2.849E-3 3.201E-3 4.121E-3 5.747E-3 3.43E-3 3.479E-3 1.181E-3 2.505E-3</td><td>5.688E-4 5.055E-4 8.112E-4 1.03E-3 9.56E-4 6.583E-4 4.385E-4 6.643E-4</td><td>164.953</td><td>275.903</td><td>0 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>2.512E-3 2.774E-3 4.415E-3 5.15E-3 4.611E-3 3.766E-3 1.757E-3 1.595E-3</td><td>5.54E-4 5.529E-4 6.52E-4 9.296E-4 9.814E-4 7.586E-4 4.714E-4 4.687E-4</td><td>140.83</td><td>292.998</td><td>0 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>2.775E-3 3.558E-3 2.696E-3 4.732E-3 4.718E-3 2.472E-3 3.624E-4 1.925E-3</td><td>6.373E-4 6.193E-4 5.602E-4 7.906E-4 8.084E-4 5.897E-4 3.525E-4 4.281E-4</td><td>113.222</td><td>307.201</td><td>0 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.018 0.043 0.043 0.04 0.047 0.045 0.031 0.047</td><td>3.432E-3 4.766E-3 5.891E-3 6.646E-3 6.977E-3 6.939E-3 6.674E-3 6.373E-3</td><td>-78.32</td><td>266.409</td><td>0 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.01 6.987E-3 6.662E-3 0.011 0.014 0.018 0.03 0.038</td><td>1.547E-3 1.432E-3 1.409E-3 1.642E-3 2.27E-3 3.38E-3 5E-3 7.098E-3</td><td>-109.335</td><td>255.918</td><td>0 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.012 0.02 0.029 0.043 0.058 0.057 0.075 0.081</td><td>1.774E-3 3.024E-3 4.574E-3 6.319E-3 8.142E-3 9.93E-3 0.012 0.013</td><td>-137.642</td><td>242.11</td><td>0 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.018 0.023 0.016 0.019 0.029 0.027 0.026 0.025</td><td>2.95E-3 3.357E-3 3.666E-3 3.896E-3 4.087E-3 4.287E-3 4.55E-3 4.928E-3</td><td>-162.542</td><td>225.328</td><td>0 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>5.177E-3 0.01 0.018 0.021 0.032 0.038 0.065 0.088</td><td>8.973E-4 1.585E-3 2.534E-3 3.744E-3 5.201E-3 6.883E-3 8.761E-3 0.011</td><td>-183.418</td><td>205.987</td><td>0 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.187 0.23 0.185 0.172 0.148 0.107 0.126 0.145</td><td>0.025 0.026 0.025 0.024 0.023 0.022 0.021 0.022</td><td>1.241</td><td>209.587</td><td>0 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.126 0.104 0.097 0.106 0.11 0.123 0.184 0.155</td><td>0.019 0.018 0.017 0.017 0.017 0.019 0.022 0.025</td><td>-19.382</td><td>208.573</td><td>0 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.083 0.058 0.103 0.125 0.134 0.183 0.223 0.203</td><td>0.012 0.013 0.015 0.018 0.022 0.027 0.032 0.037</td><td>-39.525</td><td>205.28</td><td>0 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.069 0.133 0.162 0.211 0.209 0.274 0.278 0.289</td><td>0.016 0.02 0.025 0.03 0.034 0.038 0.042 0.044</td><td>-58.689</td><td>199.789</td><td>0 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.189 0.179 0.109 0.155 0.236 0.21 0.235 0.25</td><td>0.026 0.03 0.032 0.034 0.035 0.036 0.036 0.036</td><td>-76.401</td><td>192.237</td><td>0 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.024 0.049 0.055 0.077 0.079 0.086 0.061 0.067</td><td>3.81E-3 6.511E-3 9.075E-3 0.011 0.012 0.011 0.01 9.014E-3</td><td>141.766</td><td>221.937</td><td>0 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.015 0.028 0.046 0.063 0.08 0.065 0.086 0.065</td><td>2.135E-3 4.42E-3 7.113E-3 9.523E-3 0.011 0.012 0.011 9.97E-3</td><td>125.477</td><td>236.878</td><td>0 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>7.235E-3 0.024 0.046 0.057 0.063 0.089 0.07 0.062</td><td>1.569E-3 3.548E-3 6.078E-3 8.521E-3 0.01 0.011 0.011 9.843E-3</td><td>106.081</td><td>249.823</td><td>0 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>8.077E-3 0.022 0.035 0.047 0.08 0.049 0.066 0.056</td><td>1.684E-3 3.649E-3 6.006E-3 8.142E-3 9.538E-3 9.958E-3 9.508E-3 8.571E-3</td><td>84.058</td><td>260.453</td><td>0 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.011 0.023 0.036 0.044 0.056 0.057 0.045 0.035</td><td>2.447E-3 4.435E-3 6.39E-3 7.786E-3 8.327E-3 8.043E-3 7.253E-3 6.441E-3</td><td>59.955</td><td>268.504</td><td>0 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>2.724E-3 0.011 0.023 0.041 0.039 0.06 0.056 0.062</td><td>6.449E-4 1.866E-3 3.799E-3 6.003E-3 7.92E-3 9.108E-3 9.392E-3 8.901E-3</td><td>195.512</td><td>201.768</td><td>1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>1.315E-3 1.447E-3 5.701E-3 0.014 0.034 0.052 0.056 0.068</td><td>4.311E-4 3.717E-4 9.964E-4 2.478E-3 4.626E-3 6.975E-3 8.987E-3 0.01</td><td>183.031</td><td>222.931</td><td>1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>5.963E-3 2.038E-3 2.296E-3 2.998E-3 0.014 0.026 0.045 0.058</td><td>9.019E-4 5.784E-4 4.167E-4 8.735E-4 2.188E-3 4.258E-3 6.685E-3 8.946E-3</td><td>166.018</td><td>242.445</td><td>1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>4.865E-3 3.113E-3 2.044E-3 2.476E-3 7.915E-3 0.016 0.029 0.051</td><td>1.039E-3 8.319E-4 5.05E-4 5.068E-4 1.234E-3 2.813E-3 5.043E-3 7.482E-3</td><td>144.895</td><td>259.827</td><td>1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>5.739E-3 4.04E-3 1.611E-3 1.274E-3 5.668E-3 0.017 0.036 0.046</td><td>9.484E-4 7.864E-4 4.741E-4 4.281E-4 1.046E-3 2.486E-3 4.585E-3 6.937E-3</td><td>120.185</td><td>274.647</td><td>1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.02 0.029 0.031 0.04 0.064 0.086 0.106 0.107</td><td>3.568E-3 3.866E-3 4.74E-3 6.297E-3 8.549E-3 0.011 0.015 0.018</td><td>-83.257</td><td>233.387</td><td>1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.052 0.059 0.091 0.092 0.157 0.121 0.158 0.132</td><td>7.218E-3 9.836E-3 0.013 0.015 0.018 0.02 0.021 0.023</td><td>-111.295</td><td>222.51</td><td>1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.038 0.052 0.036 0.057 0.07 0.05 0.05 0.059</td><td>7.752E-3 8.198E-3 8.494E-3 8.708E-3 8.917E-3 9.199E-3 9.623E-3 0.01</td><td>-136.577</td><td>208.652</td><td>1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.02 0.022 0.038 0.069 0.058 0.068 0.117 0.13</td><td>3.354E-3 4.757E-3 6.471E-3 8.475E-3 0.011 0.013 0.016 0.019</td><td>-158.477</td><td>192.157</td><td>1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.065 0.09 0.096 0.088 0.116 0.105 0.115 0.143</td><td>0.01 0.012 0.014 0.016 0.017 0.019 0.02 0.022</td><td>-176.454</td><td>173.432</td><td>1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.151 0.147 0.26 0.278 0.296 0.358 0.411 0.423</td><td>0.024 0.028 0.033 0.039 0.045 0.051 0.057 0.062</td><td>-3.696</td><td>176.565</td><td>1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.18 0.173 0.336 0.353 0.435 0.336 0.437 0.564</td><td>0.032 0.038 0.045 0.05 0.055 0.059 0.062 0.064</td><td>-21.342</td><td>175.165</td><td>1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.257 0.372 0.298 0.36 0.358 0.338 0.367 0.444</td><td>0.044 0.048 0.052 0.054 0.055 0.055 0.055 0.054</td><td>-38.459</td><td>171.822</td><td>1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.216 0.235 0.31 0.261 0.289 0.232 0.263 0.298</td><td>0.044 0.044 0.044 0.043 0.042 0.041 0.04 0.04</td><td>-54.625</td><td>166.618</td><td>1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.172 0.195 0.23 0.199 0.153 0.269 0.194 0.209</td><td>0.03 0.03 0.03 0.03 0.031 0.033 0.035 0.037</td><td>-69.437</td><td>159.682</td><td>1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.067 0.068 0.048 0.06 0.063 0.078 0.132 0.154</td><td>0.01 8.988E-3 8.263E-3 8.757E-3 0.011 0.014 0.019 0.024</td><td>136.829</td><td>188.915</td><td>1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.077 0.073 0.078 0.045 0.075 0.08 0.102 0.15</td><td>0.012 0.011 9.409E-3 8.583E-3 8.872E-3 0.011 0.014 0.018</td><td>123.517</td><td>203.47</td><td>1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.071 0.072 0.069 0.069 0.051 0.061 0.069 0.09</td><td>0.011 0.011 9.976E-3 8.84E-3 8.441E-3 9.323E-3 0.012 0.015</td><td>107.146</td><td>216.365</td><td>1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.073 0.072 0.046 0.064 0.042 0.054 0.07 0.089</td><td>0.011 0.01 9.345E-3 8.271E-3 7.907E-3 8.783E-3 0.011 0.015</td><td>88.123</td><td>227.282</td><td>1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.051 0.045 0.054 0.045 0.049 0.038 0.065 0.083</td><td>9.346E-3 8.658E-3 7.608E-3 6.931E-3 7.253E-3 8.924E-3 0.012 0.016</td><td>66.918</td><td>235.95</td><td>1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.015 0.017 0.015 0.017 0.021 0.021 0.02 0.025</td><td>2.379E-3 2.681E-3 2.907E-3 3.086E-3 3.259E-3 3.477E-3 3.789E-3 4.243E-3</td><td>-278.769</td><td>31.618</td><td>2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>6.429E-4 3.306E-3 5.727E-3 0.015 0.021 0.041 0.043 0.052</td><td>3.915E-4 8.181E-4 1.585E-3 2.682E-3 4.054E-3 5.617E-3 7.276E-3 8.931E-3</td><td>-294.325</td><td>-0.421</td><td>2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>4.848E-3 4.777E-3 8.175E-3 6.95E-3 7.608E-3 6.849E-3 5.982E-3 0.01</td><td>9.088E-4 1.191E-3 1.344E-3 1.351E-3 1.262E-3 1.177E-3 1.221E-3 1.514E-3</td><td>-302.595</td><td>-33.793</td><td>2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>2.154E-3 1.537E-3 4.575E-3 8.58E-3 0.014 0.026 0.027 0.032</td><td>4.22E-4 4.784E-4 8.781E-4 1.619E-3 2.599E-3 3.658E-3 4.627E-3 5.37E-3</td><td>-303.372</td><td>-67.67</td><td>2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>2.296E-3 1.295E-3 1.479E-3 6.562E-4 5.555E-4 2.663E-3 8.551E-3 0.018</td><td>5.071E-4 5.371E-4 4.145E-4 2.619E-4 2.791E-4 6.582E-4 1.515E-3 2.854E-3</td><td>-296.639</td><td>-101.214</td><td>2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.202 0.223 0.168 0.205 0.217 0.17 0.187 0.217</td><td>0.03 0.032 0.033 0.033 0.033 0.033 0.032 0.032</td><td>-199.208</td><td>-25.204</td><td>2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.084 0.109 0.186 0.187 0.215 0.199 0.281 0.289</td><td>0.015 0.019 0.024 0.029 0.033 0.037 0.041 0.043</td><td>-204.372</td><td>-47.766</td><td>2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.071 0.067 0.086 0.085 0.122 0.109 0.153 0.213</td><td>0.012 0.011 0.012 0.014 0.016 0.02 0.024 0.029</td><td>-204.477</td><td>-70.623</td><td>2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.138 0.133 0.119 0.148 0.12 0.114 0.111 0.149</td><td>0.02 0.02 0.02 0.019 0.018 0.017 0.017 0.018</td><td>-199.519</td><td>-93.209</td><td>2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.138 0.204 0.149 0.196 0.208 0.176 0.193 0.124</td><td>0.018 0.022 0.025 0.026 0.027 0.026 0.025 0.024</td><td>-189.622</td><td>-114.965</td><td>2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.614 0.609 0.535 0.414 0.629 0.501 0.633 0.457</td><td>0.093 0.092 0.091 0.09 0.089 0.089 0.088 0.088</td><td>-58.683</td><td>-12.853</td><td>2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.758 0.65 0.677 0.785 0.806 0.726 0.687 0.585</td><td>0.107 0.105 0.103 0.101 0.099 0.098 0.096 0.095</td><td>-59.514</td><td>-19.461</td><td>2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.995 0.68 0.728 0.855 0.627 0.786 0.738 0.729</td><td>0.119 0.117 0.115 0.113 0.111 0.109 0.107 0.105</td><td>-58.872</td><td>-26.08</td><td>2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.832 0.897 0.809 0.948 0.884 0.995 0.504 0.874</td><td>0.126 0.125 0.123 0.122 0.12 0.118 0.117 0.115</td><td>-56.772</td><td>-32.545</td><td>2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.748 0.962 0.985 0.801 1.016 0.901 0.541 0.946</td><td>0.129 0.129 0.128 0.127 0.126 0.125 0.123 0.122</td><td>-53.267</td><td>-38.697</td><td>2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.674 0.81 0.767 0.48 0.567 0.738 0.674 0.757</td><td>0.098 0.1 0.102 0.104 0.105 0.107 0.108 0.11</td><td>79.562</td><td>-56.822</td><td>3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.521 0.67 0.717 0.685 0.644 0.789 0.714 0.804</td><td>0.102 0.104 0.106 0.107 0.109 0.111 0.112 0.113</td><td>89.953</td><td>-47.345</td><td>3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.365 0.267 0.499 0.582 0.6 0.688 0.58 0.664</td><td>0.077 0.08 0.082 0.084 0.087 0.089 0.091 0.092</td><td>98.118</td><td>-36.831</td><td>3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.328 0.366 0.375 0.459 0.512 0.499 0.414 0.394</td><td>0.06 0.061 0.063 0.064 0.066 0.068 0.069 0.071</td><td>103.853</td><td>-25.539</td><td>3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.357 0.341 0.524 0.539 0.511 0.478 0.491 0.467</td><td>0.07 0.069 0.069 0.069 0.069 0.069 0.069 0.07</td><td>107.017</td><td>-13.75</td><td>3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.089 0.152 0.113 0.155 0.193 0.175 0.199 0.181</td><td>0.016 0.019 0.022 0.025 0.028 0.03 0.033 0.035</td><td>220.086</td><td>-44.472</td><td>3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.036 0.054 0.043 0.056 0.049 0.066 0.113 0.095</td><td>6.371E-3 6.777E-3 7.391E-3 8.271E-3 9.46E-3 0.011 0.013 0.015</td><td>234.811</td><td>-19.04</td><td>3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.06 0.061 0.109 0.092 0.126 0.089 0.175 0.135</td><td>0.011 0.013 0.015 0.017 0.018 0.019 0.02 0.02</td><td>243.723</td><td>7.713</td><td>3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.022 0.023 0.045 0.049 0.061 0.099 0.12 0.091</td><td>2.797E-3 4.009E-3 5.879E-3 8.365E-3 0.011 0.015 0.018 0.022</td><td>246.6</td><td>35.125</td><td>3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.044 0.039 0.055 0.036 0.042 0.045 0.053 0.077</td><td>7.774E-3 7.774E-3 7.461E-3 7.095E-3 6.954E-3 7.278E-3 8.237E-3 9.914E-3</td><td>243.372</td><td>62.517</td><td>3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.371 0.357 0.47 0.424 0.456 0.389 0.395 0.54</td><td>0.051 0.056 0.061 0.066 0.071 0.075 0.079 0.083</td><td>140.525</td><td>12.35</td><td>4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.245 0.199 0.268 0.332 0.358 0.429 0.343 0.305</td><td>0.038 0.039 0.041 0.043 0.045 0.049 0.052 0.056</td><td>144.858</td><td>28.305</td><td>4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.479 0.238 0.299 0.37 0.275 0.217 0.295 0.231</td><td>0.053 0.052 0.05 0.049 0.048 0.047 0.047 0.047</td><td>145.605</td><td>44.544</td><td>4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.314 0.404 0.381 0.456 0.451 0.35 0.383 0.441</td><td>0.061 0.063 0.064 0.064 0.063 0.062 0.06 0.058</td><td>142.747</td><td>60.664</td><td>4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.315 0.502 0.487 0.391 0.529 0.565 0.625 0.511</td><td>0.053 0.059 0.064 0.068 0.071 0.072 0.072 0.072</td><td>136.355</td><td>76.268</td><td>4 5</td><td>F F F F F F F F</td></tr>
+</table>
+</OI_VIS2>
+<OI_T3>
+<keywords>
+<keyword><name>EXTNAME</name><value>OI_T3</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>100</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
+<keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
+<keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
+<keyword><name>ARRNAME</name><value>CHARA</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2007-05-11</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSNAME</name><value>MIRC_H</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
+</keywords>
+<rows>100</rows><columns>
+<column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>0</min><max>0</max></column>
+<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>18000.0</min><max>26640.000343322754</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>54231.20833333349</min><max>54231.30833333731</max></column>
+<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>T3AMP</name><description>triple product amplitude</description><type>D</type><unit></unit><min>4.157445437158458E-5</min><max>0.3686613440513611</max></column>
+<column><name>T3AMPERR</name><description>error in triple product amplitude</description><type>D</type><unit></unit><min>7.171485049184412E-5</min><max>0.06159747391939163</max></column>
+<column><name>T3PHI</name><description>triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-177.9101104736328</min><max>141.37591552734375</max></column>
+<column><name>T3PHIERR</name><description>error in triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>0.41949397325515747</min><max>38.237159729003906</max></column>
+<column><name>U1COORD</name><description>U coordinate of baseline AB of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>-303.37229872444675</min><max>200.449085893421</max></column>
+<column><name>V1COORD</name><description>V coordinate of baseline AB of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>-114.96461061854029</min><max>307.20113736198914</max></column>
+<column><name>U2COORD</name><description>U coordinate of baseline BC of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>-303.37229872444675</min><max>246.60017210558712</max></column>
+<column><name>V2COORD</name><description>V coordinate of baseline BC of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>-114.96461061854029</min><max>274.6465837137181</max></column>
+<column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>0</min><max>5</max></column>
+<column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
+</columns>
+<table>
+<tr>
+<th>TARGET_ID</th><th>TIME</th><th>MJD</th><th>INT_TIME</th><th>T3AMP</th><th>T3AMPERR</th><th>T3PHI</th><th>T3PHIERR</th><th>U1COORD</th><th>V1COORD</th><th>U2COORD</th><th>V2COORD</th><th>STA_INDEX</th><th>FLAG</th></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>3.296E-3 6.33E-3 7.235E-3 5.141E-3 3.713E-3 0.014 0.016 0.031</td><td>5.275E-4 1.086E-3 1.346E-3 1.071E-3 1.27E-3 2.866E-3 4.769E-3 6.4E-3</td><td>-60.88 -74.06 -79.777 -58.501 8.604 33.115 34.963 31.986</td><td>2.862 1.547 1.319 1.564 1.375 0.825 0.654 0.589</td><td>4.937</td><td>33.022</td><td>195.512</td><td>201.768</td><td>0 1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>1.94E-3 1.506E-3 4.383E-3 9.043E-3 8.492E-3 3.788E-3 0.01 0.022</td><td>3.271E-4 3.513E-4 8.468E-4 1.36E-3 1.457E-3 1.259E-3 2.115E-3 4.012E-3</td><td>69.424 -14.069 -64.684 -75.556 -73.49 -33.88 13.334 30.034</td><td>4.58 4.255 1.887 1.309 1.247 1.385 0.978 0.702</td><td>1.96</td><td>33.408</td><td>183.031</td><td>222.931</td><td>0 1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>3.16E-3 1.33E-3 2.39E-3 3.113E-3 5.872E-3 7.482E-3 4.164E-3 0.014</td><td>5.717E-4 3.967E-4 4.233E-4 8.309E-4 1.343E-3 1.496E-3 1.374E-3 2.213E-3</td><td>99.337 71.534 -1.233 -60.012 -72.831 -71.279 -37.332 7.924</td><td>2.657 3.764 3.531 1.917 1.321 1.224 1.299 0.952</td><td>-1.065</td><td>33.458</td><td>166.018</td><td>242.445</td><td>0 1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>2.362E-3 2.078E-3 2.077E-3 2.739E-3 5.795E-3 6.324E-3 5.141E-3 6.024E-3</td><td>6.144E-4 5.403E-4 4.354E-4 5.464E-4 1.007E-3 1.347E-3 1.287E-3 1.569E-3</td><td>91.875 80.377 34.179 -36.544 -72.734 -79.64 -61.156 -9.959</td><td>2.489 2.799 3.435 2.77 1.641 1.318 1.362 1.185</td><td>-4.065</td><td>33.171</td><td>144.895</td><td>259.827</td><td>0 1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>2.684E-3 1.982E-3 1.935E-3 1.966E-3 4.032E-3 5.027E-3 4.543E-3 6.617E-3</td><td>6.517E-4 5.734E-4 3.799E-4 4.395E-4 8.255E-4 1.079E-3 9.451E-4 1.42E-3</td><td>80.857 70.961 32.647 -41.045 -78.376 -86.193 -61.638 -3.53</td><td>2.362 2.65 3.93 3.404 1.928 1.555 1.726 1.27</td><td>-6.963</td><td>32.555</td><td>120.185</td><td>274.647</td><td>0 1 2</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.018 0.018 0.017 0.032 0.041 0.052 0.047 0.052</td><td>3.473E-3 4.302E-3 5.346E-3 6.6E-3 7.934E-3 9.196E-3 0.01 0.011</td><td>26.182 6.531 -8.251 -21.063 -28.493 -33.393 -32.706 -30.027</td><td>0.75 0.682 0.626 0.583 0.552 0.531 0.517 0.507</td><td>4.937</td><td>33.022</td><td>-83.257</td><td>233.387</td><td>0 1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.02 0.017 0.018 0.027 0.027 0.038 0.068 0.054</td><td>3.241E-3 3.636E-3 4.083E-3 4.918E-3 6.358E-3 8.356E-3 0.011 0.013</td><td>-48.603 -41.035 -26.59 -11.283 2.406 11.748 17.006 17.988</td><td>0.775 0.734 0.697 0.646 0.59 0.544 0.512 0.491</td><td>1.96</td><td>33.408</td><td>-111.295</td><td>222.51</td><td>0 1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.015 0.027 0.023 0.045 0.054 0.056 0.051 0.095</td><td>3.644E-3 5.026E-3 6.384E-3 7.674E-3 8.884E-3 0.01 0.011 0.012</td><td>44.063 36.979 29.481 24.513 17.16 10.556 3.421 -2.448</td><td>0.733 0.641 0.589 0.557 0.536 0.52 0.508 0.498</td><td>-1.065</td><td>33.458</td><td>-136.577</td><td>208.652</td><td>0 1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.016 0.026 0.024 0.026 0.037 0.026 0.06 0.048</td><td>3.144E-3 4.058E-3 5.004E-3 5.96E-3 6.927E-3 7.931E-3 9.019E-3 0.01</td><td>-35.994 -40.013 -41.686 -39.978 -38.205 -34.968 -31.134 -26.844</td><td>0.787 0.699 0.642 0.603 0.574 0.552 0.534 0.518</td><td>-4.065</td><td>33.171</td><td>-158.477</td><td>192.157</td><td>0 1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.012 0.023 0.03 0.032 0.045 0.042 0.091 0.074</td><td>2.897E-3 4.426E-3 6.171E-3 8.098E-3 0.01 0.012 0.015 0.017</td><td>25.506 22.195 22.773 20.831 19.498 18.145 17.513 15.413</td><td>0.82 0.674 0.596 0.549 0.518 0.497 0.482 0.471</td><td>-6.963</td><td>32.555</td><td>-176.454</td><td>173.432</td><td>0 1 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.115 0.135 0.098 0.157 0.125 0.142 0.162 0.121</td><td>0.025 0.028 0.03 0.032 0.034 0.035 0.037 0.039</td><td>-7.848 -15.327 -19.55 -22.456 -21.42 -19.293 -14.058 -8.594</td><td>0.447 0.443 0.44 0.438 0.436 0.434 0.433 0.431</td><td>4.937</td><td>33.022</td><td>-3.696</td><td>176.565</td><td>0 1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.099 0.156 0.153 0.2 0.19 0.166 0.226 0.192</td><td>0.026 0.027 0.029 0.03 0.032 0.035 0.039 0.043</td><td>-21.734 -22.372 -18.964 -14.247 -8.799 -1.649 2.808 6.45</td><td>0.447 0.444 0.442 0.44 0.437 0.434 0.431 0.428</td><td>1.96</td><td>33.408</td><td>-21.342</td><td>175.165</td><td>0 1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.135 0.1 0.077 0.134 0.182 0.152 0.189 0.192</td><td>0.023 0.026 0.029 0.033 0.037 0.041 0.045 0.048</td><td>-12.178 -4.222 1.777 7.783 11.461 11.944 13.228 11.677</td><td>0.451 0.447 0.442 0.437 0.433 0.429 0.427 0.425</td><td>-1.065</td><td>33.458</td><td>-38.459</td><td>171.822</td><td>0 1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.107 0.094 0.207 0.179 0.21 0.259 0.159 0.171</td><td>0.027 0.031 0.035 0.038 0.041 0.043 0.044 0.046</td><td>14.448 15.699 14.64 13.152 11.068 8.258 4.237 0.951</td><td>0.444 0.438 0.434 0.432 0.43 0.428 0.427 0.426</td><td>-4.065</td><td>33.171</td><td>-54.625</td><td>166.618</td><td>0 1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.134 0.182 0.174 0.194 0.212 0.218 0.213 0.107</td><td>0.03 0.032 0.033 0.035 0.036 0.038 0.039 0.041</td><td>9.468 4.67 0.011 -4.803 -9.399 -13.509 -16.31 -18.929</td><td>0.44 0.438 0.436 0.434 0.433 0.432 0.431 0.43</td><td>-6.963</td><td>32.555</td><td>-69.437</td><td>159.682</td><td>0 1 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.03 0.021 0.04 0.044 0.03 0.08 0.11 0.065</td><td>6.301E-3 7.798E-3 8.87E-3 0.01 0.012 0.013 0.014 0.016</td><td>37.111 28.448 13.017 -5.082 -18.493 -27.508 -29.018 -26.548</td><td>0.592 0.555 0.536 0.52 0.504 0.492 0.483 0.478</td><td>4.937</td><td>33.022</td><td>136.829</td><td>188.915</td><td>0 1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.029 0.025 0.045 0.03 0.067 0.059 0.037 0.069</td><td>4.911E-3 6.975E-3 8.392E-3 9.326E-3 0.01 0.012 0.013 0.014</td><td>36.378 33.456 23.606 10.256 -5.791 -18.926 -27.436 -30.233</td><td>0.646 0.573 0.544 0.529 0.517 0.504 0.493 0.484</td><td>1.96</td><td>33.408</td><td>123.517</td><td>203.47</td><td>0 1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.025 0.032 0.036 0.05 0.046 0.066 0.057 0.073</td><td>4.134E-3 6.374E-3 8.025E-3 9.01E-3 9.726E-3 0.011 0.012 0.013</td><td>35.45 33.337 26.698 14.097 0.387 -15.163 -24.676 -30.089</td><td>0.693 0.589 0.55 0.534 0.524 0.513 0.502 0.492</td><td>-1.065</td><td>33.458</td><td>107.146</td><td>216.365</td><td>0 1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.015 0.02 0.04 0.041 0.056 0.057 0.067 0.063</td><td>4.198E-3 6.321E-3 7.799E-3 8.61E-3 9.169E-3 9.941E-3 0.011 0.012</td><td>34.978 31.725 23.864 12.268 -3.93 -17.425 -28.732 -31.518</td><td>0.689 0.591 0.555 0.54 0.531 0.521 0.51 0.499</td><td>-4.065</td><td>33.171</td><td>88.123</td><td>227.282</td><td>0 1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.03 0.03 0.027 0.041 0.047 0.048 0.062 0.051</td><td>4.888E-3 6.478E-3 7.367E-3 7.817E-3 8.327E-3 9.146E-3 0.01 0.011</td><td>34.814 26.729 15.754 0.494 -13.621 -27.11 -33.585 -32.129</td><td>0.648 0.586 0.564 0.554 0.545 0.532 0.519 0.508</td><td>-6.963</td><td>32.555</td><td>66.918</td><td>235.95</td><td>0 1 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>1.359E-3 1.482E-3 1.318E-3 1.084E-3 8.146E-4 1.817E-3 3.543E-3 6.88E-3</td><td>2.429E-4 3.251E-4 3.219E-4 2.32E-4 2.492E-4 5E-4 8.147E-4 1.145E-3</td><td>11.183 20.057 31.181 15.176 -55.989 -67.571 -57.518 -40.442</td><td>6.313 4.61 4.657 6.65 6.137 3.009 1.949 1.485</td><td>200.449</td><td>234.79</td><td>-278.769</td><td>31.618</td><td>0 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>4.157E-5 3.991E-4 7.275E-4 3.95E-4 7.387E-4 1.064E-3 2.304E-3 5.275E-3</td><td>7.171E-5 1.084E-4 1.616E-4 2.114E-4 2.365E-4 2.398E-4 4.579E-4 1.032E-3</td><td>-2.732 42.447 45.021 76.254 70.977 41.864 3.523 -8.449</td><td>38.237 17.95 10.265 7.401 6.508 6.405 3.272 1.61</td><td>184.991</td><td>256.339</td><td>-294.325</td><td>-0.421</td><td>0 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>1.919E-4 5.037E-4 7.079E-4 9.743E-4 1.601E-3 1.111E-3 7.056E-4 1.384E-3</td><td>1.098E-4 1.407E-4 2.304E-4 3.032E-4 3.149E-4 2.673E-4 2.213E-4 3.446E-4</td><td>-57.05 -34.763 -3.617 7.222 24.443 23.937 -2.101 -20.049</td><td>17.584 12.319 6.702 4.96 4.765 5.68 7.02 4.339</td><td>164.953</td><td>275.903</td><td>-302.595</td><td>-33.793</td><td>0 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>1.363E-4 1.757E-4 5.205E-4 9.771E-4 1.719E-3 1.522E-3 1.395E-3 1.268E-3</td><td>9.061E-5 1.006E-4 1.522E-4 2.529E-4 3.339E-4 3.459E-4 2.889E-4 3.19E-4</td><td>57.017 28.038 13.837 37.947 33.124 39.813 24.858 -22.528</td><td>24.113 20.189 11.095 6.036 4.484 4.323 5.222 4.701</td><td>140.83</td><td>292.998</td><td>-303.372</td><td>-67.67</td><td>0 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>1.606E-4 4.233E-4 3.303E-4 1.35E-4 3.291E-4 7.917E-4 8.352E-4 1.592E-3</td><td>7.332E-5 8.817E-5 8.623E-5 7.918E-5 9.34E-5 1.589E-4 1.826E-4 3.158E-4</td><td>-114.735 -62.716 -64.952 -12.001 113.469 115.09 88.859 21.477</td><td>36.419 25.312 26.356 31.024 22.874 10.491 8.815 4.751</td><td>113.222</td><td>307.201</td><td>-296.639</td><td>-101.214</td><td>0 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>6.951E-3 0.01 9.188E-3 4.933E-3 6.702E-3 0.01 0.019 0.026</td><td>2.136E-3 2.46E-3 2.106E-3 1.298E-3 1.299E-3 2.642E-3 4.234E-3 5.837E-3</td><td>22.677 31.881 39.334 27.52 -28.058 -48.215 -42.217 -29.475</td><td>0.973 0.896 0.981 1.354 1.353 0.861 0.686 0.607</td><td>200.449</td><td>234.79</td><td>-199.208</td><td>-25.204</td><td>0 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>5.675E-3 6.927E-3 6.515E-3 9.364E-3 9.311E-3 3.712E-3 0.012 0.027</td><td>1.085E-3 1.487E-3 1.923E-3 2.006E-3 1.69E-3 1.307E-3 2.149E-3 4.242E-3</td><td>-27.547 10.415 34.22 47.974 53.176 30.997 -11.197 -21.206</td><td>1.548 1.23 1.037 1.01 1.127 1.347 0.969 0.686</td><td>184.991</td><td>256.339</td><td>-204.372</td><td>-47.766</td><td>0 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>4.036E-3 3.459E-3 4.661E-3 8.619E-3 9.513E-3 9.383E-3 7.91E-3 8.98E-3</td><td>7.906E-4 7.493E-4 1.156E-3 1.57E-3 1.81E-3 1.719E-3 1.498E-3 2.439E-3</td><td>-66.616 -30.734 14.22 42.452 61.012 67.171 42.741 2.333</td><td>1.999 2.092 1.475 1.184 1.078 1.115 1.223 0.9</td><td>164.953</td><td>275.903</td><td>-204.477</td><td>-70.623</td><td>0 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>7.537E-3 6.221E-3 0.01 0.014 0.011 7.973E-3 7.935E-3 0.01</td><td>1.165E-3 1.327E-3 1.641E-3 2.206E-3 2.381E-3 2.095E-3 1.538E-3 1.622E-3</td><td>-50.906 -34.185 -2.06 22.56 38.144 46.558 36.428 -4.811</td><td>1.467 1.333 1.15 0.954 0.913 0.984 1.201 1.158</td><td>140.83</td><td>292.998</td><td>-199.519</td><td>-93.209</td><td>0 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>5.526E-3 0.01 8.709E-3 0.015 0.01 8.129E-3 9.318E-3 7.566E-3</td><td>1.578E-3 1.812E-3 1.869E-3 2.534E-3 2.64E-3 2.116E-3 1.311E-3 1.545E-3</td><td>-34.644 -20.061 6.15 25.141 36.012 40.559 18.939 -32.935</td><td>1.18 1.077 1.056 0.881 0.862 0.978 1.344 1.197</td><td>113.222</td><td>307.201</td><td>-189.622</td><td>-114.965</td><td>0 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>5.936E-3 9.406E-3 8.495E-3 4.06E-3 7.026E-3 0.017 0.029 0.017</td><td>1.443E-3 2.081E-3 2.079E-3 1.418E-3 1.499E-3 3.084E-3 4.782E-3 6.19E-3</td><td>42.78 54.531 56.23 40.727 -28.04 -46.478 -44.08 -35.09</td><td>1.255 0.988 0.988 1.271 1.223 0.794 0.653 0.595</td><td>200.449</td><td>234.79</td><td>-58.683</td><td>-12.853</td><td>0 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>5.904E-3 8.12E-3 0.017 0.017 0.012 8.919E-3 0.013 0.024</td><td>9.367E-4 1.686E-3 2.545E-3 2.819E-3 2.325E-3 1.642E-3 2.354E-3 3.93E-3</td><td>-5.965 22.697 40.055 43.895 40.367 6.611 -38.46 -47.245</td><td>1.738 1.129 0.879 0.832 0.925 1.149 0.919 0.708</td><td>184.991</td><td>256.339</td><td>-59.514</td><td>-19.461</td><td>0 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>3.828E-3 6.082E-3 0.01 0.013 0.011 6.841E-3 9.447E-3 0.014</td><td>8.815E-4 1.229E-3 2.249E-3 3.076E-3 3.201E-3 2.567E-3 1.825E-3 2.4E-3</td><td>-31.55 -7.859 20.944 31.413 36.797 30.58 1.694 -38.494</td><td>1.826 1.41 0.943 0.795 0.78 0.875 1.072 0.908</td><td>164.953</td><td>275.903</td><td>-58.872</td><td>-26.08</td><td>0 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>5.21E-3 6.224E-3 0.012 0.014 0.015 0.016 0.011 8.845E-3</td><td>9.241E-4 1.381E-3 1.998E-3 2.932E-3 3.262E-3 2.804E-3 1.907E-3 1.787E-3</td><td>-28.59 -17.318 6.634 23.605 31.019 32.164 16.695 -26.496</td><td>1.757 1.295 1.013 0.815 0.772 0.834 1.043 1.087</td><td>140.83</td><td>292.998</td><td>-56.772</td><td>-32.545</td><td>0 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>5.737E-3 9.199E-3 7.59E-3 0.011 0.01 0.011 4.361E-3 7.078E-3</td><td>1.263E-3 1.684E-3 1.879E-3 2.64E-3 2.759E-3 2.166E-3 1.293E-3 1.472E-3</td><td>-21.263 -11.334 11.536 27.155 33.811 37.263 15.186 -35.073</td><td>1.381 1.13 1.052 0.862 0.841 0.964 1.358 1.238</td><td>113.222</td><td>307.201</td><td>-53.267</td><td>-38.697</td><td>0 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.058 0.073 0.079 0.064 0.097 0.073 0.08 0.075</td><td>9.715E-3 0.012 0.013 0.014 0.014 0.014 0.013 0.013</td><td>-9.976 -4.612 0.525 4.377 9.739 13.873 17.57 19.074</td><td>0.524 0.502 0.491 0.487 0.487 0.489 0.491 0.491</td><td>-78.32</td><td>266.409</td><td>79.562</td><td>-56.822</td><td>0 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.037 0.019 0.032 0.031 0.033 0.064 0.057 0.072</td><td>5.566E-3 5.217E-3 5.073E-3 5.525E-3 6.777E-3 8.849E-3 0.012 0.015</td><td>18.558 13.18 4.688 -3.897 -10.109 -13.058 -12.364 -10.136</td><td>0.617 0.632 0.638 0.619 0.578 0.536 0.503 0.479</td><td>-109.335</td><td>255.918</td><td>89.953</td><td>-47.345</td><td>0 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.018 0.029 0.033 0.043 0.063 0.094 0.106 0.104</td><td>4.088E-3 5.801E-3 7.917E-3 0.01 0.013 0.017 0.02 0.023</td><td>-44.31 -31.124 -19.336 -10.328 -3.701 1.002 4.261 5.882</td><td>0.696 0.608 0.552 0.515 0.49 0.473 0.461 0.453</td><td>-137.642</td><td>242.11</td><td>98.118</td><td>-36.831</td><td>0 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.032 0.03 0.036 0.055 0.043 0.06 0.044 0.048</td><td>5.502E-3 6.766E-3 7.99E-3 9.13E-3 0.01 0.011 0.012 0.013</td><td>30.307 31.757 31.078 27.611 24.486 17.992 12.132 5.088</td><td>0.62 0.578 0.551 0.532 0.518 0.508 0.499 0.491</td><td>-162.542</td><td>225.328</td><td>103.853</td><td>-25.539</td><td>0 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.023 0.025 0.033 0.052 0.03 0.075 0.077 0.105</td><td>3.909E-3 5.818E-3 7.863E-3 9.959E-3 0.012 0.014 0.016 0.018</td><td>-16.938 -17.51 -18.678 -19.655 -19.11 -19.203 -19.999 -19.961</td><td>0.71 0.608 0.553 0.521 0.5 0.486 0.476 0.468</td><td>-183.418</td><td>205.987</td><td>107.017</td><td>-13.75</td><td>0 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>9.189E-3 0.018 0.014 0.018 0.022 0.021 0.024 0.026</td><td>1.524E-3 2.576E-3 3.649E-3 4.518E-3 5.033E-3 5.167E-3 5.02E-3 4.796E-3</td><td>0.239 4.934 3.177 2.835 1.283 1.386 1.588 2.947</td><td>1.208 0.873 0.733 0.668 0.64 0.634 0.641 0.652</td><td>-78.32</td><td>266.409</td><td>220.086</td><td>-44.472</td><td>0 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>2.378E-3 3.659E-3 4.06E-3 5.318E-3 8.33E-3 3.905E-3 0.015 0.018</td><td>4.766E-4 6.766E-4 8.838E-4 1.174E-3 1.612E-3 2.186E-3 2.829E-3 3.478E-3</td><td>71.035 57.283 35.38 10.045 -11.72 -26.824 -36.156 -39.896</td><td>3.148 2.285 1.822 1.458 1.163 0.959 0.83 0.749</td><td>-109.335</td><td>255.918</td><td>234.811</td><td>-19.04</td><td>0 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>2.785E-3 7.263E-3 0.013 0.012 0.021 0.032 0.035 0.029</td><td>5.67E-4 1.254E-3 2.19E-3 3.226E-3 4.184E-3 4.906E-3 5.315E-3 5.428E-3</td><td>-11.435 -6.261 -0.778 -2.827 -2.732 -2.354 -2.345 0.374</td><td>2.677 1.388 0.958 0.777 0.69 0.647 0.628 0.623</td><td>-137.642</td><td>242.11</td><td>243.723</td><td>7.713</td><td>0 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>1.607E-3 3.185E-3 6.604E-3 7.515E-3 0.01 0.013 0.017 0.016</td><td>3.944E-4 7.412E-4 1.204E-3 1.725E-3 2.23E-3 2.656E-3 2.975E-3 3.207E-3</td><td>46.295 33.382 19.286 7.776 1.474 -7.765 -10.595 -12.716</td><td>3.786 2.111 1.431 1.112 0.948 0.859 0.809 0.779</td><td>-162.542</td><td>225.328</td><td>246.6</td><td>35.125</td><td>0 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>2.099E-3 3.532E-3 4.81E-3 6.194E-3 6.199E-3 0.013 9.599E-3 0.016</td><td>4.15E-4 7.656E-4 1.155E-3 1.522E-3 1.844E-3 2.137E-3 2.438E-3 2.8E-3</td><td>17.651 7.783 -2.976 -11.082 -19.813 -30.386 -33.544 -33.353</td><td>3.6 2.054 1.476 1.21 1.065 0.972 0.9 0.835</td><td>-183.418</td><td>205.987</td><td>243.372</td><td>62.517</td><td>0 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.041 0.055 0.07 0.083 0.08 0.088 0.099 0.052</td><td>7.392E-3 0.01 0.013 0.014 0.015 0.015 0.014 0.014</td><td>17.602 13.473 6.608 0.343 -5.257 -12.356 -14.755 -16.076</td><td>0.563 0.516 0.495 0.485 0.482 0.483 0.486 0.488</td><td>1.241</td><td>209.587</td><td>140.525</td><td>12.35</td><td>0 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.021 0.032 0.054 0.046 0.038 0.059 0.057 0.065</td><td>4.091E-3 5.908E-3 7.487E-3 8.825E-3 0.01 0.011 0.012 0.013</td><td>43.265 33.725 21.249 8.091 -6.869 -17.21 -26.174 -29.624</td><td>0.696 0.605 0.561 0.537 0.52 0.509 0.5 0.494</td><td>-19.382</td><td>208.573</td><td>144.858</td><td>28.305</td><td>0 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.019 0.022 0.042 0.058 0.041 0.064 0.035 0.081</td><td>3.172E-3 5.098E-3 7.189E-3 9.291E-3 0.011 0.013 0.014 0.014</td><td>39.619 30.432 17.57 5.124 -4.418 -13.44 -18.31 -19.977</td><td>0.783 0.637 0.568 0.53 0.508 0.495 0.489 0.486</td><td>-39.525</td><td>205.28</td><td>145.605</td><td>44.544</td><td>0 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.023 0.037 0.058 0.082 0.076 0.057 0.101 0.099</td><td>4.106E-3 7.198E-3 0.01 0.013 0.015 0.017 0.017 0.016</td><td>18.05 12.697 5.675 0.235 -4.241 -6.683 -8.266 -6.996</td><td>0.695 0.568 0.515 0.49 0.478 0.473 0.473 0.475</td><td>-58.689</td><td>199.789</td><td>142.747</td><td>60.664</td><td>0 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.024 0.035 0.073 0.072 0.065 0.102 0.065 0.055</td><td>6.112E-3 9.381E-3 0.012 0.014 0.016 0.016 0.015 0.014</td><td>15.758 8.5 2.041 -1.758 -4.079 -5.148 -3.587 1.04</td><td>0.598 0.528 0.498 0.483 0.478 0.478 0.482 0.487</td><td>-76.401</td><td>192.237</td><td>136.355</td><td>76.268</td><td>0 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>1.563E-3 1.747E-3 4.454E-3 4.088E-3 8.762E-3 9.85E-3 0.011 0.019</td><td>2.367E-4 4.638E-4 7.641E-4 1.14E-3 1.569E-3 2.01E-3 2.427E-3 2.797E-3</td><td>-64.277 -61.294 -42.404 -25.679 -7.679 3.426 12.31 19.892</td><td>6.5 3.231 2.057 1.491 1.185 1.009 0.903 0.835</td><td>195.512</td><td>201.768</td><td>-278.769</td><td>31.618</td><td>1 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>3.131E-4 3.675E-4 2.175E-3 6.908E-3 0.013 0.013 0.023 0.013</td><td>1.007E-4 1.501E-4 4.417E-4 1.041E-3 1.913E-3 2.945E-3 3.98E-3 4.856E-3</td><td>106.495 52.17 15.126 3.432 1.865 2.123 2.428 2.346</td><td>20.177 11.3 3.387 1.598 1.041 0.813 0.705 0.649</td><td>183.031</td><td>222.931</td><td>-294.325</td><td>-0.421</td><td>1 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>5.774E-4 1.384E-3 9.19E-4 1.629E-3 2.252E-3 3.502E-3 4.59E-3 7.232E-3</td><td>2.51E-4 2.286E-4 1.961E-4 3.196E-4 5.071E-4 6.904E-4 9.001E-4 1.21E-3</td><td>26.012 0.578 -47.597 -77.924 -72.303 -56.935 -34.408 -8.241</td><td>6.087 6.764 8.086 4.692 2.969 2.245 1.795 1.426</td><td>166.018</td><td>242.445</td><td>-302.595</td><td>-33.793</td><td>1 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>3.837E-4 7.602E-4 7.548E-4 1.07E-3 2.688E-3 5.266E-3 9.817E-3 0.016</td><td>1.234E-4 1.375E-4 1.64E-4 2.466E-4 5.965E-4 1.221E-3 2.036E-3 2.909E-3</td><td>-177.91 139.713 87.865 25.429 5.695 -6.199 -8.499 -9.091</td><td>14.783 12.711 10.079 6.208 2.556 1.416 1.001 0.818</td><td>144.895</td><td>259.827</td><td>-303.372</td><td>-67.67</td><td>1 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>8.882E-4 1.146E-3 6.293E-4 3.264E-4 6.11E-4 2.421E-3 5.483E-3 7.346E-3</td><td>2.07E-4 2.077E-4 1.379E-4 9.088E-5 1.566E-4 5.219E-4 1.215E-3 2.181E-3</td><td>-18.709 -37.767 -43.193 -63.681 -16.852 2.168 4.328 4.565</td><td>7.585 7.555 12.656 23.984 10.696 2.89 1.421 0.96</td><td>120.185</td><td>274.647</td><td>-296.639</td><td>-101.214</td><td>1 2 3</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>8.892E-3 0.022 0.044 0.054 0.055 0.058 0.083 0.045</td><td>1.971E-3 4.198E-3 6.804E-3 9.429E-3 0.012 0.013 0.014 0.014</td><td>-30.626 -28.125 -19.653 -9.958 -2.877 3.988 7.648 10.324</td><td>1.021 0.689 0.577 0.528 0.503 0.49 0.485 0.485</td><td>195.512</td><td>201.768</td><td>-199.208</td><td>-25.204</td><td>1 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>4.231E-3 7.662E-3 0.012 0.033 0.048 0.036 0.066 0.08</td><td>1.186E-3 1.265E-3 3.205E-3 6.255E-3 9.792E-3 0.013 0.016 0.018</td><td>72.545 13.235 -11.255 -11.843 -8.585 -4.169 -1.486 2.404</td><td>1.448 1.38 0.779 0.593 0.523 0.491 0.475 0.467</td><td>183.031</td><td>222.931</td><td>-204.372</td><td>-47.766</td><td>1 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.01 7.22E-3 4.912E-3 9.516E-3 0.022 0.026 0.032 0.065</td><td>2.072E-3 1.592E-3 1.286E-3 2.43E-3 4.578E-3 7.222E-3 0.01 0.013</td><td>40.152 40.191 7.73 -22.67 -22.875 -16.312 -9.704 -3.774</td><td>0.99 1.173 1.363 0.902 0.664 0.567 0.52 0.495</td><td>166.018</td><td>242.445</td><td>-204.477</td><td>-70.623</td><td>1 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.018 0.01 8.254E-3 9.348E-3 0.014 0.026 0.032 0.036</td><td>2.952E-3 2.601E-3 1.79E-3 1.735E-3 3.03E-3 4.649E-3 6.261E-3 7.832E-3</td><td>27.42 30.096 19.007 -28.512 -45.546 -41.507 -30.197 -17.661</td><td>0.812 0.869 1.086 1.108 0.801 0.66 0.593 0.554</td><td>144.895</td><td>259.827</td><td>-199.519</td><td>-93.209</td><td>1 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>9.121E-3 0.015 3.644E-3 9.929E-3 0.019 0.022 0.035 0.065</td><td>2.201E-3 2.149E-3 1.579E-3 1.504E-3 2.929E-3 4.85E-3 6.746E-3 8.403E-3</td><td>39.514 44.407 37.291 -10.053 -36.404 -35.422 -28.209 -17.916</td><td>0.955 0.969 1.18 1.22 0.815 0.649 0.579 0.543</td><td>120.185</td><td>274.647</td><td>-189.622</td><td>-114.965</td><td>1 2 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.016 0.019 0.027 0.033 0.053 0.063 0.047 0.064</td><td>2.261E-3 4.035E-3 5.63E-3 7.314E-3 9.344E-3 0.012 0.013 0.015</td><td>-53.791 -46.913 -33.294 -16.352 0.973 13.137 19.202 22.768</td><td>0.94 0.7 0.615 0.565 0.529 0.504 0.489 0.481</td><td>195.512</td><td>201.768</td><td>-58.683</td><td>-12.853</td><td>1 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>5.274E-3 5.452E-3 0.019 0.019 0.036 0.036 0.04 0.07</td><td>1.857E-3 1.532E-3 3.027E-3 4.818E-3 6.756E-3 9.09E-3 0.012 0.014</td><td>31.798 -25.803 -50.737 -42.693 -26.83 -10.543 2.77 10.95</td><td>1.06 1.204 0.802 0.651 0.579 0.533 0.502 0.484</td><td>183.031</td><td>222.931</td><td>-59.514</td><td>-19.461</td><td>1 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.016 0.014 9.739E-3 0.011 0.017 0.036 0.074 0.061</td><td>3.362E-3 2.426E-3 1.736E-3 2.827E-3 4.676E-3 6.947E-3 9.755E-3 0.013</td><td>30.416 26.963 -10.221 -42.277 -39.341 -26.193 -12.501 -1.151</td><td>0.761 0.903 1.107 0.83 0.659 0.574 0.524 0.493</td><td>166.018</td><td>242.445</td><td>-58.872</td><td>-26.08</td><td>1 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.016 0.019 8.512E-3 8.251E-3 0.014 0.036 0.043 0.051</td><td>3.658E-3 3.124E-3 2.059E-3 1.93E-3 3.407E-3 5.647E-3 8.576E-3 0.012</td><td>26.381 30.114 19.019 -22.104 -37.095 -28.191 -15.548 -5.642</td><td>0.732 0.789 0.994 1.035 0.756 0.614 0.541 0.5</td><td>144.895</td><td>259.827</td><td>-56.772</td><td>-32.545</td><td>1 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.01 0.015 8.4E-3 7.562E-3 0.011 0.027 0.044 0.061</td><td>3.267E-3 2.788E-3 1.795E-3 1.562E-3 3.028E-3 5.471E-3 8.722E-3 0.012</td><td>25.12 31.613 26.049 -15.407 -32.344 -22.925 -12.858 -4.364</td><td>0.772 0.837 1.084 1.189 0.802 0.621 0.538 0.497</td><td>120.185</td><td>274.647</td><td>-53.267</td><td>-38.697</td><td>1 2 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.038 0.05 0.061 0.06 0.122 0.148 0.143 0.136</td><td>9.624E-3 0.011 0.013 0.017 0.022 0.027 0.033 0.038</td><td>23.245 18.009 10.729 4.773 1.62 -0.862 -2.786 -3.333</td><td>0.525 0.51 0.49 0.471 0.456 0.445 0.437 0.431</td><td>-83.257</td><td>233.387</td><td>79.562</td><td>-56.822</td><td>1 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.067 0.139 0.096 0.191 0.207 0.189 0.305 0.195</td><td>0.017 0.021 0.026 0.031 0.035 0.039 0.041 0.044</td><td>-9.581 -5.35 -3.368 -1.531 0.317 1.153 1.273 1.446</td><td>0.473 0.456 0.446 0.439 0.434 0.431 0.429 0.428</td><td>-111.295</td><td>222.51</td><td>89.953</td><td>-47.345</td><td>1 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.076 0.101 0.101 0.123 0.088 0.115 0.11 0.091</td><td>0.017 0.019 0.02 0.021 0.022 0.023 0.024 0.024</td><td>12.545 10.65 8.517 6.193 2.32 -1.761 -5.938 -8.606</td><td>0.469 0.463 0.459 0.456 0.454 0.453 0.451 0.449</td><td>-136.577</td><td>208.652</td><td>98.118</td><td>-36.831</td><td>1 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.054 0.075 0.099 0.088 0.119 0.098 0.115 0.156</td><td>9.876E-3 0.012 0.014 0.016 0.019 0.021 0.023 0.025</td><td>-19.448 -22.855 -25.717 -26.523 -26.468 -26.173 -23.941 -21.952</td><td>0.522 0.5 0.484 0.473 0.465 0.458 0.453 0.449</td><td>-158.477</td><td>192.157</td><td>103.853</td><td>-25.539</td><td>1 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.063 0.098 0.099 0.091 0.096 0.143 0.14 0.081</td><td>0.016 0.017 0.018 0.02 0.021 0.022 0.024 0.026</td><td>-2.805 0.392 3.307 6.163 8.755 11.568 13.504 15.964</td><td>0.475 0.47 0.466 0.461 0.457 0.454 0.45 0.447</td><td>-176.454</td><td>173.432</td><td>107.017</td><td>-13.75</td><td>1 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>6.977E-3 0.01 0.014 0.021 0.031 0.025 0.045 0.073</td><td>2.566E-3 2.722E-3 3.112E-3 3.943E-3 5.409E-3 7.58E-3 0.01 0.014</td><td>-12.224 -17.296 -17.617 -14.023 -7.803 -4.342 -1.516 0.066</td><td>0.875 0.847 0.791 0.707 0.624 0.559 0.516 0.489</td><td>-83.257</td><td>233.387</td><td>220.086</td><td>-44.472</td><td>1 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.011 0.017 0.012 0.015 0.025 0.026 0.032 0.052</td><td>2.449E-3 2.843E-3 3.152E-3 3.504E-3 4.104E-3 5.13E-3 6.618E-3 8.473E-3</td><td>-15.042 -14.534 -16.83 -11.363 -4.886 3.677 7.061 9.722</td><td>0.898 0.828 0.786 0.746 0.695 0.636 0.582 0.542</td><td>-111.295</td><td>222.51</td><td>234.811</td><td>-19.04</td><td>1 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.02 0.024 0.018 0.014 0.019 0.024 0.038 0.03</td><td>3.343E-3 3.724E-3 3.857E-3 3.869E-3 3.966E-3 4.338E-3 5.047E-3 6.032E-3</td><td>0.061 0.798 2.044 7.686 14.185 21.634 28.101 29.587</td><td>0.763 0.726 0.714 0.713 0.706 0.679 0.64 0.6</td><td>-136.577</td><td>208.652</td><td>243.723</td><td>7.713</td><td>1 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>3.472E-3 7.776E-3 0.01 0.021 0.02 0.019 0.031 0.033</td><td>1.049E-3 1.488E-3 2.005E-3 2.582E-3 3.316E-3 4.418E-3 6.069E-3 8.289E-3</td><td>-25.913 -37.809 -44.611 -42.169 -34.272 -22.446 -14.826 -7.941</td><td>1.589 1.229 1.011 0.872 0.766 0.674 0.599 0.545</td><td>-158.477</td><td>192.157</td><td>246.6</td><td>35.125</td><td>1 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.016 0.019 0.014 0.015 0.019 0.021 0.026 0.025</td><td>2.94E-3 3.059E-3 3.001E-3 2.957E-3 3.149E-3 3.74E-3 4.8E-3 6.335E-3</td><td>-0.524 0.683 4.941 10.095 15.29 17.94 17.096 14.785</td><td>0.814 0.797 0.805 0.811 0.786 0.724 0.652 0.591</td><td>-176.454</td><td>173.432</td><td>243.372</td><td>62.517</td><td>1 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.058 0.049 0.074 0.056 0.082 0.104 0.152 0.232</td><td>0.012 0.013 0.014 0.016 0.02 0.025 0.032 0.038</td><td>-27.218 -28.981 -24.795 -16.56 -8.365 -2.927 -0.187 0.98</td><td>0.501 0.495 0.487 0.475 0.46 0.447 0.438 0.431</td><td>-3.696</td><td>176.565</td><td>140.525</td><td>12.35</td><td>1 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.075 0.081 0.059 0.092 0.081 0.094 0.068 0.14</td><td>0.013 0.014 0.014 0.015 0.016 0.019 0.023 0.028</td><td>-17.391 -20.657 -21.808 -17.432 -8.954 -1.121 3.552 7.623</td><td>0.494 0.488 0.486 0.483 0.475 0.464 0.453 0.443</td><td>-21.342</td><td>175.165</td><td>144.858</td><td>28.305</td><td>1 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.07 0.085 0.089 0.088 0.095 0.088 0.074 0.123</td><td>0.018 0.018 0.017 0.016 0.016 0.017 0.019 0.021</td><td>-5.031 -7.619 -6.157 -2.473 5.312 13.832 19.491 21.316</td><td>0.468 0.467 0.469 0.473 0.475 0.472 0.465 0.456</td><td>-38.459</td><td>171.822</td><td>145.605</td><td>44.544</td><td>1 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.11 0.068 0.119 0.07 0.09 0.083 0.083 0.062</td><td>0.018 0.018 0.017 0.016 0.016 0.016 0.018 0.02</td><td>-3.652 -5.093 -3.017 1.896 9.383 18.349 24.339 26.901</td><td>0.466 0.466 0.469 0.474 0.477 0.475 0.468 0.46</td><td>-54.625</td><td>166.618</td><td>142.747</td><td>60.664</td><td>1 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.059 0.083 0.068 0.078 0.067 0.105 0.11 0.11</td><td>0.013 0.013 0.013 0.013 0.014 0.016 0.019 0.022</td><td>-10.149 -13.031 -12.175 -6.409 1.569 9.042 12.703 13.975</td><td>0.491 0.49 0.493 0.494 0.488 0.477 0.464 0.454</td><td>-69.437</td><td>159.682</td><td>136.355</td><td>76.268</td><td>1 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.04 0.063 0.054 0.065 0.057 0.072 0.067 0.043</td><td>8.734E-3 9.678E-3 0.01 0.011 0.011 0.012 0.012 0.013</td><td>-16.366 -15.34 -12.55 -10.414 -6.702 -2.168 2.755 6.903</td><td>0.538 0.525 0.516 0.511 0.507 0.503 0.498 0.493</td><td>-278.769</td><td>31.618</td><td>79.562</td><td>-56.822</td><td>2 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.012 0.021 0.039 0.041 0.066 0.064 0.101 0.11</td><td>1.897E-3 3.867E-3 6.482E-3 9.548E-3 0.013 0.016 0.02 0.022</td><td>53.345 31.102 19.383 14.254 10.405 7.47 4.766 2.791</td><td>1.046 0.714 0.586 0.526 0.494 0.474 0.462 0.453</td><td>-294.325</td><td>-0.421</td><td>89.953</td><td>-47.345</td><td>2 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.014 0.014 0.017 0.015 0.014 0.022 0.024 0.028</td><td>2.753E-3 3.273E-3 3.66E-3 3.96E-3 4.207E-3 4.508E-3 5.135E-3 6.434E-3</td><td>-15.505 -29.041 -40.232 -46.101 -47.189 -41.451 -30.468 -17.652</td><td>0.842 0.771 0.732 0.706 0.688 0.669 0.636 0.588</td><td>-302.595</td><td>-33.793</td><td>98.118</td><td>-36.831</td><td>2 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.011 7.704E-3 0.014 0.031 0.033 0.031 0.037 0.037</td><td>1.788E-3 2.043E-3 3.167E-3 4.504E-3 5.753E-3 6.855E-3 7.859E-3 8.834E-3</td><td>141.376 87.554 57.18 35.807 22.211 10.349 -1.903 -12.768</td><td>1.087 0.999 0.784 0.669 0.61 0.576 0.553 0.536</td><td>-303.372</td><td>-67.67</td><td>103.853</td><td>-25.539</td><td>2 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.012 0.012 0.01 5.875E-3 8.053E-3 0.016 0.033 0.024</td><td>2.139E-3 2.475E-3 2.112E-3 1.191E-3 1.353E-3 3.17E-3 5.228E-3 7.217E-3</td><td>-65.891 -72.658 -72.504 -56.569 29.52 46.917 44.587 39.521</td><td>0.972 0.893 0.979 1.443 1.314 0.783 0.631 0.567</td><td>-296.639</td><td>-101.214</td><td>107.017</td><td>-13.75</td><td>2 3 4</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.034 0.042 0.03 0.043 0.067 0.03 0.045 0.055</td><td>6.235E-3 7.177E-3 8.004E-3 8.744E-3 9.457E-3 0.01 0.011 0.012</td><td>-29.619 -27.229 -25.97 -23.839 -18.545 -15.006 -9.629 -3.568</td><td>0.594 0.568 0.551 0.538 0.527 0.518 0.508 0.499</td><td>-278.769</td><td>31.618</td><td>220.086</td><td>-44.472</td><td>2 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>5.54E-3 0.011 0.019 0.021 0.033 0.041 0.047 0.053</td><td>1.262E-3 2.285E-3 3.521E-3 4.933E-3 6.516E-3 8.259E-3 0.01 0.012</td><td>87.791 61.451 47.187 34.378 23.772 15.871 7.687 0.91</td><td>1.382 0.935 0.745 0.645 0.585 0.546 0.519 0.5</td><td>-294.325</td><td>-0.421</td><td>234.811</td><td>-19.04</td><td>2 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.011 0.021 0.021 0.015 0.035 0.03 0.023 0.032</td><td>3.328E-3 4.283E-3 4.896E-3 5.126E-3 5.061E-3 4.93E-3 5.066E-3 5.731E-3</td><td>-20.191 -25.317 -26.543 -25.476 -19.157 -8.833 3.099 17.706</td><td>0.765 0.683 0.647 0.636 0.639 0.645 0.639 0.611</td><td>-302.595</td><td>-33.793</td><td>243.723</td><td>7.713</td><td>2 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>4.581E-3 4.839E-3 0.01 0.024 0.043 0.04 0.044 0.082</td><td>9.662E-4 1.291E-3 2.412E-3 4.129E-3 6.21E-3 8.417E-3 0.011 0.012</td><td>137.111 74.937 38.895 18.286 5.288 -1.834 -7.325 -10.681</td><td>1.696 1.359 0.906 0.693 0.594 0.543 0.515 0.498</td><td>-303.372</td><td>-67.67</td><td>246.6</td><td>35.125</td><td>2 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>9.347E-3 0.011 6.354E-3 4.732E-3 3.827E-3 0.011 0.018 0.028</td><td>1.921E-3 2.012E-3 1.577E-3 8.423E-4 9.336E-4 2.23E-3 3.969E-3 6.134E-3</td><td>-48.585 -57.141 -59.906 -47.654 25.738 39.993 34.071 23.92</td><td>1.038 1.009 1.18 1.896 1.743 0.948 0.705 0.597</td><td>-296.639</td><td>-101.214</td><td>243.372</td><td>62.517</td><td>2 3 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.141 0.318 0.284 0.292 0.266 0.263 0.311 0.302</td><td>0.041 0.044 0.046 0.048 0.05 0.051 0.052 0.052</td><td>-3.743 -6.947 -9.042 -10.961 -12.076 -13.002 -12.764 -11.573</td><td>0.429 0.427 0.426 0.425 0.424 0.424 0.423 0.423</td><td>-199.208</td><td>-25.204</td><td>140.525</td><td>12.35</td><td>2 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.131 0.161 0.13 0.035 0.23 0.25 0.279 0.209</td><td>0.027 0.031 0.034 0.038 0.042 0.046 0.049 0.052</td><td>22.842 20.067 17.191 13.138 9.195 5.139 0.243 -2.184</td><td>0.445 0.439 0.435 0.431 0.429 0.426 0.424 0.423</td><td>-204.372</td><td>-47.766</td><td>144.858</td><td>28.305</td><td>2 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.156 0.133 0.174 0.203 0.11 0.153 0.245 0.198</td><td>0.029 0.028 0.028 0.03 0.032 0.034 0.037 0.041</td><td>2.27 6.72 11.934 17.364 20.3 21.805 20.943 19.08</td><td>0.441 0.442 0.442 0.441 0.438 0.435 0.432 0.43</td><td>-204.477</td><td>-70.623</td><td>145.605</td><td>44.544</td><td>2 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.228 0.153 0.18 0.253 0.293 0.181 0.154 0.154</td><td>0.042 0.043 0.043 0.041 0.04 0.038 0.037 0.038</td><td>-2.217 -3.351 -3.221 -1.07 1.639 4.902 9.795 14.997</td><td>0.428 0.428 0.428 0.429 0.43 0.431 0.432 0.432</td><td>-199.519</td><td>-93.209</td><td>142.747</td><td>60.664</td><td>2 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.262 0.197 0.342 0.215 0.244 0.216 0.258 0.249</td><td>0.038 0.044 0.049 0.052 0.053 0.053 0.051 0.049</td><td>2.992 0.814 -1.077 -1.641 -2.406 -2.31 -1.557 0.976</td><td>0.432 0.427 0.425 0.423 0.423 0.423 0.423 0.424</td><td>-189.622</td><td>-114.965</td><td>136.355</td><td>76.268</td><td>2 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>18000</td><td>54231.208</td><td>0</td><td>0.162 0.146 0.156 0.195 0.285 0.247 0.227 0.369</td><td>0.031 0.035 0.04 0.045 0.049 0.053 0.058 0.062</td><td>7.918 5.267 3.98 1.793 1.997 0.889 0.093 -0.539</td><td>0.439 0.434 0.43 0.427 0.424 0.422 0.421 0.419</td><td>79.562</td><td>-56.822</td><td>140.525</td><td>12.35</td><td>3 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>20160</td><td>54231.233</td><td>0</td><td>0.087 0.082 0.096 0.101 0.104 0.111 0.153 0.181</td><td>0.017 0.018 0.019 0.021 0.023 0.026 0.03 0.033</td><td>-12.986 -11.508 -8.5 -6.145 -4.504 -3.96 -1.366 -0.736</td><td>0.471 0.468 0.463 0.457 0.452 0.446 0.441 0.436</td><td>89.953</td><td>-47.345</td><td>144.858</td><td>28.305</td><td>3 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>22319.999</td><td>54231.258</td><td>0</td><td>0.138 0.122 0.115 0.118 0.114 0.109 0.186 0.202</td><td>0.023 0.025 0.027 0.029 0.03 0.031 0.031 0.032</td><td>6.464 3.87 -0.304 -3.959 -6.998 -10.837 -13.531 -15.805</td><td>0.452 0.447 0.444 0.442 0.44 0.439 0.439 0.438</td><td>98.118</td><td>-36.831</td><td>145.605</td><td>44.544</td><td>3 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>24480.001</td><td>54231.283</td><td>0</td><td>0.062 0.071 0.07 0.116 0.17 0.128 0.139 0.14</td><td>0.011 0.013 0.016 0.02 0.023 0.027 0.03 0.032</td><td>1.077 10.494 16.986 17.384 18.328 16.688 15.582 11.457</td><td>0.514 0.491 0.473 0.46 0.451 0.445 0.44 0.437</td><td>103.853</td><td>-25.539</td><td>142.747</td><td>60.664</td><td>3 4 5</td><td>F F F F F F F F</td></tr>
+<tr><td>0</td><td>26640</td><td>54231.308</td><td>0</td><td>0.067 0.078 0.078 0.075 0.107 0.101 0.104 0.113</td><td>0.018 0.019 0.02 0.02 0.02 0.02 0.022 0.024</td><td>-13.022 -15.2 -13.297 -9.79 -3.034 3.234 9.194 16.044</td><td>0.466 0.463 0.461 0.461 0.461 0.459 0.455 0.45</td><td>107.017</td><td>-13.75</td><td>136.355</td><td>76.268</td><td>3 4 5</td><td>F F F F F F F F</td></tr>
+</table>
+</OI_T3>
+<checkReport>
+Analysing File: 2008-Contest_Binary.oifits
+Analysing table [OI_ARRAY#1]
+SEVERE	STA_INDEX[0] cannot be &lt; 1 at row 0
+SEVERE	Invalid ARRAYX keyword '0.0'
+SEVERE	Invalid ARRAYY keyword '0.0'
+SEVERE	Invalid ARRAYZ keyword '0.0'
+SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+Analysing table [OI_TARGET#2]
+SEVERE	TARGET_ID[0] cannot be &lt; 1 at row 0
+Analysing table [OI_T3#5]
+SEVERE	Missing unit for column 'T3PHI', should be not empty or 'deg|degree|degrees'
+SEVERE	Missing unit for column 'T3PHIERR', should be not empty or 'deg|degree|degrees'
+
+0 warnings, 8 severe errors
+</checkReport>
+<rules>
+  <rule>
+    <name>GENERIC_COL_UNIT_EXIST</name>
+    <description>check if the column unit exists</description>
+    <paragraph>V2.4§2</paragraph>
+  </rule>
+  <rule>
+    <name>OI_ARRAY_STA_INDEX_MIN</name>
+    <description>check if the STA_INDEX values &gt;= 1</description>
+    <paragraph>V1.6.1.4</paragraph>
+  </rule>
+  <rule>
+    <name>OI_ARRAY_XYZ</name>
+    <description>check if the ARRAY_XYZ keyword values corresponds to a proper coordinate on earth</description>
+    <paragraph>V1.6.1.3</paragraph>
+  </rule>
+  <rule>
+    <name>OI_ARRAY_XYZ_FIX</name>
+    <description>fix the ARRAY_XYZ keyword values (to VLTI or CHARA according to the ARRNAME keyword) when the ARRAY_XYZ keyword values are incorrect</description>
+    <paragraph>V1.6.1.3</paragraph>
+  </rule>
+  <rule>
+    <name>OI_TARGET_TARGETID_MIN</name>
+    <description>check if the TARGET_ID values &gt;= 1</description>
+    <paragraph>V2.OI_TARGET_Table</paragraph>
+  </rule>
+</rules>
+<failures>
+  <profile>
+  </profile>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_STA_INDEX_MIN</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>STA_INDEX</member>
+    <data>
+      <value>0</value>
+      <row>0</row>
+      <message>STA_INDEX[0] cannot be &lt; 1 at row 0</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>ARRAYX</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYX keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>ARRAYY</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYY keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>ARRAYZ</member>
+    <data>
+      <value>0.0</value>
+      <message>Invalid ARRAYZ keyword '0.0'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_ARRAY_XYZ_FIX</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <data>
+      <value>CHARA</value>
+      <message>Fixed ARRAY_X/Y/Z to 'CHARA'.</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_TARGET_TARGETID_MIN</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_TARGET</extName>
+    <extNb>2</extNb>
+    <member>TARGET</member>
+    <data>
+      <value>0</value>
+      <row>0</row>
+      <message>TARGET_ID[0] cannot be &lt; 1 at row 0</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_COL_UNIT_EXIST</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_T3</extName>
+    <extNb>5</extNb>
+    <member>T3PHI</member>
+    <data>
+      <value>deg|degree|degrees</value>
+      <message>Missing unit for column 'T3PHI', should be not empty or 'deg|degree|degrees'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_COL_UNIT_EXIST</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_T3</extName>
+    <extNb>5</extNb>
+    <member>T3PHIERR</member>
+    <data>
+      <value>deg|degree|degrees</value>
+      <message>Missing unit for column 'T3PHIERR', should be not empty or 'deg|degree|degrees'</message>
+    </data>
+  </failure>
+</failures>
+</oifits>

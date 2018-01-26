@@ -1,0 +1,92 @@
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: larger;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #292b2c;
+    background-image: url(img/repper_pattern.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    padding-top: 70px;
+}
+
+body {
+    width: 100%;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+h3 {
+    margin-top: 50px;
+}
+
+ul {
+    padding-left: 0px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.mycontainer {
+    width: 90%;
+    max-width: 100%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding: 20px;
+    background-color: #759ab9;
+    border-radius: 20px;
+    border: 3px #0c4779 solid;
+    box-shadow: 2px 2px 0px #0c4754;
+    opacity: 0.9;
+}
+
+.applyTo {
+    background-color: #759ab9;
+    opacity: 0.8;
+    border-radius: 10px;
+    display: block;
+}
+
+.myhide {
+   display:none;
+}
+
+.oitable {
+    width: 240px;
+    height: auto;
+    margin: 5px;
+    color: #0c4754;
+}
+
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-row>[class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row.row:after,
+.flex-row.row:before {
+    display: flex;
+}
