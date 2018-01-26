@@ -10,6 +10,8 @@ cache:
 
 before_install:
   - rm ~/.m2/settings.xml
+  - export JAVA_OPTS="-Xmx1024m"
+  - export MAVEN_OPTS="-Xmx1024m"
 
 before_script:
   - echo $HOME
