@@ -2,10 +2,10 @@ language: java
 sudo: false
 
 jdk:
-  - openjdk7
+  - oraclejdk8
 
 before_install:
-  - export MAVEN_OPTS="-Xms128M -Xmx512M"
+  - export MAVEN_OPTS="-Xms128M -Xmx1024M"
   - cd parent-pom
   - mvn -Dassembly.skipAssembly -Djarsigner.skip=true clean install
   - cd ..
@@ -16,7 +16,8 @@ before_script:
   - echo $MAVEN_OPTS
 
 script: 
-  - mvn clean install -Djarsigner.skip=true -Dmaven.javadoc.skip=true -B -V
+  - mvn clean install -Djarsigner.skip=true -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn test -Djava.util.logging.config.file=./src/test/resources/logging.properties -Djarsigner.skip=true -B -e -X
 
 install: true
 
