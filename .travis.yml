@@ -1,11 +1,29 @@
 language: java
 sudo: false
+
 jdk:
   - openjdk7
+
+cache:
+ directories:
+   - $HOME/.m2
+
+before_install:
+  - rm ~/.m2/settings.xml
+
+before_script:
+  - echo $HOME
+  - echo $JAVA_OPTS
+  - echo $MAVEN_OPTS
+
 before_install:
   - cd parent-pom
   - mvn -Dassembly.skipAssembly -Djarsigner.skip=true clean install
   - cd ..
   - mvn process-resources
-script: mvn -Dassembly.skipAssembly -Djarsigner.skip=true test -B
+
+script: 
+  - mvn clean install -Djarsigner.skip=true -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+install: true
 
