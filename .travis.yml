@@ -2,4 +2,9 @@ language: java
 sudo: false
 jdk:
   - openjdk7
+before_install:
+  - cd parent-pom
+  - mvn -Dassembly.skipAssembly -Djarsigner.skip=true clean install
+  - cd ..
+  - mvn process-resources
 

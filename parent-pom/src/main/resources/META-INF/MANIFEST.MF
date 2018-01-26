@@ -1,0 +1,6 @@
+Built-By: JMMC (jmmc-tech-group@jmmc.fr)
+Built-Date: ${timestamp}
+Implementation-Title: ${project.artifactId} 
+Implementation-Version: ${project.version}
+Implementation-Vendor: www.jmmc.fr
+Implementation-URL: http://www.jmmc.fr
