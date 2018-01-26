@@ -7,4 +7,5 @@ before_install:
   - mvn -Dassembly.skipAssembly -Djarsigner.skip=true clean install
   - cd ..
   - mvn process-resources
+script: mvn -Dassembly.skipAssembly -Djarsigner.skip=true test -B
 
