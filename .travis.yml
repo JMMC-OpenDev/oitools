@@ -17,7 +17,7 @@ before_script:
 
 script: 
   - mvn clean install -Djarsigner.skip=true -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - mvn test -Djava.util.logging.config.file=./src/test/resources/logging.properties -Djarsigner.skip=true -B -e -X
+  - mvn test -Djava.util.logging.config.file=./src/test/resources/logging.properties -Djarsigner.skip=true -B
 
 install: true
 
