@@ -366,8 +366,8 @@ SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_TARGET#2]
 SEVERE	TARGET_ID[0] cannot be &lt; 1 at row 0
 Analysing table [OI_T3#5]
-SEVERE	Missing unit for column 'T3PHI', should be not empty or 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be not empty or 'deg|degree|degrees'
+SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 
 0 warnings, 8 severe errors
 </checkReport>
@@ -483,7 +483,7 @@ SEVERE	Missing unit for column 'T3PHIERR', should be not empty or 'deg|degree|de
     <member>T3PHI</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'T3PHI', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'T3PHI', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -495,7 +495,7 @@ SEVERE	Missing unit for column 'T3PHIERR', should be not empty or 'deg|degree|de
     <member>T3PHIERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'T3PHIERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
 </failures>

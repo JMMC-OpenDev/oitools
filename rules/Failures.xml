@@ -27358,7 +27358,7 @@
     <member>DIAMETER</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'DIAMETER', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'DIAMETER', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -27370,7 +27370,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27382,7 +27382,7 @@
     <member>STA_NAME</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_NAME', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_NAME', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27394,7 +27394,7 @@
     <member>STAXYZ</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'STAXYZ', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'STAXYZ', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -27406,7 +27406,7 @@
     <member>TEL_NAME</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TEL_NAME', should be not empty or ''</message>
+      <message>Missing unit for column 'TEL_NAME', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27418,7 +27418,7 @@
     <member>EFF_BAND</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'EFF_BAND', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'EFF_BAND', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -27430,7 +27430,7 @@
     <member>EFF_WAVE</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'EFF_WAVE', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'EFF_WAVE', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -27442,7 +27442,7 @@
     <member>DEC_ERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'DEC_ERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'DEC_ERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -27454,7 +27454,7 @@
     <member>DECEP0</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'DECEP0', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'DECEP0', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -27466,7 +27466,7 @@
     <member>EQUINOX</member>
     <data>
       <value>yr|year|years</value>
-      <message>Missing unit for column 'EQUINOX', should be not empty or 'yr|year|years'</message>
+      <message>Missing unit for column 'EQUINOX', should be 'yr|year|years'</message>
     </data>
   </failure>
   <failure>
@@ -27478,7 +27478,7 @@
     <member>PARA_ERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'PARA_ERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'PARA_ERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -27490,7 +27490,7 @@
     <member>PARALLAX</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'PARALLAX', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'PARALLAX', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -27502,7 +27502,7 @@
     <member>PMDEC</member>
     <data>
       <value>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</value>
-      <message>Missing unit for column 'PMDEC', should be not empty or 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
+      <message>Missing unit for column 'PMDEC', should be 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
     </data>
   </failure>
   <failure>
@@ -27514,7 +27514,7 @@
     <member>PMDEC_ERR</member>
     <data>
       <value>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</value>
-      <message>Missing unit for column 'PMDEC_ERR', should be not empty or 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
+      <message>Missing unit for column 'PMDEC_ERR', should be 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
     </data>
   </failure>
   <failure>
@@ -27526,7 +27526,7 @@
     <member>PMRA</member>
     <data>
       <value>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</value>
-      <message>Missing unit for column 'PMRA', should be not empty or 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
+      <message>Missing unit for column 'PMRA', should be 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
     </data>
   </failure>
   <failure>
@@ -27538,7 +27538,7 @@
     <member>PMRA_ERR</member>
     <data>
       <value>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</value>
-      <message>Missing unit for column 'PMRA_ERR', should be not empty or 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
+      <message>Missing unit for column 'PMRA_ERR', should be 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
     </data>
   </failure>
   <failure>
@@ -27550,7 +27550,7 @@
     <member>RA_ERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'RA_ERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'RA_ERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -27562,7 +27562,7 @@
     <member>RAEP0</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'RAEP0', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'RAEP0', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -27574,7 +27574,7 @@
     <member>SPECTYP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'SPECTYP', should be not empty or ''</message>
+      <message>Missing unit for column 'SPECTYP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27586,7 +27586,7 @@
     <member>SYSVEL</member>
     <data>
       <value>m/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second</value>
-      <message>Missing unit for column 'SYSVEL', should be not empty or 'm/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second'</message>
+      <message>Missing unit for column 'SYSVEL', should be 'm/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second'</message>
     </data>
   </failure>
   <failure>
@@ -27598,7 +27598,7 @@
     <member>TARGET</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27610,7 +27610,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27622,7 +27622,7 @@
     <member>VELDEF</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VELDEF', should be not empty or ''</message>
+      <message>Missing unit for column 'VELDEF', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27634,7 +27634,7 @@
     <member>VELTYP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VELTYP', should be not empty or ''</message>
+      <message>Missing unit for column 'VELTYP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27646,7 +27646,7 @@
     <member>FLAG</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FLAG', should be not empty or ''</message>
+      <message>Missing unit for column 'FLAG', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27658,7 +27658,7 @@
     <member>INT_TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'INT_TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'INT_TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -27670,7 +27670,7 @@
     <member>MJD</member>
     <data>
       <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be not empty or 'day|days'</message>
+      <message>Missing unit for column 'MJD', should be 'day|days'</message>
     </data>
   </failure>
   <failure>
@@ -27682,7 +27682,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27694,7 +27694,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27706,7 +27706,7 @@
     <member>TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -27718,7 +27718,7 @@
     <member>UCOORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'UCOORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'UCOORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -27730,7 +27730,7 @@
     <member>VCOORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'VCOORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'VCOORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -27742,7 +27742,7 @@
     <member>VISAMP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VISAMP', should be not empty or ''</message>
+      <message>Missing unit for column 'VISAMP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27754,7 +27754,7 @@
     <member>VISAMPERR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VISAMPERR', should be not empty or ''</message>
+      <message>Missing unit for column 'VISAMPERR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27766,7 +27766,7 @@
     <member>VISPHI</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'VISPHI', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'VISPHI', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -27778,7 +27778,7 @@
     <member>VISPHIERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'VISPHIERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'VISPHIERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -27790,7 +27790,7 @@
     <member>FLAG</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FLAG', should be not empty or ''</message>
+      <message>Missing unit for column 'FLAG', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27802,7 +27802,7 @@
     <member>INT_TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'INT_TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'INT_TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -27814,7 +27814,7 @@
     <member>MJD</member>
     <data>
       <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be not empty or 'day|days'</message>
+      <message>Missing unit for column 'MJD', should be 'day|days'</message>
     </data>
   </failure>
   <failure>
@@ -27826,7 +27826,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27838,7 +27838,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27850,7 +27850,7 @@
     <member>TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -27862,7 +27862,7 @@
     <member>UCOORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'UCOORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'UCOORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -27874,7 +27874,7 @@
     <member>VCOORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'VCOORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'VCOORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -27886,7 +27886,7 @@
     <member>VIS2DATA</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VIS2DATA', should be not empty or ''</message>
+      <message>Missing unit for column 'VIS2DATA', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27898,7 +27898,7 @@
     <member>VIS2ERR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VIS2ERR', should be not empty or ''</message>
+      <message>Missing unit for column 'VIS2ERR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27910,7 +27910,7 @@
     <member>FLAG</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FLAG', should be not empty or ''</message>
+      <message>Missing unit for column 'FLAG', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27922,7 +27922,7 @@
     <member>INT_TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'INT_TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'INT_TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -27934,7 +27934,7 @@
     <member>MJD</member>
     <data>
       <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be not empty or 'day|days'</message>
+      <message>Missing unit for column 'MJD', should be 'day|days'</message>
     </data>
   </failure>
   <failure>
@@ -27946,7 +27946,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27958,7 +27958,7 @@
     <member>T3AMP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'T3AMP', should be not empty or ''</message>
+      <message>Missing unit for column 'T3AMP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27970,7 +27970,7 @@
     <member>T3AMPERR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'T3AMPERR', should be not empty or ''</message>
+      <message>Missing unit for column 'T3AMPERR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -27982,7 +27982,7 @@
     <member>T3PHI</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'T3PHI', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'T3PHI', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -27994,7 +27994,7 @@
     <member>T3PHIERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'T3PHIERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -28006,7 +28006,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28018,7 +28018,7 @@
     <member>TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -28030,7 +28030,7 @@
     <member>U1COORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'U1COORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'U1COORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28042,7 +28042,7 @@
     <member>U2COORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'U2COORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'U2COORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28054,7 +28054,7 @@
     <member>V1COORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'V1COORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'V1COORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28066,7 +28066,7 @@
     <member>V2COORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'V2COORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'V2COORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28078,7 +28078,7 @@
     <member>DIAMETER</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'DIAMETER', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'DIAMETER', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28090,7 +28090,7 @@
     <member>FOV</member>
     <data>
       <value>arcsec|as|arcsecond|arcseconds</value>
-      <message>Missing unit for column 'FOV', should be not empty or 'arcsec|as|arcsecond|arcseconds'</message>
+      <message>Missing unit for column 'FOV', should be 'arcsec|as|arcsecond|arcseconds'</message>
     </data>
   </failure>
   <failure>
@@ -28102,7 +28102,7 @@
     <member>FOVTYPE</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FOVTYPE', should be not empty or ''</message>
+      <message>Missing unit for column 'FOVTYPE', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28114,7 +28114,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28126,7 +28126,7 @@
     <member>STA_NAME</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_NAME', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_NAME', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28138,7 +28138,7 @@
     <member>STAXYZ</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'STAXYZ', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'STAXYZ', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28150,7 +28150,7 @@
     <member>TEL_NAME</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TEL_NAME', should be not empty or ''</message>
+      <message>Missing unit for column 'TEL_NAME', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28162,7 +28162,7 @@
     <member>EFF_BAND</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'EFF_BAND', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'EFF_BAND', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28174,7 +28174,7 @@
     <member>EFF_WAVE</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'EFF_WAVE', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'EFF_WAVE', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28186,7 +28186,7 @@
     <member>CATEGORY</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CATEGORY', should be not empty or ''</message>
+      <message>Missing unit for column 'CATEGORY', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28198,7 +28198,7 @@
     <member>DEC_ERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'DEC_ERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'DEC_ERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -28210,7 +28210,7 @@
     <member>DECEP0</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'DECEP0', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'DECEP0', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -28222,7 +28222,7 @@
     <member>EQUINOX</member>
     <data>
       <value>yr|year|years</value>
-      <message>Missing unit for column 'EQUINOX', should be not empty or 'yr|year|years'</message>
+      <message>Missing unit for column 'EQUINOX', should be 'yr|year|years'</message>
     </data>
   </failure>
   <failure>
@@ -28234,7 +28234,7 @@
     <member>PARA_ERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'PARA_ERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'PARA_ERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -28246,7 +28246,7 @@
     <member>PARALLAX</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'PARALLAX', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'PARALLAX', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -28258,7 +28258,7 @@
     <member>PMDEC</member>
     <data>
       <value>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</value>
-      <message>Missing unit for column 'PMDEC', should be not empty or 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
+      <message>Missing unit for column 'PMDEC', should be 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
     </data>
   </failure>
   <failure>
@@ -28270,7 +28270,7 @@
     <member>PMDEC_ERR</member>
     <data>
       <value>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</value>
-      <message>Missing unit for column 'PMDEC_ERR', should be not empty or 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
+      <message>Missing unit for column 'PMDEC_ERR', should be 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
     </data>
   </failure>
   <failure>
@@ -28282,7 +28282,7 @@
     <member>PMRA</member>
     <data>
       <value>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</value>
-      <message>Missing unit for column 'PMRA', should be not empty or 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
+      <message>Missing unit for column 'PMRA', should be 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
     </data>
   </failure>
   <failure>
@@ -28294,7 +28294,7 @@
     <member>PMRA_ERR</member>
     <data>
       <value>deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year</value>
-      <message>Missing unit for column 'PMRA_ERR', should be not empty or 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
+      <message>Missing unit for column 'PMRA_ERR', should be 'deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year'</message>
     </data>
   </failure>
   <failure>
@@ -28306,7 +28306,7 @@
     <member>RA_ERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'RA_ERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'RA_ERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -28318,7 +28318,7 @@
     <member>RAEP0</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'RAEP0', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'RAEP0', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -28330,7 +28330,7 @@
     <member>SPECTYP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'SPECTYP', should be not empty or ''</message>
+      <message>Missing unit for column 'SPECTYP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28342,7 +28342,7 @@
     <member>SYSVEL</member>
     <data>
       <value>m/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second</value>
-      <message>Missing unit for column 'SYSVEL', should be not empty or 'm/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second'</message>
+      <message>Missing unit for column 'SYSVEL', should be 'm/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second'</message>
     </data>
   </failure>
   <failure>
@@ -28354,7 +28354,7 @@
     <member>TARGET</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28366,7 +28366,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28378,7 +28378,7 @@
     <member>VELDEF</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VELDEF', should be not empty or ''</message>
+      <message>Missing unit for column 'VELDEF', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28390,7 +28390,7 @@
     <member>VELTYP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VELTYP', should be not empty or ''</message>
+      <message>Missing unit for column 'VELTYP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28402,7 +28402,7 @@
     <member>CORR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CORR', should be not empty or ''</message>
+      <message>Missing unit for column 'CORR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28414,7 +28414,7 @@
     <member>IINDX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'IINDX', should be not empty or ''</message>
+      <message>Missing unit for column 'IINDX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28426,7 +28426,7 @@
     <member>JINDX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'JINDX', should be not empty or ''</message>
+      <message>Missing unit for column 'JINDX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28438,7 +28438,7 @@
     <member>INSNAME</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'INSNAME', should be not empty or ''</message>
+      <message>Missing unit for column 'INSNAME', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28450,7 +28450,7 @@
     <member>JXX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'JXX', should be not empty or ''</message>
+      <message>Missing unit for column 'JXX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28462,7 +28462,7 @@
     <member>JXY</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'JXY', should be not empty or ''</message>
+      <message>Missing unit for column 'JXY', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28474,7 +28474,7 @@
     <member>JYX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'JYX', should be not empty or ''</message>
+      <message>Missing unit for column 'JYX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28486,7 +28486,7 @@
     <member>JYY</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'JYY', should be not empty or ''</message>
+      <message>Missing unit for column 'JYY', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28498,7 +28498,7 @@
     <member>MJD_END</member>
     <data>
       <value>day|days</value>
-      <message>Missing unit for column 'MJD_END', should be not empty or 'day|days'</message>
+      <message>Missing unit for column 'MJD_END', should be 'day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28510,7 +28510,7 @@
     <member>MJD_OBS</member>
     <data>
       <value>day|days</value>
-      <message>Missing unit for column 'MJD_OBS', should be not empty or 'day|days'</message>
+      <message>Missing unit for column 'MJD_OBS', should be 'day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28522,7 +28522,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28534,7 +28534,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28546,7 +28546,7 @@
     <member>CORRINDX_IVIS</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CORRINDX_IVIS', should be not empty or ''</message>
+      <message>Missing unit for column 'CORRINDX_IVIS', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28558,7 +28558,7 @@
     <member>CORRINDX_RVIS</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CORRINDX_RVIS', should be not empty or ''</message>
+      <message>Missing unit for column 'CORRINDX_RVIS', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28570,7 +28570,7 @@
     <member>CORRINDX_VISAMP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CORRINDX_VISAMP', should be not empty or ''</message>
+      <message>Missing unit for column 'CORRINDX_VISAMP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28582,7 +28582,7 @@
     <member>CORRINDX_VISPHI</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CORRINDX_VISPHI', should be not empty or ''</message>
+      <message>Missing unit for column 'CORRINDX_VISPHI', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28594,7 +28594,7 @@
     <member>FLAG</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FLAG', should be not empty or ''</message>
+      <message>Missing unit for column 'FLAG', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28606,7 +28606,7 @@
     <member>INT_TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'INT_TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'INT_TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -28618,7 +28618,7 @@
     <member>IVIS</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'IVIS', should be not empty or ''</message>
+      <message>Missing unit for column 'IVIS', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28630,7 +28630,7 @@
     <member>IVISERR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'IVISERR', should be not empty or ''</message>
+      <message>Missing unit for column 'IVISERR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28642,7 +28642,7 @@
     <member>MJD</member>
     <data>
       <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be not empty or 'day|days'</message>
+      <message>Missing unit for column 'MJD', should be 'day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28654,7 +28654,7 @@
     <member>RVIS</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'RVIS', should be not empty or ''</message>
+      <message>Missing unit for column 'RVIS', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28666,7 +28666,7 @@
     <member>RVISERR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'RVISERR', should be not empty or ''</message>
+      <message>Missing unit for column 'RVISERR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28678,7 +28678,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28690,7 +28690,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28702,7 +28702,7 @@
     <member>TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -28714,7 +28714,7 @@
     <member>UCOORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'UCOORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'UCOORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28726,7 +28726,7 @@
     <member>VCOORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'VCOORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'VCOORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28738,7 +28738,7 @@
     <member>VISAMP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VISAMP', should be not empty or ''</message>
+      <message>Missing unit for column 'VISAMP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28750,7 +28750,7 @@
     <member>VISAMPERR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VISAMPERR', should be not empty or ''</message>
+      <message>Missing unit for column 'VISAMPERR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28762,7 +28762,7 @@
     <member>VISPHI</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'VISPHI', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'VISPHI', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -28774,7 +28774,7 @@
     <member>VISPHIERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'VISPHIERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'VISPHIERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -28786,7 +28786,7 @@
     <member>VISREFMAP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VISREFMAP', should be not empty or ''</message>
+      <message>Missing unit for column 'VISREFMAP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28798,7 +28798,7 @@
     <member>CORRINDX_VIS2DATA</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CORRINDX_VIS2DATA', should be not empty or ''</message>
+      <message>Missing unit for column 'CORRINDX_VIS2DATA', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28810,7 +28810,7 @@
     <member>FLAG</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FLAG', should be not empty or ''</message>
+      <message>Missing unit for column 'FLAG', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28822,7 +28822,7 @@
     <member>INT_TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'INT_TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'INT_TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -28834,7 +28834,7 @@
     <member>MJD</member>
     <data>
       <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be not empty or 'day|days'</message>
+      <message>Missing unit for column 'MJD', should be 'day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28846,7 +28846,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28858,7 +28858,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28870,7 +28870,7 @@
     <member>TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -28882,7 +28882,7 @@
     <member>UCOORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'UCOORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'UCOORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28894,7 +28894,7 @@
     <member>VCOORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'VCOORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'VCOORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -28906,7 +28906,7 @@
     <member>VIS2DATA</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VIS2DATA', should be not empty or ''</message>
+      <message>Missing unit for column 'VIS2DATA', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28918,7 +28918,7 @@
     <member>VIS2ERR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'VIS2ERR', should be not empty or ''</message>
+      <message>Missing unit for column 'VIS2ERR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28930,7 +28930,7 @@
     <member>CORRINDX_T3AMP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CORRINDX_T3AMP', should be not empty or ''</message>
+      <message>Missing unit for column 'CORRINDX_T3AMP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28942,7 +28942,7 @@
     <member>CORRINDX_T3PHI</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CORRINDX_T3PHI', should be not empty or ''</message>
+      <message>Missing unit for column 'CORRINDX_T3PHI', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28954,7 +28954,7 @@
     <member>FLAG</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FLAG', should be not empty or ''</message>
+      <message>Missing unit for column 'FLAG', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -28966,7 +28966,7 @@
     <member>INT_TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'INT_TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'INT_TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -28978,7 +28978,7 @@
     <member>MJD</member>
     <data>
       <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be not empty or 'day|days'</message>
+      <message>Missing unit for column 'MJD', should be 'day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28990,7 +28990,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -29002,7 +29002,7 @@
     <member>T3AMP</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'T3AMP', should be not empty or ''</message>
+      <message>Missing unit for column 'T3AMP', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -29014,7 +29014,7 @@
     <member>T3AMPERR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'T3AMPERR', should be not empty or ''</message>
+      <message>Missing unit for column 'T3AMPERR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -29026,7 +29026,7 @@
     <member>T3PHI</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'T3PHI', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'T3PHI', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -29038,7 +29038,7 @@
     <member>T3PHIERR</member>
     <data>
       <value>deg|degree|degrees</value>
-      <message>Missing unit for column 'T3PHIERR', should be not empty or 'deg|degree|degrees'</message>
+      <message>Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'</message>
     </data>
   </failure>
   <failure>
@@ -29050,7 +29050,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -29062,7 +29062,7 @@
     <member>TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -29074,7 +29074,7 @@
     <member>U1COORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'U1COORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'U1COORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -29086,7 +29086,7 @@
     <member>U2COORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'U2COORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'U2COORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -29098,7 +29098,7 @@
     <member>V1COORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'V1COORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'V1COORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -29110,7 +29110,7 @@
     <member>V2COORD</member>
     <data>
       <value>m|meter|meters</value>
-      <message>Missing unit for column 'V2COORD', should be not empty or 'm|meter|meters'</message>
+      <message>Missing unit for column 'V2COORD', should be 'm|meter|meters'</message>
     </data>
   </failure>
   <failure>
@@ -29122,7 +29122,7 @@
     <member>CORRINDX_FLUXDATA</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'CORRINDX_FLUXDATA', should be not empty or ''</message>
+      <message>Missing unit for column 'CORRINDX_FLUXDATA', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -29134,7 +29134,7 @@
     <member>FLAG</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FLAG', should be not empty or ''</message>
+      <message>Missing unit for column 'FLAG', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -29146,7 +29146,7 @@
     <member>FLUXDATA</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FLUXDATA', should be not empty or ''</message>
+      <message>Missing unit for column 'FLUXDATA', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -29158,7 +29158,7 @@
     <member>FLUXERR</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'FLUXERR', should be not empty or ''</message>
+      <message>Missing unit for column 'FLUXERR', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -29170,7 +29170,7 @@
     <member>INT_TIME</member>
     <data>
       <value>s|sec|second|seconds</value>
-      <message>Missing unit for column 'INT_TIME', should be not empty or 's|sec|second|seconds'</message>
+      <message>Missing unit for column 'INT_TIME', should be 's|sec|second|seconds'</message>
     </data>
   </failure>
   <failure>
@@ -29182,7 +29182,7 @@
     <member>MJD</member>
     <data>
       <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be not empty or 'day|days'</message>
+      <message>Missing unit for column 'MJD', should be 'day|days'</message>
     </data>
   </failure>
   <failure>
@@ -29194,7 +29194,7 @@
     <member>STA_INDEX</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'STA_INDEX', should be not empty or ''</message>
+      <message>Missing unit for column 'STA_INDEX', should be ''</message>
     </data>
   </failure>
   <failure>
@@ -29206,7 +29206,7 @@
     <member>TARGET_ID</member>
     <data>
       <value></value>
-      <message>Missing unit for column 'TARGET_ID', should be not empty or ''</message>
+      <message>Missing unit for column 'TARGET_ID', should be ''</message>
     </data>
   </failure>
   <failure>
