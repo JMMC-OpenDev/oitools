@@ -117,7 +117,7 @@ public enum Rule {
     GENERIC_COL_UNIT_EXIST("check if the column unit exists",
             "V2.4§2",
             RuleDataType.VALUE,
-            "Missing unit for column '{{MEMBER}}', should be not empty"
+            "Missing unit for column '{{MEMBER}}', should be '{{VALUE}}'"
     ),
     GENERIC_COL_VAL_ACCEPTED_INT("check if column values match the 'accepted' values (integer)",
             "V1-V2.Tables",
