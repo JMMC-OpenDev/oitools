@@ -801,7 +801,7 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Return the OIFitsStandard for an OIFitsFile
+     * Get the OIFitsStandard corresponding to the given keyword content value
      * @param content value to determine the OIFITS standard
      * @return the version
      */
