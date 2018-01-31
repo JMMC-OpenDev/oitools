@@ -192,6 +192,11 @@ public final class OIFitsChecker {
                 /* Special case when the hdu has not been defined yet. 
                 Only applies to the file existence and read cases */
                 if (rule.name().startsWith("FILE") || rule.name().startsWith("OIFITS")) {
+
+                    if (!rule.getApplyTo().contains("FILE") && !rule.getApplyTo().isEmpty()) {
+                        System.out.println("BAD inspectRuleFailed applyTo conflict for '" + rule.name() + "': " + rule.getApplyTo());
+                    }
+
                     inspectRuleFailed(rule, "FILE", OIFitsStandard.VERSION_1);
                     inspectRuleFailed(rule, "FILE", OIFitsStandard.VERSION_2);
                 } else {
