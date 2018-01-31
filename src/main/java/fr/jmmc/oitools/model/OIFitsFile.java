@@ -513,14 +513,14 @@ public final class OIFitsFile extends FitsImageFile {
             /* Checking presence of one and only one OI_TARGET table */
             if (!hasOiTarget() || OIFitsChecker.isInspectRules()) {
                 // rule [OIFITS_OI_TARGET_EXIST] check if only one OI_TARGET table exists in the OIFITS file
-                checker.inspectRuleFailed(Rule.OIFITS_OI_TARGET_EXIST, OIFitsConstants.TABLE_OI_TARGET, (FitsConstants.KEYWORD_CONTENT_OIFITS2.equals(FitsConstants.KEYWORD_CONTENT) ? OIFitsStandard.VERSION_2 : OIFitsStandard.VERSION_1));
+                checker.inspectRuleFailed(Rule.OIFITS_OI_TARGET_EXIST, OIFitsConstants.TABLE_OI_TARGET, getVersion());
                 checker.ruleFailed(Rule.OIFITS_OI_TARGET_EXIST);
             }
 
             /* Checking presence of at least one OI_WAVELENGTH table */
             if (this.insNameToOiWavelength.isEmpty() || OIFitsChecker.isInspectRules()) {
                 // rule [OIFITS_OI_WAVELENGTH_EXIST] check if at least one OI_WAVELENGTH table exists in the OIFITS file
-                checker.inspectRuleFailed(Rule.OIFITS_OI_WAVELENGTH_EXIST, OIFitsConstants.TABLE_OI_WAVELENGTH, (FitsConstants.KEYWORD_CONTENT_OIFITS2.equals(FitsConstants.KEYWORD_CONTENT) ? OIFitsStandard.VERSION_2 : OIFitsStandard.VERSION_1));
+                checker.inspectRuleFailed(Rule.OIFITS_OI_WAVELENGTH_EXIST, OIFitsConstants.TABLE_OI_WAVELENGTH, getVersion());
                 checker.ruleFailed(Rule.OIFITS_OI_WAVELENGTH_EXIST);
             }
 
@@ -798,6 +798,15 @@ public final class OIFitsFile extends FitsImageFile {
      */
     public boolean isOIFits2() {
         return version == OIFitsStandard.VERSION_2;
+    }
+
+    /**
+     * Get the OIFitsStandard corresponding to the given keyword content value
+     * @param content value to determine the OIFITS standard
+     * @return the version
+     */
+    public static OIFitsStandard getOIFitsStandard(final String content) {
+        return (FitsConstants.KEYWORD_CONTENT_OIFITS2.equals(content) ? OIFitsStandard.VERSION_2 : OIFitsStandard.VERSION_1);
     }
 
     /**
