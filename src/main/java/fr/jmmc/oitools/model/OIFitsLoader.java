@@ -366,8 +366,7 @@ public class OIFitsLoader {
 
                         final String content = header.getTrimmedStringValue(FitsConstants.KEYWORD_CONTENT);
 
-                        final OIFitsStandard version = (std != null) ? std
-                                : (FitsConstants.KEYWORD_CONTENT_OIFITS2.equals(content) ? OIFitsStandard.VERSION_2 : OIFitsStandard.VERSION_1);
+                        final OIFitsStandard version = (std != null) ? std : OIFitsFile.getOIFitsStandard(content);
 
                         factory = (version == OIFitsStandard.VERSION_2) ? OIPrimaryHDU.DEFAULT_FACTORY : FitsImageHDUFactory.DEFAULT_FACTORY;
 
@@ -547,7 +546,7 @@ public class OIFitsLoader {
                     // rule [OIFITS_TABLE_UNKNOWN] check if the table belongs to the OIFITS standard and version
 
                     // TODO: simplify (FitsConstants.KEYWORD_CONTENT_OIFITS2.equals(hdu.getHeader().getTrimmedStringValue(FitsConstants.KEYWORD_CONTENT)) ? OIFitsStandard.VERSION_2 : OIFitsStandard.VERSION_1)
-                    checker.inspectRuleFailed(Rule.OIFITS_TABLE_UNKNOWN, "FILE", FitsConstants.KEYWORD_CONTENT_OIFITS2.equals(hdu.getHeader().getTrimmedStringValue(FitsConstants.KEYWORD_CONTENT)) ? OIFitsStandard.VERSION_2 : OIFitsStandard.VERSION_1);
+                    checker.inspectRuleFailed(Rule.OIFITS_TABLE_UNKNOWN, "FILE", OIFitsFile.getOIFitsStandard(hdu.getHeader().getTrimmedStringValue(FitsConstants.KEYWORD_CONTENT)));
 
                     checker.ruleFailed(Rule.OIFITS_TABLE_UNKNOWN, extName, i);
 
