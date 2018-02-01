@@ -24,6 +24,8 @@ import static fr.jmmc.oitools.JUnitBaseTest.getFitsFiles;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
+import fr.jmmc.oitools.model.Rule;
+
 import fr.nom.tam.fits.FitsException;
 import java.io.File;
 import java.io.IOException;
@@ -49,29 +51,35 @@ public class IsInspectRuleTest extends AbstractFileBaseTest {
      */
     @Test
     public void dumpFile() throws IOException, FitsException {
-
+        // Enable inspectRules FIRST:
         OIFitsChecker.setInspectRules(true);
-        final OIFitsChecker checker = new OIFitsChecker();
-        List<String> failureMsgs = new ArrayList<String>();
-        String fileName = "";
-        try {
-            for (String f : getFitsFiles(new File(TEST_DIR_OIFITS))) {
 
-                fileName = f.replaceAll(TEST_DIR_OIFITS, "");
-                OIFITS = OIFitsLoader.loadOIFits(checker, f);
-                OIFITS.analyze();
+        if (Rule.ARRNAME_UNIQ.getApplyTo() == null) {
+            throw new IllegalStateException("Rule.applyToSet is null !");
+        }
+
+        try {
+            final OIFitsChecker checker = new OIFitsChecker();
+
+            final List<String> failureMsgs = new ArrayList<String>();
+
+            for (String f : getFitsFiles(new File(TEST_DIR_OIFITS))) {
+                try {
+                    OIFITS = OIFitsLoader.loadOIFits(checker, f);
+                } catch (Exception e) {
+                    logger.log(Level.SEVERE, "exception:", e);
+                    failureMsgs.add("File: " + (f.replaceAll(TEST_DIR_OIFITS, ""))
+                            + "throws an exception : " + e.getMessage() + "\n");
+                }
+
             }
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "exception:", e);
-            failureMsgs.add("File: " + fileName + "throws an exception : " + e.getMessage() + "\n");
+            if (!failureMsgs.isEmpty()) {
+                Assert.fail("IsInspectRuleTest failed " + failureMsgs.size() + " times:\n" + failureMsgs);
+            }
+
         } finally {
+            // Always disable inspectRules before any other test:
             OIFitsChecker.setInspectRules(false);
         }
-        if (!failureMsgs.isEmpty()) {
-            for (String failureMsg : failureMsgs) {
-                Assert.fail(failureMsg);
-            }
-        }
-
     }
 }
