@@ -57,9 +57,9 @@ public class IsInspectRuleTest extends AbstractFileBaseTest {
         try {
             for (String f : getFitsFiles(new File(TEST_DIR_OIFITS))) {
 
+                fileName = f.replaceAll(TEST_DIR_OIFITS, "");
                 OIFITS = OIFitsLoader.loadOIFits(checker, f);
                 OIFITS.analyze();
-                fileName = f.replaceAll(TEST_DIR_OIFITS, "");
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "exception:", e);
