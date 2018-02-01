@@ -50,13 +50,13 @@ public class IsInspectRuleTest extends AbstractFileBaseTest {
     @Test
     public void dumpFile() throws IOException, FitsException {
 
+        OIFitsChecker.setInspectRules(true);
         final OIFitsChecker checker = new OIFitsChecker();
         List<String> failureMsgs = new ArrayList<String>();
         String fileName = "";
         try {
             for (String f : getFitsFiles(new File(TEST_DIR_OIFITS))) {
 
-                OIFitsChecker.setInspectRules(true);
                 OIFITS = OIFitsLoader.loadOIFits(checker, f);
                 OIFITS.analyze();
                 fileName = f.replaceAll(TEST_DIR_OIFITS, "");
