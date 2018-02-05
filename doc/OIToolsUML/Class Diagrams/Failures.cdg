@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="OIFitsChecker" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="543.0" yPosition="19.0">
+      <Fields>
+        <Field name="INSPECT_RULES" type="boolean" visibility="private" isStatic="true"/>
+        <Field name="INSPECT_MODE" type="InspectMode" visibility="private" isStatic="true"/>
+        <Field name="logger" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="fileRef" type="FileRef" visibility="private"/>
+        <Field name="skipFormat" type="boolean" visibility="private"/>
+        <Field name="failures" type="Map&lt;RuleFailure, DataLocation&gt;" visibility="private" isFinal="true"/>
+        <Field name="corrCheckers" type="Map&lt;String, OIFitsCorrChecker&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="isInspectRules" returnType="boolean" visibility="public" isStatic="true"/>
+        <Method name="setInspectRules" returnType="void" visibility="public" isStatic="true">
+          <Argument type="boolean" name="COLLECT_RULES"/>
+        </Method>
+        <Method name="getInspectMode" returnType="InspectMode" visibility="public" isStatic="true"/>
+        <Method name="setInspectMode" returnType="void" visibility="public" isStatic="true">
+          <Argument type="InspectMode" name="InspectMode"/>
+        </Method>
+        <Method name="shouldSkipRule" returnType="boolean" visibility="public" isStatic="true">
+          <Argument type="Rule" name="rule"/>
+        </Method>
+        <Method name="defineSeverity" returnType="void" visibility="package">
+          <Argument type="SeverityProfile" name="profile"/>
+        </Method>
+        <Method name="cleanup" returnType="void" visibility="package"/>
+        <Method name="inspectRuleFailed" returnType="void" visibility="public">
+          <Argument type="Rule" name="rule"/>
+          <Argument type="String" name="applyTo"/>
+          <Argument type="OIFitsStandard" name="standard"/>
+        </Method>
+        <Method name="inspectRuleFailed" returnType="void" visibility="private">
+          <Argument type="Rule" name="rule"/>
+          <Argument type="FitsHDU" name="hdu"/>
+          <Argument type="String" name="member"/>
+        </Method>
+        <Method name="ruleFailed" returnType="DataLocation" visibility="package">
+          <Argument type="Rule" name="rule"/>
+        </Method>
+        <Method name="ruleFailed" returnType="DataLocation" visibility="package">
+          <Argument type="Rule" name="rule"/>
+          <Argument type="FitsHDU" name="hdu"/>
+        </Method>
+        <Method name="ruleFailed" returnType="DataLocation" visibility="public">
+          <Argument type="Rule" name="rule"/>
+          <Argument type="FitsHDU" name="hdu"/>
+          <Argument type="String" name="member"/>
+        </Method>
+        <Method name="ruleFailed" returnType="DataLocation" visibility="public">
+          <Argument type="Rule" name="rule"/>
+          <Argument type="String" name="extName"/>
+          <Argument type="int" name="extNb"/>
+        </Method>
+        <Method name="getMeta" returnType="CellMeta" visibility="private" isStatic="true">
+          <Argument type="FitsHDU" name="hdu"/>
+          <Argument type="String" name="member"/>
+        </Method>
+        <Method name="getStandard" returnType="OIFitsStandard" visibility="private" isStatic="true">
+          <Argument type="FitsHDU" name="hdu"/>
+        </Method>
+        <Method name="getNbWarnings" returnType="int" visibility="public"/>
+        <Method name="getNbSeveres" returnType="int" visibility="public"/>
+        <Method name="getCheckStatus" returnType="String" visibility="public"/>
+        <Method name="getSortedFailures" returnType="Map&lt;RuleFailure, DataLocation&gt;" visibility="private">
+          <Argument type="RuleFailureComparator" name="comparator"/>
+        </Method>
+        <Method name="getFailuresAsString" returnType="String" visibility="public"/>
+        <Method name="getFailuresAsString" returnType="StringBuilder" visibility="public">
+          <Argument type="StringBuilder" name="sb"/>
+          <Argument type="RuleFailureComparator" name="comparator"/>
+        </Method>
+        <Method name="getCheckReport" returnType="String" visibility="public"/>
+        <Method name="getFailuresReport" returnType="StringBuilder" visibility="public">
+          <Argument type="StringBuilder" name="sb"/>
+          <Argument type="RuleFailureComparator" name="comparator"/>
+        </Method>
+        <Method name="getFailuresAsXML" returnType="String" visibility="public"/>
+        <Method name="getFailuresAsXML" returnType="StringBuilder" visibility="public">
+          <Argument type="StringBuilder" name="sb"/>
+        </Method>
+        <Method name="getFailuresAsXML" returnType="StringBuilder" visibility="public">
+          <Argument type="StringBuilder" name="sb"/>
+          <Argument type="RuleFailureComparator" name="comparator"/>
+        </Method>
+        <Method name="getRulesUsedByFailures" returnType="Set&lt;Rule&gt;" visibility="public"/>
+        <Method name="writeRulesUsedByFailures" returnType="void" visibility="public">
+          <Argument type="StringBuilder" name="sb"/>
+        </Method>
+        <Method name="clearCheckReport" returnType="void" visibility="public"/>
+        <Method name="getCorrChecker" returnType="OIFitsCorrChecker" visibility="public">
+          <Argument type="String" name="corrname"/>
+        </Method>
+        <Method name="getFileRef" returnType="FileRef" visibility="public"/>
+        <Method name="setFileRef" returnType="void" visibility="package">
+          <Argument type="FileRef" name="fileRef"/>
+        </Method>
+        <Method name="isSkipFormat" returnType="boolean" visibility="public"/>
+        <Method name="setSkipFormat" returnType="void" visibility="package">
+          <Argument type="boolean" name="skipFormat"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="RuleFailure" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="751.0" yPosition="746.0">
+      <Fields>
+        <Field name="rule" type="Rule" visibility="private" isFinal="true"/>
+        <Field name="fileRef" type="FileRef" visibility="private" isFinal="true"/>
+        <Field name="extName" type="String" visibility="private" isFinal="true"/>
+        <Field name="extNb" type="int" visibility="private" isFinal="true"/>
+        <Field name="member" type="String" visibility="private" isFinal="true"/>
+        <Field name="severity" type="Severity" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="Rule" name="rule"/>
+          <Argument type="FileRef" name="fileRef"/>
+          <Argument type="String" name="extName"/>
+          <Argument type="int" name="extNb"/>
+          <Argument type="String" name="member"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="getField" returnType="Object" visibility="public">
+          <Argument type="RuleFailureField" name="field"/>
+        </Method>
+        <Method name="getRule" returnType="Rule" visibility="public"/>
+        <Method name="getFileRef" returnType="FileRef" visibility="public"/>
+        <Method name="getExtName" returnType="String" visibility="public"/>
+        <Method name="getExtNb" returnType="int" visibility="public"/>
+        <Method name="getMember" returnType="String" visibility="public"/>
+        <Method name="getSeverity" returnType="Severity" visibility="public"/>
+        <Method name="setSeverity" returnType="void" visibility="package">
+          <Argument type="Severity" name="severity"/>
+        </Method>
+        <Method name="formatMessage" returnType="String" visibility="package"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="toString" returnType="StringBuilder" visibility="public">
+          <Argument type="StringBuilder" name="sb"/>
+        </Method>
+        <Method name="toXML" returnType="StringBuilder" visibility="public">
+          <Argument type="StringBuilder" name="sb"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="SeverityProfileStrict" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="1154.0" yPosition="385.0">
+      <Fields>
+        <Field name="INSTANCE" type="SeverityProfile" visibility="package" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="defineSeverity" returnType="void" visibility="public">
+          <Argument type="RuleFailure" name="rule"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DataLocation" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="431.0" yPosition="450.0">
+      <Fields>
+        <Field name="rule" type="Rule" visibility="private" isFinal="true"/>
+        <Field name="values" type="ArrayList&lt;Object&gt;" visibility="private"/>
+        <Field name="limits" type="ArrayList&lt;Object&gt;" visibility="private"/>
+        <Field name="expecteds" type="ArrayList&lt;String&gt;" visibility="private"/>
+        <Field name="rows" type="ArrayList&lt;Integer&gt;" visibility="private"/>
+        <Field name="cols" type="ArrayList&lt;Integer&gt;" visibility="private"/>
+        <Field name="details" type="ArrayList&lt;String&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="Rule" name="rule"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="addFixedValue" returnType="void" visibility="public">
+          <Argument type="int" name="value"/>
+        </Method>
+        <Method name="addFixedValue" returnType="void" visibility="public">
+          <Argument type="String" name="value"/>
+        </Method>
+        <Method name="addKeywordValue" returnType="void" visibility="public">
+          <Argument type="String" name="value"/>
+        </Method>
+        <Method name="addKeywordValue" returnType="void" visibility="public">
+          <Argument type="double" name="value"/>
+        </Method>
+        <Method name="addKeywordValue" returnType="void" visibility="public">
+          <Argument type="String" name="value"/>
+          <Argument type="String" name="expected"/>
+        </Method>
+        <Method name="addKeywordValue" returnType="void" visibility="public">
+          <Argument type="char" name="value"/>
+          <Argument type="char" name="expected"/>
+        </Method>
+        <Method name="addKeywordValue" returnType="void" visibility="public">
+          <Argument type="short" name="value"/>
+          <Argument type="String" name="expected"/>
+        </Method>
+        <Method name="addKeywordValue" returnType="void" visibility="public">
+          <Argument type="int" name="value"/>
+          <Argument type="int" name="expected"/>
+        </Method>
+        <Method name="addKeywordValue" returnType="void" visibility="public">
+          <Argument type="double" name="value"/>
+          <Argument type="String" name="expected"/>
+        </Method>
+        <Method name="addValueAt" returnType="void" visibility="public">
+          <Argument type="String" name="value"/>
+          <Argument type="int" name="row"/>
+        </Method>
+        <Method name="addValueAt" returnType="void" visibility="public">
+          <Argument type="short" name="value"/>
+          <Argument type="int" name="row"/>
+        </Method>
+        <Method name="addValueAt" returnType="void" visibility="public">
+          <Argument type="int" name="value"/>
+          <Argument type="int" name="row"/>
+        </Method>
+        <Method name="addValueAt" returnType="void" visibility="public">
+          <Argument type="float" name="value"/>
+          <Argument type="int" name="row"/>
+        </Method>
+        <Method name="addValueAt" returnType="void" visibility="public">
+          <Argument type="double" name="value"/>
+          <Argument type="int" name="row"/>
+        </Method>
+        <Method name="addValueAt" returnType="void" visibility="public">
+          <Argument type="short" name="value"/>
+          <Argument type="String" name="expected"/>
+          <Argument type="int" name="row"/>
+        </Method>
+        <Method name="addValueAt" returnType="void" visibility="public">
+          <Argument type="String" name="value"/>
+          <Argument type="String" name="expected"/>
+          <Argument type="int" name="row"/>
+        </Method>
+        <Method name="addValuesAt" returnType="void" visibility="public">
+          <Argument type="int" name="value"/>
+          <Argument type="int" name="limit"/>
+          <Argument type="int" name="row"/>
+        </Method>
+        <Method name="addValuesAt" returnType="void" visibility="public">
+          <Argument type="double" name="value"/>
+          <Argument type="double" name="limit"/>
+          <Argument type="int" name="row"/>
+        </Method>
+        <Method name="addValueAtRows" returnType="void" visibility="public">
+          <Argument type="short" name="value"/>
+          <Argument type="int" name="row1"/>
+          <Argument type="int" name="row2"/>
+        </Method>
+        <Method name="addValueAtRows" returnType="void" visibility="public">
+          <Argument type="String" name="value"/>
+          <Argument type="int" name="row1"/>
+          <Argument type="int" name="row2"/>
+        </Method>
+        <Method name="addColValueAt" returnType="void" visibility="public">
+          <Argument type="String" name="value"/>
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+        </Method>
+        <Method name="addColValueAt" returnType="void" visibility="public">
+          <Argument type="short" name="value"/>
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+        </Method>
+        <Method name="addColValueAt" returnType="void" visibility="public">
+          <Argument type="float" name="value"/>
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+        </Method>
+        <Method name="addColValueAt" returnType="void" visibility="public">
+          <Argument type="double" name="value"/>
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+        </Method>
+        <Method name="addColValueAt" returnType="void" visibility="public">
+          <Argument type="short" name="value"/>
+          <Argument type="String" name="expected"/>
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+        </Method>
+        <Method name="addValueAtCols" returnType="void" visibility="public">
+          <Argument type="short" name="value"/>
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col1"/>
+          <Argument type="int" name="col2"/>
+        </Method>
+        <Method name="addColValueAt" returnType="void" visibility="public">
+          <Argument type="int" name="value"/>
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+          <Argument type="String" name="details"/>
+        </Method>
+        <Method name="setValues" returnType="void" visibility="private">
+          <Argument type="Object" name="value"/>
+          <Argument type="Object" name="limit"/>
+          <Argument type="String" name="expected"/>
+          <Argument type="Integer" name="row"/>
+          <Argument type="Integer" name="col"/>
+          <Argument type="String" name="details"/>
+        </Method>
+        <Method name="ensureCapacity" returnType="void" visibility="private"/>
+        <Method name="isEmpty" returnType="boolean" visibility="public"/>
+        <Method name="getValues" returnType="ArrayList&lt;Object&gt;" visibility="public"/>
+        <Method name="getLimits" returnType="ArrayList&lt;Object&gt;" visibility="public"/>
+        <Method name="getExpecteds" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+        <Method name="getRows" returnType="ArrayList&lt;Integer&gt;" visibility="public"/>
+        <Method name="getCols" returnType="ArrayList&lt;Integer&gt;" visibility="public"/>
+        <Method name="getDetails" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+        <Method name="formatMessage" returnType="String" visibility="package">
+          <Argument type="String" name="ruleMessage"/>
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="toString" returnType="StringBuilder" visibility="public">
+          <Argument type="StringBuilder" name="sb"/>
+        </Method>
+        <Method name="toXML" returnType="StringBuilder" visibility="public">
+          <Argument type="StringBuilder" name="sb"/>
+          <Argument type="String" name="ruleMessage"/>
+          <Argument type="DataLocation" name="data"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="SeverityProfile" package="fr.jmmc.oitools.model" visibility="public" xPosition="1020.0" yPosition="126.0">
+      <Methods>
+        <Method name="defineSeverity" returnType="void" visibility="public">
+          <Argument type="RuleFailure" name="rule"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Enum name="Rule" package="fr.jmmc.oitools.model" visibility="public" xPosition="17.0" yPosition="5.0">
+      <Literals>
+        <Literal name="ARRNAME_UNIQ"/>
+        <Literal name="COL_UNKNOWN"/>
+        <Literal name="CORRNAME_REF"/>
+        <Literal name="CORRNAME_UNIQ"/>
+        <Literal name="FILE_EXIST"/>
+        <Literal name="FILE_LOAD"/>
+        <Literal name="INSNAME_REF"/>
+        <Literal name="INSNAME_UNIQ"/>
+        <Literal name="GENERIC_ARRNAME_REF"/>
+        <Literal name="GENERIC_COL_DIM"/>
+        <Literal name="GENERIC_COL_ERR"/>
+        <Literal name="GENERIC_COL_FORMAT"/>
+        <Literal name="GENERIC_COL_MANDATORY"/>
+        <Literal name="GENERIC_COL_NBROWS"/>
+        <Literal name="GENERIC_COL_UNIT"/>
+        <Literal name="GENERIC_COL_UNIT_EXIST"/>
+        <Literal name="GENERIC_COL_VAL_ACCEPTED_INT"/>
+        <Literal name="GENERIC_COL_VAL_ACCEPTED_STR"/>
+        <Literal name="GENERIC_COL_VAL_POSITIVE"/>
+        <Literal name="GENERIC_CORRINDX_MIN"/>
+        <Literal name="GENERIC_CORRINDX_MAX"/>
+        <Literal name="GENERIC_CORRINDX_UNIQ"/>
+        <Literal name="GENERIC_DATE_OBS_RANGE"/>
+        <Literal name="GENERIC_DATE_OBS_STANDARD"/>
+        <Literal name="GENERIC_KEYWORD_FORMAT"/>
+        <Literal name="GENERIC_KEYWORD_MANDATORY"/>
+        <Literal name="GENERIC_KEYWORD_VAL_ACCEPTED_INT"/>
+        <Literal name="GENERIC_KEYWORD_VAL_ACCEPTED_STR"/>
+        <Literal name="GENERIC_MJD_RANGE"/>
+        <Literal name="GENERIC_OIREV_FIX"/>
+        <Literal name="GENERIC_STA_INDEX_UNIQ"/>
+        <Literal name="OI_ARRAY_ARRNAME"/>
+        <Literal name="OI_ARRAY_STA_NAME"/>
+        <Literal name="OI_ARRAY_STA_NAME_UNIQ"/>
+        <Literal name="OI_ARRAY_STA_INDEX_MIN"/>
+        <Literal name="OI_ARRAY_STA_INDEX_UNIQ"/>
+        <Literal name="OI_ARRAY_XYZ"/>
+        <Literal name="OI_ARRAY_XYZ_FIX"/>
+        <Literal name="OI_CORR_CORRNAME"/>
+        <Literal name="OI_CORR_IINDEX_MIN"/>
+        <Literal name="OI_CORR_JINDEX_SUP"/>
+        <Literal name="OI_CORR_IJINDEX_MAX"/>
+        <Literal name="OIFITS_OI_ARRAY_EXIST_V2"/>
+        <Literal name="OIFITS_OIDATA"/>
+        <Literal name="OIFITS_OI_TARGET_EXIST"/>
+        <Literal name="OIFITS_OI_WAVELENGTH_EXIST"/>
+        <Literal name="OIFITS_PRIMARYHDU_EXIST_V2"/>
+        <Literal name="OIFITS_TABLE_UNKNOWN"/>
+        <Literal name="OI_FLUX_CORRINDX"/>
+        <Literal name="OI_INSPOL_INSNAME_UNIQ"/>
+        <Literal name="OI_INSPOL_MJD_DIFF"/>
+        <Literal name="OI_INSPOL_MJD_RANGE"/>
+        <Literal name="OI_T3_CORRINDX"/>
+        <Literal name="OI_TARGET_COORD"/>
+        <Literal name="OI_TARGET_COORD_EXIST"/>
+        <Literal name="OI_TARGET_TARGET"/>
+        <Literal name="OITARGET_TARGET_EXIST"/>
+        <Literal name="OI_TARGET_TARGET_UNIQ"/>
+        <Literal name="OI_TARGET_TARGETID_MIN"/>
+        <Literal name="OI_TARGET_TARGETID_UNIQ"/>
+        <Literal name="OI_VIS_CORRINDX"/>
+        <Literal name="OI_VIS2_CORRINDX"/>
+        <Literal name="OI_WAVELENGTH_EFF_WAVE"/>
+        <Literal name="OI_WAVELENGTH_INSNAME"/>
+        <Literal name="PRIMARYHDU_MULTI_TARGET"/>
+        <Literal name="PRIMARYHDU_TYPE_ATOMIC"/>
+        <Literal name="TABLE_NOT_OIFITS2"/>
+      </Literals>
+    </Enum>
+    <Enum name="Severity" package="fr.jmmc.oitools.model" visibility="public" xPosition="1334.0" yPosition="912.0">
+      <Literals>
+        <Literal name="Undefined"/>
+        <Literal name="Disabled"/>
+        <Literal name="Information"/>
+        <Literal name="Warning"/>
+        <Literal name="Error"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="fr.jmmc.oitools.model.SeverityProfileStrict" target="fr.jmmc.oitools.model.SeverityProfile"/>
+    <HasRelation name="INSTANCE" source="fr.jmmc.oitools.model.SeverityProfileStrict" target="fr.jmmc.oitools.model.SeverityProfile" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="severity" source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Severity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rule" source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Rule" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.DataLocation" target="fr.jmmc.oitools.model.DataLocation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="failures" source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.DataLocation" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Map&lt;RuleFailure, DataLocation&gt;"/>
+    <UseRelation source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Severity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rule" source="fr.jmmc.oitools.model.DataLocation" target="fr.jmmc.oitools.model.Rule" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.SeverityProfile" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Rule" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.Rule" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.SeverityProfile" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.DataLocation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.SeverityProfileStrict" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
