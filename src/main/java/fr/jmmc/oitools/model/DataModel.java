@@ -488,7 +488,7 @@ public class DataModel {
     }
 
     /**
-     * Main function of call and creation of files. Checker is created here to be given to all methods.
+     * Main function to create files.
      * @param unused
      */
     public static void main(String[] unused) {
@@ -498,6 +498,7 @@ public class DataModel {
 
         OIFitsChecker.setInspectRules(true);
         try {
+            // create once, collect all rules & failures:
             final OIFitsChecker checker = new OIFitsChecker();
 
             dumpCorrupted(checker);
