@@ -455,7 +455,10 @@ public class DataModel {
 
         for (Rule rule : Rule.values()) {
             if (rule.getStandard().isEmpty()) {
-                logger.log(Level.WARNING, "Missing standard set for {0}", rule);
+                // only report in OIFITS2:
+                if (oiFitsFile.isOIFits2()) {
+                    logger.log(Level.WARNING, "Missing standard set for {0}", rule);
+                }
             } else if (rule.getStandard().contains(oiFitsFile.getVersion())) {
                 rule.toXml(sb, ignore);
             }
