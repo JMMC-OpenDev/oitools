@@ -229,10 +229,10 @@ public interface OIFitsConstants {
     public final static String KEYWORD_AMPTYP = "AMPTYP";
     /** AMPTYP ABSOLUTE  keyword V2 */
     public final static String KEYWORD_AMPTYP_ABSOLUTE = "absolute";
-    /** AMPTYP DIFF keyword V2 */
-    public final static String KEYWORD_AMPTYP_DIFF = "differential";
     /** AMPTYP CORR keyword V2 */
     public final static String KEYWORD_AMPTYP_CORR = "correlated flux";
+    /** AMPTYP DIFF keyword V2 */
+    public final static String KEYWORD_AMPTYP_DIFF = "differential";
     /** PHITYP keyword V2 */
     public final static String KEYWORD_PHITYP = "PHITYP";
     /** PHITYP ABSOLUTE  keyword V2 */
