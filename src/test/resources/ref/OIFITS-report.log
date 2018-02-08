@@ -457,22 +457,15 @@ SEVERE	MJD [0.00810185167938471] is out of range, expected in [27073.5 - 106332.
 Analysing File: GGTauA_H_MJD56269_CAL_HD28462_V990Tau7Holesb.oifits
 Analysing table [OI_VIS2#3]
 SEVERE	Missing OI_ARRAY table that describes the 'NACO' array
-SEVERE	The keyword DATE-OBS '2012-12-08T02:47:24.3793' is not in a standard format 'YYYY-MM-DD'
 Analysing table [OI_T3#4]
 SEVERE	Missing OI_ARRAY table that describes the 'NACO' array
-SEVERE	The keyword DATE-OBS '2012-12-08T02:47:24.3793' is not in a standard format 'YYYY-MM-DD'
 Analysing File: GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits
 Analysing HDU [HDU#0]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	OBSTECH keyword must be present
 Analysing table [OI_ARRAY#1]
 SEVERE	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
 SEVERE	Missing column 'FOV'
 SEVERE	Missing column 'FOVTYPE'
-SEVERE	Invalid value for column 'FOVTYPE' line 0, found '' should be 'FWHM|RADIUS'
-SEVERE	Invalid value for column 'FOVTYPE' line 1, found '' should be 'FWHM|RADIUS'
-SEVERE	Invalid value for column 'FOVTYPE' line 2, found '' should be 'FWHM|RADIUS'
-SEVERE	Invalid value for column 'FOVTYPE' line 3, found '' should be 'FWHM|RADIUS'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_TARGET#2]
@@ -487,21 +480,17 @@ SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_VIS#5]
 SEVERE	Invalid format for column 'VISDATA', found '5M' should be '5C'
 SEVERE	Invalid format for column 'VISERR', found '5M' should be '5C'
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_VIS2#6]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_T3#7]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Missing keyword 'OI_REVN'
 Analysing table [OI_VIS#9]
 SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]
@@ -515,15 +504,12 @@ SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with form
 SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]
 SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
 SEVERE	Invalid format for column 'VISERR', found '210M' should be '210C'
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_VIS2#10]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_T3#11]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#12]
@@ -534,7 +520,6 @@ SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Missing keyword 'OI_REVN'
 Analysing File: GRAVITY.2016-01-09T05-37-06_singlesci_calibrated.fits
 Analysing table [OI_ARRAY#2]
@@ -543,31 +528,18 @@ Analysing table [OI_WAVELENGTH#3]
 SEVERE	Skipping non-standard OIFITS column 'OI_WAVELENGTH#3.POLAR' with format [1J]
 Analysing table [OI_WAVELENGTH#4]
 SEVERE	Skipping non-standard OIFITS column 'OI_WAVELENGTH#4.POLAR' with format [1J]
-Analysing table [OI_VIS#5]
-SEVERE	The keyword DATE-OBS '2016-01-09T05:31:42' is not in a standard format 'YYYY-MM-DD'
-Analysing table [OI_VIS2#6]
-SEVERE	The keyword DATE-OBS '2016-01-09T05:31:42' is not in a standard format 'YYYY-MM-DD'
-Analysing table [OI_T3#7]
-SEVERE	The keyword DATE-OBS '2016-01-09T05:31:42' is not in a standard format 'YYYY-MM-DD'
 Analysing table [OI_FLUX#8]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
-SEVERE	The keyword DATE-OBS '2016-01-09T05:31:42' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Missing keyword 'CALSTAT'
 SEVERE	Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3'
 SEVERE	Unsupported table OI_FLUX#8 in OIFITS V1.0
 Analysing table [OI_VIS#9]
 SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.ASTROMETRIC_DELAY' with format [1D]
 SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.ASTROMETRIC_PHASE' with format [1D]
-SEVERE	The keyword DATE-OBS '2016-01-09T05:31:42' is not in a standard format 'YYYY-MM-DD'
-Analysing table [OI_VIS2#10]
-SEVERE	The keyword DATE-OBS '2016-01-09T05:31:42' is not in a standard format 'YYYY-MM-DD'
-Analysing table [OI_T3#11]
-SEVERE	The keyword DATE-OBS '2016-01-09T05:31:42' is not in a standard format 'YYYY-MM-DD'
 Analysing table [OI_FLUX#12]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [235D]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
-SEVERE	The keyword DATE-OBS '2016-01-09T05:31:42' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Missing keyword 'CALSTAT'
 SEVERE	Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3'
 SEVERE	Unsupported table OI_FLUX#12 in OIFITS V1.0
@@ -618,4 +590,4 @@ SEVERE	Can't check repeat for column 'JXY'
 SEVERE	Can't check repeat for column 'JYX'
 SEVERE	Can't check repeat for column 'JYY'
 
-0 warnings, 420 severe errors
+0 warnings, 400 severe errors

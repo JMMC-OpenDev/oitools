@@ -27,12 +27,25 @@ package fr.jmmc.oitools.meta;
  */
 public final class CustomUnits extends Units {
 
+    /** flag indicating if the units is required */
+    private final boolean required;
+
     /**
      * Public constructor
      * WARNING: CustomUnits INSTANCES MUST NEVER BE SHARED among keyword / columns !
      */
     public CustomUnits() {
+        this(true);
+    }
+
+    /**
+     * Public constructor
+     * WARNING: CustomUnits INSTANCES MUST NEVER BE SHARED among keyword / columns !
+     * @param required flag indicating if the units is required
+     */
+    public CustomUnits(final boolean required) {
         super("UNIT_CUSTOM", "");
+        this.required = required;
     }
 
     /**
@@ -41,6 +54,14 @@ public final class CustomUnits extends Units {
      */
     public void setRepresentation(final String unit) {
         set(unit);
+    }
+
+    /**
+     * True if the unit is required
+     * @return true if the unit is required
+     */
+    public boolean isRequired() {
+        return required;
     }
 
 }

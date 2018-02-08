@@ -229,6 +229,24 @@ public class CellMeta {
     }
 
     /**
+     * Return true if the units is a CustomUnits.
+     *
+     * @return true if the units is a CustomUnits.
+     */
+    public final boolean isCustomUnits() {
+        return (this.unit instanceof CustomUnits);
+    }
+
+    /**
+     * Return CustomUnits (no checks).
+     *
+     * @return CustomUnits (no checks).
+     */
+    public final CustomUnits getCustomUnits() {
+        return (CustomUnits)this.unit;
+    }
+
+    /**
      * Return all accepted cell units.
      *
      * @return all accepted cell units.

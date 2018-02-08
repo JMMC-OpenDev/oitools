@@ -72,13 +72,13 @@ public final class OIVis extends OIData {
         }
 
         if (oifitsFile.isOIFits2()) {
-            // VISAMP  column definition (User unit)
+            // VISAMP  column definition (User unit required only for AMPTYPE='correlated flux')
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISAMP, "visibility amplitude",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), OIFitsConstants.COLUMN_VISAMPERR, DataRange.RANGE_VIS, this));
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(false), OIFitsConstants.COLUMN_VISAMPERR, DataRange.RANGE_VIS, this));
 
-            // VISAMPERR  column definition (User unit)
+            // VISAMPERR  column definition (User unit required only for AMPTYPE='correlated flux')
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISAMPERR, "error in visibility amplitude",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), null, DataRange.RANGE_POSITIVE, this));
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(false), null, DataRange.RANGE_POSITIVE, this));
         } else {
             // VISAMP  column definition
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISAMP, "visibility amplitude",

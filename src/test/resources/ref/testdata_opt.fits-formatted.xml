@@ -194,8 +194,8 @@
 <keyword><name>DATE-OBS</name><value>2000-10-19</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
 <keyword><name>INSNAME</name><value>COAST_NICMOS</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
 <keyword><name>CORRNAME</name><value>TEST</value><description>Identifies corresponding OI_CORR table</description><type>A</type><unit></unit></keyword>
-<keyword><name>AMPTYP</name><value>absolute</value><description>'absolute, 'differential', correlated flux'</description><type>A</type><unit></unit></keyword>
-<keyword><name>PHITYP</name><value>absolute</value><description>'absolute, 'differential'</description><type>A</type><unit></unit></keyword>
+<keyword><name>AMPTYP</name><value>absolute</value><description>'absolute', 'differential', 'correlated flux'</description><type>A</type><unit></unit></keyword>
+<keyword><name>PHITYP</name><value>absolute</value><description>'absolute', 'differential'</description><type>A</type><unit></unit></keyword>
 <keyword><name>AMPORDER</name><value>1</value><description>Polynomial fit order for differential chromatic amplitudes</description><type>J</type><unit></unit></keyword>
 <keyword><name>PHIORDER</name><value>2</value><description>Polynomial fit order for differential chromatic phases</description><type>J</type><unit></unit></keyword>
 </keywords>
