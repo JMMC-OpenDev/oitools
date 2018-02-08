@@ -152,7 +152,7 @@ public class ColumnMeta extends CellMeta {
      * @param dataRange optional data range (may be null)
      */
     public ColumnMeta(final String name, final String desc, final Types dataType, final int repeat, final boolean optional, final boolean is3D,
-            final String[] acceptedValues, final Units unit, final String errName, final DataRange dataRange) {
+                      final String[] acceptedValues, final Units unit, final String errName, final DataRange dataRange) {
         this(name, desc, dataType, repeat, optional, is3D, NO_INT_VALUES, acceptedValues, unit, errName, dataRange);
     }
 
@@ -166,7 +166,7 @@ public class ColumnMeta extends CellMeta {
      * @param stringAcceptedValues string possible values for column/keyword
      */
     public ColumnMeta(final String name, final String desc, final Types dataType,
-            final int repeat, final String[] stringAcceptedValues) {
+                      final int repeat, final String[] stringAcceptedValues) {
         this(name, desc, dataType, repeat, false, false, NO_INT_VALUES, stringAcceptedValues, Units.NO_UNIT, null, null);
     }
 
@@ -186,8 +186,8 @@ public class ColumnMeta extends CellMeta {
      * @param dataRange optional data range (may be null)
      */
     private ColumnMeta(final String name, final String desc, final Types dataType,
-            final int repeat, final boolean optional, final boolean is3D, final short[] intAcceptedValues, final String[] stringAcceptedValues,
-            final Units unit, final String errName, final DataRange dataRange) {
+                       final int repeat, final boolean optional, final boolean is3D, final short[] intAcceptedValues, final String[] stringAcceptedValues,
+                       final Units unit, final String errName, final DataRange dataRange) {
         super(MetaType.COLUMN, name, desc, dataType, optional, intAcceptedValues, stringAcceptedValues, unit);
 
         this.is3D = is3D;
@@ -268,7 +268,7 @@ public class ColumnMeta extends CellMeta {
      * @param nbRows number of rows in the column
      */
     public final void check(final OIFitsChecker checker, final FitsTable table,
-            final Object value, final int nbRows) {
+                            final Object value, final int nbRows) {
         final String colName = getName();
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "check : {0} = {1}", new Object[]{colName, ArrayFuncs.arrayDescription(value)});
@@ -349,7 +349,7 @@ public class ColumnMeta extends CellMeta {
      * @return true if the corresponding value must be discarded (ignore) as totally incompatible !
      */
     public final boolean checkColumnFormat(final OIFitsChecker checker, final FitsTable table,
-            final char columnType, final int columnRepeat) {
+                                           final char columnType, final int columnRepeat) {
         final String colName = getName();
         boolean ignore = false;
 
@@ -411,7 +411,7 @@ public class ColumnMeta extends CellMeta {
      * @param columnRows number of rows in the given column
      */
     private void checkValues(final OIFitsChecker checker, final FitsTable table,
-            final Object value, final int columnRows) {
+                             final Object value, final int columnRows) {
         final String colName = getName();
         boolean error;
 
@@ -419,43 +419,18 @@ public class ColumnMeta extends CellMeta {
 
         if (intAcceptedValues.length != 0) {
             // OIData: STA_INDEX (2D but nCols=[1,2 or 3]) or TARGET_ID (1D)
-            final boolean isArray = isArray();
 
-            if (!isArray) {
-                // OIData: TARGET_ID (1D)
-                final short[] sValues = (short[]) value;
+            // Skip checks if the column is missing (from file):
+            if (!checker.hasRule(Rule.GENERIC_COL_MANDATORY, table, colName) || OIFitsChecker.isInspectRules()) {
+                final boolean isArray = isArray();
 
-                short val;
-                for (int r = 0; r < columnRows; r++) {
-                    val = sValues[r];
+                if (!isArray) {
+                    // OIData: TARGET_ID (1D)
+                    final short[] sValues = (short[]) value;
 
-                    if (!ModelBase.isUndefined(val) || OIFitsChecker.isInspectRules()) {
-                        error = true;
-
-                        for (int i = 0, len = intAcceptedValues.length; i < len; i++) {
-                            if (val == intAcceptedValues[i]) {
-                                error = false;
-                                break;
-                            }
-                        }
-
-                        if (error || OIFitsChecker.isInspectRules()) {
-                            // rule [GENERIC_COL_VAL_ACCEPTED_INT] check if column values match the 'accepted' values (integer)
-                            checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addValueAt(val, getIntAcceptedValuesAsString(), r);
-                        }
-                    }
-                }
-            } else {
-                // OIData: STA_INDEX (2D but nCols=[1,2 or 3])
-                final short[][] sValues = (short[][]) value;
-
-                short[] values;
-                short val;
-                for (int r = 0; r < columnRows; r++) {
-                    values = sValues[r];
-
-                    for (int c = 0, rlen = values.length; c < rlen; c++) {
-                        val = values[c];
+                    short val;
+                    for (int r = 0; r < columnRows; r++) {
+                        val = sValues[r];
 
                         if (!ModelBase.isUndefined(val) || OIFitsChecker.isInspectRules()) {
                             error = true;
@@ -469,7 +444,36 @@ public class ColumnMeta extends CellMeta {
 
                             if (error || OIFitsChecker.isInspectRules()) {
                                 // rule [GENERIC_COL_VAL_ACCEPTED_INT] check if column values match the 'accepted' values (integer)
-                                checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addColValueAt(val, getIntAcceptedValuesAsString(), r, c);
+                                checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addValueAt(val, getIntAcceptedValuesAsString(), r);
+                            }
+                        }
+                    }
+                } else {
+                    // OIData: STA_INDEX (2D but nCols=[1,2 or 3])
+                    final short[][] sValues = (short[][]) value;
+
+                    short[] values;
+                    short val;
+                    for (int r = 0; r < columnRows; r++) {
+                        values = sValues[r];
+
+                        for (int c = 0, rlen = values.length; c < rlen; c++) {
+                            val = values[c];
+
+                            if (!ModelBase.isUndefined(val) || OIFitsChecker.isInspectRules()) {
+                                error = true;
+
+                                for (int i = 0, len = intAcceptedValues.length; i < len; i++) {
+                                    if (val == intAcceptedValues[i]) {
+                                        error = false;
+                                        break;
+                                    }
+                                }
+
+                                if (error || OIFitsChecker.isInspectRules()) {
+                                    // rule [GENERIC_COL_VAL_ACCEPTED_INT] check if column values match the 'accepted' values (integer)
+                                    checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addColValueAt(val, getIntAcceptedValuesAsString(), r, c);
+                                }
                             }
                         }
                     }
@@ -484,28 +488,31 @@ public class ColumnMeta extends CellMeta {
             // OITarget : VELTYP, VELDEF
             // OIInspol: INSNAME ...
 
-            final String[] sValues = (String[]) value;
+            // Skip checks if the column is missing (from file):
+            if (!checker.hasRule(Rule.GENERIC_COL_MANDATORY, table, colName) || OIFitsChecker.isInspectRules()) {
+                final String[] sValues = (String[]) value;
 
-            String val;
-            for (int rowNb = 0; rowNb < columnRows; rowNb++) {
-                error = true;
+                String val;
+                for (int rowNb = 0; rowNb < columnRows; rowNb++) {
+                    error = true;
 
-                val = sValues[rowNb];
+                    val = sValues[rowNb];
 
-                if (val == null) {
-                    val = "";
-                } else {
-                    for (int i = 0, len = stringAcceptedValues.length; i < len; i++) {
-                        if (val.equals(stringAcceptedValues[i])) {
-                            error = false;
-                            break;
+                    if (val == null) {
+                        val = "";
+                    } else {
+                        for (int i = 0, len = stringAcceptedValues.length; i < len; i++) {
+                            if (val.equals(stringAcceptedValues[i])) {
+                                error = false;
+                                break;
+                            }
                         }
                     }
-                }
 
-                if (error || OIFitsChecker.isInspectRules()) {
-                    // rule [GENERIC_COL_VAL_ACCEPTED_STR] check if column values match the 'accepted' values (string)
-                    checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_STR, table, colName).addValueAt(val, getStringAcceptedValuesAsString(), rowNb);
+                    if (error || OIFitsChecker.isInspectRules()) {
+                        // rule [GENERIC_COL_VAL_ACCEPTED_STR] check if column values match the 'accepted' values (string)
+                        checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_STR, table, colName).addValueAt(val, getStringAcceptedValuesAsString(), rowNb);
+                    }
                 }
             }
             return;
