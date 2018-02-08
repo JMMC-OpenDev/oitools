@@ -226,7 +226,7 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Creation and storage of all the objects necessary for the new management of the failures (Key of map)
+     * Create and store the RuleFailure and return its related DataLocation
      * @param rule rule informations
      * @param hdu HDU informations
      * @param member member (keyword/column) name
@@ -238,8 +238,7 @@ public final class OIFitsChecker {
             return new DataLocation(rule);
         }
 
-        final RuleFailure failure = new RuleFailure(rule, fileRef, ((hdu == null) ? null : hdu.getExtName()),
-                ((hdu == null) ? UNDEFINED_EXT_NB : hdu.getExtNb()), member);
+        final RuleFailure failure = createFailure(rule, hdu, member);
 
         DataLocation datas = failures.get(failure);
 
@@ -284,6 +283,24 @@ public final class OIFitsChecker {
             failures.put(ruleFail, datas);
         }
         return datas;
+    }
+
+    /**
+     * Return true if the corresponding RuleFailure is already present
+     * @param rule rule information
+     * @param hdu HDU information
+     * @param member member (keyword/column) name
+     * @return true if the corresponding RuleFailure is already present
+     */
+    public boolean hasRule(final Rule rule, final FitsHDU hdu, final String member) {
+        final RuleFailure failure = createFailure(rule, hdu, member);
+
+        return (failures.get(failure) != null);
+    }
+
+    private RuleFailure createFailure(final Rule rule, final FitsHDU hdu, final String member) {
+        return new RuleFailure(rule, fileRef, ((hdu == null) ? null : hdu.getExtName()),
+                ((hdu == null) ? UNDEFINED_EXT_NB : hdu.getExtNb()), member);
     }
 
     private static CellMeta getMeta(final FitsHDU hdu, final String member) {
