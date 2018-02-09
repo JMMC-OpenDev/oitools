@@ -2,7 +2,7 @@
 
 <ClassDiagram name="Multi-file class diagram">
   <ClassDiagramComponents>
-    <Class name="OIFitsChecker" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="543.0" yPosition="19.0">
+    <Class name="OIFitsChecker" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="460.0" yPosition="23.0">
       <Fields>
         <Field name="INSPECT_RULES" type="boolean" visibility="private" isStatic="true"/>
         <Field name="INSPECT_MODE" type="InspectMode" visibility="private" isStatic="true"/>
@@ -107,7 +107,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="RuleFailure" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="751.0" yPosition="746.0">
+    <Class name="RuleFailure" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="723.0" yPosition="843.0">
       <Fields>
         <Field name="rule" type="Rule" visibility="private" isFinal="true"/>
         <Field name="fileRef" type="FileRef" visibility="private" isFinal="true"/>
@@ -152,7 +152,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="SeverityProfileStrict" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="1154.0" yPosition="385.0">
+    <Class name="SeverityProfileStrict" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="1200.0" yPosition="500.0">
       <Fields>
         <Field name="INSTANCE" type="SeverityProfile" visibility="package" isStatic="true" isFinal="true"/>
       </Fields>
@@ -164,7 +164,7 @@
         <Method name="toString" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="DataLocation" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="431.0" yPosition="450.0">
+    <Class name="DataLocation" package="fr.jmmc.oitools.model" visibility="public" isFinal="true" xPosition="481.0" yPosition="571.0">
       <Fields>
         <Field name="rule" type="Rule" visibility="private" isFinal="true"/>
         <Field name="values" type="ArrayList&lt;Object&gt;" visibility="private"/>
@@ -331,14 +331,14 @@
         </Method>
       </Methods>
     </Class>
-    <Interface name="SeverityProfile" package="fr.jmmc.oitools.model" visibility="public" xPosition="1020.0" yPosition="126.0">
+    <Interface name="SeverityProfile" package="fr.jmmc.oitools.model" visibility="public" xPosition="1099.0" yPosition="157.0">
       <Methods>
         <Method name="defineSeverity" returnType="void" visibility="public">
           <Argument type="RuleFailure" name="rule"/>
         </Method>
       </Methods>
     </Interface>
-    <Enum name="Rule" package="fr.jmmc.oitools.model" visibility="public" xPosition="17.0" yPosition="5.0">
+    <Enum name="Rule" package="fr.jmmc.oitools.model" visibility="public" xPosition="18.0" yPosition="5.0">
       <Literals>
         <Literal name="ARRNAME_UNIQ"/>
         <Literal name="COL_UNKNOWN"/>
@@ -409,7 +409,7 @@
         <Literal name="TABLE_NOT_OIFITS2"/>
       </Literals>
     </Enum>
-    <Enum name="Severity" package="fr.jmmc.oitools.model" visibility="public" xPosition="1334.0" yPosition="912.0">
+    <Enum name="Severity" package="fr.jmmc.oitools.model" visibility="public" xPosition="1199.0" yPosition="994.0">
       <Literals>
         <Literal name="Undefined"/>
         <Literal name="Disabled"/>
@@ -420,21 +420,21 @@
     </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="fr.jmmc.oitools.model.SeverityProfileStrict" target="fr.jmmc.oitools.model.SeverityProfile"/>
+    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Severity" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.DataLocation" target="fr.jmmc.oitools.model.DataLocation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.DataLocation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rule" source="fr.jmmc.oitools.model.DataLocation" target="fr.jmmc.oitools.model.Rule" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="failures" source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.DataLocation" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Map&lt;RuleFailure, DataLocation&gt;"/>
     <HasRelation name="INSTANCE" source="fr.jmmc.oitools.model.SeverityProfileStrict" target="fr.jmmc.oitools.model.SeverityProfile" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.SeverityProfile" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.SeverityProfile" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="fr.jmmc.oitools.model.SeverityProfileStrict" target="fr.jmmc.oitools.model.SeverityProfile"/>
     <HasRelation name="severity" source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Severity" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="rule" source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Rule" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="fr.jmmc.oitools.model.DataLocation" target="fr.jmmc.oitools.model.DataLocation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="failures" source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.DataLocation" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Map&lt;RuleFailure, DataLocation&gt;"/>
-    <UseRelation source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Severity" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="rule" source="fr.jmmc.oitools.model.DataLocation" target="fr.jmmc.oitools.model.Rule" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.SeverityProfile" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Rule" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.Rule" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="fr.jmmc.oitools.model.SeverityProfile" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.DataLocation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="fr.jmmc.oitools.model.SeverityProfileStrict" target="fr.jmmc.oitools.model.RuleFailure" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.OIFitsChecker" target="fr.jmmc.oitools.model.Rule" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="fr.jmmc.oitools.model.RuleFailure" target="fr.jmmc.oitools.model.Rule" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

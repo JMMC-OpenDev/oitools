@@ -376,7 +376,7 @@ public final class FitsImageLoader {
      * @param filename name of related fits file
      * @param hdus list of HD units
      * @param firstOnly load only the first valid Image HDU
-     * @return List< FitsImageHDU> is list for all imageHDU find
+     * @return List(FitsImageHDU) is list for all imageHDU find
      * @throws FitsException if any FITS error occurred
      * @throws IOException IO failure
      * @throws IllegalArgumentException if unsupported unit or unit conversion is not allowed
@@ -391,7 +391,7 @@ public final class FitsImageLoader {
      * @param hdus list of HD units
      * @param firstOnly load only the first valid Image HDU
      * @param requireCdeltKeywords throw an exception if CDELT keywords are missing
-     * @return List< FitsImageHDU> is list for all imageHDU find
+     * @return List(FitsImageHDU) is list for all imageHDU find
      * @throws FitsException if any FITS error occurred
      * @throws IOException IO failure
      * @throws IllegalArgumentException if unsupported unit or unit conversion is not allowed or missing CDELT keyword

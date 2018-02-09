@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Loader">
+  <ClassDiagramComponents>
+    <Class name="LoadOIFits" package="" visibility="public" xPosition="422.0" yPosition="83.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="load" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="load(OIFits)" package="" visibility="public" xPosition="422.0" yPosition="278.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="OImaging" package="" visibility="public" xPosition="828.0" yPosition="56.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="load(FITS)" package="" visibility="public" xPosition="877.0" yPosition="278.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="processHDUnits(OIFITS)" package="" visibility="public" xPosition="387.0" yPosition="459.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="processHDUnits(FITS)" package="" visibility="public" xPosition="860.0" yPosition="459.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="processHDUnit" package="" visibility="public" xPosition="828.0" yPosition="537.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="processTable" package="" visibility="public" xPosition="422.0" yPosition="618.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="processImage" package="" visibility="public" xPosition="877.0" yPosition="618.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="processKeyword" package="" visibility="public" xPosition="641.0" yPosition="749.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="processData" package="" visibility="public" xPosition="860.0" yPosition="744.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="processKeyword" package="" visibility="public" xPosition="1103.0" yPosition="742.0">
+      <Fields>
+        <Field name="ImageKeywords" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation name="" source="processImage" target="processData" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="OImaging" target="load(FITS)" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="load(OIFits)" target="processHDUnits(OIFITS)" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="processImage" target="processKeyword" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="load(FITS)" target="processHDUnits(FITS)" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="processHDUnits(OIFITS)" target="processTable" sourceCardinality="1..1" targetCardinality="1..*"/>
+    <UseRelation name="" source="processHDUnits(OIFITS)" target="processHDUnit" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="processHDUnits(FITS)" target="processImage" sourceCardinality="1..1" targetCardinality="1..*"/>
+    <UseRelation name="" source="processHDUnits(OIFITS)" target="processKeyword" sourceCardinality="1..1" targetCardinality="1..*"/>
+    <UseRelation name="" source="processImage" target="processKeyword" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="LoadOIFits" target="load(OIFits)" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="processHDUnits(OIFITS)" target="processHDUnits(FITS)" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="OImaging" target="LoadOIFits" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="processTable" target="processKeyword" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

@@ -43,7 +43,8 @@ import java.util.Set;
 import java.util.logging.Level;
 
 /**
- * Create Xml Files for DataModel version 1 and 2, all Rules and them applyTo and Failures
+ * Create Xml Files for DataModel version 1 and 2, all Rules and them applyTo
+ * Create Xml File for all Failures, all informations on the failures
  * @author bourgesl, mellag, kempsc
  */
 public class DataModel {
@@ -65,6 +66,7 @@ public class DataModel {
     /** flag to globally support OI_VIS Complex visibility columns (disabled by default) */
     private static boolean oiVisComplexSupport = false;
 
+    /** list used for sorted rules */
     private static final ArrayList<Rule> SORTED_RULES = new ArrayList<Rule>(64);
 
     //resources directory
@@ -114,7 +116,7 @@ public class DataModel {
         final int nRows = 1;
         final int nWLen = 1;
 
-        //load file V1
+        //load file V1 (catch V1 failures)
         String absFilePath = TEST_DIR + "oifits/TEST_CreateOIFileV1.fits";
         OIFitsLoader.loadOIFits(checker, absFilePath);
 
@@ -127,7 +129,7 @@ public class DataModel {
             OIFitsChecker.setInspectMode(InspectMode.NORMAL);
         }
 
-        // fake data model:
+        // fake data model (catch V1 structure failures):
         final OIFitsFile oiFitsFile = new OIFitsFile(OIFitsStandard.VERSION_1);
 
         // OITarget:
@@ -162,6 +164,7 @@ public class DataModel {
         oit3.setArrName(arrName);
         oiFitsFile.addOiTable(oit3);
 
+        //write DataModel V1
         writeDataModel(checker, oiFitsFile, "rules/DataModelV1.xml");
     }
 
@@ -175,11 +178,11 @@ public class DataModel {
         final int nRows = 1;
         final int nWLen = 1;
 
-        //load file
+        //load file (catch V2 failures)
         String absFilePath = TEST_DIR + "oifits/TEST_CreateOIFileV2.fits";
         OIFitsLoader.loadOIFits(checker, absFilePath);
 
-        // fake data model:
+        // fake data model (catch V2 structure failures):
         final OIFitsFile oiFitsFile = new OIFitsFile(OIFitsStandard.VERSION_2);
 
         //PrimaryHDU:
@@ -238,9 +241,17 @@ public class DataModel {
         oispect.setCorrName(corrname);
         oiFitsFile.addOiTable(oispect);
 
+        //write DataModel V2
         writeDataModel(checker, oiFitsFile, "rules/DataModelV2.xml");
     }
 
+    /**
+     * Write the DataModel for OIFITS Version 1 and 2
+     * @param checker OIFitsChecker same checker run for all versions
+     * @param oiFitsFile OIFitsFile created in the dumpDataModelV1/2
+     * @param file String name of the file that will be created
+     * @throws java.io.IOException
+     */
     private static void writeDataModel(final OIFitsChecker checker, final OIFitsFile oiFitsFile, final String file) throws IOException {
 
         oiFitsFile.check(checker);
@@ -267,6 +278,11 @@ public class DataModel {
         FileUtils.writeFile(new File(file), sb.toString());
     }
 
+    /**
+     * Write the Failures
+     * @param checker OIFitsChecker same checker run for all versions
+     * @throws java.io.IOException
+     */
     private static void writeFailures(final OIFitsChecker checker) throws IOException {
 
         // Ensure failures contain all rules
@@ -475,7 +491,7 @@ public class DataModel {
     }
 
     /**
-     * Main function of call and creation of files. Checker is created here to be given to all methods.
+     * Main function to create files.
      * @param unused
      */
     public static void main(String[] unused) {
@@ -485,6 +501,7 @@ public class DataModel {
 
         OIFitsChecker.setInspectRules(true);
         try {
+            // create once, collect all rules & failures:
             final OIFitsChecker checker = new OIFitsChecker();
 
             dumpCorrupted(checker);
