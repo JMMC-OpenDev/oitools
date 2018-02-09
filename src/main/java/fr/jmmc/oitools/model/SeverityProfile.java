@@ -19,6 +19,8 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.oitools.meta.OIFitsStandard;
+
 /**
  * Interface for creating severity profiles
  * @author kempsc
@@ -26,9 +28,10 @@ package fr.jmmc.oitools.model;
 public interface SeverityProfile {
 
     /**
-     * Definition of the severity to be created for each new profile
-     * @param rule
+     * Set the severity for the given failure and OIFITS standard
+     * @param failure failure to set the severity
+     * @param std OIFITS standard
      */
-    public void defineSeverity(RuleFailure rule);
+    public void defineSeverity(RuleFailure failure, OIFitsStandard std);
 
 }

@@ -493,7 +493,7 @@ public final class OIFitsFile extends FitsImageFile {
     public void check(final OIFitsChecker checker) {
         try {
             // Initialize FileRef in OIFitsChecker
-            checker.setFileRef(getFileRef());
+            checker.setFileRef(getFileRef(), getVersion());
 
             final long start = System.nanoTime();
 
@@ -571,7 +571,13 @@ public final class OIFitsFile extends FitsImageFile {
 
             // Define Severity:
             // TODO: define an alternate method that use the given profile ?
-            checker.defineSeverity(SeverityProfileStrict.INSTANCE);
+            final SeverityProfile profile;
+            if (true) {
+                profile = SeverityProfileConfigurable.JMMC;
+            } else {
+                profile = SeverityProfileStrict.INSTANCE;
+            }
+            checker.defineSeverity(profile);
 
             if (logger.isLoggable(Level.FINE)) {
                 logger.log(Level.FINE, "OIFitsFile.check: duration = {0} ms.", 1e-6d * (System.nanoTime() - start));

@@ -86,7 +86,10 @@ public class CellMeta {
      * @param stringAcceptedValues string possible values for column/keyword
      * @param unit keyword/column unit
      */
-    protected CellMeta(final MetaType type, final String name, final String desc, final Types dataType, final boolean optional, final short[] intAcceptedValues, final String[] stringAcceptedValues, final Units unit) {
+    protected CellMeta(final MetaType type, final String name, final String desc,
+                       final Types dataType, final boolean optional,
+                       final short[] intAcceptedValues,
+                       final String[] stringAcceptedValues, final Units unit) {
 
         if (name == null || name.isEmpty()) {
             throw new IllegalStateException("name can not be null");
@@ -223,6 +226,24 @@ public class CellMeta {
      */
     public final Units getUnits() {
         return this.unit;
+    }
+
+    /**
+     * Return true if the units is a CustomUnits.
+     *
+     * @return true if the units is a CustomUnits.
+     */
+    public final boolean isCustomUnits() {
+        return (this.unit instanceof CustomUnits);
+    }
+
+    /**
+     * Return CustomUnits (no checks).
+     *
+     * @return CustomUnits (no checks).
+     */
+    public final CustomUnits getCustomUnits() {
+        return (CustomUnits)this.unit;
     }
 
     /**

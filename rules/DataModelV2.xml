@@ -932,6 +932,7 @@
     <subjects>
       <apply>MAIN_HEADER.DATE-OBS</apply>
       <apply>OI_FLUX.DATE-OBS</apply>
+      <apply>OI_SPECTRUM.DATE-OBS</apply>
       <apply>OI_T3.DATE-OBS</apply>
       <apply>OI_VIS.DATE-OBS</apply>
       <apply>OI_VIS2.DATE-OBS</apply>
@@ -3309,12 +3310,12 @@
   <keyword>
     <name>AMPTYP</name>
     <datatype>TYPE_CHAR</datatype>
-    <description>'absolute, 'differential', correlated flux'</description>
+    <description>'absolute', 'differential', 'correlated flux'</description>
     <optional>true</optional>
     <values>
       <string>absolute</string>
-      <string>correlated flux</string>
       <string>differential</string>
+      <string>correlated flux</string>
     </values>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
@@ -3324,7 +3325,7 @@
   <keyword>
     <name>PHITYP</name>
     <datatype>TYPE_CHAR</datatype>
-    <description>'absolute, 'differential'</description>
+    <description>'absolute', 'differential'</description>
     <optional>true</optional>
     <values>
       <string>absolute</string>
@@ -3436,11 +3437,11 @@
     <name>VISAMP</name>
     <datatype>TYPE_DBL</datatype>
     <description>visibility amplitude</description>
-    <optional>false</optional>
+    <optional>true</optional>
+    <unit>UNIT_CUSTOM</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
-      <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
     </rules>
     <repeat>[[NWAVE]]</repeat>
@@ -3456,12 +3457,12 @@
     <name>VISAMPERR</name>
     <datatype>TYPE_DBL</datatype>
     <description>error in visibility amplitude</description>
-    <optional>false</optional>
+    <optional>true</optional>
+    <unit>UNIT_CUSTOM</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_ERR</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
-      <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
     </rules>
     <repeat>[[NWAVE]]</repeat>

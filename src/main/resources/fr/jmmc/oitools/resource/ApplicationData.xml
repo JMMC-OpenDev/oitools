@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<ApplicationData link="http://www.jmmc.fr/oitools/">
+    
+    <program name="OITools" version="0.3.0"/>
+    <compilation date="06/03/2012" compiler="JDK 1.5.0_16"/>
+
+    <text>OITools is the JMMC library dedicated to OIFits manipulation (load, save and validation) and FITS images</text>
+
+    <dependences>
+
+        <!-- JMMC -->
+
+        <!-- Java Mariotti OITools -->
+        <package name="OITools"
+                 description="OITools is the JMMC library dedicated to OIFits manipulation (load, save and validation)"
+                 link="https://www.jmmc.fr/dev/oitools/"
+                 jars="oitools.jar"
+                 license="CECILL-B ???"/>     
+
+
+        <!-- 1. Science / VO libraries (always on top for better visibility) -->
+
+        <!-- OITools dependencies -->
+
+        <package name="nom.tam.fits"
+                 description="The Java FITS library (nom.tam.fits) has been developed which provides efficient I/O for FITS images and binary tables. Made by Dr Thomas A. McGlynn, HEASARC"
+                 link="http://heasarc.gsfc.nasa.gov/docs/heasarc/fits/java/v1.0/"
+                 license="Copyright: Thomas McGlynn 1997-1999." />
+        <!--
+          Copyright: Thomas McGlynn 1997-1999.
+          This code may be used for any purpose, non-commercial
+          or commercial so long as this copyright notice is retained
+          in the source code or included in or referred to in any
+          derived software.
+        -->
+
+    </dependences>
+
+    <releasenotes>
+        <release version="0.3">
+            <prerelease version="0.3.0">
+                <change>Added Fits Image support (load, write, convert data to float[rows][columns] and related keywords)</change>
+            </prerelease>
+        </release>
+        <release version="0.2">
+            <prerelease version="0.2.1">
+                <change>Fix bug loading data tables with only one wavelength and using TDIM keywords (1)</change>
+            </prerelease>
+            <prerelease version="0.2.0">
+                <change>Several bug fixed related to ASCII character encoding / decoding and ASCII_NULL support</change>
+            </prerelease>
+        </release>
+        <release version="0.1">
+            <prerelease version="0.1.0">
+                <change>First official release : included in Aspro 2</change>
+            </prerelease>
+        </release>
+    </releasenotes>
+
+    <acknowledgment><![CDATA[This research has made use of the Jean-Marie Mariotti Center]]>
+    </acknowledgment>
+</ApplicationData>

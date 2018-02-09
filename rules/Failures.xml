@@ -19744,24 +19744,6 @@
     <file>memory:2</file>
     <extName>OI_VIS</extName>
     <extNb>5</extNb>
-    <member>VISAMP</member>
-    <message>Missing column 'VISAMP'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_MANDATORY</rule>
-    <file>memory:2</file>
-    <extName>OI_VIS</extName>
-    <extNb>5</extNb>
-    <member>VISAMPERR</member>
-    <message>Missing column 'VISAMPERR'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_MANDATORY</rule>
-    <file>memory:2</file>
-    <extName>OI_VIS</extName>
-    <extNb>5</extNb>
     <member>VISPHI</member>
     <message>Missing column 'VISPHI'</message>
   </failure>
@@ -20997,24 +20979,6 @@
     <extNb>6</extNb>
     <member>VCOORD</member>
     <message>Missing column 'VCOORD'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_MANDATORY</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>6</extNb>
-    <member>VISAMP</member>
-    <message>Missing column 'VISAMP'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_MANDATORY</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>6</extNb>
-    <member>VISAMPERR</member>
-    <message>Missing column 'VISAMPERR'</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>
@@ -32832,6 +32796,102 @@
   </failure>
   <failure>
     <severity>SEVERE</severity>
+    <rule>GENERIC_DATE_OBS_STANDARD</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>4</extNb>
+    <member>DATE-OBS</member>
+    <data>
+      <value>2017-07-06</value>
+      <message>The keyword DATE-OBS '2017-07-06' is not in a standard format 'YYYY-MM-DD'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_DATE_OBS_STANDARD</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>5</extNb>
+    <member>DATE-OBS</member>
+    <data>
+      <value>2017-07-06</value>
+      <message>The keyword DATE-OBS '2017-07-06' is not in a standard format 'YYYY-MM-DD'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_DATE_OBS_STANDARD</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>6</extNb>
+    <member>DATE-OBS</member>
+    <data>
+      <value>2017-07-06</value>
+      <message>The keyword DATE-OBS '2017-07-06' is not in a standard format 'YYYY-MM-DD'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_DATE_OBS_STANDARD</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>DATE-OBS</member>
+    <data>
+      <value>2017-05-23</value>
+      <message>The keyword DATE-OBS '2017-05-23' is not in a standard format 'YYYY-MM-DD'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_DATE_OBS_STANDARD</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>6</extNb>
+    <member>DATE-OBS</member>
+    <data>
+      <value>2017-07-06</value>
+      <message>The keyword DATE-OBS '2017-07-06' is not in a standard format 'YYYY-MM-DD'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_DATE_OBS_STANDARD</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>7</extNb>
+    <member>DATE-OBS</member>
+    <data>
+      <value>2017-07-06</value>
+      <message>The keyword DATE-OBS '2017-07-06' is not in a standard format 'YYYY-MM-DD'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_DATE_OBS_STANDARD</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>8</extNb>
+    <member>DATE-OBS</member>
+    <data>
+      <value>2017-07-06</value>
+      <message>The keyword DATE-OBS '2017-07-06' is not in a standard format 'YYYY-MM-DD'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_DATE_OBS_STANDARD</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_SPECTRUM</extName>
+    <extNb>9</extNb>
+    <member>DATE-OBS</member>
+    <data>
+      <value>2017-07-06</value>
+      <message>The keyword DATE-OBS '2017-07-06' is not in a standard format 'YYYY-MM-DD'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>memory:1</file>
     <extName>OI_TARGET</extName>
@@ -38767,8 +38827,8 @@
     <member>AMPTYP</member>
     <data>
       <value>DEFAULT</value>
-      <expected>absolute|correlated flux|differential</expected>
-      <message>Invalid value for keyword 'AMPTYP', found 'DEFAULT' should be 'absolute|correlated flux|differential'</message>
+      <expected>absolute|differential|correlated flux</expected>
+      <message>Invalid value for keyword 'AMPTYP', found 'DEFAULT' should be 'absolute|differential|correlated flux'</message>
     </data>
   </failure>
   <failure>
@@ -39300,8 +39360,8 @@
     <member>AMPTYP</member>
     <data>
       <value>absolute</value>
-      <expected>absolute|correlated flux|differential</expected>
-      <message>Invalid value for keyword 'AMPTYP', found 'absolute' should be 'absolute|correlated flux|differential'</message>
+      <expected>absolute|differential|correlated flux</expected>
+      <message>Invalid value for keyword 'AMPTYP', found 'absolute' should be 'absolute|differential|correlated flux'</message>
     </data>
   </failure>
   <failure>

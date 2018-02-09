@@ -242,7 +242,7 @@ public class OIFitsLoader {
         try {
             final FileRef fileRef = new FileRef(absFilePath);
             // Initialize FileRef in OIFitsChecker
-            checker.setFileRef(fileRef);
+            checker.setFileRef(fileRef, null);
 
             // Check if the given file exists:
             final File file = new File(absFilePath);
@@ -724,17 +724,16 @@ public class OIFitsLoader {
         final Units parsedUnit = Units.parseUnit(columnUnit);
 
         if (column.getUnits() != parsedUnit || OIFitsChecker.isInspectRules()) {
-            if (parsedUnit == Units.NO_UNIT || OIFitsChecker.isInspectRules()) {
+            if (((parsedUnit == Units.NO_UNIT) && (!column.isCustomUnits() || column.getCustomUnits().isRequired())) || OIFitsChecker.isInspectRules()) {
                 // rule [GENERIC_COL_UNIT_EXIST] check if the column unit exist
                 checker.ruleFailed(Rule.GENERIC_COL_UNIT_EXIST, table, column.getName()).addKeywordValue(column.getUnit());
             }
-            if (parsedUnit != Units.NO_UNIT || OIFitsChecker.isInspectRules()) {
+            if ((parsedUnit != Units.NO_UNIT) || OIFitsChecker.isInspectRules()) {
                 // Parse the user unit into CustomUnits
-                if (column.getUnits() instanceof CustomUnits) {
-                    final CustomUnits columnUnits = (CustomUnits) column.getUnits();
-                    columnUnits.setRepresentation((parsedUnit != null) ? parsedUnit.getStandardRepresentation() : columnUnit);
+                if (column.isCustomUnits()) {
+                    column.getCustomUnits().setRepresentation((parsedUnit != null) ? parsedUnit.getStandardRepresentation() : columnUnit);
                 }
-                if (!(column.getUnits() instanceof CustomUnits) || OIFitsChecker.isInspectRules()) {
+                if (!column.isCustomUnits() || OIFitsChecker.isInspectRules()) {
                     // rule [GENERIC_COL_UNIT] check if the column unit matches the expected unit
                     checker.ruleFailed(Rule.GENERIC_COL_UNIT, table, column.getName()).addKeywordValue(columnUnit, column.getUnit());
                 }

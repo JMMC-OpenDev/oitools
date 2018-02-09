@@ -19,6 +19,8 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.oitools.meta.OIFitsStandard;
+
 /**
  * Implementation for the severe profile
  * @author kempsc
@@ -28,9 +30,8 @@ public final class SeverityProfileStrict implements SeverityProfile {
     static final SeverityProfile INSTANCE = new SeverityProfileStrict();
 
     @Override
-    public void defineSeverity(final RuleFailure rule) {
-
-        rule.setSeverity(Severity.Error);
+    public void defineSeverity(final RuleFailure failure, final OIFitsStandard std) {
+        failure.setSeverity(Severity.Error);
     }
 
     @Override

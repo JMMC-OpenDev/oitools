@@ -45,12 +45,12 @@ public final class OIVis extends OIData {
         if (oifitsFile.isOIFits2()) {
             // AMPTYP  keyword definition
             addKeywordMeta(new KeywordMeta(OIFitsConstants.KEYWORD_AMPTYP,
-                    "'absolute, 'differential', correlated flux'", Types.TYPE_CHAR, true,
-                    new String[]{OIFitsConstants.KEYWORD_AMPTYP_ABSOLUTE, OIFitsConstants.KEYWORD_AMPTYP_CORR,
-                        OIFitsConstants.KEYWORD_AMPTYP_DIFF}));
+                    "'absolute', 'differential', 'correlated flux'", Types.TYPE_CHAR, true,
+                    new String[]{OIFitsConstants.KEYWORD_AMPTYP_ABSOLUTE, OIFitsConstants.KEYWORD_AMPTYP_DIFF,
+                                 OIFitsConstants.KEYWORD_AMPTYP_CORR}));
             // PHITYP  keyword definition
             addKeywordMeta(new KeywordMeta(OIFitsConstants.KEYWORD_PHITYP,
-                    "'absolute, 'differential'", Types.TYPE_CHAR, true,
+                    "'absolute', 'differential'", Types.TYPE_CHAR, true,
                     new String[]{OIFitsConstants.KEYWORD_PHITYP_ABSOLUTE, OIFitsConstants.KEYWORD_PHITYP_DIFF}));
             // AMPORDER  keyword definition
             addKeywordMeta(new KeywordMeta(OIFitsConstants.KEYWORD_AMPORDER,
@@ -71,13 +71,23 @@ public final class OIVis extends OIData {
                     Types.TYPE_COMPLEX, true, false, NO_STR_VALUES, new CustomUnits(), null, null, this));
         }
 
-        // VISAMP  column definition
-        addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISAMP, "visibility amplitude",
-                Types.TYPE_DBL, OIFitsConstants.COLUMN_VISAMPERR, DataRange.RANGE_VIS, this));
+        if (oifitsFile.isOIFits2()) {
+            // VISAMP  column definition (User unit required only for AMPTYPE='correlated flux')
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISAMP, "visibility amplitude",
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(false), OIFitsConstants.COLUMN_VISAMPERR, DataRange.RANGE_VIS, this));
 
-        // VISAMPERR  column definition
-        addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISAMPERR, "error in visibility amplitude",
-                Types.TYPE_DBL, DataRange.RANGE_POSITIVE, this));
+            // VISAMPERR  column definition (User unit required only for AMPTYPE='correlated flux')
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISAMPERR, "error in visibility amplitude",
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(false), null, DataRange.RANGE_POSITIVE, this));
+        } else {
+            // VISAMP  column definition
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISAMP, "visibility amplitude",
+                    Types.TYPE_DBL, OIFitsConstants.COLUMN_VISAMPERR, DataRange.RANGE_VIS, this));
+
+            // VISAMPERR  column definition
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISAMPERR, "error in visibility amplitude",
+                    Types.TYPE_DBL, DataRange.RANGE_POSITIVE, this));
+        }
 
         // VISPHI  column definition
         addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISPHI, "visibility phase", Types.TYPE_DBL,

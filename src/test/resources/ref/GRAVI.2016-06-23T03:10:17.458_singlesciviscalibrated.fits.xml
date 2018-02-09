@@ -1622,8 +1622,8 @@
 <keyword><name>ARRNAME</name><value>VLTI</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
 <keyword><name>DATE-OBS</name><value>2016-06-23T03:10:23</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
 <keyword><name>INSNAME</name><value>GRAVITY_FT</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
-<keyword><name>AMPTYP</name><value>absolute</value><description>'absolute, 'differential', correlated flux'</description><type>A</type><unit></unit></keyword>
-<keyword><name>PHITYP</name><value>differential</value><description>'absolute, 'differential'</description><type>A</type><unit></unit></keyword>
+<keyword><name>AMPTYP</name><value>absolute</value><description>'absolute', 'differential', 'correlated flux'</description><type>A</type><unit></unit></keyword>
+<keyword><name>PHITYP</name><value>differential</value><description>'absolute', 'differential'</description><type>A</type><unit></unit></keyword>
 <keyword><name>PHIORDER</name><value>1</value><description>Polynomial fit order for differential chromatic phases</description><type>J</type><unit></unit></keyword>
 </keywords>
 <rows>6</rows><columns>
@@ -1763,8 +1763,8 @@
 <keyword><name>ARRNAME</name><value>VLTI</value><description>name of corresponding array</description><type>A</type><unit></unit></keyword>
 <keyword><name>DATE-OBS</name><value>2016-06-23T03:10:23</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
 <keyword><name>INSNAME</name><value>GRAVITY_SC</value><description>name of corresponding detector</description><type>A</type><unit></unit></keyword>
-<keyword><name>AMPTYP</name><value>absolute</value><description>'absolute, 'differential', correlated flux'</description><type>A</type><unit></unit></keyword>
-<keyword><name>PHITYP</name><value>differential</value><description>'absolute, 'differential'</description><type>A</type><unit></unit></keyword>
+<keyword><name>AMPTYP</name><value>absolute</value><description>'absolute', 'differential', 'correlated flux'</description><type>A</type><unit></unit></keyword>
+<keyword><name>PHITYP</name><value>differential</value><description>'absolute', 'differential'</description><type>A</type><unit></unit></keyword>
 <keyword><name>PHIORDER</name><value>1</value><description>Polynomial fit order for differential chromatic phases</description><type>J</type><unit></unit></keyword>
 </keywords>
 <rows>6</rows><columns>
@@ -1898,16 +1898,11 @@
 <checkReport>
 Analysing File: GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits
 Analysing HDU [HDU#0]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	OBSTECH keyword must be present
 Analysing table [OI_ARRAY#1]
 SEVERE	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
 SEVERE	Missing column 'FOV'
 SEVERE	Missing column 'FOVTYPE'
-SEVERE	Invalid value for column 'FOVTYPE' line 0, found '' should be 'FWHM|RADIUS'
-SEVERE	Invalid value for column 'FOVTYPE' line 1, found '' should be 'FWHM|RADIUS'
-SEVERE	Invalid value for column 'FOVTYPE' line 2, found '' should be 'FWHM|RADIUS'
-SEVERE	Invalid value for column 'FOVTYPE' line 3, found '' should be 'FWHM|RADIUS'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_TARGET#2]
@@ -1922,21 +1917,17 @@ SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_VIS#5]
 SEVERE	Invalid format for column 'VISDATA', found '5M' should be '5C'
 SEVERE	Invalid format for column 'VISERR', found '5M' should be '5C'
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_VIS2#6]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_T3#7]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Missing keyword 'OI_REVN'
 Analysing table [OI_VIS#9]
 SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]
@@ -1950,15 +1941,12 @@ SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with form
 SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]
 SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
 SEVERE	Invalid format for column 'VISERR', found '210M' should be '210C'
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_VIS2#10]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_T3#11]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 SEVERE	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#12]
@@ -1969,10 +1957,9 @@ SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
 SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
-SEVERE	The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'
 SEVERE	Missing keyword 'OI_REVN'
 
-0 warnings, 58 severe errors
+0 warnings, 48 severe errors
 </checkReport>
 <rules>
   <rule>
@@ -1989,16 +1976,6 @@ SEVERE	Missing keyword 'OI_REVN'
     <name>GENERIC_COL_MANDATORY</name>
     <description>check if the required column is present</description>
     <paragraph>V1-V2.Tables</paragraph>
-  </rule>
-  <rule>
-    <name>GENERIC_COL_VAL_ACCEPTED_STR</name>
-    <description>check if column values match the 'accepted' values (string)</description>
-    <paragraph>V1-V2.Tables</paragraph>
-  </rule>
-  <rule>
-    <name>GENERIC_DATE_OBS_STANDARD</name>
-    <description>check if the DATE_OBS keyword is in the format 'YYYY-MM-DD'</description>
-    <paragraph>V2.6.1§1</paragraph>
   </rule>
   <rule>
     <name>GENERIC_KEYWORD_MANDATORY</name>
@@ -2024,18 +2001,6 @@ SEVERE	Missing keyword 'OI_REVN'
 <failures>
   <profile>
   </profile>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_DATE_OBS_STANDARD</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>DATE-OBS</member>
-    <data>
-      <value>2016-06-23T03:10:23</value>
-      <message>The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'</message>
-    </data>
-  </failure>
   <failure>
     <severity>SEVERE</severity>
     <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
@@ -2074,38 +2039,6 @@ SEVERE	Missing keyword 'OI_REVN'
     <extNb>1</extNb>
     <member>FOVTYPE</member>
     <message>Missing column 'FOVTYPE'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_VAL_ACCEPTED_STR</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <member>FOVTYPE</member>
-    <data>
-      <value></value>
-      <expected>FWHM|RADIUS</expected>
-      <row>0</row>
-      <message>Invalid value for column 'FOVTYPE' line 0, found '' should be 'FWHM|RADIUS'</message>
-    </data>
-    <data>
-      <value></value>
-      <expected>FWHM|RADIUS</expected>
-      <row>1</row>
-      <message>Invalid value for column 'FOVTYPE' line 1, found '' should be 'FWHM|RADIUS'</message>
-    </data>
-    <data>
-      <value></value>
-      <expected>FWHM|RADIUS</expected>
-      <row>2</row>
-      <message>Invalid value for column 'FOVTYPE' line 2, found '' should be 'FWHM|RADIUS'</message>
-    </data>
-    <data>
-      <value></value>
-      <expected>FWHM|RADIUS</expected>
-      <row>3</row>
-      <message>Invalid value for column 'FOVTYPE' line 3, found '' should be 'FWHM|RADIUS'</message>
-    </data>
   </failure>
   <failure>
     <severity>SEVERE</severity>
@@ -2231,18 +2164,6 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>SEVERE</severity>
-    <rule>GENERIC_DATE_OBS_STANDARD</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>5</extNb>
-    <member>DATE-OBS</member>
-    <data>
-      <value>2016-06-23T03:10:23</value>
-      <message>The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>OI_VIS</extName>
@@ -2267,18 +2188,6 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>SEVERE</severity>
-    <rule>GENERIC_DATE_OBS_STANDARD</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>6</extNb>
-    <member>DATE-OBS</member>
-    <data>
-      <value>2016-06-23T03:10:23</value>
-      <message>The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>OI_VIS2</extName>
@@ -2299,18 +2208,6 @@ SEVERE	Missing keyword 'OI_REVN'
     <data>
       <value>2</value>
       <message>Fixed OI_REVN to 2.</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_DATE_OBS_STANDARD</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>7</extNb>
-    <member>DATE-OBS</member>
-    <data>
-      <value>2016-06-23T03:10:23</value>
-      <message>The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'</message>
     </data>
   </failure>
   <failure>
@@ -2359,18 +2256,6 @@ SEVERE	Missing keyword 'OI_REVN'
     <data>
       <value>1D</value>
       <message>Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_DATE_OBS_STANDARD</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>8</extNb>
-    <member>DATE-OBS</member>
-    <data>
-      <value>2016-06-23T03:10:23</value>
-      <message>The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'</message>
     </data>
   </failure>
   <failure>
@@ -2518,18 +2403,6 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>SEVERE</severity>
-    <rule>GENERIC_DATE_OBS_STANDARD</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>DATE-OBS</member>
-    <data>
-      <value>2016-06-23T03:10:23</value>
-      <message>The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>OI_VIS</extName>
@@ -2554,18 +2427,6 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>SEVERE</severity>
-    <rule>GENERIC_DATE_OBS_STANDARD</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>10</extNb>
-    <member>DATE-OBS</member>
-    <data>
-      <value>2016-06-23T03:10:23</value>
-      <message>The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>OI_VIS2</extName>
@@ -2586,18 +2447,6 @@ SEVERE	Missing keyword 'OI_REVN'
     <data>
       <value>2</value>
       <message>Fixed OI_REVN to 2.</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_DATE_OBS_STANDARD</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>11</extNb>
-    <member>DATE-OBS</member>
-    <data>
-      <value>2016-06-23T03:10:23</value>
-      <message>The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'</message>
     </data>
   </failure>
   <failure>
@@ -2706,18 +2555,6 @@ SEVERE	Missing keyword 'OI_REVN'
     <data>
       <value>1D</value>
       <message>Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_DATE_OBS_STANDARD</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>12</extNb>
-    <member>DATE-OBS</member>
-    <data>
-      <value>2016-06-23T03:10:23</value>
-      <message>The keyword DATE-OBS '2016-06-23T03:10:23' is not in a standard format 'YYYY-MM-DD'</message>
     </data>
   </failure>
   <failure>

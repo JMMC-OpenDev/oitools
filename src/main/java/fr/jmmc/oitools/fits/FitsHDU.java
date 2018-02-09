@@ -605,7 +605,8 @@ public abstract class FitsHDU extends ModelBase {
                     // convert again to string
                     final String strDate = sdf.format(date);
 
-                    if (dateObs.equals(strDate)) {
+                    // Check only date present at the beginning:
+                    if (dateObs.startsWith(strDate)) {
                         valid = true;
                     }
                 } catch (ParseException pe) {
@@ -613,8 +614,8 @@ public abstract class FitsHDU extends ModelBase {
                 }
             }
 
-            if (!valid) {
-                // rule [GENERIC_DATE_OBS_STANDARD] check if the DATE_OBS keyword is in the standard format: YYYY-MM-DD
+            if (!valid || OIFitsChecker.isInspectRules()) {
+                // rule [GENERIC_DATE_OBS_STANDARD] check if the DATE_OBS keyword is in the format 'YYYY-MM-DD'
                 checker.ruleFailed(Rule.GENERIC_DATE_OBS_STANDARD, hdu, OIFitsConstants.KEYWORD_DATE_OBS).addKeywordValue(dateObs);
             }
             if (valid || OIFitsChecker.isInspectRules()) {

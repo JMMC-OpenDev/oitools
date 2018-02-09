@@ -933,16 +933,15 @@ public abstract class OIData extends OIAbstractData {
      * @param colName cloumn name
      * @param unit new unit
      */
-    public void setColumnUnit(String colName, String unit) {
-        ColumnMeta colMeta = getColumnMeta(colName);
+    public void setColumnUnit(final String colName, final String unit) {
+        final ColumnMeta colMeta = getColumnMeta(colName);
         if (colMeta == null) {
             logger.log(Level.SEVERE, "Can not modify a non existing column in this table or this file: ", colName);
         } else {
-            Units colUnit = colMeta.getUnits();
-            if (colUnit instanceof CustomUnits) {
-                ((CustomUnits) colUnit).setRepresentation(unit);
+            if (colMeta.isCustomUnits()) {
+                colMeta.getCustomUnits().setRepresentation(unit);
             } else {
-                logger.log(Level.WARNING, "Can not modify {0} is not a Userunit column: ", colName);
+                logger.log(Level.WARNING, "Can not modify {0} is not a CustomUnits column: ", colName);
             }
         }
     }

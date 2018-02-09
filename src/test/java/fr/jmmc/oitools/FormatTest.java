@@ -43,6 +43,16 @@ public class FormatTest {
     }
 
     @Test
+    public void testDateOk2() {
+        testDateObs("2017-02-07T00:00:00", false);
+    }
+
+    @Test
+    public void testDateOk3() {
+        testDateObs("2017-02-07TEST", false);
+    }
+
+    @Test
     public void testDateBad1() {
         testDateObs("2017-02-31", true);
     }
@@ -65,11 +75,6 @@ public class FormatTest {
     @Test
     public void testDateBad5() {
         testDateObs(" 2017-02-07", true);
-    }
-
-    @Test
-    public void testDateBad6() {
-        testDateObs("2017-02-07T00:00:00", true);
     }
 
     @Test

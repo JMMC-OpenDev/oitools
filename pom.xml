@@ -93,6 +93,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <configuration>
+                        <forkCount>1</forkCount>
+                        <reuseForks>false</reuseForks>
+                    </configuration>
                     <!-- Travis build workaround -->
                     <argLine>-Xms256m -Xmx1024m</argLine>
                     <systemProperties>
