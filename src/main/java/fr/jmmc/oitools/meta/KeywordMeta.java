@@ -28,7 +28,7 @@ import java.util.logging.Level;
  * This class describes a FITS keyword.
  * 
  * Notes :
- * - OIFits uses only 'A', 'I', 'D' types for keywords => Other types are not supported for keywords.
+ * - OIFits uses only 'A', 'I', 'D' types for keywords. Other types are not supported for keywords.
  * - Keyword units are only useful for XML representation of an OIFits file (not defined in FITS)
  *
  * @author bourgesl

@@ -39,7 +39,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 /**
- * Generic FITS table (column metadata & data)
+ * Generic FITS table (column metadata and data)
  */
 public abstract class FitsTable extends FitsHDU {
 
