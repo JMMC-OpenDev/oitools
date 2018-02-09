@@ -39,6 +39,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 
 /**
  * This command line program loads OIFits files given as arguments
@@ -46,6 +47,12 @@ import java.util.Set;
  * @author bourgesl, mella
  */
 public final class OIFitsViewer {
+
+    /**
+     * Logger associated to test classes
+     */
+    public final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(OIFitsViewer.class.getName());
+
 
     /* members */
     /** internal OIFits checker */
@@ -295,18 +302,18 @@ public final class OIFitsViewer {
         final OIFitsViewer viewer = new OIFitsViewer(xml, tsv, format, verbose);
 
         if (!tsv) {
-            System.out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>");
+            logger.log(Level.INFO, "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>");
         }
         for (String fileName : fileNames) {
             try {
-                System.out.println(viewer.process(fileName));
+                logger.log(Level.INFO, viewer.process(fileName));
             } catch (Exception e) {
                 e.printStackTrace(System.err);
-                System.out.println("Error reading file '" + fileName + "'");
+                logger.log(Level.INFO, "Error reading file ''{0}''", fileName);
             }
         }
         if (!tsv) {
-            System.out.println("</oifits_list>");
+            logger.log(Level.INFO, "</oifits_list>");
         }
 
     }
@@ -316,34 +323,34 @@ public final class OIFitsViewer {
      * @param message message to print
      */
     private static void error(final String message) {
-        System.err.println(message);
+        logger.log(Level.SEVERE, message);
         showArgumentsHelp();
         System.exit(1);
     }
 
     /** Show command arguments help */
     private static void showArgumentsHelp() {
-        System.out.println(
+        logger.log(Level.INFO,
                 "-------------------------------------------------------------------------");
-        System.out.println(
+        logger.log(Level.INFO,
                 "Usage: OIFitsViewer [-f|-format] [-v|-verbose] [-t|-tsv] <file names>");
-        System.out.println(
+        logger.log(Level.INFO,
                 "------------- Arguments help --------------------------------------------");
-        System.out.println(
+        logger.log(Level.INFO,
                 "| Key          Value           Description                              |");
-        System.out.println(
+        logger.log(Level.INFO,
                 "|-----------------------------------------------------------------------|");
-        System.out.println(
+        logger.log(Level.INFO,
                 "| [-f] or [-format]            Use the number formatter                 |");
-        System.out.println(
+        logger.log(Level.INFO,
                 "| [-v] or [-verbose]           Dump all column data                     |");
-        System.out.println(
+        logger.log(Level.INFO,
                 "| [-t] or [-tsv]               Dump object table in tsv format          |");
-        System.out.println(
+        logger.log(Level.INFO,
                 "| [-c] or [-check]             Check only given file(s)                 |");
-        System.out.println(
+        logger.log(Level.INFO,
                 "| [-h|-help]                   Show arguments help                      |");
-        System.out.println(
+        logger.log(Level.INFO,
                 "-------------------------------------------------------------------------");
     }
 }

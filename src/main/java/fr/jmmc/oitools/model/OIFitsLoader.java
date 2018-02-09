@@ -32,7 +32,6 @@ import fr.jmmc.oitools.image.ImageOiConstants;
 import fr.jmmc.oitools.image.ImageOiData;
 import fr.jmmc.oitools.meta.ArrayColumnMeta;
 import fr.jmmc.oitools.meta.ColumnMeta;
-import fr.jmmc.oitools.meta.CustomUnits;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;

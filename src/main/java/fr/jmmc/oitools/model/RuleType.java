@@ -25,6 +25,12 @@ package fr.jmmc.oitools.model;
  */
 public enum RuleType {
 
+    /**
+     * Rule failure type
+     */
     CHECK,
+    /**
+     * Rule to fix failure
+     */
     FIX;
 }

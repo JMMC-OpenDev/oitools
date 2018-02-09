@@ -54,7 +54,7 @@ public final class OIFitsChecker {
 
     /* --- INSPECT RULES --- */
     private static boolean INSPECT_RULES = false;
-
+    /* --- INSPECT_MODE --- */
     private static InspectMode INSPECT_MODE = InspectMode.NORMAL;
 
     /**
@@ -73,16 +73,25 @@ public final class OIFitsChecker {
         INSPECT_RULES = COLLECT_RULES;
     }
 
+    /**
+     * Give information if we are in inspection mode (shouldSkipRule() spécial case)
+     * @return INSPECT_MODE true if inspection mode active
+     */
     public static InspectMode getInspectMode() {
         return INSPECT_MODE;
     }
 
+    /**
+     * Set information if we want to go into inspection mode (DataModel)
+     * @param InspectMode true if inspection mode active
+     */
     public static void setInspectMode(InspectMode InspectMode) {
         INSPECT_MODE = InspectMode;
     }
 
     /**
      * Filter the writing of the rules according to the cases
+     * @param rule Rule
      * @return filter with all informations to filter the rules to write
      */
     public static boolean shouldSkipRule(Rule rule) {
@@ -579,7 +588,8 @@ public final class OIFitsChecker {
 
     /**
      * Set FileRef value and standard
-     * @param fileRef
+     * @param fileRef reference on the file
+     * @param std OIFitsStandard
      */
     void setFileRef(final FileRef fileRef, final OIFitsStandard std) {
         this.fileRef = fileRef;

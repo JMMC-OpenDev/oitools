@@ -68,7 +68,9 @@ public interface ImageOiConstants {
     public final static String KEYWORD_DESCRIPTION_HDUNAME = "Unique name for the image within the FITS file";
 
     /* bsmem specific */
+    /** KEYWORD_AUTO_WGT : keyword */
     public final static String KEYWORD_AUTO_WGT = "AUTO_WGT";
+    /** KEYWORD_FLUXERR : keyword */
     public final static String KEYWORD_FLUXERR = "FLUXERR";
 
 }

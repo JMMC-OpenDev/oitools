@@ -24,7 +24,6 @@ import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.fits.FitsHDU;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.ColumnMeta;
-import fr.jmmc.oitools.meta.CustomUnits;
 import fr.jmmc.oitools.meta.DataRange;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
