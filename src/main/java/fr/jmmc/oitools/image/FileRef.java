@@ -100,6 +100,10 @@ public final class FileRef {
         }
     }
 
+    /**
+     * Get a number as identifier for the memory structure
+     * @return a number corresponding to the number of memory structure
+     */
     public int getMemoryIndex() {
         if (memCount == -1) {
             memCount = GLOBAL_COUNTER.getAndIncrement();
@@ -116,6 +120,10 @@ public final class FileRef {
         return "FileRef[" + getStringId() + "]";
     }
 
+    /**
+     * Get the file name if exist or a memory number 
+     * @return the file name if exist or a memory number 
+     */
     public String getStringId() {
         if (getFileName() != null) {
             return getFileName();

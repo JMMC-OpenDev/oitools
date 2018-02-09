@@ -41,7 +41,15 @@ public final class RuleFailureComparator implements Comparator<RuleFailure> {
                     RuleFailureField.MEMBER
             )
     );
+
+    /**
+     * Default comparator
+     */
     public static final RuleFailureComparator DEFAULT = BY_TABLE;
+
+    /**
+     * Comparator by Rule
+     */
     public static final RuleFailureComparator BY_RULE = new RuleFailureComparator(
             Arrays.asList(
                     RuleFailureField.RULE,
@@ -51,6 +59,9 @@ public final class RuleFailureComparator implements Comparator<RuleFailure> {
             )
     );
 
+    /**
+     * Comparator by file
+     */
     public static final Comparator<FileRef> CMP_FILE_REF = new Comparator<FileRef>() {
         @Override
         public int compare(final FileRef r1, final FileRef r2) {
@@ -71,6 +82,9 @@ public final class RuleFailureComparator implements Comparator<RuleFailure> {
         }
     };
 
+    /**
+     * Comparator by number
+     */
     public static final Comparator<Integer> CMP_INT = new Comparator<Integer>() {
         @Override
         public int compare(final Integer i1, final Integer i2) {
@@ -81,10 +95,18 @@ public final class RuleFailureComparator implements Comparator<RuleFailure> {
     // members:
     private final List<RuleFailureField> sortDirectives;
 
+    /**
+     * Set the value sortDirectives
+     * @param sortDirectives List
+     */
     public RuleFailureComparator(List<RuleFailureField> sortDirectives) {
         this.sortDirectives = sortDirectives;
     }
 
+    /**
+     * Get the list of value: sortDirectives
+     * @return sortDirectives
+     */
     public List<RuleFailureField> getSortDirectives() {
         return sortDirectives;
     }
@@ -126,6 +148,11 @@ public final class RuleFailureComparator implements Comparator<RuleFailure> {
         return 0;
     }
 
+    /**
+     * Get the comparator according to the field
+     * @param field RuleFailureField
+     * @return the comparator according to the field
+     */
     public Comparator getComparator(RuleFailureField field) {
         switch (field) {
             case RULE:

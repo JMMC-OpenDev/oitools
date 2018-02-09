@@ -177,7 +177,7 @@ public final class CsvOutputVisitor implements ModelVisitor {
         }
     }
 
-    public static void appendHeader(StringBuilder buffer, String sep) {
+    private static void appendHeader(StringBuilder buffer, String sep) {
         // respect the same order has the one provided in the appendCsvRecord
         buffer.append("target_name").append(sep)
                 .append("s_ra").append(sep)

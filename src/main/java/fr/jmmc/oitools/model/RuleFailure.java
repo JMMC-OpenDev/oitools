@@ -30,6 +30,9 @@ import fr.jmmc.oitools.image.FileRef;
  */
 public final class RuleFailure {
 
+    /**
+     * Enum for field to allow in RuleFailure
+     */
     public enum RuleFailureField {
         RULE, FILE_REF, EXTNAME, EXT_NB, MEMBER, SEVERITY;
     }
@@ -108,6 +111,11 @@ public final class RuleFailure {
         return hash;
     }
 
+    /**
+     * Get the correct field
+     * @param field RuleFailureField enum
+     * @return the correct field
+     */
     public Object getField(final RuleFailureField field) {
         switch (field) {
             case RULE:
@@ -126,6 +134,7 @@ public final class RuleFailure {
                 return null;
         }
     }
+
     /* --- KEY --- */
     /**
      * Return the validation rule
