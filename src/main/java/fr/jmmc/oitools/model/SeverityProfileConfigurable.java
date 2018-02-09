@@ -19,24 +19,52 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.jmcs.util.ResourceUtils;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 
 /**
- * Implementation for the severe profile
+ * Implementation for the configurable profile (ascii config file)
  * @author kempsc
  */
-public final class SeverityProfileStrict implements SeverityProfile {
+public final class SeverityProfileConfigurable implements SeverityProfile {
 
-    static final SeverityProfile INSTANCE = new SeverityProfileStrict();
+    // TODO: use a factory or automatically lookup profiles in the CONF_CLASSLOADER_PATH folder
+    static final SeverityProfile JMMC = new SeverityProfileConfigurable("JMMC");
+
+    /** classloader path to configuration files */
+    public static final String CONF_CLASSLOADER_PATH = "fr/jmmc/oitools/resource/";
+
+    /* members */
+    /** profile name */
+    private final String name;
+
+    public SeverityProfileConfigurable(final String name) {
+        this.name = name;
+
+        loadConfig();
+    }
 
     @Override
     public void defineSeverity(final RuleFailure failure, final OIFitsStandard std) {
         failure.setSeverity(Severity.Error);
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
-        return "SeverityProfileStrict";
+        return "SeverityProfile" + name;
+    }
+
+    private void loadConfig() {
+        final String fileName = "profile_" + name + ".conf";
+
+        // use the class loader resource resolver
+        final String config = ResourceUtils.readResource(CONF_CLASSLOADER_PATH + fileName);
+
+        System.out.println("config: " + config);
     }
 
 }

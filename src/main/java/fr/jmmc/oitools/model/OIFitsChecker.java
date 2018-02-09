@@ -35,6 +35,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -106,6 +107,9 @@ public final class OIFitsChecker {
     /** Map to storing all objects for error handling */
     private final Map<RuleFailure, DataLocation> failures;
 
+    /** Standard mapping */
+    private final Map<FileRef, OIFitsStandard> fileRefStandards = new HashMap<FileRef, OIFitsStandard>();
+
     /** OIFITS2: temporary state to check correlation indexes keyed by CORRNAME */
     private final Map<String, OIFitsCorrChecker> corrCheckers = new HashMap<String, OIFitsCorrChecker>();
 
@@ -132,7 +136,11 @@ public final class OIFitsChecker {
         }
 
         for (RuleFailure failure : failures.keySet()) {
-            profile.defineSeverity(failure);
+            final OIFitsStandard std = fileRefStandards.get(failure.getFileRef());
+
+            logger.log(Level.INFO, "defineSeverity[{0}] for std = {1}", new Object[]{failure.getRule().name(), std});
+
+            profile.defineSeverity(failure, std);
         }
         logger.info("defineSeverity: done");
     }
@@ -141,8 +149,9 @@ public final class OIFitsChecker {
      * Clear the map
      */
     void cleanup() {
-        setFileRef(null);
+        setFileRef(null, null);
         setSkipFormat(false);
+        fileRefStandards.clear();
         corrCheckers.clear();
     }
 
@@ -569,11 +578,14 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Set FileRef Object
+     * Set FileRef value and standard
      * @param fileRef
      */
-    void setFileRef(FileRef fileRef) {
+    void setFileRef(final FileRef fileRef, final OIFitsStandard std) {
         this.fileRef = fileRef;
+        if (std != null) {
+            this.fileRefStandards.put(fileRef, std);
+        }
     }
 
     /**

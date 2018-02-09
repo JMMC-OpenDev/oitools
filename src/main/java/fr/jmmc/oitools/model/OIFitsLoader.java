@@ -242,7 +242,7 @@ public class OIFitsLoader {
         try {
             final FileRef fileRef = new FileRef(absFilePath);
             // Initialize FileRef in OIFitsChecker
-            checker.setFileRef(fileRef);
+            checker.setFileRef(fileRef, null);
 
             // Check if the given file exists:
             final File file = new File(absFilePath);
