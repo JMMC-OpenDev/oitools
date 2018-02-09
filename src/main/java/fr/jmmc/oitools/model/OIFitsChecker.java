@@ -134,7 +134,7 @@ public final class OIFitsChecker {
      * @param profile define severity profil for all rules
      */
     void defineSeverity(final SeverityProfile profile) {
-        logger.log(java.util.logging.Level.INFO, "defineSeverity: {0}", profile);
+        logger.log(java.util.logging.Level.FINE, "defineSeverity: {0}", profile);
 
         // first check rule is complete:
         for (Map.Entry<RuleFailure, DataLocation> entry : failures.entrySet()) {
@@ -147,11 +147,13 @@ public final class OIFitsChecker {
         for (RuleFailure failure : failures.keySet()) {
             final OIFitsStandard std = fileRefStandards.get(failure.getFileRef());
 
-            logger.log(Level.INFO, "defineSeverity[{0}] for std = {1}", new Object[]{failure.getRule().name(), std});
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "defineSeverity[{0}] for std = {1}", new Object[]{failure.getRule().name(), std});
+            }
 
             profile.defineSeverity(failure, std);
         }
-        logger.info("defineSeverity: done");
+        logger.fine("defineSeverity: done");
     }
 
     /**

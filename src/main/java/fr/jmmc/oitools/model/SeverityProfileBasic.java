@@ -22,21 +22,22 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 
 /**
- * Implementation for the severe profile
+ * Implementation for the basic SeverityProfile
  * @author kempsc
  */
-public final class SeverityProfileStrict implements SeverityProfile {
+public final class SeverityProfileBasic extends SeverityProfile {
 
-    static final SeverityProfile INSTANCE = new SeverityProfileStrict();
+    /* members */
+    private final Severity severity;
 
-    @Override
-    public void defineSeverity(final RuleFailure failure, final OIFitsStandard std) {
-        failure.setSeverity(Severity.Error);
+    SeverityProfileBasic(final String name, final Severity severity) {
+        super(name);
+        this.severity = severity;
     }
 
     @Override
-    public String toString() {
-        return "SeverityProfileStrict";
+    public void defineSeverity(final RuleFailure failure, final OIFitsStandard std) {
+        failure.setSeverity(severity);
     }
 
 }
