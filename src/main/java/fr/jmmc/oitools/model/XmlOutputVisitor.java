@@ -673,7 +673,7 @@ public final class XmlOutputVisitor implements ModelVisitor {
 
     /**
      * Encode special characters to entities
-     * @see jmcs StringUtils.encodeTagContent(String)
+     * @see JMCS StringUtils.encodeTagContent(String)
      *
      * @param src input string
      * @return encoded value
