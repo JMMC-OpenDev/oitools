@@ -771,12 +771,12 @@
 <checkReport>
 Analysing File: 2012-03-24_ALL_oiDataCalib.fits
 Analysing table [OI_ARRAY#3]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 
-0 warnings, 4 severe errors
+3 warnings, 0 severe errors
 </checkReport>
 <rules>
   <rule>
@@ -787,14 +787,14 @@ SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
   <rule>
     <name>OI_ARRAY_XYZ_FIX</name>
     <description>fix the ARRAY_XYZ keyword values (to VLTI or CHARA according to the ARRNAME keyword) when the ARRAY_XYZ keyword values are incorrect</description>
-    <paragraph>V1.6.1.3</paragraph>
+    <paragraph>JMMC</paragraph>
   </rule>
 </rules>
 <failures>
   <profile>
   </profile>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>2012-03-24_ALL_oiDataCalib.fits</file>
     <extName>OI_ARRAY</extName>
@@ -806,7 +806,7 @@ SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>2012-03-24_ALL_oiDataCalib.fits</file>
     <extName>OI_ARRAY</extName>
@@ -818,7 +818,7 @@ SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>2012-03-24_ALL_oiDataCalib.fits</file>
     <extName>OI_ARRAY</extName>
@@ -830,7 +830,7 @@ SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>2012-03-24_ALL_oiDataCalib.fits</file>
     <extName>OI_ARRAY</extName>
