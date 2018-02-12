@@ -834,7 +834,7 @@
   <rule>
     <name>OI_ARRAY_XYZ_FIX</name>
     <description>fix the ARRAY_XYZ keyword values (to VLTI or CHARA according to the ARRNAME keyword) when the ARRAY_XYZ keyword values are incorrect</description>
-    <paragraph>V1.6.1.3</paragraph>
+    <paragraph>JMMC</paragraph>
     <subjects>
       <apply>OI_ARRAY</apply>
     </subjects>

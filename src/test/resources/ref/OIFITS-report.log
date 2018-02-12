@@ -4,408 +4,408 @@ SEVERE	STA_INDEX[0] cannot be < 1 at row 0
 Analysing table [OI_TARGET#2]
 SEVERE	TARGET_ID[0] cannot be < 1 at row 0
 Analysing table [OI_VIS#4]
-SEVERE	Missing unit for column 'VISPHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'VISPHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'VISPHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'VISPHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#6]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing File: 2008-Contest_Binary.oifits
 Analysing table [OI_ARRAY#1]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_TARGET#2]
 SEVERE	TARGET_ID[0] cannot be < 1 at row 0
 Analysing table [OI_T3#5]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing File: 2009-11-eps_Aur-avg5.oifits
 Analysing table [OI_ARRAY#1]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#2]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#3]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#4]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#5]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#6]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#7]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#8]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#9]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#10]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#11]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#12]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#13]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#14]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#15]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#16]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#17]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#18]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#19]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#20]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#21]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#22]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#23]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#24]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#25]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#26]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_T3#80]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#81]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#82]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#83]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#84]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#85]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#86]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#87]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#88]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#89]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#90]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#91]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#92]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#93]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#94]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#95]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#96]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#97]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#98]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#99]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#100]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#101]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#102]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#103]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#104]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing table [OI_T3#105]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing File: 2012-03-24_ALL_oiDataCalib.fits
 Analysing table [OI_ARRAY#3]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing File: A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits
 Analysing table [IMAGE-OI INPUT PARAM#-1]
 SEVERE	Missing keyword 'RGL_PRIO'
 Analysing table [OI_ARRAY#3]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#4]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#5]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#6]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#7]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#8]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_VIS#10]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#11]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#12]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#13]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#14]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#15]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#16]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#17]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#18]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#19]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#20]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#21]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing File: A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits
 Analysing table [OI_ARRAY#2]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#3]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#4]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#5]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#6]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#7]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_VIS#9]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#10]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#11]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#12]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#13]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#14]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#15]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#16]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#17]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#18]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#19]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#20]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing File: AMBER_070409.fits
 Analysing table [OI_VIS#5]
 SEVERE	Invalid format for column 'VISDATA', found '20M' should be '20C'
 SEVERE	Invalid format for column 'VISERR', found '20M' should be '20C'
-SEVERE	Missing unit for column 'VISDATA', should be ''
-SEVERE	Missing unit for column 'VISERR', should be ''
+INFO	Missing unit for column 'VISDATA', should be ''
+INFO	Missing unit for column 'VISERR', should be ''
 Analysing table [OI_VIS#6]
 SEVERE	Invalid format for column 'VISDATA', found '20M' should be '20C'
 SEVERE	Invalid format for column 'VISERR', found '20M' should be '20C'
-SEVERE	Missing unit for column 'VISDATA', should be ''
-SEVERE	Missing unit for column 'VISERR', should be ''
+INFO	Missing unit for column 'VISDATA', should be ''
+INFO	Missing unit for column 'VISERR', should be ''
 Analysing File: bigtest2.fits
 Analysing HDU [HDU#0]
 SEVERE	Missing keyword 'DATE'
@@ -414,46 +414,46 @@ Analysing table [OI_TARGET#1]
 SEVERE	TARGET_ID[0] cannot be < 1 at row 0
 Analysing table [OI_ARRAY#2]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '100.0'
-SEVERE	Invalid ARRAYY keyword '200.0'
-SEVERE	Invalid ARRAYZ keyword '300.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '100.0'
+WARNING	Invalid ARRAYY keyword '200.0'
+WARNING	Invalid ARRAYZ keyword '300.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#3]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
-SEVERE	Invalid ARRAYX keyword '10.0'
-SEVERE	Invalid ARRAYY keyword '20.0'
-SEVERE	Invalid ARRAYZ keyword '30.0'
+WARNING	Invalid ARRAYX keyword '10.0'
+WARNING	Invalid ARRAYY keyword '20.0'
+WARNING	Invalid ARRAYZ keyword '30.0'
 Analysing table [OI_INSPOL#7]
 SEVERE	Can't check repeat for column 'JXX'
 SEVERE	Can't check repeat for column 'JXY'
 SEVERE	Can't check repeat for column 'JYX'
 SEVERE	Can't check repeat for column 'JYY'
 Analysing table [OI_VIS#8]
-SEVERE	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2.3148149193730205E-4] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2.3148149193730205E-4] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#9]
-SEVERE	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [0.009259259328246117] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.009259259328246117] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#10]
-SEVERE	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2.3148149193730205E-4] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2.3148149193730205E-4] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#11]
-SEVERE	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [0.009259259328246117] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.009259259328246117] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_T3#12]
-SEVERE	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2.3148149193730205E-4] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2.3148149193730205E-4] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_T3#13]
-SEVERE	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [0.009259259328246117] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.009259259328246117] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_FLUX#14]
 SEVERE	Missing unit for column 'FLUXERR', should be ''
-SEVERE	MJD [0.00578703731298447] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [0.00810185167938471] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.00578703731298447] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.00810185167938471] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_FLUX#15]
 SEVERE	Missing unit for column 'FLUXERR', should be ''
-SEVERE	MJD [0.00578703731298447] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [0.00810185167938471] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.00578703731298447] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [0.00810185167938471] is out of range, expected in [27073.5 - 106332.5]
 Analysing File: GGTauA_H_MJD56269_CAL_HD28462_V990Tau7Holesb.oifits
 Analysing table [OI_VIS2#3]
 SEVERE	Missing OI_ARRAY table that describes the 'NACO' array
@@ -463,115 +463,115 @@ Analysing File: GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits
 Analysing HDU [HDU#0]
 SEVERE	OBSTECH keyword must be present
 Analysing table [OI_ARRAY#1]
-SEVERE	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
-SEVERE	Missing column 'FOV'
-SEVERE	Missing column 'FOVTYPE'
+INFO	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
+WARNING	Missing column 'FOV'
+WARNING	Missing column 'FOVTYPE'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_TARGET#2]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_WAVELENGTH#3]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_WAVELENGTH#4]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_VIS#5]
 SEVERE	Invalid format for column 'VISDATA', found '5M' should be '5C'
 SEVERE	Invalid format for column 'VISERR', found '5M' should be '5C'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_VIS2#6]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_T3#7]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
 SEVERE	Missing keyword 'OI_REVN'
 Analysing table [OI_VIS#9]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.E_U' with format [3D]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.E_V' with format [3D]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.E_W' with format [3D]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.E_ZD' with format [3D]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.GDELAY_ASTROMETRY' with format [1D]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.OPD_DISP' with format [210D]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with format [1D]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_U' with format [3D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_V' with format [3D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_W' with format [3D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_ZD' with format [3D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.GDELAY_ASTROMETRY' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.OPD_DISP' with format [210D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]
 SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
 SEVERE	Invalid format for column 'VISERR', found '210M' should be '210C'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_VIS2#10]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_T3#11]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-SEVERE	Fixed OI_REVN to 2.
+INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#12]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [210D]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.FT_POS' with format [1D]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.LKDT_MET_FC' with format [1D]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [210D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.FT_POS' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.LKDT_MET_FC' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
 SEVERE	Missing keyword 'OI_REVN'
 Analysing File: GRAVITY.2016-01-09T05-37-06_singlesci_calibrated.fits
 Analysing table [OI_ARRAY#2]
-SEVERE	Skipping non-standard OIFITS column 'OI_ARRAY#2.MNTSTA' with format [1J]
+INFO	Skipping non-standard OIFITS column 'OI_ARRAY#2.MNTSTA' with format [1J]
 Analysing table [OI_WAVELENGTH#3]
-SEVERE	Skipping non-standard OIFITS column 'OI_WAVELENGTH#3.POLAR' with format [1J]
+INFO	Skipping non-standard OIFITS column 'OI_WAVELENGTH#3.POLAR' with format [1J]
 Analysing table [OI_WAVELENGTH#4]
-SEVERE	Skipping non-standard OIFITS column 'OI_WAVELENGTH#4.POLAR' with format [1J]
+INFO	Skipping non-standard OIFITS column 'OI_WAVELENGTH#4.POLAR' with format [1J]
 Analysing table [OI_FLUX#8]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
 SEVERE	Missing keyword 'CALSTAT'
 SEVERE	Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3'
 SEVERE	Unsupported table OI_FLUX#8 in OIFITS V1.0
 Analysing table [OI_VIS#9]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.ASTROMETRIC_DELAY' with format [1D]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#9.ASTROMETRIC_PHASE' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.ASTROMETRIC_DELAY' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#9.ASTROMETRIC_PHASE' with format [1D]
 Analysing table [OI_FLUX#12]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [235D]
-SEVERE	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [235D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
 SEVERE	Missing keyword 'CALSTAT'
 SEVERE	Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3'
 SEVERE	Unsupported table OI_FLUX#12 in OIFITS V1.0
 Analysing File: Mystery-Med_H-AmberVISPHI.oifits
 Analysing table [OI_TARGET#2]
-SEVERE	The target DECEP0 coordinate is 0.0 at row 0
-SEVERE	The target RAEP0 coordinate is 0.0 at row 0
+WARNING	The target DECEP0 coordinate is 0.0 at row 0
+WARNING	The target RAEP0 coordinate is 0.0 at row 0
 Analysing File: NGC5128_2005.oifits
 Analysing table [OI_VIS#4]
-SEVERE	Missing unit for column 'VISPHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'VISPHIERR', should be 'deg|degree|degrees'
-SEVERE	The keyword DATE-OBS '1564-02-15' has an incorrect year, expected in [1933 - 2150]
+INFO	Missing unit for column 'VISPHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'VISPHIERR', should be 'deg|degree|degrees'
+WARNING	The keyword DATE-OBS '1564-02-15' has an incorrect year, expected in [1933 - 2150]
 Analysing File: PRODUCT_V838_Mon_1.90-2.53micron_2013-04-15T01_49_24.8034--------0.00000------------inf--------1--------2--------3.fits
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#4.T3BIAS' with format [16C]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#4.T3INTERBIAS' with format [16C]
-SEVERE	Skipping non-standard OIFITS column 'OI_VIS#4.VISCOVRI' with format [16D]
-SEVERE	Missing unit for column 'VISDATA', should be ''
-SEVERE	Missing unit for column 'VISERR', should be ''
-SEVERE	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
+INFO	Skipping non-standard OIFITS column 'OI_VIS#4.T3BIAS' with format [16C]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#4.T3INTERBIAS' with format [16C]
+INFO	Skipping non-standard OIFITS column 'OI_VIS#4.VISCOVRI' with format [16D]
+INFO	Missing unit for column 'VISDATA', should be ''
+INFO	Missing unit for column 'VISERR', should be ''
+INFO	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
 Analysing table [OI_VIS2#5]
-SEVERE	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
+INFO	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
 Analysing table [OI_T3#6]
-SEVERE	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
+INFO	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
 Analysing File: T_PYX_oiDataCalib.fits
 Analysing table [OI_ARRAY#4]
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing File: TEST_CreateOIFileV1.fits
-SEVERE	Missing unit for column 'VISDATA', should be ''
-SEVERE	Missing unit for column 'VISERR', should be ''
+INFO	Missing unit for column 'VISDATA', should be ''
+INFO	Missing unit for column 'VISERR', should be ''
 Analysing File: TEST_CreateOIFileV2.fits
 Analysing table [OI_INSPOL#5]
 SEVERE	Can't check repeat for column 'JXX'
@@ -590,4 +590,4 @@ SEVERE	Can't check repeat for column 'JXY'
 SEVERE	Can't check repeat for column 'JYX'
 SEVERE	Can't check repeat for column 'JYY'
 
-0 warnings, 400 severe errors
+166 warnings, 80 severe errors

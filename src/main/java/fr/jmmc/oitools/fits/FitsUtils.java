@@ -19,6 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.fits;
 
+import fr.jmmc.oitools.model.SeverityProfileFactory;
 import fr.nom.tam.fits.BasicHDU;
 import fr.nom.tam.fits.BinaryTable;
 import fr.nom.tam.fits.BinaryTableHDU;
@@ -98,6 +99,9 @@ public final class FitsUtils {
         FitsFactory.setUseHierarch(true);
         // Force to use binary tables:
         FitsFactory.setUseAsciiTables(false);
+        
+        // Preload Severity profiles:
+        SeverityProfileFactory.getInstance();
     }
 
     /**

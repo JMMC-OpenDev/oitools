@@ -227,7 +227,7 @@ public enum Rule {
     ),
     OI_ARRAY_XYZ_FIX(RuleType.FIX,
             "fix the ARRAY_XYZ keyword values (to VLTI or CHARA according to the ARRNAME keyword) when the ARRAY_XYZ keyword values are incorrect",
-            "V1.6.1.3",
+            Const.JMMC,
             RuleDataType.VALUE,
             "Fixed ARRAY_X/Y/Z to '{{VALUE}}'."
     ),

@@ -570,14 +570,7 @@ public final class OIFitsFile extends FitsImageFile {
             }
 
             // Define Severity:
-            // TODO: define an alternate method that use the given profile ?
-            final SeverityProfile profile;
-            if (true) {
-                profile = SeverityProfileConfigurable.JMMC;
-            } else {
-                profile = SeverityProfileStrict.INSTANCE;
-            }
-            checker.defineSeverity(profile);
+            checker.defineSeverity(SeverityProfileFactory.getInstance().getProfile(SeverityProfileFactory.PROFILE_JMMC));
 
             if (logger.isLoggable(Level.FINE)) {
                 logger.log(Level.FINE, "OIFitsFile.check: duration = {0} ms.", 1e-6d * (System.nanoTime() - start));

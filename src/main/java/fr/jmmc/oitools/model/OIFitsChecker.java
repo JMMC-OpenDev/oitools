@@ -46,15 +46,14 @@ import java.util.logging.Logger;
  */
 public final class OIFitsChecker {
 
-    /* --- INSPECT MODE --- */
     enum InspectMode {
         NORMAL,
         CASE_V2_IN_V1;
     }
 
-    /* --- INSPECT RULES --- */
+    /** InspectRule flag */
     private static boolean INSPECT_RULES = false;
-    /* --- INSPECT_MODE --- */
+    /** InspectMode description */
     private static InspectMode INSPECT_MODE = InspectMode.NORMAL;
 
     /**
@@ -113,7 +112,7 @@ public final class OIFitsChecker {
     /** flag to skip keyword / column format checks (loading OIFITS) */
     private boolean skipFormat = false;
 
-    /** Map to storing all objects for error handling */
+    /** Map to storing all objects for failures handling */
     private final Map<RuleFailure, DataLocation> failures;
 
     /** Standard mapping */
@@ -134,7 +133,7 @@ public final class OIFitsChecker {
      * @param profile define severity profil for all rules
      */
     void defineSeverity(final SeverityProfile profile) {
-        logger.log(java.util.logging.Level.INFO, "defineSeverity: {0}", profile);
+        logger.log(java.util.logging.Level.FINE, "defineSeverity: {0}", profile);
 
         // first check rule is complete:
         for (Map.Entry<RuleFailure, DataLocation> entry : failures.entrySet()) {
@@ -147,11 +146,13 @@ public final class OIFitsChecker {
         for (RuleFailure failure : failures.keySet()) {
             final OIFitsStandard std = fileRefStandards.get(failure.getFileRef());
 
-            logger.log(Level.INFO, "defineSeverity[{0}] for std = {1}", new Object[]{failure.getRule().name(), std});
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "defineSeverity[{0}] for std = {1}", new Object[]{failure.getRule().name(), std});
+            }
 
             profile.defineSeverity(failure, std);
         }
-        logger.info("defineSeverity: done");
+        logger.fine("defineSeverity: done");
     }
 
     /**
@@ -165,10 +166,11 @@ public final class OIFitsChecker {
     }
 
     /**
+     * Management of the applyTo and standard
      * TODO do private at the end
      * @param rule rule informations
      * @param applyTo String for rule apply To
-     * @param standard Strandard information
+     * @param standard OIFitsStandard information
      */
     public void inspectRuleFailed(final Rule rule, final String applyTo, final OIFitsStandard standard) {
         if (isInspectRules() && !shouldSkipRule(rule)) {

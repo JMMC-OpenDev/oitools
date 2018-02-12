@@ -359,17 +359,17 @@
 Analysing File: 2008-Contest_Binary.oifits
 Analysing table [OI_ARRAY#1]
 SEVERE	STA_INDEX[0] cannot be &lt; 1 at row 0
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_TARGET#2]
 SEVERE	TARGET_ID[0] cannot be &lt; 1 at row 0
 Analysing table [OI_T3#5]
-SEVERE	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
-SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
+INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 
-0 warnings, 8 severe errors
+3 warnings, 2 severe errors
 </checkReport>
 <rules>
   <rule>
@@ -390,7 +390,7 @@ SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
   <rule>
     <name>OI_ARRAY_XYZ_FIX</name>
     <description>fix the ARRAY_XYZ keyword values (to VLTI or CHARA according to the ARRNAME keyword) when the ARRAY_XYZ keyword values are incorrect</description>
-    <paragraph>V1.6.1.3</paragraph>
+    <paragraph>JMMC</paragraph>
   </rule>
   <rule>
     <name>OI_TARGET_TARGETID_MIN</name>
@@ -415,7 +415,7 @@ SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>2008-Contest_Binary.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -427,7 +427,7 @@ SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>2008-Contest_Binary.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -439,7 +439,7 @@ SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>2008-Contest_Binary.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -451,7 +451,7 @@ SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>2008-Contest_Binary.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -475,7 +475,7 @@ SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>2008-Contest_Binary.oifits</file>
     <extName>OI_T3</extName>
@@ -487,7 +487,7 @@ SEVERE	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>2008-Contest_Binary.oifits</file>
     <extName>OI_T3</extName>

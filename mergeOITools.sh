@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# First, configure the remote upstream:
+# git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+
 # Get remote changes into the local branch 'upstream'
 git fetch -v upstream 
 

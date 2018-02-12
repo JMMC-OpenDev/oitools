@@ -55,7 +55,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -67,7 +67,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -79,7 +79,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -91,7 +91,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -103,7 +103,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -115,7 +115,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -127,7 +127,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -139,7 +139,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -151,7 +151,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -163,7 +163,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -175,7 +175,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -187,7 +187,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -199,7 +199,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -211,7 +211,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -223,7 +223,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -235,7 +235,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -247,7 +247,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -259,7 +259,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -271,7 +271,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -19487,7 +19487,7 @@
     <message>Missing column 'DIAMETER'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>memory:2</file>
     <extName>OI_ARRAY</extName>
@@ -19496,7 +19496,7 @@
     <message>Missing column 'FOV'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>memory:2</file>
     <extName>OI_ARRAY</extName>
@@ -20576,7 +20576,7 @@
     <message>Missing column 'DIAMETER'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -20585,7 +20585,7 @@
     <message>Missing column 'FOV'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -25299,7 +25299,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -25312,7 +25312,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -25325,7 +25325,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -25338,7 +25338,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -25351,7 +25351,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -25364,7 +25364,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -25377,7 +25377,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -25390,7 +25390,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25403,7 +25403,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25416,7 +25416,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25429,7 +25429,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25442,7 +25442,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25455,7 +25455,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25468,7 +25468,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25481,7 +25481,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25494,7 +25494,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25507,7 +25507,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25520,7 +25520,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25533,7 +25533,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25546,7 +25546,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25559,7 +25559,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25572,7 +25572,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25585,7 +25585,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25598,7 +25598,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -25611,7 +25611,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25624,7 +25624,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25637,7 +25637,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25650,7 +25650,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25663,7 +25663,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25676,7 +25676,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25689,7 +25689,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25702,7 +25702,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25741,7 +25741,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25754,7 +25754,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -25767,7 +25767,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25780,7 +25780,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25793,7 +25793,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25806,7 +25806,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25819,7 +25819,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25832,7 +25832,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25845,7 +25845,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25858,7 +25858,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25871,7 +25871,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25884,7 +25884,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -25897,7 +25897,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -25910,7 +25910,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -25923,7 +25923,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -25936,7 +25936,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -25949,7 +25949,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -25962,7 +25962,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -25975,7 +25975,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -25988,7 +25988,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -26001,7 +26001,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -26014,7 +26014,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -26027,7 +26027,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -26040,7 +26040,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -26053,7 +26053,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -26066,7 +26066,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -26079,7 +26079,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -26092,7 +26092,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -26105,7 +26105,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -26118,7 +26118,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -26131,7 +26131,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -26144,7 +26144,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -26157,7 +26157,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -26170,7 +26170,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -26183,7 +26183,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -26196,7 +26196,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26209,7 +26209,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26222,7 +26222,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26235,7 +26235,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26248,7 +26248,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26261,7 +26261,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26274,7 +26274,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26287,7 +26287,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26300,7 +26300,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26313,7 +26313,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26326,7 +26326,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26339,7 +26339,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26352,7 +26352,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26365,7 +26365,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26378,7 +26378,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26391,7 +26391,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26404,7 +26404,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26417,7 +26417,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -26430,7 +26430,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -26443,7 +26443,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -26456,7 +26456,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -26469,7 +26469,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -26482,7 +26482,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -26495,7 +26495,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -26508,7 +26508,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -26521,7 +26521,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -26534,7 +26534,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -26547,7 +26547,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -26560,7 +26560,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -26573,7 +26573,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -26586,7 +26586,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26599,7 +26599,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26612,7 +26612,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26625,7 +26625,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26638,7 +26638,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26651,7 +26651,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26690,7 +26690,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26729,7 +26729,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26742,7 +26742,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26755,7 +26755,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26768,7 +26768,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26781,7 +26781,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26820,7 +26820,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26833,7 +26833,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26846,7 +26846,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -26859,7 +26859,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26872,7 +26872,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26885,7 +26885,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26898,7 +26898,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26911,7 +26911,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26924,7 +26924,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26937,7 +26937,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26950,7 +26950,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26963,7 +26963,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26976,7 +26976,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -26989,7 +26989,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -27002,7 +27002,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27015,7 +27015,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27028,7 +27028,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27041,7 +27041,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27054,7 +27054,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27067,7 +27067,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27080,7 +27080,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27093,7 +27093,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27106,7 +27106,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27119,7 +27119,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27132,7 +27132,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27145,7 +27145,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27158,7 +27158,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27171,7 +27171,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27184,7 +27184,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27197,7 +27197,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -27210,7 +27210,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -27223,7 +27223,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -27236,7 +27236,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -27249,7 +27249,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -27262,7 +27262,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -27275,7 +27275,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -27288,7 +27288,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -27301,7 +27301,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -27314,7 +27314,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -27326,7 +27326,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -27338,7 +27338,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -27350,7 +27350,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -27362,7 +27362,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -27374,7 +27374,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -27386,7 +27386,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -27398,7 +27398,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27410,7 +27410,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27422,7 +27422,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27434,7 +27434,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27446,7 +27446,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27458,7 +27458,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27470,7 +27470,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27482,7 +27482,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27494,7 +27494,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27506,7 +27506,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27518,7 +27518,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27530,7 +27530,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27542,7 +27542,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27554,7 +27554,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27566,7 +27566,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27578,7 +27578,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27590,7 +27590,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -27602,7 +27602,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27614,7 +27614,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27626,7 +27626,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27638,7 +27638,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27650,7 +27650,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27662,7 +27662,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27674,7 +27674,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27686,7 +27686,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27722,7 +27722,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27734,7 +27734,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -27746,7 +27746,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27758,7 +27758,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27770,7 +27770,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27782,7 +27782,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27794,7 +27794,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27806,7 +27806,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27818,7 +27818,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27830,7 +27830,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27842,7 +27842,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27854,7 +27854,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -27866,7 +27866,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27878,7 +27878,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27890,7 +27890,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27902,7 +27902,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27914,7 +27914,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27926,7 +27926,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27938,7 +27938,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27950,7 +27950,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27962,7 +27962,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27974,7 +27974,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27986,7 +27986,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -27998,7 +27998,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -28010,7 +28010,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -28022,7 +28022,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -28034,7 +28034,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -28046,7 +28046,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -28058,7 +28058,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -28070,7 +28070,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -28082,7 +28082,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -28094,7 +28094,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -28106,7 +28106,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -28118,7 +28118,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -28130,7 +28130,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -28142,7 +28142,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28154,7 +28154,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28166,7 +28166,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28178,7 +28178,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28190,7 +28190,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28202,7 +28202,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28214,7 +28214,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28226,7 +28226,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28238,7 +28238,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28250,7 +28250,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28262,7 +28262,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28274,7 +28274,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28286,7 +28286,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28298,7 +28298,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28310,7 +28310,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28322,7 +28322,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28334,7 +28334,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28346,7 +28346,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -28358,7 +28358,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -28370,7 +28370,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -28382,7 +28382,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -28394,7 +28394,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -28406,7 +28406,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -28418,7 +28418,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -28430,7 +28430,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -28442,7 +28442,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -28454,7 +28454,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -28466,7 +28466,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -28478,7 +28478,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -28490,7 +28490,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -28502,7 +28502,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28514,7 +28514,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28526,7 +28526,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28538,7 +28538,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28550,7 +28550,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28562,7 +28562,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28598,7 +28598,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28634,7 +28634,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28646,7 +28646,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28658,7 +28658,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28670,7 +28670,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28682,7 +28682,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28718,7 +28718,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28730,7 +28730,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28742,7 +28742,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -28754,7 +28754,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28766,7 +28766,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28778,7 +28778,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28790,7 +28790,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28802,7 +28802,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28814,7 +28814,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28826,7 +28826,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28838,7 +28838,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28850,7 +28850,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28862,7 +28862,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28874,7 +28874,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -28886,7 +28886,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -28898,7 +28898,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -28910,7 +28910,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -28922,7 +28922,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -28934,7 +28934,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -28946,7 +28946,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -28958,7 +28958,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -28970,7 +28970,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -28982,7 +28982,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -28994,7 +28994,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -29006,7 +29006,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -29018,7 +29018,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -29030,7 +29030,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -29042,7 +29042,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -29054,7 +29054,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -29066,7 +29066,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -29078,7 +29078,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -29090,7 +29090,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -29102,7 +29102,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -29114,7 +29114,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -29126,7 +29126,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -29138,7 +29138,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -29150,7 +29150,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -29162,7 +29162,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -30285,7 +30285,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_STR</rule>
     <file>memory:1</file>
     <extName>OI_TARGET</extName>
@@ -30299,7 +30299,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_STR</rule>
     <file>memory:1</file>
     <extName>OI_TARGET</extName>
@@ -30327,7 +30327,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_STR</rule>
     <file>memory:2</file>
     <extName>OI_TARGET</extName>
@@ -30341,7 +30341,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_STR</rule>
     <file>memory:2</file>
     <extName>OI_TARGET</extName>
@@ -30383,7 +30383,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -30403,7 +30403,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -30469,7 +30469,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -30489,7 +30489,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -32495,7 +32495,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>memory:1</file>
     <extName>OI_VIS</extName>
@@ -32508,7 +32508,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>memory:1</file>
     <extName>OI_VIS2</extName>
@@ -32521,7 +32521,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>memory:1</file>
     <extName>OI_T3</extName>
@@ -32534,7 +32534,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>memory:2</file>
     <member>DATE-OBS</member>
@@ -32545,7 +32545,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_VIS</extName>
@@ -32558,7 +32558,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_VIS2</extName>
@@ -32571,7 +32571,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_T3</extName>
@@ -32584,7 +32584,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_FLUX</extName>
@@ -32597,7 +32597,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -32610,7 +32610,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -32623,7 +32623,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -32636,7 +32636,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
@@ -32649,7 +32649,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -32662,7 +32662,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -32675,7 +32675,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -32688,7 +32688,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -32701,7 +32701,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:1</file>
     <extName>OI_VIS</extName>
@@ -32713,7 +32713,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:1</file>
     <extName>OI_VIS2</extName>
@@ -32725,7 +32725,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:1</file>
     <extName>OI_T3</extName>
@@ -32737,7 +32737,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:2</file>
     <member>DATE-OBS</member>
@@ -32747,7 +32747,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:2</file>
     <extName>OI_VIS</extName>
@@ -32759,7 +32759,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:2</file>
     <extName>OI_VIS2</extName>
@@ -32771,7 +32771,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:2</file>
     <extName>OI_T3</extName>
@@ -32783,7 +32783,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:2</file>
     <extName>OI_FLUX</extName>
@@ -32795,7 +32795,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -32807,7 +32807,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -32819,7 +32819,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -32831,7 +32831,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
@@ -32843,7 +32843,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -32855,7 +32855,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -32867,7 +32867,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -32879,7 +32879,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -39612,7 +39612,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>memory:1</file>
     <extName>OI_VIS</extName>
@@ -39630,7 +39630,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>memory:1</file>
     <extName>OI_VIS2</extName>
@@ -39648,7 +39648,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>memory:1</file>
     <extName>OI_T3</extName>
@@ -39666,7 +39666,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>memory:2</file>
     <member>MJD-END</member>
@@ -39677,7 +39677,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>memory:2</file>
     <member>MJD-OBS</member>
@@ -39688,7 +39688,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_VIS</extName>
@@ -39706,7 +39706,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_VIS2</extName>
@@ -39724,7 +39724,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_T3</extName>
@@ -39742,7 +39742,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_FLUX</extName>
@@ -39760,7 +39760,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -39778,7 +39778,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -39796,7 +39796,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -39814,7 +39814,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
@@ -39827,7 +39827,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
@@ -39840,7 +39840,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -39858,7 +39858,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -39876,7 +39876,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -39894,7 +39894,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -39912,7 +39912,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:1</file>
     <extName>OI_TARGET</extName>
@@ -39923,7 +39923,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:1</file>
     <extName>OI_ARRAY</extName>
@@ -39934,7 +39934,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:1</file>
     <extName>OI_WAVELENGTH</extName>
@@ -39945,7 +39945,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:1</file>
     <extName>OI_VIS</extName>
@@ -39956,7 +39956,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:1</file>
     <extName>OI_VIS2</extName>
@@ -39967,7 +39967,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:1</file>
     <extName>OI_T3</extName>
@@ -39978,7 +39978,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:2</file>
     <extName>OI_TARGET</extName>
@@ -39989,7 +39989,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:2</file>
     <extName>OI_ARRAY</extName>
@@ -40000,7 +40000,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:2</file>
     <extName>OI_WAVELENGTH</extName>
@@ -40011,7 +40011,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:2</file>
     <extName>OI_CORR</extName>
@@ -40022,7 +40022,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:2</file>
     <extName>OI_INSPOL</extName>
@@ -40033,7 +40033,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:2</file>
     <extName>OI_VIS</extName>
@@ -40044,7 +40044,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:2</file>
     <extName>OI_VIS2</extName>
@@ -40055,7 +40055,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:2</file>
     <extName>OI_T3</extName>
@@ -40066,7 +40066,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>memory:2</file>
     <extName>OI_FLUX</extName>
@@ -40077,7 +40077,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -40088,7 +40088,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -40099,7 +40099,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -40110,7 +40110,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -40121,7 +40121,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -40132,7 +40132,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -40143,7 +40143,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -40154,7 +40154,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -40165,7 +40165,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -40176,7 +40176,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -40187,7 +40187,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -40198,7 +40198,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -40209,7 +40209,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -40220,7 +40220,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -40231,7 +40231,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_SPECTRUM</extName>
@@ -41232,7 +41232,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>memory:1</file>
     <extName>OI_ARRAY</extName>
@@ -41244,7 +41244,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>memory:1</file>
     <extName>OI_ARRAY</extName>
@@ -41256,7 +41256,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>memory:1</file>
     <extName>OI_ARRAY</extName>
@@ -41268,7 +41268,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>memory:2</file>
     <extName>OI_ARRAY</extName>
@@ -41280,7 +41280,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>memory:2</file>
     <extName>OI_ARRAY</extName>
@@ -41292,7 +41292,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>memory:2</file>
     <extName>OI_ARRAY</extName>
@@ -41304,7 +41304,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -41316,7 +41316,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -41328,7 +41328,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -41340,7 +41340,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -41352,7 +41352,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -41364,7 +41364,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -41376,7 +41376,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>memory:1</file>
     <extName>OI_ARRAY</extName>
@@ -41387,7 +41387,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>memory:2</file>
     <extName>OI_ARRAY</extName>
@@ -41398,7 +41398,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -41409,7 +41409,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -42482,7 +42482,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_INSPOL_MJD_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_INSPOL</extName>
@@ -42495,7 +42495,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_INSPOL_MJD_RANGE</rule>
     <file>memory:2</file>
     <extName>OI_INSPOL</extName>
@@ -42508,7 +42508,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_INSPOL_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -42571,7 +42571,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_INSPOL_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -42670,7 +42670,7 @@
     <message>Missing OI_CORR table but the column CORRINDX_T3PHI is defined.</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_TARGET_COORD</rule>
     <file>memory:1</file>
     <extName>OI_TARGET</extName>
@@ -42683,7 +42683,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_TARGET_COORD</rule>
     <file>memory:1</file>
     <extName>OI_TARGET</extName>
@@ -42696,7 +42696,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_TARGET_COORD</rule>
     <file>memory:2</file>
     <extName>OI_TARGET</extName>
@@ -42709,7 +42709,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_TARGET_COORD</rule>
     <file>memory:2</file>
     <extName>OI_TARGET</extName>
@@ -42722,7 +42722,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_TARGET_COORD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -42740,7 +42740,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_TARGET_COORD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -42758,7 +42758,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_TARGET_COORD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -42776,7 +42776,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_TARGET_COORD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>

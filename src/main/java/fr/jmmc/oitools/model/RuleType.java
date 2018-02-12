@@ -20,17 +20,11 @@
 package fr.jmmc.oitools.model;
 
 /**
- * Type of the rules, if FIX if fixed bug rule (informative failure)
+ * Type of the rules, CHECK is for validation, FIX is for correction
  * @author kempsc
  */
 public enum RuleType {
 
-    /**
-     * Rule failure type
-     */
     CHECK,
-    /**
-     * Rule to fix failure
-     */
     FIX;
 }

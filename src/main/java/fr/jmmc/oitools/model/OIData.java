@@ -713,7 +713,6 @@ public abstract class OIData extends OIAbstractData {
      */
     protected static void checkStaIndexes(final OIFitsChecker checker, final short[][] staIndexes, final OIData oiData) {
         // check STA_INDEX Unique
-        /* TODO: avoid redudant messages */
         for (int i = 0; i < staIndexes.length; i++) {
             final short[] indexes = staIndexes[i];
 

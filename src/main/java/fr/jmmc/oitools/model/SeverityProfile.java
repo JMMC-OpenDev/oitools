@@ -22,16 +22,37 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 
 /**
- * Interface for creating severity profiles
+ * The aim of a SeverityProfile consists in defining the severity of given failures
  * @author kempsc
  */
-public interface SeverityProfile {
+public abstract class SeverityProfile {
+
+    /* members */
+    /** profile name */
+    private final String name;
+
+    SeverityProfile(final String name) {
+        this.name = name;
+    }
+
+    /**
+     * Return the name of this SeverityProfile
+     * @return name of this SeverityProfile
+     */
+    public final String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 
     /**
      * Set the severity for the given failure and OIFITS standard
      * @param failure failure to set the severity
      * @param std OIFITS standard
      */
-    public void defineSeverity(RuleFailure failure, OIFitsStandard std);
+    public abstract void defineSeverity(final RuleFailure failure, final OIFitsStandard std);
 
 }

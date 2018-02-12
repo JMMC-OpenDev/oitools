@@ -831,78 +831,78 @@ Analysing File: A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.i
 SEVERE	Missing keyword 'RGL_PRIO'
 Analysing table [OI_ARRAY#3]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#4]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#5]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#6]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#7]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#8]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
-SEVERE	Invalid ARRAYX keyword '0.0'
-SEVERE	Invalid ARRAYY keyword '0.0'
-SEVERE	Invalid ARRAYZ keyword '0.0'
-SEVERE	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Invalid ARRAYX keyword '0.0'
+WARNING	Invalid ARRAYY keyword '0.0'
+WARNING	Invalid ARRAYZ keyword '0.0'
+INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_VIS#10]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#11]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#12]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#13]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#14]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#15]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#16]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#17]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#18]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#19]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#20]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#21]
-SEVERE	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
-SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
+WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 
-0 warnings, 43 severe errors
+30 warnings, 7 severe errors
 </checkReport>
 <rules>
   <rule>
@@ -928,7 +928,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
   <rule>
     <name>OI_ARRAY_XYZ_FIX</name>
     <description>fix the ARRAY_XYZ keyword values (to VLTI or CHARA according to the ARRNAME keyword) when the ARRAY_XYZ keyword values are incorrect</description>
-    <paragraph>V1.6.1.3</paragraph>
+    <paragraph>JMMC</paragraph>
   </rule>
 </rules>
 <failures>
@@ -955,7 +955,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -967,7 +967,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -979,7 +979,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -991,7 +991,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1015,7 +1015,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1027,7 +1027,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1039,7 +1039,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1051,7 +1051,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1075,7 +1075,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1087,7 +1087,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1099,7 +1099,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1111,7 +1111,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1135,7 +1135,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1147,7 +1147,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1159,7 +1159,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1171,7 +1171,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1195,7 +1195,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1207,7 +1207,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1219,7 +1219,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1231,7 +1231,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1255,7 +1255,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1267,7 +1267,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1279,7 +1279,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1291,7 +1291,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1302,7 +1302,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS</extName>
@@ -1320,7 +1320,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS2</extName>
@@ -1338,7 +1338,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS</extName>
@@ -1356,7 +1356,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS2</extName>
@@ -1374,7 +1374,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS</extName>
@@ -1392,7 +1392,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS2</extName>
@@ -1410,7 +1410,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS</extName>
@@ -1428,7 +1428,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS2</extName>
@@ -1446,7 +1446,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS</extName>
@@ -1464,7 +1464,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS2</extName>
@@ -1482,7 +1482,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS</extName>
@@ -1500,7 +1500,7 @@ SEVERE	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_VIS2</extName>

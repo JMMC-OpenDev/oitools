@@ -418,7 +418,6 @@ public final class OIArray extends OITable {
         final short[] staIndexes = getStaIndex();
         final String[] staNames = getStaName();
 
-        /* TODO: avoid redudant messages */
         for (int i = 0; i < staIndexes.length; i++) {
             if (staNames[i] == null || OIFitsChecker.isInspectRules()) {
                 // rule [OI_ARRAY_STA_NAME] check if the STA_NAME column values have a not null or empty value
