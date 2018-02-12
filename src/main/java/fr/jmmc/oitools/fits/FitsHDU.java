@@ -55,7 +55,7 @@ public abstract class FitsHDU extends ModelBase {
 
     /** minimum year value */
     public static final int YEAR_MIN = 1933;
-    /** maxmum year value */
+    /** maximum year value */
     public static final int YEAR_MAX = 2150;
 
     /** MJD starting at 1-JAN-1933 00:00 UT */
@@ -72,7 +72,8 @@ public abstract class FitsHDU extends ModelBase {
             "extension name", Types.TYPE_CHAR, true, NO_STR_VALUES);
 
     /* members */
-    /** Set to use when in the situation to harvest the rules. It is not created if one is not in isInspectRules() */
+    /** Rule list used in the situation to harvest the rules. It is not created if one is not in isInspectRules() 
+     */
     private final Set<Rule> applyRules = OIFitsChecker.isInspectRules() ? new HashSet<Rule>() : null;
 
     /**

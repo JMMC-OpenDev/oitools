@@ -46,15 +46,14 @@ import java.util.logging.Logger;
  */
 public final class OIFitsChecker {
 
-    /* --- INSPECT MODE --- */
     enum InspectMode {
         NORMAL,
         CASE_V2_IN_V1;
     }
 
-    /* --- INSPECT RULES --- */
+    /** InspectRule flag */
     private static boolean INSPECT_RULES = false;
-    /* --- INSPECT_MODE --- */
+    /** InspectMode description */
     private static InspectMode INSPECT_MODE = InspectMode.NORMAL;
 
     /**
@@ -113,7 +112,7 @@ public final class OIFitsChecker {
     /** flag to skip keyword / column format checks (loading OIFITS) */
     private boolean skipFormat = false;
 
-    /** Map to storing all objects for error handling */
+    /** Map to storing all objects for failures handling */
     private final Map<RuleFailure, DataLocation> failures;
 
     /** Standard mapping */
@@ -167,10 +166,11 @@ public final class OIFitsChecker {
     }
 
     /**
+     * Management of the applyTo and standard
      * TODO do private at the end
      * @param rule rule informations
      * @param applyTo String for rule apply To
-     * @param standard Strandard information
+     * @param standard OIFitsStandard information
      */
     public void inspectRuleFailed(final Rule rule, final String applyTo, final OIFitsStandard standard) {
         if (isInspectRules() && !shouldSkipRule(rule)) {

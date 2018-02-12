@@ -368,7 +368,6 @@ public final class OITarget extends OITable {
         final short[] targetIds = getTargetId();
         final String[] targetNames = getTarget();
 
-        /* TODO: avoid redudant messages */
         // TODO: check coordinates (crossmatch ?)
         for (int i = 0; i < len; i++) {
 
