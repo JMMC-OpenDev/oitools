@@ -22,6 +22,8 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.jmcs.util.ResourceUtils;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,11 +58,10 @@ public final class SeverityProfileConfigurable extends SeverityProfile {
 
     @Override
     public void defineSeverity(final RuleFailure failure, final OIFitsStandard std) {
-        List<ProfileMatcher> matchers = getMatchers(failure.getRule().name());
+        final List<ProfileMatcher> matchers = getMatchers(failure.getRule().name());
 
         if (matchers == null || !applyMatchers(matchers, failure, std)) {
-            matchers = getMatchers(WILDCARD);
-            applyMatchers(matchers, failure, std);
+            applyMatchers(getDefaultMatchers(), failure, std);
         }
     }
 
@@ -94,11 +95,11 @@ public final class SeverityProfileConfigurable extends SeverityProfile {
                     continue;
                 }
             }
+            // always increase severity
             if ((severity == null) || (matcher.severity.ordinal() > severity.ordinal())) {
                 if (logger.isLoggable(Level.FINE)) {
                     logger.log(Level.FINE, "accept matcher: {0} for {1}", new Object[]{matcher, failure});
                 }
-                // always increase severity
                 severity = matcher.severity;
             }
         }
@@ -109,17 +110,12 @@ public final class SeverityProfileConfigurable extends SeverityProfile {
         return false;
     }
 
-    private List<ProfileMatcher> getMatchers(String ruleId) {
-        return matcherMap.get(ruleId);
+    private List<ProfileMatcher> getDefaultMatchers() {
+        return getMatchers(WILDCARD);
     }
 
-    private void addMatcher(ProfileMatcher matcher) {
-        List<ProfileMatcher> list = matcherMap.get(matcher.ruleId);
-        if (list == null) {
-            list = new ArrayList<ProfileMatcher>(5);
-            matcherMap.put(matcher.ruleId, list);
-        }
-        list.add(matcher);
+    private List<ProfileMatcher> getMatchers(final String ruleId) {
+        return matcherMap.get(ruleId);
     }
 
     private void loadConfig() {
@@ -183,15 +179,36 @@ public final class SeverityProfileConfigurable extends SeverityProfile {
                 addMatcher(new ProfileMatcher(severity, ruleId, extName, member, std));
             }
         }
+        // Sort matchers by increasing severity (priority)
+        sortMatchers();
 
         logger.log(Level.FINE, "matcherMap: {0}", matcherMap);
 
         // Ensure default rule is defined:
-        List<ProfileMatcher> matchers = getMatchers(WILDCARD);
+        final List<ProfileMatcher> matchers = getDefaultMatchers();
 
         if ((matchers == null)
                 || !applyMatchers(matchers, ANY_FAILURE, null)) {
             throw new IllegalStateException("Missing default rule [" + WILDCARD + "] !");
+        }
+    }
+
+    private void addMatcher(final ProfileMatcher matcher) {
+        List<ProfileMatcher> list = matcherMap.get(matcher.ruleId);
+        if (list == null) {
+            list = new ArrayList<ProfileMatcher>(5);
+            matcherMap.put(matcher.ruleId, list);
+        }
+        list.add(matcher);
+    }
+
+    private void sortMatchers() {
+        for (final List<ProfileMatcher> matchers : matcherMap.values()) {
+            if (matchers.size() > 1) {
+                Collections.sort(matchers, ProfileMatcherSeverityComparator.INSTANCE);
+
+                logger.log(Level.FINE, "matchers:\n{0}", matchers);
+            }
         }
     }
 
@@ -209,7 +226,8 @@ public final class SeverityProfileConfigurable extends SeverityProfile {
             if (WILDCARD.equals(ruleId)) {
                 this.ruleId = WILDCARD;
             } else {
-                this.ruleId = Rule.valueOf(ruleId).name(); // validation
+                // validation of the ruleId (x* not accepted):
+                this.ruleId = Rule.valueOf(ruleId).name();
             }
             this.extName = (WILDCARD.equals(extName)) ? null : extName;
             if ((member == null) || (WILDCARD.equals(member))) {
@@ -249,6 +267,16 @@ public final class SeverityProfileConfigurable extends SeverityProfile {
             return "ProfileMatcher{" + "severity=" + severity + ", ruleId=" + ruleId
                     + ", extName=" + extName + ", member=" + member
                     + ", isMemberExact=" + isMemberExact + ", std=" + std + '}';
+        }
+    }
+
+    final static class ProfileMatcherSeverityComparator implements Comparator<ProfileMatcher> {
+
+        final static ProfileMatcherSeverityComparator INSTANCE = new ProfileMatcherSeverityComparator();
+
+        @Override
+        public int compare(final ProfileMatcher m1, final ProfileMatcher m2) {
+            return m1.severity.compareTo(m2.severity);
         }
 
     }
