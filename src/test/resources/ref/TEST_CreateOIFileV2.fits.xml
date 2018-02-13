@@ -374,8 +374,6 @@ SEVERE	Can't check repeat for column 'JYY'
   </rule>
 </rules>
 <failures>
-  <profile>
-  </profile>
   <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>
