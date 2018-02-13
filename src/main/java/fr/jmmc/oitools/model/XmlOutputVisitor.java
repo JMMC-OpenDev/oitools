@@ -278,8 +278,8 @@ public final class XmlOutputVisitor implements ModelVisitor {
             this.buffer.append("<checkReport>\n").append(encodeTagContent(checker.getCheckReport())).append("\n</checkReport>\n");
 
             // note: suppose there is no encoding issues (illegal xml characters)
-            checker.writeRulesUsedByFailures(this.buffer);
-            checker.getFailuresAsXML(this.buffer);
+            checker.appendRulesUsedByFailures(this.buffer);
+            checker.appendFailuresAsXML(this.buffer);
         }
 
         exitOIFitsFile();

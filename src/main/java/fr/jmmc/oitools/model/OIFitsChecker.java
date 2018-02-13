@@ -39,61 +39,59 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class contains several static methods to validate the OIFits structure (keywords, columns)
- * Management and creation of the rules.
- * Creation and storage of all the objects necessary for the new management of the failures. (String/XML)
+ * This class contains several static methods to validate the OIFits structure (keywords, columns).
  * @author bourgesl
  */
 public final class OIFitsChecker {
 
-    enum InspectMode {
+    public enum InspectMode {
         NORMAL,
         CASE_V2_IN_V1;
     }
 
-    /** InspectRule flag */
+    /** Inspect rule flag */
     private static boolean INSPECT_RULES = false;
-    /** InspectMode description */
+    /** Inspect mode value */
     private static InspectMode INSPECT_MODE = InspectMode.NORMAL;
 
     /**
-     * Give information if we are in rules inspection
-     * @return INSPECT_RULES true if collection of rules active
+     * Return the Inspect rule flag
+     * @return Inspect rule flag
      */
     public static boolean isInspectRules() {
         return INSPECT_RULES;
     }
 
     /**
-     * Set information if we want to go into inspection rules (DataModel)
-     * @param COLLECT_RULES true if collection of rules active
+     * Define the Inspect rule flag: true to collect rules and their applyTo (DataModel)
+     * @param inspectRules Inspect rule flag
      */
-    public static void setInspectRules(boolean COLLECT_RULES) {
-        INSPECT_RULES = COLLECT_RULES;
+    public static void setInspectRules(final boolean inspectRules) {
+        INSPECT_RULES = inspectRules;
     }
 
     /**
-     * Give information if we are in inspection mode (shouldSkipRule() spécial case)
-     * @return INSPECT_MODE true if inspection mode active
+     * Return the Inspect mode value
+     * @return Inspect mode value
      */
     public static InspectMode getInspectMode() {
         return INSPECT_MODE;
     }
 
     /**
-     * Set information if we want to go into inspection mode (DataModel)
-     * @param InspectMode true if inspection mode active
+     * Define the Inspect mode value
+     * @param InspectMode Inspect mode value
      */
-    public static void setInspectMode(InspectMode InspectMode) {
+    public static void setInspectMode(final InspectMode InspectMode) {
         INSPECT_MODE = InspectMode;
     }
 
     /**
-     * Filter the writing of the rules according to the cases
-     * @param rule Rule
-     * @return filter with all informations to filter the rules to write
+     * Return true if the given rule should be ignored by ruleFailed(Rule)
+     * @param rule Rule to check
+     * @return true if the given rule should be ignored
      */
-    public static boolean shouldSkipRule(Rule rule) {
+    private static boolean shouldSkipRule(final Rule rule) {
         switch (INSPECT_MODE) {
             case CASE_V2_IN_V1:
                 return (rule != Rule.TABLE_NOT_OIFITS2);
@@ -103,22 +101,23 @@ public final class OIFitsChecker {
         }
     }
 
+    /** logger */
     private final static Logger logger = Logger.getLogger(OIFitsChecker.class.getName());
 
     /* members */
-    /** Save fileRef */
+    /** current FileRef */
     private FileRef fileRef = null;
 
     /** flag to skip keyword / column format checks (loading OIFITS) */
     private boolean skipFormat = false;
 
-    /** Map to storing all objects for failures handling */
+    /** DataLocation mapping keyed by RuleFailure */
     private final Map<RuleFailure, DataLocation> failures;
 
-    /** Standard mapping */
+    /** OIFitsStandard mapping keyed by FileRef */
     private final Map<FileRef, OIFitsStandard> fileRefStandards = new HashMap<FileRef, OIFitsStandard>();
 
-    /** OIFITS2: temporary state to check correlation indexes keyed by CORRNAME */
+    /** OIFITS2: temporary state to check correlation indexes (OIFitsCorrChecker) keyed by CORRNAME */
     private final Map<String, OIFitsCorrChecker> corrCheckers = new HashMap<String, OIFitsCorrChecker>();
 
     /**
@@ -129,8 +128,8 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Define the severity of all the rules of the map according to the chosen profile.
-     * @param profile define severity profil for all rules
+     * Define the severity of all rules according to the given profile.
+     * @param profile severity profile to use
      */
     void defineSeverity(final SeverityProfile profile) {
         logger.log(java.util.logging.Level.FINE, "defineSeverity: {0}", profile);
@@ -156,7 +155,14 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Clear the map
+     * Clear the failures
+     */
+    public void clearCheckReport() {
+        failures.clear();
+    }
+
+    /**
+     * Clear the temporary state (cleanup)
      */
     void cleanup() {
         setFileRef(null, null);
@@ -166,13 +172,12 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Management of the applyTo and standard
-     * TODO do private at the end
-     * @param rule rule informations
-     * @param applyTo String for rule apply To
+     * Define the applyTo information and standard of the given rule (Inspect rule enabled)
+     * @param rule failed rule
+     * @param applyTo apply To information
      * @param standard OIFitsStandard information
      */
-    public void inspectRuleFailed(final Rule rule, final String applyTo, final OIFitsStandard standard) {
+    void inspectRuleFailed(final Rule rule, final String applyTo, final OIFitsStandard standard) {
         if (isInspectRules() && !shouldSkipRule(rule)) {
             rule.addApplyTo(applyTo);
             if (standard != null) {
@@ -182,10 +187,11 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Management and creation of the rules and applyTo.
-     * @param rule rule informations
-     * @param hdu HDU informations
-     * @param member member (keyword/column) name
+     * Define the applyTo information and standard of the given rule 
+     * AND the applyRules of the given data model element (Inspect rule enabled)
+     * @param rule failed rule
+     * @param hdu FitsHDU instance (may be null)
+     * @param member member (keyword/column) name (may be null)
      */
     private void inspectRuleFailed(final Rule rule, final FitsHDU hdu, final String member) {
         if (isInspectRules()) {
@@ -227,33 +233,32 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Helper when we just have the file information
-     * @param rule rule informations
-     * @return DataLocation
+     * Create and store the RuleFailure for the given information and return its related DataLocation
+     * @param rule failed rule
+     * @return related DataLocation
      */
     DataLocation ruleFailed(final Rule rule) {
         return ruleFailed(rule, null, null);
     }
 
     /**
-     * Helper when we just have the file and hdu information
-     * @param rule rule informations
-     * @param hdu HDU informations
-     * @return DataLocation
+     * Create and store the RuleFailure for the given information and return its related DataLocation
+     * @param rule failed rule
+     * @param hdu FitsHDU instance (may be null)
+     * @return related DataLocation
      */
     DataLocation ruleFailed(final Rule rule, final FitsHDU hdu) {
         return ruleFailed(rule, hdu, null);
     }
 
     /**
-     * Create and store the RuleFailure and return its related DataLocation
-     * @param rule rule informations
-     * @param hdu HDU informations
-     * @param member member (keyword/column) name
-     * @return DataLocation
+     * Create and store the RuleFailure for the given information and return its related DataLocation
+     * @param rule failed rule
+     * @param hdu FitsHDU instance (may be null)
+     * @param member member (keyword/column) name (may be null)
+     * @return related DataLocation
      */
     public DataLocation ruleFailed(final Rule rule, final FitsHDU hdu, final String member) {
-
         if (shouldSkipRule(rule)) {
             return new DataLocation(rule);
         }
@@ -275,18 +280,17 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Exceptional version of catch fail for no hdu information but extname and extNB possible
-     * @param rule rule informations
-     * @param extName String for Hdu Name
-     * @param extNb int for Hdu Number
-     * @return DataLocation
+     * Create and store the RuleFailure for the given information and return its related DataLocation
+     * ONLY used by OIFITS_TABLE_UNKNOWN (TODO KILL)
+     * @param rule failed rule
+     * @param extName Hdu name
+     * @param extNb hdu number
+     * @return related DataLocation
      */
     public DataLocation ruleFailed(final Rule rule, final String extName, final int extNb) {
-
         if (shouldSkipRule(rule)) {
             return new DataLocation(rule);
         }
-        // TODO: KILL that ruleFailred variant
         final RuleFailure ruleFail = new RuleFailure(rule, fileRef, extName, extNb, null);
 
         DataLocation datas = failures.get(ruleFail);
@@ -307,9 +311,9 @@ public final class OIFitsChecker {
 
     /**
      * Return true if the corresponding RuleFailure is already present
-     * @param rule rule information
-     * @param hdu HDU information
-     * @param member member (keyword/column) name
+     * @param rule failed rule 
+     * @param hdu FitsHDU instance (may be null)
+     * @param member member (keyword/column) name (may be null)
      * @return true if the corresponding RuleFailure is already present
      */
     public boolean hasRule(final Rule rule, final FitsHDU hdu, final String member) {
@@ -346,8 +350,8 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Get number of warning errors
-     * @return number of warning errors
+     * Get number of failures with severity = Warning
+     * @return number of failures with severity = Warning
      */
     public int getNbWarnings() {
         int warnings = 0;
@@ -361,8 +365,8 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Get number of severe errors
-     * @return number of severe errors
+     * Get number of failures with severity = Error
+     * @return number of failures with severity = Error
      */
     public int getNbSeveres() {
         int severes = 0;
@@ -376,7 +380,7 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Return a simple string that show numbers of warnings and severe errors.
+     * Return a string that gives numbers of warnings and errors.
      *
      * @return a string with number of warnings and severe errors.
      */
@@ -387,7 +391,7 @@ public final class OIFitsChecker {
     /**
      * Get the sorted map of failures according to the given comparator
      * @param comparator RuleFailureComparator instance
-     * @return failures
+     * @return sorted map of failures
      */
     private Map<RuleFailure, DataLocation> getSortedFailures(final RuleFailureComparator comparator) {
         final ArrayList<RuleFailure> keys = new ArrayList<RuleFailure>(failures.keySet());
@@ -405,20 +409,20 @@ public final class OIFitsChecker {
     }
 
     /**
-     * String display of the error. Calling the String of the Key and Value
-     * @return sb
+     * Return the failures (ASCII) sorted by the default comparator as String.
+     * @return string containing sorted failures (ASCII)
      */
     public String getFailuresAsString() {
-        return getFailuresAsString(new StringBuilder(failures.size() * 80), RuleFailureComparator.DEFAULT).toString();
+        return appendFailuresAsString(new StringBuilder(failures.size() * 80), RuleFailureComparator.DEFAULT).toString();
     }
 
     /**
-     * String display of the error. Calling the String of the Key and Value
-     * @param sb StringBuilder
+     * Append the failures (ASCII) sorted by the given comparator into the given buffer.
+     * @param sb buffer to append into
      * @param comparator RuleFailureComparator instance
-     * @return sb
+     * @return sb given buffer
      */
-    public StringBuilder getFailuresAsString(final StringBuilder sb, final RuleFailureComparator comparator) {
+    public StringBuilder appendFailuresAsString(final StringBuilder sb, final RuleFailureComparator comparator) {
         for (Map.Entry<RuleFailure, DataLocation> entry : getSortedFailures(comparator).entrySet()) {
             entry.getKey().toString(sb);
             entry.getValue().toString(sb);
@@ -428,21 +432,20 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Get the checker's report
-     *
-     * @return a string containing the analysis report
+     * Get the failures report sorted by the default comparator
+     * @return string containing the analysis report
      */
     public String getCheckReport() {
-        return getFailuresReport(new StringBuilder(failures.size() * 80), RuleFailureComparator.DEFAULT).toString();
+        return appendFailuresReport(new StringBuilder(failures.size() * 80), RuleFailureComparator.DEFAULT).toString();
     }
 
     /**
-     * Get the Failure report
-     * @param sb StringBuilder
+     * Append the failures report sorted by the given comparator into the given buffer.
+     * @param sb buffer to append into
      * @param comparator RuleFailureComparator instance
      * @return a string containing the analysis report
      */
-    public StringBuilder getFailuresReport(final StringBuilder sb, final RuleFailureComparator comparator) {
+    public StringBuilder appendFailuresReport(final StringBuilder sb, final RuleFailureComparator comparator) {
         FileRef last = null;
         int lastExtNb = -1;
 
@@ -478,33 +481,31 @@ public final class OIFitsChecker {
     }
 
     /**
-     * XML display of the error. Calling the XML of the Key and Value
-     * @return sb
+     * Return the failures (XML) sorted by the default comparator as String.
+     * @return string containing sorted failures (XML)
      */
     public String getFailuresAsXML() {
-        return getFailuresAsXML(new StringBuilder(failures.size() * 256)).toString();
+        return appendFailuresAsXML(new StringBuilder(failures.size() * 256)).toString();
     }
 
     /**
+     * Append the failures (XML) sorted by the default comparator into the given buffer.
      * XML display of the error. Calling the XML of the Key and Value
-     * @param sb StringBuilder
-     * @return sb 
+     * @param sb buffer to append into
+     * @return sb given buffer
      */
-    public StringBuilder getFailuresAsXML(final StringBuilder sb) {
-        return getFailuresAsXML(sb, RuleFailureComparator.DEFAULT);
+    public StringBuilder appendFailuresAsXML(final StringBuilder sb) {
+        return appendFailuresAsXML(sb, RuleFailureComparator.DEFAULT);
     }
 
     /**
-     * XML display of the error. Calling the XML of the Key and Value
-     * @param sb StringBuilder
+     * Append the failures (XML) sorted by the given comparator into the given buffer.
+     * @param sb buffer to append into
      * @param comparator RuleFailureComparator instance
-     * @return sb 
+     * @return sb given buffer
      */
-    public StringBuilder getFailuresAsXML(final StringBuilder sb, final RuleFailureComparator comparator) {
+    public StringBuilder appendFailuresAsXML(final StringBuilder sb, final RuleFailureComparator comparator) {
         sb.append("<failures>\n");
-        sb.append("  <profile>\n");
-        // TODO
-        sb.append("  </profile>\n");
 
         // Dump failures:
         for (Map.Entry<RuleFailure, DataLocation> entry : getSortedFailures(comparator).entrySet()) {
@@ -528,10 +529,10 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Write a List of Rules
-     * @return ruleSet Set
+     * Return the rules only used by failures
+     * @return rule set (unordered)
      */
-    public Set<Rule> getRulesUsedByFailures() {
+    Set<Rule> getRulesUsedByFailures() {
         final Set<Rule> ruleSet = new HashSet<Rule>();
 
         for (RuleFailure key : failures.keySet()) {
@@ -542,10 +543,10 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Write Rules used by failures (XML format)
-     * @param sb
+     * Write rules only used by failures (XML format)
+     * @param sb buffer to append into
      */
-    public void writeRulesUsedByFailures(final StringBuilder sb) {
+    void appendRulesUsedByFailures(final StringBuilder sb) {
         final Set<Rule> ruleSet = getRulesUsedByFailures();
 
         final Rule[] rules = new Rule[ruleSet.size()];
@@ -560,37 +561,30 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Clear the validation messages
+     * Return or create the OIFitsCorrChecker instance given the CORRNAME value
+     * @param corrName CORRNAME value
+     * @return OIFitsCorrChecker instance
      */
-    public void clearCheckReport() {
-        failures.clear();
-    }
-
-    /**
-     * Give OIFitsCorrChecker map
-     * @param corrname
-     * @return corrChecker
-     */
-    public OIFitsCorrChecker getCorrChecker(final String corrname) {
-        OIFitsCorrChecker corrChecker = corrCheckers.get(corrname);
+    OIFitsCorrChecker getCorrChecker(final String corrName) {
+        OIFitsCorrChecker corrChecker = corrCheckers.get(corrName);
         if (corrChecker == null) {
             corrChecker = new OIFitsCorrChecker();
-            corrCheckers.put(corrname, corrChecker);
+            corrCheckers.put(corrName, corrChecker);
         }
         return corrChecker;
     }
 
     /**
-     * Get FileRef object
-     * @return fileRef
+     * Return the current FileRef
+     * @return current FileRef
      */
-    public FileRef getFileRef() {
+    FileRef getFileRef() {
         return fileRef;
     }
 
     /**
-     * Set FileRef value and standard
-     * @param fileRef reference on the file
+     * Set the current FileRef and standard
+     * @param fileRef FileRef instance
      * @param std OIFitsStandard
      */
     void setFileRef(final FileRef fileRef, final OIFitsStandard std) {
@@ -601,8 +595,8 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Method to skip format checking when it's done the first time
-     * @return skipFormat boolean
+     * Return the flag to skip keyword / column format checks
+     * @return flag to skip keyword / column format checks
      */
     public boolean isSkipFormat() {
         return skipFormat;
