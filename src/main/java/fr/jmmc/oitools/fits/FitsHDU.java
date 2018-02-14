@@ -611,7 +611,7 @@ public abstract class FitsHDU extends ModelBase {
                         valid = true;
                     }
                 } catch (ParseException pe) {
-                    logger.log(Level.WARNING, "checkDateObsKeyword: unable to parse date " + dateObs, pe);
+                    logger.log(Level.WARNING, "checkDateObsKeyword: unable to parse date {0}", dateObs);
                 }
             }
 
