@@ -47,6 +47,7 @@ public class OIFitsViewerTest extends AbstractFileBaseTest {
         "2012-03-24_ALL_oiDataCalib.fits",
         "testdata_opt.fits"
     };
+
     private final static int REMOTE_COUNT = 1;
     private final static String OIFITS_URL = "http://apps.jmmc.fr/oidata/BeautyContest/2008-Contest_Binary.oifits";
 
@@ -62,6 +63,14 @@ public class OIFitsViewerTest extends AbstractFileBaseTest {
             };
             OIFitsViewer.main(args);
         }
+        String[] args = new String[]{
+            "-t",
+            "-c",
+            "-v",
+            /* file */
+            getProjectFolderPath() + "src/test/resources/corrupted/Multi_OIINSPOL_TESTV2.fits"
+        };
+        OIFitsViewer.main(args);
     }
 
     @Test

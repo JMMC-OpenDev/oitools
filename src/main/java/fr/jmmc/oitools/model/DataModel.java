@@ -293,8 +293,8 @@ public class DataModel {
 
             logger.log(Level.WARNING, "Missing rules: {0}", missing);
 
-            if (!(missing.size() == 1 && missing.contains(Rule.OI_INSPOL_INSNAME_UNIQ))) {
-                throw new IllegalStateException("rules [" + Rule.values().length + "] | Failures [" + checker.getRulesUsedByFailures().size() + "]");
+            if (!missing.isEmpty()) {
+                throw new IllegalStateException("rules [" + Rule.values().length + "] | Failures [" + checker.getRulesUsedByFailures().size() + "] missing rules: " + missing);
             }
         }
         final StringBuilder sb = new StringBuilder(32 * 1024);

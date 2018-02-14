@@ -28,9 +28,11 @@ import fr.jmmc.oitools.image.ImageOiData;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 import static fr.jmmc.oitools.model.OIFitsChecker.isInspectRules;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -94,11 +96,11 @@ public final class OIFitsFile extends FitsImageFile {
     /**
      * List storing OI_CORR table references
      */
-    private final List<OICorr> oiCorr = new LinkedList<OICorr>();
+    private final List<OICorr> oiCorrs = new LinkedList<OICorr>();
     /**
      * Storage of OI_INSPOL table references
      */
-    private final List<OIInspol> oiInspol = new LinkedList<OIInspol>();
+    private final List<OIInspol> oiInspols = new LinkedList<OIInspol>();
 
     /* data tables */
     /**
@@ -230,9 +232,9 @@ public final class OIFitsFile extends FitsImageFile {
         } else if (oiTable instanceof OIArray) {
             this.oiArrays.add((OIArray) oiTable);
         } else if (oiTable instanceof OICorr) {
-            this.oiCorr.add((OICorr) oiTable);
+            this.oiCorrs.add((OICorr) oiTable);
         } else if (oiTable instanceof OIInspol) {
-            this.oiInspol.add((OIInspol) oiTable);
+            this.oiInspols.add((OIInspol) oiTable);
         } else if (oiTable instanceof OIVis) {
             this.oiDataTables.add((OIVis) oiTable);
             this.oiVisTables.add((OIVis) oiTable);
@@ -311,9 +313,9 @@ public final class OIFitsFile extends FitsImageFile {
         } else if (oiTable instanceof OIArray) {
             this.oiArrays.remove((OIArray) oiTable);
         } else if (oiTable instanceof OICorr) {
-            this.oiCorr.remove((OICorr) oiTable);
+            this.oiCorrs.remove((OICorr) oiTable);
         } else if (oiTable instanceof OIInspol) {
-            this.oiInspol.remove((OIInspol) oiTable);
+            this.oiInspols.remove((OIInspol) oiTable);
         } else if (oiTable instanceof OIVis) {
             this.oiDataTables.remove((OIVis) oiTable);
             this.oiVisTables.remove((OIVis) oiTable);
@@ -547,11 +549,7 @@ public final class OIFitsFile extends FitsImageFile {
                     checker.ruleFailed(Rule.OIFITS_OI_ARRAY_EXIST_V2);
                 }
 
-                // TODO: implement OI_INSPOL_INSNAME_UNIQ
-                if (OIFitsChecker.isInspectRules()) {
-                    // rule [OI_INSPOL_INSNAME_UNIQ] check if the INSNAME column values are only present in a single OI_INSPOL table (compare multi OI_INSPOL table)
-                    checker.inspectRuleFailed(Rule.OI_INSPOL_INSNAME_UNIQ, OIFitsConstants.TABLE_OI_INSPOL, OIFitsStandard.VERSION_2);
-                }
+                checkOIInspols(checker);
             }
 
             /* Starting syntactical analysis */
@@ -689,6 +687,50 @@ public final class OIFitsFile extends FitsImageFile {
                 // already checked
             }
         }
+    }
+
+    private void checkOIInspols(OIFitsChecker checker) {
+
+        //Map to verify the presence of a duplicate INSNAME
+        Map<String, Set<OIInspol>> insnameToOIInspol = new HashMap<String, Set<OIInspol>>();
+
+        for (OIInspol oiInspol : oiInspols) {
+
+            for (String insName : oiInspol.getInsNames()) {
+
+                /* Get OIInspol associated to INSNAME value */
+                Set<OIInspol> oiinspols = insnameToOIInspol.get(insName);
+
+                if (oiinspols == null) {
+                    //preserve insertion order
+                    oiinspols = new LinkedHashSet<OIInspol>();
+                    insnameToOIInspol.put(insName, oiinspols);
+                }
+
+                oiinspols.add(oiInspol);
+            }
+
+            for (Map.Entry<String, Set<OIInspol>> entry : insnameToOIInspol.entrySet()) {
+                final Set<OIInspol> oiinspols = entry.getValue();
+
+                //if there are several OI_INSPOL for this INSNAME
+                //And the OI_INSPOL being validated is present in the set 
+                if ((oiinspols.size() > 1 && oiinspols.contains(oiInspol)) || isInspectRules()) {
+                    final String insName = entry.getKey();
+
+                    final StringBuilder sb = new StringBuilder();
+
+                    for (Iterator<OIInspol> it = oiinspols.iterator(); it.hasNext();) {
+                        sb.append('|').append(it.next().idToString());
+                    }
+                    sb.deleteCharAt(0);
+
+                    // rule [OI_INSPOL_INSNAME_UNIQ] check if the INSNAME column values are only present in a single OI_INSPOL table (compare multi OI_INSPOL table)
+                    checker.ruleFailed(Rule.OI_INSPOL_INSNAME_UNIQ, oiInspol, OIFitsConstants.KEYWORD_INSNAME).addKeywordValue(insName, sb.toString());
+                }
+            }
+        }
+
     }
 
     /**
@@ -948,7 +990,7 @@ public final class OIFitsFile extends FitsImageFile {
      * @return true if the file contains some OI_CORR table
      */
     public boolean hasOiCorr() {
-        return !this.oiCorr.isEmpty();
+        return !this.oiCorrs.isEmpty();
     }
 
     /**
@@ -957,7 +999,7 @@ public final class OIFitsFile extends FitsImageFile {
      * @return the number of OI_CORR tables
      */
     public int getNbOiCorr() {
-        return this.oiCorr.size();
+        return this.oiCorrs.size();
     }
 
     /**
@@ -966,7 +1008,7 @@ public final class OIFitsFile extends FitsImageFile {
      * @return an array containing all OI_CORR tables
      */
     public OICorr[] getOiCorr() {
-        return this.oiCorr.toArray(new OICorr[this.oiCorr.size()]);
+        return this.oiCorrs.toArray(new OICorr[this.oiCorrs.size()]);
     }
 
     /**
@@ -1119,7 +1161,7 @@ public final class OIFitsFile extends FitsImageFile {
      * @return true if the file contains some OI_INSPOL table
      */
     public boolean hasOiInspol() {
-        return !this.oiInspol.isEmpty();
+        return !this.oiInspols.isEmpty();
     }
 
     /**
@@ -1128,7 +1170,7 @@ public final class OIFitsFile extends FitsImageFile {
      * @return the number of OI_INSPOL tables
      */
     public int getNbOiInspol() {
-        return this.oiInspol.size();
+        return this.oiInspols.size();
     }
 
     /**
@@ -1137,7 +1179,7 @@ public final class OIFitsFile extends FitsImageFile {
      * @return an array containing all OI_INSPOL tables
      */
     public OIInspol[] getOiInspol() {
-        return this.oiInspol.toArray(new OIInspol[this.oiInspol.size()]);
+        return this.oiInspols.toArray(new OIInspol[this.oiInspols.size()]);
     }
 
     /**
