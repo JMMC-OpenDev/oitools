@@ -42393,6 +42393,32 @@
   </failure>
   <failure>
     <severity>SEVERE</severity>
+    <rule>OI_INSPOL_INSNAME_UNIQ</rule>
+    <file>memory:2</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>4</extNb>
+    <member>INSNAME</member>
+    <data>
+      <value></value>
+      <expected>OI_INSPOL#4</expected>
+      <message>The INSNAME '' is duplicated in OI_INSPOL tables [OI_INSPOL#4]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_INSPOL_INSNAME_UNIQ</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>5</extNb>
+    <member>INSNAME</member>
+    <data>
+      <value>AMBER-like</value>
+      <expected>OI_INSPOL#5</expected>
+      <message>The INSNAME 'AMBER-like' is duplicated in OI_INSPOL tables [OI_INSPOL#5]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
     <rule>OI_INSPOL_MJD_DIFF</rule>
     <file>memory:2</file>
     <extName>OI_INSPOL</extName>

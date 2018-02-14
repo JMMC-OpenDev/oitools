@@ -1482,10 +1482,10 @@
   </rule>
   <rule>
     <name>OI_INSPOL_INSNAME_UNIQ</name>
-    <description>TODO: check if the INSNAME column values are only present in a single OI_INSPOL table (compare multi OI_INSPOL table)</description>
+    <description>check if the INSNAME column values are only present in a single OI_INSPOL table (compare multi OI_INSPOL table)</description>
     <paragraph>V2.7.3§2</paragraph>
     <subjects>
-      <apply>OI_INSPOL</apply>
+      <apply>OI_INSPOL.INSNAME</apply>
     </subjects>
     <standards>
       <standard>VERSION_2</standard>
@@ -3082,6 +3082,7 @@
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_VAL_ACCEPTED_STR</applyrule>
+      <applyrule>OI_INSPOL_INSNAME_UNIQ</applyrule>
     </rules>
     <repeat>70</repeat>
     <array>false</array>

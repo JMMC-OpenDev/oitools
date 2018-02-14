@@ -286,10 +286,10 @@ public enum Rule {
             RuleDataType.NONE,
             "Missing OI_CORR table but the column CORRINDX_FLUXDATA is defined."
     ),
-    OI_INSPOL_INSNAME_UNIQ("TODO: check if the INSNAME column values are only present in a single OI_INSPOL table (compare multi OI_INSPOL table)",
+    OI_INSPOL_INSNAME_UNIQ("check if the INSNAME column values are only present in a single OI_INSPOL table (compare multi OI_INSPOL table)",
             "V2.7.3§2",
-            RuleDataType.NONE,
-            ""
+            RuleDataType.VALUE_EXPECTED,
+            "The INSNAME '{{VALUE}}' is duplicated in OI_INSPOL tables [{{EXPECTED}}]"
     ),
     OI_INSPOL_MJD_DIFF("check if MJD_OBS are not > at MJD_END values in OI_INSPOL table",
             "V2.6.1§3",

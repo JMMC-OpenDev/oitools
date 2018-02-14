@@ -1,0 +1,4 @@
+# filename       Multi_OIINSPOL_TESTV2.fits
+# local_filename Multi_OIINSPOL_TESTV2.fits
+target_name	s_ra	s_dec	t_exptime	t_min	t_max	em_res_power	em_min	em_max	facility_name	instrument_name	nb_vis	nb_vis2	nb_t3	nb_channels	
+Charleen's Star	11.77854	24.268334	500.0	57940.0	57940.0	3065.6934	1.54E-6	1.8199997E-6	Chara	AMBER-like	1	2	3	7	
