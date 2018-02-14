@@ -284,12 +284,13 @@ public class DataModel {
      * @throws java.io.IOException
      */
     private static void writeFailures(final OIFitsChecker checker) throws IOException {
-
         // Ensure failures contain all rules
-        if (Rule.values().length != checker.getRulesUsedByFailures().size()) {
+        final Set<Rule> usedRules = checker.getRulesUsedByFailures();
+        
+        if (Rule.values().length != usedRules.size()) {
             final Set<Rule> missing = new HashSet<Rule>();
             missing.addAll(Arrays.asList(Rule.values()));
-            missing.removeAll(checker.getRulesUsedByFailures());
+            missing.removeAll(usedRules);
 
             logger.log(Level.WARNING, "Missing rules: {0}", missing);
 
@@ -297,14 +298,10 @@ public class DataModel {
                 throw new IllegalStateException("rules [" + Rule.values().length + "] | Failures [" + checker.getRulesUsedByFailures().size() + "] missing rules: " + missing);
             }
         }
+        
         final StringBuilder sb = new StringBuilder(32 * 1024);
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
-
-        FileUtils.writeFile(new File("rules/Failures.xml"), checker.getFailuresAsXML(sb, RuleFailureComparator.BY_RULE).toString());
-
-        if (false) {
-            FileUtils.writeFile(new File("rules/Failures.log"), checker.getCheckReport());
-        }
+        FileUtils.writeFile(new File("rules/Failures.xml"), checker.appendFailuresAsXML(sb, RuleFailureComparator.BY_RULE).toString());
     }
 
     private static void dumpHDU(final FitsImageHDU imageHDU, final StringBuilder sb) {

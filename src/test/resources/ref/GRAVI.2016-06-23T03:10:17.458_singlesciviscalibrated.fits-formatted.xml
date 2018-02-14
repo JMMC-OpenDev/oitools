@@ -1999,8 +1999,6 @@ SEVERE	Missing keyword 'OI_REVN'
   </rule>
 </rules>
 <failures>
-  <profile>
-  </profile>
   <failure>
     <severity>SEVERE</severity>
     <rule>PRIMARYHDU_TYPE_ATOMIC</rule>

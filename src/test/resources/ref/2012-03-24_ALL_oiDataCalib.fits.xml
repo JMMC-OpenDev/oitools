@@ -791,8 +791,6 @@ INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
   </rule>
 </rules>
 <failures>
-  <profile>
-  </profile>
   <failure>
     <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ</rule>

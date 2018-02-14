@@ -399,8 +399,6 @@ INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
   </rule>
 </rules>
 <failures>
-  <profile>
-  </profile>
   <failure>
     <severity>SEVERE</severity>
     <rule>OI_ARRAY_STA_INDEX_MIN</rule>

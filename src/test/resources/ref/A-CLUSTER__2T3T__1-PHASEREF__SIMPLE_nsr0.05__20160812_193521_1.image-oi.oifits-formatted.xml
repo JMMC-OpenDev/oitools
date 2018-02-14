@@ -932,8 +932,6 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
   </rule>
 </rules>
 <failures>
-  <profile>
-  </profile>
   <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>
