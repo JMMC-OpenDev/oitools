@@ -107,4 +107,6 @@ public interface FitsConstants {
 
     /** Speed of light (2.99792458e8) */
     public final static double C_LIGHT = 2.99792458e8d;
+    /** date format */
+    public final static String FORMAT_DATE = "yyyy-MM-dd";
 }

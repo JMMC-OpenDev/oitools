@@ -21,6 +21,7 @@ package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.OIFitsConstants;
+import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.fits.FitsHDU;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.ColumnMeta;
@@ -158,6 +159,18 @@ public abstract class OIData extends OIAbstractData {
      * @return the value of DATE-OBS keyword
      */
     public final String getDateObs() {
+        final String dateObs = getRawDateObs();
+        if (dateObs != null && dateObs.length() > FitsConstants.FORMAT_DATE.length()) {
+            return dateObs.substring(0, FitsConstants.FORMAT_DATE.length());
+        }
+        return dateObs;
+    }
+
+    /**
+     * Get the raw DATE-OBS keyword value.
+     * @return the value of DATE-OBS keyword (raw)
+     */
+    public final String getRawDateObs() {
         return getKeyword(OIFitsConstants.KEYWORD_DATE_OBS);
     }
 
@@ -739,7 +752,7 @@ public abstract class OIData extends OIAbstractData {
      * @param corrindx corrindex of the column of the oiDatas table
      */
     protected static void checkCorrIndex(final OIFitsChecker checker, final OICorr oiCorr,
-            final OIData oidata, final String colName, final int[] corrindx) {
+                                         final OIData oidata, final String colName, final int[] corrindx) {
 
         // get OIFitsCorrChecker
         final OIFitsCorrChecker corrChecker = checker.getCorrChecker(oiCorr.getCorrName());
@@ -896,7 +909,7 @@ public abstract class OIData extends OIAbstractData {
      * @param colName column name
      */
     public static void checkColumnError(final OIFitsChecker checker, final boolean[][] flags, final double[][] err,
-            final OIData oidata, final String colName) {
+                                        final OIData oidata, final String colName) {
 
         boolean[] rowFlag;
         double[] rowErr;

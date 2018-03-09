@@ -596,7 +596,7 @@ public abstract class FitsHDU extends ModelBase {
         final String dateObs = hdu.getKeyword(name);
 
         if (dateObs != null || OIFitsChecker.isInspectRules()) {
-            final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            final SimpleDateFormat sdf = new SimpleDateFormat(FitsConstants.FORMAT_DATE);
             sdf.setLenient(false);
 
             boolean valid = false;
