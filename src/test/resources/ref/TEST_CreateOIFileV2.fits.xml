@@ -3,7 +3,7 @@
 <filename>TEST_CreateOIFileV2.fits</filename>
 <local_filename>TEST_CreateOIFileV2.fits</local_filename>
 <size>77760</size>
-<md5sum>18a51b29fd6333b13ba30ef4702c4aad</md5sum>
+<md5sum>72f3fbaf75cce43706c3e72eeba129f7</md5sum>
 <hdu>
 <keywords>
 </keywords>
@@ -322,9 +322,9 @@
 <tr><td>1</td><td>0.0</td><td>57940.0</td><td>500.0</td><td>922.94775390625 2304.722412109375 630.9249877929688 118.78874969482422 4743.111328125 2065.486572265625 4397.1015625</td><td>7.168263912200928 12.477619171142578 0.5182237029075623 5.011917591094971 10.676583290100098 14.817970275878906 5.715595722198486</td><td>3416.728515625 3006.3056640625 1872.4781494140625 3821.942138671875 3769.739013671875 1637.4603271484375 2451.77880859375</td><td>19.915802001953125 11.800070762634277 2.4976372718811035 5.953385353088379 18.29046058654785 9.737458229064941 16.320783615112305</td><td>145.47213745117188</td><td>109.5798110961914</td><td>10.330877304077148</td><td>171.39842224121094</td><td>3 4 7</td><td>true true false false false true true</td><td>57</td><td>78</td></tr>
 </table>
 </OI_T3>
-<OI_SPECTRUM>
+<OI_FLUX>
 <keywords>
-<keyword><name>EXTNAME</name><value>OI_SPECTRUM</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>EXTNAME</name><value>OI_FLUX</value><description>extension name</description><type>A</type><unit></unit></keyword>
 <keyword><name>NAXIS2</name><value>5</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
 <keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
 <keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
@@ -355,7 +355,7 @@
 <tr><td>1</td><td>57940.0</td><td>500.0</td><td>184.7623748779297 17.963422775268555 221.92120361328125 14.129551887512207 276.6211242675781 128.07073974609375 68.72688293457031</td><td>12.411249160766602 8.661296844482422 19.04033088684082 11.847832679748535 19.562820434570312 13.6132173538208 6.918062686920166</td><td>7</td><td>true false true true true true false</td><td>106</td></tr>
 <tr><td>1</td><td>57940.0</td><td>500.0</td><td>293.58209228515625 243.70541381835938 173.42913818359375 158.38113403320312 142.60072326660156 237.77455139160156 227.81097412109375</td><td>18.865968704223633 13.52648639678955 8.009073257446289 14.955119132995605 11.678030014038086 18.162643432617188 19.265819549560547</td><td>4</td><td>false true true false true false false</td><td>113</td></tr>
 </table>
-</OI_SPECTRUM>
+</OI_FLUX>
 <checkReport>
 Analysing File: TEST_CreateOIFileV2.fits
 Analysing table [OI_INSPOL#5]

@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Clean & Sort (alphabetically) the TEST property files
+#
 
 ./cleanTestProperties.sh
 

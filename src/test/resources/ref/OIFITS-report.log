@@ -491,6 +491,7 @@ INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
+SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
 Analysing table [OI_VIS#9]
 INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]
@@ -520,6 +521,7 @@ INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
+SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
 Analysing File: GRAVITY.2016-01-09T05-37-06_singlesci_calibrated.fits
 Analysing table [OI_ARRAY#2]
@@ -531,6 +533,7 @@ INFO	Skipping non-standard OIFITS column 'OI_WAVELENGTH#4.POLAR' with format [1J
 Analysing table [OI_FLUX#8]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
+SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'CALSTAT'
 SEVERE	Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3'
 SEVERE	Unsupported table OI_FLUX#8 in OIFITS V1.0
@@ -540,6 +543,7 @@ INFO	Skipping non-standard OIFITS column 'OI_VIS#9.ASTROMETRIC_PHASE' with forma
 Analysing table [OI_FLUX#12]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [235D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
+SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'CALSTAT'
 SEVERE	Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3'
 SEVERE	Unsupported table OI_FLUX#12 in OIFITS V1.0
@@ -590,4 +594,4 @@ SEVERE	Can't check repeat for column 'JXY'
 SEVERE	Can't check repeat for column 'JYX'
 SEVERE	Can't check repeat for column 'JYY'
 
-166 warnings, 80 severe errors
+166 warnings, 84 severe errors

@@ -272,12 +272,12 @@
     <severity>INFO</severity>
     <rule>COL_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_SPECTRUM#9.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#9.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -586,7 +586,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_ARRNAME_REF</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>ARRNAME</member>
     <data>
@@ -3316,7 +3316,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRINDX_FLUXDATA</member>
     <message>Can't check repeat for column 'CORRINDX_FLUXDATA'</message>
@@ -3325,7 +3325,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLAG</member>
     <message>Can't check repeat for column 'FLAG'</message>
@@ -3334,7 +3334,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXDATA</member>
     <message>Can't check repeat for column 'FLUXDATA'</message>
@@ -3343,7 +3343,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXERR</member>
     <message>Can't check repeat for column 'FLUXERR'</message>
@@ -3352,7 +3352,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INT_TIME</member>
     <message>Can't check repeat for column 'INT_TIME'</message>
@@ -3361,7 +3361,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>MJD</member>
     <message>Can't check repeat for column 'MJD'</message>
@@ -3370,7 +3370,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>STA_INDEX</member>
     <message>Can't check repeat for column 'STA_INDEX'</message>
@@ -3379,7 +3379,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>TARGET_ID</member>
     <message>Can't check repeat for column 'TARGET_ID'</message>
@@ -14538,7 +14538,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_ERR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXERR</member>
     <data>
@@ -18682,7 +18682,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRINDX_FLUXDATA</member>
     <data>
@@ -18695,7 +18695,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLAG</member>
     <data>
@@ -18708,7 +18708,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXDATA</member>
     <data>
@@ -18721,7 +18721,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXERR</member>
     <data>
@@ -18734,7 +18734,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INT_TIME</member>
     <data>
@@ -18747,7 +18747,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>MJD</member>
     <data>
@@ -18760,7 +18760,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>STA_INDEX</member>
     <data>
@@ -18773,7 +18773,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>TARGET_ID</member>
     <data>
@@ -21216,7 +21216,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLAG</member>
     <message>Missing column 'FLAG'</message>
@@ -21225,7 +21225,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXDATA</member>
     <message>Missing column 'FLUXDATA'</message>
@@ -21234,7 +21234,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXERR</member>
     <message>Missing column 'FLUXERR'</message>
@@ -21243,7 +21243,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INT_TIME</member>
     <message>Missing column 'INT_TIME'</message>
@@ -21252,7 +21252,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>MJD</member>
     <message>Missing column 'MJD'</message>
@@ -21261,7 +21261,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>TARGET_ID</member>
     <message>Missing column 'TARGET_ID'</message>
@@ -25196,7 +25196,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_NBROWS</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRINDX_FLUXDATA</member>
     <data>
@@ -25209,7 +25209,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_NBROWS</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLAG</member>
     <data>
@@ -25222,7 +25222,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_NBROWS</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXDATA</member>
     <data>
@@ -25235,7 +25235,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_NBROWS</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXERR</member>
     <data>
@@ -25248,7 +25248,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_NBROWS</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INT_TIME</member>
     <data>
@@ -25261,7 +25261,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_NBROWS</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>MJD</member>
     <data>
@@ -25274,7 +25274,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_NBROWS</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>STA_INDEX</member>
     <data>
@@ -25287,7 +25287,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_NBROWS</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>TARGET_ID</member>
     <data>
@@ -27211,7 +27211,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRINDX_FLUXDATA</member>
     <data>
@@ -27224,7 +27224,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLAG</member>
     <data>
@@ -27234,10 +27234,10 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>SEVERE</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXDATA</member>
     <data>
@@ -27247,10 +27247,10 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>SEVERE</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXERR</member>
     <data>
@@ -27263,7 +27263,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INT_TIME</member>
     <data>
@@ -27276,7 +27276,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>MJD</member>
     <data>
@@ -27289,7 +27289,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>STA_INDEX</member>
     <data>
@@ -27302,7 +27302,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>TARGET_ID</member>
     <data>
@@ -29079,7 +29079,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRINDX_FLUXDATA</member>
     <data>
@@ -29091,7 +29091,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLAG</member>
     <data>
@@ -29100,10 +29100,10 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>SEVERE</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXDATA</member>
     <data>
@@ -29112,10 +29112,10 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>SEVERE</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FLUXERR</member>
     <data>
@@ -29127,7 +29127,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INT_TIME</member>
     <data>
@@ -29139,7 +29139,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>MJD</member>
     <data>
@@ -29151,7 +29151,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>STA_INDEX</member>
     <data>
@@ -29163,7 +29163,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>TARGET_ID</member>
     <data>
@@ -30205,7 +30205,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>STA_INDEX</member>
     <data>
@@ -30248,7 +30248,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>TARGET_ID</member>
     <data>
@@ -30935,7 +30935,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_VAL_POSITIVE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INT_TIME</member>
     <data>
@@ -31188,7 +31188,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_CORRINDX_MAX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRINDX_FLUXDATA</member>
     <data>
@@ -31446,7 +31446,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_CORRINDX_MIN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRINDX_FLUXDATA</member>
     <data>
@@ -32243,7 +32243,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_CORRINDX_UNIQ</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRINDX_FLUXDATA</member>
     <data>
@@ -32689,7 +32689,7 @@
     <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>DATE-OBS</member>
     <data>
@@ -32880,7 +32880,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>DATE-OBS</member>
     <data>
@@ -36475,7 +36475,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>ARRNAME</member>
     <data>
@@ -36488,7 +36488,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CALSTAT</member>
     <data>
@@ -36501,7 +36501,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRNAME</member>
     <data>
@@ -36514,7 +36514,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>DATE-OBS</member>
     <data>
@@ -36540,7 +36540,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>EXTVER</member>
     <data>
@@ -36553,7 +36553,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FOV</member>
     <data>
@@ -36566,7 +36566,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FOVTYPE</member>
     <data>
@@ -36579,7 +36579,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INSNAME</member>
     <data>
@@ -36592,7 +36592,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>NAXIS2</member>
     <data>
@@ -36605,7 +36605,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_FORMAT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>OI_REVN</member>
     <data>
@@ -38094,7 +38094,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CALSTAT</member>
     <message>Missing keyword 'CALSTAT'</message>
@@ -38103,7 +38103,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>DATE-OBS</member>
     <message>Missing keyword 'DATE-OBS'</message>
@@ -38121,16 +38121,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
-    <extNb>9</extNb>
-    <member>EXTNAME</member>
-    <message>Missing keyword 'EXTNAME'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_KEYWORD_MANDATORY</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INSNAME</member>
     <message>Missing keyword 'INSNAME'</message>
@@ -38139,7 +38130,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>NAXIS2</member>
     <message>Missing keyword 'NAXIS2'</message>
@@ -38148,7 +38139,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>OI_REVN</member>
     <message>Missing keyword 'OI_REVN'</message>
@@ -38534,7 +38525,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>OI_REVN</member>
     <data>
@@ -39535,7 +39526,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>ARRNAME</member>
     <data>
@@ -39548,7 +39539,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CALSTAT</member>
     <data>
@@ -39561,7 +39552,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRNAME</member>
     <data>
@@ -39574,20 +39565,20 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>EXTNAME</member>
     <data>
-      <value>OI_SPECTRUM</value>
+      <value>OI_FLUX</value>
       <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_SPECTRUM' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>FOVTYPE</member>
     <data>
@@ -39600,7 +39591,7 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>INSNAME</member>
     <data>
@@ -39895,7 +39886,7 @@
     <severity>WARNING</severity>
     <rule>GENERIC_MJD_RANGE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>MJD</member>
     <data>
@@ -40232,7 +40223,7 @@
     <severity>INFO</severity>
     <rule>GENERIC_OIREV_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <data>
       <value>1</value>
@@ -40921,9 +40912,9 @@
     <severity>SEVERE</severity>
     <rule>OIFITS_TABLE_UNKNOWN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
-    <message>Skipping non-standard OIFITS 'OI_SPECTRUM#9'</message>
+    <message>Skipping non-standard OIFITS 'OI_FLUX#9'</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>
@@ -42386,7 +42377,7 @@
     <severity>SEVERE</severity>
     <rule>OI_FLUX_CORRINDX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_SPECTRUM</extName>
+    <extName>OI_FLUX</extName>
     <extNb>9</extNb>
     <member>CORRINDX_FLUXDATA</member>
     <message>Missing OI_CORR table but the column CORRINDX_FLUXDATA is defined.</message>

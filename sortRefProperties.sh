@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Sort (alphabetically) the REFERENCE property files
+#
 
 for FILE in ./src/test/resources/ref/*.properties 
 do

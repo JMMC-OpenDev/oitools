@@ -20,8 +20,8 @@
     <subjects>
       <apply>OI_ARRAY</apply>
       <apply>OI_CORR</apply>
+      <apply>OI_FLUX</apply>
       <apply>OI_INSPOL</apply>
-      <apply>OI_SPECTRUM</apply>
       <apply>OI_T3</apply>
       <apply>OI_TARGET</apply>
       <apply>OI_VIS</apply>
@@ -111,7 +111,6 @@
       <apply>OI_ARRAY.ARRNAME</apply>
       <apply>OI_FLUX.ARRNAME</apply>
       <apply>OI_INSPOL.ARRNAME</apply>
-      <apply>OI_SPECTRUM.ARRNAME</apply>
       <apply>OI_T3.ARRNAME</apply>
       <apply>OI_VIS.ARRNAME</apply>
       <apply>OI_VIS2.ARRNAME</apply>
@@ -153,14 +152,6 @@
       <apply>OI_INSPOL.MJD_OBS</apply>
       <apply>OI_INSPOL.STA_INDEX</apply>
       <apply>OI_INSPOL.TARGET_ID</apply>
-      <apply>OI_SPECTRUM.CORRINDX_FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLAG</apply>
-      <apply>OI_SPECTRUM.FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLUXERR</apply>
-      <apply>OI_SPECTRUM.INT_TIME</apply>
-      <apply>OI_SPECTRUM.MJD</apply>
-      <apply>OI_SPECTRUM.STA_INDEX</apply>
-      <apply>OI_SPECTRUM.TARGET_ID</apply>
       <apply>OI_T3.CORRINDX_T3AMP</apply>
       <apply>OI_T3.CORRINDX_T3PHI</apply>
       <apply>OI_T3.FLAG</apply>
@@ -241,7 +232,6 @@
     <paragraph>JMMC</paragraph>
     <subjects>
       <apply>OI_FLUX.FLUXERR</apply>
-      <apply>OI_SPECTRUM.FLUXERR</apply>
       <apply>OI_T3.T3AMPERR</apply>
       <apply>OI_T3.T3PHIERR</apply>
       <apply>OI_VIS.IVISERR</apply>
@@ -287,14 +277,6 @@
       <apply>OI_INSPOL.MJD_OBS</apply>
       <apply>OI_INSPOL.STA_INDEX</apply>
       <apply>OI_INSPOL.TARGET_ID</apply>
-      <apply>OI_SPECTRUM.CORRINDX_FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLAG</apply>
-      <apply>OI_SPECTRUM.FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLUXERR</apply>
-      <apply>OI_SPECTRUM.INT_TIME</apply>
-      <apply>OI_SPECTRUM.MJD</apply>
-      <apply>OI_SPECTRUM.STA_INDEX</apply>
-      <apply>OI_SPECTRUM.TARGET_ID</apply>
       <apply>OI_T3.CORRINDX_T3AMP</apply>
       <apply>OI_T3.CORRINDX_T3PHI</apply>
       <apply>OI_T3.FLAG</apply>
@@ -399,12 +381,6 @@
       <apply>OI_INSPOL.MJD_OBS</apply>
       <apply>OI_INSPOL.STA_INDEX</apply>
       <apply>OI_INSPOL.TARGET_ID</apply>
-      <apply>OI_SPECTRUM.FLAG</apply>
-      <apply>OI_SPECTRUM.FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLUXERR</apply>
-      <apply>OI_SPECTRUM.INT_TIME</apply>
-      <apply>OI_SPECTRUM.MJD</apply>
-      <apply>OI_SPECTRUM.TARGET_ID</apply>
       <apply>OI_T3.FLAG</apply>
       <apply>OI_T3.INT_TIME</apply>
       <apply>OI_T3.MJD</apply>
@@ -498,14 +474,6 @@
       <apply>OI_INSPOL.MJD_OBS</apply>
       <apply>OI_INSPOL.STA_INDEX</apply>
       <apply>OI_INSPOL.TARGET_ID</apply>
-      <apply>OI_SPECTRUM.CORRINDX_FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLAG</apply>
-      <apply>OI_SPECTRUM.FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLUXERR</apply>
-      <apply>OI_SPECTRUM.INT_TIME</apply>
-      <apply>OI_SPECTRUM.MJD</apply>
-      <apply>OI_SPECTRUM.STA_INDEX</apply>
-      <apply>OI_SPECTRUM.TARGET_ID</apply>
       <apply>OI_T3.CORRINDX_T3AMP</apply>
       <apply>OI_T3.CORRINDX_T3PHI</apply>
       <apply>OI_T3.FLAG</apply>
@@ -595,6 +563,14 @@
       <apply>OI_CORR.CORR</apply>
       <apply>OI_CORR.IINDX</apply>
       <apply>OI_CORR.JINDX</apply>
+      <apply>OI_FLUX.CORRINDX_FLUXDATA</apply>
+      <apply>OI_FLUX.FLAG</apply>
+      <apply>OI_FLUX.FLUXDATA</apply>
+      <apply>OI_FLUX.FLUXERR</apply>
+      <apply>OI_FLUX.INT_TIME</apply>
+      <apply>OI_FLUX.MJD</apply>
+      <apply>OI_FLUX.STA_INDEX</apply>
+      <apply>OI_FLUX.TARGET_ID</apply>
       <apply>OI_INSPOL.INSNAME</apply>
       <apply>OI_INSPOL.JXX</apply>
       <apply>OI_INSPOL.JXY</apply>
@@ -604,14 +580,6 @@
       <apply>OI_INSPOL.MJD_OBS</apply>
       <apply>OI_INSPOL.STA_INDEX</apply>
       <apply>OI_INSPOL.TARGET_ID</apply>
-      <apply>OI_SPECTRUM.CORRINDX_FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLAG</apply>
-      <apply>OI_SPECTRUM.FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLUXERR</apply>
-      <apply>OI_SPECTRUM.INT_TIME</apply>
-      <apply>OI_SPECTRUM.MJD</apply>
-      <apply>OI_SPECTRUM.STA_INDEX</apply>
-      <apply>OI_SPECTRUM.TARGET_ID</apply>
       <apply>OI_T3.CORRINDX_T3AMP</apply>
       <apply>OI_T3.CORRINDX_T3PHI</apply>
       <apply>OI_T3.FLAG</apply>
@@ -701,6 +669,14 @@
       <apply>OI_CORR.CORR</apply>
       <apply>OI_CORR.IINDX</apply>
       <apply>OI_CORR.JINDX</apply>
+      <apply>OI_FLUX.CORRINDX_FLUXDATA</apply>
+      <apply>OI_FLUX.FLAG</apply>
+      <apply>OI_FLUX.FLUXDATA</apply>
+      <apply>OI_FLUX.FLUXERR</apply>
+      <apply>OI_FLUX.INT_TIME</apply>
+      <apply>OI_FLUX.MJD</apply>
+      <apply>OI_FLUX.STA_INDEX</apply>
+      <apply>OI_FLUX.TARGET_ID</apply>
       <apply>OI_INSPOL.INSNAME</apply>
       <apply>OI_INSPOL.JXX</apply>
       <apply>OI_INSPOL.JXY</apply>
@@ -710,14 +686,6 @@
       <apply>OI_INSPOL.MJD_OBS</apply>
       <apply>OI_INSPOL.STA_INDEX</apply>
       <apply>OI_INSPOL.TARGET_ID</apply>
-      <apply>OI_SPECTRUM.CORRINDX_FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLAG</apply>
-      <apply>OI_SPECTRUM.FLUXDATA</apply>
-      <apply>OI_SPECTRUM.FLUXERR</apply>
-      <apply>OI_SPECTRUM.INT_TIME</apply>
-      <apply>OI_SPECTRUM.MJD</apply>
-      <apply>OI_SPECTRUM.STA_INDEX</apply>
-      <apply>OI_SPECTRUM.TARGET_ID</apply>
       <apply>OI_T3.CORRINDX_T3AMP</apply>
       <apply>OI_T3.CORRINDX_T3PHI</apply>
       <apply>OI_T3.FLAG</apply>
@@ -801,8 +769,6 @@
       <apply>OI_FLUX.TARGET_ID</apply>
       <apply>OI_INSPOL.STA_INDEX</apply>
       <apply>OI_INSPOL.TARGET_ID</apply>
-      <apply>OI_SPECTRUM.STA_INDEX</apply>
-      <apply>OI_SPECTRUM.TARGET_ID</apply>
       <apply>OI_T3.STA_INDEX</apply>
       <apply>OI_T3.TARGET_ID</apply>
       <apply>OI_VIS.STA_INDEX</apply>
@@ -839,7 +805,6 @@
       <apply>OI_ARRAY.DIAMETER</apply>
       <apply>OI_CORR.CORR</apply>
       <apply>OI_FLUX.INT_TIME</apply>
-      <apply>OI_SPECTRUM.INT_TIME</apply>
       <apply>OI_T3.INT_TIME</apply>
       <apply>OI_VIS.INT_TIME</apply>
       <apply>OI_VIS2.INT_TIME</apply>
@@ -857,7 +822,6 @@
     <paragraph>V2.7.2§4</paragraph>
     <subjects>
       <apply>OI_FLUX.CORRINDX_FLUXDATA</apply>
-      <apply>OI_SPECTRUM.CORRINDX_FLUXDATA</apply>
       <apply>OI_T3.CORRINDX_T3AMP</apply>
       <apply>OI_T3.CORRINDX_T3PHI</apply>
       <apply>OI_VIS.CORRINDX_IVIS</apply>
@@ -876,7 +840,6 @@
     <paragraph>V2.7.2§4</paragraph>
     <subjects>
       <apply>OI_FLUX.CORRINDX_FLUXDATA</apply>
-      <apply>OI_SPECTRUM.CORRINDX_FLUXDATA</apply>
       <apply>OI_T3.CORRINDX_T3AMP</apply>
       <apply>OI_T3.CORRINDX_T3PHI</apply>
       <apply>OI_VIS.CORRINDX_IVIS</apply>
@@ -895,7 +858,6 @@
     <paragraph>V2.7.2§4</paragraph>
     <subjects>
       <apply>OI_FLUX.CORRINDX_FLUXDATA</apply>
-      <apply>OI_SPECTRUM.CORRINDX_FLUXDATA</apply>
       <apply>OI_T3.CORRINDX_T3AMP</apply>
       <apply>OI_T3.CORRINDX_T3PHI</apply>
       <apply>OI_VIS.CORRINDX_IVIS</apply>
@@ -915,7 +877,6 @@
     <subjects>
       <apply>MAIN_HEADER.DATE-OBS</apply>
       <apply>OI_FLUX.DATE-OBS</apply>
-      <apply>OI_SPECTRUM.DATE-OBS</apply>
       <apply>OI_T3.DATE-OBS</apply>
       <apply>OI_VIS.DATE-OBS</apply>
       <apply>OI_VIS2.DATE-OBS</apply>
@@ -932,7 +893,6 @@
     <subjects>
       <apply>MAIN_HEADER.DATE-OBS</apply>
       <apply>OI_FLUX.DATE-OBS</apply>
-      <apply>OI_SPECTRUM.DATE-OBS</apply>
       <apply>OI_T3.DATE-OBS</apply>
       <apply>OI_VIS.DATE-OBS</apply>
       <apply>OI_VIS2.DATE-OBS</apply>
@@ -1016,16 +976,6 @@
       <apply>OI_INSPOL.NPOL</apply>
       <apply>OI_INSPOL.OI_REVN</apply>
       <apply>OI_INSPOL.ORIENT</apply>
-      <apply>OI_SPECTRUM.ARRNAME</apply>
-      <apply>OI_SPECTRUM.CALSTAT</apply>
-      <apply>OI_SPECTRUM.CORRNAME</apply>
-      <apply>OI_SPECTRUM.DATE-OBS</apply>
-      <apply>OI_SPECTRUM.EXTVER</apply>
-      <apply>OI_SPECTRUM.FOV</apply>
-      <apply>OI_SPECTRUM.FOVTYPE</apply>
-      <apply>OI_SPECTRUM.INSNAME</apply>
-      <apply>OI_SPECTRUM.NAXIS2</apply>
-      <apply>OI_SPECTRUM.OI_REVN</apply>
       <apply>OI_T3.ARRNAME</apply>
       <apply>OI_T3.CORRNAME</apply>
       <apply>OI_T3.DATE-OBS</apply>
@@ -1108,12 +1058,6 @@
       <apply>OI_INSPOL.NPOL</apply>
       <apply>OI_INSPOL.OI_REVN</apply>
       <apply>OI_INSPOL.ORIENT</apply>
-      <apply>OI_SPECTRUM.CALSTAT</apply>
-      <apply>OI_SPECTRUM.DATE-OBS</apply>
-      <apply>OI_SPECTRUM.EXTNAME</apply>
-      <apply>OI_SPECTRUM.INSNAME</apply>
-      <apply>OI_SPECTRUM.NAXIS2</apply>
-      <apply>OI_SPECTRUM.OI_REVN</apply>
       <apply>OI_T3.DATE-OBS</apply>
       <apply>OI_T3.EXTNAME</apply>
       <apply>OI_T3.INSNAME</apply>
@@ -1151,7 +1095,6 @@
       <apply>OI_CORR.OI_REVN</apply>
       <apply>OI_FLUX.OI_REVN</apply>
       <apply>OI_INSPOL.OI_REVN</apply>
-      <apply>OI_SPECTRUM.OI_REVN</apply>
       <apply>OI_T3.OI_REVN</apply>
       <apply>OI_TARGET.OI_REVN</apply>
       <apply>OI_VIS.OI_REVN</apply>
@@ -1180,12 +1123,6 @@
       <apply>OI_INSPOL.ARRNAME</apply>
       <apply>OI_INSPOL.EXTNAME</apply>
       <apply>OI_INSPOL.ORIENT</apply>
-      <apply>OI_SPECTRUM.ARRNAME</apply>
-      <apply>OI_SPECTRUM.CALSTAT</apply>
-      <apply>OI_SPECTRUM.CORRNAME</apply>
-      <apply>OI_SPECTRUM.EXTNAME</apply>
-      <apply>OI_SPECTRUM.FOVTYPE</apply>
-      <apply>OI_SPECTRUM.INSNAME</apply>
       <apply>OI_T3.ARRNAME</apply>
       <apply>OI_T3.CORRNAME</apply>
       <apply>OI_T3.EXTNAME</apply>
@@ -1216,7 +1153,6 @@
       <apply>MAIN_HEADER.MJD-END</apply>
       <apply>MAIN_HEADER.MJD-OBS</apply>
       <apply>OI_FLUX.MJD</apply>
-      <apply>OI_SPECTRUM.MJD</apply>
       <apply>OI_T3.MJD</apply>
       <apply>OI_VIS.MJD</apply>
       <apply>OI_VIS2.MJD</apply>
@@ -1235,7 +1171,6 @@
       <apply>OI_CORR</apply>
       <apply>OI_FLUX</apply>
       <apply>OI_INSPOL</apply>
-      <apply>OI_SPECTRUM</apply>
       <apply>OI_T3</apply>
       <apply>OI_TARGET</apply>
       <apply>OI_VIS</apply>
@@ -1474,7 +1409,6 @@
     <paragraph>V2.7.2§4</paragraph>
     <subjects>
       <apply>OI_FLUX.CORRINDX_FLUXDATA</apply>
-      <apply>OI_SPECTRUM.CORRINDX_FLUXDATA</apply>
     </subjects>
     <standards>
       <standard>VERSION_2</standard>

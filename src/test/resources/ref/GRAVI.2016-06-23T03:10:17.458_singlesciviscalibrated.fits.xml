@@ -1928,6 +1928,7 @@ INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
+SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
 Analysing table [OI_VIS#9]
 INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]
@@ -1957,9 +1958,10 @@ INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
+SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
 
-2 warnings, 17 severe errors
+2 warnings, 19 severe errors
 </checkReport>
 <rules>
   <rule>
@@ -2255,6 +2257,15 @@ SEVERE	Missing keyword 'OI_REVN'
       <value>1D</value>
       <message>Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]</message>
     </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_COL_MANDATORY</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>8</extNb>
+    <member>FLUXDATA</member>
+    <message>Missing column 'FLUXDATA'</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>
@@ -2554,6 +2565,15 @@ SEVERE	Missing keyword 'OI_REVN'
       <value>1D</value>
       <message>Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]</message>
     </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_COL_MANDATORY</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>12</extNb>
+    <member>FLUXDATA</member>
+    <message>Missing column 'FLUXDATA'</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>

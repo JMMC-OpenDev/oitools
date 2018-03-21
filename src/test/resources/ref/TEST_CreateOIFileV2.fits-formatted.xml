@@ -3,7 +3,7 @@
 <filename>TEST_CreateOIFileV2.fits</filename>
 <local_filename>TEST_CreateOIFileV2.fits</local_filename>
 <size>77760</size>
-<md5sum>18a51b29fd6333b13ba30ef4702c4aad</md5sum>
+<md5sum>72f3fbaf75cce43706c3e72eeba129f7</md5sum>
 <hdu>
 <keywords>
 </keywords>
@@ -322,9 +322,9 @@
 <tr><td>1</td><td>0</td><td>57940</td><td>500</td><td>922.948 2304.722 630.925 118.789 4743.111 2065.487 4397.102</td><td>7.168 12.478 0.518 5.012 10.677 14.818 5.716</td><td>3416.729 3006.306 1872.478 3821.942 3769.739 1637.46 2451.779</td><td>19.916 11.8 2.498 5.953 18.29 9.737 16.321</td><td>145.472</td><td>109.58</td><td>10.331</td><td>171.398</td><td>3 4 7</td><td>T T F F F T T</td><td>57</td><td>78</td></tr>
 </table>
 </OI_T3>
-<OI_SPECTRUM>
+<OI_FLUX>
 <keywords>
-<keyword><name>EXTNAME</name><value>OI_SPECTRUM</value><description>extension name</description><type>A</type><unit></unit></keyword>
+<keyword><name>EXTNAME</name><value>OI_FLUX</value><description>extension name</description><type>A</type><unit></unit></keyword>
 <keyword><name>NAXIS2</name><value>5</value><description>number of table rows</description><type>J</type><unit></unit></keyword>
 <keyword><name>EXTVER</name><value>1</value><description>extension version</description><type>J</type><unit></unit></keyword>
 <keyword><name>OI_REVN</name><value>1</value><description>revision number of the table definition</description><type>J</type><unit></unit></keyword>
@@ -355,7 +355,7 @@
 <tr><td>1</td><td>57940</td><td>500</td><td>184.762 17.963 221.921 14.13 276.621 128.071 68.727</td><td>12.411 8.661 19.04 11.848 19.563 13.613 6.918</td><td>7</td><td>T F T T T T F</td><td>106</td></tr>
 <tr><td>1</td><td>57940</td><td>500</td><td>293.582 243.705 173.429 158.381 142.601 237.775 227.811</td><td>18.866 13.526 8.009 14.955 11.678 18.163 19.266</td><td>4</td><td>F T T F T F F</td><td>113</td></tr>
 </table>
-</OI_SPECTRUM>
+</OI_FLUX>
 <checkReport>
 Analysing File: TEST_CreateOIFileV2.fits
 Analysing table [OI_INSPOL#5]

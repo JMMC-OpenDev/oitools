@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Git commands to update your forked repository with the JMMC-OpenDev/OITools master
+#
 
 # First, configure the remote upstream:
 # git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
