@@ -127,18 +127,17 @@ public class FitsImageHDU extends FitsHDU {
      */
     @Override
     public final String toString() {
-        return toString(true);
+        return toString(false);
     }
 
     /**
      * Returns a string representation of this HDU
-     * @param dumpHeaderCards true to dump also header cards
+     * @param detailled true to dump also header cards
      * @return a string representation of this HDU
      */
-    public final String toString(final boolean dumpHeaderCards) {
+    public final String toString(final boolean detailled) {
         return idToString() + "[" + getImageCount() + ']'
-                + ((dumpHeaderCards) ? "{\n" + getHeaderCardsAsString("\n") + '}' : "")
-                + '\n' + getFitsImages();
+                + ((detailled) ? "{\n" + getHeaderCardsAsString("\n") + '}' + '\n' + getFitsImages() : "");
     }
 
     /**
