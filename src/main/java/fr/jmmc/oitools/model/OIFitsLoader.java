@@ -616,10 +616,6 @@ public class OIFitsLoader {
 
             idx = hdu.findColumn(name);
 
-            if ((idx == -1) && (column.getAlias() != null)) {
-                idx = hdu.findColumn(column.getAlias());
-            }
-
             if (idx == -1 || OIFitsChecker.isInspectRules()) {
                 if (!column.isOptional()) {
                     /* No column with columnName name */
@@ -627,6 +623,12 @@ public class OIFitsLoader {
                     checker.ruleFailed(Rule.GENERIC_COL_MANDATORY, table, name);
                 }
             }
+
+            // lets continue reading with alias support if any
+            if ((idx == -1) && (column.getAlias() != null)) {
+                idx = hdu.findColumn(column.getAlias());
+            }
+
             if (idx != -1 || OIFitsChecker.isInspectRules()) {
 
                 final char type;
