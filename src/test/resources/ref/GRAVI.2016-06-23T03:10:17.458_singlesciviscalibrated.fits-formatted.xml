@@ -1900,12 +1900,10 @@ Analysing File: GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits
 Analysing HDU [HDU#0]
 INFO	The keyword 'INSMODE' has the value 'SINGLE,MEDIUM,COMBINED,COMBINED' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'INSTRUME' has the value 'GRAVITY' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'OBJECT' has the value 'IRAS17216-3801' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'OBSERVER' has the value 'UNKNOWN' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'PROCSOFT' has the value 'GRAVITY pipeline 0.9.8' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'PROG_ID' has the value '60.A-9174(A)' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'REFERENC' has the value '2001PASP..112.1133P' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'TELESCOP' has the value 'ESO-VLTI-A1234' but should be set to 'MULTI' for multiple observations
 Analysing table [OI_ARRAY#1]
 INFO	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
 WARNING	Missing column 'FOV'
@@ -2040,19 +2038,6 @@ SEVERE	Missing keyword 'OI_REVN'
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
-    <member>OBJECT</member>
-    <data>
-      <value>IRAS17216-3801</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'OBJECT' has the value 'IRAS17216-3801' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
     <member>OBSERVER</member>
     <data>
       <value>UNKNOWN</value>
@@ -2097,19 +2082,6 @@ SEVERE	Missing keyword 'OI_REVN'
       <value>2001PASP..112.1133P</value>
       <expected>MULTI</expected>
       <message>The keyword 'REFERENC' has the value '2001PASP..112.1133P' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>TELESCOP</member>
-    <data>
-      <value>ESO-VLTI-A1234</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'TELESCOP' has the value 'ESO-VLTI-A1234' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>

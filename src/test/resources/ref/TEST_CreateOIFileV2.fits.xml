@@ -359,15 +359,12 @@
 <checkReport>
 Analysing File: TEST_CreateOIFileV2.fits
 Analysing HDU [HDU#0]
-INFO	The keyword 'INSMODE' has the value 'Low_JHK' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'INSTRUME' has the value 'VEGA' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'OBJECT' has the value 'MegaStar' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'OBSERVER' has the value 'Gilles' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'OBSTECH' has the value 'SCAN, PH_REF, ...' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'PROCSOFT' has the value 'pndg 3.4' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'PROG_ID' has the value '074.R-456' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'REFERENC' has the value '2017HDTYE.123.43.56' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'TELESCOP' has the value 'Etoilemagic' but should be set to 'MULTI' for multiple observations
 Analysing table [OI_INSPOL#5]
 SEVERE	Can't check repeat for column 'JXX'
 SEVERE	Can't check repeat for column 'JXY'
@@ -389,32 +386,6 @@ SEVERE	Can't check repeat for column 'JYY'
   </rule>
 </rules>
 <failures>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>INSMODE</member>
-    <data>
-      <value>Low_JHK</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'INSMODE' has the value 'Low_JHK' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>INSTRUME</member>
-    <data>
-      <value>VEGA</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'INSTRUME' has the value 'VEGA' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
   <failure>
     <severity>INFO</severity>
     <rule>PRIMARYHDU_TYPE_MULTI</rule>
@@ -491,19 +462,6 @@ SEVERE	Can't check repeat for column 'JYY'
       <value>2017HDTYE.123.43.56</value>
       <expected>MULTI</expected>
       <message>The keyword 'REFERENC' has the value '2017HDTYE.123.43.56' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>TELESCOP</member>
-    <data>
-      <value>Etoilemagic</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'TELESCOP' has the value 'Etoilemagic' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>

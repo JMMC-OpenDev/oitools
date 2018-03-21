@@ -28,7 +28,6 @@ import fr.jmmc.oitools.image.ImageOiData;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 import static fr.jmmc.oitools.model.OIFitsChecker.isInspectRules;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -192,11 +191,11 @@ public final class OIFitsFile extends FitsImageFile {
             } else if (oiTable instanceof OIInspol) {
                 extVer = getNbOiInspol();
             }
-
+            
             extVer++;
             oiTable.setExtVer(extVer);
         }
-
+        
         this.registerOiTable(oiTable);
     }
 
@@ -224,7 +223,7 @@ public final class OIFitsFile extends FitsImageFile {
             logger.log(Level.FINE, "Registering object for {0}", oiTable.idToString());
         }
         this.oiTables.add(oiTable);
-
+        
         if (oiTable instanceof OITarget) {
             this.oiTargets.add((OITarget) oiTable);
         } else if (oiTable instanceof OIWavelength) {
@@ -248,14 +247,14 @@ public final class OIFitsFile extends FitsImageFile {
             this.oiDataTables.add((OISpectrum) oiTable);
             this.oiSpectrumTables.add((OISpectrum) oiTable);
         }
-
+        
         if (oiTable instanceof OIWavelength) {
             final OIWavelength o = (OIWavelength) oiTable;
             final String insName = o.getInsName();
-
+            
             if (insName != null) {
                 List<OIWavelength> v = this.insNameToOiWavelength.get(insName);
-
+                
                 if (v == null) {
                     v = new LinkedList<OIWavelength>();
                     this.insNameToOiWavelength.put(insName, v);
@@ -264,15 +263,15 @@ public final class OIFitsFile extends FitsImageFile {
             } else {
                 logger.warning("INSNAME of OI_WAVELENGTH table is null during building step");
             }
-
+            
             computeWavelengthBounds();
         } else if (oiTable instanceof OIArray) {
             final OIArray o = (OIArray) oiTable;
             final String arrName = o.getArrName();
-
+            
             if (arrName != null) {
                 List<OIArray> v = this.arrNameToOiArray.get(arrName);
-
+                
                 if (v == null) {
                     v = new LinkedList<OIArray>();
                     this.arrNameToOiArray.put(arrName, v);
@@ -284,10 +283,10 @@ public final class OIFitsFile extends FitsImageFile {
         } else if (oiTable instanceof OICorr) {
             final OICorr o = (OICorr) oiTable;
             final String corrName = o.getCorrName();
-
+            
             if (corrName != null) {
                 List<OICorr> v = this.corrNameToOiCorr.get(corrName);
-
+                
                 if (v == null) {
                     v = new LinkedList<OICorr>();
                     this.corrNameToOiCorr.put(corrName, v);
@@ -305,7 +304,7 @@ public final class OIFitsFile extends FitsImageFile {
      */
     protected void unregisterOiTable(final OITable oiTable) {
         this.oiTables.remove(oiTable);
-
+        
         if (oiTable instanceof OITarget) {
             this.oiTargets.remove((OITarget) oiTable);
         } else if (oiTable instanceof OIWavelength) {
@@ -438,7 +437,7 @@ public final class OIFitsFile extends FitsImageFile {
         if (oiTarget == null) {
             return EMPTY_SHORT_ARRAY;
         }
-
+        
         return oiTarget.getTargetId();
     }
 
@@ -496,9 +495,9 @@ public final class OIFitsFile extends FitsImageFile {
         try {
             // Initialize FileRef in OIFitsChecker
             checker.setFileRef(getFileRef(), getVersion());
-
+            
             final long start = System.nanoTime();
-
+            
             logger.info("Analysing values and references");
 
             /* Checking primary HDU */
@@ -509,7 +508,7 @@ public final class OIFitsFile extends FitsImageFile {
                     checker.ruleFailed(Rule.OIFITS_PRIMARYHDU_EXIST_V2);
                 }
             }
-
+            
             logger.finest("Checking mandatory tables");
 
             /* Checking presence of one and only one OI_TARGET table */
@@ -525,18 +524,19 @@ public final class OIFitsFile extends FitsImageFile {
                 checker.inspectRuleFailed(Rule.OIFITS_OI_WAVELENGTH_EXIST, OIFitsConstants.TABLE_OI_WAVELENGTH, getVersion());
                 checker.ruleFailed(Rule.OIFITS_OI_WAVELENGTH_EXIST);
             }
-
+            
             if (isOIFits2()) {
                 if (getPrimaryImageHDU() != null) {
                     final OIPrimaryHDU primaryHDU = (OIPrimaryHDU) getPrimaryImageHDU();
 
-                    final short[] targetIds = getAcceptedTargetIds();
-                    final String[] arrNames = getAcceptedArrNames();
-                    final String[] insNames = getAcceptedInsNames();
-                    // Note: targetIds may contain duplicates or identical targets ...
                     // Note: arrNames may points to identical arrays ...
-                    if ((targetIds.length > 1 || arrNames.length > 1 || insNames.length > 1) || OIFitsChecker.isInspectRules()) {
-                        primaryHDU.checkMultiKeywords(checker);
+                    final int arrNames = getAcceptedArrNames().length;
+                    final int insNames = getAcceptedInsNames().length;
+                    // Note: targetIds may contain duplicates or identical targets ...
+                    final int targets = getAcceptedTargetIds().length;
+                    
+                    if ((arrNames > 1 || insNames > 1 || targets > 1) || OIFitsChecker.isInspectRules()) {
+                        primaryHDU.checkMultiKeywords(checker, arrNames, insNames, targets);
                     }
                 }
 
@@ -546,13 +546,13 @@ public final class OIFitsFile extends FitsImageFile {
                     checker.inspectRuleFailed(Rule.OIFITS_OI_ARRAY_EXIST_V2, OIFitsConstants.TABLE_OI_ARRAY, OIFitsStandard.VERSION_2);
                     checker.ruleFailed(Rule.OIFITS_OI_ARRAY_EXIST_V2);
                 }
-
+                
                 checkOIInspols(checker);
             }
 
             /* Starting syntactical analysis */
             logger.finest("Building list of table for keywords analysis");
-
+            
             if (isOIFits2()) {
                 if (getPrimaryImageHDU() != null || OIFitsChecker.isInspectRules()) {
                     getPrimaryImageHDU().checkSyntax(checker);
@@ -567,7 +567,7 @@ public final class OIFitsFile extends FitsImageFile {
 
             // Define Severity:
             checker.defineSeverity(SeverityProfileFactory.getInstance().getProfile(SeverityProfileFactory.PROFILE_JMMC));
-
+            
             if (logger.isLoggable(Level.FINE)) {
                 logger.log(Level.FINE, "OIFitsFile.check: duration = {0} ms.", 1e-6d * (System.nanoTime() - start));
             }
@@ -588,7 +588,7 @@ public final class OIFitsFile extends FitsImageFile {
     public void checkCrossReference(final OITable oiTable, final OIFitsChecker checker) {
         if (oiTable instanceof OITarget) {
             final OITarget oitarget = (OITarget) oiTable;
-
+            
             if (oitarget.getNbTargets() < 1 || OIFitsChecker.isInspectRules()) {
                 // rule [OITARGET_TARGET_EXIST] check if the OI_TARGET table have at least one target
                 checker.ruleFailed(Rule.OITARGET_TARGET_EXIST, oitarget);
@@ -596,11 +596,11 @@ public final class OIFitsFile extends FitsImageFile {
         } else if (oiTable instanceof OIWavelength) {
             final OIWavelength oiwavelength = (OIWavelength) oiTable;
             final String insName = oiwavelength.getInsName();
-
+            
             if (insName != null) {
                 /* Get OiWavelength associated to INSNAME value */
                 final List<OIWavelength> oiwaves = insNameToOiWavelength.get(insName);
-
+                
                 if (oiwaves == null || isInspectRules()) {
                     /* Problem: INSNAME value has not been encoutered during
                      * building step, that should be impossible */
@@ -611,7 +611,7 @@ public final class OIFitsFile extends FitsImageFile {
                 if ((oiwaves != null && oiwaves.size() > 1) || isInspectRules()) {
                     /* Problem: more that one OiWavelength table associated to INSNAME value, that is strictly forbidden */
                     final StringBuilder sb = new StringBuilder();
-
+                    
                     if (oiwaves != null) {
                         for (Iterator<OIWavelength> it = oiwaves.iterator(); it.hasNext();) {
                             sb.append('|').append(it.next().idToString());
@@ -627,11 +627,11 @@ public final class OIFitsFile extends FitsImageFile {
         } else if (oiTable instanceof OIArray) {
             final OIArray oiarray = (OIArray) oiTable;
             final String arrName = oiarray.getArrName();
-
+            
             if (arrName != null || isInspectRules()) {
                 /* Get OiArray associated to ARRNAME value */
                 final List<OIArray> oiarrays = arrNameToOiArray.get(arrName);
-
+                
                 if (oiarrays == null || isInspectRules()) {
                     /* Problem: OI_ARRAY.ARRNAME can be modified without fixing cross-references */
                     // rule [GENERIC_ARRNAME_REF] check if an OI_ARRAY table matches the ARRNAME keyword
@@ -640,7 +640,7 @@ public final class OIFitsFile extends FitsImageFile {
                 if ((oiarrays != null && oiarrays.size() > 1) || isInspectRules()) {
                     /* Problem: more that one OiArray table associated to ARRNAME value, that is strictly forbiden */
                     final StringBuilder sb = new StringBuilder();
-
+                    
                     if (oiarrays != null) {
                         for (Iterator<OIArray> it = oiarrays.iterator(); it.hasNext();) {
                             sb.append('|').append(it.next().idToString());
@@ -656,11 +656,11 @@ public final class OIFitsFile extends FitsImageFile {
         } else if (oiTable instanceof OICorr) {
             final OICorr oicorr = (OICorr) oiTable;
             final String corrName = oicorr.getCorrName();
-
+            
             if (corrName != null) {
                 /* Get OICorr associated to CORRNAME value */
                 final List<OICorr> oicorrs = corrNameToOiCorr.get(corrName);
-
+                
                 if (oicorrs == null || isInspectRules()) {
                     /* Problem: CORRNAME value has not been encoutered during
                      * building step, that should be impossible */
@@ -671,7 +671,7 @@ public final class OIFitsFile extends FitsImageFile {
                 if ((oicorrs != null && oicorrs.size() > 1) || isInspectRules()) {
                     /* Problem: more that one OICorr table associated to CORRNAME value, that is strictly forbiden */
                     final StringBuilder sb = new StringBuilder();
-
+                    
                     if (oicorrs != null) {
                         for (Iterator<OICorr> it = oicorrs.iterator(); it.hasNext();) {
                             sb.append('|').append(it.next().idToString());
@@ -686,28 +686,28 @@ public final class OIFitsFile extends FitsImageFile {
             }
         }
     }
-
+    
     private void checkOIInspols(OIFitsChecker checker) {
 
         //Map to verify the presence of a duplicate INSNAME
         Map<String, Set<OIInspol>> insnameToOIInspol = new HashMap<String, Set<OIInspol>>();
-
+        
         for (OIInspol oiInspol : oiInspols) {
-
+            
             for (String insName : oiInspol.getInsNames()) {
 
                 /* Get OIInspol associated to INSNAME value */
                 Set<OIInspol> oiinspols = insnameToOIInspol.get(insName);
-
+                
                 if (oiinspols == null) {
                     //preserve insertion order
                     oiinspols = new LinkedHashSet<OIInspol>();
                     insnameToOIInspol.put(insName, oiinspols);
                 }
-
+                
                 oiinspols.add(oiInspol);
             }
-
+            
             for (Map.Entry<String, Set<OIInspol>> entry : insnameToOIInspol.entrySet()) {
                 final Set<OIInspol> oiinspols = entry.getValue();
 
@@ -715,9 +715,9 @@ public final class OIFitsFile extends FitsImageFile {
                 //And the OI_INSPOL being validated is present in the set 
                 if ((oiinspols.size() > 1 && oiinspols.contains(oiInspol)) || isInspectRules()) {
                     final String insName = entry.getKey();
-
+                    
                     final StringBuilder sb = new StringBuilder();
-
+                    
                     for (Iterator<OIInspol> it = oiinspols.iterator(); it.hasNext();) {
                         sb.append('|').append(it.next().idToString());
                     }
@@ -728,7 +728,7 @@ public final class OIFitsFile extends FitsImageFile {
                 }
             }
         }
-
+        
     }
 
     /**
@@ -759,7 +759,7 @@ public final class OIFitsFile extends FitsImageFile {
             return false;
         }
         final OIFitsFile other = (OIFitsFile) obj;
-
+        
         return areEquals(this.getAbsoluteFilePath(), other.getAbsoluteFilePath());
     }
 

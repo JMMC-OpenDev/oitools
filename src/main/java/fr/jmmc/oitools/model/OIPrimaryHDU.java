@@ -863,12 +863,18 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * Check specific keywords for multiple observations
      * @param checker checker component
      */
-    void checkMultiKeywords(final OIFitsChecker checker) {
-        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_TELESCOP);
-        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSTRUME);
+    void checkMultiKeywords(final OIFitsChecker checker, final int arrnames, final int insnames, final int targets) {
+        if (arrnames > 1) {
+            checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_TELESCOP);
+        }
+        if (insnames > 1) {
+            checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSTRUME);
+            checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSMODE);
+        }
+        if (targets > 1) {
+            checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_OBJECT);
+        }
         checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_OBSERVER);
-        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_OBJECT);
-        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSMODE);
         checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_REFERENC);
         checkKeywordValueIsMulti(checker, OIFitsConstants.KEYWORD_PROG_ID);
         checkKeywordValueIsMulti(checker, OIFitsConstants.KEYWORD_PROCSOFT);
@@ -878,7 +884,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
     private void checkKeywordValueIsMulti(final OIFitsChecker checker, final String keywordName) {
         final String value = getKeyword(keywordName);
         if (value != null || OIFitsChecker.isInspectRules()) {
-            if (!VALUE_MULTI.equalsIgnoreCase(value) || OIFitsChecker.isInspectRules()) {
+            if ((value != null && !value.startsWith(VALUE_MULTI)) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.PRIMARYHDU_TYPE_MULTI, this, keywordName).addKeywordValue(value, VALUE_MULTI);
             }
         }

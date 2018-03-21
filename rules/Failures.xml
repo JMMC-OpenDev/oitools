@@ -43635,39 +43635,6 @@
     <severity>INFO</severity>
     <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>memory:2</file>
-    <member>INSMODE</member>
-    <data>
-      <value>null</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'INSMODE' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>memory:2</file>
-    <member>INSTRUME</member>
-    <data>
-      <value>null</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'INSTRUME' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>memory:2</file>
-    <member>OBJECT</member>
-    <data>
-      <value>null</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'OBJECT' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>memory:2</file>
     <member>OBSERVER</member>
     <data>
       <value>null</value>
@@ -43717,43 +43684,6 @@
       <value>null</value>
       <expected>MULTI</expected>
       <message>The keyword 'REFERENC' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>memory:2</file>
-    <member>TELESCOP</member>
-    <data>
-      <value>null</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'TELESCOP' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>INSMODE</member>
-    <data>
-      <value>Low_JHK</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'INSMODE' has the value 'Low_JHK' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>INSTRUME</member>
-    <data>
-      <value>VEGA</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'INSTRUME' has the value 'VEGA' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>
@@ -43832,19 +43762,6 @@
       <value>2017HDTYE.123.43.56</value>
       <expected>MULTI</expected>
       <message>The keyword 'REFERENC' has the value '2017HDTYE.123.43.56' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>TELESCOP</member>
-    <data>
-      <value>Etoilemagic</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'TELESCOP' has the value 'Etoilemagic' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>

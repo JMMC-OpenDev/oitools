@@ -410,10 +410,6 @@ Analysing File: bigtest2.fits
 Analysing HDU [HDU#0]
 SEVERE	Missing keyword 'DATE'
 INFO	The keyword 'INSMODE' has the value 'SYNTHETIC' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'INSTRUME' has the value 'MULTIPLE' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'OBJECT' has the value 'MULTIPLE' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'OBSERVER' has the value 'MULTIPLE' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'TELESCOP' has the value 'MULTIPLE' but should be set to 'MULTI' for multiple observations
 Analysing table [OI_TARGET#1]
 SEVERE	TARGET_ID[0] cannot be < 1 at row 0
 Analysing table [OI_ARRAY#2]
@@ -467,12 +463,10 @@ Analysing File: GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits
 Analysing HDU [HDU#0]
 INFO	The keyword 'INSMODE' has the value 'SINGLE,MEDIUM,COMBINED,COMBINED' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'INSTRUME' has the value 'GRAVITY' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'OBJECT' has the value 'IRAS17216-3801' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'OBSERVER' has the value 'UNKNOWN' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'PROCSOFT' has the value 'GRAVITY pipeline 0.9.8' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'PROG_ID' has the value '60.A-9174(A)' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'REFERENC' has the value '2001PASP..112.1133P' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'TELESCOP' has the value 'ESO-VLTI-A1234' but should be set to 'MULTI' for multiple observations
 Analysing table [OI_ARRAY#1]
 INFO	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
 WARNING	Missing column 'FOV'
@@ -589,15 +583,12 @@ INFO	Missing unit for column 'VISDATA', should be ''
 INFO	Missing unit for column 'VISERR', should be ''
 Analysing File: TEST_CreateOIFileV2.fits
 Analysing HDU [HDU#0]
-INFO	The keyword 'INSMODE' has the value 'Low_JHK' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'INSTRUME' has the value 'VEGA' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'OBJECT' has the value 'MegaStar' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'OBSERVER' has the value 'Gilles' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'OBSTECH' has the value 'SCAN, PH_REF, ...' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'PROCSOFT' has the value 'pndg 3.4' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'PROG_ID' has the value '074.R-456' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'REFERENC' has the value '2017HDTYE.123.43.56' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'TELESCOP' has the value 'Etoilemagic' but should be set to 'MULTI' for multiple observations
 Analysing table [OI_INSPOL#5]
 SEVERE	Can't check repeat for column 'JXX'
 SEVERE	Can't check repeat for column 'JXY'
