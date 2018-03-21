@@ -318,18 +318,13 @@
 </OI_FLUX>
 <checkReport>
 Analysing File: testdata_opt.fits
-Analysing HDU [HDU#0]
-SEVERE	OBSTECH keyword must be present
-SEVERE	PROCSOFT keyword must be present
-SEVERE	PROG_ID keyword must be present
-SEVERE	REFERENC keyword must be present
 Analysing table [OI_INSPOL#9]
 SEVERE	Can't check repeat for column 'JXX'
 SEVERE	Can't check repeat for column 'JXY'
 SEVERE	Can't check repeat for column 'JYX'
 SEVERE	Can't check repeat for column 'JYY'
 
-0 warnings, 8 severe errors
+0 warnings, 4 severe errors
 </checkReport>
 <rules>
   <rule>
@@ -337,49 +332,8 @@ SEVERE	Can't check repeat for column 'JYY'
     <description>check if the dimension of column values &gt;= 1</description>
     <paragraph>JMMC</paragraph>
   </rule>
-  <rule>
-    <name>PRIMARYHDU_TYPE_ATOMIC</name>
-    <description>check if supplementary keywords are present, when OIFITS contains only one target observed on a single interferometer</description>
-    <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
-  </rule>
 </rules>
 <failures>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>testdata_opt.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>OBSTECH</member>
-    <message>OBSTECH keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>testdata_opt.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>PROCSOFT</member>
-    <message>PROCSOFT keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>testdata_opt.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>PROG_ID</member>
-    <message>PROG_ID keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>testdata_opt.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>REFERENC</member>
-    <message>REFERENC keyword must be present</message>
-  </failure>
   <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_DIM</rule>

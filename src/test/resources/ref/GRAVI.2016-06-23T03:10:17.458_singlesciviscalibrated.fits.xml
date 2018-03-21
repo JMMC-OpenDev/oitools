@@ -1898,7 +1898,14 @@
 <checkReport>
 Analysing File: GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits
 Analysing HDU [HDU#0]
-SEVERE	OBSTECH keyword must be present
+INFO	The keyword 'INSMODE' has the value 'SINGLE,MEDIUM,COMBINED,COMBINED' but should be set to 'MULTI' for multiple observations
+INFO	The keyword 'INSTRUME' has the value 'GRAVITY' but should be set to 'MULTI' for multiple observations
+INFO	The keyword 'OBJECT' has the value 'IRAS17216-3801' but should be set to 'MULTI' for multiple observations
+INFO	The keyword 'OBSERVER' has the value 'UNKNOWN' but should be set to 'MULTI' for multiple observations
+INFO	The keyword 'PROCSOFT' has the value 'GRAVITY pipeline 0.9.8' but should be set to 'MULTI' for multiple observations
+INFO	The keyword 'PROG_ID' has the value '60.A-9174(A)' but should be set to 'MULTI' for multiple observations
+INFO	The keyword 'REFERENC' has the value '2001PASP..112.1133P' but should be set to 'MULTI' for multiple observations
+INFO	The keyword 'TELESCOP' has the value 'ESO-VLTI-A1234' but should be set to 'MULTI' for multiple observations
 Analysing table [OI_ARRAY#1]
 INFO	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
 WARNING	Missing column 'FOV'
@@ -1961,7 +1968,7 @@ INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
 
-2 warnings, 19 severe errors
+2 warnings, 18 severe errors
 </checkReport>
 <rules>
   <rule>
@@ -1995,20 +2002,115 @@ SEVERE	Missing keyword 'OI_REVN'
     <paragraph>JMMC</paragraph>
   </rule>
   <rule>
-    <name>PRIMARYHDU_TYPE_ATOMIC</name>
-    <description>check if supplementary keywords are present, when OIFITS contains only one target observed on a single interferometer</description>
+    <name>PRIMARYHDU_TYPE_MULTI</name>
+    <description>check if main header keywords are set to 'MULTI' for heterogenous content</description>
     <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
   </rule>
 </rules>
 <failures>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
-    <member>OBSTECH</member>
-    <message>OBSTECH keyword must be present</message>
+    <member>INSMODE</member>
+    <data>
+      <value>SINGLE,MEDIUM,COMBINED,COMBINED</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSMODE' has the value 'SINGLE,MEDIUM,COMBINED,COMBINED' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>INSTRUME</member>
+    <data>
+      <value>GRAVITY</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSTRUME' has the value 'GRAVITY' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>OBJECT</member>
+    <data>
+      <value>IRAS17216-3801</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBJECT' has the value 'IRAS17216-3801' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>OBSERVER</member>
+    <data>
+      <value>UNKNOWN</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBSERVER' has the value 'UNKNOWN' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>PROCSOFT</member>
+    <data>
+      <value>GRAVITY pipeline 0.9.8</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROCSOFT' has the value 'GRAVITY pipeline 0.9.8' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>PROG_ID</member>
+    <data>
+      <value>60.A-9174(A)</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROG_ID' has the value '60.A-9174(A)' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>REFERENC</member>
+    <data>
+      <value>2001PASP..112.1133P</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'REFERENC' has the value '2001PASP..112.1133P' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>TELESCOP</member>
+    <data>
+      <value>ESO-VLTI-A1234</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'TELESCOP' has the value 'ESO-VLTI-A1234' but should be set to 'MULTI' for multiple observations</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>

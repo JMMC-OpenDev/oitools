@@ -43632,176 +43632,220 @@
     <message>INSNAME identifier has blank value</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_MULTI_TARGET</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>INSMODE</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSMODE' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>INSTRUME</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSTRUME' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>OBJECT</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBJECT' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>OBSERVER</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBSERVER' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>OBSTECH</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBSTECH' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>PROCSOFT</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROCSOFT' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>PROG_ID</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROG_ID' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>REFERENC</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'REFERENC' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>TELESCOP</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'TELESCOP' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
     <member>INSMODE</member>
     <data>
-      <value>MULTI</value>
-      <message>'INSMODE' keyword must contain the value 'MULTI' when multi targets and array</message>
+      <value>Low_JHK</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSMODE' has the value 'Low_JHK' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_MULTI_TARGET</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
     <member>INSTRUME</member>
     <data>
-      <value>MULTI</value>
-      <message>'INSTRUME' keyword must contain the value 'MULTI' when multi targets and array</message>
+      <value>VEGA</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSTRUME' has the value 'VEGA' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_MULTI_TARGET</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
     <member>OBJECT</member>
     <data>
-      <value>MULTI</value>
-      <message>'OBJECT' keyword must contain the value 'MULTI' when multi targets and array</message>
+      <value>MegaStar</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBJECT' has the value 'MegaStar' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_MULTI_TARGET</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
     <member>OBSERVER</member>
     <data>
-      <value>MULTI</value>
-      <message>'OBSERVER' keyword must contain the value 'MULTI' when multi targets and array</message>
+      <value>Gilles</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBSERVER' has the value 'Gilles' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_MULTI_TARGET</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
     <member>OBSTECH</member>
     <data>
-      <value>MULTI</value>
-      <message>'OBSTECH' keyword must contain the value 'MULTI' when multi targets and array</message>
+      <value>SCAN, PH_REF, ...</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBSTECH' has the value 'SCAN, PH_REF, ...' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_MULTI_TARGET</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
     <member>PROCSOFT</member>
     <data>
-      <value>MULTI</value>
-      <message>'PROCSOFT' keyword must contain the value 'MULTI' when multi targets and array</message>
+      <value>pndg 3.4</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROCSOFT' has the value 'pndg 3.4' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_MULTI_TARGET</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
     <member>PROG_ID</member>
     <data>
-      <value>MULTI</value>
-      <message>'PROG_ID' keyword must contain the value 'MULTI' when multi targets and array</message>
+      <value>074.R-456</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROG_ID' has the value '074.R-456' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_MULTI_TARGET</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
     <member>REFERENC</member>
     <data>
-      <value>MULTI</value>
-      <message>'REFERENC' keyword must contain the value 'MULTI' when multi targets and array</message>
+      <value>2017HDTYE.123.43.56</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'REFERENC' has the value '2017HDTYE.123.43.56' but should be set to 'MULTI' for multiple observations</message>
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_MULTI_TARGET</rule>
+    <severity>INFO</severity>
+    <rule>PRIMARYHDU_TYPE_MULTI</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
     <member>TELESCOP</member>
     <data>
-      <value>MULTI</value>
-      <message>'TELESCOP' keyword must contain the value 'MULTI' when multi targets and array</message>
+      <value>Etoilemagic</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'TELESCOP' has the value 'Etoilemagic' but should be set to 'MULTI' for multiple observations</message>
     </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>memory:2</file>
-    <member>OBSTECH</member>
-    <message>OBSTECH keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>memory:2</file>
-    <member>PROCSOFT</member>
-    <message>PROCSOFT keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>memory:2</file>
-    <member>PROG_ID</member>
-    <message>PROG_ID keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>memory:2</file>
-    <member>REFERENC</member>
-    <message>REFERENC keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>OBSTECH</member>
-    <message>OBSTECH keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>PROCSOFT</member>
-    <message>PROCSOFT keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>PROG_ID</member>
-    <message>PROG_ID keyword must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>PRIMARYHDU_TYPE_ATOMIC</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>REFERENC</member>
-    <message>REFERENC keyword must be present</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>

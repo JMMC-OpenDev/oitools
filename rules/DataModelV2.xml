@@ -1596,7 +1596,7 @@
     </standards>
   </rule>
   <rule>
-    <name>PRIMARYHDU_MULTI_TARGET</name>
+    <name>PRIMARYHDU_TYPE_MULTI</name>
     <description>check if main header keywords are set to 'MULTI' for heterogenous content</description>
     <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
     <subjects>
@@ -1609,20 +1609,6 @@
       <apply>MAIN_HEADER.PROG_ID</apply>
       <apply>MAIN_HEADER.REFERENC</apply>
       <apply>MAIN_HEADER.TELESCOP</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_2</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>PRIMARYHDU_TYPE_ATOMIC</name>
-    <description>check if supplementary keywords are present, when OIFITS contains only one target observed on a single interferometer</description>
-    <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
-    <subjects>
-      <apply>MAIN_HEADER.OBSTECH</apply>
-      <apply>MAIN_HEADER.PROCSOFT</apply>
-      <apply>MAIN_HEADER.PROG_ID</apply>
-      <apply>MAIN_HEADER.REFERENC</apply>
     </subjects>
     <standards>
       <standard>VERSION_2</standard>
@@ -1725,7 +1711,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
-      <applyrule>PRIMARYHDU_MULTI_TARGET</applyrule>
+      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1736,7 +1722,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
-      <applyrule>PRIMARYHDU_MULTI_TARGET</applyrule>
+      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1747,7 +1733,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
-      <applyrule>PRIMARYHDU_MULTI_TARGET</applyrule>
+      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1758,7 +1744,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
-      <applyrule>PRIMARYHDU_MULTI_TARGET</applyrule>
+      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1769,7 +1755,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
-      <applyrule>PRIMARYHDU_MULTI_TARGET</applyrule>
+      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1779,8 +1765,7 @@
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
-      <applyrule>PRIMARYHDU_MULTI_TARGET</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_ATOMIC</applyrule>
+      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1790,8 +1775,7 @@
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
-      <applyrule>PRIMARYHDU_MULTI_TARGET</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_ATOMIC</applyrule>
+      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1801,8 +1785,7 @@
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
-      <applyrule>PRIMARYHDU_MULTI_TARGET</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_ATOMIC</applyrule>
+      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1812,8 +1795,7 @@
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
-      <applyrule>PRIMARYHDU_MULTI_TARGET</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_ATOMIC</applyrule>
+      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
