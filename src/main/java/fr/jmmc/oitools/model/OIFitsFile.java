@@ -532,13 +532,11 @@ public final class OIFitsFile extends FitsImageFile {
 
                     final short[] targetIds = getAcceptedTargetIds();
                     final String[] arrNames = getAcceptedArrNames();
+                    final String[] insNames = getAcceptedInsNames();
                     // Note: targetIds may contain duplicates or identical targets ...
                     // Note: arrNames may points to identical arrays ...
-                    if ((targetIds.length > 1 && arrNames.length > 1) || OIFitsChecker.isInspectRules()) {
-                        primaryHDU.checkMULTIKeywordHDU(checker);
-                    }
-                    if ((targetIds.length == 1 && arrNames.length == 1) || OIFitsChecker.isInspectRules()) {
-                        primaryHDU.checkBookkeepingKeyword(checker);
+                    if ((targetIds.length > 1 || arrNames.length > 1 || insNames.length > 1) || OIFitsChecker.isInspectRules()) {
+                        primaryHDU.checkMultiKeywords(checker);
                     }
                 }
 

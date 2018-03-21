@@ -361,15 +361,10 @@ public enum Rule {
             RuleDataType.NONE,
             "INSNAME identifier has blank value"
     ),
-    PRIMARYHDU_MULTI_TARGET("check if main header keywords are set to 'MULTI' for heterogenous content",
+    PRIMARYHDU_TYPE_MULTI("check if main header keywords are set to 'MULTI' for heterogenous content",
             "V2.MAIN_HEADER_Table(3)",
-            RuleDataType.VALUE,
-            "'{{MEMBER}}' keyword must contain the value '{{VALUE}}' when multi targets and array"
-    ),
-    PRIMARYHDU_TYPE_ATOMIC("check if supplementary keywords are present, when OIFITS contains only one target observed on a single interferometer",
-            "V2.MAIN_HEADER_Table(3)",
-            RuleDataType.NONE,
-            "{{MEMBER}} keyword must be present"
+            RuleDataType.VALUE_EXPECTED,
+            "The keyword '{{MEMBER}}' has the value '{{VALUE}}' but should be set to '{{EXPECTED}}' for multiple observations"
     ),
     TABLE_NOT_OIFITS2(
             "check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in the OIFITS 1 file",

@@ -44,6 +44,8 @@ public final class OIPrimaryHDU extends FitsImageHDU {
     };
 
     /* constants */
+    /** keyword value 'MULTI' */
+    private final static String VALUE_MULTI = "MULTI";
     /**
      * ORIGIN keyword descriptor
      */
@@ -858,48 +860,28 @@ public final class OIPrimaryHDU extends FitsImageHDU {
     }
 
     /**
-     * Check the keyword concern by the rule if the value "MULTI" is present
+     * Check specific keywords for multiple observations
      * @param checker checker component
      */
-    void checkMULTIKeywordHDU(final OIFitsChecker checker) {
-        checkValueContains(checker, FitsConstants.KEYWORD_TELESCOP, "MULTI");
-        checkValueContains(checker, FitsConstants.KEYWORD_INSTRUME, "MULTI");
-        checkValueContains(checker, FitsConstants.KEYWORD_OBSERVER, "MULTI");
-        checkValueContains(checker, FitsConstants.KEYWORD_OBJECT, "MULTI");
-        checkValueContains(checker, FitsConstants.KEYWORD_INSMODE, "MULTI");
-        checkValueContains(checker, FitsConstants.KEYWORD_REFERENC, "MULTI");
-        checkValueContains(checker, OIFitsConstants.KEYWORD_PROG_ID, "MULTI");
-        checkValueContains(checker, OIFitsConstants.KEYWORD_PROCSOFT, "MULTI");
-        checkValueContains(checker, OIFitsConstants.KEYWORD_OBSTECH, "MULTI");
+    void checkMultiKeywords(final OIFitsChecker checker) {
+        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_TELESCOP);
+        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSTRUME);
+        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_OBSERVER);
+        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_OBJECT);
+        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSMODE);
+        checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_REFERENC);
+        checkKeywordValueIsMulti(checker, OIFitsConstants.KEYWORD_PROG_ID);
+        checkKeywordValueIsMulti(checker, OIFitsConstants.KEYWORD_PROCSOFT);
+        checkKeywordValueIsMulti(checker, OIFitsConstants.KEYWORD_OBSTECH);
     }
 
-    private void checkValueContains(final OIFitsChecker checker, final String keywordName, final String value) {
-        if (getKeyword(keywordName) != null) {
-            if (!getKeyword(keywordName).startsWith(value) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.PRIMARYHDU_MULTI_TARGET, this, keywordName).addKeywordValue(value);
+    private void checkKeywordValueIsMulti(final OIFitsChecker checker, final String keywordName) {
+        final String value = getKeyword(keywordName);
+        if (value != null || OIFitsChecker.isInspectRules()) {
+            if (!VALUE_MULTI.equalsIgnoreCase(value) || OIFitsChecker.isInspectRules()) {
+                checker.ruleFailed(Rule.PRIMARYHDU_TYPE_MULTI, this, keywordName).addKeywordValue(value, VALUE_MULTI);
             }
         }
-    }
-
-    /**
-     * Check the keyword concern by the rule Bookkeping keyword
-     * @param checker checker component
-     */
-    void checkBookkeepingKeyword(final OIFitsChecker checker) {
-
-        if (getKeyword(FitsConstants.KEYWORD_REFERENC) == null || OIFitsChecker.isInspectRules()) {
-            checker.ruleFailed(Rule.PRIMARYHDU_TYPE_ATOMIC, this, FitsConstants.KEYWORD_REFERENC);
-        }
-        if (getKeyword(OIFitsConstants.KEYWORD_PROG_ID) == null || OIFitsChecker.isInspectRules()) {
-            checker.ruleFailed(Rule.PRIMARYHDU_TYPE_ATOMIC, this, OIFitsConstants.KEYWORD_PROG_ID);
-        }
-        if (getKeyword(OIFitsConstants.KEYWORD_PROCSOFT) == null || OIFitsChecker.isInspectRules()) {
-            checker.ruleFailed(Rule.PRIMARYHDU_TYPE_ATOMIC, this, OIFitsConstants.KEYWORD_PROCSOFT);
-        }
-        if (getKeyword(OIFitsConstants.KEYWORD_OBSTECH) == null || OIFitsChecker.isInspectRules()) {
-            checker.ruleFailed(Rule.PRIMARYHDU_TYPE_ATOMIC, this, OIFitsConstants.KEYWORD_OBSTECH);
-        }
-
     }
 
 }
