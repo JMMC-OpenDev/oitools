@@ -47,9 +47,7 @@ public interface OIFitsConstants {
     /** Primary HDU */
     public final static String PRIMARY_HDU = "MAIN_HEADER";
 
-    /** Table OI_SPECTRUM */
-    public final static String TABLE_OI_SPECTRUM = "OI_SPECTRUM";
-    /** GRAVITY OI_FLUX: */
+    /** Table OI_FLUX */
     public final static String TABLE_OI_FLUX = "OI_FLUX";
     /** Table OI_CORR */
     public final static String TABLE_OI_CORR = "OI_CORR";

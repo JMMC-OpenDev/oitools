@@ -22,7 +22,6 @@ package fr.jmmc.oitools;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
 import static fr.jmmc.oitools.JUnitBaseTest.getFitsFiles;
 import fr.jmmc.oitools.model.OIFitsChecker;
-import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.Rule;
 
@@ -36,13 +35,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Test the code robustness: active isInspectRule 
+ * Test the code robustness: enable the OIFitsChecker.isInspectRule flag
  * @author kempsc
  */
-public class IsInspectRuleTest extends AbstractFileBaseTest {
-
-    // members:
-    private static OIFitsFile OIFITS = null;
+public class InspectRuleTest extends AbstractFileBaseTest {
 
     /**
      * Test loading lots of files when isInspectRule is active
@@ -65,7 +61,7 @@ public class IsInspectRuleTest extends AbstractFileBaseTest {
 
             for (String f : getFitsFiles(new File(TEST_DIR_OIFITS))) {
                 try {
-                    OIFITS = OIFitsLoader.loadOIFits(checker, f);
+                    OIFitsLoader.loadOIFits(checker, f);
                 } catch (Exception e) {
                     logger.log(Level.SEVERE, "exception:", e);
                     failureMsgs.add("File: " + (f.replaceAll(TEST_DIR_OIFITS, ""))
@@ -78,7 +74,7 @@ public class IsInspectRuleTest extends AbstractFileBaseTest {
             }
 
         } finally {
-            // Always disable inspectRules before any other test:
+            // Always disable the inspectRules flag before any other test:
             OIFitsChecker.setInspectRules(false);
         }
     }

@@ -864,14 +864,14 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @param checker checker component
      */
     void checkMultiKeywords(final OIFitsChecker checker, final int arrnames, final int insnames, final int targets) {
-        if (arrnames > 1) {
+        if (arrnames > 1 || OIFitsChecker.isInspectRules()) {
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_TELESCOP);
         }
-        if (insnames > 1) {
+        if (insnames > 1 || OIFitsChecker.isInspectRules()) {
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSTRUME);
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSMODE);
         }
-        if (targets > 1) {
+        if (targets > 1 || OIFitsChecker.isInspectRules()) {
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_OBJECT);
         }
         checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_OBSERVER);
@@ -885,7 +885,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
         final String value = getKeyword(keywordName);
         if (value != null || OIFitsChecker.isInspectRules()) {
             if ((value != null && !value.startsWith(VALUE_MULTI)) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.PRIMARYHDU_TYPE_MULTI, this, keywordName).addKeywordValue(value, VALUE_MULTI);
+                checker.ruleFailed(Rule.MAIN_HEADER_TYPE_MULTI, this, keywordName).addKeywordValue(value, VALUE_MULTI);
             }
         }
     }

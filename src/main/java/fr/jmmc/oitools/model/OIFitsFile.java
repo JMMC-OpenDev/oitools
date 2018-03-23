@@ -121,7 +121,7 @@ public final class OIFitsFile extends FitsImageFile {
     /**
      * Storage of OI_FLUX table references
      */
-    private final List<OISpectrum> oiSpectrumTables = new LinkedList<OISpectrum>();
+    private final List<OIFlux> oiFluxTables = new LinkedList<OIFlux>();
     /* cached analyzed data */
     /**
      * List of OIData tables keyed by target (name)
@@ -184,8 +184,8 @@ public final class OIFitsFile extends FitsImageFile {
                 extVer = getNbOiVis2();
             } else if (oiTable instanceof OIT3) {
                 extVer = getNbOiT3();
-            } else if (oiTable instanceof OISpectrum) {
-                extVer = getNbOiSpectrum();
+            } else if (oiTable instanceof OIFlux) {
+                extVer = getNbOiFlux();
             } else if (oiTable instanceof OICorr) {
                 extVer = getNbOiCorr();
             } else if (oiTable instanceof OIInspol) {
@@ -243,9 +243,9 @@ public final class OIFitsFile extends FitsImageFile {
         } else if (oiTable instanceof OIT3) {
             this.oiDataTables.add((OIT3) oiTable);
             this.oiT3Tables.add((OIT3) oiTable);
-        } else if (oiTable instanceof OISpectrum) {
-            this.oiDataTables.add((OISpectrum) oiTable);
-            this.oiSpectrumTables.add((OISpectrum) oiTable);
+        } else if (oiTable instanceof OIFlux) {
+            this.oiDataTables.add((OIFlux) oiTable);
+            this.oiFluxTables.add((OIFlux) oiTable);
         }
         
         if (oiTable instanceof OIWavelength) {
@@ -324,9 +324,9 @@ public final class OIFitsFile extends FitsImageFile {
         } else if (oiTable instanceof OIT3) {
             this.oiDataTables.remove((OIT3) oiTable);
             this.oiT3Tables.remove((OIT3) oiTable);
-        } else if (oiTable instanceof OISpectrum) {
-            this.oiDataTables.remove((OISpectrum) oiTable);
-            this.oiSpectrumTables.remove((OISpectrum) oiTable);
+        } else if (oiTable instanceof OIFlux) {
+            this.oiDataTables.remove((OIFlux) oiTable);
+            this.oiFluxTables.remove((OIFlux) oiTable);
         }
     }
 
@@ -503,9 +503,8 @@ public final class OIFitsFile extends FitsImageFile {
             /* Checking primary HDU */
             if (isOIFits2()) {
                 if (getPrimaryImageHDU() == null || OIFitsChecker.isInspectRules()) {
-                    // rule [OIFITS_PRIMARYHDU_EXIST_V2] check if the main header (PRIMARY HDU) exists in the OIFITS 2 file
-                    checker.inspectRuleFailed(Rule.OIFITS_PRIMARYHDU_EXIST_V2, OIFitsConstants.PRIMARY_HDU, OIFitsStandard.VERSION_2);
-                    checker.ruleFailed(Rule.OIFITS_PRIMARYHDU_EXIST_V2);
+                    // rule [OIFITS_MAIN_HEADER_EXIST_V2] check if the main header (PRIMARY HDU) exists in the OIFITS 2 file
+                    checker.ruleFailed(Rule.OIFITS_MAIN_HEADER_EXIST_V2);
                 }
             }
             
@@ -514,14 +513,12 @@ public final class OIFitsFile extends FitsImageFile {
             /* Checking presence of one and only one OI_TARGET table */
             if (!hasOiTarget() || OIFitsChecker.isInspectRules()) {
                 // rule [OIFITS_OI_TARGET_EXIST] check if only one OI_TARGET table exists in the OIFITS file
-                checker.inspectRuleFailed(Rule.OIFITS_OI_TARGET_EXIST, OIFitsConstants.TABLE_OI_TARGET, getVersion());
                 checker.ruleFailed(Rule.OIFITS_OI_TARGET_EXIST);
             }
 
             /* Checking presence of at least one OI_WAVELENGTH table */
             if (this.insNameToOiWavelength.isEmpty() || OIFitsChecker.isInspectRules()) {
                 // rule [OIFITS_OI_WAVELENGTH_EXIST] check if at least one OI_WAVELENGTH table exists in the OIFITS file
-                checker.inspectRuleFailed(Rule.OIFITS_OI_WAVELENGTH_EXIST, OIFitsConstants.TABLE_OI_WAVELENGTH, getVersion());
                 checker.ruleFailed(Rule.OIFITS_OI_WAVELENGTH_EXIST);
             }
             
@@ -535,6 +532,7 @@ public final class OIFitsFile extends FitsImageFile {
                     // Note: targetIds may contain duplicates or identical targets ...
                     final int targets = getAcceptedTargetIds().length;
                     
+                    /* rule [MAIN_HEADER_TYPE_MULTI] check if main header keywords are set to 'MULTI' for heterogenous content */
                     if ((arrNames > 1 || insNames > 1 || targets > 1) || OIFitsChecker.isInspectRules()) {
                         primaryHDU.checkMultiKeywords(checker, arrNames, insNames, targets);
                     }
@@ -543,7 +541,6 @@ public final class OIFitsFile extends FitsImageFile {
                 /* Checking presence of at least one OI_ARRAY table in OIFITS V2 */
                 if (this.arrNameToOiArray.isEmpty() || OIFitsChecker.isInspectRules()) {
                     // rule [OIFITS_OI_ARRAY_EXIST_V2] check if at least one OI_ARRAY table exists in the OIFITS 2 file
-                    checker.inspectRuleFailed(Rule.OIFITS_OI_ARRAY_EXIST_V2, OIFitsConstants.TABLE_OI_ARRAY, OIFitsStandard.VERSION_2);
                     checker.ruleFailed(Rule.OIFITS_OI_ARRAY_EXIST_V2);
                 }
                 
@@ -590,8 +587,8 @@ public final class OIFitsFile extends FitsImageFile {
             final OITarget oitarget = (OITarget) oiTable;
             
             if (oitarget.getNbTargets() < 1 || OIFitsChecker.isInspectRules()) {
-                // rule [OITARGET_TARGET_EXIST] check if the OI_TARGET table have at least one target
-                checker.ruleFailed(Rule.OITARGET_TARGET_EXIST, oitarget);
+                // rule [OI_TARGET_TARGET_EXIST] check if the OI_TARGET table have at least one target
+                checker.ruleFailed(Rule.OI_TARGET_TARGET_EXIST, oitarget);
             }
         } else if (oiTable instanceof OIWavelength) {
             final OIWavelength oiwavelength = (OIWavelength) oiTable;
@@ -634,8 +631,8 @@ public final class OIFitsFile extends FitsImageFile {
                 
                 if (oiarrays == null || isInspectRules()) {
                     /* Problem: OI_ARRAY.ARRNAME can be modified without fixing cross-references */
-                    // rule [GENERIC_ARRNAME_REF] check if an OI_ARRAY table matches the ARRNAME keyword
-                    checker.ruleFailed(Rule.GENERIC_ARRNAME_REF, oiarray, OIFitsConstants.KEYWORD_ARRNAME).addKeywordValue(arrName);
+                    // rule [ARRNAME_REF] check if an OI_ARRAY table matches the ARRNAME keyword
+                    checker.ruleFailed(Rule.ARRNAME_REF, oiarray, OIFitsConstants.KEYWORD_ARRNAME).addKeywordValue(arrName);
                 }
                 if ((oiarrays != null && oiarrays.size() > 1) || isInspectRules()) {
                     /* Problem: more that one OiArray table associated to ARRNAME value, that is strictly forbiden */
@@ -1131,8 +1128,8 @@ public final class OIFitsFile extends FitsImageFile {
      *
      * @return true if the file contains some OI_FLUX table
      */
-    public boolean hasOiSpectrum() {
-        return !this.oiSpectrumTables.isEmpty();
+    public boolean hasOiFlux() {
+        return !this.oiFluxTables.isEmpty();
     }
 
     /**
@@ -1140,8 +1137,8 @@ public final class OIFitsFile extends FitsImageFile {
      *
      * @return the number of OI_FLUX tables
      */
-    public int getNbOiSpectrum() {
-        return this.oiSpectrumTables.size();
+    public int getNbOiFlux() {
+        return this.oiFluxTables.size();
     }
 
     /**
@@ -1149,8 +1146,8 @@ public final class OIFitsFile extends FitsImageFile {
      *
      * @return an array containing all OI_FLUX tables
      */
-    public OISpectrum[] getOiSpectrum() {
-        return this.oiSpectrumTables.toArray(new OISpectrum[this.oiSpectrumTables.size()]);
+    public OIFlux[] getOiFlux() {
+        return this.oiFluxTables.toArray(new OIFlux[this.oiFluxTables.size()]);
     }
 
     /**

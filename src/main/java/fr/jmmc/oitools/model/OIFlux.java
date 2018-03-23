@@ -30,15 +30,15 @@ import fr.jmmc.oitools.meta.Units;
 import fr.jmmc.oitools.meta.WaveColumnMeta;
 
 /**
- * Class for OI_Spectrum / OI_Flux table.
+ * Class for OI_Flux table.
  */
-public final class OISpectrum extends OIData {
+public final class OIFlux extends OIData {
 
     /** 
-     * Public OISpectrum class constructor
+     * Public OIFlux class constructor
      * @param oifitsFile main OifitsFile
      */
-    public OISpectrum(final OIFitsFile oifitsFile) {
+    public OIFlux(final OIFitsFile oifitsFile) {
         // do not use common columns:
         super(oifitsFile, false);
 
@@ -54,10 +54,10 @@ public final class OISpectrum extends OIData {
         addKeywordMeta(new KeywordMeta(OIFitsConstants.KEYWORD_FOV_TYPE, "Model for FOV: 'FWHM' or 'RADIUS'",
                 Types.TYPE_CHAR, true, new String[]{OIFitsConstants.COLUMN_FOVTYPE_FWHM, OIFitsConstants.COLUMN_FOVTYPE_RADIUS}));
 
-        // OI_SPECTRUM.FLUXDATA column definition (User unit)
+        // FLUXDATA column definition (User unit)
         ColumnMeta colMeta = new WaveColumnMeta(OIFitsConstants.COLUMN_FLUXDATA, "flux per telescope", Types.TYPE_DBL,
                 new CustomUnits(), OIFitsConstants.COLUMN_FLUXERR, DataRange.RANGE_POSITIVE, this);
-        // OI_FLUX.FLUX column definition (optional)
+        // GRAVITY: FLUX column definition (optional)
         colMeta.setAlias(OIFitsConstants.COLUMN_FLUX);
         addColumnMeta(colMeta);
 
@@ -83,12 +83,12 @@ public final class OISpectrum extends OIData {
     }
 
     /**
-     * Public OISpectrum class constructor to create a new table
+     * Public OIFlux class constructor to create a new table
      * @param oifitsFile main OifitsFile
      * @param insName value of INSNAME keyword
      * @param nbRows number of rows i.e. the Fits NAXIS2 keyword value
      */
-    public OISpectrum(final OIFitsFile oifitsFile, final String insName, final int nbRows) {
+    public OIFlux(final OIFitsFile oifitsFile, final String insName, final int nbRows) {
         this(oifitsFile);
 
         setInsName(insName);

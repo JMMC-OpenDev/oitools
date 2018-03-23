@@ -151,7 +151,7 @@ public class OIFitsLoader {
      * @throws IOException IO failure
      */
     public static OIFitsFile loadOIFits(final OIFitsStandard std, final OIFitsChecker checker,
-            final String fileLocation, final boolean doChecksum) throws IOException, FitsException {
+                                        final String fileLocation, final boolean doChecksum) throws IOException, FitsException {
         boolean remote = false;
         final String absFilePath;
         final URI fileURI;
@@ -438,10 +438,11 @@ public class OIFitsLoader {
 
                         // if we are on V1
                         if (!oiFitsFile.isOIFits2()) {
-                            // rule [TABLE_NOT_OIFITS2] check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in the OIFITS 1 file
+                            // rule [OIFITS_TABLE_NOT_V2] check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in an OIFITS 1 file
+                            // TODO: how to ensure this rule is listed in applyTo()
                             if (oiTable instanceof OICorr || oiTable instanceof OIInspol) {
-                                checker.inspectRuleFailed(Rule.TABLE_NOT_OIFITS2, oiTable.getExtName(), OIFitsStandard.VERSION_1);
-                                checker.ruleFailed(Rule.TABLE_NOT_OIFITS2, oiTable);
+                                checker.inspectRuleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable.getExtName(), OIFitsStandard.VERSION_1);
+                                checker.ruleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable);
                             }
                         }
 
@@ -474,9 +475,8 @@ public class OIFitsLoader {
                     oiTable = new OIVis2(this.oiFitsFile);
                 } else if (OIFitsConstants.TABLE_OI_T3.equals(extName)) {
                     oiTable = new OIT3(this.oiFitsFile);
-                } else if ((OIFitsConstants.TABLE_OI_SPECTRUM.equals(extName)
-                        || OIFitsConstants.TABLE_OI_FLUX.equals(extName))) {
-                    oiTable = new OISpectrum(this.oiFitsFile);
+                } else if (OIFitsConstants.TABLE_OI_FLUX.equals(extName)) {
+                    oiTable = new OIFlux(this.oiFitsFile);
                 }
                 if (oiTable != null) {
                     // flag HDU:
@@ -490,10 +490,11 @@ public class OIFitsLoader {
 
                     // if we are on V1
                     if (!oiFitsFile.isOIFits2()) {
-                        // rule [TABLE_NOT_OIFITS2] check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in the OIFITS 1 file
-                        if (oiTable instanceof OISpectrum) {
-                            checker.inspectRuleFailed(Rule.TABLE_NOT_OIFITS2, oiTable.getExtName(), OIFitsStandard.VERSION_1);
-                            checker.ruleFailed(Rule.TABLE_NOT_OIFITS2, oiTable);
+                        // rule [OIFITS_TABLE_NOT_V2] check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in an OIFITS 1 file
+                        // TODO: how to ensure this rule is listed in applyTo()
+                        if (oiTable instanceof OIFlux) {
+                            checker.inspectRuleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable.getExtName(), OIFitsStandard.VERSION_1);
+                            checker.ruleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable);
 
                         }
                     }
@@ -542,12 +543,10 @@ public class OIFitsLoader {
                 }
 
                 if (!processed[i] || OIFitsChecker.isInspectRules()) {
-                    // rule [OIFITS_TABLE_UNKNOWN] check if the table belongs to the OIFITS standard and version
-
-                    // TODO: simplify (FitsConstants.KEYWORD_CONTENT_OIFITS2.equals(hdu.getHeader().getTrimmedStringValue(FitsConstants.KEYWORD_CONTENT)) ? OIFitsStandard.VERSION_2 : OIFitsStandard.VERSION_1)
-                    checker.inspectRuleFailed(Rule.OIFITS_TABLE_UNKNOWN, "FILE", OIFitsFile.getOIFitsStandard(hdu.getHeader().getTrimmedStringValue(FitsConstants.KEYWORD_CONTENT)));
-
-                    checker.ruleFailed(Rule.OIFITS_TABLE_UNKNOWN, extName, i);
+                    // rule [UNKNOWN_TABLE] check if the table belongs to the OIFITS standard and version
+                    checker.inspectRuleFailed(Rule.UNKNOWN_TABLE, OIFitsChecker.FILE_RULE, oiFitsFile.getVersion());
+                    // TODO: special case:
+                    checker.ruleFailed(Rule.UNKNOWN_TABLE, extName, i);
 
                     // TODO load and handle any other FITS binary table or HDU...
                     if (logger.isLoggable(Level.INFO)) {
@@ -680,16 +679,17 @@ public class OIFitsLoader {
         for (int i = 0, nCols = hdu.getNCols(); i < nCols; i++) {
             name = hdu.getColumnName(i);
 
-            //Separation of the displays for the collection of the Rules from that of the Failures (we do not wish to have all the details of unknown column during the collection of the rules)
+            // Separation of the displays for the collection of the Rules from that of the Failures 
+            // (we do not wish to have all the details of unknown column during the collection of the rules)
             if (OIFitsChecker.isInspectRules()) {
-                final DataLocation data = checker.ruleFailed(Rule.COL_UNKNOWN, table, "[[UNKNOWN]]");
+                final DataLocation data = checker.ruleFailed(Rule.UNKNOWN_COLUMN, table, "[[UNKNOWN]]");
                 if (data.isEmpty()) {
                     data.addKeywordValue("[FORMAT]");
                 }
             }
             if (!columnsDesc.containsKey(name)) {
-                // rule [COL_UNKNOWN] check if the column belongs to the OIFITS standard and version
-                checker.ruleFailed(Rule.COL_UNKNOWN, table, name).addKeywordValue(hdu.getColumnLength(i) + "" + hdu.getColumnType(i));
+                // rule [UNKNOWN_COLUMN] check if the column belongs to the OIFITS standard and version
+                checker.ruleFailed(Rule.UNKNOWN_COLUMN, table, name).addKeywordValue(hdu.getColumnLength(i) + "" + hdu.getColumnType(i));
             }
         }
     }
@@ -705,7 +705,7 @@ public class OIFitsLoader {
      * @return converted column value or null
      */
     private Object parseColumn(final OITable table, final ColumnMeta column, final char columnType,
-            final int columnRepeat, final String columnUnit, final Object columnValue) {
+                               final int columnRepeat, final String columnUnit, final Object columnValue) {
 
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "parseColumn: {0} = {1}",

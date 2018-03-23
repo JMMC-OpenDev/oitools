@@ -43,7 +43,9 @@ import java.util.logging.Logger;
  * @author bourgesl
  */
 public final class OIFitsChecker {
-
+    /** 'FILE' rules = applyTo & Rule name matcher */
+    public final static String FILE_RULE = "FILE";
+    
     public enum InspectMode {
         NORMAL,
         CASE_V2_IN_V1;
@@ -94,7 +96,7 @@ public final class OIFitsChecker {
     private static boolean shouldSkipRule(final Rule rule) {
         switch (INSPECT_MODE) {
             case CASE_V2_IN_V1:
-                return (rule != Rule.TABLE_NOT_OIFITS2);
+                return (rule != Rule.OIFITS_TABLE_NOT_V2);
             default:
             case NORMAL:
                 return false;
@@ -216,15 +218,16 @@ public final class OIFitsChecker {
                 }
             } else {
                 /* Special case when the hdu has not been defined yet. 
-                Only applies to the file existence and read cases */
+                 * Only applies to the file and structure checks (FILE_* & OIFITS_* rules) */
                 if (rule.name().startsWith("FILE") || rule.name().startsWith("OIFITS")) {
 
-                    if (!rule.getApplyTo().contains("FILE") && !rule.getApplyTo().isEmpty()) {
-                        System.out.println("BAD inspectRuleFailed applyTo conflict for '" + rule.name() + "': " + rule.getApplyTo());
+                    if (!rule.getApplyTo().contains(FILE_RULE) && !rule.getApplyTo().isEmpty()) {
+                        logger.log(Level.SEVERE, "BAD inspectRuleFailed applyTo conflict for ''{0}'': {1}", new Object[]{rule.name(), rule.getApplyTo()});
                     }
-
-                    inspectRuleFailed(rule, "FILE", OIFitsStandard.VERSION_1);
-                    inspectRuleFailed(rule, "FILE", OIFitsStandard.VERSION_2);
+                    if (!rule.name().endsWith("_V2")) {
+                        inspectRuleFailed(rule, FILE_RULE, OIFitsStandard.VERSION_1);
+                    }
+                    inspectRuleFailed(rule, FILE_RULE, OIFitsStandard.VERSION_2);
                 } else {
                     throw new IllegalStateException("error in the rules collection system, hdu cannot be null");
                 }

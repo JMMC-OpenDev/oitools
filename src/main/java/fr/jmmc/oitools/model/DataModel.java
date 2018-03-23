@@ -19,6 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.image.FitsImageHDU;
 import fr.jmmc.oitools.meta.CellMeta;
 import fr.jmmc.oitools.meta.ColumnMeta;
@@ -185,7 +186,7 @@ public class DataModel {
         // fake data model (catch V2 structure failures):
         final OIFitsFile oiFitsFile = new OIFitsFile(OIFitsStandard.VERSION_2);
 
-        //PrimaryHDU:
+        // PrimaryHDU:
         final OIPrimaryHDU imageHDU = new OIPrimaryHDU();
         imageHDU.setOrigin("ESO");
         imageHDU.setDate("2017-12-06");
@@ -236,7 +237,7 @@ public class DataModel {
         oit3.setCorrName(corrname);
         oiFitsFile.addOiTable(oit3);
 
-        final OISpectrum oispect = new OISpectrum(oiFitsFile, insName, nRows);
+        final OIFlux oispect = new OIFlux(oiFitsFile, insName, nRows);
         oispect.setArrName(arrName);
         oispect.setCorrName(corrname);
         oiFitsFile.addOiTable(oispect);
@@ -266,9 +267,7 @@ public class DataModel {
 
         writeRules(sb, oiFitsFile);
 
-        if (oiFitsFile.getPrimaryImageHDU() != null) {
-            dumpHDU(oiFitsFile.getPrimaryImageHDU(), sb);
-        }
+        dumpPrimaryHDU(oiFitsFile, sb);
         dumpTables(oiFitsFile.getOITableList(), sb);
 
         sb.append("</datamodel>\n");
@@ -286,7 +285,7 @@ public class DataModel {
     private static void writeFailures(final OIFitsChecker checker) throws IOException {
         // Ensure failures contain all rules
         final Set<Rule> usedRules = checker.getRulesUsedByFailures();
-        
+
         if (Rule.values().length != usedRules.size()) {
             final Set<Rule> missing = new HashSet<Rule>();
             missing.addAll(Arrays.asList(Rule.values()));
@@ -298,22 +297,24 @@ public class DataModel {
                 throw new IllegalStateException("rules [" + Rule.values().length + "] | Failures [" + checker.getRulesUsedByFailures().size() + "] missing rules: " + missing);
             }
         }
-        
+
         final StringBuilder sb = new StringBuilder(32 * 1024);
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
         FileUtils.writeFile(new File("rules/Failures.xml"), checker.appendFailuresAsXML(sb, RuleFailureComparator.BY_RULE).toString());
     }
 
-    private static void dumpHDU(final FitsImageHDU imageHDU, final StringBuilder sb) {
-        sb.append("<table name=\"PrimaryHDU\">\n");
-        for (KeywordMeta keyword : imageHDU.getKeywordDescCollection()) {
-            dumpKeyword(keyword, sb);
+    private static void dumpPrimaryHDU(final OIFitsFile oiFitsFile, final StringBuilder sb) {
+        final FitsImageHDU primaryHDU = oiFitsFile.getPrimaryImageHDU();
+        if (primaryHDU != null) {
+            sb.append("<table name=\"").append(OIFitsConstants.PRIMARY_HDU).append("\">\n");
+            for (KeywordMeta keyword : primaryHDU.getKeywordDescCollection()) {
+                dumpKeyword(keyword, sb);
+            }
+            sb.append("</table>\n");
         }
-        sb.append("</table>\n");
     }
 
     private static void dumpTables(final List<OITable> tables, final StringBuilder sb) {
-
         for (OITable table : tables) {
             sb.append("<table name=\"").append(table.getExtName()).append("\">\n");
 

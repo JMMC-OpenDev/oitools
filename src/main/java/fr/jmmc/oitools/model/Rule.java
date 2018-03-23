@@ -34,17 +34,16 @@ import java.util.TreeSet;
  */
 public enum Rule {
 
+    ARRNAME_REF("check if an OI_ARRAY table matches the ARRNAME keyword",
+            "V2.6.1§3",
+            RuleDataType.VALUE,
+            "Missing OI_ARRAY table that describes the '{{VALUE}}' array"
+    ),
     ARRNAME_UNIQ(
             "check if a single OI_ARRAY table corresponds to the ARRNAME keyword",
             "V2.5.2§1",
             RuleDataType.VALUE_EXPECTED,
             "OI_ARRAY tables [{{EXPECTED}}] are identified by same ARRNAME='{{VALUE}}'"
-    ),
-    COL_UNKNOWN(
-            "check if the column belongs to the OIFITS standard and version",
-            Const.JMMC,
-            RuleDataType.VALUE,
-            "Skipping non-standard OIFITS column '{{HDU}}.{{MEMBER}}' with format [{{VALUE}}]"
     ),
     CORRNAME_REF(
             "check if an OI_CORR table matches the CORRNAME keyword",
@@ -78,11 +77,6 @@ public enum Rule {
             "V1.6.3.1",
             RuleDataType.VALUE_EXPECTED,
             "OI_WAVELENGTH tables [{{EXPECTED}}] are identified by same INSNAME='{{VALUE}}'"
-    ),
-    GENERIC_ARRNAME_REF("check if an OI_ARRAY table matches the ARRNAME keyword",
-            "V2.6.1§3",
-            RuleDataType.VALUE,
-            "Missing OI_ARRAY table that describes the '{{VALUE}}' array"
     ),
     GENERIC_COL_DIM("check if the dimension of column values >= 1",
             Const.JMMC,
@@ -195,6 +189,11 @@ public enum Rule {
             RuleDataType.VALUE_ROW_COL1_COL2,
             "STA_INDEX[{{VALUE}}] duplicated at row {{ROW}} at indexes {{DETAILS}}"
     ),
+    MAIN_HEADER_TYPE_MULTI("check if main header keywords are set to 'MULTI' for heterogenous content",
+            "V2.MAIN_HEADER_Table(3)",
+            RuleDataType.VALUE_EXPECTED,
+            "The keyword '{{MEMBER}}' has the value '{{VALUE}}' but should be set to '{{EXPECTED}}' for multiple observations"
+    ),
     OI_ARRAY_ARRNAME("check the ARRNAME keyword has a not null or empty value",
             "V2.5.2§1",
             RuleDataType.NONE,
@@ -251,36 +250,6 @@ public enum Rule {
             RuleDataType.VALUE_LIMIT_ROW,
             "{{MEMBER}} index {{VALUE}} cannot be > NDATA [{{LIMIT}}] at row {{ROW}}"
     ),
-    OIFITS_OI_ARRAY_EXIST_V2("check if at least one OI_ARRAY table exists in the OIFITS 2 file",
-            "V2.4.2§1",
-            RuleDataType.NONE,
-            "No OI_ARRAY table found: one or more must be present"
-    ),
-    OIFITS_OIDATA("check if at least one data table exists in the OIFITS file",
-            "V2.4.2§1",
-            RuleDataType.NONE,
-            "No OI_VIS, OI_VIS2, OI_T3 table found: one or more of them must be present"
-    ),
-    OIFITS_OI_TARGET_EXIST("check if only one OI_TARGET table exists in the OIFITS file",
-            "V2.4.2§1",
-            RuleDataType.NONE,
-            "No OI_TARGET table found: one and only one must be present"
-    ),
-    OIFITS_OI_WAVELENGTH_EXIST("check if at least one OI_WAVELENGTH table exists in the OIFITS file",
-            "V2.4.2§1",
-            RuleDataType.NONE,
-            "No OI_WAVELENGTH table found: one or more must be present"
-    ),
-    OIFITS_PRIMARYHDU_EXIST_V2("check if the main header (PRIMARY HDU) exists in the OIFITS 2 file",
-            "V2.4.1§3",
-            RuleDataType.NONE,
-            "No primary HDU found: one must be present"
-    ),
-    OIFITS_TABLE_UNKNOWN("check if the table belongs to the OIFITS standard and version",
-            "V2.4.2§3-4",
-            RuleDataType.NONE,
-            "Skipping non-standard OIFITS '{{HDU}}'"
-    ),
     OI_FLUX_CORRINDX("check if the referenced OI_CORR table exists when the column CORRINDX_FLUXDATA is present",
             "V2.7.2§4",
             RuleDataType.NONE,
@@ -301,11 +270,6 @@ public enum Rule {
             RuleDataType.VALUE_ROW,
             "Invalid {{MEMBER}} '{{VALUE}}', cannot be < 0 at row {{ROW}}"
     ),
-    OI_T3_CORRINDX("check if the referenced OI_CORR exists when the column CORRINDX_T3AMP or CORRINDX_T3PHI is present",
-            "V2.7.2§4",
-            RuleDataType.NONE,
-            "Missing OI_CORR table but the column {{MEMBER}} is defined."
-    ),
     OI_TARGET_COORD("check if the TARGET RA and DEC values are not 0.0",
             Const.JMMC,
             RuleDataType.VALUE_ROW,
@@ -321,7 +285,7 @@ public enum Rule {
             RuleDataType.VALUE_ROW,
             "TARGET undefined at row {{ROW}}"
     ),
-    OITARGET_TARGET_EXIST("check if the OI_TARGET table has at least one target",
+    OI_TARGET_TARGET_EXIST("check if the OI_TARGET table has at least one target",
             Const.JMMC,
             RuleDataType.NONE,
             "No target defined"
@@ -340,6 +304,11 @@ public enum Rule {
             Const.JMMC,
             RuleDataType.VALUE_ROW1_ROW2,
             "TARGET_ID[{{VALUE}}] duplicated at rows {{DETAILS}}"
+    ),
+    OI_T3_CORRINDX("check if the referenced OI_CORR exists when the column CORRINDX_T3AMP or CORRINDX_T3PHI is present",
+            "V2.7.2§4",
+            RuleDataType.NONE,
+            "Missing OI_CORR table but the column {{MEMBER}} is defined."
     ),
     OI_VIS_CORRINDX("check if the referenced OI_CORR table exists when the column CORRINDX_VISAMP, CORRINDX_VISPHI, CORRINDX_RVIS or CORRINDX_IVIS is present",
             "V2.7.2§4",
@@ -361,16 +330,47 @@ public enum Rule {
             RuleDataType.NONE,
             "INSNAME identifier has blank value"
     ),
-    PRIMARYHDU_TYPE_MULTI("check if main header keywords are set to 'MULTI' for heterogenous content",
-            "V2.MAIN_HEADER_Table(3)",
-            RuleDataType.VALUE_EXPECTED,
-            "The keyword '{{MEMBER}}' has the value '{{VALUE}}' but should be set to '{{EXPECTED}}' for multiple observations"
+    OIFITS_MAIN_HEADER_EXIST_V2("check if the main header (PRIMARY HDU) exists in the OIFITS 2 file",
+            "V2.4.1§3",
+            RuleDataType.NONE,
+            "No primary HDU found: one must be present"
     ),
-    TABLE_NOT_OIFITS2(
-            "check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in the OIFITS 1 file",
+    OIFITS_OI_ARRAY_EXIST_V2("check if at least one OI_ARRAY table exists in the OIFITS 2 file",
+            "V2.4.2§1",
+            RuleDataType.NONE,
+            "No OI_ARRAY table found: one or more must be present"
+    ),
+    OIFITS_OIDATA("check if at least one data table exists in the OIFITS file",
+            "V2.4.2§1",
+            RuleDataType.NONE,
+            "No OI_VIS, OI_VIS2, OI_T3 table found: one or more of them must be present"
+    ),
+    OIFITS_OI_TARGET_EXIST("check if only one OI_TARGET table exists in the OIFITS file",
+            "V2.4.2§1",
+            RuleDataType.NONE,
+            "No OI_TARGET table found: one and only one must be present"
+    ),
+    OIFITS_OI_WAVELENGTH_EXIST("check if at least one OI_WAVELENGTH table exists in the OIFITS file",
+            "V2.4.2§1",
+            RuleDataType.NONE,
+            "No OI_WAVELENGTH table found: one or more must be present"
+    ),
+    OIFITS_TABLE_NOT_V2(
+            "check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in an OIFITS 1 file",
             Const.JMMC,
             RuleDataType.NONE,
             "Unsupported table {{HDU}} in OIFITS V1.0"
+    ),
+    UNKNOWN_COLUMN(
+            "check if the column belongs to the OIFITS standard and version",
+            Const.JMMC,
+            RuleDataType.VALUE,
+            "Skipping non-standard OIFITS column '{{HDU}}.{{MEMBER}}' with format [{{VALUE}}]"
+    ),
+    UNKNOWN_TABLE("check if the table belongs to the OIFITS standard and version",
+            "V2.4.2§3-4",
+            RuleDataType.NONE,
+            "Skipping non-standard OIFITS '{{HDU}}'"
     );
 
     // members:

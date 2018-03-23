@@ -22,7 +22,7 @@ package fr.jmmc.oitools.test;
 import static fr.jmmc.oitools.JUnitBaseTest.getFitsFiles;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
-import fr.jmmc.oitools.model.OISpectrum;
+import fr.jmmc.oitools.model.OIFlux;
 import fr.jmmc.oitools.model.OITable;
 import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIWavelength;
@@ -104,8 +104,8 @@ public class FindFilesTool implements TestEnv {
     }
 
     private static boolean findOISpect(OIFitsFile oifits) {
-        if (oifits.hasOiSpectrum()) {
-            for (OISpectrum oispect : oifits.getOiSpectrum()) {
+        if (oifits.hasOiFlux()) {
+            for (OIFlux oispect : oifits.getOiFlux()) {
                 if (oispect.getNbRows() > 0) {
                     return true;
                 }

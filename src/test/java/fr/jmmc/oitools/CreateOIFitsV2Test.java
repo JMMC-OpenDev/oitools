@@ -31,7 +31,7 @@ import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFitsWriter;
 import fr.jmmc.oitools.model.OIInspol;
 import fr.jmmc.oitools.model.OIPrimaryHDU;
-import fr.jmmc.oitools.model.OISpectrum;
+import fr.jmmc.oitools.model.OIFlux;
 import fr.jmmc.oitools.model.OIT3;
 import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIVis;
@@ -672,7 +672,7 @@ public class CreateOIFitsV2Test {
 
                 for (String corrname : oiFitsFile.getAcceptedCorrNames()) {
 
-                    final OISpectrum flux = new OISpectrum(oiFitsFile, insname, nRows);
+                    final OIFlux flux = new OIFlux(oiFitsFile, insname, nRows);
                     final int nWaveLengths = flux.getNWave();
 
                     flux.setDateObs("2017-07-06");

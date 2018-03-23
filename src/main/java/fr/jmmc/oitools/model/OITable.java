@@ -40,7 +40,7 @@ public abstract class OITable extends FitsTable {
     private final static KeywordMeta KEYWORD_EXTNAME_2 = new KeywordMeta(FitsConstants.KEYWORD_EXT_NAME, "extension name", Types.TYPE_CHAR,
             new String[]{OIFitsConstants.TABLE_OI_ARRAY, OIFitsConstants.TABLE_OI_TARGET, OIFitsConstants.TABLE_OI_WAVELENGTH,
                 OIFitsConstants.TABLE_OI_VIS, OIFitsConstants.TABLE_OI_VIS2, OIFitsConstants.TABLE_OI_T3,
-                OIFitsConstants.TABLE_OI_SPECTRUM, OIFitsConstants.TABLE_OI_FLUX, OIFitsConstants.TABLE_OI_CORR, OIFitsConstants.TABLE_OI_INSPOL
+                OIFitsConstants.TABLE_OI_FLUX, OIFitsConstants.TABLE_OI_CORR, OIFitsConstants.TABLE_OI_INSPOL
             });
     /** OI_REVN=1 keyword descriptor */
     private final static KeywordMeta KEYWORD_OI_REVN_1 = new KeywordMeta(OIFitsConstants.KEYWORD_OI_REVN,
@@ -75,7 +75,7 @@ public abstract class OITable extends FitsTable {
             extName = OIFitsConstants.TABLE_OI_VIS2;
         } else if (this instanceof OIT3) {
             extName = OIFitsConstants.TABLE_OI_T3;
-        } else if (this instanceof OISpectrum) {
+        } else if (this instanceof OIFlux) {
             extName = OIFitsConstants.TABLE_OI_FLUX;
         } else if (this instanceof OICorr) {
             extName = OIFitsConstants.TABLE_OI_CORR;
@@ -105,7 +105,7 @@ public abstract class OITable extends FitsTable {
         // OIFITS 1 or 2 logic:
         int revision = (isOiFits2) ? OIFitsConstants.KEYWORD_OI_REVN_2 : OIFitsConstants.KEYWORD_OI_REVN_1;
 
-        if ((this instanceof OISpectrum) || (this instanceof OICorr) || (this instanceof OIInspol)) {
+        if ((this instanceof OIFlux) || (this instanceof OICorr) || (this instanceof OIInspol)) {
             // new OIFITS2 tables => oiRev=1
             // Laurent thinks it's TOTALLY stupid:
             revision = OIFitsConstants.KEYWORD_OI_REVN_1;

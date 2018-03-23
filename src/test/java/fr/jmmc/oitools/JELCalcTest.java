@@ -32,6 +32,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class JELCalcTest extends JUnitBaseTest {
+    
+    private final static int N = 1000;
 
     @Test
     public void testCalc() throws CompilationException, Throwable {
@@ -93,9 +95,10 @@ public class JELCalcTest extends JUnitBaseTest {
         if (expr_c != null) {
             logger.info("Evaluation ...");
 
+            final long startTime = System.nanoTime();
+            
             // Evaluate (Can do it now any number of times FAST !!!)
-            for (int n = 0; n < 100; n++) {
-                final long startTime = System.nanoTime();
+            for (int n = 0; n < N; n++) {
 
                 for (int i = 0; i < x.length; i++) {
                     dataProvider.x = x[i];      // <- Value of the variable
@@ -103,8 +106,8 @@ public class JELCalcTest extends JUnitBaseTest {
 
                     result[i] = expr_c.evaluate_double(context);
                 }
-                System.out.println("duration = " + 1e-6d * (System.nanoTime() - startTime));
             }
+            System.out.println("duration = " + (1e-6d * (System.nanoTime() - startTime) / N) + " ms.");
 //            System.out.println("result: " + Arrays.toString(result));
 
             Assert.assertArrayEquals("result", expected, result, 1e-30);
