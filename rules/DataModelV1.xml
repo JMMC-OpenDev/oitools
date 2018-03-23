@@ -2,27 +2,25 @@
 <datamodel>
 <rules>
   <rule>
-    <name>ARRNAME_UNIQ</name>
-    <description>check if a single OI_ARRAY table corresponds to the ARRNAME keyword</description>
-    <paragraph>V2.5.2§1</paragraph>
+    <name>ARRNAME_REF</name>
+    <description>check if an OI_ARRAY table matches the ARRNAME keyword</description>
+    <paragraph>V2.6.1§3</paragraph>
     <subjects>
       <apply>OI_ARRAY.ARRNAME</apply>
+      <apply>OI_T3.ARRNAME</apply>
+      <apply>OI_VIS.ARRNAME</apply>
+      <apply>OI_VIS2.ARRNAME</apply>
     </subjects>
     <standards>
       <standard>VERSION_1</standard>
     </standards>
   </rule>
   <rule>
-    <name>COL_UNKNOWN</name>
-    <description>check if the column belongs to the OIFITS standard and version</description>
-    <paragraph>JMMC</paragraph>
+    <name>ARRNAME_UNIQ</name>
+    <description>check if a single OI_ARRAY table corresponds to the ARRNAME keyword</description>
+    <paragraph>V2.5.2§1</paragraph>
     <subjects>
-      <apply>OI_ARRAY</apply>
-      <apply>OI_T3</apply>
-      <apply>OI_TARGET</apply>
-      <apply>OI_VIS</apply>
-      <apply>OI_VIS2</apply>
-      <apply>OI_WAVELENGTH</apply>
+      <apply>OI_ARRAY.ARRNAME</apply>
     </subjects>
     <standards>
       <standard>VERSION_1</standard>
@@ -67,20 +65,6 @@
     <paragraph>V1.6.3.1</paragraph>
     <subjects>
       <apply>OI_WAVELENGTH.INSNAME</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>GENERIC_ARRNAME_REF</name>
-    <description>check if an OI_ARRAY table matches the ARRNAME keyword</description>
-    <paragraph>V2.6.1§3</paragraph>
-    <subjects>
-      <apply>OI_ARRAY.ARRNAME</apply>
-      <apply>OI_T3.ARRNAME</apply>
-      <apply>OI_VIS.ARRNAME</apply>
-      <apply>OI_VIS2.ARRNAME</apply>
     </subjects>
     <standards>
       <standard>VERSION_1</standard>
@@ -843,52 +827,6 @@
     </standards>
   </rule>
   <rule>
-    <name>OIFITS_OIDATA</name>
-    <description>check if at least one data table exists in the OIFITS file</description>
-    <paragraph>V2.4.2§1</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>OIFITS_OI_TARGET_EXIST</name>
-    <description>check if only one OI_TARGET table exists in the OIFITS file</description>
-    <paragraph>V2.4.2§1</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-      <apply>OI_TARGET</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>OIFITS_OI_WAVELENGTH_EXIST</name>
-    <description>check if at least one OI_WAVELENGTH table exists in the OIFITS file</description>
-    <paragraph>V2.4.2§1</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-      <apply>OI_WAVELENGTH</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>OIFITS_TABLE_UNKNOWN</name>
-    <description>check if the table belongs to the OIFITS standard and version</description>
-    <paragraph>V2.4.2§3-4</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-    </standards>
-  </rule>
-  <rule>
     <name>OI_TARGET_COORD</name>
     <description>check if the TARGET RA and DEC values are not 0.0</description>
     <paragraph>JMMC</paragraph>
@@ -924,7 +862,7 @@
     </standards>
   </rule>
   <rule>
-    <name>OITARGET_TARGET_EXIST</name>
+    <name>OI_TARGET_TARGET_EXIST</name>
     <description>check if the OI_TARGET table has at least one target</description>
     <paragraph>JMMC</paragraph>
     <subjects>
@@ -990,13 +928,72 @@
     </standards>
   </rule>
   <rule>
-    <name>TABLE_NOT_OIFITS2</name>
-    <description>check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in the OIFITS 1 file</description>
+    <name>OIFITS_OIDATA</name>
+    <description>check if at least one data table exists in the OIFITS file</description>
+    <paragraph>V2.4.2§1</paragraph>
+    <subjects>
+      <apply>FILE</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>OIFITS_OI_TARGET_EXIST</name>
+    <description>check if only one OI_TARGET table exists in the OIFITS file</description>
+    <paragraph>V2.4.2§1</paragraph>
+    <subjects>
+      <apply>FILE</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>OIFITS_OI_WAVELENGTH_EXIST</name>
+    <description>check if at least one OI_WAVELENGTH table exists in the OIFITS file</description>
+    <paragraph>V2.4.2§1</paragraph>
+    <subjects>
+      <apply>FILE</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>OIFITS_TABLE_NOT_V2</name>
+    <description>check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in an OIFITS 1 file</description>
     <paragraph>JMMC</paragraph>
     <subjects>
       <apply>OI_CORR</apply>
-      <apply>OI_FLUX</apply>
       <apply>OI_INSPOL</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>UNKNOWN_COLUMN</name>
+    <description>check if the column belongs to the OIFITS standard and version</description>
+    <paragraph>JMMC</paragraph>
+    <subjects>
+      <apply>OI_ARRAY</apply>
+      <apply>OI_T3</apply>
+      <apply>OI_TARGET</apply>
+      <apply>OI_VIS</apply>
+      <apply>OI_VIS2</apply>
+      <apply>OI_WAVELENGTH</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>UNKNOWN_TABLE</name>
+    <description>check if the table belongs to the OIFITS standard and version</description>
+    <paragraph>V2.4.2§3-4</paragraph>
+    <subjects>
+      <apply>FILE</apply>
     </subjects>
     <standards>
       <standard>VERSION_1</standard>
@@ -1006,7 +1003,7 @@
 <table name="OI_TARGET">
   <rules>
     <applyrule>GENERIC_OIREV_FIX</applyrule>
-    <applyrule>OITARGET_TARGET_EXIST</applyrule>
+    <applyrule>OI_TARGET_TARGET_EXIST</applyrule>
   </rules>
   <keyword>
     <name>EXTNAME</name>
@@ -1430,8 +1427,8 @@
     <description>array name for cross-referencing</description>
     <optional>false</optional>
     <rules>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>ARRNAME_UNIQ</applyrule>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
       <applyrule>OI_ARRAY_ARRNAME</applyrule>
@@ -1760,7 +1757,7 @@
       <string>[[ARRNAME]]</string>
     </values>
     <rules>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</applyrule>
     </rules>
@@ -2083,7 +2080,7 @@
       <string>[[ARRNAME]]</string>
     </values>
     <rules>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</applyrule>
     </rules>
@@ -2365,7 +2362,7 @@
       <string>[[ARRNAME]]</string>
     </values>
     <rules>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</applyrule>
     </rules>

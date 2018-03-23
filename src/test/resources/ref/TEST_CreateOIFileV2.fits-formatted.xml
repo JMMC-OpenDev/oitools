@@ -380,7 +380,7 @@ SEVERE	Can't check repeat for column 'JYY'
     <paragraph>JMMC</paragraph>
   </rule>
   <rule>
-    <name>PRIMARYHDU_TYPE_MULTI</name>
+    <name>MAIN_HEADER_TYPE_MULTI</name>
     <description>check if main header keywords are set to 'MULTI' for heterogenous content</description>
     <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
   </rule>
@@ -388,7 +388,7 @@ SEVERE	Can't check repeat for column 'JYY'
 <failures>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -401,7 +401,7 @@ SEVERE	Can't check repeat for column 'JYY'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -414,7 +414,7 @@ SEVERE	Can't check repeat for column 'JYY'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -427,7 +427,7 @@ SEVERE	Can't check repeat for column 'JYY'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -440,7 +440,7 @@ SEVERE	Can't check repeat for column 'JYY'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -453,7 +453,7 @@ SEVERE	Can't check repeat for column 'JYY'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>

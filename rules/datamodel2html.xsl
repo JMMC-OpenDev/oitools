@@ -31,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     <!-- base template -->
     <xsl:template match="/">
+        <xsl:variable name="isV2" select="count(datamodel/table[@name = 'OI_FLUX']) = 1"/>
 
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
             <head>
@@ -69,29 +70,59 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 <span class="icon-bar">-</span>
                                 <span class="icon-bar">-</span>
                             </button>
-                             <a class="navbar-brand" href="http://www.jmmc.fr" target="_blank">JMMC OITools</a>
+                            <a class="navbar-brand" href="http://www.jmmc.fr" target="_blank">JMMC OITools</a>
                         </div>
                         <div id="navbar" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
-                                <li><a href="#Rules">OIFITS Rules</a></li>
+                                <li>
+                                    <a href="#Rules">OIFITS Rules</a>
+                                </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">OIFITS Data Model<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#TABLE_PrimaryHDU">Main Header</a></li>
+                                        <xsl:if test="$isV2">
+                                            <li>
+                                                <a href="#TABLE_MAIN_HEADER">MAIN HEADER</a>
+                                            </li>
+                                            <li role="separator" class="divider"></li>
+                                        </xsl:if>
+                                        <li>
+                                            <a href="#TABLE_OI_TARGET">OI_TARGET</a>
+                                        </li>
+                                        <li>
+                                            <a href="#TABLE_OI_ARRAY">OI_ARRAY</a>
+                                        </li>
+                                        <li>
+                                            <a href="#TABLE_OI_WAVELENGTH">OI_WAVELENGTH</a>
+                                        </li>
+                                        <xsl:if test="$isV2">
+                                            <li>
+                                                <a href="#TABLE_OI_CORR">OI_CORR</a>
+                                            </li>
+                                            <li>
+                                                <a href="#TABLE_OI_INSPOL">OI_INSPOL</a>
+                                            </li>
+                                        </xsl:if>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#TABLE_OI_TARGET">OI_TARGET</a></li>
-                                        <li><a href="#TABLE_OI_ARRAY">OI_ARRAY</a></li>
-                                        <li><a href="#TABLE_OI_WAVELENGTH">OI_WAVELENGTH</a></li>
-                                        <li><a href="#TABLE_OI_CORR">OI_CORR</a></li>
-                                        <li><a href="#TABLE_OI_INSPOL">OI_INSPOL</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#TABLE_OI_VIS">OI_VIS</a></li>
-                                        <li><a href="#TABLE_OI_VIS2">OI_VIS2</a></li>
-                                        <li><a href="#TABLE_OI_T3">OI_T3</a></li>
-                                        <li><a href="#TABLE_OI_SPECTRUM">OI_SPECTRUM</a></li>
+                                        <li>
+                                            <a href="#TABLE_OI_VIS">OI_VIS</a>
+                                        </li>
+                                        <li>
+                                            <a href="#TABLE_OI_VIS2">OI_VIS2</a>
+                                        </li>
+                                        <li>
+                                            <a href="#TABLE_OI_T3">OI_T3</a>
+                                        </li>
+                                        <xsl:if test="$isV2">
+                                            <li>
+                                                <a href="#TABLE_OI_FLUX">OI_FLUX</a>
+                                            </li>
+                                        </xsl:if>
                                     </ul>
                                 </li>
-                                <li><a href="http://www.jmmc.fr/twiki/pub/Jmmc/OIFITSTwoProject/oifits_norm_v2.pdf" target="_blank">OIFITS 2 standard</a></li>
+                                <li>
+                                    <a href="http://www.jmmc.fr/twiki/pub/Jmmc/OIFITSTwoProject/oifits_norm_v2.pdf" target="_blank">OIFITS 2 standard</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -111,7 +142,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
                 <script>
                     function toggleApplyTo() {
-                        $('.myhide').toggle();
+                    $('.myhide').toggle();
                     }
                 </script>
                 
@@ -145,7 +176,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:template match="rule">
         <tr id="RULE_{name}">
             <td>
-                <b><xsl:value-of select="name" /></b>
+                <b>
+                    <xsl:value-of select="name" />
+                </b>
             </td>
             <td>
                 <xsl:value-of select="description" />
@@ -226,11 +259,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <div class="container mycontainer" id="TABLE_{@name}">
             <h2>
                 <span class="label label-primary">
-                <xsl:choose>
-                    <xsl:when test="contains(@name, 'HDU')">HDU </xsl:when>
-                    <xsl:otherwise>Table </xsl:otherwise>
-                </xsl:choose>
-                <xsl:value-of select="@name" />
+                    <xsl:if test="starts-with(@name, 'OI_')">Table </xsl:if>
+                    <xsl:value-of select="@name" />
                 </span>
             </h2>
             <div class="panel panel-default">
@@ -290,7 +320,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <tbody>
             <tr id="TABLE_{$tablename}.{name}">
                 <td>
-                    <b><xsl:value-of select="name" /></b>
+                    <b>
+                        <xsl:value-of select="name" />
+                    </b>
                 </td>
                 <td>
                     <xsl:value-of select="substring(datatype, 6)" />
@@ -345,7 +377,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <tbody>
             <tr id="TABLE_{$tablename}.{name}">
                 <td>
-                    <b><xsl:value-of select="name" /></b>
+                    <b>
+                        <xsl:value-of select="name" />
+                    </b>
                 </td>
                 <td>
                     <xsl:value-of select="substring(datatype, 6)" />

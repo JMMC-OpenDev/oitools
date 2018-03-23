@@ -2,6 +2,246 @@
 <failures>
   <failure>
     <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:1</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:1</file>
+    <extName>OI_VIS</extName>
+    <extNb>3</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:1</file>
+    <extName>OI_VIS2</extName>
+    <extNb>4</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:1</file>
+    <extName>OI_T3</extName>
+    <extNb>5</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:2</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:2</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>4</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>null</value>
+      <message>Missing OI_ARRAY table that describes the '' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:2</file>
+    <extName>OI_VIS</extName>
+    <extNb>5</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:2</file>
+    <extName>OI_VIS2</extName>
+    <extNb>6</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:2</file>
+    <extName>OI_T3</extName>
+    <extNb>7</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>memory:2</file>
+    <extName>OI_FLUX</extName>
+    <extNb>8</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>VLTI-like</value>
+      <message>Missing OI_ARRAY table that describes the 'VLTI-like' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>4</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>VLTI-like</value>
+      <message>Missing OI_ARRAY table that describes the 'VLTI-like' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>5</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>VLTI-like</value>
+      <message>Missing OI_ARRAY table that describes the 'VLTI-like' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>6</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>VLTI-like</value>
+      <message>Missing OI_ARRAY table that describes the 'VLTI-like' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>Chara</value>
+      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>5</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>Chara</value>
+      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>6</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>Chara</value>
+      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>7</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>Chara</value>
+      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>8</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>Chara</value>
+      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>ARRNAME_REF</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>9</extNb>
+    <member>ARRNAME</member>
+    <data>
+      <value>Chara</value>
+      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
     <rule>ARRNAME_UNIQ</rule>
     <file>memory:1</file>
     <extName>OI_ARRAY</extName>
@@ -50,234 +290,6 @@
       <value>Chara</value>
       <expected>OI_ARRAY#1</expected>
       <message>OI_ARRAY tables [OI_ARRAY#1] are identified by same ARRNAME='Chara'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_ARRAY#1.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_WAVELENGTH</extName>
-    <extNb>2</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_WAVELENGTH#2.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_TARGET</extName>
-    <extNb>3</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_TARGET#3.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>4</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#4.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>4</extNb>
-    <member>VISDATA</member>
-    <data>
-      <value>64C</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#4.VISDATA' with format [64C]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>4</extNb>
-    <member>VISERR</member>
-    <data>
-      <value>64C</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#4.VISERR' with format [64C]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>5</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS2#5.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>6</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_T3#6.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_ARRAY#1.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_WAVELENGTH</extName>
-    <extNb>2</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_WAVELENGTH#2.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_TARGET</extName>
-    <extNb>3</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_TARGET#3.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_CORR</extName>
-    <extNb>4</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_CORR#4.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_INSPOL</extName>
-    <extNb>5</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_INSPOL#5.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>6</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#6.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>6</extNb>
-    <member>VISDATA</member>
-    <data>
-      <value>7C</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#6.VISDATA' with format [7C]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>6</extNb>
-    <member>VISERR</member>
-    <data>
-      <value>7C</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#6.VISERR' with format [7C]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>7</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS2#7.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>8</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_T3#8.[[UNKNOWN]]' with format [[FORMAT]]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>9</extNb>
-    <member>[[UNKNOWN]]</member>
-    <data>
-      <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#9.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -353,246 +365,6 @@
     <rule>FILE_LOAD</rule>
     <file>src/test/resources/corrupted/testdata_opt_TRUNC.fits</file>
     <message>Unable to load the file src/test/resources/corrupted/testdata_opt_TRUNC.fits</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:1</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>[[ARRNAME]]</value>
-      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:1</file>
-    <extName>OI_VIS</extName>
-    <extNb>3</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>[[ARRNAME]]</value>
-      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:1</file>
-    <extName>OI_VIS2</extName>
-    <extNb>4</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>[[ARRNAME]]</value>
-      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:1</file>
-    <extName>OI_T3</extName>
-    <extNb>5</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>[[ARRNAME]]</value>
-      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:2</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>[[ARRNAME]]</value>
-      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:2</file>
-    <extName>OI_INSPOL</extName>
-    <extNb>4</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>null</value>
-      <message>Missing OI_ARRAY table that describes the '' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:2</file>
-    <extName>OI_VIS</extName>
-    <extNb>5</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>[[ARRNAME]]</value>
-      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:2</file>
-    <extName>OI_VIS2</extName>
-    <extNb>6</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>[[ARRNAME]]</value>
-      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:2</file>
-    <extName>OI_T3</extName>
-    <extNb>7</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>[[ARRNAME]]</value>
-      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>memory:2</file>
-    <extName>OI_FLUX</extName>
-    <extNb>8</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>[[ARRNAME]]</value>
-      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>VLTI-like</value>
-      <message>Missing OI_ARRAY table that describes the 'VLTI-like' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>4</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>VLTI-like</value>
-      <message>Missing OI_ARRAY table that describes the 'VLTI-like' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>5</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>VLTI-like</value>
-      <message>Missing OI_ARRAY table that describes the 'VLTI-like' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>6</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>VLTI-like</value>
-      <message>Missing OI_ARRAY table that describes the 'VLTI-like' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>Chara</value>
-      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_INSPOL</extName>
-    <extNb>5</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>Chara</value>
-      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>6</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>Chara</value>
-      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>7</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>Chara</value>
-      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>8</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>Chara</value>
-      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_ARRNAME_REF</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>9</extNb>
-    <member>ARRNAME</member>
-    <data>
-      <value>Chara</value>
-      <message>Missing OI_ARRAY table that describes the 'Chara' array</message>
-    </data>
   </failure>
   <failure>
     <severity>SEVERE</severity>
@@ -38712,8 +38484,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_TARGET</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_TARGET' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_TARGET' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -38725,8 +38497,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_ARRAY</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_ARRAY' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_ARRAY' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -38751,8 +38523,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_WAVELENGTH</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_WAVELENGTH' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_WAVELENGTH' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -38764,8 +38536,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_CORR</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_CORR' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_CORR' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -38790,8 +38562,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_INSPOL</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_INSPOL' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_INSPOL' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -38855,8 +38627,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_VIS</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_VIS' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_VIS' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -38920,8 +38692,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_VIS2</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_VIS2' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_VIS2' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -38972,8 +38744,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_T3</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_T3' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_T3' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39037,8 +38809,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_FLUX</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39245,8 +39017,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_ARRAY</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_ARRAY' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_ARRAY' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39271,8 +39043,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_WAVELENGTH</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_WAVELENGTH' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_WAVELENGTH' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39284,8 +39056,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_TARGET</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_TARGET' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_TARGET' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39297,8 +39069,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_CORR</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_CORR' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_CORR' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39323,8 +39095,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_INSPOL</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_INSPOL' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_INSPOL' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39388,8 +39160,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_VIS</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_VIS' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_VIS' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39453,8 +39225,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_VIS2</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_VIS2' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_VIS2' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39505,8 +39277,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_T3</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_T3' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_T3' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -39570,8 +39342,8 @@
     <member>EXTNAME</member>
     <data>
       <value>OI_FLUX</value>
-      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL</expected>
-      <message>Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_SPECTRUM|OI_FLUX|OI_CORR|OI_INSPOL'</message>
+      <expected>OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL</expected>
+      <message>Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3|OI_FLUX|OI_CORR|OI_INSPOL'</message>
     </data>
   </failure>
   <failure>
@@ -40697,6 +40469,234 @@
     </data>
   </failure>
   <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>INSMODE</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSMODE' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>INSTRUME</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSTRUME' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>OBJECT</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBJECT' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>OBSERVER</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBSERVER' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>OBSTECH</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBSTECH' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>PROCSOFT</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROCSOFT' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>PROG_ID</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROG_ID' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>REFERENC</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'REFERENC' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>memory:2</file>
+    <member>TELESCOP</member>
+    <data>
+      <value>null</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'TELESCOP' has the value '' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>INSMODE</member>
+    <data>
+      <value>Low_JHK</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSMODE' has the value 'Low_JHK' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>INSTRUME</member>
+    <data>
+      <value>VEGA</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'INSTRUME' has the value 'VEGA' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>OBJECT</member>
+    <data>
+      <value>MegaStar</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBJECT' has the value 'MegaStar' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>OBSERVER</member>
+    <data>
+      <value>Gilles</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBSERVER' has the value 'Gilles' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>OBSTECH</member>
+    <data>
+      <value>SCAN, PH_REF, ...</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'OBSTECH' has the value 'SCAN, PH_REF, ...' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>PROCSOFT</member>
+    <data>
+      <value>pndg 3.4</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROCSOFT' has the value 'pndg 3.4' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>PROG_ID</member>
+    <data>
+      <value>074.R-456</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'PROG_ID' has the value '074.R-456' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>REFERENC</member>
+    <data>
+      <value>2017HDTYE.123.43.56</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'REFERENC' has the value '2017HDTYE.123.43.56' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <member>TELESCOP</member>
+    <data>
+      <value>Etoilemagic</value>
+      <expected>MULTI</expected>
+      <message>The keyword 'TELESCOP' has the value 'Etoilemagic' but should be set to 'MULTI' for multiple observations</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OIFITS_MAIN_HEADER_EXIST_V2</rule>
+    <file>memory:2</file>
+    <message>No primary HDU found: one must be present</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OIFITS_MAIN_HEADER_EXIST_V2</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <message>No primary HDU found: one must be present</message>
+  </failure>
+  <failure>
     <severity>SEVERE</severity>
     <rule>OIFITS_OIDATA</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
@@ -40770,183 +40770,19 @@
   </failure>
   <failure>
     <severity>SEVERE</severity>
-    <rule>OIFITS_PRIMARYHDU_EXIST_V2</rule>
-    <file>memory:2</file>
-    <message>No primary HDU found: one must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_PRIMARYHDU_EXIST_V2</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <message>No primary HDU found: one must be present</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <message>Skipping non-standard OIFITS 'HDU#0'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <message>Skipping non-standard OIFITS 'OI_ARRAY#1'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_WAVELENGTH</extName>
-    <extNb>2</extNb>
-    <message>Skipping non-standard OIFITS 'OI_WAVELENGTH#2'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_TARGET</extName>
-    <extNb>3</extNb>
-    <message>Skipping non-standard OIFITS 'OI_TARGET#3'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>4</extNb>
-    <message>Skipping non-standard OIFITS 'OI_VIS#4'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>5</extNb>
-    <message>Skipping non-standard OIFITS 'OI_VIS2#5'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>6</extNb>
-    <message>Skipping non-standard OIFITS 'OI_T3#6'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <message>Skipping non-standard OIFITS 'HDU#0'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <message>Skipping non-standard OIFITS 'OI_ARRAY#1'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_WAVELENGTH</extName>
-    <extNb>2</extNb>
-    <message>Skipping non-standard OIFITS 'OI_WAVELENGTH#2'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_TARGET</extName>
-    <extNb>3</extNb>
-    <message>Skipping non-standard OIFITS 'OI_TARGET#3'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <rule>OIFITS_TABLE_NOT_V2</rule>
+    <file>src/test/resources/corrupted/V1_with_V2_Tables.fits</file>
     <extName>OI_CORR</extName>
-    <extNb>4</extNb>
-    <message>Skipping non-standard OIFITS 'OI_CORR#4'</message>
+    <extNb>1</extNb>
+    <message>Unsupported table OI_CORR#1 in OIFITS V1.0</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <rule>OIFITS_TABLE_NOT_V2</rule>
+    <file>src/test/resources/corrupted/V1_with_V2_Tables.fits</file>
     <extName>OI_INSPOL</extName>
-    <extNb>5</extNb>
-    <message>Skipping non-standard OIFITS 'OI_INSPOL#5'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>6</extNb>
-    <message>Skipping non-standard OIFITS 'OI_VIS#6'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>7</extNb>
-    <message>Skipping non-standard OIFITS 'OI_VIS2#7'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>8</extNb>
-    <message>Skipping non-standard OIFITS 'OI_T3#8'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OIFITS_TABLE_UNKNOWN</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>9</extNb>
-    <message>Skipping non-standard OIFITS 'OI_FLUX#9'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OITARGET_TARGET_EXIST</rule>
-    <file>memory:1</file>
-    <extName>OI_TARGET</extName>
-    <extNb>0</extNb>
-    <message>No target defined</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OITARGET_TARGET_EXIST</rule>
-    <file>memory:2</file>
-    <extName>OI_TARGET</extName>
-    <extNb>0</extNb>
-    <message>No target defined</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OITARGET_TARGET_EXIST</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
-    <extName>OI_TARGET</extName>
-    <extNb>3</extNb>
-    <message>No target defined</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>OITARGET_TARGET_EXIST</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>OI_TARGET</extName>
-    <extNb>3</extNb>
-    <message>No target defined</message>
+    <extNb>2</extNb>
+    <message>Unsupported table OI_INSPOL#2 in OIFITS V1.0</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>
@@ -43084,6 +42920,38 @@
   </failure>
   <failure>
     <severity>SEVERE</severity>
+    <rule>OI_TARGET_TARGET_EXIST</rule>
+    <file>memory:1</file>
+    <extName>OI_TARGET</extName>
+    <extNb>0</extNb>
+    <message>No target defined</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_TARGET_TARGET_EXIST</rule>
+    <file>memory:2</file>
+    <extName>OI_TARGET</extName>
+    <extNb>0</extNb>
+    <message>No target defined</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_TARGET_TARGET_EXIST</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_TARGET</extName>
+    <extNb>3</extNb>
+    <message>No target defined</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>OI_TARGET_TARGET_EXIST</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_TARGET</extName>
+    <extNb>3</extNb>
+    <message>No target defined</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
     <rule>OI_TARGET_TARGET_UNIQ</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -43633,159 +43501,366 @@
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>memory:2</file>
-    <member>OBSERVER</member>
-    <data>
-      <value>null</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'OBSERVER' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>memory:2</file>
-    <member>OBSTECH</member>
-    <data>
-      <value>null</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'OBSTECH' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>memory:2</file>
-    <member>PROCSOFT</member>
-    <data>
-      <value>null</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'PROCSOFT' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>memory:2</file>
-    <member>PROG_ID</member>
-    <data>
-      <value>null</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'PROG_ID' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>memory:2</file>
-    <member>REFERENC</member>
-    <data>
-      <value>null</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'REFERENC' has the value '' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>OBJECT</member>
-    <data>
-      <value>MegaStar</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'OBJECT' has the value 'MegaStar' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>OBSERVER</member>
-    <data>
-      <value>Gilles</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'OBSERVER' has the value 'Gilles' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>OBSTECH</member>
-    <data>
-      <value>SCAN, PH_REF, ...</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'OBSTECH' has the value 'SCAN, PH_REF, ...' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>PROCSOFT</member>
-    <data>
-      <value>pndg 3.4</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'PROCSOFT' has the value 'pndg 3.4' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>PROG_ID</member>
-    <data>
-      <value>074.R-456</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'PROG_ID' has the value '074.R-456' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
-    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>REFERENC</member>
-    <data>
-      <value>2017HDTYE.123.43.56</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'REFERENC' has the value '2017HDTYE.123.43.56' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>TABLE_NOT_OIFITS2</rule>
-    <file>src/test/resources/corrupted/V1_with_V2_Tables.fits</file>
-    <extName>OI_CORR</extName>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_ARRAY</extName>
     <extNb>1</extNb>
-    <message>Unsupported table OI_CORR#1 in OIFITS V1.0</message>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_ARRAY#1.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>TABLE_NOT_OIFITS2</rule>
-    <file>src/test/resources/corrupted/V1_with_V2_Tables.fits</file>
-    <extName>OI_INSPOL</extName>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_WAVELENGTH</extName>
     <extNb>2</extNb>
-    <message>Unsupported table OI_INSPOL#2 in OIFITS V1.0</message>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_WAVELENGTH#2.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_TARGET</extName>
+    <extNb>3</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_TARGET#3.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>4</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#4.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>4</extNb>
+    <member>VISDATA</member>
+    <data>
+      <value>64C</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#4.VISDATA' with format [64C]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>4</extNb>
+    <member>VISERR</member>
+    <data>
+      <value>64C</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#4.VISERR' with format [64C]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>5</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS2#5.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>6</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_T3#6.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_ARRAY#1.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_WAVELENGTH</extName>
+    <extNb>2</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_WAVELENGTH#2.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_TARGET</extName>
+    <extNb>3</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_TARGET#3.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_CORR</extName>
+    <extNb>4</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_CORR#4.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>5</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_INSPOL#5.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>6</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#6.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>6</extNb>
+    <member>VISDATA</member>
+    <data>
+      <value>7C</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#6.VISDATA' with format [7C]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>6</extNb>
+    <member>VISERR</member>
+    <data>
+      <value>7C</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#6.VISERR' with format [7C]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>7</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS2#7.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>8</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_T3#8.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>9</extNb>
+    <member>[[UNKNOWN]]</member>
+    <data>
+      <value>[FORMAT]</value>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#9.[[UNKNOWN]]' with format [[FORMAT]]</message>
+    </data>
   </failure>
   <failure>
     <severity>SEVERE</severity>
-    <rule>TABLE_NOT_OIFITS2</rule>
-    <file>src/test/resources/corrupted/V1_with_V2_Tables.fits</file>
-    <extName>OI_FLUX</extName>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <message>Skipping non-standard OIFITS 'HDU#0'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <message>Skipping non-standard OIFITS 'OI_ARRAY#1'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_WAVELENGTH</extName>
+    <extNb>2</extNb>
+    <message>Skipping non-standard OIFITS 'OI_WAVELENGTH#2'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_TARGET</extName>
     <extNb>3</extNb>
-    <message>Unsupported table OI_FLUX#3 in OIFITS V1.0</message>
+    <message>Skipping non-standard OIFITS 'OI_TARGET#3'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>4</extNb>
+    <message>Skipping non-standard OIFITS 'OI_VIS#4'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>5</extNb>
+    <message>Skipping non-standard OIFITS 'OI_VIS2#5'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>6</extNb>
+    <message>Skipping non-standard OIFITS 'OI_T3#6'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>HDU</extName>
+    <extNb>0</extNb>
+    <message>Skipping non-standard OIFITS 'HDU#0'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <message>Skipping non-standard OIFITS 'OI_ARRAY#1'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_WAVELENGTH</extName>
+    <extNb>2</extNb>
+    <message>Skipping non-standard OIFITS 'OI_WAVELENGTH#2'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_TARGET</extName>
+    <extNb>3</extNb>
+    <message>Skipping non-standard OIFITS 'OI_TARGET#3'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_CORR</extName>
+    <extNb>4</extNb>
+    <message>Skipping non-standard OIFITS 'OI_CORR#4'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_INSPOL</extName>
+    <extNb>5</extNb>
+    <message>Skipping non-standard OIFITS 'OI_INSPOL#5'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>6</extNb>
+    <message>Skipping non-standard OIFITS 'OI_VIS#6'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>7</extNb>
+    <message>Skipping non-standard OIFITS 'OI_VIS2#7'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>8</extNb>
+    <message>Skipping non-standard OIFITS 'OI_T3#8'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>UNKNOWN_TABLE</rule>
+    <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>9</extNb>
+    <message>Skipping non-standard OIFITS 'OI_FLUX#9'</message>
   </failure>
 </failures>

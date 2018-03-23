@@ -1905,11 +1905,11 @@ INFO	The keyword 'PROCSOFT' has the value 'GRAVITY pipeline 0.9.8' but should be
 INFO	The keyword 'PROG_ID' has the value '60.A-9174(A)' but should be set to 'MULTI' for multiple observations
 INFO	The keyword 'REFERENC' has the value '2001PASP..112.1133P' but should be set to 'MULTI' for multiple observations
 Analysing table [OI_ARRAY#1]
-INFO	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
 WARNING	Missing column 'FOV'
 WARNING	Missing column 'FOVTYPE'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
+INFO	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
 Analysing table [OI_TARGET#2]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
@@ -1931,11 +1931,15 @@ Analysing table [OI_T3#7]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
-INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
-INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
+INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
 Analysing table [OI_VIS#9]
+SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
+SEVERE	Invalid format for column 'VISERR', found '210M' should be '210C'
+SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
+INFO	Fixed OI_REVN to 2.
 INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]
 INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_U' with format [3D]
 INFO	Skipping non-standard OIFITS column 'OI_VIS#9.E_V' with format [3D]
@@ -1945,10 +1949,6 @@ INFO	Skipping non-standard OIFITS column 'OI_VIS#9.GDELAY_ASTROMETRY' with forma
 INFO	Skipping non-standard OIFITS column 'OI_VIS#9.OPD_DISP' with format [210D]
 INFO	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]
-SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
-SEVERE	Invalid format for column 'VISERR', found '210M' should be '210C'
-SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 Analysing table [OI_VIS2#10]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
@@ -1956,6 +1956,8 @@ Analysing table [OI_T3#11]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#12]
+SEVERE	Missing column 'FLUXDATA'
+SEVERE	Missing keyword 'OI_REVN'
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [210D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.FT_POS' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.LKDT_MET_FC' with format [1D]
@@ -1963,17 +1965,10 @@ INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
-SEVERE	Missing column 'FLUXDATA'
-SEVERE	Missing keyword 'OI_REVN'
 
 2 warnings, 18 severe errors
 </checkReport>
 <rules>
-  <rule>
-    <name>COL_UNKNOWN</name>
-    <description>check if the column belongs to the OIFITS standard and version</description>
-    <paragraph>JMMC</paragraph>
-  </rule>
   <rule>
     <name>GENERIC_COL_FORMAT</name>
     <description>check if the column format matches the expected format (data type and dimensions)</description>
@@ -2000,15 +1995,20 @@ SEVERE	Missing keyword 'OI_REVN'
     <paragraph>JMMC</paragraph>
   </rule>
   <rule>
-    <name>PRIMARYHDU_TYPE_MULTI</name>
+    <name>MAIN_HEADER_TYPE_MULTI</name>
     <description>check if main header keywords are set to 'MULTI' for heterogenous content</description>
     <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
+  </rule>
+  <rule>
+    <name>UNKNOWN_COLUMN</name>
+    <description>check if the column belongs to the OIFITS standard and version</description>
+    <paragraph>JMMC</paragraph>
   </rule>
 </rules>
 <failures>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -2021,7 +2021,7 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -2034,7 +2034,7 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -2047,7 +2047,7 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -2060,7 +2060,7 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -2073,7 +2073,7 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>PRIMARYHDU_TYPE_MULTI</rule>
+    <rule>MAIN_HEADER_TYPE_MULTI</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>HDU</extName>
     <extNb>0</extNb>
@@ -2082,18 +2082,6 @@ SEVERE	Missing keyword 'OI_REVN'
       <value>2001PASP..112.1133P</value>
       <expected>MULTI</expected>
       <message>The keyword 'REFERENC' has the value '2001PASP..112.1133P' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <member>MNTSTA</member>
-    <data>
-      <value>1J</value>
-      <message>Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]</message>
     </data>
   </failure>
   <failure>
@@ -2136,6 +2124,18 @@ SEVERE	Missing keyword 'OI_REVN'
     <data>
       <value>2</value>
       <message>Fixed OI_REVN to 2.</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_ARRAY</extName>
+    <extNb>1</extNb>
+    <member>MNTSTA</member>
+    <data>
+      <value>1J</value>
+      <message>Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]</message>
     </data>
   </failure>
   <failure>
@@ -2309,30 +2309,6 @@ SEVERE	Missing keyword 'OI_REVN'
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>8</extNb>
-    <member>FLUX</member>
-    <data>
-      <value>5D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>8</extNb>
-    <member>TIME</member>
-    <data>
-      <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]</message>
-    </data>
-  </failure>
-  <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
@@ -2352,110 +2328,26 @@ SEVERE	Missing keyword 'OI_REVN'
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
+    <rule>UNKNOWN_COLUMN</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>E_AZ</member>
+    <extName>OI_FLUX</extName>
+    <extNb>8</extNb>
+    <member>FLUX</member>
     <data>
-      <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]</message>
+      <value>5D</value>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]</message>
     </data>
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
+    <rule>UNKNOWN_COLUMN</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>E_U</member>
-    <data>
-      <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_U' with format [3D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>E_V</member>
-    <data>
-      <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_V' with format [3D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>E_W</member>
-    <data>
-      <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_W' with format [3D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>E_ZD</member>
-    <data>
-      <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_ZD' with format [3D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>GDELAY_ASTROMETRY</member>
+    <extName>OI_FLUX</extName>
+    <extNb>8</extNb>
+    <member>TIME</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.GDELAY_ASTROMETRY' with format [1D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>OPD_DISP</member>
-    <data>
-      <value>210D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.OPD_DISP' with format [210D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>PHASE_ASTROMETRY</member>
-    <data>
-      <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with format [1D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <member>PHASE_REF_COEFF</member>
-    <data>
-      <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]</message>
     </data>
   </failure>
   <failure>
@@ -2509,135 +2401,159 @@ SEVERE	Missing keyword 'OI_REVN'
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>10</extNb>
-    <member>OI_REVN</member>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>E_AZ</member>
     <data>
-      <value>1</value>
-      <expected>2</expected>
-      <message>Invalid value for keyword 'OI_REVN', found '1' should be '2'</message>
+      <value>3D</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]</message>
     </data>
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
+    <rule>UNKNOWN_COLUMN</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>10</extNb>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>E_U</member>
     <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>11</extNb>
-    <member>OI_REVN</member>
-    <data>
-      <value>1</value>
-      <expected>2</expected>
-      <message>Invalid value for keyword 'OI_REVN', found '1' should be '2'</message>
+      <value>3D</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_U' with format [3D]</message>
     </data>
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
+    <rule>UNKNOWN_COLUMN</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>11</extNb>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>E_V</member>
     <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
+      <value>3D</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_V' with format [3D]</message>
     </data>
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
+    <rule>UNKNOWN_COLUMN</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>12</extNb>
-    <member>FLUX</member>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>E_W</member>
+    <data>
+      <value>3D</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_W' with format [3D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>E_ZD</member>
+    <data>
+      <value>3D</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_ZD' with format [3D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>GDELAY_ASTROMETRY</member>
+    <data>
+      <value>1D</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#9.GDELAY_ASTROMETRY' with format [1D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>OPD_DISP</member>
     <data>
       <value>210D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [210D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#9.OPD_DISP' with format [210D]</message>
     </data>
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
+    <rule>UNKNOWN_COLUMN</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>12</extNb>
-    <member>FT_POS</member>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>PHASE_ASTROMETRY</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.FT_POS' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with format [1D]</message>
     </data>
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
+    <rule>UNKNOWN_COLUMN</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>12</extNb>
-    <member>LKDT_MET_FC</member>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>PHASE_REF_COEFF</member>
     <data>
-      <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.LKDT_MET_FC' with format [1D]</message>
+      <value>3D</value>
+      <message>Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>10</extNb>
+    <member>OI_REVN</member>
+    <data>
+      <value>1</value>
+      <expected>2</expected>
+      <message>Invalid value for keyword 'OI_REVN', found '1' should be '2'</message>
     </data>
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
+    <rule>GENERIC_OIREV_FIX</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>12</extNb>
-    <member>OPD_MET_FC</member>
+    <extName>OI_VIS2</extName>
+    <extNb>10</extNb>
     <data>
-      <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D]</message>
+      <value>2</value>
+      <message>Fixed OI_REVN to 2.</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>11</extNb>
+    <member>OI_REVN</member>
+    <data>
+      <value>1</value>
+      <expected>2</expected>
+      <message>Invalid value for keyword 'OI_REVN', found '1' should be '2'</message>
     </data>
   </failure>
   <failure>
     <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
+    <rule>GENERIC_OIREV_FIX</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>12</extNb>
-    <member>OPL_AIR</member>
+    <extName>OI_T3</extName>
+    <extNb>11</extNb>
     <data>
-      <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>12</extNb>
-    <member>SC_POS</member>
-    <data>
-      <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>COL_UNKNOWN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>12</extNb>
-    <member>TIME</member>
-    <data>
-      <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]</message>
+      <value>2</value>
+      <message>Fixed OI_REVN to 2.</message>
     </data>
   </failure>
   <failure>
@@ -2657,6 +2573,90 @@ SEVERE	Missing keyword 'OI_REVN'
     <extNb>12</extNb>
     <member>OI_REVN</member>
     <message>Missing keyword 'OI_REVN'</message>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>12</extNb>
+    <member>FLUX</member>
+    <data>
+      <value>210D</value>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [210D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>12</extNb>
+    <member>FT_POS</member>
+    <data>
+      <value>1D</value>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.FT_POS' with format [1D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>12</extNb>
+    <member>LKDT_MET_FC</member>
+    <data>
+      <value>1D</value>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.LKDT_MET_FC' with format [1D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>12</extNb>
+    <member>OPD_MET_FC</member>
+    <data>
+      <value>1D</value>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>12</extNb>
+    <member>OPL_AIR</member>
+    <data>
+      <value>1D</value>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>12</extNb>
+    <member>SC_POS</member>
+    <data>
+      <value>1D</value>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>UNKNOWN_COLUMN</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_FLUX</extName>
+    <extNb>12</extNb>
+    <member>TIME</member>
+    <data>
+      <value>1D</value>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]</message>
+    </data>
   </failure>
 </failures>
 </oifits>

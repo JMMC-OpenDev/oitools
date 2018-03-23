@@ -2,11 +2,16 @@
 <datamodel>
 <rules>
   <rule>
-    <name>ARRNAME_UNIQ</name>
-    <description>check if a single OI_ARRAY table corresponds to the ARRNAME keyword</description>
-    <paragraph>V2.5.2§1</paragraph>
+    <name>ARRNAME_REF</name>
+    <description>check if an OI_ARRAY table matches the ARRNAME keyword</description>
+    <paragraph>V2.6.1§3</paragraph>
     <subjects>
       <apply>OI_ARRAY.ARRNAME</apply>
+      <apply>OI_FLUX.ARRNAME</apply>
+      <apply>OI_INSPOL.ARRNAME</apply>
+      <apply>OI_T3.ARRNAME</apply>
+      <apply>OI_VIS.ARRNAME</apply>
+      <apply>OI_VIS2.ARRNAME</apply>
     </subjects>
     <standards>
       <standard>VERSION_1</standard>
@@ -14,19 +19,11 @@
     </standards>
   </rule>
   <rule>
-    <name>COL_UNKNOWN</name>
-    <description>check if the column belongs to the OIFITS standard and version</description>
-    <paragraph>JMMC</paragraph>
+    <name>ARRNAME_UNIQ</name>
+    <description>check if a single OI_ARRAY table corresponds to the ARRNAME keyword</description>
+    <paragraph>V2.5.2§1</paragraph>
     <subjects>
-      <apply>OI_ARRAY</apply>
-      <apply>OI_CORR</apply>
-      <apply>OI_FLUX</apply>
-      <apply>OI_INSPOL</apply>
-      <apply>OI_T3</apply>
-      <apply>OI_TARGET</apply>
-      <apply>OI_VIS</apply>
-      <apply>OI_VIS2</apply>
-      <apply>OI_WAVELENGTH</apply>
+      <apply>OI_ARRAY.ARRNAME</apply>
     </subjects>
     <standards>
       <standard>VERSION_1</standard>
@@ -97,23 +94,6 @@
     <paragraph>V1.6.3.1</paragraph>
     <subjects>
       <apply>OI_WAVELENGTH.INSNAME</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-      <standard>VERSION_2</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>GENERIC_ARRNAME_REF</name>
-    <description>check if an OI_ARRAY table matches the ARRNAME keyword</description>
-    <paragraph>V2.6.1§3</paragraph>
-    <subjects>
-      <apply>OI_ARRAY.ARRNAME</apply>
-      <apply>OI_FLUX.ARRNAME</apply>
-      <apply>OI_INSPOL.ARRNAME</apply>
-      <apply>OI_T3.ARRNAME</apply>
-      <apply>OI_VIS.ARRNAME</apply>
-      <apply>OI_VIS2.ARRNAME</apply>
     </subjects>
     <standards>
       <standard>VERSION_1</standard>
@@ -1197,6 +1177,25 @@
     </standards>
   </rule>
   <rule>
+    <name>MAIN_HEADER_TYPE_MULTI</name>
+    <description>check if main header keywords are set to 'MULTI' for heterogenous content</description>
+    <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
+    <subjects>
+      <apply>MAIN_HEADER.INSMODE</apply>
+      <apply>MAIN_HEADER.INSTRUME</apply>
+      <apply>MAIN_HEADER.OBJECT</apply>
+      <apply>MAIN_HEADER.OBSERVER</apply>
+      <apply>MAIN_HEADER.OBSTECH</apply>
+      <apply>MAIN_HEADER.PROCSOFT</apply>
+      <apply>MAIN_HEADER.PROG_ID</apply>
+      <apply>MAIN_HEADER.REFERENC</apply>
+      <apply>MAIN_HEADER.TELESCOP</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_2</standard>
+    </standards>
+  </rule>
+  <rule>
     <name>OI_ARRAY_ARRNAME</name>
     <description>check the ARRNAME keyword has a not null or empty value</description>
     <paragraph>V2.5.2§1</paragraph>
@@ -1328,82 +1327,6 @@
     </standards>
   </rule>
   <rule>
-    <name>OIFITS_OI_ARRAY_EXIST_V2</name>
-    <description>check if at least one OI_ARRAY table exists in the OIFITS 2 file</description>
-    <paragraph>V2.4.2§1</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-      <apply>OI_ARRAY</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-      <standard>VERSION_2</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>OIFITS_OIDATA</name>
-    <description>check if at least one data table exists in the OIFITS file</description>
-    <paragraph>V2.4.2§1</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-      <standard>VERSION_2</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>OIFITS_OI_TARGET_EXIST</name>
-    <description>check if only one OI_TARGET table exists in the OIFITS file</description>
-    <paragraph>V2.4.2§1</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-      <apply>OI_TARGET</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-      <standard>VERSION_2</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>OIFITS_OI_WAVELENGTH_EXIST</name>
-    <description>check if at least one OI_WAVELENGTH table exists in the OIFITS file</description>
-    <paragraph>V2.4.2§1</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-      <apply>OI_WAVELENGTH</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-      <standard>VERSION_2</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>OIFITS_PRIMARYHDU_EXIST_V2</name>
-    <description>check if the main header (PRIMARY HDU) exists in the OIFITS 2 file</description>
-    <paragraph>V2.4.1§3</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-      <apply>MAIN_HEADER</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-      <standard>VERSION_2</standard>
-    </standards>
-  </rule>
-  <rule>
-    <name>OIFITS_TABLE_UNKNOWN</name>
-    <description>check if the table belongs to the OIFITS standard and version</description>
-    <paragraph>V2.4.2§3-4</paragraph>
-    <subjects>
-      <apply>FILE</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_1</standard>
-      <standard>VERSION_2</standard>
-    </standards>
-  </rule>
-  <rule>
     <name>OI_FLUX_CORRINDX</name>
     <description>check if the referenced OI_CORR table exists when the column CORRINDX_FLUXDATA is present</description>
     <paragraph>V2.7.2§4</paragraph>
@@ -1449,18 +1372,6 @@
     </standards>
   </rule>
   <rule>
-    <name>OI_T3_CORRINDX</name>
-    <description>check if the referenced OI_CORR exists when the column CORRINDX_T3AMP or CORRINDX_T3PHI is present</description>
-    <paragraph>V2.7.2§4</paragraph>
-    <subjects>
-      <apply>OI_T3.CORRINDX_T3AMP</apply>
-      <apply>OI_T3.CORRINDX_T3PHI</apply>
-    </subjects>
-    <standards>
-      <standard>VERSION_2</standard>
-    </standards>
-  </rule>
-  <rule>
     <name>OI_TARGET_COORD</name>
     <description>check if the TARGET RA and DEC values are not 0.0</description>
     <paragraph>JMMC</paragraph>
@@ -1499,7 +1410,7 @@
     </standards>
   </rule>
   <rule>
-    <name>OITARGET_TARGET_EXIST</name>
+    <name>OI_TARGET_TARGET_EXIST</name>
     <description>check if the OI_TARGET table has at least one target</description>
     <paragraph>JMMC</paragraph>
     <subjects>
@@ -1543,6 +1454,18 @@
     </subjects>
     <standards>
       <standard>VERSION_1</standard>
+      <standard>VERSION_2</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>OI_T3_CORRINDX</name>
+    <description>check if the referenced OI_CORR exists when the column CORRINDX_T3AMP or CORRINDX_T3PHI is present</description>
+    <paragraph>V2.7.2§4</paragraph>
+    <subjects>
+      <apply>OI_T3.CORRINDX_T3AMP</apply>
+      <apply>OI_T3.CORRINDX_T3PHI</apply>
+    </subjects>
+    <standards>
       <standard>VERSION_2</standard>
     </standards>
   </rule>
@@ -1596,23 +1519,97 @@
     </standards>
   </rule>
   <rule>
-    <name>PRIMARYHDU_TYPE_MULTI</name>
-    <description>check if main header keywords are set to 'MULTI' for heterogenous content</description>
-    <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
+    <name>OIFITS_MAIN_HEADER_EXIST_V2</name>
+    <description>check if the main header (PRIMARY HDU) exists in the OIFITS 2 file</description>
+    <paragraph>V2.4.1§3</paragraph>
     <subjects>
-      <apply>MAIN_HEADER.OBJECT</apply>
-      <apply>MAIN_HEADER.OBSERVER</apply>
-      <apply>MAIN_HEADER.OBSTECH</apply>
-      <apply>MAIN_HEADER.PROCSOFT</apply>
-      <apply>MAIN_HEADER.PROG_ID</apply>
-      <apply>MAIN_HEADER.REFERENC</apply>
+      <apply>FILE</apply>
     </subjects>
     <standards>
       <standard>VERSION_2</standard>
     </standards>
   </rule>
+  <rule>
+    <name>OIFITS_OI_ARRAY_EXIST_V2</name>
+    <description>check if at least one OI_ARRAY table exists in the OIFITS 2 file</description>
+    <paragraph>V2.4.2§1</paragraph>
+    <subjects>
+      <apply>FILE</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_2</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>OIFITS_OIDATA</name>
+    <description>check if at least one data table exists in the OIFITS file</description>
+    <paragraph>V2.4.2§1</paragraph>
+    <subjects>
+      <apply>FILE</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+      <standard>VERSION_2</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>OIFITS_OI_TARGET_EXIST</name>
+    <description>check if only one OI_TARGET table exists in the OIFITS file</description>
+    <paragraph>V2.4.2§1</paragraph>
+    <subjects>
+      <apply>FILE</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+      <standard>VERSION_2</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>OIFITS_OI_WAVELENGTH_EXIST</name>
+    <description>check if at least one OI_WAVELENGTH table exists in the OIFITS file</description>
+    <paragraph>V2.4.2§1</paragraph>
+    <subjects>
+      <apply>FILE</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+      <standard>VERSION_2</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>UNKNOWN_COLUMN</name>
+    <description>check if the column belongs to the OIFITS standard and version</description>
+    <paragraph>JMMC</paragraph>
+    <subjects>
+      <apply>OI_ARRAY</apply>
+      <apply>OI_CORR</apply>
+      <apply>OI_FLUX</apply>
+      <apply>OI_INSPOL</apply>
+      <apply>OI_T3</apply>
+      <apply>OI_TARGET</apply>
+      <apply>OI_VIS</apply>
+      <apply>OI_VIS2</apply>
+      <apply>OI_WAVELENGTH</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+      <standard>VERSION_2</standard>
+    </standards>
+  </rule>
+  <rule>
+    <name>UNKNOWN_TABLE</name>
+    <description>check if the table belongs to the OIFITS standard and version</description>
+    <paragraph>V2.4.2§3-4</paragraph>
+    <subjects>
+      <apply>FILE</apply>
+    </subjects>
+    <standards>
+      <standard>VERSION_1</standard>
+      <standard>VERSION_2</standard>
+    </standards>
+  </rule>
 </rules>
-<table name="PrimaryHDU">
+<table name="MAIN_HEADER">
   <keyword>
     <name>EXTNAME</name>
     <datatype>TYPE_CHAR</datatype>
@@ -1708,6 +1705,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
+      <applyrule>MAIN_HEADER_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1718,6 +1716,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
+      <applyrule>MAIN_HEADER_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1728,7 +1727,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
+      <applyrule>MAIN_HEADER_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1739,6 +1738,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
+      <applyrule>MAIN_HEADER_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1749,7 +1749,7 @@
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
+      <applyrule>MAIN_HEADER_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1759,7 +1759,7 @@
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
+      <applyrule>MAIN_HEADER_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1769,7 +1769,7 @@
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
+      <applyrule>MAIN_HEADER_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1779,7 +1779,7 @@
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
+      <applyrule>MAIN_HEADER_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1789,7 +1789,7 @@
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
-      <applyrule>PRIMARYHDU_TYPE_MULTI</applyrule>
+      <applyrule>MAIN_HEADER_TYPE_MULTI</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -1951,7 +1951,7 @@
 <table name="OI_TARGET">
   <rules>
     <applyrule>GENERIC_OIREV_FIX</applyrule>
-    <applyrule>OITARGET_TARGET_EXIST</applyrule>
+    <applyrule>OI_TARGET_TARGET_EXIST</applyrule>
   </rules>
   <keyword>
     <name>EXTNAME</name>
@@ -1965,7 +1965,6 @@
       <string>OI_VIS</string>
       <string>OI_VIS2</string>
       <string>OI_T3</string>
-      <string>OI_SPECTRUM</string>
       <string>OI_FLUX</string>
       <string>OI_CORR</string>
       <string>OI_INSPOL</string>
@@ -2353,7 +2352,6 @@
       <string>OI_VIS</string>
       <string>OI_VIS2</string>
       <string>OI_T3</string>
-      <string>OI_SPECTRUM</string>
       <string>OI_FLUX</string>
       <string>OI_CORR</string>
       <string>OI_INSPOL</string>
@@ -2403,8 +2401,8 @@
     <description>array name for cross-referencing</description>
     <optional>false</optional>
     <rules>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>ARRNAME_UNIQ</applyrule>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
       <applyrule>OI_ARRAY_ARRNAME</applyrule>
@@ -2607,7 +2605,6 @@
       <string>OI_VIS</string>
       <string>OI_VIS2</string>
       <string>OI_T3</string>
-      <string>OI_SPECTRUM</string>
       <string>OI_FLUX</string>
       <string>OI_CORR</string>
       <string>OI_INSPOL</string>
@@ -2726,7 +2723,6 @@
       <string>OI_VIS</string>
       <string>OI_VIS2</string>
       <string>OI_T3</string>
-      <string>OI_SPECTRUM</string>
       <string>OI_FLUX</string>
       <string>OI_CORR</string>
       <string>OI_INSPOL</string>
@@ -2867,7 +2863,6 @@
       <string>OI_VIS</string>
       <string>OI_VIS2</string>
       <string>OI_T3</string>
-      <string>OI_SPECTRUM</string>
       <string>OI_FLUX</string>
       <string>OI_CORR</string>
       <string>OI_INSPOL</string>
@@ -2920,7 +2915,7 @@
       <string>[[ARRNAME]]</string>
     </values>
     <rules>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</applyrule>
     </rules>
@@ -3121,7 +3116,6 @@
       <string>OI_VIS</string>
       <string>OI_VIS2</string>
       <string>OI_T3</string>
-      <string>OI_SPECTRUM</string>
       <string>OI_FLUX</string>
       <string>OI_CORR</string>
       <string>OI_INSPOL</string>
@@ -3174,7 +3168,7 @@
       <string>[[ARRNAME]]</string>
     </values>
     <rules>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</applyrule>
     </rules>
@@ -3647,7 +3641,6 @@
       <string>OI_VIS</string>
       <string>OI_VIS2</string>
       <string>OI_T3</string>
-      <string>OI_SPECTRUM</string>
       <string>OI_FLUX</string>
       <string>OI_CORR</string>
       <string>OI_INSPOL</string>
@@ -3700,7 +3693,7 @@
       <string>[[ARRNAME]]</string>
     </values>
     <rules>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</applyrule>
     </rules>
@@ -3963,7 +3956,6 @@
       <string>OI_VIS</string>
       <string>OI_VIS2</string>
       <string>OI_T3</string>
-      <string>OI_SPECTRUM</string>
       <string>OI_FLUX</string>
       <string>OI_CORR</string>
       <string>OI_INSPOL</string>
@@ -4016,7 +4008,7 @@
       <string>[[ARRNAME]]</string>
     </values>
     <rules>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</applyrule>
     </rules>
@@ -4370,7 +4362,6 @@
       <string>OI_VIS</string>
       <string>OI_VIS2</string>
       <string>OI_T3</string>
-      <string>OI_SPECTRUM</string>
       <string>OI_FLUX</string>
       <string>OI_CORR</string>
       <string>OI_INSPOL</string>
@@ -4423,7 +4414,7 @@
       <string>[[ARRNAME]]</string>
     </values>
     <rules>
-      <applyrule>GENERIC_ARRNAME_REF</applyrule>
+      <applyrule>ARRNAME_REF</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
       <applyrule>GENERIC_KEYWORD_VAL_ACCEPTED_STR</applyrule>
     </rules>
