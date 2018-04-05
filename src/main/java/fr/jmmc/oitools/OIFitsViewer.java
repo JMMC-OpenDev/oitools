@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
  *
  * This program is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIVis2;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.model.XmlOutputVisitor;
-import nom.tam.fits.FitsException;
+import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
