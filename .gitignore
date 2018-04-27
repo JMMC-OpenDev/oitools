@@ -8,3 +8,6 @@ nb*.xml
 /src/test/resources/test/oifits/*
 /target/
 
+src/test/.DS_Store
+src/test/resources/.DS_Store
+.DS_Store
