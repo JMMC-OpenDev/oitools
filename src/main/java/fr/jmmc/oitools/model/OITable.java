@@ -52,7 +52,7 @@ public abstract class OITable extends FitsTable {
 
     /* members */
     /** Main OIFitsFile */
-    private final OIFitsFile oifitsFile;
+    private OIFitsFile oifitsFile;
 
     /**
      * Protected OITable class constructor
@@ -157,5 +157,13 @@ public abstract class OITable extends FitsTable {
     public final OIFitsFile getOIFitsFile() {
         return this.oifitsFile;
     }
+    /**
+     * Set parent structure. TODO: temporary, to remove when colnage is done 
+     * @param file 
+     */
+    public void setOIFitsFile(OIFitsFile file) {
+        this.oifitsFile = file;
+    }
+            
     /*___oOo___*/
 }

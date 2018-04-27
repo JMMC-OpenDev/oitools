@@ -18,14 +18,13 @@ package fr.jmmc.oitools.util;
 
 import fr.jmmc.oitools.meta.OIFitsStandard;
 import fr.jmmc.oitools.model.OIArray;
+import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -39,10 +38,11 @@ public class MergeUtils {
     /**
      * Merge of two oifits files. Only one target by input files are accepted, have to be the the same (name) in the two
      * files. Target of file 1 is cloned in result.
+     *
      * @param f1 first file to be merged
      * @param f2 second file to be merged
      * @return result of merge
-     * @throws IllegalArgumentException 
+     * @throws IllegalArgumentException
      */
     public static OIFitsFile mergeOIFitsFile(
             final OIFitsFile f1, final OIFitsFile f2)
@@ -57,125 +57,38 @@ public class MergeUtils {
 
         OIFitsFile result = new OIFitsFile(OIFitsStandard.VERSION_1);
 
-//        try {
+        // Process OI_TARGET part
+        OITarget target1 = f1.getOiTarget();
+        OITarget target2 = f2.getOiTarget();
+        checkOITarget(target1, target2);
+        // No exception raised, store target 1 in result
+        target1.setOIFitsFile(result);
+        result.addOiTable(target1);
+        // TODO: ? cloner l'instance
+        logger.info("Target name: " + result.getOiTarget());
 
-            // Process OI_TARGET part **********************************************************************
-            OITarget target1 = f1.getOiTarget();
-            OITarget target2 = f2.getOiTarget();
-            checkOITarget(target1, target2);
-            // No exception raised, store target 1 in result
-            result.addOiTable(target1);
-            // TODO: ? cloner l'instance
-            logger.info("Target name: " + result.getOiTarget());
+        // Process OI_WAVELENGTH part
+        Map<String, String> mapWLNames = mergeOIWL(result, f1, f2);
+        logger.info("mapWLNames: "+mapWLNames);
+        logger.info("insnames: "+Arrays.toString(result.getAcceptedInsNames()));
 
-            // Process OI_WAVELENGTH part **********************************************************************
-            Set<OIWavelength> allWl = new HashSet<OIWavelength>();
-            OIWavelength[] oiwls1 = f1.getOiWavelengths();
-            Set<String> wlNames = new HashSet<String>();
-            // Collect all WL names of first file, store each WL in result list
-            for (OIWavelength oiwl : oiwls1) {
-                wlNames.add(oiwl.getInsName());
-                allWl.add(oiwl); // TODO: clone
-            }
-            // Browse all names of second file, change name if already present in first file, build a map 
-            // old_name > new name
-            Map<String, String> mapWLNames = new HashMap<String, String>();
-            OIWavelength[] oiwls2 = f2.getOiWavelengths();
-            for (OIWavelength oiwl : oiwls2) {
-                String oldName = oiwl.getInsName(), newName = oldName;
-                if (wlNames.contains(newName)) {
-                    int idx = 0;
-                    do {
-                        idx++;
-                        newName = oldName + "_" + idx;
-                    } while (wlNames.contains(newName));
-                }
-                mapWLNames.put(oldName, newName);
-                wlNames.add(newName);
-            }
-            //  Store in result
-            for (OIWavelength wl : allWl) {
-                result.addOiTable(wl); // TODO: ? clone instance ?
-            }
+        // Process OI_ARRAY part 
+        Map<String, String> mapArrayNames = mergeOIArray(result, f1, f2);
+        logger.info("mapArrayNames: "+mapArrayNames);
+        
+        // Merge data
+        mergeOIData(result, f1, f2, mapWLNames, mapArrayNames);
 
-            // Process OI_ARRAY part **********************************************************************
-            Set<OIArray> allArrays = new HashSet<OIArray>();
-            OIArray[] oiArrays1 = f1.getOiArrays();
-            Set<String> arraysName = new HashSet<String>();
-            // Collect all WL names of first file, store each WL in result list
-            for (OIArray oiArray : oiArrays1) {
-                wlNames.add(oiArray.getArrName());
-                allArrays.add(oiArray); // TODO: clone
-            }
-            // Browse all names of second file, change name if already present in first file, build a map 
-            // old_name > new name
-            Map<String, String> mapArrayNames = new HashMap<String, String>();
-            OIArray[] oiArray2 = f2.getOiArrays();
-            for (OIArray array : oiArray2) {
-                String oldName = array.getArrName(), newName = oldName;
-                if (arraysName.contains(newName)) {
-                    int idx = 0;
-                    do {
-                        idx++;
-                        newName = oldName + "_" + idx;
-                    } while (arraysName.contains(newName));
-                }
-                mapArrayNames.put(oldName, newName);
-                arraysName.add(newName);
-            }
-            //  Store in result
-            for (OIArray arr : allArrays) {
-                result.addOiTable(arr);  // TODO: clone instance
-            }
-
-            // Process Data VIS ********************************************************
-//            List<OIVis> resultDataVis = new ArrayList<OIVis>();
-//            OIVis[] oiVis1 = f1.getOiVis();
-//            // Store all oivis of file 1
-//            for (OIVis visData : oiVis1) {
-//                resultDataVis.add(visData);
-//            }
-//            OIVis[] oiVis2 = f2.getOiVis();
-//            // Browse all oivis of file 2
-//            for (OIVis visData : oiVis2) {
-//                OIVis newData = new OIVis(result);
-//                newData.setAmpOrder(visData.getAmpOrder());
-//                newData.setAmpTyp(visData.getAmpTyp());
-//                newData.setArrName(mapArrayNames.get(visData.getArrName()));
-//                newData.setCorrName(visData.getCorrName());
-//                newData.setDateObs(visData.getDateObs());
-//                newData.setExtName(visData.getExtName());
-//                newData.setExtNb(visData.getExtNb());
-//                newData.setExtVer(visData.getExtNb());
-//                newData.setInsName(mapWLNames.get(visData.getInsName()));
-//                newData.setPhiOrder(visData.getPhiOrder());
-//                newData.setPhiTyp(visData.getPhiType());
-//                
-//                for (Map.Entry<String, Object> columnValue : visData.getColumnsValue().entrySet()) {
-//                    newData.setColumnValue( columnValue.getKey(), columnValue.getValue());
-//                }
-//                for (Map.Entry<String, Object> keywordValue : visData.getKeywordsValue().entrySet()) {
-//                    newData.setKeywordValue( keywordValue.getKey(), keywordValue.getValue());
-//                }
-//                for (ColumnMeta columnDesc : visData.getAllColumnDescCollection()) {
-//                    newData.setColumnUnit( columnDesc.getName(), columnDesc.getUnit());
-//                }
-//                newData.setChanged();
-//                resultDataVis.add(newData);
-//            }
-//            // Store
-//            OIVis dataVis = new OIVis(result, );
-//        } catch (FitsException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        } catch (IllegalArgumentException ex) {
-//            logger.log(Level.SEVERE, null, ex);
-//            throw 
-//        }
         return result;
     }
 
+    /**
+     * Merge Target part of OIFitsFile
+     *
+     * @param oit1
+     * @param oit2
+     * @throws IllegalArgumentException
+     */
     private static void checkOITarget(OITarget oit1, OITarget oit2) throws IllegalArgumentException {
         if (oit1 == null || oit1.getNbRows() < 1) {
             throw new IllegalArgumentException("Merge: first file has null or empty target");
@@ -199,4 +112,120 @@ public class MergeUtils {
             throw new IllegalArgumentException("Merge: files have not the same target");
         }
     }
+
+    /**
+     * Merge the WL part of OIFitsFiles
+     *
+     * @param result
+     * @param f1
+     * @param f2
+     * @return
+     */
+    private static Map< String, String> mergeOIWL(OIFitsFile result, OIFitsFile f1, OIFitsFile f2) {
+        // Collect all WL names of first file, store each WL in result list
+        for (OIWavelength oiwl : f1.getOiWavelengths()) {
+            oiwl.setOIFitsFile(result);
+            result.addOiTable(oiwl);
+        }
+        // Browse all names of second file, change name if already present in first file, build a map 
+        // old_name > new name
+        Map<String, String> mapWLNames = new HashMap<String, String>();
+
+        for (OIWavelength oiwl : f2.getOiWavelengths()) {
+            final String oldName = oiwl.getInsName();
+            String newName = oldName;
+            int idx = 0;
+            while (result.getOiWavelength(newName) != null) {
+                idx++;
+                newName = oldName + "_" + idx;
+            }
+            // before modify: TODO clone
+            oiwl.setInsName(newName);
+            mapWLNames.put(oldName, newName);
+            oiwl.setOIFitsFile(result);
+            result.addOiTable(oiwl);
+        }
+        return mapWLNames;
+    }
+
+    /**
+     * Merge Array part of OIFitsFiles
+     *
+     * @param result
+     * @param f1
+     * @param f2
+     * @return
+     */
+    private static Map< String, String> mergeOIArray(OIFitsFile result, OIFitsFile f1, OIFitsFile f2) {
+        // Collect all WL names of first file, store each WL in result list
+        for (OIArray oiwl : f1.getOiArrays()) {
+            oiwl.setOIFitsFile(result);
+            result.addOiTable(oiwl);
+        }
+        // Browse all names of second file, change name if already present in first file, build a map 
+        // old_name > new name
+        Map<String, String> mapArrayNames = new HashMap<String, String>();
+
+        for (OIArray oiwl : f2.getOiArrays()) {
+            String oldName = oiwl.getArrName(), newName = oldName;
+            int idx = 0;
+            while (result.getOiArray(newName) != null) {
+                idx++;
+                newName = oldName + "_" + idx;
+            }
+            // before modify: TODO clone
+            oiwl.setArrName(newName);
+            mapArrayNames.put(oldName, newName);
+            oiwl.setOIFitsFile(result);
+            result.addOiTable(oiwl);
+        }
+        return mapArrayNames;
+    }
+
+    
+    private static void mergeOIData(
+            OIFitsFile result, OIFitsFile f1, OIFitsFile f2,
+            Map<String,String> mapWLNames, Map<String,String> mapArrayNames) {
+        
+        // Process Data VIS 
+        // Store all oivis of file 1
+        
+        for (OIData oiData : f1.getOiDatas()) {
+            oiData.setOIFitsFile(result);
+            result.addOiTable(oiData);
+            
+        }
+        // Browse all oivis of file 2
+        
+        for (OIData oiData : f2.getOiDatas()) {
+            oiData.setOIFitsFile(result);
+//            OIVis newData = new OIVis(result);
+//            newData.setAmpOrder(visData.getAmpOrder());
+//            newData.setAmpTyp(visData.getAmpTyp());
+            oiData.setArrName(mapArrayNames.get(oiData.getArrName()));
+//            newData.setCorrName(visData.getCorrName());
+//            newData.setDateObs(visData.getDateObs());
+//            newData.setExtName(visData.getExtName());
+//            newData.setExtNb(visData.getExtNb());
+//            newData.setExtVer(visData.getExtNb());
+            oiData.setInsName(mapWLNames.get(oiData.getInsName()));
+//            newData.setPhiOrder(visData.getPhiOrder());
+//            newData.setPhiTyp(visData.getPhiType());
+
+//            for (Map.Entry<String, Object> columnValue : visData.getColumnsValue().entrySet()) {
+//                newData.setColumnValue(columnValue.getKey(), columnValue.getValue());
+//            }
+//            for (Map.Entry<String, Object> keywordValue : visData.getKeywordsValue().entrySet()) {
+//                newData.setKeywordValue(keywordValue.getKey(), keywordValue.getValue());
+//            }
+//            for (ColumnMeta columnDesc : visData.getAllColumnDescCollection()) {
+//                newData.setColumnUnit(columnDesc.getName(), columnDesc.getUnit());
+//            }
+            oiData.setOIFitsFile(result);
+            result.addOiTable(oiData);
+        
+        }
+
+    }
+    
 }
