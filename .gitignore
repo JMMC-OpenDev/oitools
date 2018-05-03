@@ -1,5 +1,8 @@
 nb*.xml
 *.log
+**/.DS_Store
+
+src/test/resources/logging.properties
 /src/test/resources/test/*.csv
 /src/test/resources/test/*.fits
 /src/test/resources/test/*.properties
@@ -7,7 +10,3 @@ nb*.xml
 /src/test/resources/test/fits/*
 /src/test/resources/test/oifits/*
 /target/
-
-src/test/.DS_Store
-src/test/resources/.DS_Store
-.DS_Store

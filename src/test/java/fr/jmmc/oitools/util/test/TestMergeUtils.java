@@ -17,12 +17,11 @@
 /** *****************************************************************************
  * JMMC project ( http://www.jmmc.fr ) - Copyright (C) CNRS.
  ***************************************************************************** */
-package vjb.test;
+package fr.jmmc.oitools.util.test;
 
 import fr.jmmc.oitools.JUnitBaseTest;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_TEST;
-import static fr.jmmc.oitools.JUnitBaseTest.getFitsFiles;
 import static fr.jmmc.oitools.JUnitBaseTest.logger;
 import fr.jmmc.oitools.OIFitsViewer;
 import fr.jmmc.oitools.model.OIArray;
@@ -35,16 +34,14 @@ import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIVis2;
 import fr.jmmc.oitools.model.OIWavelength;
-import fr.jmmc.oitools.util.MergeUtils;
+import fr.jmmc.oitools.processing.MergeUtils;
 import fr.nom.tam.fits.FitsException;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Queue;
 import java.util.logging.Level;
-import javafx.collections.transformation.SortedList;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -75,30 +72,6 @@ public class TestMergeUtils extends JUnitBaseTest {
                 TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits");
         merge = merge(f1, f2, "mergeTestTarget.oifits");
         Assert.assertNotNull("Merge return a null value", merge);
-    }
-
-    /**
-     * Test target part of the merge
-     *
-     * @throws IOException
-     * @throws MalformedURLException
-     * @throws FitsException
-     */
-    @Test
-    public void testDifferentTargets() throws IOException, MalformedURLException, FitsException {
-
-        try {
-            merge(
-                    TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
-                    TEST_DIR_OIFITS + "NGC5128_2005.oifits",
-                    "mergeTestTarget.oifits");
-            Assert.fail("Merge of two files with different target should raise an exception");
-        } catch (IllegalArgumentException iae) {
-            Assert.assertTrue(
-                    String.format("Message should contains 'not the same target' (is '%s')", iae.getMessage()),
-                    iae.getMessage().contains("not the same target"));
-        }
-
     }
 
     /**
@@ -140,10 +113,36 @@ public class TestMergeUtils extends JUnitBaseTest {
     @Test
     public void testOIVIS() throws IOException, MalformedURLException, FitsException {
 
-        OIVis[] oiVis = merge.getOiVis();
-        Assert.assertNotNull("Merge return null for OIVis part", oiVis);
-        Assert.assertEquals(f1.getOiVis().length + f2.getOiVis().length, oiVis.length);
+        OIVis[] oiVis1 = f1.getOiVis();
+        OIVis[] oiVis2 = f2.getOiVis();
+        OIVis[] oiVisMerge = merge.getOiVis();
 
+        // Check returned OIVis part
+        Assert.assertNotNull("Merge return null for OIVis part", oiVisMerge);
+        Assert.assertEquals(oiVis1.length + f2.getOiVis().length, oiVisMerge.length);
+
+        // Check content OIVis
+        List<OIVis> allResultOiVis = new ArrayList<OIVis>(Arrays.asList(oiVisMerge));
+
+        // TODO : compare used by remove is on identiy, do comparaison method
+        // see compareTable of OITableUtils
+        
+        for (OIVis oiVis : oiVis1) {
+            if (!allResultOiVis.remove(oiVis)) {
+                Assert.fail(String.format("Data %s of file 1 not found in result of merge.", oiVis));
+            }
+        }
+        System.out.print("VJT: restant dans result: " + allResultOiVis);
+        System.out.print("VJT: dans f2: " + Arrays.toString(oiVis2));
+        for (OIVis oiVis : oiVis2) {
+            if (!allResultOiVis.remove(oiVis)) {
+                Assert.fail(String.format("Data %s of file 2 not found in result of merge.", oiVis));
+            }
+        }
+        Assert.assertEquals(
+                "Result of merge cointains more OIVis data than it should: " + allResultOiVis,
+                0, allResultOiVis.size());
+        
     }
 
     /**
@@ -156,9 +155,10 @@ public class TestMergeUtils extends JUnitBaseTest {
     @Test
     public void testOIVIS2() throws IOException, MalformedURLException, FitsException {
 
-        OIVis2[] oiVis2 = merge.getOiVis2();
-        Assert.assertNotNull("Merge return null for OIVis2 part", oiVis2);
-        Assert.assertEquals(f1.getOiVis2().length + f2.getOiVis2().length, oiVis2.length);
+        OIVis2[] oiVis2Merge = merge.getOiVis2();
+
+        Assert.assertNotNull("Merge return null for OIVis2 part", oiVis2Merge);
+        Assert.assertEquals(f1.getOiVis2().length + f2.getOiVis2().length, oiVis2Merge.length);
 
     }
 
@@ -173,7 +173,7 @@ public class TestMergeUtils extends JUnitBaseTest {
     public void testOIT3() throws IOException, MalformedURLException, FitsException {
 
         OIT3[] oiT3 = merge.getOiT3();
-        Assert.assertNotNull("Merge return null for OIVis2 part", oiT3);
+        Assert.assertNotNull("Merge return null for OIT3 part", oiT3);
         Assert.assertEquals(f1.getOiT3().length + f2.getOiT3().length, oiT3.length);
 
     }
@@ -196,12 +196,12 @@ public class TestMergeUtils extends JUnitBaseTest {
             OIFitsFile mergeResult = MergeUtils.mergeOIFitsFile(file1, file2);
 
             mergeResult.check(checker);
-            logger.log(Level.INFO, "validation results\n{0}", checker.getCheckReport());
+            logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
 
             OIFitsWriter.writeOIFits(TEST_DIR_TEST + resultName, mergeResult);
 
             if (true) {
-                logger.log(Level.INFO, "create : " + new OIFitsViewer(true, true).process(TEST_DIR_TEST + resultName));
+                logger.log(Level.INFO, "MERGE: create > " + new OIFitsViewer(true, true).process(TEST_DIR_TEST + resultName));
             }
 
             return mergeResult;
@@ -211,12 +211,23 @@ public class TestMergeUtils extends JUnitBaseTest {
 
     }
 
-    private OIFitsFile merge(String filename1, String filename2, String resultName)
+    private static OIFitsFile mergeTwoFiles(String filename1, String filename2, String resultName)
             throws IOException, MalformedURLException, FitsException {
         return merge(
                 OIFitsLoader.loadOIFits(filename1),
                 OIFitsLoader.loadOIFits(filename2),
                 resultName);
+    }
+
+    private static OIFitsFile mergeFiles(String resultName, String... filenames)
+            throws IOException, MalformedURLException, FitsException {
+
+        OIFitsFile[] files = new OIFitsFile[filenames.length];
+        for (int i = 0; i < filenames.length; i++) {
+            files[i] = OIFitsLoader.loadOIFits(filenames[i]);
+
+        }
+        return MergeUtils.mergeOIFitsFiles(files);
     }
 
 }
