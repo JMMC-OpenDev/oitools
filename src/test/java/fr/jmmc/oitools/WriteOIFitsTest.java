@@ -41,7 +41,6 @@ import org.junit.Test;
  */
 public class WriteOIFitsTest extends JUnitBaseTest {
 
-    private final static String TEST_DIR_TEST_OIFITS = TEST_DIR_TEST + "oifits/";
     /** */
     private final static boolean COMPARE_RAW = true;
     /** */

@@ -52,6 +52,8 @@ import org.junit.Test;
  */
 public class TestMergeUtils extends JUnitBaseTest {
 
+    private final static boolean DEBUG = false;
+
     // Common data used by several tests
     private static OIFitsFile f1 = null;
     private static OIFitsFile f2 = null;
@@ -70,7 +72,7 @@ public class TestMergeUtils extends JUnitBaseTest {
                 TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits");
         f2 = OIFitsLoader.loadOIFits(
                 TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits");
-        merge = merge(f1, f2, "mergeTestTarget.oifits");
+        merge = merge(f1, f2, TEST_DIR_TEST_OIFITS + "mergeTestTarget.oifits");
         Assert.assertNotNull("Merge return a null value", merge);
     }
 
@@ -132,8 +134,7 @@ public class TestMergeUtils extends JUnitBaseTest {
                 Assert.fail(String.format("Data %s of file 1 not found in result of merge.", oiVis));
             }
         }
-        System.out.print("VJT: restant dans result: " + allResultOiVis);
-        System.out.print("VJT: dans f2: " + Arrays.toString(oiVis2));
+
         for (OIVis oiVis : oiVis2) {
             if (!allResultOiVis.remove(oiVis)) {
                 Assert.fail(String.format("Data %s of file 2 not found in result of merge.", oiVis));
@@ -183,51 +184,29 @@ public class TestMergeUtils extends JUnitBaseTest {
      *
      * @param filename1
      * @param filename2
+     * @param outputFilePath
      * @return merged structure
      * @throws IOException
      * @throws MalformedURLException
      * @throws FitsException
      */
-    private static OIFitsFile merge(OIFitsFile file1, OIFitsFile file2, String resultName)
+    private static OIFitsFile merge(OIFitsFile file1, OIFitsFile file2, String outputFilePath)
             throws IOException, MalformedURLException, FitsException {
 
         final OIFitsChecker checker = new OIFitsChecker();
-        try {
-            OIFitsFile mergeResult = MergeUtils.mergeOIFitsFile(file1, file2);
 
-            mergeResult.check(checker);
-            logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
+        OIFitsFile mergeResult = MergeUtils.mergeOIFitsFile(file1, file2);
 
-            OIFitsWriter.writeOIFits(TEST_DIR_TEST + resultName, mergeResult);
+        mergeResult.check(checker);
+        logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
 
-            if (true) {
-                logger.log(Level.INFO, "MERGE: create > " + new OIFitsViewer(true, true).process(TEST_DIR_TEST + resultName));
-            }
+        OIFitsWriter.writeOIFits(outputFilePath, mergeResult);
 
-            return mergeResult;
-        } finally {
-            // validation results
+        if (DEBUG) {
+            logger.log(Level.INFO, "MERGE: create > {0}", new OIFitsViewer(true, true).process(outputFilePath));
         }
 
-    }
-
-    private static OIFitsFile mergeTwoFiles(String filename1, String filename2, String resultName)
-            throws IOException, MalformedURLException, FitsException {
-        return merge(
-                OIFitsLoader.loadOIFits(filename1),
-                OIFitsLoader.loadOIFits(filename2),
-                resultName);
-    }
-
-    private static OIFitsFile mergeFiles(String resultName, String... filenames)
-            throws IOException, MalformedURLException, FitsException {
-
-        OIFitsFile[] files = new OIFitsFile[filenames.length];
-        for (int i = 0; i < filenames.length; i++) {
-            files[i] = OIFitsLoader.loadOIFits(filenames[i]);
-
-        }
-        return MergeUtils.mergeOIFitsFiles(files);
+        return mergeResult;
     }
 
 }

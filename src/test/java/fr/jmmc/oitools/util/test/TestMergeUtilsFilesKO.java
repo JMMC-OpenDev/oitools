@@ -149,7 +149,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
 
         try {
             MergeUtils.mergeOIFitsFile(
-                    OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "empty.oifits"),
+                    OIFitsLoader.loadOIFits(TEST_DIR_FITS + "SG_surface2.fits"),
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
             Assert.fail("Merge an empty file should raise an exception");
         } catch (FitsException fe) {
@@ -161,7 +161,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
         try {
             MergeUtils.mergeOIFitsFile(
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"),
-                    OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "empty.oifits"));
+                    OIFitsLoader.loadOIFits(TEST_DIR_FITS + "SG_surface2.fits"));
             Assert.fail("Merge an empty file should raise an exception");
         } catch (FitsException fe) {
             Assert.assertTrue(
