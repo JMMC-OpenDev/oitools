@@ -2792,7 +2792,7 @@
   <column>
     <name>IINDX</name>
     <datatype>TYPE_INT</datatype>
-    <description>Frist index of correlation matrix element</description>
+    <description>First index of correlation matrix element</description>
     <optional>false</optional>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>

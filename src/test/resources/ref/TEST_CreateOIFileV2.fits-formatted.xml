@@ -124,7 +124,7 @@
 <keyword><name>NDATA</name><value>120</value><description>Number of correlated data</description><type>J</type><unit></unit></keyword>
 </keywords>
 <rows>37</rows><columns>
-<column><name>IINDX</name><description>Frist index of correlation matrix element</description><type>J</type><unit></unit><min>1</min><max>1</max></column>
+<column><name>IINDX</name><description>First index of correlation matrix element</description><type>J</type><unit></unit><min>1</min><max>1</max></column>
 <column><name>JINDX</name><description>Second index of correlation matrix element</description><type>J</type><unit></unit><min>2</min><max>110</max></column>
 <column><name>CORR</name><description>Matrix element (IINDX, JINDX)</description><type>D</type><unit></unit><min>0.009277214296162128</min><max>0.9955143928527832</max></column>
 </columns>

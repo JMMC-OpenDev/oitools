@@ -43,7 +43,7 @@ public final class OICorr extends OITable {
 
     /** IINDX  keyword descriptor */
     private final static ColumnMeta COLUMN_IINDX = new ColumnMeta(OIFitsConstants.COLUMN_IINDX,
-            "Frist index of correlation matrix element", Types.TYPE_INT);
+            "First index of correlation matrix element", Types.TYPE_INT);
 
     /** JINDX  keyword descriptor */
     private final static ColumnMeta COLUMN_JINDX = new ColumnMeta(OIFitsConstants.COLUMN_JINDX,
