@@ -80,11 +80,6 @@ public class JUnitBaseTest {
      */
     public final static String TEST_DIR_TEST = TEST_DIR + "test/";
 
-    /**
-     * absolute path to test folder to save test OIFITS files
-     */
-    public final static String TEST_DIR_TEST_OIFITS = TEST_DIR_TEST + "oifits/";
-
     static {
         Locale.setDefault(Locale.US);
 

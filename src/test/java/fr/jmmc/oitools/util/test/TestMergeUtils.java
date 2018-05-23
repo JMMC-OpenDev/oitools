@@ -72,7 +72,7 @@ public class TestMergeUtils extends JUnitBaseTest {
                 TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits");
         f2 = OIFitsLoader.loadOIFits(
                 TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits");
-        merge = merge(f1, f2, TEST_DIR_TEST_OIFITS + "mergeTestTarget.oifits");
+        merge = merge(f1, f2, TEST_DIR_TEST + "mergeTestTarget.fits");
         Assert.assertNotNull("Merge return a null value", merge);
     }
 
