@@ -35,6 +35,7 @@ import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIVis2;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.OIFitsProcessor;
+import fr.jmmc.oitools.util.MergeUtil;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -195,7 +196,7 @@ public class TestMergeUtils extends JUnitBaseTest {
 
         final OIFitsChecker checker = new OIFitsChecker();
 
-        OIFitsFile mergeResult = OIFitsProcessor.mergeOIFitsFile(file1, file2);
+        OIFitsFile mergeResult = MergeUtil.mergeOIFitsFile(file1, file2);
 
         mergeResult.check(checker);
         logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());

@@ -33,21 +33,22 @@ public class TestProcessorCommandLine {
     @Test
     public void testNoParameter() {
         String result = callProcessor(new String[0]);
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("Not enough parameters"));
+        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
     }
 
     @Test
     public void testNoInputFile() {
         String result = callProcessor(new String[] {"merge" });
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("No input file given"));
+        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
     }
 
     @Test
     public void testNoOutputFile() {
         String result = callProcessor(new String[] {"merge", 
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
-            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits", "-o"});
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("Output file path is missing"));
+            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits", "-o"
+        });
+        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
     }
 
     @Test
@@ -55,9 +56,18 @@ public class TestProcessorCommandLine {
         File output = new File("./merge_result.oifits");
         String result = callProcessor(new String[] {"merge", "-o", output.getAbsolutePath(), 
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
-            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"});
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("Start merge"));
+            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
+        });
+        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
         Assert.assertTrue( "No result file created", output.exists());
+    }
+
+    @Test
+    public void testList() {
+        String result = callProcessor(new String[] {"list", 
+            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
+        });
+        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
     }
 
     
@@ -78,6 +88,7 @@ public class TestProcessorCommandLine {
         OIFitsProcessor.main(args);
         System.out.flush();
         System.setOut(old);
+        Logg
         return baos.toString();
     }
     
