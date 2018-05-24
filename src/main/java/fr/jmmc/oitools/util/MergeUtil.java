@@ -18,6 +18,7 @@ package fr.jmmc.oitools.util;
 
 import fr.jmmc.oitools.meta.OIFitsStandard;
 import fr.jmmc.oitools.model.OIArray;
+import fr.jmmc.oitools.model.OICorr;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OITable;
@@ -36,21 +37,20 @@ public class MergeUtil {
 
     private static final Logger logger = Logger.getLogger(MergeUtil.class.getName());
 
+//    public static OIFitsFile mergeOIFitsFile(
+//            final OIFitsFile oifitsOne, final OIFitsFile oifitsTwo)
+//            throws IllegalArgumentException {
+//        return mergeOIFitsFiles(oifitsOne, oifitsTwo);
+//    }
+
     /**
      * Merge of two oifits files. Only one target by input files are accepted, have to be the the same (name) in the two
      * files. Target of file 1 is cloned in result.
      *
-     * @param oifitsOne first file to be merged
-     * @param oifitsTwo second file to be merged
+     * @param oiFitsToMerge files to be merged
      * @return result of merge
      * @throws IllegalArgumentException
      */
-    public static OIFitsFile mergeOIFitsFile(
-            final OIFitsFile oifitsOne, final OIFitsFile oifitsTwo)
-            throws IllegalArgumentException {
-        return mergeOIFitsFiles(oifitsOne, oifitsTwo);
-    }
-
     public static OIFitsFile mergeOIFitsFiles(
             final OIFitsFile... oiFitsToMerge)
             throws IllegalArgumentException {
@@ -66,6 +66,7 @@ public class MergeUtil {
 
         final Map<String, String> mapWLNames = new HashMap<String, String>();
         final Map<String, String> mapArrayNames = new HashMap<String, String>();
+        final Map<String, String> mapCorrNames = new HashMap<String, String>();
 
         String targetName = null;
 
@@ -95,6 +96,12 @@ public class MergeUtil {
             // Process OI_ARRAY part 
             mergeOIArray(result, mapArrayNames, fileToMerge);
             logger.info("mapArrayNames: " + mapArrayNames);
+
+            // Process OI_CORR part if V2
+            if (result.getVersion().equals(OIFitsStandard.VERSION_2)) {
+                mergeOICorr(result, mapCorrNames, fileToMerge);
+                logger.info("mapCorrNames: " + mapCorrNames);
+            }
         }
 
         // Merge data
@@ -188,6 +195,35 @@ public class MergeUtil {
             mapArrayNames.put(oldName, newName);
 
             result.addOiTable(newOiArray);
+        }
+    }
+
+    /**
+     * Merge Array part of OIFitsFiles
+     *
+     * @param result
+     * @param f1
+     * @param f2
+     * @return
+     */
+    private static void mergeOICorr(OIFitsFile result, Map<String, String> mapCorrNames, OIFitsFile fileToMerge) {
+        // Browse all names of file to merge, change name if already present in result, add to map 
+        // old_name > new name
+        for (OICorr oiCorr : fileToMerge.getOiCorr()) {
+            String oldName = oiCorr.getCorrName(), newName = oldName;
+            int idx = 0;
+            while (result.getOiCorr(newName) != null) {
+                idx++;
+                newName = oldName + "_" + idx;
+            }
+
+            // TODO : clone instance of source data
+            OICorr newOiCorr = (OICorr) copyTable(result, oiCorr);
+
+            newOiCorr.setCorrName(newName);
+            mapCorrNames.put(oldName, newName);
+
+            result.addOiTable(newOiCorr);
         }
     }
 
