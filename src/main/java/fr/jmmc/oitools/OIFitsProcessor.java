@@ -49,7 +49,8 @@ public class OIFitsProcessor {
 
         if (args.length < 1) {
             // No prameters, show help
-            showArgumentsHelp();
+            logger.log(Level.SEVERE, "No parameters given.");
+            showArgumentsHelp("No parameters given.");
             return;
         }
 
@@ -74,7 +75,7 @@ public class OIFitsProcessor {
                 list(inputFiles);
 
             } else {
-                showArgumentsHelp();
+                showArgumentsHelp("Unknown command.");
             }
         }
 
@@ -108,11 +109,13 @@ public class OIFitsProcessor {
      * @param outputFile
      */
     private static void merge(List<String> inputFiles, String outputFile) {
+
         if (inputFiles != null && inputFiles.size() > 0) {
             if (outputFile != null) {
 
                 OIFitsFile[] inputs = new OIFitsFile[inputFiles.size()];
                 int i = 0;
+                // Get input files
                 for (String inputFile : inputFiles) {
                     try {
                         inputs[i] = OIFitsLoader.loadOIFits(inputFile);
@@ -127,7 +130,9 @@ public class OIFitsProcessor {
                         System.exit(1);
                     }
                 }
+                // Call merge
                 OIFitsFile result = MergeUtil.mergeOIFitsFiles(inputs);
+                // Store result
                 result.setAbsoluteFilePath(outputFile);
                 try {
                     OIFitsWriter.writeOIFits(outputFile, result);
@@ -142,11 +147,13 @@ public class OIFitsProcessor {
                 }
 
             } else {
-                showArgumentsHelp();
+                logger.log(Level.SEVERE, "No output files given in parameters.");
+                showArgumentsHelp("No output files given in parameters.");
             }
 
         } else {
-            showArgumentsHelp();
+            logger.log(Level.SEVERE, "No input file given in parameters.");
+            showArgumentsHelp("No input file given in parameters.");
         }
 
     }
@@ -195,6 +202,13 @@ public class OIFitsProcessor {
      * Show command arguments help
      */
     private static void showArgumentsHelp() {
+        showArgumentsHelp(null);
+    }
+
+    private static void showArgumentsHelp(String prefixMessage) {
+        if (prefixMessage != null) {
+            System.out.println(prefixMessage);
+        }
         System.out.println(
                 "--------------------------------------------------------------------------------------");
         System.out.println(
@@ -206,9 +220,9 @@ public class OIFitsProcessor {
         System.out.println(
                 "|------------------------------------------------------------------------------------|");
         System.out.println(
-                "| command      "+COMMAND_MERGE+"           Merge several oifits files                            |");
+                "| command      " + COMMAND_MERGE + "           Merge several oifits files                            |");
         System.out.println(
-                "| command      "+COMMAND_LIST+"           List content of several oifits files                            |");
+                "| command      " + COMMAND_LIST + "           List content of several oifits files                            |");
         System.out.println(
                 "| -o or -output <file_path>    Complete path, absolut or relative, for output file   |");
         System.out.println(

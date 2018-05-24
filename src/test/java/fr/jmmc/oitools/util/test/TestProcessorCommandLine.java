@@ -33,13 +33,13 @@ public class TestProcessorCommandLine {
     @Test
     public void testNoParameter() {
         String result = callProcessor(new String[0]);
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
+        Assert.assertTrue("Bad return message: " + result, result.startsWith("No parameters"));
     }
 
     @Test
     public void testNoInputFile() {
         String result = callProcessor(new String[] {"merge" });
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
+        Assert.assertTrue("Bad return message: " + result, result.startsWith("No input file"));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class TestProcessorCommandLine {
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits", "-o"
         });
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
+        Assert.assertTrue("Bad return message: " + result, result.startsWith("No output file"));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TestProcessorCommandLine {
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
         });
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
+        Assert.assertEquals("Bad return message: " + result, "", result);
         Assert.assertTrue( "No result file created", output.exists());
     }
 
@@ -67,7 +67,7 @@ public class TestProcessorCommandLine {
         String result = callProcessor(new String[] {"list", 
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("---"));
+        Assert.assertEquals("Bad return message: " + result, "", result);
     }
 
     
@@ -88,7 +88,6 @@ public class TestProcessorCommandLine {
         OIFitsProcessor.main(args);
         System.out.flush();
         System.setOut(old);
-        Logg
         return baos.toString();
     }
     
