@@ -96,7 +96,7 @@ public final class OIFitsViewer {
      * @param verbose if true the result will contain the table content
      */
     public OIFitsViewer(final boolean doXmlOutput, final boolean doCsvOutput, final boolean format, final boolean verbose) {
-        this.checker = (doXmlOutput) ? new OIFitsChecker() : null;
+        this.checker = new OIFitsChecker();
         this.xmlSerializer = (doXmlOutput) ? new XmlOutputVisitor(format, verbose, this.checker) : null;
         this.tsvSerializer = (doCsvOutput) ? new CsvOutputVisitor(verbose) : null;
     }
@@ -125,6 +125,10 @@ public final class OIFitsViewer {
         }
 
         if (this.checker != null) {
+            // check mode:
+            if (output == null) {
+                output = this.checker.getCheckReport();
+            }
             // clean the checker before processing any other files
             this.checker.clearCheckReport();
         }
@@ -305,7 +309,7 @@ public final class OIFitsViewer {
         // Action:
         final OIFitsViewer viewer = new OIFitsViewer(xml, tsv, format, verbose);
 
-        if (!tsv) {
+        if (xml) {
             info("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>");
         }
         for (String fileName : fileNames) {
@@ -315,7 +319,7 @@ public final class OIFitsViewer {
                 error(fileName, e);
             }
         }
-        if (!tsv) {
+        if (xml) {
             info("</oifits_list>");
         }
     }
