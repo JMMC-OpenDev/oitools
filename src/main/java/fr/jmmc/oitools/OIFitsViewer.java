@@ -37,8 +37,12 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This command line program loads OIFits files given as arguments
@@ -259,6 +263,7 @@ public final class OIFitsViewer {
      */
     public static void main(final String[] args) {
 
+        boolean quiet = true;
         boolean format = false;
         boolean verbose = false;
         boolean tsv = false;
@@ -277,74 +282,126 @@ public final class OIFitsViewer {
                     verbose = true;
                 } else if (arg.equals("-c") || arg.equals("-check")) {
                     xml = false;
+                } else if (arg.equals("-l") || arg.equals("-log")) {
+                    quiet = false;
                 } else if (arg.equals("-h") || arg.equals("-help")) {
                     showArgumentsHelp();
                     System.exit(0);
                 } else {
-                    error("'" + arg + "' option not supported.");
+                    errorArg("'" + arg + "' option not supported.");
                 }
             } else {
                 fileNames.add(arg);
             }
         }
 
+        // Initialization:
+        bootstrap(quiet);
+
         if (fileNames.isEmpty()) {
-            error("Missing file name argument.");
+            errorArg("Missing file name argument.");
         }
 
+        // Action:
         final OIFitsViewer viewer = new OIFitsViewer(xml, tsv, format, verbose);
 
         if (!tsv) {
-            System.out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>");
+            info("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>");
         }
         for (String fileName : fileNames) {
             try {
-                System.out.println(viewer.process(fileName));
+                info(viewer.process(fileName));
             } catch (Exception e) {
-                e.printStackTrace(System.err);
-                System.out.println("Error reading file '" + fileName + "'");
+                error(fileName, e);
             }
         }
         if (!tsv) {
-            System.out.println("</oifits_list>");
+            info("</oifits_list>");
         }
+    }
 
+    /** Show command arguments help */
+    private static void showArgumentsHelp() {
+        info("-------------------------------------------------------------------------");
+        info("Usage: " + OIFitsViewer.class.getName() + " [-f|-format] [-v|-verbose] [-t|-tsv] <file names>");
+        info("------------- Arguments help --------------------------------------------");
+        info("| Key          Value           Description                              |");
+        info("|-----------------------------------------------------------------------|");
+        info("| [-f] or [-format]            Use the number formatter                 |");
+        info("| [-v] or [-verbose]           Dump all column data                     |");
+        info("| [-t] or [-tsv]               Dump object table in tsv format          |");
+        info("| [-c] or [-check]             Check only given file(s)                 |");
+        info("| [-l] or [-log]               Enable logging (quiet by default)        |");
+        info("| [-h|-help]                   Show arguments help                      |");
+        info("-------------------------------------------------------------------------");
     }
 
     /**
      * Print an error message when parsing the command line arguments
      * @param message message to print
      */
-    private static void error(final String message) {
-        System.err.println(message);
+    private static void errorArg(final String message) {
+        error(message);
         showArgumentsHelp();
         System.exit(1);
     }
 
-    /** Show command arguments help */
-    private static void showArgumentsHelp() {
-        System.out.println(
-                "-------------------------------------------------------------------------");
-        System.out.println(
-                "Usage: OIFitsViewer [-f|-format] [-v|-verbose] [-t|-tsv] <file names>");
-        System.out.println(
-                "------------- Arguments help --------------------------------------------");
-        System.out.println(
-                "| Key          Value           Description                              |");
-        System.out.println(
-                "|-----------------------------------------------------------------------|");
-        System.out.println(
-                "| [-f] or [-format]            Use the number formatter                 |");
-        System.out.println(
-                "| [-v] or [-verbose]           Dump all column data                     |");
-        System.out.println(
-                "| [-t] or [-tsv]               Dump object table in tsv format          |");
-        System.out.println(
-                "| [-c] or [-check]             Check only given file(s)                 |");
-        System.out.println(
-                "| [-h|-help]                   Show arguments help                      |");
-        System.out.println(
-                "-------------------------------------------------------------------------");
+    /*
+     --- common functions ---
+     */
+    /**
+     * Bootstrap the runtime (locale, logger)
+     * @param quiet true to disable java.util.logging
+     */
+    public static void bootstrap(final boolean quiet) {
+        // Set the default locale to en-US locale (for Numerical Fields "." ",")
+        Locale.setDefault(Locale.US);
+
+        // Set the default timezone to GMT to handle properly the date in UTC
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+
+        initLoggers(quiet);
+    }
+
+    /**
+     * Initialise java.util.logging Logger
+     * @param quiet true to disable java.util.logging
+     */
+    private static void initLoggers(final boolean quiet) {
+        Logger logger = Logger.getLogger(OIFitsViewer.class.getName());
+
+        // Get root logger:
+        while (logger.getParent() != null) {
+            logger = logger.getParent();
+        }
+
+        logger.setLevel((quiet) ? Level.SEVERE : Level.INFO);
+    }
+
+    /**
+     * Print an information message
+     * @param message message to print
+     */
+    public static void info(final String message) {
+        System.out.println(message);
+    }
+
+    /**
+     * Print an error message
+     * @param message message to print
+     */
+    public static void error(final String message) {
+        System.err.println(message);
+    }
+
+    /**
+     * Print an error message with an exception
+     * @param message message to print
+     * @param exception message to print
+     */
+    public static void error(final String message, final Exception exception) {
+        System.err.println(message); // TODO: get cause chain
+        exception.printStackTrace(System.err);
     }
 }
 /*___oOo___*/
