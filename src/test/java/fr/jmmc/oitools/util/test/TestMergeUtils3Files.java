@@ -131,8 +131,6 @@ public class TestMergeUtils3Files extends JUnitBaseTest {
                 Assert.fail(String.format("Data %s of file 1 not found in result of merge.", oiVis));
             }
         }
-        System.out.print("VJT: restant dans result: " + allResultOiVis);
-        System.out.print("VJT: dans f2: " + Arrays.toString(oiVis2));
         for (OIVis oiVis : oiVis2) {
             if (!allResultOiVis.remove(oiVis)) {
                 Assert.fail(String.format("Data %s of file 2 not found in result of merge.", oiVis));
