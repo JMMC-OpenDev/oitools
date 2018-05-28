@@ -37,19 +37,15 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This command line program loads OIFits files given as arguments
  * and print their XML or simple CSV description in the system out stream
  * @author bourgesl, mella
  */
-public final class OIFitsViewer {
+public final class OIFitsViewer extends OIFitsCommand {
 
     /* members */
     /** internal OIFits checker */
@@ -104,14 +100,14 @@ public final class OIFitsViewer {
     /**
      * Process the given file
      *
-     * @param filename name of the file to visualize its content.
+     * @param fileLocation absolute File Path or URL (file:// or http://)
      * @return serializer output or null if undefined
      * @throws FitsException excpetion thrown during fits reading
      * @throws IOException exception thrown on file reading error
      */
-    public String process(final String filename) throws IOException, FitsException {
+    public String process(final String fileLocation) throws IOException, FitsException {
         // Load file
-        final OIFitsFile oiFitsFile = OIFitsLoader.loadOIFits(this.checker, filename, true);
+        final OIFitsFile oiFitsFile = OIFitsLoader.loadOIFits(this.checker, fileLocation, true);
 
         String output = null;
         if (this.xmlSerializer != null) {
@@ -269,7 +265,7 @@ public final class OIFitsViewer {
         boolean tsv = false;
         boolean xml = true;
 
-        final List<String> fileNames = new ArrayList<String>(args.length);
+        final List<String> fileLocations = new ArrayList<String>(args.length);
 
         // parse command line arguments :
         for (final String arg : args) {
@@ -291,14 +287,14 @@ public final class OIFitsViewer {
                     errorArg("'" + arg + "' option not supported.");
                 }
             } else {
-                fileNames.add(arg);
+                fileLocations.add(arg);
             }
         }
 
         // Initialization:
         bootstrap(quiet);
 
-        if (fileNames.isEmpty()) {
+        if (fileLocations.isEmpty()) {
             errorArg("Missing file name argument.");
         }
 
@@ -308,11 +304,11 @@ public final class OIFitsViewer {
         if (!tsv) {
             info("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>");
         }
-        for (String fileName : fileNames) {
+        for (String fileLocation : fileLocations) {
             try {
-                info(viewer.process(fileName));
+                info(viewer.process(fileLocation));
             } catch (Exception e) {
-                error(fileName, e);
+                error("Error reading file '" + fileLocation + "'", e);
             }
         }
         if (!tsv) {
@@ -321,9 +317,9 @@ public final class OIFitsViewer {
     }
 
     /** Show command arguments help */
-    private static void showArgumentsHelp() {
+    protected static void showArgumentsHelp() {
         info("-------------------------------------------------------------------------");
-        info("Usage: " + OIFitsViewer.class.getName() + " [-f|-format] [-v|-verbose] [-t|-tsv] <file names>");
+        info("Usage: " + OIFitsViewer.class.getName() + " [-f|-format] [-v|-verbose] [-t|-tsv] <file locations>");
         info("------------- Arguments help --------------------------------------------");
         info("| Key          Value           Description                              |");
         info("|-----------------------------------------------------------------------|");
@@ -336,72 +332,5 @@ public final class OIFitsViewer {
         info("-------------------------------------------------------------------------");
     }
 
-    /**
-     * Print an error message when parsing the command line arguments
-     * @param message message to print
-     */
-    private static void errorArg(final String message) {
-        error(message);
-        showArgumentsHelp();
-        System.exit(1);
-    }
-
-    /*
-     --- common functions ---
-     */
-    /**
-     * Bootstrap the runtime (locale, logger)
-     * @param quiet true to disable java.util.logging
-     */
-    public static void bootstrap(final boolean quiet) {
-        // Set the default locale to en-US locale (for Numerical Fields "." ",")
-        Locale.setDefault(Locale.US);
-
-        // Set the default timezone to GMT to handle properly the date in UTC
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
-
-        initLoggers(quiet);
-    }
-
-    /**
-     * Initialise java.util.logging Logger
-     * @param quiet true to disable java.util.logging
-     */
-    private static void initLoggers(final boolean quiet) {
-        Logger logger = Logger.getLogger(OIFitsViewer.class.getName());
-
-        // Get root logger:
-        while (logger.getParent() != null) {
-            logger = logger.getParent();
-        }
-
-        logger.setLevel((quiet) ? Level.SEVERE : Level.INFO);
-    }
-
-    /**
-     * Print an information message
-     * @param message message to print
-     */
-    public static void info(final String message) {
-        System.out.println(message);
-    }
-
-    /**
-     * Print an error message
-     * @param message message to print
-     */
-    public static void error(final String message) {
-        System.err.println(message);
-    }
-
-    /**
-     * Print an error message with an exception
-     * @param message message to print
-     * @param exception message to print
-     */
-    public static void error(final String message, final Exception exception) {
-        System.err.println(message); // TODO: get cause chain
-        exception.printStackTrace(System.err);
-    }
 }
 /*___oOo___*/
