@@ -77,7 +77,16 @@ public class TestProcessorCommandLine {
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
-                result[OUT_INDEX] != null && result[OUT_INDEX].startsWith("<oifits>"));
+                result[OUT_INDEX] != null && result[OUT_INDEX].startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>"));
+    }
+
+    @Test
+    public void testConvert() {
+        File output = new File(TEST_DIR + "convert_result.oifits");
+        String[] result = callProcessor(new String[]{"convert","-o", output.getAbsolutePath(), 
+            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
+        });
+        Assert.assertTrue("No output file present.", output.exists());
     }
 
     /**

@@ -50,7 +50,14 @@ public class OIFitsProcessor extends OIFitsCommand {
                 showArgumentsHelp("No parameters given.");
                 return;
             }
-            bootstrap(false);
+            
+            boolean quiet = true;
+            for (final String arg : args) {
+                if (arg.equals("-l") || arg.equals("-log")) {
+                    quiet = false;
+                } 
+            }
+            bootstrap(quiet);
 
             String command = args[0];
 
@@ -70,13 +77,12 @@ public class OIFitsProcessor extends OIFitsCommand {
 
                 } else if (COMMAND_LIST.equals(command)) {
 
-                    list(inputFiles);
+                    list(inputFiles, !quiet);
 
                 } else if (COMMAND_CONVERT.equals(command)) {
 
                     if (inputFiles.size() > 1) {
-                        String msg = "Copy: too many input file, only one is accepted.";
-                        throw new IllegalArgumentException(msg);
+                        throw new IllegalArgumentException("Copy: too many input file, only one is accepted.");
                     }
 
                     copy(inputFiles.get(0), outputFile);
@@ -97,14 +103,23 @@ public class OIFitsProcessor extends OIFitsCommand {
      *
      * @param fileLocations
      */
-    private static void list(List<String> fileLocations) throws FitsException, IOException {
+    private static void list(List<String> fileLocations, boolean logAsked) throws FitsException, IOException {
         // List data of input file
-        OIFitsViewer viewer = new OIFitsViewer(true, true, false);
-        for (String fileLocation : fileLocations) {
-            // Visualisation of file data
-            String display = viewer.process(fileLocation);
-            System.out.println(display);
+        ArrayList<String> argsList = new ArrayList<String>();
+        argsList.add("-tsv");
+        if (logAsked) {
+            argsList.add("-log");
         }
+        argsList.addAll(fileLocations);
+        
+        
+        OIFitsViewer.main((String[]) (argsList.toArray(new String[argsList.size()])));
+//        OIFitsViewer viewer = new OIFitsViewer(true, true, false);
+//        for (String fileLocation : fileLocations) {
+//            // Visualisation of file data
+//            String display = viewer.process(fileLocation);
+//            System.out.println(display);
+//        }
     }
 
     /**
