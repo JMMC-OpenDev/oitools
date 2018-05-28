@@ -57,7 +57,7 @@ public class MergeUtil {
         // TODO: clone fits structure by save/load on disk ? 
         // aims: get local copy modifiable
 
-        if (oiFitsToMerge == null || oiFitsToMerge.length < 2) {
+        if (oiFitsToMerge == null || oiFitsToMerge.length < 1) {
             throw new IllegalArgumentException(
                     "Merge: Not enough files as parameters: " + oiFitsToMerge);
         }
