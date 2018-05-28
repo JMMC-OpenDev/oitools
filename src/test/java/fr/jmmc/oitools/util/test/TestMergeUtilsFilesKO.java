@@ -54,14 +54,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
                     iae.getMessage().contains("Not enough files as parameters"));
         }
 
-        try {
-            MergeUtil.mergeOIFitsFiles(OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
-            Assert.fail("Merge with only one parameters should raise an exception");
-        } catch (IllegalArgumentException iae) {
-            Assert.assertTrue(
-                    String.format("Message should contains 'Not enough files as parameters' (is '%s')", iae.getMessage()),
-                    iae.getMessage().contains("Not enough files as parameters"));
-        }
+        MergeUtil.mergeOIFitsFiles(OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
 
     }
 

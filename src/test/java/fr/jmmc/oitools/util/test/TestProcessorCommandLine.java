@@ -17,6 +17,7 @@
 package fr.jmmc.oitools.util.test;
 
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
+import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR;
 import fr.jmmc.oitools.OIFitsProcessor;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -30,65 +31,101 @@ import org.junit.Test;
  */
 public class TestProcessorCommandLine {
 
+    private static final int OUT_INDEX = 0;
+    private static final int ERR_INDEX = 1;
+
     @Test
     public void testNoParameter() {
-        String result = callProcessor(new String[0]);
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("No parameters"));
+        String[] result = callProcessor(new String[0]);
+        Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
+                result[ERR_INDEX] != null && result[ERR_INDEX].startsWith("No parameters"));
     }
 
     @Test
     public void testNoInputFile() {
-        String result = callProcessor(new String[] {"merge" });
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("No input file"));
+        String[] result = callProcessor(new String[]{"merge"});
+        Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
+                result[ERR_INDEX] != null && result[ERR_INDEX].startsWith("No input file"));
     }
 
     @Test
     public void testNoOutputFile() {
-        String result = callProcessor(new String[] {"merge", 
+        String[] result = callProcessor(new String[]{"merge",
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits", "-o"
         });
-        Assert.assertTrue("Bad return message: " + result, result.startsWith("No output file"));
+        Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
+                result[ERR_INDEX] != null && result[ERR_INDEX].startsWith("No output file"));
     }
 
     @Test
     public void testOk() {
-        File output = new File("./merge_result.oifits");
-        String result = callProcessor(new String[] {"merge", "-o", output.getAbsolutePath(), 
+        File output = new File(TEST_DIR + "merge_result.oifits");
+        String[] result = callProcessor(new String[]{"merge", "-o", output.getAbsolutePath(),
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
         });
-        Assert.assertEquals("Bad return message: " + result, "", result);
-        Assert.assertTrue( "No result file created", output.exists());
+        Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
+                result[OUT_INDEX] != null && result[OUT_INDEX].length() == 0);
+        Assert.assertTrue("No result file created", output.exists());
+        output.delete();
     }
 
     @Test
     public void testList() {
-        String result = callProcessor(new String[] {"list", 
+        String[] result = callProcessor(new String[]{"list",
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
-        Assert.assertEquals("Bad return message: " + result, "", result);
+        Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
+                result[OUT_INDEX] != null && result[OUT_INDEX].startsWith("<oifits>"));
     }
 
-    
     /**
-     * 
+     * Call merge, return out and err stream of the operation
+     *
      * @param args
-     * @return 
+     * @return String[2], [0]: out, [1]: err
      */
-    private static String callProcessor(String[] args) {
+    private static String[] callProcessor(String[] args) {
+        String[] result = new String[2];
+
         // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
-        // Print some output: goes to your special stream
-        OIFitsProcessor.main(args);
-        System.out.flush();
-        System.setOut(old);
-        return baos.toString();
+        PrintStream psOut = null;
+        PrintStream psErr = null;
+
+        try {
+
+            ByteArrayOutputStream baosOut = new ByteArrayOutputStream();
+            ByteArrayOutputStream baosErr = new ByteArrayOutputStream();
+            psOut = new PrintStream(baosOut);
+            psErr = new PrintStream(baosErr);
+            // IMPORTANT: Save the old System.out!
+            PrintStream oldOut = System.out;
+            PrintStream oldErr = System.err;
+            // Tell Java to use special stream
+            System.setOut(psOut);
+            System.setErr(psErr);
+
+            // Call operation
+            OIFitsProcessor.main(args);
+
+            System.out.flush();
+            System.err.flush();
+            System.setOut(oldOut);
+            System.setErr(oldErr);
+
+            result[0] = baosOut.toString();
+            result[1] = baosErr.toString();
+            return result;
+
+        } finally {
+            if (psOut != null) {
+                psOut.close();
+            }
+            if (psErr != null) {
+                psErr.close();
+            }
+        }
     }
-    
+
 }
