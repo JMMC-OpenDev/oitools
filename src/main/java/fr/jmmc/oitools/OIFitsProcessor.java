@@ -34,6 +34,7 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static final String COMMAND_MERGE = "merge";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_CONVERT = "convert";
+    private static final String COMMAND_HELP = "help";
 
     private static final String OPTION_HELP = "-help";
     private static final String OPTION_OUTPUT = "-output";
@@ -50,12 +51,12 @@ public class OIFitsProcessor extends OIFitsCommand {
                 showArgumentsHelp("No parameters given.");
                 return;
             }
-            
+
             boolean quiet = true;
             for (final String arg : args) {
                 if (arg.equals("-l") || arg.equals("-log")) {
                     quiet = false;
-                } 
+                }
             }
             bootstrap(quiet);
 
@@ -87,6 +88,10 @@ public class OIFitsProcessor extends OIFitsCommand {
 
                     copy(inputFiles.get(0), outputFile);
 
+                } else if (COMMAND_HELP.equals(command)) {
+
+                    showArgumentsHelp();
+
                 } else {
 
                     showArgumentsHelp("Unknown command.");
@@ -111,8 +116,7 @@ public class OIFitsProcessor extends OIFitsCommand {
             argsList.add("-log");
         }
         argsList.addAll(fileLocations);
-        
-        
+
         OIFitsViewer.main((String[]) (argsList.toArray(new String[argsList.size()])));
 //        OIFitsViewer viewer = new OIFitsViewer(true, true, false);
 //        for (String fileLocation : fileLocations) {
@@ -228,11 +232,13 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("------------- Arguments help ---------------------------------------------------------");
         info("| Key          Value           Description                                           |");
         info("|------------------------------------------------------------------------------------|");
-        info("| command      " + COMMAND_MERGE + "          Merge several oifits files                         |");
-        info("| command      " + COMMAND_LIST + "           List content of several oifits files                |");
-        info("| command      " + COMMAND_CONVERT + "        REmove unused data from file                       |");
+        info("| command      " + COMMAND_MERGE + "          Merge several oifits files                             |");
+        info("| command      " + COMMAND_LIST + "           List content of several oifits files                   |");
+        info("| command      " + COMMAND_CONVERT + "        Remove unused data from file                           |");
         info("| " + OPTION_OUTPUT.substring(0, 2) + " or " + OPTION_OUTPUT
-                + " <file_path>    Complete path, absolut or relative, for output file   |");
+                + " <file_path>   Complete path, absolute or relative, for output file   |");
+        info("| option       " + OPTION_HELP.substring(0, 2) + " or " 
+                + OPTION_HELP + "    Display this help message                              |");
         info("--------------------------------------------------------------------------------------");
     }
 

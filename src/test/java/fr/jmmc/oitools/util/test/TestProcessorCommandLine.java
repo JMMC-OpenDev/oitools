@@ -16,6 +16,7 @@
  */
 package fr.jmmc.oitools.util.test;
 
+import fr.jmmc.oitools.JUnitBaseTest;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR;
 import fr.jmmc.oitools.OIFitsProcessor;
@@ -60,7 +61,7 @@ public class TestProcessorCommandLine {
 
     @Test
     public void testOk() {
-        File output = new File(TEST_DIR + "merge_result.oifits");
+        File output = new File(JUnitBaseTest.TEST_DIR_TEST + "merge_result.oifits");
         String[] result = callProcessor(new String[]{"merge", "-o", output.getAbsolutePath(),
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
@@ -82,7 +83,7 @@ public class TestProcessorCommandLine {
 
     @Test
     public void testConvert() {
-        File output = new File(TEST_DIR + "convert_result.oifits");
+        File output = new File(JUnitBaseTest.TEST_DIR_TEST + "convert_result.oifits");
         String[] result = callProcessor(new String[]{"convert","-o", output.getAbsolutePath(), 
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
