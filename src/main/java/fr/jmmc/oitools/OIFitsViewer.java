@@ -299,10 +299,15 @@ public final class OIFitsViewer extends OIFitsCommand {
         bootstrap(quiet);
 
         if (fileLocations.isEmpty()) {
-            errorArg("Missing file name argument.");
+            errorArg("No file location given in arguments.");
         }
 
-        // Action:
+        process(xml, tsv, format, verbose, fileLocations);
+    }
+
+    public static void process(final boolean xml, final boolean tsv, final boolean format, final boolean verbose,
+                               final List<String> fileLocations) {
+
         final OIFitsViewer viewer = new OIFitsViewer(xml, tsv, format, verbose);
 
         if (xml) {
@@ -320,6 +325,17 @@ public final class OIFitsViewer extends OIFitsCommand {
         }
     }
 
+    /**
+     * Print an error message when parsing the command line arguments
+     *
+     * @param message message to print
+     */
+    protected static void errorArg(final String message) {
+        error(message);
+        showArgumentsHelp();
+        System.exit(1);
+    }
+
     /** Show command arguments help */
     protected static void showArgumentsHelp() {
         info("-------------------------------------------------------------------------");
@@ -327,12 +343,12 @@ public final class OIFitsViewer extends OIFitsCommand {
         info("------------- Arguments help --------------------------------------------");
         info("| Key          Value           Description                              |");
         info("|-----------------------------------------------------------------------|");
+        info("| [-h|-help]                   Show arguments help                      |");
+        info("| [-l] or [-log]               Enable logging (quiet by default)        |");
         info("| [-f] or [-format]            Use the number formatter                 |");
         info("| [-v] or [-verbose]           Dump all column data                     |");
         info("| [-t] or [-tsv]               Dump object table in tsv format          |");
         info("| [-c] or [-check]             Check only given file(s)                 |");
-        info("| [-l] or [-log]               Enable logging (quiet by default)        |");
-        info("| [-h|-help]                   Show arguments help                      |");
         info("-------------------------------------------------------------------------");
     }
 

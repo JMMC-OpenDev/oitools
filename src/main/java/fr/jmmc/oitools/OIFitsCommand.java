@@ -28,46 +28,6 @@ import java.util.logging.Logger;
 public abstract class OIFitsCommand {
 
     /**
-     * Display a message and
-     *
-     * @param message
-     * @param originalThrowable
-     */
-    protected void error(String message, Throwable originalThrowable) {
-
-        System.out.println(message);
-
-        Throwable errorElement = originalThrowable;
-        while (errorElement != null) {
-            System.out.println(errorElement.getMessage());
-            errorElement = (errorElement != errorElement.getCause()) ? errorElement.getCause() : null;
-        }
-
-    }
-
-    protected void changeLogLevel(Level level) {
-
-    }
-
-    /**
-     * Print an error message when parsing the command line arguments
-     *
-     * @param message message to print
-     */
-    protected static void errorArg(final String message) {
-        error(message);
-        showArgumentsHelp();
-        System.exit(1);
-    }
-
-    protected static void showArgumentsHelp() {
-        info("Help command not implemented");
-    }
-
-    /*
-     --- common functions ---
-     */
-    /**
      * Bootstrap the runtime (locale, logger)
      *
      * @param quiet true to disable java.util.logging
@@ -87,7 +47,7 @@ public abstract class OIFitsCommand {
      *
      * @param quiet true to disable java.util.logging
      */
-    protected static void initLoggers(final boolean quiet) {
+    private static void initLoggers(final boolean quiet) {
         Logger logger = Logger.getLogger(OIFitsViewer.class.getName());
 
         // Get root logger:
@@ -124,12 +84,17 @@ public abstract class OIFitsCommand {
      */
     public static void error(final String message, final Exception exception) {
         error(message);
+
         Throwable errorElement = exception;
         while (errorElement != null) {
             error(errorElement.getMessage());
-            errorElement = (errorElement != errorElement.getCause()) ? errorElement.getCause() : null;
+            errorElement = errorElement.getCause();
         }
 
+        if (exception != null) {
+            // Show stack trace:
+            exception.printStackTrace(System.err);
+        }
     }
 
 }
