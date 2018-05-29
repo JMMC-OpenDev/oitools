@@ -54,42 +54,28 @@ public class OIFitsProcessor extends OIFitsCommand {
             for (final String arg : args) {
                 if (arg.equals("-l") || arg.equals("-log")) {
                     quiet = false;
+                    break;
                 }
             }
             bootstrap(quiet);
 
-            String command = args[0];
-
-            List<String> inputFiles = getInputFiles(args);
-            String outputFilePath = getOutputFilepath(args);
+            final String command = args[0];
 
             // command processing
             if (COMMAND_HELP.equals(command)) {
-
                 showArgumentsHelp();
-
             } else if (COMMAND_LIST.equals(command)) {
-
-                list(inputFiles);
-
+                list(args);
             } else if (COMMAND_CONVERT.equals(command)) {
-
-                if (inputFiles.isEmpty()) {
-                    errorArg("No file location given in arguments.");
-                }
-                if (inputFiles.size() > 1) {
-                    errorArg("too many input files, only one is accepted.");
-                }
-
-                copy(inputFiles.get(0), outputFilePath);
-
+                copy(args);
             } else if (COMMAND_MERGE.equals(command)) {
-
-                merge(inputFiles, outputFilePath);
-
+                merge(args);
             } else {
-                errorArg("Unknown command.");
+                throw new IllegalArgumentException("Unknown command.");
             }
+        } catch (IllegalArgumentException iae) {
+            error(iae.getMessage());
+            showArgumentsHelp();
         } catch (Exception e) {
             error("Processor: exception occured", e);
         }
@@ -98,15 +84,12 @@ public class OIFitsProcessor extends OIFitsCommand {
     /**
      * List content of files
      *
-     * @param fileLocations
+     * @param args command line arguments.
      */
-    private static void list(final List<String> fileLocations) throws FitsException, IOException {
+    private static void list(final String[] args) throws FitsException, IOException {
+        final List<String> fileLocations = getInputFiles(args);
+
         // TODO: implement later a simplified output
-
-        if (fileLocations.isEmpty()) {
-            errorArg("No file location given in arguments.");
-        }
-
         OIFitsViewer.process(false, true, false, false, fileLocations);
     }
 
@@ -116,10 +99,14 @@ public class OIFitsProcessor extends OIFitsCommand {
      * @param inputFileLocations
      * @param outputFilePath
      */
-    private static void copy(String inputFileLocation, String outputFilePath) throws FitsException, Exception {
-        if (outputFilePath == null) {
-            errorArg("No output file given in arguments.");
+    private static void copy(final String[] args) throws FitsException, Exception {
+        final List<String> fileLocations = getInputFiles(args);
+        if (fileLocations.size() > 1) {
+            throw new IllegalArgumentException("too many input files, only one is accepted.");
         }
+
+        final String inputFileLocation = fileLocations.get(0);
+        final String outputFilePath = getOutputFilepath(args);
 
         // Load then save file content
         OIFitsFile file = OIFitsLoader.loadOIFits(inputFileLocation);
@@ -133,24 +120,19 @@ public class OIFitsProcessor extends OIFitsCommand {
      * @param fileLocations
      * @param outputFilePath
      */
-    private static void merge(List<String> fileLocations, String outputFilePath) throws FitsException, IOException {
-        if (fileLocations == null || fileLocations.isEmpty()) {
-            errorArg("No file location given in arguments.");
-        }
-        if (outputFilePath == null) {
-            errorArg("No output file given in arguments.");
-        }
+    private static void merge(final String[] args) throws FitsException, IOException {
+        final List<String> fileLocations = getInputFiles(args);
+        final String outputFilePath = getOutputFilepath(args);
 
-        OIFitsFile[] inputs = new OIFitsFile[fileLocations.size()];
-        int i = 0;
+        final OIFitsFile[] inputs = new OIFitsFile[fileLocations.size()];
+
         // Get input files
-        for (String fileLocation : fileLocations) {
-            inputs[i] = OIFitsLoader.loadOIFits(fileLocation);
-            i++;
+        for (int i = 0; i < fileLocations.size(); i++) {
+            inputs[i] = OIFitsLoader.loadOIFits(fileLocations.get(i));
         }
 
         // Call merge
-        OIFitsFile result = MergeUtil.mergeOIFitsFiles(inputs);
+        final OIFitsFile result = MergeUtil.mergeOIFitsFiles(inputs);
         // Store result
         OIFitsWriter.writeOIFits(outputFilePath, result);
     }
@@ -162,14 +144,18 @@ public class OIFitsProcessor extends OIFitsCommand {
      * @return output file path 
      */
     private static String getOutputFilepath(String[] args) {
-        String filePath = null;
+        String outputFilePath = null;
+
         for (int i = 1; i < args.length; i++) {
             if (OPTION_OUTPUT.substring(0, 2).equals(args[i]) || OPTION_OUTPUT.equals(args[i])) {
-                filePath = (++i < args.length) ? args[i] : null;
+                outputFilePath = (++i < args.length) ? args[i] : null;
                 break;
             }
         }
-        return filePath;
+        if (outputFilePath == null) {
+            throw new IllegalArgumentException("No output file given in arguments.");
+        }
+        return outputFilePath;
     }
 
     /**
@@ -179,31 +165,23 @@ public class OIFitsProcessor extends OIFitsCommand {
      * @return input file paths
      */
     private static List<String> getInputFiles(String[] args) {
-        List<String> files = new ArrayList<String>();
-        if (args.length >= 2) {
-            for (int i = 1; i < args.length; i++) {
-                // note: should be generalized to any argument having value(s):
-                if (OPTION_OUTPUT.substring(0, 2).equals(args[i]) || OPTION_OUTPUT.equals(args[i])) {
-                    i++;  // skip next parameter which is the output file
-                } else if (args[i].startsWith("-")) {
-                    // ignore short options
-                } else {
-                    files.add(args[i]);
-                }
+        final List<String> fileLocations = new ArrayList<String>();
+
+        for (int i = 1; i < args.length; i++) {
+            // note: should be generalized to any argument having value(s):
+            if (OPTION_OUTPUT.substring(0, 2).equals(args[i]) || OPTION_OUTPUT.equals(args[i])) {
+                i++;  // skip next parameter which is the output file
+            } else if (args[i].startsWith("-")) {
+                // ignore short options
+            } else {
+                fileLocations.add(args[i]);
             }
         }
-        return files;
-    }
 
-    /**
-     * Print an error message when parsing the command line arguments
-     *
-     * @param message message to print
-     */
-    protected static void errorArg(final String message) {
-        error(message);
-        showArgumentsHelp();
-        System.exit(1);
+        if (fileLocations.isEmpty()) {
+            throw new IllegalArgumentException("No file location given in arguments.");
+        }
+        return fileLocations;
     }
 
     /** Show command arguments help */
@@ -214,11 +192,11 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("| Key          Value           Description                                           |");
         info("|------------------------------------------------------------------------------------|");
         info("| command      " + COMMAND_LIST + "           List content of several oifits files                   |");
+        info("| command      " + COMMAND_LIST + "           List content of several oifits files                   |");
         info("| command      " + COMMAND_CONVERT + "        Convert the given input file                           |");
         info("| command      " + COMMAND_MERGE + "          Merge several oifits files                             |");
         info("| " + OPTION_OUTPUT.substring(0, 2) + " or " + OPTION_OUTPUT
                 + " <file_path>   Complete path, absolute or relative, for output file   |");
-
         info("| [-l] or [-log]              Enable logging (quiet by default)                      |");
         info("--------------------------------------------------------------------------------------");
     }

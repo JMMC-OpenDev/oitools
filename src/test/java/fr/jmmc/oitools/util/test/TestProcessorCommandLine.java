@@ -18,7 +18,6 @@ package fr.jmmc.oitools.util.test;
 
 import fr.jmmc.oitools.JUnitBaseTest;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
-import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR;
 import fr.jmmc.oitools.OIFitsProcessor;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,38 +35,30 @@ public class TestProcessorCommandLine {
     private static final int ERR_INDEX = 1;
 
     @Test
-    public void testNoParameter() {
-        String[] result = callProcessor(new String[0]);
-        Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
-                result[ERR_INDEX] != null && result[ERR_INDEX].startsWith("No parameters"));
-    }
-
-    @Test
     public void testNoInputFile() {
         String[] result = callProcessor(new String[]{"merge"});
         Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
-                result[ERR_INDEX] != null && result[ERR_INDEX].startsWith("No input file"));
+                getError(result).startsWith("No file location given in arguments."));
     }
 
     @Test
     public void testNoOutputFile() {
-        String[] result = callProcessor(new String[]{"merge",
-            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
-            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits", "-o"
-        });
+        String[] result = callProcessor(new String[]{"merge", 
+        TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
+        "-o"});
         Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
-                result[ERR_INDEX] != null && result[ERR_INDEX].startsWith("No output file"));
+                getError(result).startsWith("No output file"));
     }
 
     @Test
     public void testOk() {
-        File output = new File(JUnitBaseTest.TEST_DIR_TEST + "merge_result.oifits");
+        File output = new File(JUnitBaseTest.TEST_DIR_TEST + "merge_result.fits");
         String[] result = callProcessor(new String[]{"merge", "-o", output.getAbsolutePath(),
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
         });
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
-                result[OUT_INDEX] != null && result[OUT_INDEX].length() == 0);
+                getOut(result).length() == 0);
         Assert.assertTrue("No result file created", output.exists());
         output.delete();
     }
@@ -78,16 +69,24 @@ public class TestProcessorCommandLine {
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
-                result[OUT_INDEX] != null && result[OUT_INDEX].startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>"));
+                getOut(result).startsWith("target_name"));
     }
 
     @Test
     public void testConvert() {
-        File output = new File(JUnitBaseTest.TEST_DIR_TEST + "convert_result.oifits");
+        File output = new File(JUnitBaseTest.TEST_DIR_TEST + "convert_result.fits");
         String[] result = callProcessor(new String[]{"convert","-o", output.getAbsolutePath(), 
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
         Assert.assertTrue("No output file present.", output.exists());
+    }
+    
+    private static String getOut(String[] result) {
+        return result[OUT_INDEX] != null ? result[OUT_INDEX] : "";
+    }
+    
+    private static String getError(String[] result) {
+        return result[ERR_INDEX] != null ? result[ERR_INDEX] : "";
     }
 
     /**
