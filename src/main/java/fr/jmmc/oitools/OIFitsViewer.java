@@ -275,6 +275,7 @@ public final class OIFitsViewer extends OIFitsCommand {
         for (final String arg : args) {
             if (arg.startsWith("-")) {
                 if (arg.equals("-t") || arg.equals("-tsv")) {
+                    xml = false;
                     tsv = true;
                 } else if (arg.equals("-f") || arg.equals("-format")) {
                     format = true;
