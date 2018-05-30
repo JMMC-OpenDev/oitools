@@ -27,6 +27,7 @@ import fr.jmmc.oitools.meta.Units;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Class for OI_TARGET table.
@@ -457,10 +458,10 @@ public final class OITarget extends OITable {
     /**
      * Return the row index corresponding to the given targetId or null if missing
      * @param targetId targetId (may be null)
-     * @return row index corresponding to the given targetId or null if missing
+     * @return row index corresponding to the given targetId or null if missing (or null if Analyzer not run)
      */
     public Integer getRowIndex(final Short targetId) {
-        return getTargetIdToRowIndex().get(targetId);
+        return targetIdToRowIndex.get(targetId);
     }
 
     Map<String, Short> getTargetToTargetId() {
@@ -470,10 +471,10 @@ public final class OITarget extends OITable {
     /**
      * Return the targetId corresponding to the given target (name) or null if missing
      * @param target target (name)
-     * @return targetId corresponding to the given target (name) or null if missing
+     * @return targetId corresponding to the given target (name) or null if missing (or null if Analyzer not run)
      */
     public Short getTargetId(final String target) {
-        return getTargetToTargetId().get(target);
+        return targetToTargetId.get(target);
     }
 
     Map<Short, Target> getTargetIdToTarget() {
@@ -483,23 +484,27 @@ public final class OITarget extends OITable {
     /**
      * Return the Target corresponding to the given targetId or null if missing
      * @param targetId targetId (may be null)
-     * @return Target corresponding to the given targetId or null if missing
+     * @return Target corresponding to the given targetId or null if missing (or null if Analyzer not run)
      */
     public Target getTarget(final Short targetId) {
-        return getTargetIdToTarget().get(targetId);
+        return targetIdToTarget.get(targetId);
     }
 
-    public Map<Target, Short> getTargetObjToTargetId() {
+    Map<Target, Short> getTargetObjToTargetId() {
         return targetObjToTargetId;
+    }
+
+    public Set<Target> getTargetSet() {
+        return targetObjToTargetId.keySet();
     }
 
     /**
      * Return the targetId corresponding to the given Target or null if missing
      * @param target Target
-     * @return targetId corresponding to the given Target or null if missing
+     * @return targetId corresponding to the given Target or null if missing (or null if Analyzer not run)
      */
-    public Short getTargetIdList(final Target target) {
-        return getTargetObjToTargetId().get(target);
+    public Short getTargetId(final Target target) {
+        return targetObjToTargetId.get(target);
     }
 
     Target createTarget(final int idx) {
@@ -512,4 +517,3 @@ public final class OITarget extends OITable {
         return null;
     }
 }
-/*___oOo___*/

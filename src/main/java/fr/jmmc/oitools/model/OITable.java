@@ -164,6 +164,4 @@ public abstract class OITable extends FitsTable {
     public void setOIFitsFile(OIFitsFile file) {
         this.oifitsFile = file;
     }
-            
-    /*___oOo___*/
 }

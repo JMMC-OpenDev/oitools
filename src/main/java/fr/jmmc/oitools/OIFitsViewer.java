@@ -354,4 +354,3 @@ public final class OIFitsViewer extends OIFitsCommand {
     }
 
 }
-/*___oOo___*/

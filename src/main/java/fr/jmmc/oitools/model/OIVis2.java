@@ -317,5 +317,3 @@ public final class OIVis2 extends OIData {
         }
     }
 }
-
-/*___oOo___*/

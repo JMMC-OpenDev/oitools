@@ -273,8 +273,8 @@ public final class OIWavelength extends OITable {
     }
 
     /**
-     * Get InstrumentMode
-     * @return
+     * Get the associated InstrumentMode
+     * @return associated InstrumentMode (or null if Analyzer not run)
      */
     public InstrumentMode getInstrumentMode() {
         return insMode;
@@ -284,4 +284,3 @@ public final class OIWavelength extends OITable {
         this.insMode = insMode;
     }
 }
-/*___oOo___*/

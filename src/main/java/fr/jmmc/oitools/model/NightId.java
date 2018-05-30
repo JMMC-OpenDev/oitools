@@ -19,6 +19,9 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.jmcs.util.NumberUtils;
+import java.util.Comparator;
+
 /**
  * A value-type (immutable) representing a single night in any OI_Data table
  * @author bourgesl
@@ -26,7 +29,15 @@ package fr.jmmc.oitools.model;
 public final class NightId {
 
     public final static NightId UNDEFINED = new NightId();
+    
+    public static final Comparator<NightId> CMP_NIGHT = new Comparator<NightId>() {
+        @Override
+        public int compare(NightId n1, NightId n2) {
+            return NumberUtils.compare(n1.getNightId(), n2.getNightId());
+        }
+    };
 
+    /* members */
     /* nightId = rounded MJD */
     private int nightId;
 

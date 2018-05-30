@@ -1254,4 +1254,3 @@ public final class OIFitsFile extends FitsImageFile {
         return imageOiData;
     }
 }
-/*___oOo___*/

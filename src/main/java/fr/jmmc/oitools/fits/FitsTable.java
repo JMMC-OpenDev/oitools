@@ -1163,4 +1163,3 @@ public abstract class FitsTable extends FitsHDU {
     }
 
 }
-/*___oOo___*/
