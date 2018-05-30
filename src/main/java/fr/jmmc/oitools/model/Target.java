@@ -19,17 +19,72 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.jmcs.util.NumberUtils;
+import fr.jmmc.oitools.util.CoordUtils;
+import java.util.Comparator;
+import java.util.logging.Level;
+
 /**
  * A value-type (immutable) representing a single target in any OI_Target table
  * @author bourgesl
  */
 public final class Target {
 
+    /** Logger */
+    final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Target.class.getName());
+
+    public final static Matcher<Target> MATCHER_NAME = new Matcher<Target>() {
+
+        @Override
+        public boolean match(final Target src, final Target other) {
+            if (src == other) {
+                return true;
+            }
+            // Compare only NAME values:
+            return ModelBase.areEquals(src.getTarget(), other.getTarget());
+        }
+    };
+
+    public final static Matcher<Target> MATCHER_LIKE = new Matcher<Target>() {
+
+        /** distance in degrees to consider same targets = 1 arcsecs */
+        public final static double SAME_TARGET_DISTANCE = 1d * CoordUtils.ARCSEC_IN_DEGREES;
+
+        @Override
+        public boolean match(final Target src, final Target other) {
+            if (src == other) {
+                return true;
+            }
+            // only check ra/dec:
+            final double distance = CoordUtils.computeDistanceInDegrees(src.getRaEp0(), src.getDecEp0(),
+                    other.getRaEp0(), other.getDecEp0());
+
+            final boolean match = (distance <= SAME_TARGET_DISTANCE);
+
+            if (match) {
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "match [{0} vs {1}] = {2} arcsec",
+                            new Object[]{src.getTarget(), other.getTarget(),
+                                         NumberUtils.trimTo3Digits(distance * CoordUtils.DEG_IN_ARCSEC)});
+                }
+            }
+            return match;
+        }
+    };
+
+    public static final Comparator<Target> CMP_TARGET = new Comparator<Target>() {
+        @Override
+        public int compare(final Target t1, final Target t2) {
+            return String.CASE_INSENSITIVE_ORDER.compare(t1.getTarget(), t2.getTarget());
+        }
+    };
+
     public final static Target UNDEFINED = new Target("UNDEFINED", Double.NaN, Double.NaN,
             Float.NaN, Double.NaN, Double.NaN,
             Double.NaN, "", "", Double.NaN, Double.NaN, Double.NaN, Double.NaN,
             Float.NaN, Float.NaN, "");
 
+    /** members */
     private final String target;
     private final double raEp0;
     private final double decEp0;
@@ -50,21 +105,21 @@ public final class Target {
     private int hashcode = 0;
 
     public Target(final String target,
-            final double raEp0,
-            final double decEp0,
-            final float equinox,
-            final double raErr,
-            final double decErr,
-            final double sysvel,
-            final String velTyp,
-            final String velDef,
-            final double pmRa,
-            final double pmDec,
-            final double pmRaErr,
-            final double pmDecErr,
-            final float parallax,
-            final float paraErr,
-            final String specTyp) {
+                  final double raEp0,
+                  final double decEp0,
+                  final float equinox,
+                  final double raErr,
+                  final double decErr,
+                  final double sysvel,
+                  final String velTyp,
+                  final String velDef,
+                  final double pmRa,
+                  final double pmDec,
+                  final double pmRaErr,
+                  final double pmDecErr,
+                  final float parallax,
+                  final float paraErr,
+                  final String specTyp) {
         this.target = target;
         this.raEp0 = raEp0;
         this.decEp0 = decEp0;
@@ -223,7 +278,7 @@ public final class Target {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode() {/*___oOo___*/
         if (hashcode != 0) {
             // use precomputed hash code (or equals 0 but low probability):
             return hashcode;
