@@ -157,7 +157,7 @@ public final class Analyzer implements ModelVisitor {
         // compute night ids:
         final double[] nightIds = oiData.getNightId();
 
-        // note: if no OITarget table than the target will be Target.UNDEFINED
+        // note: if no OITarget table then the target will be Target.UNDEFINED
         final Map<Short, Target> targetIdToTarget = (oiTarget != null) ? oiTarget.getTargetIdToTarget() : null;
 
         // Resolve instrument mode:
@@ -209,6 +209,7 @@ public final class Analyzer implements ModelVisitor {
                 g = new Granule();
             }
             // update tables associated to the current granule:
+            // TODO: generate mask(rows = i indices) (BitSet ?) for every table corresponding to the granule ?
             oiDataTables.add(oiData);
         }
 
@@ -311,11 +312,13 @@ public final class Analyzer implements ModelVisitor {
         final float lambdaMin = oiWavelength.getEffWaveMin();
         final float lambdaMax = oiWavelength.getEffWaveMax();
         final float bandMin = oiWavelength.getEffBandMin();
-        // Resolution = lambda / delta_lambda
+        // Resolution = mean(lambda / delta_lambda)
         final float resPower = oiWavelength.getResolution();
 
-        // TODO: extract only instrument Name ie (first alpha characters ?):
+        // TODO: extract only instrument Name ie parse first alpha characters to cleanup weird INSNAME values
         final InstrumentMode insMode = new InstrumentMode(insName, nbChannels, lambdaMin, lambdaMax, resPower, bandMin);
+        
+        // Associate the InstrumentMode instance to the OIWavelength table (locally)
         oiWavelength.setInstrumentMode(insMode);
 
         if (isLogDebug) {
@@ -357,6 +360,7 @@ public final class Analyzer implements ModelVisitor {
             // may create several identical Target objects if the target record is duplicated:
             final Target target = oiTarget.createTarget(i);
 
+            // Mapping between target id <-> Target instance (locally)
             targetIdToTarget.put(targetId, target);
             targetObjToTargetId.put(target, targetId);
         }
