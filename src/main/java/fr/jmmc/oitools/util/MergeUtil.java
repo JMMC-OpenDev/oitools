@@ -153,25 +153,35 @@ public class MergeUtil {
      * @return
      */
     private static void mergeOIWL(Context context, OIFitsFile fileToMerge) {
+
         // Browse all names of file to merge, change name if already present in result, add to map 
         // old_name > new name
         if (fileToMerge != null && fileToMerge.getOiWavelengths() != null) {
+            Set<String> usedNames = context.getInsUsedByData();
+
+            // Browse all OiWavelengths of the file to merge
             for (OIWavelength oiWaveLength : fileToMerge.getOiWavelengths()) {
+
                 final String oldName = oiWaveLength.getInsName();
-                String newName = oldName;
-                int idx = 0;
-                while (context.getResultFile().getOiWavelength(newName) != null) {
-                    idx++;
-                    newName = oldName + "_" + idx;
+                // Only if this OiWavelengths is pointed by some data, keep it
+                if (usedNames.contains(oldName)) {
+                    // If name is already present in result, 
+                    // change the name and memorise this change to update data information later
+                    String newName = oldName;
+                    int idx = 0;
+                    while (context.getResultFile().getOiWavelength(newName) != null) {
+                        idx++;
+                        newName = oldName + "_" + idx;
+                    }
+
+                    // TODO : clone instance of source data
+                    OIWavelength newOiWave = (OIWavelength) copyTable(context.getResultFile(), oiWaveLength);
+
+                    newOiWave.setInsName(newName);
+                    context.getMapWLNames().put(oldName, newName);
+
+                    context.getResultFile().addOiTable(newOiWave);
                 }
-
-                // TODO : clone instance of source data
-                OIWavelength newOiWave = (OIWavelength) copyTable(context.getResultFile(), oiWaveLength);
-
-                newOiWave.setInsName(newName);
-                context.getMapWLNames().put(oldName, newName);
-
-                context.getResultFile().addOiTable(newOiWave);
             }
         }
     }
@@ -185,24 +195,35 @@ public class MergeUtil {
      * @return
      */
     private static void mergeOIArray(Context context, OIFitsFile fileToMerge) {
+
         // Browse all names of file to merge, change name if already present in result, add to map 
         // old_name > new name
         if (fileToMerge != null && fileToMerge.getOiArrays() != null) {
+            Set<String> usedNames = context.getInsUsedByData();
+
+            // Browse all OIArray of the file to merge
             for (OIArray oiArray : fileToMerge.getOiArrays()) {
+
                 String oldName = oiArray.getArrName(), newName = oldName;
-                int idx = 0;
-                while (context.getResultFile().getOiArray(newName) != null) {
-                    idx++;
-                    newName = oldName + "_" + idx;
+                // Only if this OIArray is pointed by some data, keep it
+                if (usedNames.contains(oldName)) {
+
+                    // If name is already present in result, 
+                    // change the name and memorise this change to update data information later
+                    int idx = 0;
+                    while (context.getResultFile().getOiArray(newName) != null) {
+                        idx++;
+                        newName = oldName + "_" + idx;
+                    }
+
+                    // TODO : clone instance of source data
+                    OIArray newOiArray = (OIArray) copyTable(context.getResultFile(), oiArray);
+
+                    newOiArray.setArrName(newName);
+                    context.getMapArrayNames().put(oldName, newName);
+
+                    context.getResultFile().addOiTable(newOiArray);
                 }
-
-                // TODO : clone instance of source data
-                OIArray newOiArray = (OIArray) copyTable(context.getResultFile(), oiArray);
-
-                newOiArray.setArrName(newName);
-                context.getMapArrayNames().put(oldName, newName);
-
-                context.getResultFile().addOiTable(newOiArray);
             }
         }
     }
@@ -306,6 +327,7 @@ public class MergeUtil {
             return false;
         } else {
             return oiwavelength1.getInsName().equals(oiwavelength2.getInsName());
+
         }
     }
 
