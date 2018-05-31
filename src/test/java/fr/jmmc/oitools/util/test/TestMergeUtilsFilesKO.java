@@ -46,7 +46,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
     public void testNoFiles() throws IOException, MalformedURLException, FitsException {
 
         try {
-            MergeUtil.mergeOIFitsFiles();
+            MergeUtil.mergeOIFitsFiles(null);
             Assert.fail("Merge with no parameters should raise an exception");
         } catch (IllegalArgumentException iae) {
             Assert.assertTrue(
@@ -54,7 +54,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
                     iae.getMessage().contains("Not enough files as parameters"));
         }
 
-        MergeUtil.mergeOIFitsFiles(OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
+        MergeUtil.mergeOIFitsFiles(null, OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
 
     }
 
@@ -69,7 +69,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
     public void testBadFilename() throws IOException, MalformedURLException, FitsException {
 
         try {
-            MergeUtil.mergeOIFitsFiles(
+            MergeUtil.mergeOIFitsFiles(null,
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "inexistingFile.oifits"),
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
             Assert.fail("Merge with an inexisting file should raise an exception");
@@ -80,7 +80,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
         }
 
         try {
-            MergeUtil.mergeOIFitsFiles(
+            MergeUtil.mergeOIFitsFiles(null,
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"),
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "inexistingFile.oifits"));
             Assert.fail("Merge with an inexisting file should raise an exception");
@@ -103,7 +103,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
     public void testDifferentTargets() throws IOException, MalformedURLException, FitsException {
 
         try {
-            MergeUtil.mergeOIFitsFiles(
+            MergeUtil.mergeOIFitsFiles(null,
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS
                             + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"),
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
@@ -115,7 +115,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
         }
 
         try {
-            MergeUtil.mergeOIFitsFiles(
+            MergeUtil.mergeOIFitsFiles(null,
                     OIFitsLoader.loadOIFits(
                             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"),
                     OIFitsLoader.loadOIFits(
@@ -141,7 +141,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
     public void testEmptyFiles() throws IOException, MalformedURLException, FitsException {
 
         try {
-            MergeUtil.mergeOIFitsFiles(
+            MergeUtil.mergeOIFitsFiles(null,
                     OIFitsLoader.loadOIFits(TEST_DIR_FITS + "SG_surface2.fits"),
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
             Assert.fail("Merge an empty file should raise an exception");
@@ -152,7 +152,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
         }
 
         try {
-            MergeUtil.mergeOIFitsFiles(
+            MergeUtil.mergeOIFitsFiles(null,
                     OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"),
                     OIFitsLoader.loadOIFits(TEST_DIR_FITS + "SG_surface2.fits"));
             Assert.fail("Merge an empty file should raise an exception");

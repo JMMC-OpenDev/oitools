@@ -43,9 +43,9 @@ public class TestProcessorCommandLine {
 
     @Test
     public void testNoOutputFile() {
-        String[] result = callProcessor(new String[]{"merge", 
-        TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
-        "-o"});
+        String[] result = callProcessor(new String[]{"merge",
+            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
+            "-o"});
         Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
                 getError(result).startsWith("No output file"));
     }
@@ -75,16 +75,16 @@ public class TestProcessorCommandLine {
     @Test
     public void testConvert() {
         File output = new File(JUnitBaseTest.TEST_DIR_TEST + "convert_result.fits");
-        String[] result = callProcessor(new String[]{"convert","-o", output.getAbsolutePath(), 
+        callProcessor(new String[]{"convert", "-o", output.getAbsolutePath(),
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
         Assert.assertTrue("No output file present.", output.exists());
     }
-    
+
     private static String getOut(String[] result) {
         return result[OUT_INDEX] != null ? result[OUT_INDEX] : "";
     }
-    
+
     private static String getError(String[] result) {
         return result[ERR_INDEX] != null ? result[ERR_INDEX] : "";
     }
