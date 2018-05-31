@@ -132,7 +132,7 @@ public class OIFitsProcessor extends OIFitsCommand {
         }
 
         // Call merge
-        final OIFitsFile result = MergeUtil.mergeOIFitsFiles( null, inputs);
+        final OIFitsFile result = MergeUtil.mergeOIFitsFiles(inputs);
         // Store result
         OIFitsWriter.writeOIFits(outputFilePath, result);
     }

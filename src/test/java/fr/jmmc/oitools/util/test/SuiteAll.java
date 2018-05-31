@@ -30,6 +30,6 @@ import org.junit.runners.Suite;
     TestMergeUtils3Files.class,
     TestProcessorCommandLine.class
 })
-public class SuiteTest {
+public class SuiteAll {
 
 }

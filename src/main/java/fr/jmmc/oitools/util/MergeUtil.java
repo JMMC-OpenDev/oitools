@@ -41,14 +41,20 @@ public class MergeUtil {
 
     private static final Logger logger = Logger.getLogger(MergeUtil.class.getName());
 
-//    public static OIFitsFile mergeOIFitsFile(
-//            final OIFitsFile oifitsOne, final OIFitsFile oifitsTwo)
-//            throws IllegalArgumentException {
-//        return mergeOIFitsFiles(oifitsOne, oifitsTwo);
-//    }
     /**
-     * Merge of two oifits files. Only one target by input files are accepted, have to be the the same (name) in the
-     * input files.
+     * Merge of oifits files.
+     *
+     * @param oiFitsToMerge
+     * @return
+     * @throws IllegalArgumentException
+     */
+    public static OIFitsFile mergeOIFitsFiles(final OIFitsFile... oiFitsToMerge) throws IllegalArgumentException {
+        return mergeOIFitsFiles(null, null, oiFitsToMerge);
+    }
+
+    /**
+     * Merge of oifits files. Only one target by input files are accepted, have to be the the same (name) in the input
+     * files.
      *
      * @param filters: values to apply on criteria to determine data to keep
      * @param oiFitsToMerge files to be merged
@@ -57,61 +63,52 @@ public class MergeUtil {
      */
     public static OIFitsFile mergeOIFitsFiles(
             final Selector filters,
-            final OIFitsFile... oiFitsToMerge)
-            throws IllegalArgumentException {
+            final OIFitsStandard std,
+            final OIFitsFile... oiFitsToMerge) throws IllegalArgumentException {
 
-        final Context context = new Context();
-
-        // TODO: clone fits structure by save/load on disk ? 
-        // aims: get local copy modifiable
         if (oiFitsToMerge == null || oiFitsToMerge.length < 1) {
             throw new IllegalArgumentException(
                     "Merge: Not enough files as parameters: " + oiFitsToMerge);
         }
+
+        // createOIFits
+        OIFitsFile resultFile = new OIFitsFile(std != null ? std : OIFitsStandard.VERSION_1); // TODO default ?
+
+        final Context context = new Context(resultFile);
 
         // Merge metadata FIRST to prepare mappings
         for (OIFitsFile fileToMerge : oiFitsToMerge) {
             // analyze first to use Target objects:
             // fileToMerge.analyze(); // will be usefull in the future
 
-            // Process OI_TARGET part
-            OITarget oiTarget = fileToMerge.getOiTarget();
-            checkOITarget(context, oiTarget);
-
-            // No exception raised, store target 1 in result
-            if (context.getResultFile().getOiTarget() == null || context.getResultFile().getOiTarget().getNbTargets() == 0) {
-                oiTarget.setOIFitsFile(context.getResultFile()); // TODO FIX
-                context.getResultFile().addOiTable(oiTarget);
-                context.setTargetName(oiTarget.getTarget()[0]);
-            }
-            // TODO: ? clone instance
-            logger.info("Target name: " + context.getResultFile().getOiTarget());
-
             // Prefilter data, and get all useful Ins, Array and Corr in data tables
             List<OIData> dataOfTarget = fileToMerge.getOiDataList();
-            List<OIData> dataToKeep = preFilterOfData(context, dataOfTarget, filters);
+            List<OIData> dataToKeep = filterOfData(context, dataOfTarget, filters);
+
+            // Process OI_TARGET part
+            OITarget oiTarget = fileToMerge.getOiTarget();
+            processOITarget(context, oiTarget);
 
             // Process OI_WAVELENGTH part
-            mergeOIWL(context, fileToMerge);
-            logger.info("mapWLNames: " + context.getMapWLNames());
-            logger.info("insnames: " + Arrays.toString(context.getResultFile().getAcceptedInsNames()));
+            processOIWL(context, fileToMerge);
 
             // Process OI_ARRAY part 
-            mergeOIArray(context, fileToMerge);
-            logger.info("mapArrayNames: " + context.getMapArrayNames());
+            processOIArray(context, fileToMerge);
 
-            // Process OI_CORR part if V2
-            if (context.getResultFile().getVersion().equals(OIFitsStandard.VERSION_2)) {
-                mergeOICorr(context, fileToMerge);
-                logger.info("mapCorrNames: " + context.getMapCorrNames());
+            // Specific to OIFits V2
+            if (resultFile.isOIFits2()) {
+                // Process OI_CORR part if V2
+                processOICorr(context, fileToMerge);
+
+                // TODO: ....
             }
 
             // Merge data
-            mergeOIData(context, fileToMerge.getOiDataList(context.getTargetName()));
+            processOIData(context, dataToKeep);
 
         }
 
-        return context.getResultFile();
+        return context.resultFile;
     }
 
     /**
@@ -121,8 +118,8 @@ public class MergeUtil {
      * @param oit2
      * @throws IllegalArgumentException
      */
-    private static void checkOITarget(Context context, OITarget oiTarget) throws IllegalArgumentException {
-        OIFitsFile resultFile = context.getResultFile();
+    private static void processOITarget(Context context, OITarget oiTarget) throws IllegalArgumentException {
+        OIFitsFile resultFile = context.resultFile;
         if (oiTarget == null || oiTarget.getNbRows() < 1) {
             throw new IllegalArgumentException(
                     String.format("Merge: target for %s is null or empty",
@@ -142,6 +139,15 @@ public class MergeUtil {
         if (resultTargetName != null && !resultTargetName.equals(targetNameX)) {
             throw new IllegalArgumentException("Merge: files have not the same target");
         }
+        // No exception raised, store target 1 in result
+        if (resultFile.getOiTarget() == null || resultFile.getOiTarget().getNbTargets() == 0) {
+            oiTarget.setOIFitsFile(resultFile); // TODO FIX
+            resultFile.addOiTable(oiTarget);
+            context.targetName = oiTarget.getTarget()[0];
+        }
+        // TODO: ? clone instance
+        logger.info("Target name: " + resultFile.getOiTarget());
+
     }
 
     /**
@@ -152,12 +158,12 @@ public class MergeUtil {
      * @param f2
      * @return
      */
-    private static void mergeOIWL(Context context, OIFitsFile fileToMerge) {
+    private static void processOIWL(Context context, OIFitsFile fileToMerge) {
 
         // Browse all names of file to merge, change name if already present in result, add to map 
         // old_name > new name
         if (fileToMerge != null && fileToMerge.getOiWavelengths() != null) {
-            Set<String> usedNames = context.getInsUsedByData();
+            Set<String> usedNames = context.insUsedByData;
 
             // Browse all OiWavelengths of the file to merge
             for (OIWavelength oiWaveLength : fileToMerge.getOiWavelengths()) {
@@ -169,21 +175,24 @@ public class MergeUtil {
                     // change the name and memorise this change to update data information later
                     String newName = oldName;
                     int idx = 0;
-                    while (context.getResultFile().getOiWavelength(newName) != null) {
+                    while (context.resultFile.getOiWavelength(newName) != null) {
                         idx++;
                         newName = oldName + "_" + idx;
                     }
 
                     // TODO : clone instance of source data
-                    OIWavelength newOiWave = (OIWavelength) copyTable(context.getResultFile(), oiWaveLength);
+                    OIWavelength newOiWave = (OIWavelength) copyTable(context.resultFile, oiWaveLength);
 
                     newOiWave.setInsName(newName);
-                    context.getMapWLNames().put(oldName, newName);
+                    context.mapWLNames.put(oldName, newName);
 
-                    context.getResultFile().addOiTable(newOiWave);
+                    context.resultFile.addOiTable(newOiWave);
                 }
             }
         }
+        logger.info("mapWLNames: " + context.mapWLNames);
+        logger.info("insnames: " + Arrays.toString(context.resultFile.getAcceptedInsNames()));
+
     }
 
     /**
@@ -194,12 +203,12 @@ public class MergeUtil {
      * @param f2
      * @return
      */
-    private static void mergeOIArray(Context context, OIFitsFile fileToMerge) {
+    private static void processOIArray(Context context, OIFitsFile fileToMerge) {
 
         // Browse all names of file to merge, change name if already present in result, add to map 
         // old_name > new name
         if (fileToMerge != null && fileToMerge.getOiArrays() != null) {
-            Set<String> usedNames = context.getInsUsedByData();
+            Set<String> usedNames = context.insUsedByData;
 
             // Browse all OIArray of the file to merge
             for (OIArray oiArray : fileToMerge.getOiArrays()) {
@@ -211,21 +220,23 @@ public class MergeUtil {
                     // If name is already present in result, 
                     // change the name and memorise this change to update data information later
                     int idx = 0;
-                    while (context.getResultFile().getOiArray(newName) != null) {
+                    while (context.resultFile.getOiArray(newName) != null) {
                         idx++;
                         newName = oldName + "_" + idx;
                     }
 
                     // TODO : clone instance of source data
-                    OIArray newOiArray = (OIArray) copyTable(context.getResultFile(), oiArray);
+                    OIArray newOiArray = (OIArray) copyTable(context.resultFile, oiArray);
 
                     newOiArray.setArrName(newName);
-                    context.getMapArrayNames().put(oldName, newName);
+                    context.mapArrayNames.put(oldName, newName);
 
-                    context.getResultFile().addOiTable(newOiArray);
+                    context.resultFile.addOiTable(newOiArray);
                 }
             }
         }
+        logger.info("mapArrayNames: " + context.mapArrayNames);
+
     }
 
     /**
@@ -236,42 +247,44 @@ public class MergeUtil {
      * @param f2
      * @return
      */
-    private static void mergeOICorr(Context context, OIFitsFile fileToMerge) {
+    private static void processOICorr(Context context, OIFitsFile fileToMerge) {
         // Browse all names of file to merge, change name if already present in result, add to map 
         // old_name > new name
         if (fileToMerge != null && fileToMerge.getOiCorr() != null) {
             for (OICorr oiCorr : fileToMerge.getOiCorr()) {
                 String oldName = oiCorr.getCorrName(), newName = oldName;
                 int idx = 0;
-                while (context.getResultFile().getOiCorr(newName) != null) {
+                while (context.resultFile.getOiCorr(newName) != null) {
                     idx++;
                     newName = oldName + "_" + idx;
                 }
 
                 // TODO : clone instance of source data
-                OICorr newOiCorr = (OICorr) copyTable(context.getResultFile(), oiCorr);
+                OICorr newOiCorr = (OICorr) copyTable(context.resultFile, oiCorr);
 
                 newOiCorr.setCorrName(newName);
-                context.getMapCorrNames().put(oldName, newName);
+                context.mapCorrNames.put(oldName, newName);
 
-                context.getResultFile().addOiTable(newOiCorr);
+                context.resultFile.addOiTable(newOiCorr);
 
             }
         }
+        logger.info("mapCorrNames: " + context.mapCorrNames);
+
     }
 
-    private static void mergeOIData(Context context, List<OIData> dataToMerge) {
+    private static void processOIData(Context context, List<OIData> dataToMerge) {
 
-        Map<String, String> mapArrayNames = context.getMapArrayNames();
-        Map<String, String> mapWLNames = context.getMapWLNames();
-        Map<String, String> mapCorrNames = context.getMapCorrNames();
+        Map<String, String> mapArrayNames = context.mapArrayNames;
+        Map<String, String> mapWLNames = context.mapWLNames;
+        Map<String, String> mapCorrNames = context.mapCorrNames;
 
         // Browse all data
         if (dataToMerge != null) {
             for (OIData oiData : dataToMerge) {
 
                 // TODO : clone instance of source data
-                OIData newData = (OIData) copyTable(context.getResultFile(), oiData);
+                OIData newData = (OIData) copyTable(context.resultFile, oiData);
 
                 // Change wave and array by new ones
                 newData.setInsName(mapWLNames.get(oiData.getInsName()));
@@ -280,7 +293,7 @@ public class MergeUtil {
                     newData.setCorrName(mapCorrNames.get(oiData.getCorrName()));
                 }
 
-                context.getResultFile().addOiTable(newData);
+                context.resultFile.addOiTable(newData);
 
             }
         }
@@ -303,7 +316,7 @@ public class MergeUtil {
      * @param filterInsName
      * @return
      */
-    private static List<OIData> preFilterOfData(
+    private static List<OIData> filterOfData(
             Context context, List<OIData> dataToFilter, Selector filters) {
         List<OIData> dataToKeep = new ArrayList<OIData>();
         String patternInsname = filters != null ? filters.getPattern(Selector.INSTRUMENT_FILTER) : null; //"PRIMAMBR";
@@ -312,9 +325,9 @@ public class MergeUtil {
             for (OIData data : dataToFilter) {
                 if (patternInsname == null || data.getInsName().equals(patternInsname)) {
                     dataToKeep.add(data);
-                    context.getInsUsedByData().add(data.getInsName());
-                    context.getArraysUsedByData().add(data.getArrName());
-                    context.getCorrUsedByData().add(data.getCorrName());
+                    context.insUsedByData.add(data.getInsName());
+                    context.arraysUsedByData.add(data.getArrName());
+                    context.corrUsedByData.add(data.getCorrName());
                 }
             }
         }
@@ -334,80 +347,31 @@ public class MergeUtil {
     /**
      * Hold temporary data of merge operation
      */
-    public static class Context {
+    static class Context {
 
-        private String targetName = null;
-        private OIFitsFile resultFile = new OIFitsFile(OIFitsStandard.VERSION_1);
-        private Map<String, String> mapWLNames = new HashMap<String, String>();
-        private Map<String, String> mapArrayNames = new HashMap<String, String>();
-        private Map<String, String> mapCorrNames = new HashMap<String, String>();
+        /**
+         * output OIFits
+         */
+        final OIFitsFile resultFile;
+
+        /**
+         * TODO remove later. NAme of the single accepted target
+         */
+        String targetName = null;
+        /**
+         *
+         */
+        Map<String, String> mapWLNames = new HashMap<String, String>();
+        Map<String, String> mapArrayNames = new HashMap<String, String>();
+        Map<String, String> mapCorrNames = new HashMap<String, String>();
         Set<String> insUsedByData = new HashSet<String>();
         Set<String> arraysUsedByData = new HashSet<String>();
         Set<String> corrUsedByData = new HashSet<String>();
 
-        public Set<String> getInsUsedByData() {
-            return insUsedByData;
-        }
-
-        public void setInsUsedByData(Set<String> insUsedByData) {
-            this.insUsedByData = insUsedByData;
-        }
-
-        public Set<String> getArraysUsedByData() {
-            return arraysUsedByData;
-        }
-
-        public void setArraysUsedByData(Set<String> arraysUsedByData) {
-            this.arraysUsedByData = arraysUsedByData;
-        }
-
-        public Set<String> getCorrUsedByData() {
-            return corrUsedByData;
-        }
-
-        public void setCorrUsedByData(Set<String> corrUsedByData) {
-            this.corrUsedByData = corrUsedByData;
-        }
-
-        public OIFitsFile getResultFile() {
-            return resultFile;
-        }
-
-        public void setResultFile(OIFitsFile resultFile) {
+        private Context(final OIFitsFile resultFile) {
             this.resultFile = resultFile;
         }
 
-        public String getTargetName() {
-            return targetName;
-        }
-
-        public void setTargetName(String targetName) {
-            this.targetName = targetName;
-        }
-
-        public Map<String, String> getMapWLNames() {
-            return mapWLNames;
-        }
-
-        public void setMapWLNames(Map<String, String> mapWLNames) {
-            this.mapWLNames = mapWLNames;
-        }
-
-        public Map<String, String> getMapArrayNames() {
-            return mapArrayNames;
-        }
-
-        public void setMapArrayNames(Map<String, String> mapArrayNames) {
-            this.mapArrayNames = mapArrayNames;
-        }
-
-        public Map<String, String> getMapCorrNames() {
-            return mapCorrNames;
-        }
-
-        public void setMapCorrNames(Map<String, String> mapCorrNames) {
-            this.mapCorrNames = mapCorrNames;
-        }
     }
 
     /**

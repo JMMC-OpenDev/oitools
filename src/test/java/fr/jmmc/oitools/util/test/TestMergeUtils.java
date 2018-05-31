@@ -195,7 +195,7 @@ public class TestMergeUtils extends JUnitBaseTest {
 
         final OIFitsChecker checker = new OIFitsChecker();
 
-        OIFitsFile mergeResult = MergeUtil.mergeOIFitsFiles(null, file1, file2);
+        OIFitsFile mergeResult = MergeUtil.mergeOIFitsFiles(file1, file2);
 
         mergeResult.check(checker);
         logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
