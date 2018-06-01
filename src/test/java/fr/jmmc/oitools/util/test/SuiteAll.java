@@ -28,7 +28,8 @@ import org.junit.runners.Suite;
     TestMergeUtilsFilesKO.class,
     TestMergeUtils.class,
     TestMergeUtils3Files.class,
-    TestProcessorCommandLine.class
+    TestProcessorCommandLine.class,
+    TestMergeFilter.class
 })
 public class SuiteAll {
 

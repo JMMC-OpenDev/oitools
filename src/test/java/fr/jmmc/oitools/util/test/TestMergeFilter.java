@@ -21,30 +21,19 @@ package fr.jmmc.oitools.util.test;
 
 import fr.jmmc.oitools.JUnitBaseTest;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
-import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_TEST;
-import static fr.jmmc.oitools.JUnitBaseTest.logger;
-import fr.jmmc.oitools.OIFitsViewer;
+import fr.jmmc.oitools.meta.OIFitsStandard;
 import fr.jmmc.oitools.model.OIArray;
-import fr.jmmc.oitools.model.OIFitsChecker;
+import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
-import fr.jmmc.oitools.model.OIFitsWriter;
-import fr.jmmc.oitools.model.OIT3;
-import fr.jmmc.oitools.model.OITarget;
-import fr.jmmc.oitools.model.OIVis;
-import fr.jmmc.oitools.model.OIVis2;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.util.MergeUtil;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -57,8 +46,9 @@ public class TestMergeFilter extends JUnitBaseTest {
 
     // Common data used by several tests
     private static OIFitsFile f1 = null;
-    private static OIFitsFile f2 = null;
-    private static OIFitsFile merge = null;
+//    private static OIFitsFile f2 = null;
+    private static OIFitsFile mergeFilterBlock = null;
+    private static OIFitsFile mergeFilterPass = null;
 
     /**
      * Do the merge of 2 OIFitsFiles
@@ -70,143 +60,81 @@ public class TestMergeFilter extends JUnitBaseTest {
     @BeforeClass
     public static void init() throws IOException, MalformedURLException, FitsException {
         f1 = OIFitsLoader.loadOIFits(
-                TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits");
-        f2 = OIFitsLoader.loadOIFits(
-                TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits");
-        merge = merge(f1, f2, TEST_DIR_TEST + "mergeTestTarget.fits");
-        Assert.assertNotNull("Merge return a null value", merge);
+                TEST_DIR_OIFITS + "GRAVITY.2016-01-09T05-37-06_singlesci_calibrated.fits");
+//        f2 = OIFitsLoader.loadOIFits(
+//                TEST_DIR_OIFITS + "GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits");
+
+        MergeUtil.Selector filter = new MergeUtil.Selector();
+
+        // Filter block data of the files
+        filter.addPattern(MergeUtil.Selector.INSTRUMENT_FILTER, "GRAV");
+        mergeFilterBlock = MergeUtil.mergeOIFitsFiles(filter, OIFitsStandard.VERSION_1, f1);
+        Assert.assertNotNull("Merge return a null value", mergeFilterBlock);
+
+        // Filter let pass data of the files
+        filter.addPattern(MergeUtil.Selector.INSTRUMENT_FILTER, "SPECTRO_SC"); // SPECTRO_FT
+        mergeFilterPass =  MergeUtil.mergeOIFitsFiles(filter, OIFitsStandard.VERSION_1, f1);
+        Assert.assertNotNull("Merge return a null value", mergeFilterPass);
     }
 
     /**
-     * Test target part of the merge
+     * Test if data are filtered
      *
      * @throws IOException
      * @throws MalformedURLException
      * @throws FitsException
      */
     @Test // @Ignore
-    public void testTargetWLArray() throws IOException, MalformedURLException, FitsException {
+    public void testData() throws IOException, MalformedURLException, FitsException {
 
-        OITarget oiTarget = merge.getOiTarget();
-        Assert.assertEquals("Merge result has more or less than one target", 1, oiTarget.getNbRows());
-        Assert.assertEquals("Merge result has not the expected target: " + oiTarget.getTarget(oiTarget.getTargetId()[0]),
-                f1.getOiTarget().getTarget(f1.getOiTarget().getTargetId()[0]),
-                oiTarget.getTarget(oiTarget.getTargetId()[0]));
+        List<OIData> dataList = mergeFilterBlock.getOiDataList();
+        Assert.assertEquals("No data should be in merge result of blocking filter",
+                0, dataList != null ? dataList.size() : 0);
 
-        OIWavelength[] oiWl = merge.getOiWavelengths();
-        Assert.assertEquals("Merge result has bad number of WL",
-                f1.getOiWavelengths().length + f2.getOiWavelengths().length,
-                oiWl.length);
-//        List<String> wlNames = new ArrayList<String>(f1.getOIW oiWl.get);
-
-        OIArray[] oiArray = merge.getOiArrays();
-        Assert.assertEquals("Merge result has bad number of array",
-                f1.getOiArrays().length + f2.getOiArrays().length,
-                oiArray.length);
+        dataList = mergeFilterPass.getOiDataList();
+        Assert.assertEquals("4 Data tables should be in merge result of blocking filter",
+                4, dataList != null ? dataList.size() : 0);
 
     }
 
     /**
-     * Test OIVIS data part of the merge
+     * Test if ins are filtered
      *
      * @throws IOException
      * @throws MalformedURLException
      * @throws FitsException
      */
     @Test // @Ignore
-    public void testOIVIS() throws IOException, MalformedURLException, FitsException {
+    public void testIns() throws IOException, MalformedURLException, FitsException {
 
-        OIVis[] oiVis1 = f1.getOiVis();
-        OIVis[] oiVis2 = f2.getOiVis();
-        OIVis[] oiVisMerge = merge.getOiVis();
+        OIWavelength[] insList = mergeFilterBlock.getOiWavelengths();
+        Assert.assertEquals("No ins should be in merge result of blocking filter",
+                0, insList != null ? insList.length : 0);
 
-        // Check returned OIVis part
-        Assert.assertNotNull("Merge return null for OIVis part", oiVisMerge);
-        Assert.assertEquals(oiVis1.length + oiVis2.length, oiVisMerge.length);
-
-        // Check content OIVis
-        List<OIVis> allResultOiVis = new ArrayList<OIVis>(Arrays.asList(oiVisMerge));
-
-        // TODO : compare used by remove is on identiy, do comparaison method
-        // see compareTable of OITableUtils
-        for (OIVis oiVis : oiVis1) {
-            if (!allResultOiVis.remove(oiVis)) {
-                Assert.fail(String.format("Data %s of file 1 not found in result of merge.", oiVis));
-            }
-        }
-
-        for (OIVis oiVis : oiVis2) {
-            if (!allResultOiVis.remove(oiVis)) {
-                Assert.fail(String.format("Data %s of file 2 not found in result of merge.", oiVis));
-            }
-        }
-        Assert.assertEquals(
-                "Result of merge cointains more OIVis data than it should: " + allResultOiVis,
-                0, allResultOiVis.size());
+        insList = mergeFilterPass.getOiWavelengths();
+        Assert.assertEquals("1 Ins should be in merge result of blocking filter",
+                1, insList != null ? insList.length : 0);
 
     }
 
     /**
-     * Test OIVIS2 data part of the merge
+     * Test if arrays are filtered
      *
      * @throws IOException
      * @throws MalformedURLException
      * @throws FitsException
      */
     @Test // @Ignore
-    public void testOIVIS2() throws IOException, MalformedURLException, FitsException {
+    public void testArraysIns() throws IOException, MalformedURLException, FitsException {
 
-        OIVis2[] oiVis2Merge = merge.getOiVis2();
+        OIArray[] arrayList = mergeFilterBlock.getOiArrays();
+        Assert.assertEquals("No array should be in merge result of blocking filter",
+                0, arrayList != null ? arrayList.length : 0);
 
-        Assert.assertNotNull("Merge return null for OIVis2 part", oiVis2Merge);
-        Assert.assertEquals(f1.getOiVis2().length + f2.getOiVis2().length, oiVis2Merge.length);
+        arrayList = mergeFilterPass.getOiArrays();
+        Assert.assertEquals("1 array should be in merge result of blocking filter",
+                1, arrayList != null ? arrayList.length : 0);
 
-    }
-
-    /**
-     * Test OIT3 data part of the merge
-     *
-     * @throws IOException
-     * @throws MalformedURLException
-     * @throws FitsException
-     */
-    @Test
-    public void testOIT3() throws IOException, MalformedURLException, FitsException {
-
-        OIT3[] oiT3 = merge.getOiT3();
-        Assert.assertNotNull("Merge return null for OIT3 part", oiT3);
-        Assert.assertEquals(f1.getOiT3().length + f2.getOiT3().length, oiT3.length);
-
-    }
-
-    /**
-     * Merge and write oifits files
-     *
-     * @param filename1
-     * @param filename2
-     * @param outputFilePath
-     * @return merged structure
-     * @throws IOException
-     * @throws MalformedURLException
-     * @throws FitsException
-     */
-    private static OIFitsFile merge(OIFitsFile file1, OIFitsFile file2, String outputFilePath)
-            throws IOException, MalformedURLException, FitsException {
-
-        final OIFitsChecker checker = new OIFitsChecker();
-
-        OIFitsFile mergeResult = MergeUtil.mergeOIFitsFiles(file1, file2);
-
-        mergeResult.check(checker);
-        logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
-
-        OIFitsWriter.writeOIFits(outputFilePath, mergeResult);
-
-        if (DEBUG) {
-            logger.log(Level.INFO, "MERGE: create > {0}", new OIFitsViewer(true, true).process(outputFilePath));
-        }
-
-        return mergeResult;
     }
 
 }

@@ -84,7 +84,7 @@ public class TestMergeUtils extends JUnitBaseTest {
      * @throws MalformedURLException
      * @throws FitsException
      */
-    @Test @Ignore
+    @Test // @Ignore
     public void testTargetWLArray() throws IOException, MalformedURLException, FitsException {
 
         OITarget oiTarget = merge.getOiTarget();
@@ -113,7 +113,7 @@ public class TestMergeUtils extends JUnitBaseTest {
      * @throws MalformedURLException
      * @throws FitsException
      */
-    @Test @Ignore
+    @Test // @Ignore
     public void testOIVIS() throws IOException, MalformedURLException, FitsException {
 
         OIVis[] oiVis1 = f1.getOiVis();
@@ -153,7 +153,7 @@ public class TestMergeUtils extends JUnitBaseTest {
      * @throws MalformedURLException
      * @throws FitsException
      */
-    @Test @Ignore
+    @Test // @Ignore
     public void testOIVIS2() throws IOException, MalformedURLException, FitsException {
 
         OIVis2[] oiVis2Merge = merge.getOiVis2();
