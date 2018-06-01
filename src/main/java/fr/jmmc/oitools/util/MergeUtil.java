@@ -208,7 +208,7 @@ public class MergeUtil {
         // Browse all names of file to merge, change name if already present in result, add to map 
         // old_name > new name
         if (fileToMerge != null && fileToMerge.getOiArrays() != null) {
-            Set<String> usedNames = context.insUsedByData;
+            Set<String> usedNames = context.arraysUsedByData;
 
             // Browse all OIArray of the file to merge
             for (OIArray oiArray : fileToMerge.getOiArrays()) {
