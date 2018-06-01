@@ -21,9 +21,14 @@ package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.fits.FitsConstants;
+import fr.jmmc.oitools.fits.FitsHeaderCard;
 import fr.jmmc.oitools.fits.FitsTable;
+import fr.jmmc.oitools.fits.FitsUtils;
+import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
+import fr.nom.tam.fits.HeaderCard;
+import java.util.logging.Level;
 
 /**
  * Base Class for all OI_* tables.
@@ -34,13 +39,13 @@ public abstract class OITable extends FitsTable {
     /** EXTNAME for V1 OIFITS keyword descriptor */
     private final static KeywordMeta KEYWORD_EXTNAME_1 = new KeywordMeta(FitsConstants.KEYWORD_EXT_NAME, "extension name", Types.TYPE_CHAR,
             new String[]{OIFitsConstants.TABLE_OI_ARRAY, OIFitsConstants.TABLE_OI_TARGET, OIFitsConstants.TABLE_OI_WAVELENGTH,
-                OIFitsConstants.TABLE_OI_VIS, OIFitsConstants.TABLE_OI_VIS2, OIFitsConstants.TABLE_OI_T3
+                         OIFitsConstants.TABLE_OI_VIS, OIFitsConstants.TABLE_OI_VIS2, OIFitsConstants.TABLE_OI_T3
             });
     /** EXTNAME for V2 OIFITS keyword descriptor */
     private final static KeywordMeta KEYWORD_EXTNAME_2 = new KeywordMeta(FitsConstants.KEYWORD_EXT_NAME, "extension name", Types.TYPE_CHAR,
             new String[]{OIFitsConstants.TABLE_OI_ARRAY, OIFitsConstants.TABLE_OI_TARGET, OIFitsConstants.TABLE_OI_WAVELENGTH,
-                OIFitsConstants.TABLE_OI_VIS, OIFitsConstants.TABLE_OI_VIS2, OIFitsConstants.TABLE_OI_T3,
-                OIFitsConstants.TABLE_OI_FLUX, OIFitsConstants.TABLE_OI_CORR, OIFitsConstants.TABLE_OI_INSPOL
+                         OIFitsConstants.TABLE_OI_VIS, OIFitsConstants.TABLE_OI_VIS2, OIFitsConstants.TABLE_OI_T3,
+                         OIFitsConstants.TABLE_OI_FLUX, OIFitsConstants.TABLE_OI_CORR, OIFitsConstants.TABLE_OI_INSPOL
             });
     /** OI_REVN=1 keyword descriptor */
     private final static KeywordMeta KEYWORD_OI_REVN_1 = new KeywordMeta(OIFitsConstants.KEYWORD_OI_REVN,
@@ -95,6 +100,60 @@ public abstract class OITable extends FitsTable {
         // Always define keyword values:
         this.setExtName(extName);
         this.setOiRevn(revision);
+    }
+
+    /**
+     * Copy the table into this instance
+     *
+     * @param src table to copy
+     */
+    protected final void copyTable(final OITable src) throws IllegalArgumentException {
+        // Copy keyword values:
+        for (KeywordMeta keyword : getKeywordDescCollection()) {
+            final String keywordName = keyword.getName();
+
+            if (FitsConstants.KEYWORD_EXT_NAME.equals(keywordName)
+                    || OIFitsConstants.KEYWORD_OI_REVN.equals(keywordName)) {
+                // Ignore ExtName / OiRevn (v1/2) defined in previous constructor
+                continue;
+            }
+
+            // get keyword value:
+            final Object keywordValue = src.getKeywordValue(keywordName);
+
+            // potentially missing values
+            if (keywordValue != null) {
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "KEYWORD {0} = ''{1}''", new Object[]{keywordName, keywordValue});
+                }
+                setKeywordValue(keywordName, keywordValue);
+            }
+        }
+
+        // Copy header cards:
+        if (src.hasHeaderCards()) {
+            // Copy references to Fits header cards:
+            getHeaderCards().addAll(src.getHeaderCards());
+        }
+
+        // Copy column values:
+        String columnName;
+        Object columnValue;
+
+        // Copy columns:
+        for (ColumnMeta column : getColumnDescCollection()) {
+            columnName = column.getName();
+            columnValue = src.getColumnValue(columnName);
+
+            if (columnValue == null) {
+                columnValue = createColumnArray(column, getNbRows());
+            }
+
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "COLUMN {0} = ''{1}''", new Object[]{columnName, columnValue});
+            }
+            setColumnValue(columnName, columnValue);
+        }
     }
 
     /*
@@ -157,8 +216,10 @@ public abstract class OITable extends FitsTable {
     public final OIFitsFile getOIFitsFile() {
         return this.oifitsFile;
     }
+
     /**
-     * Set parent structure. TODO: temporary, to remove when colnage is done 
+     * Set parent structure. 
+TODO: temporary, to remove when copyTable() is done 
      * @param file 
      */
     public void setOIFitsFile(OIFitsFile file) {

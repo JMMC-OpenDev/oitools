@@ -187,6 +187,17 @@ public final class OITarget extends OITable {
         this.initializeTable(nbRows);
     }
 
+    /**
+     * Public OITarget class constructor to copy the given table (structure only)
+     * @param oifitsFile main OifitsFile
+     * @param src table to copy
+     */
+    public OITarget(final OIFitsFile oifitsFile, final OITarget src) {
+        this(oifitsFile);
+        
+        this.copyTable(src);
+    }
+
     /** 
      * Get number of target identified in this table.
      * @return number of target identified in this table.

@@ -143,6 +143,17 @@ public final class OIArray extends OITable {
         this.initializeTable(nbRows);
     }
 
+    /**
+     * Public OIArray class constructor to copy the given table (structure only)
+     * @param oifitsFile main OifitsFile
+     * @param src table to copy
+     */
+    public OIArray(final OIFitsFile oifitsFile, final OIArray src) {
+        this(oifitsFile);
+        
+        this.copyTable(src);
+    }
+
     /* --- Keywords --- */
     /**
      * Get the value of ARRNAME keyword

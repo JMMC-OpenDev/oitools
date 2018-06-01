@@ -317,7 +317,7 @@ public final class Analyzer implements ModelVisitor {
 
         // TODO: extract only instrument Name ie parse first alpha characters to cleanup weird INSNAME values
         final InstrumentMode insMode = new InstrumentMode(insName, nbChannels, lambdaMin, lambdaMax, resPower, bandMin);
-        
+
         // Associate the InstrumentMode instance to the OIWavelength table (locally)
         oiWavelength.setInstrumentMode(insMode);
 

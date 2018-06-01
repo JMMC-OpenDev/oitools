@@ -69,7 +69,7 @@ public class TestProcessorCommandLine {
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
-                getOut(result).startsWith("target_name"));
+                getOut(result).startsWith("Processing"));
     }
 
     @Test

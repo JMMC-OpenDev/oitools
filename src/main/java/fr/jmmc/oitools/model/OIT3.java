@@ -145,6 +145,17 @@ public final class OIT3 extends OIData {
         this.initializeTable(nbRows);
     }
 
+    /**
+     * Public OIT3 class constructor to copy the given table (structure only)
+     * @param oifitsFile main OifitsFile
+     * @param src table to copy
+     */
+    public OIT3(final OIFitsFile oifitsFile, final OIT3 src) {
+        this(oifitsFile);
+        
+        this.copyTable(src);
+    }
+    
     /* --- Columns --- */
     /**
      * Return the T3AMP column.

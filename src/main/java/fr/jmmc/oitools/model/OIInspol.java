@@ -127,16 +127,26 @@ public final class OIInspol extends OIAbstractData {
     /**
      * Public OIInspol class constructor to create a new table
      * @param oifitsFile main OifitsFile
-     * @param arrname value of ARRNAME keyword
      * @param nbRows number of rows i.e. the Fits NAXIS2 keyword value
      * @param nWaves number of nwaves
      */
-    public OIInspol(final OIFitsFile oifitsFile, final String arrname, final int nbRows, final int nWaves) {
+    public OIInspol(final OIFitsFile oifitsFile, final int nbRows, final int nWaves) {
         this(oifitsFile, nWaves);
 
         this.initializeTable(nbRows);
     }
 
+    /**
+     * Public OIInspol class constructor to copy the given table (structure only)
+     * @param oifitsFile main OifitsFile
+     * @param src table to copy
+     */
+    public OIInspol(final OIFitsFile oifitsFile, final OIInspol src) {
+        this(oifitsFile);
+        
+        this.copyTable(src);
+    }
+    
     /* --- keywords --- */
     /**
      * Get the value of NPOL keyword

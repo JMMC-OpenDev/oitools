@@ -265,7 +265,6 @@ public final class FitsImageWriter {
      * @throws fr.nom.tam.fits.HeaderCardException
      */
     private static void processHeaderCards(final Header header, final FitsHDU hduFits) throws HeaderCardException {
-
         if (hduFits.hasHeaderCards()) {
 
             final boolean isImage = (hduFits instanceof FitsImageHDU);
@@ -298,7 +297,7 @@ public final class FitsImageWriter {
             keywordName = keyword.getName();
 
             // get keyword value :
-            keywordValue = hduFits.getKeywordsValue().get(keywordName);
+            keywordValue = hduFits.getKeywordValue(keywordName);
 
             if (keywordValue == null) {
                 // skip missing values
@@ -306,7 +305,7 @@ public final class FitsImageWriter {
             }
 
             if (logger.isLoggable(Level.FINE)) {
-                logger.log(Level.FINE, "KEYWORD {0} = ''{1}''", new Object[]{keyword.getName(), keywordValue});
+                logger.log(Level.FINE, "KEYWORD {0} = ''{1}''", new Object[]{keywordName, keywordValue});
             }
 
             switch (keyword.getDataType()) {

@@ -1030,7 +1030,7 @@ public abstract class FitsTable extends FitsHDU {
                 }
             }
             if ((value == null) && OIFitsChecker.isInspectRules()) {
-                // Create a new column value:
+                // Create a new column value to always enter in column.check(checker) below:
                 value = createColumnArray(column, getNbRows());
             }
             if (value != null) {

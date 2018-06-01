@@ -187,7 +187,7 @@ public final class OIFitsFile extends FitsImageFile {
             } else if (oiTable instanceof OIFlux) {
                 extVer = getNbOiFlux();
             } else if (oiTable instanceof OICorr) {
-                extVer = getNbOiCorr();
+                extVer = getNbOiCorrs();
             } else if (oiTable instanceof OIInspol) {
                 extVer = getNbOiInspol();
             }
@@ -328,6 +328,29 @@ public final class OIFitsFile extends FitsImageFile {
             this.oiDataTables.remove((OIFlux) oiTable);
             this.oiFluxTables.remove((OIFlux) oiTable);
         }
+    }
+    
+    public OITable copyTable(OITable oiTable) {
+        if (oiTable instanceof OITarget) {
+            return new OITarget(this, (OITarget) oiTable);
+        } else if (oiTable instanceof OIWavelength) {
+            return new OIWavelength(this, (OIWavelength) oiTable);
+        } else if (oiTable instanceof OIArray) {
+            return new OIArray(this, (OIArray) oiTable);
+        } else if (oiTable instanceof OICorr) {
+            return new OICorr(this, (OICorr) oiTable);
+        } else if (oiTable instanceof OIInspol) {
+            return new OIInspol(this, (OIInspol) oiTable);
+        } else if (oiTable instanceof OIVis) {
+            return new OIVis(this, (OIVis) oiTable);
+        } else if (oiTable instanceof OIVis2) {
+            return new OIVis2(this, (OIVis2) oiTable);
+        } else if (oiTable instanceof OIT3) {
+            return new OIT3(this, (OIT3) oiTable);
+        } else if (oiTable instanceof OIFlux) {
+            return new OIFlux(this, (OIFlux) oiTable);
+        }
+        return null;
     }
 
     /**
@@ -962,6 +985,15 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
+     * Tells if the file contains some OI_WAVELENGTH tables
+     *
+     * @return true if the file contains some OI_WAVELENGTH table
+     */
+    public boolean hasOiWavelengths() {
+        return !this.oiWavelengths.isEmpty();
+    }
+
+    /**
      * Get the number of OI_WAVELENGTH tables
      *
      * @return the number of OI_WAVELENGTH tables
@@ -993,7 +1025,7 @@ public final class OIFitsFile extends FitsImageFile {
      *
      * @return the number of OI_CORR tables
      */
-    public int getNbOiCorr() {
+    public int getNbOiCorrs() {
         return this.oiCorrs.size();
     }
 
@@ -1002,7 +1034,7 @@ public final class OIFitsFile extends FitsImageFile {
      *
      * @return an array containing all OI_CORR tables
      */
-    public OICorr[] getOiCorr() {
+    public OICorr[] getOiCorrs() {
         return this.oiCorrs.toArray(new OICorr[this.oiCorrs.size()]);
     }
 

@@ -22,7 +22,7 @@ package fr.jmmc.oitools.fits;
 import fr.nom.tam.fits.HeaderCard;
 
 /**
- * This class represents one Fits header card (key, value, comment)
+ * This class represents one Fits header card (key, value, comment) immutable
  * @author bourgesl
  */
 public final class FitsHeaderCard {

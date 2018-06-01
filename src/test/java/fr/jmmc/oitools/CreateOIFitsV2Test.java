@@ -328,7 +328,7 @@ public class CreateOIFitsV2Test {
 
             for (String insname : oiFitsFile.getAcceptedInsNames()) {
 
-                final OIInspol oiinspol = new OIInspol(oiFitsFile, arrname, nRows, N_WAVE);
+                final OIInspol oiinspol = new OIInspol(oiFitsFile, nRows, N_WAVE);
 
                 oiinspol.setNPol(3);
                 oiinspol.setArrName(arrname);

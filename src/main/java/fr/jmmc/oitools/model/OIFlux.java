@@ -96,6 +96,17 @@ public final class OIFlux extends OIData {
         this.initializeTable(nbRows);
     }
 
+    /**
+     * Public OIFlux class constructor to copy the given table (structure only)
+     * @param oifitsFile main OifitsFile
+     * @param src table to copy
+     */
+    public OIFlux(final OIFitsFile oifitsFile, final OIFlux src) {
+        this(oifitsFile);
+        
+        this.copyTable(src);
+    }
+
     /* --- Keywords --- */
     /**
      * Get the value of CALSTAT keyword

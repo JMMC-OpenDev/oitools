@@ -76,6 +76,17 @@ public final class OIWavelength extends OITable {
     }
 
     /**
+     * Public OIWavelength class constructor to copy the given table (structure only)
+     * @param oifitsFile main OifitsFile
+     * @param src table to copy
+     */
+    public OIWavelength(final OIFitsFile oifitsFile, final OIWavelength src) {
+        this(oifitsFile);
+        
+        this.copyTable(src);
+    }
+
+    /**
      * Get number of wavelengths
      * @return the number of wavelengths.
      */

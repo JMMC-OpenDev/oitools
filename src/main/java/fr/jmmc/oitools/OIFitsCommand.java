@@ -97,4 +97,13 @@ public abstract class OIFitsCommand {
         }
     }
 
+    static boolean hasOptionArg(final String[] args, final String opt, final String longOpt) {
+        for (final String arg : args) {
+            if (arg.equals(opt) || arg.equals(longOpt)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

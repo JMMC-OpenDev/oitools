@@ -111,6 +111,17 @@ public final class OIVis2 extends OIData {
         this.initializeTable(nbRows);
     }
 
+    /**
+     * Public OIVis2 class constructor to copy the given table (structure only)
+     * @param oifitsFile main OifitsFile
+     * @param src table to copy
+     */
+    public OIVis2(final OIFitsFile oifitsFile, final OIVis2 src) {
+        this(oifitsFile);
+        
+        this.copyTable(src);
+    }
+
     /* --- Columns --- */
     /**
      * Return the VIS2DATA column.

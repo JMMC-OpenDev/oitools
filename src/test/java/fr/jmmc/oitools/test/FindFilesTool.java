@@ -124,7 +124,7 @@ public class FindFilesTool implements TestEnv {
     }
 
     private static boolean oneNWave(OIFitsFile oifits) {
-        if (oifits.getNbOiWavelengths() > 0) {
+        if (oifits.hasOiWavelengths()) {
             for (OIWavelength oiwave : oifits.getOiWavelengths()) {
                 if (oiwave.getNWave() == 1) {
                     return true;

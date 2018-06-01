@@ -185,6 +185,17 @@ public final class OIVis extends OIData {
         this.initializeTable(nbRows);
     }
 
+    /**
+     * Public OIVis class constructor to copy the given table (structure only)
+     * @param oifitsFile main OifitsFile
+     * @param src table to copy
+     */
+    public OIVis(final OIFitsFile oifitsFile, final OIVis src) {
+        this(oifitsFile);
+        
+        this.copyTable(src);
+    }
+    
     /* --- keywords --- */
     /**
      * Get the optional value of AMPTYPE keyword

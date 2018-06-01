@@ -87,6 +87,17 @@ public final class OICorr extends OITable {
         this.initializeTable(nbRows);
     }
 
+    /**
+     * Public OICorr class constructor to copy the given table (structure only)
+     * @param oifitsFile main OifitsFile
+     * @param src table to copy
+     */
+    public OICorr(final OIFitsFile oifitsFile, final OICorr src) {
+        this(oifitsFile);
+        
+        this.copyTable(src);
+    }
+    
     /* --- keywords --- */
     /**
      * Get the CORRNAME keyword value.

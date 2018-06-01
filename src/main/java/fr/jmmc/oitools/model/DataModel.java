@@ -217,7 +217,7 @@ public class DataModel {
         oiFitsFile.addOiTable(oicorr);
 
         // OIInspol:
-        final OIInspol oiinspol = new OIInspol(oiFitsFile, arrName, nRows, nWLen);
+        final OIInspol oiinspol = new OIInspol(oiFitsFile, nRows, nWLen);
         oiFitsFile.addOiTable(oiinspol);
 
         // Data:

@@ -16,14 +16,16 @@
  */
 package fr.jmmc.oitools;
 
+import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFitsWriter;
-import fr.jmmc.oitools.util.MergeUtil;
+import fr.jmmc.oitools.processing.Merger;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  *
@@ -50,13 +52,7 @@ public class OIFitsProcessor extends OIFitsCommand {
                 return;
             }
 
-            boolean quiet = true;
-            for (final String arg : args) {
-                if (arg.equals("-l") || arg.equals("-log")) {
-                    quiet = false;
-                    break;
-                }
-            }
+            final boolean quiet = !hasOptionArg(args, "-l", "-log");
             bootstrap(quiet);
 
             final String command = args[0];
@@ -107,10 +103,12 @@ public class OIFitsProcessor extends OIFitsCommand {
 
         final String inputFileLocation = fileLocations.get(0);
         final String outputFilePath = getOutputFilepath(args);
+        final boolean check = hasOptionArg(args, "-c", "-check");
 
         // Load then save file content
-        OIFitsFile file = OIFitsLoader.loadOIFits(inputFileLocation);
-        OIFitsWriter.writeOIFits(outputFilePath, file);
+        final OIFitsFile result = OIFitsLoader.loadOIFits(inputFileLocation);
+        // Store result
+        write(outputFilePath, result, check);
     }
 
     /**
@@ -123,6 +121,7 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static void merge(final String[] args) throws FitsException, IOException {
         final List<String> fileLocations = getInputFiles(args);
         final String outputFilePath = getOutputFilepath(args);
+        final boolean check = hasOptionArg(args, "-c", "-check");
 
         final OIFitsFile[] inputs = new OIFitsFile[fileLocations.size()];
 
@@ -132,7 +131,18 @@ public class OIFitsProcessor extends OIFitsCommand {
         }
 
         // Call merge
-        final OIFitsFile result = MergeUtil.mergeOIFitsFiles(inputs);
+        final OIFitsFile result = Merger.process(inputs);
+        // Store result
+        write(outputFilePath, result, check);
+    }
+
+    private static void write(final String outputFilePath, final OIFitsFile result, final boolean check) throws IOException, FitsException {
+        if (check) {
+            final OIFitsChecker checker = new OIFitsChecker();
+            result.check(checker);
+            info("validation results:\n" + checker.getCheckReport());
+        }
+
         // Store result
         OIFitsWriter.writeOIFits(outputFilePath, result);
     }
@@ -191,13 +201,14 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("------------- Arguments help ---------------------------------------------------------");
         info("| Key          Value           Description                                           |");
         info("|------------------------------------------------------------------------------------|");
-        info("| command      " + COMMAND_LIST + "           List content of several oifits files                   |");
+        info("| command      " + COMMAND_HELP + "           Show this help                                         |");
         info("| command      " + COMMAND_LIST + "           List content of several oifits files                   |");
         info("| command      " + COMMAND_CONVERT + "        Convert the given input file                           |");
         info("| command      " + COMMAND_MERGE + "          Merge several oifits files                             |");
         info("| " + OPTION_OUTPUT.substring(0, 2) + " or " + OPTION_OUTPUT
                 + " <file_path>   Complete path, absolute or relative, for output file   |");
         info("| [-l] or [-log]              Enable logging (quiet by default)                      |");
+        info("| [-c] or [-check]            Check output file before writing                       |");
         info("--------------------------------------------------------------------------------------");
     }
 

@@ -315,6 +315,9 @@ public final class OIFitsViewer extends OIFitsCommand {
             info("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>");
         }
         for (String fileLocation : fileLocations) {
+            if (!xml) {
+                info("Processing: " + fileLocation);
+            }
             try {
                 info(viewer.process(fileLocation));
             } catch (Exception e) {

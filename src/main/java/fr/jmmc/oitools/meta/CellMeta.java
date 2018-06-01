@@ -96,9 +96,13 @@ public class CellMeta {
         }
         if (intAcceptedValues == null) {
             throw new IllegalStateException("intAcceptedValues can not be null");
+        } else if ((intAcceptedValues.length != 0) && dataType != Types.TYPE_SHORT && dataType != Types.TYPE_INT) {
+            throw new IllegalStateException("intAcceptedValues can only be defined for type SHORT");
         }
         if (stringAcceptedValues == null) {
             throw new IllegalStateException("stringAcceptedValues can not be null");
+        } else if ((stringAcceptedValues.length != 0) && (dataType != Types.TYPE_CHAR)) {
+            throw new IllegalStateException("stringAcceptedValues can only be defined for type CHAR");
         }
         if (unit == null) {
             throw new IllegalStateException("unit can not be null");

@@ -29,7 +29,7 @@ import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIVis2;
 import fr.jmmc.oitools.model.OIWavelength;
-import fr.jmmc.oitools.util.MergeUtil;
+import fr.jmmc.oitools.processing.Merger;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -46,8 +46,6 @@ import org.junit.Test;
  * @author jammetv
  */
 public class TestMergeUtils3Files extends JUnitBaseTest {
-
-    private static final boolean DEBUG = true;
 
     // Common data used by several tests
     private static OIFitsFile f1 = null;
@@ -70,7 +68,7 @@ public class TestMergeUtils3Files extends JUnitBaseTest {
                 TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits");
         f3 = OIFitsLoader.loadOIFits(
                 TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits");
-        merge = MergeUtil.mergeOIFitsFiles(f1, f2, f3);
+        merge = Merger.process(f1, f2, f3);
         Assert.assertNotNull("Merge return a null value", merge);
     }
 
@@ -94,13 +92,11 @@ public class TestMergeUtils3Files extends JUnitBaseTest {
         Assert.assertEquals("Merge result has bad number of WL",
                 f1.getOiWavelengths().length + f2.getOiWavelengths().length + f3.getOiWavelengths().length,
                 oiWl.length);
-//        List<String> wlNames = new ArrayList<String>(f1.getOIW oiWl.get);
 
         OIArray[] oiArray = merge.getOiArrays();
         Assert.assertEquals("Merge result has bad number of array",
                 f1.getOiArrays().length + f2.getOiArrays().length + f3.getOiArrays().length,
                 oiArray.length);
-
     }
 
     /**
@@ -121,31 +117,6 @@ public class TestMergeUtils3Files extends JUnitBaseTest {
         // Check returned OIVis part
         Assert.assertNotNull("Merge return null for OIVis part", oiVisMerge);
         Assert.assertEquals(oiVis1.length + oiVis2.length + oiVis3.length, oiVisMerge.length);
-
-        // Check content OIVis
-        List<OIVis> allResultOiVis = new ArrayList<OIVis>(Arrays.asList(oiVisMerge));
-
-        // TODO : compare used by remove is on identiy, do comparaison method
-        // see compareTable of OITableUtils
-        for (OIVis oiVis : oiVis1) {
-            if (!allResultOiVis.remove(oiVis)) {
-                Assert.fail(String.format("Data %s of file 1 not found in result of merge.", oiVis));
-            }
-        }
-        for (OIVis oiVis : oiVis2) {
-            if (!allResultOiVis.remove(oiVis)) {
-                Assert.fail(String.format("Data %s of file 2 not found in result of merge.", oiVis));
-            }
-        }
-        for (OIVis oiVis : oiVis3) {
-            if (!allResultOiVis.remove(oiVis)) {
-                Assert.fail(String.format("Data %s of file 3 not found in result of merge.", oiVis));
-            }
-        }
-        Assert.assertEquals(
-                "Result of merge cointains more OIVis data than it should: " + allResultOiVis,
-                0, allResultOiVis.size());
-
     }
 
     /**
@@ -177,6 +148,5 @@ public class TestMergeUtils3Files extends JUnitBaseTest {
         OIT3[] mergeOiT3 = merge.getOiT3();
         Assert.assertNotNull("Merge return null for OIT3 part", mergeOiT3);
         Assert.assertEquals(f1.getOiT3().length + f2.getOiT3().length + f3.getOiT3().length, mergeOiT3.length);
-
     }
 }

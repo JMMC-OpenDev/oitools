@@ -606,12 +606,10 @@ public final class FitsImageLoader {
             }
         }
 
-        String name;
-        Object value;
         for (KeywordMeta keyword : keywordsDescCollection) {
-            name = keyword.getName();
+            final String keywordName = keyword.getName();
 
-            final boolean hasKeyword = header.containsKey(name);
+            final boolean hasKeyword = header.containsKey(keywordName);
 
             // check mandatory keywords:
             if (!hasKeyword || OIFitsChecker.isInspectRules()) {
@@ -619,17 +617,18 @@ public final class FitsImageLoader {
                     /* No keyword with keywordName name */
                     if (checker != null) {
                         // rule [GENERIC_KEYWORD_MANDATORY] check if the required keyword is present
-                        checker.ruleFailed(Rule.GENERIC_KEYWORD_MANDATORY, hduFits, name);
+                        checker.ruleFailed(Rule.GENERIC_KEYWORD_MANDATORY, hduFits, keywordName);
                     }
                 }
             }
             if (hasKeyword || OIFitsChecker.isInspectRules()) {
                 // parse keyword value:
-                value = parseKeyword(checker, hduFits, keyword, header.getValue(name));
+                final Object keywordValue = parseKeyword(checker, hduFits, keyword, header.getValue(keywordName));
 
                 // store key and value:
-                if (value != null) {
-                    hduFits.setKeywordValue(name, value);
+                // potentially missing values
+                if (keywordValue != null) {
+                    hduFits.setKeywordValue(keywordName, keywordValue);
                 }
             }
         }
@@ -827,14 +826,9 @@ public final class FitsImageLoader {
             // Anyway do not store already handled keywords
             if (!keywordsDesc.containsKey(key)
                     && (isImage || !FitsUtils.isStandardKeyword(key))) {
+                // no trim:
                 value = card.getValue();
-                // DISABLE TRIM
-/*                
-            if (value != null) {
-                // trim values:
-                value = value.trim();
-            }
-                 */
+
                 headerCards.add(new FitsHeaderCard(key, value, card.getComment()));
             }
         }

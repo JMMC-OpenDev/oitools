@@ -21,17 +21,20 @@ package fr.jmmc.oitools.util.test;
 
 import fr.jmmc.oitools.JUnitBaseTest;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
-import fr.jmmc.oitools.meta.OIFitsStandard;
+import fr.jmmc.oitools.OIFitsViewer;
 import fr.jmmc.oitools.model.OIArray;
 import fr.jmmc.oitools.model.OIData;
+import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIWavelength;
-import fr.jmmc.oitools.util.MergeUtil;
+import fr.jmmc.oitools.processing.Merger;
+import fr.jmmc.oitools.processing.Selector;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.logging.Level;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -42,11 +45,8 @@ import org.junit.Test;
  */
 public class TestMergeFilter extends JUnitBaseTest {
 
-    private final static boolean DEBUG = false;
-
     // Common data used by several tests
-    private static OIFitsFile f1 = null;
-//    private static OIFitsFile f2 = null;
+    private static OIFitsFile input = null;
     private static OIFitsFile mergeFilterBlock = null;
     private static OIFitsFile mergeFilterPass = null;
 
@@ -59,21 +59,19 @@ public class TestMergeFilter extends JUnitBaseTest {
      */
     @BeforeClass
     public static void init() throws IOException, MalformedURLException, FitsException {
-        f1 = OIFitsLoader.loadOIFits(
+        input = OIFitsLoader.loadOIFits(
                 TEST_DIR_OIFITS + "GRAVITY.2016-01-09T05-37-06_singlesci_calibrated.fits");
-//        f2 = OIFitsLoader.loadOIFits(
-//                TEST_DIR_OIFITS + "GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits");
 
-        MergeUtil.Selector filter = new MergeUtil.Selector();
+        Selector selector = new Selector();
 
         // Filter block data of the files
-        filter.addPattern(MergeUtil.Selector.INSTRUMENT_FILTER, "GRAV");
-        mergeFilterBlock = MergeUtil.mergeOIFitsFiles(filter, OIFitsStandard.VERSION_1, f1);
+        selector.addPattern(Selector.INSTRUMENT_FILTER, "GRAV");
+        mergeFilterBlock = Merger.process(selector, input);
         Assert.assertNotNull("Merge return a null value", mergeFilterBlock);
 
         // Filter let pass data of the files
-        filter.addPattern(MergeUtil.Selector.INSTRUMENT_FILTER, "SPECTRO_SC"); // SPECTRO_FT
-        mergeFilterPass =  MergeUtil.mergeOIFitsFiles(filter, OIFitsStandard.VERSION_1, f1);
+        selector.addPattern(Selector.INSTRUMENT_FILTER, "SPECTRO_SC"); // SPECTRO_FT
+        mergeFilterPass = merge(selector, input);
         Assert.assertNotNull("Merge return a null value", mergeFilterPass);
     }
 
@@ -137,4 +135,14 @@ public class TestMergeFilter extends JUnitBaseTest {
 
     }
 
+    private static OIFitsFile merge(final Selector selector, final OIFitsFile... oiFitsToMerge) {
+
+        OIFitsFile mergeResult = Merger.process(selector, oiFitsToMerge);
+
+        final OIFitsChecker checker = new OIFitsChecker();
+        mergeResult.check(checker);
+        logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
+
+        return mergeResult;
+    }
 }
