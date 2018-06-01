@@ -330,14 +330,14 @@ public final class Merger {
                 final String newArrName = mapArrayNames.get(oiData.getArrName());
                 // What to do if not found (invalid ref) ?
                 if (newArrName == null) {
-                    logger.info("Invalid ARRNAME[" + oiData.getArrName() + "] found !");
+                    logger.log(Level.WARNING, "Invalid ARRNAME[{0}] found !", oiData.getArrName());
                     continue;
                 }
 
                 final String newInsName = mapInsNames.get(oiData.getInsName());
                 // What to do if not found (invalid ref) ?
                 if (newInsName == null) {
-                    logger.info("Invalid INSNAME[" + oiData.getInsName() + "] found !");
+                    logger.log(Level.WARNING, "Invalid INSNAME[{0}] found !", oiData.getInsName());
                     continue;
                 }
 
@@ -347,7 +347,7 @@ public final class Merger {
                     newCorrName = mapCorrNames.get(oiData.getCorrName());
                     // What to do if not found (invalid ref) ?
                     if (newCorrName == null) {
-                        logger.info("Invalid CORRNAME[" + oiData.getCorrName() + "] found !");
+                        logger.log(Level.WARNING, "Invalid CORRNAME[{0}] found !", oiData.getCorrName());
                         continue;
                     }
                 }
