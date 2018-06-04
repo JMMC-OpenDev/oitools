@@ -21,11 +21,11 @@ import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFitsWriter;
 import fr.jmmc.oitools.processing.Merger;
+import fr.jmmc.oitools.processing.Selector;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  *
@@ -39,6 +39,7 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static final String COMMAND_MERGE = "merge";
 
     private static final String OPTION_OUTPUT = "-output";
+    private static final String OPTION_INSNAME = "-insname";
 
     /**
      * Main entry point.
@@ -130,10 +131,22 @@ public class OIFitsProcessor extends OIFitsCommand {
             inputs[i] = OIFitsLoader.loadOIFits(fileLocations.get(i));
         }
 
+        Selector selector = null;
+        int positionOptionFilter = getOptionArgPosition(args, OPTION_INSNAME, OPTION_INSNAME);
+        if (positionOptionFilter > -1 && args.length > positionOptionFilter + 1) {
+            selector = new Selector();
+            selector.addPattern(Selector.INSTRUMENT_FILTER, args[positionOptionFilter + 1]);
+        }
+
         // Call merge
-        final OIFitsFile result = Merger.process(inputs);
-        // Store result
-        write(outputFilePath, result, check);
+        final OIFitsFile result = Merger.process(selector, inputs);
+        if (result != null && result.getOiDatas().length > 0) {
+            // Store result
+            write(outputFilePath, result, check);
+        } else {
+            info("Result is empty, no file created.");
+        }
+
     }
 
     private static void write(final String outputFilePath, final OIFitsFile result, final boolean check) throws IOException, FitsException {
@@ -151,7 +164,7 @@ public class OIFitsProcessor extends OIFitsCommand {
      * Get output file path from command arguments
      *
      * @param args
-     * @return output file path 
+     * @return output file path
      */
     private static String getOutputFilepath(String[] args) {
         String outputFilePath = null;
@@ -179,7 +192,8 @@ public class OIFitsProcessor extends OIFitsCommand {
 
         for (int i = 1; i < args.length; i++) {
             // note: should be generalized to any argument having value(s):
-            if (OPTION_OUTPUT.substring(0, 2).equals(args[i]) || OPTION_OUTPUT.equals(args[i])) {
+            if (OPTION_OUTPUT.substring(0, 2).equals(args[i]) || OPTION_OUTPUT.equals(args[i])
+                    || OPTION_INSNAME.equals(args[i])) {
                 i++;  // skip next parameter which is the output file
             } else if (args[i].startsWith("-")) {
                 // ignore short options
@@ -194,7 +208,9 @@ public class OIFitsProcessor extends OIFitsCommand {
         return fileLocations;
     }
 
-    /** Show command arguments help */
+    /**
+     * Show command arguments help
+     */
     protected static void showArgumentsHelp() {
         info("--------------------------------------------------------------------------------------");
         info("Usage: " + OIFitsProcessor.class.getName() + " command -o <path_output_file> <file locations>");
@@ -209,6 +225,7 @@ public class OIFitsProcessor extends OIFitsCommand {
                 + " <file_path>   Complete path, absolute or relative, for output file   |");
         info("| [-l] or [-log]              Enable logging (quiet by default)                      |");
         info("| [-c] or [-check]            Check output file before writing                       |");
+        info("| [-insname]   <insname_value> Filter result on given insname                        |");
         info("--------------------------------------------------------------------------------------");
     }
 

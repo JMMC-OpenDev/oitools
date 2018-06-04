@@ -106,4 +106,20 @@ public abstract class OIFitsCommand {
         return false;
     }
 
+    /**
+     * Get position of an option in args. 
+     * @param args
+     * @param opt
+     * @param longOpt
+     * @return index of the option in args if found, -1 else.
+     */
+    static int getOptionArgPosition(final String[] args, final String opt, final String longOpt) {
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equals(opt) || args[i].equals(longOpt)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }

@@ -35,13 +35,16 @@ import java.util.logging.Logger;
 
 /**
  * Processing class to merge given OIFitsFile instances into a single OIFitsFile instance
+ *
  * @author jammetv
  */
 public final class Merger {
 
     private static final Logger logger = Logger.getLogger(Merger.class.getName());
 
-    /** Utility class */
+    /**
+     * Utility class
+     */
     private Merger() {
         super();
     }
@@ -70,8 +73,7 @@ public final class Merger {
     }
 
     /**
-     * Merge of OIFitsFile structure.
-     * Note: only one target by input files are accepted and must be the the same (name)
+     * Merge of OIFitsFile structure. Note: only one target by input files are accepted and must be the the same (name)
      *
      * @param selector optional Selector instance to filter OIFits content
      * @param std OIFits standard for the output OIFitsFile
@@ -80,7 +82,7 @@ public final class Merger {
      * @throws IllegalArgumentException
      */
     public static OIFitsFile process(final Selector selector, final OIFitsStandard std,
-                                     final OIFitsFile... oiFitsToMerge) throws IllegalArgumentException {
+            final OIFitsFile... oiFitsToMerge) throws IllegalArgumentException {
 
         if (oiFitsToMerge == null || oiFitsToMerge.length < 1) {
             throw new IllegalArgumentException("Merge: Missing OIFits inputs");
@@ -122,7 +124,7 @@ public final class Merger {
             processOIData(ctx);
         }
 
-        return resultFile;
+        return (resultFile.getOiDatas() != null || resultFile.getOiDatas().length > 0) ? resultFile : null;
     }
 
     private static OIFitsFile createOIFits(final OIFitsStandard std, final OIFitsFile[] oiFitsToMerge) {
@@ -312,7 +314,7 @@ public final class Merger {
     }
 
     /**
-    
+     *
      * @param ctx merge context
      */
     private static void processOIData(final Context ctx) {
@@ -375,7 +377,7 @@ public final class Merger {
 
         final List<OIData> dataToKeep = ctx.dataToKeep;
         // reset
-        dataToKeep.clear();
+        ctx.reset();
 
         if (fileToMerge.hasOiData()) {
             final Selector selector = ctx.selector;
@@ -400,13 +402,19 @@ public final class Merger {
      */
     static final class Context {
 
-        /** Optional Selector */
+        /**
+         * Optional Selector
+         */
         final Selector selector;
 
-        /** output OIFits */
+        /**
+         * output OIFits
+         */
         final OIFitsFile resultFile;
 
-        /** Currently processed file */
+        /**
+         * Currently processed file
+         */
         OIFitsFile fileToMerge = null;
 
         /**
@@ -426,13 +434,28 @@ public final class Merger {
         final Set<String> arraysUsedByData = new HashSet<String>();
         final Set<String> corrUsedByData = new HashSet<String>();
 
-        /** All OIData to keep after filter */
+        /**
+         * All OIData to keep after filter
+         */
         final List<OIData> dataToKeep = new ArrayList<OIData>();
 
         private Context(final Selector selector, final OIFitsFile resultFile) {
             this.selector = selector;
             this.resultFile = resultFile;
         }
+
+        public void reset() {
+            dataToKeep.clear();
+            // Reset mapping
+            mapInsNames.clear();
+            mapArrayNames.clear();
+            mapCorrNames.clear();
+            // reset set of object to keep
+            insUsedByData.clear();
+            arraysUsedByData.clear();
+            corrUsedByData.clear();
+        }
+
     }
 
 }

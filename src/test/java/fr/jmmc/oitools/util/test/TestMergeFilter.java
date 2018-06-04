@@ -21,7 +21,6 @@ package fr.jmmc.oitools.util.test;
 
 import fr.jmmc.oitools.JUnitBaseTest;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
-import fr.jmmc.oitools.OIFitsViewer;
 import fr.jmmc.oitools.model.OIArray;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsChecker;
@@ -45,10 +44,14 @@ import org.junit.Test;
  */
 public class TestMergeFilter extends JUnitBaseTest {
 
+    private static final String INPUT_FILE_NAME = "GRAVITY.2016-01-09T05-37-06_singlesci_calibrated.fits";
+    private static final String INSNAME_FILTER_VALUE = "SPECTRO_SC";   // SPECTRO_FT
+    
     // Common data used by several tests
     private static OIFitsFile input = null;
-    private static OIFitsFile mergeFilterBlock = null;
-    private static OIFitsFile mergeFilterPass = null;
+    private static OIFitsFile mergeFilterBlockAll = null;
+    private static OIFitsFile mergeFilterPassSome = null;
+    private static OIFitsFile mergeFilterPassAll = null;
 
     /**
      * Do the merge of 2 OIFitsFiles
@@ -60,19 +63,24 @@ public class TestMergeFilter extends JUnitBaseTest {
     @BeforeClass
     public static void init() throws IOException, MalformedURLException, FitsException {
         input = OIFitsLoader.loadOIFits(
-                TEST_DIR_OIFITS + "GRAVITY.2016-01-09T05-37-06_singlesci_calibrated.fits");
+                TEST_DIR_OIFITS + INPUT_FILE_NAME);
 
         Selector selector = new Selector();
 
         // Filter block data of the files
         selector.addPattern(Selector.INSTRUMENT_FILTER, "GRAV");
-        mergeFilterBlock = Merger.process(selector, input);
-        Assert.assertNotNull("Merge return a null value", mergeFilterBlock);
+        mergeFilterBlockAll = Merger.process(selector, input);
+        Assert.assertNotNull("Merge return a null value", mergeFilterBlockAll);
 
         // Filter let pass data of the files
-        selector.addPattern(Selector.INSTRUMENT_FILTER, "SPECTRO_SC"); // SPECTRO_FT
-        mergeFilterPass = merge(selector, input);
-        Assert.assertNotNull("Merge return a null value", mergeFilterPass);
+        selector.addPattern(Selector.INSTRUMENT_FILTER, INSNAME_FILTER_VALUE);
+        mergeFilterPassSome = merge(selector, input);
+        Assert.assertNotNull("Merge return a null value", mergeFilterPassSome);
+        
+        // Filter don't block any
+        mergeFilterPassAll = Merger.process(input);
+        Assert.assertNotNull("Merge return a null value", mergeFilterPassAll);
+
     }
 
     /**
@@ -85,13 +93,17 @@ public class TestMergeFilter extends JUnitBaseTest {
     @Test // @Ignore
     public void testData() throws IOException, MalformedURLException, FitsException {
 
-        List<OIData> dataList = mergeFilterBlock.getOiDataList();
+        List<OIData> dataList = mergeFilterBlockAll.getOiDataList();
         Assert.assertEquals("No data should be in merge result of blocking filter",
                 0, dataList != null ? dataList.size() : 0);
 
-        dataList = mergeFilterPass.getOiDataList();
+        dataList = mergeFilterPassSome.getOiDataList();
         Assert.assertEquals("4 Data tables should be in merge result of blocking filter",
                 4, dataList != null ? dataList.size() : 0);
+
+        dataList = mergeFilterPassAll.getOiDataList();
+        Assert.assertEquals("Bad number of Data in merge result of blocking filter",
+                input.getOiDatas().length, dataList != null ? dataList.size() : 0);
 
     }
 
@@ -105,13 +117,19 @@ public class TestMergeFilter extends JUnitBaseTest {
     @Test // @Ignore
     public void testIns() throws IOException, MalformedURLException, FitsException {
 
-        OIWavelength[] insList = mergeFilterBlock.getOiWavelengths();
+        OIWavelength[] insList = mergeFilterBlockAll.getOiWavelengths();
         Assert.assertEquals("No ins should be in merge result of blocking filter",
                 0, insList != null ? insList.length : 0);
 
-        insList = mergeFilterPass.getOiWavelengths();
+        insList = mergeFilterPassSome.getOiWavelengths();
         Assert.assertEquals("1 Ins should be in merge result of blocking filter",
                 1, insList != null ? insList.length : 0);
+        Assert.assertEquals("1 Ins should be in merge result of blocking filter",
+                INSNAME_FILTER_VALUE, insList[0].getInsName());
+
+        insList = mergeFilterPassAll.getOiWavelengths();
+        Assert.assertEquals("Bad number of Ins in merge result of passing filter",
+                input.getOiWavelengths().length, insList != null ? insList.length : 0);
 
     }
 
@@ -125,13 +143,17 @@ public class TestMergeFilter extends JUnitBaseTest {
     @Test // @Ignore
     public void testArraysIns() throws IOException, MalformedURLException, FitsException {
 
-        OIArray[] arrayList = mergeFilterBlock.getOiArrays();
+        OIArray[] arrayList = mergeFilterBlockAll.getOiArrays();
         Assert.assertEquals("No array should be in merge result of blocking filter",
                 0, arrayList != null ? arrayList.length : 0);
 
-        arrayList = mergeFilterPass.getOiArrays();
+        arrayList = mergeFilterPassSome.getOiArrays();
         Assert.assertEquals("1 array should be in merge result of blocking filter",
                 1, arrayList != null ? arrayList.length : 0);
+
+        arrayList = mergeFilterPassAll.getOiArrays();
+        Assert.assertEquals("Bad Insname in result",
+                input.getOiArrays().length, arrayList != null ? arrayList.length : 0);
 
     }
 

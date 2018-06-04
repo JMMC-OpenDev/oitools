@@ -19,9 +19,14 @@ package fr.jmmc.oitools.util.test;
 import fr.jmmc.oitools.JUnitBaseTest;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
 import fr.jmmc.oitools.OIFitsProcessor;
+import fr.jmmc.oitools.model.OIFitsFile;
+import fr.jmmc.oitools.model.OIFitsLoader;
+import fr.nom.tam.fits.FitsException;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.net.MalformedURLException;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -79,6 +84,32 @@ public class TestProcessorCommandLine {
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
         Assert.assertTrue("No output file present.", output.exists());
+    }
+
+    @Test
+    public void testMergeFilterInsname() throws IOException, MalformedURLException, FitsException {
+        File output = new File(JUnitBaseTest.TEST_DIR_TEST + "merge_filter_result.oifits");
+
+        // Filter block
+        String[] result = callProcessor(new String[]{"merge",
+            "-o", output.getAbsolutePath(), "-insname", "SPECTRO_SC",
+            TEST_DIR_OIFITS + "NGC5128_2005.oifits"
+        });
+        Assert.assertTrue("Bad return message: " + result[OUT_INDEX], 
+                getOut(result) != null ? getOut(result).startsWith("Result is empty, no file created.") : false);
+        Assert.assertTrue("No result file should be created", !output.exists());
+        output.delete();
+
+        // Filter pass
+        result = callProcessor(new String[]{"merge",
+            "-o", output.getAbsolutePath(), "-insname", "MIDI/PRISM",
+            TEST_DIR_OIFITS + "NGC5128_2005.oifits"
+        });
+        Assert.assertTrue("Bad return message: " + result[OUT_INDEX], getOut(result).length() == 0);
+        OIFitsFile mergedFile = OIFitsLoader.loadOIFits(output.getAbsolutePath());
+        Assert.assertEquals("Bad number of Ins in merged file", 1, mergedFile.getOiWavelengths().length);
+        output.delete();
+
     }
 
     private static String getOut(String[] result) {
