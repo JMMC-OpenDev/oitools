@@ -21,13 +21,10 @@ package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.fits.FitsConstants;
-import fr.jmmc.oitools.fits.FitsHeaderCard;
 import fr.jmmc.oitools.fits.FitsTable;
-import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
-import fr.nom.tam.fits.HeaderCard;
 import java.util.logging.Level;
 
 /**
@@ -130,8 +127,9 @@ public abstract class OITable extends FitsTable {
             }
         }
 
-        // Copy header cards:
-        if (src.hasHeaderCards()) {
+        // Copy header cards ?
+        // disabled for now (how to ensure consistency if the table is modified ?)
+        if (false && src.hasHeaderCards()) {
             // Copy references to Fits header cards:
             getHeaderCards().addAll(src.getHeaderCards());
         }
@@ -145,8 +143,16 @@ public abstract class OITable extends FitsTable {
             columnName = column.getName();
             columnValue = src.getColumnValue(columnName);
 
-            if (columnValue == null) {
+            if (columnValue == null && !column.isOptional()) {
                 columnValue = createColumnArray(column, getNbRows());
+            }
+            
+            // Copy custom units:
+            if (column.isCustomUnits()) {
+                final ColumnMeta srcColumn = src.getColumnDesc(columnName);
+                if (srcColumn != null && srcColumn.isCustomUnits()) {
+                    column.getCustomUnits().set(srcColumn.getCustomUnits());
+                }
             }
 
             if (logger.isLoggable(Level.FINE)) {
