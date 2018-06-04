@@ -124,7 +124,7 @@ public final class Merger {
             processOIData(ctx);
         }
 
-        return (resultFile.getOiDatas() != null || resultFile.getOiDatas().length > 0) ? resultFile : null;
+        return resultFile;
     }
 
     private static OIFitsFile createOIFits(final OIFitsStandard std, final OIFitsFile[] oiFitsToMerge) {

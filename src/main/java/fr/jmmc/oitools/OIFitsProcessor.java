@@ -140,7 +140,7 @@ public class OIFitsProcessor extends OIFitsCommand {
 
         // Call merge
         final OIFitsFile result = Merger.process(selector, inputs);
-        if (result != null && result.getOiDatas().length > 0) {
+        if (result.hasOiData()) {
             // Store result
             write(outputFilePath, result, check);
         } else {
