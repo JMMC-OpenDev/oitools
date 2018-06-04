@@ -65,7 +65,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * CONTENT keyword descriptor
      */
     private final static KeywordMeta KEYWORD_CONTENT = new KeywordMeta(FitsConstants.KEYWORD_CONTENT,
-            "Must contain only the string “OIFITS2”", Types.TYPE_CHAR);
+            "Must contain only the string 'OIFITS2'", Types.TYPE_CHAR);
     /**
      * AUTHOR keyword descriptor
      */
@@ -200,12 +200,12 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * VIS2ERR keyword descriptor
      */
     private final static KeywordMeta KEYWORD_VIS2ERR = new KeywordMeta(OIFitsConstants.KEYWORD_VIS2ERR,
-            "Repesentative V² error (%)", Types.TYPE_DBL, true, NO_STR_VALUES);
+            "Representative V² error (%)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
      * VISPHERR keyword descriptor
      */
     private final static KeywordMeta KEYWORD_VISPHERR = new KeywordMeta(OIFitsConstants.KEYWORD_VISPHERR,
-            "Repesentative Diff. Vis. Phase error (deg)", Types.TYPE_DBL, true, NO_STR_VALUES);
+            "Representative Diff. Vis. Phase error (deg)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
      * T3PHIERR keyword descriptor
      */
