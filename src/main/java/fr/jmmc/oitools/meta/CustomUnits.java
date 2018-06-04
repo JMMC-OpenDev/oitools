@@ -47,6 +47,14 @@ public final class CustomUnits extends Units {
         super("UNIT_CUSTOM", "");
         this.required = required;
     }
+    
+    /**
+    * Define the value of unit 
+    * @param unit other CustomUnits instance
+    */
+    public void set(final CustomUnits unit) {
+        set(unit.getStandardRepresentation());
+    }
 
     /**
      * Define the value of unit
