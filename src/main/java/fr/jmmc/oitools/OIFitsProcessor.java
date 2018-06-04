@@ -16,6 +16,7 @@
  */
 package fr.jmmc.oitools;
 
+import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
@@ -61,6 +62,8 @@ public class OIFitsProcessor extends OIFitsCommand {
             // command processing
             if (COMMAND_HELP.equals(command)) {
                 showArgumentsHelp();
+            } else if ("dump".equals(command)) {
+                dump(args);
             } else if (COMMAND_LIST.equals(command)) {
                 list(args);
             } else if (COMMAND_CONVERT.equals(command)) {
@@ -88,6 +91,32 @@ public class OIFitsProcessor extends OIFitsCommand {
 
         // TODO: implement later a simplified output
         OIFitsViewer.process(false, true, false, false, fileLocations);
+    }
+
+    /**
+     * Dump content of files
+     *
+     * @param args command line arguments.
+     */
+    private static void dump(final String[] args) throws FitsException, IOException {
+        final List<String> fileLocations = getInputFiles(args);
+
+        FitsUtils.setup();        
+        
+        final StringBuilder sb = new StringBuilder(16 * 1024);
+        
+        for (String fileLocation : fileLocations) {
+            info("Processing: " + fileLocation);
+            try {
+                FitsUtils.dumpFile(fileLocation, false, sb);
+                
+                info(sb.toString());
+                sb.setLength(0); // reset
+                
+            } catch (Exception e) {
+                error("Error reading file '" + fileLocation + "'", e);
+            }
+        }
     }
 
     /**
