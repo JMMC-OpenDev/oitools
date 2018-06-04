@@ -262,6 +262,8 @@ public abstract class TableHDU extends BasicHDU {
         if (unit != null && unit.length() > 0) {
             // Insert TUNIT keyword after TFORM
             setColumnMeta(index, "TUNIT", unit, "ntf::tablehdu:tunit|" + (index + 1), true);
+        } else {
+            setCurrentColumn(index, true); // set marker after TFORM 
         }
     }
 
