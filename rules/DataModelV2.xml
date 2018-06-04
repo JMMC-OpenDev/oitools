@@ -1663,7 +1663,7 @@
   <keyword>
     <name>CONTENT</name>
     <datatype>TYPE_CHAR</datatype>
-    <description>Must contain only the string “OIFITS2”</description>
+    <description>Must contain only the string 'OIFITS2'</description>
     <optional>false</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
@@ -1923,7 +1923,7 @@
   <keyword>
     <name>VIS2ERR</name>
     <datatype>TYPE_DBL</datatype>
-    <description>Repesentative V² error (%)</description>
+    <description>Representative V² error (%)</description>
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
@@ -1932,7 +1932,7 @@
   <keyword>
     <name>VISPHERR</name>
     <datatype>TYPE_DBL</datatype>
-    <description>Repesentative Diff. Vis. Phase error (deg)</description>
+    <description>Representative Diff. Vis. Phase error (deg)</description>
     <optional>true</optional>
     <rules>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>

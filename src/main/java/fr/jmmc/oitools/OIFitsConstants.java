@@ -89,9 +89,9 @@ public interface OIFitsConstants {
     public final static String KEYWORD_NUM_CHAN = "NUM_CHAN";
     /** SPEC_RES = Reference spectral resolution (λ/Δ)*/
     public final static String KEYWORD_SPEC_RES = "SPEC_RES";
-    /** VIS2ERR = Repesentative V² error (%) */
+    /** VIS2ERR = Representative V² error (%) */
     public final static String KEYWORD_VIS2ERR = "VIS2ERR";
-    /** VISPHERR = Repesentative Diff Vis Phase error (deg) */
+    /** VISPHERR = Representative Diff Vis Phase error (deg) */
     public final static String KEYWORD_VISPHERR = "VISPHERR";
     /** T3PHIERR = Representative Closure Phase error (deg)*/
     public final static String KEYWORD_T3PHIERR = "T3PHIERR";

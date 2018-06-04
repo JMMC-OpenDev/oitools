@@ -296,6 +296,11 @@ public final class FitsImageWriter {
         for (KeywordMeta keyword : hduFits.getKeywordDescCollection()) {
             keywordName = keyword.getName();
 
+            if (FitsConstants.KEYWORD_NAXIS2.equals(keywordName)) {
+                // skip NAXIS2 (handled by nom.tam.Fits)
+                continue;
+            }
+
             // get keyword value :
             keywordValue = hduFits.getKeywordValue(keywordName);
 

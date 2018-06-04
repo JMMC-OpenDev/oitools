@@ -31,6 +31,8 @@ import fr.nom.tam.fits.HeaderCard;
 import fr.nom.tam.util.ArrayFuncs;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -99,7 +101,7 @@ public final class FitsUtils {
         FitsFactory.setUseHierarch(true);
         // Force to use binary tables:
         FitsFactory.setUseAsciiTables(false);
-        
+
         // Preload Severity profiles:
         SeverityProfileFactory.getInstance();
     }
@@ -147,30 +149,15 @@ public final class FitsUtils {
      * @return true if any error occurred; false otherwise
      */
     public static boolean dumpFile(final String absFilePath, final boolean dumpValues) {
-        boolean error = false;
-
         logger.log(Level.INFO, "Dump file: {0}", absFilePath);
 
         final StringBuilder sb = new StringBuilder((dumpValues ? 128 : 16) * 1024);
 
+        boolean error = false;
+
         final long start = System.nanoTime();
         try {
-
-            final Fits s = new Fits(absFilePath);
-
-            final BasicHDU[] hdus = s.read();
-
-            final int len = hdus.length;
-            sb.append("HDUs = ").append(len).append('\n');
-
-            BasicHDU hdu;
-            for (int i = 0; i < len; i++) {
-                hdu = hdus[i];
-
-                // dump HDU:
-                FitsUtils.dumpHDU(sb, hdu, dumpValues);
-            }
-
+            dumpFile(absFilePath, dumpValues, sb);
         } catch (Throwable th) {
             logger.log(Level.SEVERE, "FitsUtils.dumpFile: failure occured while dumping file : " + absFilePath, th);
             error = true;
@@ -182,6 +169,26 @@ public final class FitsUtils {
         }
 
         return error;
+    }
+
+    /**
+     * Dump Fits file given its absolute file path
+     * @param absFilePath absolute file path
+     * @param dumpValues true indicates to dump column values
+     * @param sb buffer to dump into
+     * @throws FitsException if any FITS exception occurs
+     */
+    public static void dumpFile(final String absFilePath, final boolean dumpValues, final StringBuilder sb) throws FitsException {
+        final Fits s = new Fits(absFilePath);
+
+        final List<BasicHDU> hduList = new ArrayList<BasicHDU>(Arrays.asList(s.read()));
+        Collections.sort(hduList, ExtNameComparator.INSTANCE);
+
+        sb.append("HDUs = ").append(hduList.size()).append('\n');
+
+        for (BasicHDU hdu : hduList) {
+            FitsUtils.dumpHDU(sb, hdu, dumpValues);
+        }
     }
 
     /**
@@ -342,4 +349,23 @@ public final class FitsUtils {
             return Arrays.deepToString((Object[]) o);
         }
     }
+
+    final static class ExtNameComparator implements Comparator<BasicHDU> {
+
+        final static ExtNameComparator INSTANCE = new ExtNameComparator();
+
+        @Override
+        public int compare(final BasicHDU hdu1, final BasicHDU hdu2) {
+            String extName1 = hdu1.getHeader().getTrimmedStringValue("EXTNAME");
+            if (extName1 == null) {
+                extName1 = "";
+            }
+            String extName2 = hdu2.getHeader().getTrimmedStringValue("EXTNAME");
+            if (extName2 == null) {
+                extName2 = "";
+            }
+            return extName1.compareTo(extName2);
+        }
+
+    };
 }
