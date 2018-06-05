@@ -96,7 +96,7 @@
 <column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>0.4</min><max>0.4</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-11.24</min><max>8.727</max></column>
-<column><name>FOV</name><description>Photometric field of view (arcsee)</description><type>D</type><unit>arcsec|as|arcsecond|arcseconds</unit><min>0.5</min><max>0.5</max></column>
+<column><name>FOV</name><description>Photometric field of view (arcsec)</description><type>D</type><unit>arcsec|as|arcsecond|arcseconds</unit><min>0.5</min><max>0.5</max></column>
 <column><name>FOVTYPE</name><description>Model for FOV: 'FWHM' or 'RADIUS'</description><type>A</type><unit></unit></column>
 </columns>
 <table>

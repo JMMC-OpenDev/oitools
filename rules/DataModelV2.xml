@@ -1178,7 +1178,7 @@
   </rule>
   <rule>
     <name>MAIN_HEADER_TYPE_MULTI</name>
-    <description>check if main header keywords are set to 'MULTI' for heterogenous content</description>
+    <description>check if main header keywords are set to 'MULTI' for heterogeneous content</description>
     <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
     <subjects>
       <apply>MAIN_HEADER.INSMODE</apply>
@@ -2553,7 +2553,7 @@
   <column>
     <name>FOV</name>
     <datatype>TYPE_DBL</datatype>
-    <description>Photometric field of view (arcsee)</description>
+    <description>Photometric field of view (arcsec)</description>
     <optional>false</optional>
     <unit>UNIT_ARCSEC</unit>
     <rules>

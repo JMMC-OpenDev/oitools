@@ -189,7 +189,7 @@ public enum Rule {
             RuleDataType.VALUE_ROW_COL1_COL2,
             "STA_INDEX[{{VALUE}}] duplicated at row {{ROW}} at indexes {{DETAILS}}"
     ),
-    MAIN_HEADER_TYPE_MULTI("check if main header keywords are set to 'MULTI' for heterogenous content",
+    MAIN_HEADER_TYPE_MULTI("check if main header keywords are set to 'MULTI' for heterogeneous content",
             "V2.MAIN_HEADER_Table(3)",
             RuleDataType.VALUE_EXPECTED,
             "The keyword '{{MEMBER}}' has the value '{{VALUE}}' but should be set to '{{EXPECTED}}' for multiple observations"

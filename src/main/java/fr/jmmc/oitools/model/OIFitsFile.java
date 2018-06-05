@@ -555,7 +555,7 @@ public final class OIFitsFile extends FitsImageFile {
                     // Note: targetIds may contain duplicates or identical targets ...
                     final int targets = getAcceptedTargetIds().length;
                     
-                    /* rule [MAIN_HEADER_TYPE_MULTI] check if main header keywords are set to 'MULTI' for heterogenous content */
+                    /* rule [MAIN_HEADER_TYPE_MULTI] check if main header keywords are set to 'MULTI' for heterogeneous content */
                     if ((arrNames > 1 || insNames > 1 || targets > 1) || OIFitsChecker.isInspectRules()) {
                         primaryHDU.checkMultiKeywords(checker, arrNames, insNames, targets);
                     }

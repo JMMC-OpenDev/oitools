@@ -74,7 +74,7 @@ public final class OIArray extends OITable {
 
     /** FOV column descriptor */
     public final static ColumnMeta COLUMN_FOV = new ColumnMeta(OIFitsConstants.COLUMN_FOV,
-            "Photometric field of view (arcsee)", Types.TYPE_DBL, 1, false, false, Units.UNIT_ARCSEC);
+            "Photometric field of view (arcsec)", Types.TYPE_DBL, 1, false, false, Units.UNIT_ARCSEC);
     /** FOV_TYPE column descriptor */
     public final static ColumnMeta COLUMN_FOVTYPE = new ColumnMeta(OIFitsConstants.COLUMN_FOVTYPE,
             "Model for FOV: 'FWHM' or 'RADIUS'", Types.TYPE_CHAR, 6, false, false, new String[]{OIFitsConstants.COLUMN_FOVTYPE_FWHM,

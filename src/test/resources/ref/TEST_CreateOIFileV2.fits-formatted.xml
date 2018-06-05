@@ -79,7 +79,7 @@
 <column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>3</min><max>7</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>8.0</min><max>8.0</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-22.03283353519204</min><max>56.61105628712381</max></column>
-<column><name>FOV</name><description>Photometric field of view (arcsee)</description><type>D</type><unit>arcsec|as|arcsecond|arcseconds</unit><min>2.35</min><max>12457.2</max></column>
+<column><name>FOV</name><description>Photometric field of view (arcsec)</description><type>D</type><unit>arcsec|as|arcsecond|arcseconds</unit><min>2.35</min><max>12457.2</max></column>
 <column><name>FOVTYPE</name><description>Model for FOV: 'FWHM' or 'RADIUS'</description><type>A</type><unit></unit></column>
 </columns>
 <table>
@@ -381,7 +381,7 @@ SEVERE	Can't check repeat for column 'JYY'
   </rule>
   <rule>
     <name>MAIN_HEADER_TYPE_MULTI</name>
-    <description>check if main header keywords are set to 'MULTI' for heterogenous content</description>
+    <description>check if main header keywords are set to 'MULTI' for heterogeneous content</description>
     <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
   </rule>
 </rules>
