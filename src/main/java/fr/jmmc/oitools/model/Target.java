@@ -278,7 +278,7 @@ public final class Target {
     }
 
     @Override
-    public int hashCode() {/*___oOo___*/
+    public int hashCode() {
         if (hashcode != 0) {
             // use precomputed hash code (or equals 0 but low probability):
             return hashcode;
