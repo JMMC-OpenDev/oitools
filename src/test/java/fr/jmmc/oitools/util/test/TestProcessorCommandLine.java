@@ -58,6 +58,7 @@ public class TestProcessorCommandLine {
     @Test
     public void testOk() {
         File output = new File(JUnitBaseTest.TEST_DIR_TEST + "merge_result.fits");
+        output.delete();
         String[] result = callProcessor(new String[]{"merge", "-o", output.getAbsolutePath(),
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
@@ -65,7 +66,6 @@ public class TestProcessorCommandLine {
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
                 getOut(result).length() == 0);
         Assert.assertTrue("No result file created", output.exists());
-        output.delete();
     }
 
     @Test
@@ -80,6 +80,8 @@ public class TestProcessorCommandLine {
     @Test
     public void testConvert() {
         File output = new File(JUnitBaseTest.TEST_DIR_TEST + "convert_result.fits");
+        output.delete();
+        
         callProcessor(new String[]{"convert", "-o", output.getAbsolutePath(),
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
@@ -88,7 +90,8 @@ public class TestProcessorCommandLine {
 
     @Test
     public void testMergeFilterInsname() throws IOException, MalformedURLException, FitsException {
-        File output = new File(JUnitBaseTest.TEST_DIR_TEST + "merge_filter_result.oifits");
+        File output = new File(JUnitBaseTest.TEST_DIR_TEST + "merge_filter_result.fits");
+        output.delete();
 
         // Filter block
         String[] result = callProcessor(new String[]{"merge",
@@ -98,7 +101,6 @@ public class TestProcessorCommandLine {
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX], 
                 getOut(result) != null ? getOut(result).startsWith("Result is empty, no file created.") : false);
         Assert.assertTrue("No result file should be created", !output.exists());
-        output.delete();
 
         // Filter pass
         result = callProcessor(new String[]{"merge",
@@ -108,8 +110,6 @@ public class TestProcessorCommandLine {
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX], getOut(result).length() == 0);
         OIFitsFile mergedFile = OIFitsLoader.loadOIFits(output.getAbsolutePath());
         Assert.assertEquals("Bad number of Ins in merged file", 1, mergedFile.getOiWavelengths().length);
-        output.delete();
-
     }
 
     private static String getOut(String[] result) {
