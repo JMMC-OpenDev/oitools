@@ -54,7 +54,7 @@ public abstract class OITable extends FitsTable {
 
     /* members */
     /** Main OIFitsFile */
-    private OIFitsFile oifitsFile;
+    private final OIFitsFile oifitsFile;
 
     /**
      * Protected OITable class constructor
@@ -128,8 +128,8 @@ public abstract class OITable extends FitsTable {
         }
 
         // Copy header cards ?
-        // disabled for now (how to ensure consistency if the table is modified ?)
-        if (false && src.hasHeaderCards()) {
+        // Note: how to ensure consistency if the table is modified ?
+        if (src.hasHeaderCards()) {
             // Copy references to Fits header cards:
             getHeaderCards().addAll(src.getHeaderCards());
         }
@@ -221,14 +221,5 @@ public abstract class OITable extends FitsTable {
      */
     public final OIFitsFile getOIFitsFile() {
         return this.oifitsFile;
-    }
-
-    /**
-     * Set parent structure. 
-TODO: temporary, to remove when copyTable() is done 
-     * @param file 
-     */
-    public void setOIFitsFile(OIFitsFile file) {
-        this.oifitsFile = file;
     }
 }
