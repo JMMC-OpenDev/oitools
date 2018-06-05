@@ -313,7 +313,7 @@ public class ColumnMeta extends CellMeta {
         } else {
             columnRepeat = dims[1];
 
-            if (ndims > 2) {
+            if (ndims > 2 && columnRepeat > 0) {
                 // special case for Complex type :
                 if (ndims == 3) {
                     if ((dims[2] == 2) && (baseClass == float.class)) {
