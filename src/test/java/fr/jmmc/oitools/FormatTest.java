@@ -25,6 +25,7 @@ import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.jmmc.oitools.model.OIVis;
+import fr.jmmc.oitools.model.OIWavelength;
 import java.util.logging.Level;
 import org.junit.Assert;
 import org.junit.Test;
@@ -90,8 +91,12 @@ public class FormatTest {
     private static void testDateObs(final String dateObs, final boolean expected) {
 
         final OIFitsFile oiFitsFile = new OIFitsFile(OIFitsStandard.VERSION_1);
+        
+        final OIWavelength oiwl = new OIWavelength(oiFitsFile, 1);
+        oiwl.setInsName("TEST");
+        oiFitsFile.addOiTable(oiwl);
 
-        final OIVis vis = new OIVis(oiFitsFile, "test", 1);
+        final OIVis vis = new OIVis(oiFitsFile, "TEST", 1);
         vis.setDateObs(dateObs);
         oiFitsFile.addOiTable(vis);
 
