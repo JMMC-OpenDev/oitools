@@ -47,7 +47,7 @@ public class WriteOIFitsTest extends JUnitBaseTest {
     private final static String TEST_DIR_TEST_OIFITS = TEST_DIR_TEST + "oifits/";
 
     /** */
-    private final static boolean COMPARE_RAW = true;
+    private final static boolean COMPARE_RAW = false;
     /** */
     private final static boolean STRICT = true;
 
@@ -83,9 +83,8 @@ public class WriteOIFitsTest extends JUnitBaseTest {
 
                 // compare fits files at fits level (header / data) :
                 if (COMPARE_RAW && !TamFitsTest.compareFile(pathFile, fileTo)) {
-
-                    //we do not fail because we know is a fail TODO fix TamFitsTest
-                    //fail("Error TamFitsTest.compareFile: " + pathFile);
+                    // known failure: disabled raw comparison until TamFitsTest is fixed:
+                    fail("Error TamFitsTest.compareFile: " + pathFile);
                 }
 
                 logger.info("\n-------------------\n");

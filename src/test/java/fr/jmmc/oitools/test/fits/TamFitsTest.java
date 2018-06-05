@@ -208,7 +208,7 @@ public class TamFitsTest implements TestEnv {
         if (srcHdu instanceof BinaryTableHDU && dstHdu instanceof BinaryTableHDU) {
             res &= compareData((BinaryTableHDU) srcHdu, (BinaryTableHDU) dstHdu);
         } else {
-            logger.log(Level.WARNING, "Unsupported HDU: {0}", srcHdu.getClass());
+            logger.log(Level.INFO, "Unsupported HDU: {0}", srcHdu.getClass());
         }
 
         return res;
