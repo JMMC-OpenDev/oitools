@@ -644,7 +644,8 @@ public abstract class OIData extends OIAbstractData {
 
             if (oiWavelength != null) {
                 if (logger.isLoggable(Level.FINE)) {
-                    logger.log(Level.FINE, "Resolved OI_WAVELENGTH reference [{0} | NWAVE={1} ] to {2}", new Object[]{oiWavelength.getExtNb(), oiWavelength.getNWave(), super.toString()});
+                    logger.log(Level.FINE, "Resolved OI_WAVELENGTH reference [{0} | NWAVE={1} ] to {2}",
+                            new Object[]{oiWavelength.getExtNb(), oiWavelength.getNWave(), super.toString()});
                 }
                 this.oiWavelengthRef = oiWavelength;
             } else if (!getOIFitsFile().hasMissingTableName(insName) && logger.isLoggable(Level.WARNING)) {

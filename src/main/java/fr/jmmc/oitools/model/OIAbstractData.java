@@ -164,12 +164,13 @@ public abstract class OIAbstractData extends OITable {
 
             if (oiArray != null) {
                 if (logger.isLoggable(Level.FINE)) {
-                    logger.log(Level.FINE, "Resolved OI_Array reference [{0}] to {1}", new Object[]{oiArray.getExtNb(), super.toString()});
+                    logger.log(Level.FINE, "Resolved OI_Array reference [{0}] to {1}",
+                            new Object[]{oiArray.getExtNb(), super.toString()});
                 }
                 this.oiArrayRef = oiArray;
             } else if (!getOIFitsFile().hasMissingTableName(arrName) && logger.isLoggable(Level.WARNING)) {
                 getOIFitsFile().addMissingTableName(arrName);
-                logger.log(Level.WARNING, "Missing OI_Array table identified by ARRAYNAME=''{0}''", arrName);
+                logger.log(Level.WARNING, "Missing OI_Array table identified by ARRNAME=''{0}''", arrName);
             }
             return oiArray;
         }
