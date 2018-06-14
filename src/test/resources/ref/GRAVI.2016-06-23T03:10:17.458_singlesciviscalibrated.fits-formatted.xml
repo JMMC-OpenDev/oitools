@@ -6,6 +6,29 @@
 <md5sum>f56dd368dd597eca7e43da124778d370</md5sum>
 <hdu>
 <keywords>
+<keyword><name>ORIGIN</name><value>ESO-PARANAL</value><description>Institution responsible for file creation</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE</name><value>2016-10-18T00:40:30</value><description>Date the HDU was written</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2016-06-23T03:10:23</value><description>Start date of observation</description><type>A</type><unit></unit></keyword>
+<keyword><name>CONTENT</name><value>OIFITS2</value><description>Must contain only the string 'OIFITS2'</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATASUM</name><value>0</value><description>HDU datasum</description><type>A</type><unit></unit></keyword>
+<keyword><name>CHECKSUM</name><value>YZeraWdoYWdoaWdo</value><description>HDU checksum</description><type>A</type><unit></unit></keyword>
+<keyword><name>TELESCOP</name><value>ESO-VLTI-A1234</value><description>A generic identification of the ARRAY</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSTRUME</name><value>GRAVITY</value><description>A generic identification of the instrument</description><type>A</type><unit></unit></keyword>
+<keyword><name>OBSERVER</name><value>UNKNOWN</value><description>Who acquired the data</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSMODE</name><value>SINGLE,MEDIUM,COMBINED,COMBINED</value><description>Instrument mode</description><type>A</type><unit></unit></keyword>
+<keyword><name>OBJECT</name><value>IRAS17216-3801</value><description>Object Identifier</description><type>A</type><unit></unit></keyword>
+<keyword><name>REFERENC</name><value>2001PASP..112.1133P</value><description>Bibliographic reference</description><type>A</type><unit></unit></keyword>
+<keyword><name>PROG_ID</name><value>60.A-9174(A)</value><description>Program ID</description><type>A</type><unit></unit></keyword>
+<keyword><name>PROCSOFT</name><value>GRAVITY pipeline 0.9.8</value><description>Versioned Data Reduction Software</description><type>A</type><unit></unit></keyword>
+<keyword><name>RA</name><value>261.274746</value><description>Target Right Ascension at mean EQUINOX (deg)</description><type>D</type><unit></unit></keyword>
+<keyword><name>DEC</name><value>-38.06696</value><description>Target Declination at mean EQUINOX (deg)</description><type>D</type><unit></unit></keyword>
+<keyword><name>EQUINOX</name><value>2000.0</value><description>Standard FK5 (years)</description><type>D</type><unit></unit></keyword>
+<keyword><name>RADECSYS</name><value>FK5</value><description>Coordinate reference frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>MJD-OBS</name><value>57562.13214651</value><description>Start of observations (MJD)</description><type>D</type><unit></unit></keyword>
+<keyword><name>SIMPLE</name><value>T</value><description>file does conform to FITS standard</description><type>A</type><unit></unit></keyword>
+<keyword><name>BITPIX</name><value>8</value><description>number of bits per data pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS</name><value>0</value><description>number of data axes</description><type>A</type><unit></unit></keyword>
+<keyword><name>EXTEND</name><value>T</value><description>FITS dataset may contain extensions</description><type>A</type><unit></unit></keyword>
 <keyword><name>COMMENT</name><value></value><description>FITS (Flexible Image Transport System) format is defined in 'Astronomy</description><type>A</type><unit></unit></keyword>
 <keyword><name>COMMENT</name><value></value><description>and Astrophysics', volume 376, page 359; bibcode: 2001A&amp;A...376..359H</description><type>A</type><unit></unit></keyword>
 <keyword><name>UTC</name><value>11417.5</value><description>[s] 03:10:17.500 UTC</description><type>A</type><unit></unit></keyword>

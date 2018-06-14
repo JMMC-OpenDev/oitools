@@ -6,6 +6,25 @@
 <md5sum>9542b814e1a679b2625950f61ccd7788</md5sum>
 <hdu>
 <keywords>
+<keyword><name>ORIGIN</name><value>ESO</value><description>Institution responsible for file creation</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE</name><value>2017-10-04</value><description>Date the HDU was written</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2017-05-23</value><description>Start date of observation</description><type>A</type><unit></unit></keyword>
+<keyword><name>CONTENT</name><value>OIFITS2</value><description>Must contain only the string 'OIFITS2'</description><type>A</type><unit></unit></keyword>
+<keyword><name>AUTHOR</name><value>Charleen</value><description>As defined in FITS norm</description><type>A</type><unit></unit></keyword>
+<keyword><name>TELESCOP</name><value>Etoilemagic</value><description>A generic identification of the ARRAY</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSTRUME</name><value>VEGA</value><description>A generic identification of the instrument</description><type>A</type><unit></unit></keyword>
+<keyword><name>OBSERVER</name><value>Gilles</value><description>Who acquired the data</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSMODE</name><value>Low_JHK</value><description>Instrument mode</description><type>A</type><unit></unit></keyword>
+<keyword><name>OBJECT</name><value>MegaStar</value><description>Object Identifier</description><type>A</type><unit></unit></keyword>
+<keyword><name>REFERENC</name><value>2017HDTYE.123.43.56</value><description>Bibliographic reference</description><type>A</type><unit></unit></keyword>
+<keyword><name>PROG_ID</name><value>074.R-456</value><description>Program ID</description><type>A</type><unit></unit></keyword>
+<keyword><name>PROCSOFT</name><value>pndg 3.4</value><description>Versioned Data Reduction Software</description><type>A</type><unit></unit></keyword>
+<keyword><name>OBSTECH</name><value>SCAN, PH_REF, ...</value><description>Technique of observation</description><type>A</type><unit></unit></keyword>
+<keyword><name>SIMPLE</name><value>T</value><description>file does conform to FITS standard</description><type>A</type><unit></unit></keyword>
+<keyword><name>BITPIX</name><value>8</value><description>number of bits per data pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS</name><value>1</value><description>Dimensionality</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS1</name><value>0</value><description>width of row in bytes</description><type>A</type><unit></unit></keyword>
+<keyword><name>EXTEND</name><value>T</value><description>File contains extensions</description><type>A</type><unit></unit></keyword>
 </keywords>
 </hdu>
 <OI_TARGET>

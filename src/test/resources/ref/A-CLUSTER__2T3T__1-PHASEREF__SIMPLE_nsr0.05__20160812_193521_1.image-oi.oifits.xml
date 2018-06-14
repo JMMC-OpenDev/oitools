@@ -6,6 +6,13 @@
 <md5sum>1ba5c2a69f3d5f5106caad84a015e5a8</md5sum>
 <hdu>
 <keywords>
+<keyword><name>HDUNAME</name><value>A-CLUSTER_2Tx3T_1-PhR_0.001.fits</value><description>Unique name for the image within the FITS file</description><type>A</type><unit></unit></keyword>
+<keyword><name>SIMPLE</name><value>T</value><description>file does conform to FITS standard</description><type>A</type><unit></unit></keyword>
+<keyword><name>BITPIX</name><value>-32</value><description>number of bits per data pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS</name><value>2</value><description>Dimensionality</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS1</name><value>80</value><description>width of row in bytes</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS2</name><value>80</value><description>number of rows in table</description><type>A</type><unit></unit></keyword>
+<keyword><name>EXTEND</name><value>T</value><description>File contains extensions</description><type>A</type><unit></unit></keyword>
 <keyword><name>CRPIX1</name><value>1.0</value><description>Reference pixel</description><type>A</type><unit></unit></keyword>
 <keyword><name>CRPIX2</name><value>1.0</value><description>Reference pixel</description><type>A</type><unit></unit></keyword>
 <keyword><name>CRVAL1</name><value>-4.848136811095E-8</value><description>Coordinate at reference pixel</description><type>A</type><unit></unit></keyword>

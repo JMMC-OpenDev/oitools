@@ -6,6 +6,10 @@
 <md5sum>068c140a28d5433051c7a6ce69612ca8</md5sum>
 <hdu>
 <keywords>
+<keyword><name>SIMPLE</name><value>T</value><description>Written by IDL:  Fri Feb 29 11:38:06 2008</description><type>A</type><unit></unit></keyword>
+<keyword><name>BITPIX</name><value>16</value><description>Integer*2 (short integer)</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS</name><value>0</value><description></description><type>A</type><unit></unit></keyword>
+<keyword><name>EXTEND</name><value>T</value><description>File contains extensions</description><type>A</type><unit></unit></keyword>
 <keyword><name>COMMENT</name><value></value><description>FITS (Flexible Image Transport System) format defined in Astronomy and</description><type>A</type><unit></unit></keyword>
 <keyword><name>COMMENT</name><value></value><description>Astrophysics Supplement Series v44/p363, v44/p371, v73/p359, v73/p365.</description><type>A</type><unit></unit></keyword>
 <keyword><name>COMMENT</name><value></value><description>Contact the NASA Science Office of Standards and Technology for the</description><type>A</type><unit></unit></keyword>

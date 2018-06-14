@@ -6,6 +6,10 @@
 <md5sum>6fbfc29d1fc36910965405b70ba1a508</md5sum>
 <hdu>
 <keywords>
+<keyword><name>SIMPLE</name><value>T</value><description>file does conform to FITS standard</description><type>A</type><unit></unit></keyword>
+<keyword><name>BITPIX</name><value>16</value><description>number of bits per data pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS</name><value>0</value><description>number of data axes</description><type>A</type><unit></unit></keyword>
+<keyword><name>EXTEND</name><value>T</value><description>FITS dataset may contain extensions</description><type>A</type><unit></unit></keyword>
 <keyword><name>COMMENT</name><value></value><description>FITS (Flexible Image Transport System) format is defined in 'Astronomy</description><type>A</type><unit></unit></keyword>
 <keyword><name>COMMENT</name><value></value><description>and Astrophysics', volume 376, page 359; bibcode: 2001A&amp;A...376..359H</description><type>A</type><unit></unit></keyword>
 </keywords>

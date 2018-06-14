@@ -6,6 +6,21 @@
 <md5sum>003cc6369b9a7ab63de553e676a77918</md5sum>
 <hdu>
 <keywords>
+<keyword><name>ORIGIN</name><value>ESO</value><description>Institution responsible for file creation</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE</name><value>2016-04-26T15:01:55</value><description>Date the HDU was written</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2000-10-19</value><description>Start date of observation</description><type>A</type><unit></unit></keyword>
+<keyword><name>CONTENT</name><value>OIFITS2</value><description>Must contain only the string 'OIFITS2'</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATASUM</name><value>0</value><description>HDU datasum</description><type>A</type><unit></unit></keyword>
+<keyword><name>CHECKSUM</name><value>h4oPi4lNh4lNh4lN</value><description>HDU checksum</description><type>A</type><unit></unit></keyword>
+<keyword><name>TELESCOP</name><value>COAST</value><description>A generic identification of the ARRAY</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSTRUME</name><value>COAST_NICMOS</value><description>A generic identification of the instrument</description><type>A</type><unit></unit></keyword>
+<keyword><name>OBSERVER</name><value>Astronomer</value><description>Who acquired the data</description><type>A</type><unit></unit></keyword>
+<keyword><name>INSMODE</name><value>Low_JHK</value><description>Instrument mode</description><type>A</type><unit></unit></keyword>
+<keyword><name>OBJECT</name><value>alp_aur</value><description>Object Identifier</description><type>A</type><unit></unit></keyword>
+<keyword><name>SIMPLE</name><value>T</value><description>file does conform to FITS standard</description><type>A</type><unit></unit></keyword>
+<keyword><name>BITPIX</name><value>16</value><description>number of bits per data pixel</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS</name><value>0</value><description>number of data axes</description><type>A</type><unit></unit></keyword>
+<keyword><name>EXTEND</name><value>T</value><description>FITS dataset may contain extensions</description><type>A</type><unit></unit></keyword>
 <keyword><name>COMMENT</name><value></value><description>FITS (Flexible Image Transport System) format is defined in 'Astronomy</description><type>A</type><unit></unit></keyword>
 <keyword><name>COMMENT</name><value></value><description>and Astrophysics', volume 376, page 359; bibcode: 2001A&amp;A...376..359H</description><type>A</type><unit></unit></keyword>
 </keywords>
