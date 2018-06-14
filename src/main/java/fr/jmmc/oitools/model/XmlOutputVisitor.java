@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,8 +20,8 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsViewer;
+import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
-import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import java.text.DecimalFormat;
@@ -29,7 +29,6 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
@@ -306,17 +305,7 @@ public final class XmlOutputVisitor implements ModelVisitor {
 
             if (oiFitsFile.getPrimaryImageHDU() != null) {
                 this.buffer.append("<hdu>\n");
-                final List<FitsHeaderCard> headerCards = oiFitsFile.getPrimaryImageHDU().getHeaderCards();
-                if (!headerCards.isEmpty()) {
-                    this.buffer.append("<keywords>\n");
-                    for (FitsHeaderCard headerCard : headerCards) {
-                        final String key = headerCard.getKey();
-                        if (!FitsUtils.isStandardKeyword(key)) {
-                            dumpFitsHeaderCard(headerCard);
-                        }
-                    }
-                    this.buffer.append("</keywords>\n");
-                }
+                appendKeywords(oiFitsFile.getPrimaryImageHDU());
                 this.buffer.append("</hdu>\n");
             }
         }
@@ -345,26 +334,7 @@ public final class XmlOutputVisitor implements ModelVisitor {
 
         this.buffer.append('<').append(oiTable.getExtName()).append(">\n");
 
-        // Print keywords
-        this.buffer.append("<keywords>\n");
-
-        Object val;
-        for (final KeywordMeta keyword : oiTable.getKeywordDescCollection()) {
-            val = oiTable.getKeywordValue(keyword.getName());
-            // skip missing keywords :
-            if (val != null) {
-                this.buffer.append("<keyword><name>").append(keyword.getName()).append("</name><value>").append(val);
-                this.buffer.append("</value><description>").append(encodeTagContent(keyword.getDescription())).append("</description><type>");
-                this.buffer.append(keyword.getType()).append("</type><unit>").append(keyword.getUnit()).append("</unit></keyword>\n");
-            }
-        }
-        // Extra keywords:
-        if (oiTable.hasHeaderCards()) {
-            for (final FitsHeaderCard headerCard : oiTable.getHeaderCards()) {
-                dumpFitsHeaderCard(headerCard);
-            }
-        }
-        this.buffer.append("</keywords>\n");
+        appendKeywords(oiTable);
 
         // Print nb of rows
         this.buffer.append("<rows>").append(oiTable.getNbRows()).append("</rows>");
@@ -462,6 +432,29 @@ public final class XmlOutputVisitor implements ModelVisitor {
         if (doOIFitsFile) {
             exitOIFitsFile();
         }
+    }
+
+    private void appendKeywords(final FitsHDU hdu) {
+        // Print keywords
+        this.buffer.append("<keywords>\n");
+
+        Object val;
+        for (final KeywordMeta keyword : hdu.getKeywordDescCollection()) {
+            val = hdu.getKeywordValue(keyword.getName());
+            // skip missing keywords :
+            if (val != null) {
+                this.buffer.append("<keyword><name>").append(keyword.getName()).append("</name><value>").append(val);
+                this.buffer.append("</value><description>").append(encodeTagContent(keyword.getDescription())).append("</description><type>");
+                this.buffer.append(keyword.getType()).append("</type><unit>").append(keyword.getUnit()).append("</unit></keyword>\n");
+            }
+        }
+        // Extra keywords:
+        if (hdu.hasHeaderCards()) {
+            for (final FitsHeaderCard headerCard : hdu.getHeaderCards()) {
+                dumpFitsHeaderCard(headerCard);
+            }
+        }
+        this.buffer.append("</keywords>\n");
     }
 
     private void dumpFitsHeaderCard(final FitsHeaderCard card) {
