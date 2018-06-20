@@ -597,7 +597,7 @@ public abstract class FitsTable extends FitsHDU {
      *
      * @param meta derived meta column descriptor
      */
-    protected final void addDerivedColumnMeta(final ColumnMeta meta) {
+    public final void addDerivedColumnMeta(final ColumnMeta meta) {
         getColumnsDerivedDesc().put(meta.getName(), meta);
     }
 
@@ -606,7 +606,7 @@ public abstract class FitsTable extends FitsHDU {
      *
      * @param name column name
      */
-    protected final void removeDerivedColumnMeta(final String name) {
+    public final void removeDerivedColumnMeta(final String name) {
         getColumnsDerivedDesc().remove(name);
     }
 
@@ -657,6 +657,30 @@ public abstract class FitsTable extends FitsHDU {
      */
     public final String[] getColumnDerivedString(final String name) {
         return (String[]) getColumnDerivedValue(name);
+    }
+
+    /**
+     * Return the column derived value given its name as an integer array (int
+     * primitive type) The returned value can be null if the column derived
+     * value has never been defined
+     *
+     * @param name column name
+     * @return integer array or null if undefined
+     */
+    public final int[] getColumnDerivedInt(final String name) {
+        return (int[]) getColumnDerivedValue(name);
+    }
+
+    /**
+     * Return the column value given its name as a 2D integer array (int
+     * primitive type) The returned value can be null if the column has never
+     * been defined
+     *
+     * @param name column name
+     * @return integer array or null if undefined
+     */
+    public final int[][] getColumnDerivedInts(final String name) {
+        return (int[][]) getColumnDerivedValue(name);
     }
 
     /**
@@ -725,7 +749,7 @@ public abstract class FitsTable extends FitsHDU {
      * @param name column name
      * @param value any value
      */
-    protected final void setColumnDerivedValue(final String name, final Object value) {
+    public final void setColumnDerivedValue(final String name, final Object value) {
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "DERIVED COLUMN VALUE [{0}] = {1}", new Object[]{name, (value != null) ? ArrayFuncs.arrayDescription(value) : ""});
         }
@@ -737,7 +761,7 @@ public abstract class FitsTable extends FitsHDU {
      *
      * @param name column name
      */
-    protected final void removeColumnDerivedValue(final String name) {
+    public final void removeColumnDerivedValue(final String name) {
         getColumnsDerivedValue().remove(name);
     }
 

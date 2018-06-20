@@ -383,7 +383,7 @@ public interface OIFitsConstants {
     public final static String COLUMN_POS_ANGLE = "POS_ANGLE";
     /** SPATIAL_FREQ derived OIData column as double[][] */
     public final static String COLUMN_SPATIAL_FREQ = "SPATIAL_FREQ";
-    /** NIGHT_ID derived OiData column as int[] */
+    /** NIGHT_ID derived OiData column as double[] */
     public final static String COLUMN_NIGHT_ID = "NIGHT_ID";
     /** UCOORD_SPATIAL derived OIData column as double[][] */
     public final static String COLUMN_UCOORD_SPATIAL = "UCOORD_SPATIAL";
