@@ -27,7 +27,6 @@ import fr.jmmc.oitools.model.ModelVisitor;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OITable;
 import fr.jmmc.oitools.model.Rule;
-import fr.nom.tam.util.ArrayFuncs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
+import nom.tam.util.ArrayFuncs;
 
 /**
  * Generic FITS table (column metadata and data)

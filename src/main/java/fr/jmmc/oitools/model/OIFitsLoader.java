@@ -36,13 +36,6 @@ import fr.jmmc.oitools.meta.OIFitsStandard;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
 import fr.jmmc.oitools.util.FileUtils;
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.BinaryTableHDU;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.fits.FitsException;
-import fr.nom.tam.fits.Header;
-import fr.nom.tam.fits.ImageHDU;
-import fr.nom.tam.util.ArrayFuncs;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -52,6 +45,14 @@ import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.logging.Level;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.BinaryTableHDU;
+import nom.tam.fits.FitsException;
+import nom.tam.fits.Header;
+import nom.tam.fits.Fits;
+import nom.tam.fits.ImageHDU;
+import nom.tam.fits.LibFitsAdapter;
+import nom.tam.util.ArrayFuncs;
 
 /**
  * This state-full class loads an OIFits file to the OIFits data model with optional integrity checks
@@ -335,9 +336,11 @@ public class OIFitsLoader {
      * @param hdus array of hd unit
      * @throws FitsException if any FITS error occurred
      * @throws java.io.IOException
-     * @throws IllegalArgumentException if IMAGE-OI images HDU have unsupported unit or unit conversion is not allowed or missing CDELT keyword
+     * @throws IllegalArgumentException if IMAGE-OI images HDU have unsupported unit or unit conversion is not allowed
+     * or missing CDELT keyword
      */
-    private void processHDUnits(final OIFitsStandard std, final FileRef fileRef, final BasicHDU[] hdus) throws FitsException, IOException, IllegalArgumentException {
+    private void processHDUnits(final OIFitsStandard std, final FileRef fileRef, final BasicHDU[] hdus) 
+            throws FitsException, IOException, IllegalArgumentException {
 
         final int nbHDU = hdus.length;
 
@@ -363,7 +366,7 @@ public class OIFitsLoader {
                         //content keyword for OIFitsV2 information
                         final Header header = imgHdu.getHeader();
 
-                        final String content = header.getTrimmedStringValue(FitsConstants.KEYWORD_CONTENT);
+                        final String content = LibFitsAdapter.getTrimmedStringValue(header, FitsConstants.KEYWORD_CONTENT);
 
                         final OIFitsStandard version = (std != null) ? std : OIFitsFile.getOIFitsStandard(content);
 
@@ -641,9 +644,9 @@ public class OIFitsLoader {
                     unit = "TUNIT";
                     values = null;
                 } else {
-                    type = hdu.getColumnType(idx);
-                    length = hdu.getColumnLength(idx);
-                    unit = hdu.getColumnUnit(idx);
+                    type = LibFitsAdapter.getColumnType(hdu, idx);
+                    length = LibFitsAdapter.getColumnLength(hdu, idx);
+                    unit = LibFitsAdapter.getColumnUnit(hdu, idx);
                     values = hdu.getColumn(idx);
                 }
                 if (logger.isLoggable(Level.FINE)) {
@@ -689,7 +692,8 @@ public class OIFitsLoader {
             }
             if (!columnsDesc.containsKey(name)) {
                 // rule [UNKNOWN_COLUMN] check if the column belongs to the OIFITS standard and version
-                checker.ruleFailed(Rule.UNKNOWN_COLUMN, table, name).addKeywordValue(hdu.getColumnLength(i) + "" + hdu.getColumnType(i));
+                checker.ruleFailed(Rule.UNKNOWN_COLUMN, table, name).addKeywordValue(LibFitsAdapter.getColumnLength(hdu,i) 
+                    + "" + LibFitsAdapter.getColumnType(hdu, i));
             }
         }
     }

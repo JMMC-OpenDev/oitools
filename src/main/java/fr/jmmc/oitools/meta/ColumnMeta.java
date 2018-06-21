@@ -24,8 +24,8 @@ import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.model.ModelBase;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.Rule;
-import fr.nom.tam.util.ArrayFuncs;
 import java.util.logging.Level;
+import nom.tam.util.ArrayFuncs;
 
 /**
  * This class describes a FITS column

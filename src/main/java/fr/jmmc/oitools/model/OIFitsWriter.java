@@ -27,14 +27,6 @@ import fr.jmmc.oitools.image.FitsImageWriter;
 import fr.jmmc.oitools.image.ImageOiData;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.Types;
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.BinaryTable;
-import fr.nom.tam.fits.BinaryTableHDU;
-import fr.nom.tam.fits.Data;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.fits.FitsException;
-import fr.nom.tam.fits.Header;
-import fr.nom.tam.util.BufferedFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,6 +34,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.BinaryTable;
+import nom.tam.fits.BinaryTableHDU;
+import nom.tam.fits.FitsException;
+import nom.tam.fits.Header;
+import nom.tam.fits.Fits;
+import nom.tam.fits.Data;
+import nom.tam.fits.LibFitsAdapter;
+import nom.tam.util.BufferedFile;
 
 /**
  * This state-full class writes an OIFits file from the OIFitsFile model
@@ -271,7 +272,7 @@ public class OIFitsWriter {
         final Header header = BinaryTableHDU.manufactureHeader(fitsData);
 
         // create HDU :
-        final BinaryTableHDU hdu = new BinaryTableHDU(header, fitsData);
+        final BinaryTableHDU hdu = new BinaryTableHDU(header, (BinaryTable)fitsData);
 
         // Restore first String data :
         for (Map.Entry<String, String> e : backupFirstString.entrySet()) {
@@ -290,9 +291,11 @@ public class OIFitsWriter {
                 i = idx.intValue();
 
                 if (logger.isLoggable(Level.FINE)) {
-                    logger.log(Level.FINE, "COLUMN [{0}] [{1} {2}]", new Object[]{name, hdu.getColumnLength(i), hdu.getColumnType(i)});
+                    logger.log(Level.FINE, "COLUMN [{0}] [{1} {2}]", new Object[]{
+                        name, LibFitsAdapter.getColumnLength(hdu, i), LibFitsAdapter.getColumnType(hdu, i)});
                 }
-                hdu.setColumnName(i, name, column.getDescription(), column.getUnits().getStandardRepresentation());
+                LibFitsAdapter.setColumnName(
+                        hdu, i, name, column.getDescription(), column.getUnits().getStandardRepresentation());
             }
         }
 

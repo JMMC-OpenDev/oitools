@@ -20,7 +20,6 @@
 package fr.jmmc.oitools.util;
 
 import fr.jmmc.jmcs.network.NetworkSettings;
-import fr.nom.tam.fits.FitsUtil;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,6 +38,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
+import nom.tam.fits.FitsUtil;
 
 /**
  * This class gathers file utility methods

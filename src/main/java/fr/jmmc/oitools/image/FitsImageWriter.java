@@ -24,21 +24,20 @@ import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
 import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.meta.KeywordMeta;
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.Data;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.fits.FitsException;
-import fr.nom.tam.fits.Header;
-import fr.nom.tam.fits.HeaderCard;
-import fr.nom.tam.fits.HeaderCardException;
-import fr.nom.tam.fits.ImageData;
-import fr.nom.tam.fits.ImageHDU;
-import fr.nom.tam.util.BufferedFile;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.Fits;
+import nom.tam.fits.FitsException;
+import nom.tam.fits.Header;
+import nom.tam.fits.HeaderCard;
+import nom.tam.fits.HeaderCardException;
+import nom.tam.fits.ImageData;
+import nom.tam.fits.ImageHDU;
+import nom.tam.util.BufferedFile;
 
 /**
  * This stateless class writes is an FitsImageFile structure into an Fits image and cube
@@ -191,7 +190,7 @@ public final class FitsImageWriter {
 
         // Note: if multiple images, they must have the same dimensions and keywords
         // Prepare the image data to create HDU :
-        final Data fitsData = createImageData(imageHDU, fileName, hduIndex);
+        final ImageData fitsData = createImageData(imageHDU, fileName, hduIndex);
 
         // Generate the header from the data :
         final Header header = ImageHDU.manufactureHeader(fitsData);

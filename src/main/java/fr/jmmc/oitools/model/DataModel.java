@@ -31,7 +31,6 @@ import fr.jmmc.oitools.meta.WaveColumnMeta;
 import fr.jmmc.oitools.model.OIFitsChecker.InspectMode;
 import static fr.jmmc.oitools.model.XmlOutputVisitor.encodeTagContent;
 import fr.jmmc.oitools.util.FileUtils;
-import fr.nom.tam.fits.FitsException;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -42,6 +41,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
+import nom.tam.fits.FitsException;
 
 /**
  * Create Xml Files for DataModel version 1 and 2, all Rules and them applyTo

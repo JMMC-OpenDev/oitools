@@ -20,15 +20,6 @@
 package fr.jmmc.oitools.fits;
 
 import fr.jmmc.oitools.model.SeverityProfileFactory;
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.BinaryTable;
-import fr.nom.tam.fits.BinaryTableHDU;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.fits.FitsException;
-import fr.nom.tam.fits.FitsFactory;
-import fr.nom.tam.fits.Header;
-import fr.nom.tam.fits.HeaderCard;
-import fr.nom.tam.util.ArrayFuncs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,6 +29,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.BinaryTable;
+import nom.tam.fits.BinaryTableHDU;
+import nom.tam.fits.FitsException;
+import nom.tam.fits.FitsFactory;
+import nom.tam.fits.HeaderCard;
+import nom.tam.fits.Header;
+import nom.tam.fits.Fits;
+import nom.tam.fits.LibFitsAdapter;
+import nom.tam.util.ArrayFuncs;
 
 /**
  * This utility class gathers several methods related to Fits handling
@@ -232,7 +233,7 @@ public final class FitsUtils {
      */
     public static void dumpHeader(final StringBuilder sb, final Header header) {
 
-        final String extName = header.getTrimmedStringValue("EXTNAME");
+        final String extName = LibFitsAdapter.getTrimmedStringValue(header, "EXTNAME");
 
         sb.append("--------------------------------------------------------------------------------\n");
         if (extName != null) {
@@ -290,11 +291,11 @@ public final class FitsUtils {
         Object array;
         for (int i = 0; i < nCols; i++) {
             sb.append("COLUMN ").append(hdu.getColumnName(i)).append(" [");
-            sb.append(hdu.getColumnLength(i));
+            sb.append(LibFitsAdapter.getColumnLength(hdu, i));
             sb.append(' ');
-            sb.append(hdu.getColumnType(i));
+            sb.append(LibFitsAdapter.getColumnType(hdu, i));
             sb.append("] (");
-            unit = hdu.getColumnUnit(i);
+            unit = LibFitsAdapter.getColumnUnit(hdu, i);
             if (unit != null) {
                 sb.append(unit);
             }
@@ -356,11 +357,11 @@ public final class FitsUtils {
 
         @Override
         public int compare(final BasicHDU hdu1, final BasicHDU hdu2) {
-            String extName1 = hdu1.getHeader().getTrimmedStringValue("EXTNAME");
+            String extName1 = LibFitsAdapter.getTrimmedStringValue(hdu1.getHeader(), "EXTNAME");
             if (extName1 == null) {
                 extName1 = "";
             }
-            String extName2 = hdu2.getHeader().getTrimmedStringValue("EXTNAME");
+            String extName2 = LibFitsAdapter.getTrimmedStringValue(hdu2.getHeader(), "EXTNAME");
             if (extName2 == null) {
                 extName2 = "";
             }

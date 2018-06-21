@@ -28,19 +28,6 @@ import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.Rule;
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.Data;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.fits.FitsException;
-import fr.nom.tam.fits.FitsFactory;
-import fr.nom.tam.fits.FitsUtil;
-import fr.nom.tam.fits.Header;
-import fr.nom.tam.fits.HeaderCard;
-import fr.nom.tam.fits.ImageData;
-import fr.nom.tam.fits.ImageHDU;
-import fr.nom.tam.fits.PaddingException;
-import fr.nom.tam.util.ArrayDataInput;
-import fr.nom.tam.util.RandomAccess;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -49,6 +36,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.Data;
+import nom.tam.fits.FitsException;
+import nom.tam.fits.FitsFactory;
+import nom.tam.fits.Header;
+import nom.tam.fits.Fits;
+import nom.tam.fits.FitsUtil;
+import nom.tam.fits.HeaderCard;
+import nom.tam.fits.ImageData;
+import nom.tam.fits.ImageHDU;
+import nom.tam.fits.LibFitsAdapter;
+import nom.tam.fits.PaddingException;
+import nom.tam.util.ArrayDataInput;
+import nom.tam.util.RandomAccess;
 
 /**
  * This stateless class loads is an Fits image and cube into the FitsImageFile structure
@@ -623,7 +624,7 @@ public final class FitsImageLoader {
             }
             if (hasKeyword || OIFitsChecker.isInspectRules()) {
                 // parse keyword value:
-                final Object keywordValue = parseKeyword(checker, hduFits, keyword, header.getValue(keywordName));
+                final Object keywordValue = parseKeyword(checker, hduFits, keyword, LibFitsAdapter.getValue(header, keywordName));
 
                 // store key and value:
                 // potentially missing values
@@ -767,8 +768,8 @@ public final class FitsImageLoader {
          */
         // but check before if we have data and that CDELT is defined if requested mandatory
         if (image.getNbCols() > 0 && image.getNbRows() > 0 && requireCdeltKeywords
-                && (header.getValue(FitsImageConstants.KEYWORD_CDELT1) == null
-                || header.getValue(FitsImageConstants.KEYWORD_CDELT2) == null)) {
+                && (LibFitsAdapter.getValue(header, FitsImageConstants.KEYWORD_CDELT1) == null
+                || LibFitsAdapter.getValue(header, FitsImageConstants.KEYWORD_CDELT2) == null)) {
             logger.log(Level.WARNING, " Missing keyword(s) [ " + FitsImageConstants.KEYWORD_CDELT1 + "={0} or "
                     + FitsImageConstants.KEYWORD_CDELT2 + "={1} ] in HDU #{2}", new Object[]{header.getStringValue(FitsImageConstants.KEYWORD_CDELT1), header.getStringValue(FitsImageConstants.KEYWORD_CDELT2), image.getFitsImageHDU().getExtNb()});
             throw new IllegalArgumentException(" Missing keyword(s) [ " + FitsImageConstants.KEYWORD_CDELT1 + " or " + FitsImageConstants.KEYWORD_CDELT2 + " ] in HDU #" + image.getFitsImageHDU().getExtNb());

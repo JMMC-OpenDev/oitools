@@ -23,10 +23,10 @@ import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFitsWriter;
 import fr.jmmc.oitools.processing.Merger;
 import fr.jmmc.oitools.processing.Selector;
-import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import nom.tam.fits.FitsException;
 
 /**
  *

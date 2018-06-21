@@ -19,7 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.fits;
 
-import fr.nom.tam.fits.HeaderCard;
+import nom.tam.fits.HeaderCard;
 
 /**
  * This class represents one Fits header card (key, value, comment) immutable
