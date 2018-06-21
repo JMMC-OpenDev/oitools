@@ -19,6 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.test.fits;
 
+import fr.jmmc.oitools.TestArrayFuncs;
 import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.test.TestEnv;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import nom.tam.fits.FitsFactory;
 import nom.tam.fits.Header;
 import nom.tam.fits.HeaderCard;
 import nom.tam.fits.LibFitsAdapter;
-import nom.tam.fits.test.ArrayFuncs;
+import nom.tam.util.ArrayFuncs;
 import nom.tam.util.BufferedFile;
 
 /**
@@ -335,7 +336,7 @@ public class TamFitsTest implements TestEnv {
                      sArray = sData.getFlattenedColumn(i);
                      dArray = dData.getFlattenedColumn(i);
                      */
-                    if (!ArrayFuncs.arrayEquals(sArray, dArray)) {
+                    if (!TestArrayFuncs.arrayEquals(sArray, dArray)) {
                         logger.log(Level.INFO, "ERROR:  different values for column[{0}]\nSRC={1}\nDST={2}", new Object[]{srcHdu.getColumnName(i), FitsUtils.arrayToString(sArray), FitsUtils.arrayToString(dArray)});
                         res = false;
                     } else {
