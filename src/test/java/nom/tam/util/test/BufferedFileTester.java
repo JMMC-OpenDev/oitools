@@ -866,7 +866,7 @@ public class BufferedFileTester {
   void testArray(ArrayDataInput bf, String label, Object array) throws Exception {
     Object newArray = ArrayFuncs.mimicArray(array, ArrayFuncs.getBaseClass(array));
     bf.readLArray(newArray);
-    boolean state = ArrayFuncs.arrayEquals(array, newArray);
+    boolean state = nom.tam.fits.test.ArrayFuncs.arrayEquals(array, newArray);
     assertEquals(label, true, state);
   }
 }

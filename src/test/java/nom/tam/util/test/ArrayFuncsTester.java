@@ -75,9 +75,9 @@ public class ArrayFuncsTester {
     }
     int[][][] test5 = (int[][][]) ArrayFuncs.deepClone(test1);
 
-    assertEquals("deepClone()", true, ArrayFuncs.arrayEquals(test1, test5));
+    assertEquals("deepClone()", true, nom.tam.fits.test.ArrayFuncs.arrayEquals(test1, test5));
     test5[1][1][1] = -3;
-    assertEquals("arrayEquals()", false, ArrayFuncs.arrayEquals(test1, test5));
+    assertEquals("arrayEquals()", false, nom.tam.fits.test.ArrayFuncs.arrayEquals(test1, test5));
 
     int[] dimsOrig = ArrayFuncs.getDimensions(test1);
     int[] test6 = (int[]) ArrayFuncs.flatten(test1);
@@ -124,7 +124,7 @@ public class ArrayFuncsTester {
     assertEquals("nElements()", 120, ArrayFuncs.nElements(xtest4));
     assertEquals("nLElements()", 120L, ArrayFuncs.nLElements(xtest4));
 
-    ArrayFuncs.testPattern(xtest4, (byte) -1);
+    nom.tam.fits.test.ArrayFuncs.testPattern(xtest4, (byte) -1);
 
     assertEquals("testPattern()", (double) -1, xtest4[0][0][0][0]);
     assertEquals("testPattern()", (double) 118, xtest4[4][3][2][1]);
@@ -138,11 +138,11 @@ public class ArrayFuncsTester {
       y[i] = x[i] + 1.E-10;
     }
 
-    assertEquals("eqTest", false, ArrayFuncs.arrayEquals(x, y));
-    assertEquals("eqTest2", true, ArrayFuncs.arrayEquals(x, y, 0., 1.e-9));
-    assertEquals("eqTest3", true, ArrayFuncs.arrayEquals(x, y, 1.E-5, 1.e-9));
-    assertEquals("eqTest4", false, ArrayFuncs.arrayEquals(x, y, 0., 1.e-11));
-    assertEquals("eqTest5", false, ArrayFuncs.arrayEquals(x, y, 1.E-5, 0.));
+    assertEquals("eqTest", false, nom.tam.fits.test.ArrayFuncs.arrayEquals(x, y));
+    assertEquals("eqTest2", true, nom.tam.fits.test.ArrayFuncs.arrayEquals(x, y, 0., 1.e-9));
+    assertEquals("eqTest3", true, nom.tam.fits.test.ArrayFuncs.arrayEquals(x, y, 1.E-5, 1.e-9));
+    assertEquals("eqTest4", false, nom.tam.fits.test.ArrayFuncs.arrayEquals(x, y, 0., 1.e-11));
+    assertEquals("eqTest5", false, nom.tam.fits.test.ArrayFuncs.arrayEquals(x, y, 1.E-5, 0.));
 
     float[] fx = {1, 2, 3, 4, 5};
     float[] fy = new float[fx.length];
@@ -150,11 +150,11 @@ public class ArrayFuncsTester {
       fy[i] = fx[i] + 1.E-5F;
     }
 
-    assertEquals("eqTest6", false, ArrayFuncs.arrayEquals(fx, fy));
-    assertEquals("eqTest7", true, ArrayFuncs.arrayEquals(fx, fy, 1.E-4, 0.));
-    assertEquals("eqTest8", false, ArrayFuncs.arrayEquals(fx, fy, 1.E-6, 0.));
-    assertEquals("eqTest9", false, ArrayFuncs.arrayEquals(fx, fy, 0., 0.));
-    assertEquals("eqTest10", false, ArrayFuncs.arrayEquals(fx, fy, 0., 1.E-4));
+    assertEquals("eqTest6", false, nom.tam.fits.test.ArrayFuncs.arrayEquals(fx, fy));
+    assertEquals("eqTest7", true, nom.tam.fits.test.ArrayFuncs.arrayEquals(fx, fy, 1.E-4, 0.));
+    assertEquals("eqTest8", false, nom.tam.fits.test.ArrayFuncs.arrayEquals(fx, fy, 1.E-6, 0.));
+    assertEquals("eqTest9", false, nom.tam.fits.test.ArrayFuncs.arrayEquals(fx, fy, 0., 0.));
+    assertEquals("eqTest10", false, nom.tam.fits.test.ArrayFuncs.arrayEquals(fx, fy, 0., 1.E-4));
 
   }
 }

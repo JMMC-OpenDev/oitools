@@ -33,7 +33,7 @@ import nom.tam.fits.FitsFactory;
 import nom.tam.fits.Header;
 import nom.tam.fits.HeaderCard;
 import nom.tam.fits.LibFitsAdapter;
-import nom.tam.util.ArrayFuncs;
+import nom.tam.fits.test.ArrayFuncs;
 import nom.tam.util.BufferedFile;
 
 /**
@@ -99,7 +99,7 @@ public class TamFitsTest implements TestEnv {
                     }
                     i++;
 
-                    h.info();
+                    h.info(System.out);
                 }
             } while (h != null);
 
@@ -340,9 +340,9 @@ public class TamFitsTest implements TestEnv {
                         res = false;
                     } else {
                         if (PRINT_COL) {
-                            logger.log(Level.INFO, "COLUMN {0}\t{1}\n{2}", new Object[]{srcHdu.getColumnName(i), ArrayFuncs.arrayDescription(sArray), FitsUtils.arrayToString(sArray)});
+                            logger.log(Level.INFO, "COLUMN {0}\t{1}\n{2}", new Object[]{srcHdu.getColumnName(i), nom.tam.util.ArrayFuncs.arrayDescription(sArray), FitsUtils.arrayToString(sArray)});
                         } else {
-                            logger.log(Level.INFO, "COLUMN {0}\t{1}", new Object[]{srcHdu.getColumnName(i), ArrayFuncs.arrayDescription(sArray)});
+                            logger.log(Level.INFO, "COLUMN {0}\t{1}", new Object[]{srcHdu.getColumnName(i), nom.tam.util.ArrayFuncs.arrayDescription(sArray)});
                         }
                     }
                 }

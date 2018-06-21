@@ -130,7 +130,7 @@ public class ArrayFuncsTest extends TestCase {
     double[] start = new double[]{1, 2, 3, 4, 5, 6};
     double[] finish = new double[6];
     ArrayFuncs.copyArray(start, finish);
-    assertTrue(ArrayFuncs.arrayEquals(start, finish));
+    assertTrue(nom.tam.fits.test.ArrayFuncs.arrayEquals(start, finish));
   }
 
   /**
@@ -159,7 +159,7 @@ public class ArrayFuncsTest extends TestCase {
 
     int[][][] test = new int[2][3][4];
     byte b = 0;
-    ArrayFuncs.testPattern(test, b);
+    nom.tam.fits.test.ArrayFuncs.testPattern(test, b);
 
     assertEquals(ArrayFuncs.getBaseArray(test), test[0][0]);
   }
@@ -199,7 +199,7 @@ public class ArrayFuncsTest extends TestCase {
     Class baseType = int.class;
     int[] dims = {2, 3, 4};
 
-    Object result = ArrayFuncs.generateArray(baseType, dims);
+    Object result = nom.tam.fits.test.ArrayFuncs.generateArray(baseType, dims);
     assertEquals(result.getClass(), int[][][].class);
     int[][][] x = (int[][][]) result;
     assertEquals(x.length, 2);
@@ -217,7 +217,7 @@ public class ArrayFuncsTest extends TestCase {
     byte start = 2;
     int[] arr = new int[8];
 
-    byte result = ArrayFuncs.testPattern(arr, start);
+    byte result = nom.tam.fits.test.ArrayFuncs.testPattern(arr, start);
     assertEquals(result, (byte) (start + arr.length));
     assertEquals(start, arr[0]);
     assertEquals(start + arr.length - 1, arr[arr.length - 1]);
@@ -287,7 +287,7 @@ public class ArrayFuncsTest extends TestCase {
 
     ires = (int[][]) ArrayFuncs.convertArray(array, newType, false);
     assertNotSame(array, ires);
-    assertTrue(ArrayFuncs.arrayEquals(array, ires));
+    assertTrue(nom.tam.fits.test.ArrayFuncs.arrayEquals(array, ires));
   }
 
   /**
@@ -317,12 +317,12 @@ public class ArrayFuncsTest extends TestCase {
     int[][] t = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
 
 
-    assertTrue(ArrayFuncs.arrayEquals(null, null));
-    assertFalse(ArrayFuncs.arrayEquals(null, new int[2]));
-    assertTrue(ArrayFuncs.arrayEquals(x, y));
-    assertFalse(ArrayFuncs.arrayEquals(x, z));
-    assertFalse(ArrayFuncs.arrayEquals(x, t));
-    assertTrue(ArrayFuncs.arrayEquals(x[0], z[0]));
+    assertTrue(nom.tam.fits.test.ArrayFuncs.arrayEquals(null, null));
+    assertFalse(nom.tam.fits.test.ArrayFuncs.arrayEquals(null, new int[2]));
+    assertTrue(nom.tam.fits.test.ArrayFuncs.arrayEquals(x, y));
+    assertFalse(nom.tam.fits.test.ArrayFuncs.arrayEquals(x, z));
+    assertFalse(nom.tam.fits.test.ArrayFuncs.arrayEquals(x, t));
+    assertTrue(nom.tam.fits.test.ArrayFuncs.arrayEquals(x[0], z[0]));
   }
 
   /**
@@ -336,11 +336,11 @@ public class ArrayFuncsTest extends TestCase {
 
     double tol = 0.0;
 
-    assertTrue(ArrayFuncs.doubleArrayEquals(x, y, tol));
+    assertTrue(nom.tam.fits.test.ArrayFuncs.doubleArrayEquals(x, y, tol));
     x[0] += 1.e-14;
-    assertFalse(ArrayFuncs.doubleArrayEquals(x, y, tol));
+    assertFalse(nom.tam.fits.test.ArrayFuncs.doubleArrayEquals(x, y, tol));
     tol = 1.e-13;
-    assertTrue(ArrayFuncs.doubleArrayEquals(x, y, tol));
+    assertTrue(nom.tam.fits.test.ArrayFuncs.doubleArrayEquals(x, y, tol));
   }
 
   /**
@@ -352,10 +352,10 @@ public class ArrayFuncsTest extends TestCase {
     System.out.println("floatArrayEquals");
 
     float tol = 0.0F;
-    assertTrue(ArrayFuncs.floatArrayEquals(x, y, tol));
+    assertTrue(nom.tam.fits.test.ArrayFuncs.floatArrayEquals(x, y, tol));
     x[0] += 1.e-6f;
-    assertFalse(ArrayFuncs.floatArrayEquals(x, y, tol));
+    assertFalse(nom.tam.fits.test.ArrayFuncs.floatArrayEquals(x, y, tol));
     tol = 1.e-5f;
-    assertTrue(ArrayFuncs.floatArrayEquals(x, y, tol));
+    assertTrue(nom.tam.fits.test.ArrayFuncs.floatArrayEquals(x, y, tol));
   }
 }

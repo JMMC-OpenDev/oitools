@@ -4,7 +4,6 @@ import nom.tam.fits.AsciiTable;
 import nom.tam.fits.AsciiTableHDU;
 import nom.tam.fits.Fits;
 import nom.tam.fits.TableHDU;
-import nom.tam.util.ArrayFuncs;
 import nom.tam.util.BufferedFile;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -34,9 +33,9 @@ public class AsciiTableTester {
       realCol[i] = 10000.F * (i) * (i) * (i) + 1;
     }
 
-    int[] intCol = (int[]) ArrayFuncs.convertArray(realCol, int.class);
-    long[] longCol = (long[]) ArrayFuncs.convertArray(realCol, long.class);
-    double[] doubleCol = (double[]) ArrayFuncs.convertArray(realCol, double.class);
+    int[] intCol = (int[]) nom.tam.util.ArrayFuncs.convertArray(realCol, int.class);
+    long[] longCol = (long[]) nom.tam.util.ArrayFuncs.convertArray(realCol, long.class);
+    double[] doubleCol = (double[]) nom.tam.util.ArrayFuncs.convertArray(realCol, double.class);
 
     String[] strCol = new String[realCol.length];
 
