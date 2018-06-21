@@ -232,7 +232,7 @@ public final class FitsImageLoader {
      */
     public static long updateChecksum(final BasicHDU hdu) throws FitsException, IOException {
         // compute and add checksum into HDU (header):
-        return Fits.setChecksum(hdu, false);
+        return LibFitsAdapter.setChecksum(hdu, false);
     }
 
     /**
@@ -246,64 +246,17 @@ public final class FitsImageLoader {
 
         try {
             while (fitsFile.getStream() != null) {
-                final BasicHDU hdu = readHDU(fitsFile);
+                final BasicHDU hdu = fitsFile.readHDU();
                 if (hdu == null) {
                     break;
                 }
+                fixAxesInHeader(hdu.getHeader());
                 hduList.add(hdu);
             }
         } catch (IOException e) {
             throw new FitsException("IO error: " + e);
         }
         return hduList;
-    }
-
-    /**
-     * Read the next HDU on the default input stream.
-     * Note: it skips truncated HDU
-     *
-     * @param fitsFile Fits object to read
-     * @return The HDU read, or null if an EOF was detected.
-     * Note that null is only returned when the EOF is detected immediately
-     * at the beginning of reading the HDU.
-     *
-     * @throws FitsException if any FITS error occurred
-     * @throws IOException IO failure
-     */
-    private static BasicHDU readHDU(final Fits fitsFile) throws FitsException, IOException {
-
-        final ArrayDataInput dataStr = fitsFile.getStream();
-        if (dataStr == null || fitsFile.isAtEOF()) {
-            return null;
-        }
-
-        if (dataStr instanceof RandomAccess && fitsFile.getLastFileOffset() > 0) {
-            FitsUtil.reposition(dataStr, fitsFile.getLastFileOffset());
-        }
-
-        final Header hdr = Header.readHeader(dataStr);
-        if (hdr == null) {
-            fitsFile.setAtEOF(true);
-            return null;
-        }
-
-        if (ImageHDU.isHeader(hdr)) {
-            // Hack for ImageHDU having NAXIS > 2 and NAXISn=1
-            fixAxesInHeader(hdr);
-        }
-
-        final Data datum = hdr.makeData();
-        try {
-            datum.read(dataStr);
-        } catch (PaddingException pe) {
-            // ignore truncated HDU ...
-            fitsFile.setAtEOF(true);
-            return null;
-        }
-
-        fitsFile.setLastFileOffset(FitsUtil.findOffset(dataStr));
-
-        return FitsFactory.HDUFactory(hdr, datum);
     }
 
     /**
