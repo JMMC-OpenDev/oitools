@@ -21,19 +21,20 @@ package fr.jmmc.oitools.test.fits;
 
 import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.test.TestEnv;
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.BinaryTable;
-import fr.nom.tam.fits.BinaryTableHDU;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.fits.FitsException;
-import fr.nom.tam.fits.FitsFactory;
-import fr.nom.tam.fits.Header;
-import fr.nom.tam.fits.HeaderCard;
-import fr.nom.tam.util.ArrayFuncs;
-import fr.nom.tam.util.BufferedFile;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Level;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.BinaryTable;
+import nom.tam.fits.BinaryTableHDU;
+import nom.tam.fits.Fits;
+import nom.tam.fits.FitsException;
+import nom.tam.fits.FitsFactory;
+import nom.tam.fits.Header;
+import nom.tam.fits.HeaderCard;
+import nom.tam.fits.LibFitsAdapter;
+import nom.tam.util.ArrayFuncs;
+import nom.tam.util.BufferedFile;
 
 /**
  * This class makes several tests on nom.tam fits library
@@ -217,8 +218,8 @@ public class TamFitsTest implements TestEnv {
     private static boolean compareHeader(final Header srcHeader, final Header dstHeader) {
         boolean res = true;
 
-        final String sExtName = srcHeader.getTrimmedStringValue("EXTNAME");
-        final String dExtName = dstHeader.getTrimmedStringValue("EXTNAME");
+        final String sExtName = LibFitsAdapter.getTrimmedStringValue(srcHeader, "EXTNAME");
+        final String dExtName = LibFitsAdapter.getTrimmedStringValue(dstHeader, "EXTNAME");
 
         if (sExtName != null && !sExtName.equals(dExtName)) {
             logger.log(Level.INFO, "ERROR:  different extension name {0} <> {1}", new Object[]{sExtName, dExtName});

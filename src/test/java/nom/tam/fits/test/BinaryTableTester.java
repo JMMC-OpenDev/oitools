@@ -1,16 +1,16 @@
 package nom.tam.fits.test;
 
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.BinaryTable;
-import fr.nom.tam.fits.BinaryTableHDU;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.fits.FitsFactory;
-import fr.nom.tam.fits.FitsUtil;
-import fr.nom.tam.fits.Header;
-import fr.nom.tam.util.ArrayFuncs;
-import fr.nom.tam.util.BufferedDataOutputStream;
-import fr.nom.tam.util.BufferedFile;
 import java.io.FileOutputStream;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.BinaryTable;
+import nom.tam.fits.BinaryTableHDU;
+import nom.tam.fits.Fits;
+import nom.tam.fits.FitsFactory;
+import nom.tam.fits.FitsUtil;
+import nom.tam.fits.Header;
+import nom.tam.util.ArrayFuncs;
+import nom.tam.util.BufferedDataOutputStream;
+import nom.tam.util.BufferedFile;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;

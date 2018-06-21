@@ -6,11 +6,6 @@
  */
 package nom.tam.util.test;
 
-import fr.nom.tam.util.ArrayDataInput;
-import fr.nom.tam.util.ArrayFuncs;
-import fr.nom.tam.util.BufferedDataInputStream;
-import fr.nom.tam.util.BufferedDataOutputStream;
-import fr.nom.tam.util.BufferedFile;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -18,6 +13,11 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.RandomAccessFile;
+import nom.tam.util.ArrayDataInput;
+import nom.tam.util.ArrayFuncs;
+import nom.tam.util.BufferedDataInputStream;
+import nom.tam.util.BufferedDataOutputStream;
+import nom.tam.util.BufferedFile;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

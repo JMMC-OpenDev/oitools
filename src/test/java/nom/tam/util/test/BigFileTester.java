@@ -1,8 +1,8 @@
 package nom.tam.util.test;
 
-import fr.nom.tam.util.BufferedDataInputStream;
-import fr.nom.tam.util.BufferedFile;
 import java.io.FileInputStream;
+import nom.tam.util.BufferedDataInputStream;
+import nom.tam.util.BufferedFile;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

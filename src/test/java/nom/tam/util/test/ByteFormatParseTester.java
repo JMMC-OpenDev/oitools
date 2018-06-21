@@ -1,9 +1,9 @@
 package nom.tam.util.test;
 
-import fr.nom.tam.util.ByteFormatter;
-import fr.nom.tam.util.ByteParser;
 import fr.nom.tam.util.TruncationException;
 import java.util.Arrays;
+import nom.tam.util.ByteFormatter;
+import nom.tam.util.ByteParser;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

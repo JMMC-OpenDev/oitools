@@ -25,12 +25,12 @@ import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.Rule;
 
-import fr.nom.tam.fits.FitsException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import nom.tam.fits.FitsException;
 import org.junit.Assert;
 import org.junit.Test;
 

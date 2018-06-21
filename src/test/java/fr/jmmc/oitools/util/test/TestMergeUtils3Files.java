@@ -30,15 +30,11 @@ import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIVis2;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.processing.Merger;
-import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import nom.tam.fits.FitsException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**

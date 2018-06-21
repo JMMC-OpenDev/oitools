@@ -1,7 +1,7 @@
 package nom.tam.fits.test;
 
-import fr.nom.tam.fits.FitsFactory;
-import fr.nom.tam.fits.HeaderCard;
+import nom.tam.fits.FitsFactory;
+import nom.tam.fits.HeaderCard;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;

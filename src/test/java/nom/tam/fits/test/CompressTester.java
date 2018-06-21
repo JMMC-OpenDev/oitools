@@ -1,11 +1,11 @@
 package nom.tam.fits.test;
 
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.Fits;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.Fits;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

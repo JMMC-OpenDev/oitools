@@ -21,13 +21,13 @@ import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
 import fr.jmmc.oitools.OIFitsProcessor;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
-import fr.nom.tam.fits.FitsException;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
 import junit.framework.Assert;
+import nom.tam.fits.FitsException;
 import org.junit.Test;
 
 /**

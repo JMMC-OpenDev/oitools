@@ -1,14 +1,14 @@
 package nom.tam.fits.test;
 
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.fits.Header;
-import fr.nom.tam.fits.HeaderCard;
-import fr.nom.tam.fits.ImageHDU;
-import fr.nom.tam.fits.PaddingException;
-import fr.nom.tam.image.ImageTiler;
-import fr.nom.tam.util.BufferedFile;
-import fr.nom.tam.util.Cursor;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.Fits;
+import nom.tam.fits.Header;
+import nom.tam.fits.HeaderCard;
+import nom.tam.fits.ImageHDU;
+import nom.tam.fits.PaddingException;
+import nom.tam.image.ImageTiler;
+import nom.tam.util.BufferedFile;
+import nom.tam.util.Cursor;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

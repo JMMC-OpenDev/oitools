@@ -1,11 +1,11 @@
 package nom.tam.fits.test;
 
-import fr.nom.tam.fits.AsciiTable;
-import fr.nom.tam.fits.AsciiTableHDU;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.fits.TableHDU;
-import fr.nom.tam.util.ArrayFuncs;
-import fr.nom.tam.util.BufferedFile;
+import nom.tam.fits.AsciiTable;
+import nom.tam.fits.AsciiTableHDU;
+import nom.tam.fits.Fits;
+import nom.tam.fits.TableHDU;
+import nom.tam.util.ArrayFuncs;
+import nom.tam.util.BufferedFile;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

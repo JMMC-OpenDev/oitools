@@ -24,9 +24,9 @@ import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OITable;
-import fr.nom.tam.util.ArrayFuncs;
 import java.util.Arrays;
 import java.util.logging.Level;
+import nom.tam.util.ArrayFuncs;
 
 /**
  *

@@ -6,9 +6,9 @@ package nom.tam.util.test;
  * in the source code or included in or referred to in any
  * derived software.
  */
-import fr.nom.tam.util.Cursor;
-import fr.nom.tam.util.HashedList;
 import java.util.Iterator;
+import nom.tam.util.Cursor;
+import nom.tam.util.HashedList;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

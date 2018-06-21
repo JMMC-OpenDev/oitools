@@ -23,9 +23,9 @@ import fr.jmmc.oitools.JUnitBaseTest;
 import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.processing.Merger;
-import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import nom.tam.fits.FitsException;
 import org.junit.Assert;
 import org.junit.Test;
 

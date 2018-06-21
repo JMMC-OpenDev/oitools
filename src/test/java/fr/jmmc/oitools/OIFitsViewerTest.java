@@ -20,7 +20,6 @@
 package fr.jmmc.oitools;
 
 import fr.jmmc.oitools.util.FileUtils;
-import fr.nom.tam.fits.FitsException;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
@@ -28,6 +27,7 @@ import java.util.logging.Level;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import nom.tam.fits.FitsException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.xml.sax.InputSource;

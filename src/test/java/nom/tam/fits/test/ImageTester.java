@@ -1,10 +1,10 @@
 package nom.tam.fits.test;
 
-import fr.nom.tam.fits.BasicHDU;
-import fr.nom.tam.fits.Fits;
-import fr.nom.tam.util.ArrayFuncs;
-import fr.nom.tam.util.BufferedFile;
 import java.io.File;
+import nom.tam.fits.BasicHDU;
+import nom.tam.fits.Fits;
+import nom.tam.util.ArrayFuncs;
+import nom.tam.util.BufferedFile;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

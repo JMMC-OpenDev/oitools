@@ -1,6 +1,6 @@
 package nom.tam.util.test;
 
-import fr.nom.tam.util.ArrayFuncs;
+import nom.tam.util.ArrayFuncs;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

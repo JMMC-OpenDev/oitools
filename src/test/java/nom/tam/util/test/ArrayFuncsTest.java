@@ -6,8 +6,8 @@
  */
 package nom.tam.util.test;
 
-import fr.nom.tam.util.ArrayFuncs;
 import junit.framework.TestCase;
+import nom.tam.util.ArrayFuncs;
 
 /**
  *

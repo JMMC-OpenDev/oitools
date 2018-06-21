@@ -24,12 +24,12 @@ import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFitsWriter;
 import fr.jmmc.oitools.test.OITableUtils;
 import fr.jmmc.oitools.test.fits.TamFitsTest;
-import fr.nom.tam.fits.FitsException;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import static junit.framework.Assert.fail;
+import nom.tam.fits.FitsException;
 import org.junit.Test;
 
 /**

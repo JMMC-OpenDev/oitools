@@ -1,6 +1,6 @@
 package nom.tam.fits.test;
 
-import fr.nom.tam.fits.FitsDate;
+import nom.tam.fits.FitsDate;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
