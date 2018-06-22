@@ -19,12 +19,12 @@
 <keyword><name>CRVAL2</name><value>-4.848136811095E-8</value><description>Coordinate at reference pixel</description><type>A</type><unit></unit></keyword>
 <keyword><name>CDELT1</name><value>1.227376407872E-9</value><description>Coord. incr. per pixel</description><type>A</type><unit></unit></keyword>
 <keyword><name>CDELT2</name><value>1.227376407872E-9</value><description>Coord. incr. per pixel</description><type>A</type><unit></unit></keyword>
-<keyword><name>CUNIT1</name><value>deg</value><description> Physical units for CDELT1 and CRVAL1</description><type>A</type><unit></unit></keyword>
-<keyword><name>CUNIT2</name><value>deg</value><description> Physical units for CDELT2 and CRVAL2</description><type>A</type><unit></unit></keyword>
+<keyword><name>CUNIT1</name><value>deg</value><description>Physical units for CDELT1 and CRVAL1</description><type>A</type><unit></unit></keyword>
+<keyword><name>CUNIT2</name><value>deg</value><description>Physical units for CDELT2 and CRVAL2</description><type>A</type><unit></unit></keyword>
 <keyword><name>DATAMIN</name><value>1.543399775983E-05</value><description>Minimum data value</description><type>A</type><unit></unit></keyword>
 <keyword><name>DATAMAX</name><value>0.14965708553791046</value><description>Maximum data value</description><type>A</type><unit></unit></keyword>
-<keyword><name>CROTA1</name><value>0</value><description> Rotation angle.</description><type>A</type><unit></unit></keyword>
-<keyword><name>CROTA2</name><value>0</value><description> Rotation angle.</description><type>A</type><unit></unit></keyword>
+<keyword><name>CROTA1</name><value>0</value><description>Rotation angle.</description><type>A</type><unit></unit></keyword>
+<keyword><name>CROTA2</name><value>0</value><description>Rotation angle.</description><type>A</type><unit></unit></keyword>
 </keywords>
 </hdu>
 <OI_TARGET>

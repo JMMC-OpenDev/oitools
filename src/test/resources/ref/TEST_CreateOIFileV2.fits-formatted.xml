@@ -2,8 +2,8 @@
 <version>VERSION_2</version>
 <filename>TEST_CreateOIFileV2.fits</filename>
 <local_filename>TEST_CreateOIFileV2.fits</local_filename>
-<size>77760</size>
-<md5sum>9542b814e1a679b2625950f61ccd7788</md5sum>
+<size>80640</size>
+<md5sum>f59efec498312fda4e2689b7b70f4dd9</md5sum>
 <hdu>
 <keywords>
 <keyword><name>ORIGIN</name><value>ESO</value><description>Institution responsible for file creation</description><type>A</type><unit></unit></keyword>
@@ -20,11 +20,11 @@
 <keyword><name>PROG_ID</name><value>074.R-456</value><description>Program ID</description><type>A</type><unit></unit></keyword>
 <keyword><name>PROCSOFT</name><value>pndg 3.4</value><description>Versioned Data Reduction Software</description><type>A</type><unit></unit></keyword>
 <keyword><name>OBSTECH</name><value>SCAN, PH_REF, ...</value><description>Technique of observation</description><type>A</type><unit></unit></keyword>
-<keyword><name>SIMPLE</name><value>T</value><description>file does conform to FITS standard</description><type>A</type><unit></unit></keyword>
-<keyword><name>BITPIX</name><value>8</value><description>number of bits per data pixel</description><type>A</type><unit></unit></keyword>
-<keyword><name>NAXIS</name><value>1</value><description>Dimensionality</description><type>A</type><unit></unit></keyword>
-<keyword><name>NAXIS1</name><value>0</value><description>width of row in bytes</description><type>A</type><unit></unit></keyword>
-<keyword><name>EXTEND</name><value>T</value><description>File contains extensions</description><type>A</type><unit></unit></keyword>
+<keyword><name>SIMPLE</name><value>T</value><description>does file conform to the Standard?</description><type>A</type><unit></unit></keyword>
+<keyword><name>BITPIX</name><value>8</value><description>bits per data value</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS</name><value>1</value><description>number of axes</description><type>A</type><unit></unit></keyword>
+<keyword><name>NAXIS1</name><value>0</value><description>size of the n'th axis</description><type>A</type><unit></unit></keyword>
+<keyword><name>EXTEND</name><value>T</value><description>Extensions are permitted</description><type>A</type><unit></unit></keyword>
 </keywords>
 </hdu>
 <OI_TARGET>

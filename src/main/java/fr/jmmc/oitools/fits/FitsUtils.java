@@ -38,6 +38,7 @@ import nom.tam.fits.HeaderCard;
 import nom.tam.fits.Header;
 import nom.tam.fits.Fits;
 import nom.tam.fits.LibFitsAdapter;
+import nom.tam.fits.header.Standard;
 import nom.tam.util.ArrayFuncs;
 
 /**
@@ -103,6 +104,8 @@ public final class FitsUtils {
         // Force to use binary tables:
         FitsFactory.setUseAsciiTables(false);
 
+        Standard.SIMPLE.setCommentByKey("header:simple", null);
+        
         // Preload Severity profiles:
         SeverityProfileFactory.getInstance();
     }

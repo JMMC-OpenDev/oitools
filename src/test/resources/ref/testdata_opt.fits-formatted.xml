@@ -173,7 +173,7 @@
 <keyword><name>NPOL</name><value>1</value><description>Number of polarisation type int this table</description><type>J</type><unit></unit></keyword>
 <keyword><name>ORIENT</name><value>LABORATORY</value><description>Orientation of Jones matrix, could be 'NORTH' (for on-sky orientation), or 'LABORATORY</description><type>A</type><unit></unit></keyword>
 <keyword><name>MODEL</name><value>NOMINAL</value><description>A string keyword that describe the way the Jones matrix is estimated</description><type>A</type><unit></unit></keyword>
-<keyword><name>DATE-OBS</name><value>2000-10-19</value><description> UTC start date of observations</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATE-OBS</name><value>2000-10-19</value><description>UTC start date of observations</description><type>A</type><unit></unit></keyword>
 <keyword><name>HISTORY</name><value></value><description>File modified by user 'kempsc' with fv  on 2017-09-04T09:34:18</description><type>A</type><unit></unit></keyword>
 </keywords>
 <rows>7</rows><columns>

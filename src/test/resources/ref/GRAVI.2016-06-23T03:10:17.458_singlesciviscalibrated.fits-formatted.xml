@@ -33,28 +33,28 @@
 <keyword><name>COMMENT</name><value></value><description>and Astrophysics', volume 376, page 359; bibcode: 2001A&amp;A...376..359H</description><type>A</type><unit></unit></keyword>
 <keyword><name>UTC</name><value>11417.5</value><description>[s] 03:10:17.500 UTC</description><type>A</type><unit></unit></keyword>
 <keyword><name>LST</name><value>59733.643</value><description>[s] 16:35:33.643 LST</description><type>A</type><unit></unit></keyword>
-<keyword><name>PI-COI</name><value>UNKNOWN</value><description> PI-COI name.</description><type>A</type><unit></unit></keyword>
-<keyword><name>DATAMD5</name><value>08ff0550e0c87997c2c93889636803f5</value><description> MD5 checksum</description><type>A</type><unit></unit></keyword>
+<keyword><name>PI-COI</name><value>UNKNOWN</value><description>PI-COI name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>DATAMD5</name><value>08ff0550e0c87997c2c93889636803f5</value><description>MD5 checksum</description><type>A</type><unit></unit></keyword>
 <keyword><name>PIPEFILE</name><value>GRAVITY.2016-06-23T03-15-42_singlescivis_singlesciviscalibrated.fits</value><description></description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.AIRM</name><value>5.</value><description>Req. max. airmass</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.AMBI.FWHM</name><value>0.8</value><description>Req. max. seeing</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.OBS.AMBI.TRANS</name><value>2CLR    </value><description>Req. sky transparency</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.OBS.ATM</name><value>NATM    </value><description>Req. Atmospheric Turbulence Model</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.OBS.AMBI.TRANS</name><value>2CLR</value><description>Req. sky transparency</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.OBS.ATM</name><value>NATM</value><description>Req. Atmospheric Turbulence Model</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.BASELINE</name><value>A0-B2-D0-C1</value><description>User selected VLTI stations</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.CONTAINER.ID</name><value>1380619</value><description>Scheduling container ID</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.OBS.CONTAINER.TYPE</name><value>C       </value><description>Scheduling container type</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.OBS.CONTAINER.TYPE</name><value>C</value><description>Scheduling container type</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.CONTRAST</name><value>0.</value><description>Req. contrast</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.DID</name><value>ESO-VLT-DIC.OBS-2.0</value><description>OBS Dictionary</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.EXECTIME</name><value>1620</value><description>Expected execution time</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.OBS.GRP</name><value>0       </value><description>linked blocks</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.OBS.GRP</name><value>0</value><description>linked blocks</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.ID</name><value>1380620</value><description>Observation block ID</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.MOON.DIST</name><value>30</value><description>Req. min. angular dist. from moon [deg]</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.MOON.FLI</name><value>1.</value><description>Req. max. fractional lunar illum.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.NAME</name><value>SCI_IRAS17216</value><description>OB name</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.NTPL</name><value>2</value><description>Number of templates within OB</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.OBS.OBSERVER</name><value>UNKNOWN </value><description>Observer Name</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.OBS.OBSERVER</name><value>UNKNOWN</value><description>Observer Name</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.PI-COI.ID</name><value>14341</value><description>ESO internal PI-COI ID</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.OBS.PI-COI.NAME</name><value>UNKNOWN </value><description>PI-COI name</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.OBS.PI-COI.NAME</name><value>UNKNOWN</value><description>PI-COI name</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.PROG.ID</name><value>60.A-9174(A)</value><description>ESO program identification</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.START</name><value>2016-06-23T02:52:34</value><description>OB start time</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OBS.STREHLRATIO</name><value>0.</value><description>Req. strehl ratio</description><type>A</type><unit></unit></keyword>
@@ -70,10 +70,10 @@
 <keyword><name>HIERARCH.ESO.TPL.NEXP</name><value>3</value><description>Number of exposures.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.TPL.PRESEQ</name><value>GRAVITY_single_obs_exp.seq</value><description>Sequencer script</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.TPL.START</name><value>2016-06-23T02:58:16</value><description>TPL start time</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.TPL.VERSION</name><value>1.0     </value><description>Version of the template</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.TPL.VERSION</name><value>1.0</value><description>Version of the template</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.ANLO1.CURVAL</name><value>0.</value><description>Current Value.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.ANLO1.ID</name><value>anlo1   </value><description>Analog out ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.ANLO1.NAME</name><value>ANLO1   </value><description>Analog out name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.ANLO1.ID</name><value>anlo1</value><description>Analog out ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.ANLO1.NAME</name><value>ANLO1</value><description>Analog out name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DATE</name><value>2000-06-16</value><description>Instrument release date (yyyy-mm-dd).</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DET2.GAIN</name><value>1.71</value><description>Gain in e-/ADU</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DET2.QE</name><value>0.81</value><description>Quantum efficiency</description><type>A</type><unit></unit></keyword>
@@ -86,255 +86,255 @@
 <keyword><name>HIERARCH.ESO.INS.DPOR3.ST</name><value>F</value><description>Instrument depolarizer rotating.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DPOR4.ST</name><value>F</value><description>Instrument depolarizer rotating.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT1.ENC</name><value>-293</value><description>Derotator absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT1.ID</name><value>fr1     </value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT1.MODE</name><value>STAT    </value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT1.ID</name><value>fr1</value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT1.MODE</name><value>STAT</value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT1.MODEANGLE</name><value>-1</value><description>Calculated angle depending on MODE [deg]</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT1.NAME</name><value>Field Rotator 1</value><description>DROT name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT1.POS</name><value>-0.735</value><description>Position angle [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT2.ENC</name><value>237</value><description>Derotator absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT2.ID</name><value>fr2     </value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT2.MODE</name><value>STAT    </value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT2.ID</name><value>fr2</value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT2.MODE</name><value>STAT</value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT2.MODEANGLE</name><value>1</value><description>Calculated angle depending on MODE [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT2.NAME</name><value>Field Rotator 2</value><description>DROT name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT2.POS</name><value>0.595</value><description>Position angle [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT3.ENC</name><value>266</value><description>Derotator absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT3.ID</name><value>fr3     </value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT3.MODE</name><value>STAT    </value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT3.ID</name><value>fr3</value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT3.MODE</name><value>STAT</value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT3.MODEANGLE</name><value>1</value><description>Calculated angle depending on MODE [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT3.NAME</name><value>Field Rotator 3</value><description>DROT name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT3.POS</name><value>0.665</value><description>Position angle [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT4.ENC</name><value>521</value><description>Derotator absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT4.ID</name><value>fr4     </value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT4.MODE</name><value>STAT    </value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT4.ID</name><value>fr4</value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT4.MODE</name><value>STAT</value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT4.MODEANGLE</name><value>1</value><description>Calculated angle depending on MODE [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT4.NAME</name><value>Field Rotator 4</value><description>DROT name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT4.POS</name><value>1.305</value><description>Position angle [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT5.ENC</name><value>1705</value><description>Derotator absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT5.ID</name><value>hwp1    </value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT5.MODE</name><value>STAT    </value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT5.ID</name><value>hwp1</value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT5.MODE</name><value>STAT</value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT5.MODEANGLE</name><value>4</value><description>Calculated angle depending on MODE [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT5.NAME</name><value>Field Rotator 1</value><description>DROT name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT5.POS</name><value>4.265</value><description>Position angle [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT6.ENC</name><value>2237</value><description>Derotator absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT6.ID</name><value>hwp2    </value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT6.MODE</name><value>STAT    </value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT6.ID</name><value>hwp2</value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT6.MODE</name><value>STAT</value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT6.MODEANGLE</name><value>6</value><description>Calculated angle depending on MODE [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT6.NAME</name><value>Field Rotator 2</value><description>DROT name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT6.POS</name><value>5.595</value><description>Position angle [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT7.ENC</name><value>2265</value><description>Derotator absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT7.ID</name><value>hwp3    </value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT7.MODE</name><value>STAT    </value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT7.ID</name><value>hwp3</value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT7.MODE</name><value>STAT</value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT7.MODEANGLE</name><value>6</value><description>Calculated angle depending on MODE [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT7.NAME</name><value>Field Rotator 3</value><description>DROT name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT7.POS</name><value>5.665</value><description>Position angle [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT8.ENC</name><value>2521</value><description>Derotator absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT8.ID</name><value>hwp4    </value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.DROT8.MODE</name><value>STAT    </value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT8.ID</name><value>hwp4</value><description>DROT unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.DROT8.MODE</name><value>STAT</value><description>Instrument derotator mode.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT8.MODEANGLE</name><value>6</value><description>Calculated angle depending on MODE [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT8.NAME</name><value>Field Rotator 4</value><description>DROT name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.DROT8.POS</name><value>6.305</value><description>Position angle [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT1.CURX</name><value>3.48043</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT1.CURY</name><value>6.95068</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT1.CURZ</name><value>6.48</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT1.ID</name><value>faft1   </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT1.NAME</name><value>FAFT1   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT1.ID</name><value>faft1</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT1.NAME</name><value>FAFT1</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT2.CURX</name><value>1.34393</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT2.CURY</name><value>8.25779</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT2.CURZ</name><value>5.85</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT2.ID</name><value>faft2   </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT2.NAME</name><value>FAFT2   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT2.ID</name><value>faft2</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT2.NAME</name><value>FAFT2</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT3.CURX</name><value>1.47339</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT3.CURY</name><value>4.24362</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT3.CURZ</name><value>2.2</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT3.ID</name><value>faft3   </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT3.NAME</name><value>FAFT3   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT3.ID</name><value>faft3</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT3.NAME</name><value>FAFT3</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT4.CURX</name><value>3.30047</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT4.CURY</name><value>6.53457</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT4.CURZ</name><value>5.35</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT4.ID</name><value>faft4   </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT4.NAME</name><value>FAFT4   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT4.ID</name><value>faft4</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT4.NAME</name><value>FAFT4</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT5.CURX</name><value>3.05678</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT5.CURY</name><value>3.1124</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT5.CURZ</name><value>1.95</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT5.ID</name><value>faft5   </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT5.NAME</name><value>FAFT5   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT5.ID</name><value>faft5</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT5.NAME</name><value>FAFT5</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT6.CURX</name><value>1.2751</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT6.CURY</name><value>1.67674</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT6.CURZ</name><value>5.95</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT6.ID</name><value>faft6   </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT6.NAME</name><value>FAFT6   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT6.ID</name><value>faft6</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT6.NAME</name><value>FAFT6</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT7.CURX</name><value>2.47411</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT7.CURY</name><value>7.78983</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT7.CURZ</name><value>6.65</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT7.ID</name><value>faft7   </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT7.NAME</name><value>FAFT7   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT7.ID</name><value>faft7</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT7.NAME</name><value>FAFT7</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT8.CURX</name><value>2.9133</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT8.CURY</name><value>5.82787</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FAFT8.CURZ</name><value>2.76</value><description>Current X Position [V].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT8.ID</name><value>faft8   </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FAFT8.NAME</name><value>FAFT8   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT8.ID</name><value>faft8</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FAFT8.NAME</name><value>FAFT8</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FDDL.DELAY</name><value>10.1477</value><description>Movement delay for FDDL.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FDDL.WINDOW</name><value>0.</value><description>Movement window for FDDL.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT1.ENC</name><value>0</value><description>Filter wheel absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FILT1.ID</name><value>OUT     </value><description>Filter unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FILT1.NAME</name><value>OUT     </value><description>Filter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FILT1.ID</name><value>OUT</value><description>Filter unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FILT1.NAME</name><value>OUT</value><description>Filter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT1.NO</name><value>2</value><description>Filter wheel position index.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT1.POS</name><value>0.</value><description>Filter Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT2.ENC</name><value>6400</value><description>Filter wheel absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FILT2.ID</name><value>MED     </value><description>Filter unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FILT2.NAME</name><value>MED     </value><description>Filter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FILT2.ID</name><value>MED</value><description>Filter unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FILT2.NAME</name><value>MED</value><description>Filter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT2.NO</name><value>2</value><description>Filter wheel position index.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT2.POS</name><value>180.</value><description>Filter Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT3.ENC</name><value>0</value><description>Filter wheel absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FILT3.ID</name><value>OUT     </value><description>Filter unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FILT3.NAME</name><value>OUT     </value><description>Filter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FILT3.ID</name><value>OUT</value><description>Filter unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FILT3.NAME</name><value>OUT</value><description>Filter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT3.NO</name><value>2</value><description>Filter wheel position index.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT3.POS</name><value>0.</value><description>Filter Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT4.ENC</name><value>454198</value><description>Filter wheel absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FILT4.ID</name><value>OPEN    </value><description>Filter unique id.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.FILT4.NAME</name><value>OPEN    </value><description>Filter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FILT4.ID</name><value>OPEN</value><description>Filter unique id.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.FILT4.NAME</name><value>OPEN</value><description>Filter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT4.NO</name><value>6</value><description>Filter wheel position index.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.FILT4.POS</name><value>227.1</value><description>Filter Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.ID</name><value>GRAVITY/176642</value><description>Instrument ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK1.AOUT2</name><value>0.</value><description>Analog out two.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK1.HTRA</name><value>0.</value><description>Heater output.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAK1.ID</name><value>lak1    </value><description>Analog device ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAK1.ID</name><value>lak1</value><description>Analog device ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK1.KRDGA</name><value>85.34</value><description>Reading Channel A.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK1.KRDGB</name><value>85.28</value><description>Reading Channel B.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAK1.NAME</name><value>LS 340  </value><description>Analog device name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAK1.NAME</name><value>LS 340</value><description>Analog device name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK2.AOUT2</name><value>0.</value><description>Analog out two.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK2.HTRA</name><value>0.</value><description>Heater output.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAK2.ID</name><value>lak2    </value><description>Analog device ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAK2.ID</name><value>lak2</value><description>Analog device ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK2.KRDGA</name><value>82.52</value><description>Reading Channel A.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK2.KRDGB</name><value>83.27</value><description>Reading Channel B.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAK2.NAME</name><value>LS 340  </value><description>Analog device name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAK2.NAME</name><value>LS 340</value><description>Analog device name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK3.AOUT2</name><value>0.</value><description>Analog out two.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK3.HTRA</name><value>55.2</value><description>Heater output.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAK3.ID</name><value>lak3    </value><description>Analog device ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAK3.ID</name><value>lak3</value><description>Analog device ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK3.KRDGA</name><value>240.</value><description>Reading Channel A.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAK3.KRDGB</name><value>28.</value><description>Reading Channel B.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAK3.NAME</name><value>LS 340  </value><description>Analog device name.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP13.ID</name><value>GSLD1   </value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP13.NAME</name><value>GSLD1   </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAK3.NAME</name><value>LS 340</value><description>Analog device name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP13.ID</name><value>GSLD1</value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP13.NAME</name><value>GSLD1</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP13.ST</name><value>T</value><description>Lamp on / off .</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP14.ID</name><value>METD1   </value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP14.NAME</name><value>METD1   </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP14.ID</name><value>METD1</value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP14.NAME</name><value>METD1</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP14.ST</name><value>T</value><description>Lamp on / off .</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP15.ID</name><value>GSLD2   </value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP15.NAME</name><value>GSLD2   </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP15.ID</name><value>GSLD2</value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP15.NAME</name><value>GSLD2</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP15.ST</name><value>T</value><description>Lamp on / off .</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP16.ID</name><value>METD2   </value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP16.NAME</name><value>GSLPMU2 </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP16.ID</name><value>METD2</value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP16.NAME</name><value>GSLPMU2</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP16.ST</name><value>T</value><description>Lamp on / off .</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP17.ID</name><value>GSLD3   </value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP17.NAME</name><value>GSLD3   </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP17.ID</name><value>GSLD3</value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP17.NAME</name><value>GSLD3</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP17.ST</name><value>T</value><description>Lamp on / off .</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP18.ID</name><value>METD3   </value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP18.NAME</name><value>METD3   </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP18.ID</name><value>METD3</value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP18.NAME</name><value>METD3</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP18.ST</name><value>T</value><description>Lamp on / off .</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP19.ID</name><value>GSLD4   </value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP19.NAME</name><value>GSLD4   </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP19.ID</name><value>GSLD4</value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP19.NAME</name><value>GSLD4</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP19.ST</name><value>T</value><description>Lamp on / off .</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP20.ID</name><value>METD4   </value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP20.NAME</name><value>METD4   </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP20.ID</name><value>METD4</value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP20.NAME</name><value>METD4</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP20.ST</name><value>T</value><description>Lamp on / off .</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP4.ID</name><value>LAMP4   </value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP4.ID</name><value>LAMP4</value><description>Lamp ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP4.INTENS1</name><value>2.</value><description>Intensity output one.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.LAMP4.INTENS2</name><value>2.</value><description>Intensity output two.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.LAMP4.NAME</name><value>LAMP    </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.MLC.ID</name><value>mlc     </value><description>Metrology Laser ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.LAMP4.NAME</name><value>LAMP</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.MLC.ID</name><value>mlc</value><description>Metrology Laser ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MLC.NAME</name><value>Orange One</value><description>Metrology Laser name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MLC.POWER</name><value>596</value><description>Output power of the Metrology Laser [mW].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MLC.POWERW</name><value>780</value><description>Output power of the Metrology Laser [mW].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MLC.PUMPCUR</name><value>700</value><description>Laser Pump current [permille].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MLC.WAVELENG</name><value>1908.287</value><description>Wavelength of Metrology Laser [nm].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MODE</name><value>PARALLEL</value><description>Instrument mode used.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.MTFA.ID</name><value>mtfa    </value><description>Metrology Laser ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.MTFA.NAME</name><value>SmarAct </value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.MTFS.ID</name><value>mtfs    </value><description>Fibre switch device ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.MTFA.ID</name><value>mtfa</value><description>Metrology Laser ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.MTFA.NAME</name><value>SmarAct</value><description>SmarAct controller name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.MTFS.ID</name><value>mtfs</value><description>Fibre switch device ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MTFS.NAME</name><value>Fiber Switch</value><description>Fibre switch device name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MTFS.OUT1</name><value>14</value><description>Connect output 1.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MTFS.OUT2</name><value>17</value><description>Connect output 2.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MTFS.OUT3</name><value>9</value><description>Connect output 3.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.MTFS.OUT4</name><value>5</value><description>Connect output 4.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI1.ENC</name><value>-7000000</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI1.ID</name><value>P0      </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI1.NAME</name><value>STAR    </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI1.ID</name><value>P0</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI1.NAME</name><value>STAR</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI1.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI1.TYPE</name><value>STAR    </value><description>OPTIi element.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI1.TYPE</name><value>STAR</value><description>OPTIi element.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI11.ENC</name><value>1259</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI11.ID</name><value>ONAXIS  </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI11.NAME</name><value>ONAXIS  </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI11.ID</name><value>ONAXIS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI11.NAME</name><value>ONAXIS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI11.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI11.POS</name><value>35.4</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI12.ENC</name><value>4909</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI12.ID</name><value>ONAXIS  </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI12.NAME</name><value>ONAXIS  </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI12.ID</name><value>ONAXIS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI12.NAME</name><value>ONAXIS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI12.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI12.POS</name><value>138.1</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI13.ENC</name><value>4944</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI13.ID</name><value>ONAXIS  </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI13.NAME</name><value>ONAXIS  </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI13.ID</name><value>ONAXIS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI13.NAME</name><value>ONAXIS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI13.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI13.POS</name><value>139.1</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI14.ENC</name><value>0</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI14.ID</name><value>ONAXIS  </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI14.NAME</name><value>ONAXIS  </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI14.ID</name><value>ONAXIS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI14.NAME</name><value>ONAXIS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI14.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI14.POS</name><value>0.</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI2.ENC</name><value>9000000</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI2.ID</name><value>P0      </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI2.NAME</name><value>OUT     </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI2.ID</name><value>P0</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI2.NAME</name><value>OUT</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI2.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI2.TYPE</name><value>FREE    </value><description>OPTIi element.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI2.TYPE</name><value>FREE</value><description>OPTIi element.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI21.ENC</name><value>1763</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI21.ID</name><value>ONAXIS  </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI21.NAME</name><value>ONAXIS  </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI21.ID</name><value>ONAXIS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI21.NAME</name><value>ONAXIS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI21.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI21.POS</name><value>49.6</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI22.ENC</name><value>1755</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI22.ID</name><value>ONAXIS  </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI22.NAME</name><value>ONAXIS  </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI22.ID</name><value>ONAXIS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI22.NAME</name><value>ONAXIS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI22.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI22.POS</name><value>49.4</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI23.ENC</name><value>6523</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI23.ID</name><value>ONAXIS  </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI23.NAME</name><value>ONAXIS  </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI23.ID</name><value>ONAXIS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI23.NAME</name><value>ONAXIS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI23.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI23.POS</name><value>183.5</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI24.ENC</name><value>5174</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI24.ID</name><value>ONAXIS  </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI24.NAME</name><value>ONAXIS  </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI24.ID</name><value>ONAXIS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI24.NAME</name><value>ONAXIS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI24.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI24.POS</name><value>145.5</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI30.ENC</name><value>0</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI30.ID</name><value>INFOCUS </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI30.NAME</name><value>INFOCUS </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI30.ID</name><value>INFOCUS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI30.NAME</name><value>INFOCUS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI30.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI30.POS</name><value>0.</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI30.SWSIM</name><value>T</value><description>If T, function is software simulated(cho).</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI31.ENC</name><value>0</value><description>Component absolute position [Enc].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI31.ID</name><value>INFOCUS </value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.OPTI31.NAME</name><value>INFOCUS </value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI31.ID</name><value>INFOCUS</value><description>OPTIi unique ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.OPTI31.NAME</name><value>INFOCUS</value><description>OPTIi name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI31.NO</name><value>1</value><description>OPTIi slot number.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI31.POS</name><value>0.</value><description>OPTI Position.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.OPTI31.SWSIM</name><value>T</value><description>If T, function is software simulated(cho).</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.PMC1.CURX</name><value>4.59761</value><description>Current X Position [V]</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.PMC1.CURY</name><value>3.3897</value><description>Current X Position [V]</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.PMC1.ID</name><value>PMC1    </value><description>ID</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.PMC1.NAME</name><value>PMC1    </value><description>PMC name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.PMC1.ID</name><value>PMC1</value><description>ID</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.PMC1.NAME</name><value>PMC1</value><description>PMC name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.PMC2.CURX</name><value>1.52461</value><description>Current X Position [V]</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.PMC2.CURY</name><value>6.07641</value><description>Current X Position [V]</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.PMC2.ID</name><value>PMC2    </value><description>ID</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.PMC2.NAME</name><value>PMC2    </value><description>PMC name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.PMC2.ID</name><value>PMC2</value><description>ID</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.PMC2.NAME</name><value>PMC2</value><description>PMC name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.PMC3.CURX</name><value>4.0067</value><description>Current X Position [V]</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.PMC3.CURY</name><value>5.68695</value><description>Current X Position [V]</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.PMC3.ID</name><value>PMC3    </value><description>ID</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.PMC3.NAME</name><value>PMC3    </value><description>PMC name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.PMC3.ID</name><value>PMC3</value><description>ID</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.PMC3.NAME</name><value>PMC3</value><description>PMC name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.PMC4.CURX</name><value>4.68475</value><description>Current X Position [V]</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.PMC4.CURY</name><value>4.63407</value><description>Current X Position [V]</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.PMC4.ID</name><value>PMC4    </value><description>ID</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.PMC4.NAME</name><value>PMC4    </value><description>PMC name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.PMC4.ID</name><value>PMC4</value><description>ID</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.PMC4.NAME</name><value>PMC4</value><description>PMC name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.POLA.MODE</name><value>COMBINED</value><description>Polarization mode</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.POS1.ENC</name><value>685559</value><description>Absolute position [Enc].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.POS1.POS</name><value>685559.</value><description>Position [mm].</description><type>A</type><unit></unit></keyword>
@@ -353,28 +353,28 @@
 <keyword><name>HIERARCH.ESO.INS.SENS20.DVAL78</name><value>1</value><description>LN2 Refilling sequence step.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SENS20.DVAL79</name><value>1</value><description>LN2 Refilling sequence step.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SENS20.DVAL80</name><value>1</value><description>LN2 Refilling sequence step.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT10</name><value>0       </value><description>Cryo reached warm-up temp..</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT11</name><value>0       </value><description>SP reached regeneration temp..</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT12</name><value>1       </value><description>SP cooled down after rege..</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT13</name><value>0       </value><description>LN2 calmed down after refilling.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT14</name><value>0       </value><description>Pressure in Prevaccum line is Ok.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT15</name><value>0       </value><description>TMP is running at nominal speed.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT16</name><value>1       </value><description>TMP is in standstill.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT17</name><value>0       </value><description>Pressure is at atmospheric level.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT18</name><value>1       </value><description>Pressure is ok for starting TP.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT19</name><value>1       </value><description>Pressure is ok to Evacuate with TP</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT2</name><value>OFF     </value><description>Evacuation is On.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT20</name><value>1       </value><description>Pressure is ok to cool-down.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT3</name><value>0       </value><description>LN2 filling is On.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT4</name><value>0       </value><description>LN2 Refilling is On.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT5</name><value>0       </value><description>Sorption Pump Regeneration.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT6</name><value>0       </value><description>Warm-Up is On</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT7</name><value>0       </value><description>Re-Pressurization is On.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT73</name><value>0       </value><description>Gauge VG2 is active.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT74</name><value>1       </value><description>Gauge VG3 is active.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT75</name><value>0       </value><description>Dry nitrogen line is connected.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT8</name><value>0       </value><description>Cryostat is warm.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SENS20.STAT9</name><value>1       </value><description>Cryostat is cold.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT10</name><value>0</value><description>Cryo reached warm-up temp..</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT11</name><value>0</value><description>SP reached regeneration temp..</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT12</name><value>1</value><description>SP cooled down after rege..</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT13</name><value>0</value><description>LN2 calmed down after refilling.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT14</name><value>0</value><description>Pressure in Prevaccum line is Ok.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT15</name><value>0</value><description>TMP is running at nominal speed.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT16</name><value>1</value><description>TMP is in standstill.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT17</name><value>0</value><description>Pressure is at atmospheric level.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT18</name><value>1</value><description>Pressure is ok for starting TP.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT19</name><value>1</value><description>Pressure is ok to Evacuate with TP</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT2</name><value>OFF</value><description>Evacuation is On.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT20</name><value>1</value><description>Pressure is ok to cool-down.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT3</name><value>0</value><description>LN2 filling is On.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT4</name><value>0</value><description>LN2 Refilling is On.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT5</name><value>0</value><description>Sorption Pump Regeneration.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT6</name><value>0</value><description>Warm-Up is On</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT7</name><value>0</value><description>Re-Pressurization is On.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT73</name><value>0</value><description>Gauge VG2 is active.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT74</name><value>1</value><description>Gauge VG3 is active.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT75</name><value>0</value><description>Dry nitrogen line is connected.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT8</name><value>0</value><description>Cryostat is warm.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SENS20.STAT9</name><value>1</value><description>Cryostat is cold.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SENS20.VAL24</name><value>804.63574219</value><description>Prevacuum pressure gauge value [m</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SENS20.VAL26</name><value>1.723E-05</value><description>Cryostat pressure gauge 1 value [mb</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SENS20.VAL28</name><value>2.251E-05</value><description>Cryostat pressure gauge 2 value [mb</description><type>A</type><unit></unit></keyword>
@@ -428,50 +428,50 @@
 <keyword><name>HIERARCH.ESO.INS.SENSOR23.NAME</name><value>LS336 SCI detector</value><description>Sensor device common nam</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SENSOR24.ID</name><value>sensor24</value><description>Sensor device unique id.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SENSOR24.NAME</name><value>LS336 ACQ Detector</value><description>Sensor device common nam</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT1.ID</name><value>SHS1    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT1.NAME</name><value>CUSH1   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT1.ID</name><value>SHS1</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT1.NAME</name><value>CUSH1</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT1.ST</name><value>T</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT11.ID</name><value>SH11    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT11.NAME</name><value>FCSH11  </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT11.ID</name><value>SH11</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT11.NAME</name><value>FCSH11</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT11.ST</name><value>T</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT12.ID</name><value>SH12    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT12.NAME</name><value>FCSH12  </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT12.ID</name><value>SH12</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT12.NAME</name><value>FCSH12</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT12.ST</name><value>T</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT13.ID</name><value>SH13    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT13.NAME</name><value>FCSH13  </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT13.ID</name><value>SH13</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT13.NAME</name><value>FCSH13</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT13.ST</name><value>T</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT14.ID</name><value>SH14    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT14.NAME</name><value>FCSH14  </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT14.ID</name><value>SH14</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT14.NAME</name><value>FCSH14</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT14.ST</name><value>T</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT2.ID</name><value>SHS2    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT2.NAME</name><value>CUSH2   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT2.ID</name><value>SHS2</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT2.NAME</name><value>CUSH2</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT2.ST</name><value>T</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT21.ID</name><value>SH21    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT21.NAME</name><value>FCSH21  </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT21.ID</name><value>SH21</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT21.NAME</name><value>FCSH21</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT21.ST</name><value>F</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT22.ID</name><value>SH22    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT22.NAME</name><value>FCSH22  </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT22.ID</name><value>SH22</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT22.NAME</name><value>FCSH22</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT22.ST</name><value>F</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT23.ID</name><value>SH23    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT23.NAME</name><value>FCSH23  </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT23.ID</name><value>SH23</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT23.NAME</name><value>FCSH23</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT23.ST</name><value>F</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT24.ID</name><value>SH24    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT24.NAME</name><value>FCSH24  </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT24.ID</name><value>SH24</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT24.NAME</name><value>FCSH24</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT24.ST</name><value>F</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT3.ID</name><value>SHS3    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT3.NAME</name><value>CUSH3   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT3.ID</name><value>SHS3</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT3.NAME</name><value>CUSH3</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT3.ST</name><value>T</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT4.ID</name><value>SHS4    </value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SHUT4.NAME</name><value>CUSH4   </value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT4.ID</name><value>SHS4</value><description>Shutter ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SHUT4.NAME</name><value>CUSH4</value><description>Shutter name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SHUT4.ST</name><value>T</value><description>Shutter open.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SLC1.ID</name><value>slc     </value><description>Cal Laser ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SLC1.ID</name><value>slc</value><description>Cal Laser ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SLC1.NAME</name><value>Cal Laser</value><description>Cal Laser name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SLC1.OUT1</name><value>0</value><description></description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SLC1.OUT2</name><value>64</value><description></description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SLC1.OUT3</name><value>128</value><description></description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SLC1.OUT4</name><value>0</value><description></description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SLC1.WAVELENG</name><value>2144.2664</value><description>Wavelength [nm].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SLC2.ID</name><value>slc     </value><description>Cal Laser ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SLC2.ID</name><value>slc</value><description>Cal Laser ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SLC2.NAME</name><value>Cal Laser</value><description>Cal Laser name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SLC2.OUT1</name><value>0</value><description></description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SLC2.OUT2</name><value>64</value><description></description><type>A</type><unit></unit></keyword>
@@ -483,15 +483,15 @@
 <keyword><name>HIERARCH.ESO.INS.SOBJ.NAME</name><value>IRAS17216-3801</value><description>Science object name</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SOBJ.X</name><value>0.</value><description>RA offset science fiber from ft fiber in mas</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.SOBJ.Y</name><value>0.</value><description>DEC offset science fiber from ft fiber in ma</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SPEC.RES</name><value>MEDIUM  </value><description>Science camera spectral resolution</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.SWSIM</name><value>NORMAL  </value><description>Software simulation.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SPEC.RES</name><value>MEDIUM</value><description>Science camera spectral resolution</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.SWSIM</name><value>NORMAL</value><description>Software simulation.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.TIM1.PERIOD</name><value>10.148</value><description>Timer output period [sec].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.TIM1.ST</name><value>T</value><description>Start or stop the timer.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.TIM1.START</name><value>2016-06-23T03:10:23.00</value><description>Start UTC time in ISO f</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.TIM2.PERIOD</name><value>1.332</value><description>Timer output period [sec].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.TIM2.ST</name><value>T</value><description>Start or stop the timer.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.TIM2.START</name><value>2016-06-23T03:10:23.00</value><description>Start UTC time in ISO f</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.INS.VG1.ID</name><value>vg1     </value><description>Vacuum Gauge device ID.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.INS.VG1.ID</name><value>vg1</value><description>Vacuum Gauge device ID.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.VG1.NAME</name><value>Vacuum Gauge</value><description>Vacuum Gauge name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.VG1.VGLEFT</name><value>1.8E-05</value><description>Vacuum Gauge (RS232) : Pressure Gau</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.INS.VG1.VGPRE</name><value>1000.</value><description>Vacuum Gauge (RS232) : Pre Pressu</description><type>A</type><unit></unit></keyword>
@@ -499,7 +499,7 @@
 <keyword><name>HIERARCH.ESO.DET1.CHIP.ID</name><value>ESO-Hawaii2RG</value><description>Detector chip identification</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DET1.FRAM.STRX</name><value>1</value><description>Frame window start-x</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DET1.FRAM.STRY</name><value>1</value><description>Frame window start-y</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.DET1.NAME</name><value>ACQCAM  </value><description>Name of detector system</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.DET1.NAME</name><value>ACQCAM</value><description>Name of detector system</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DET1.NDIT</name><value>1</value><description>Number of Sub-Integrations</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DET1.SEQ1.DIT</name><value>0.7</value><description>[s] Integration time</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DET1.SEQ1.NX</name><value>2048</value><description>detector window number of pixels in X.</description><type>A</type><unit></unit></keyword>
@@ -529,73 +529,73 @@
 <keyword><name>HIERARCH.ESO.PRO.CATG</name><value>SINGLE_SCI_VIS_CALIBRATED</value><description>Category of pipeline produ</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PIPE.LAST_BUILD</name><value>Oct 15 2016 19:12:10</value><description>Last 'make clea</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.ID</name><value>gravity_vis</value><description>Pipeline recipe (unique) identifier</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.DRS.ID</name><value>cpl-7.0 </value><description>Data Reduction System identifier</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.DRS.ID</name><value>cpl-7.0</value><description>Data Reduction System identifier</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PIPE.ID</name><value>GRAVITY Instrument Pipeline 0.9.8</value><description>Pipeline (</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.RAW1.NAME</name><value>GRAVITY.2016-06-23T03-15-42.fits</value><description>File name</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.RAW1.CATG</name><value>SINGLE_SCI_RAW</value><description>Category of raw frame</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.RAW2.NAME</name><value>GRAVITY.2016-06-23T03-09-21.fits</value><description>File name</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.RAW2.CATG</name><value>SINGLE_SKY_RAW</value><description>Category of raw frame</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL1.NAME</name><value>GRAVITY.2016-06-22T17-27-26_dark.fits</value><description>File</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.CAL1.CATG</name><value>DARK    </value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.CAL1.CATG</name><value>DARK</value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL1.DATAMD5</name><value>735f52232044abd5d85c3270dca3e88c</value><description>MD5 si</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL2.NAME</name><value>GRAVITY.2016-06-15T12-54-18_bad.fits</value><description>File</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.CAL2.CATG</name><value>BAD     </value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.CAL2.CATG</name><value>BAD</value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL2.DATAMD5</name><value>9df8f58ecb04f3ce1fd6272f25030b2a</value><description>MD5 si</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL3.NAME</name><value>GRAVITY.2016-06-15T12-54-59_flat.fits</value><description>File</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.CAL3.CATG</name><value>FLAT    </value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.CAL3.CATG</name><value>FLAT</value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL3.DATAMD5</name><value>21a7cad203197afe2c9a904ee75b62c3</value><description>MD5 si</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL4.NAME</name><value>GRAVITY.2016-06-15T13-01-35_wave.fits</value><description>File</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.CAL4.CATG</name><value>WAVE    </value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.CAL4.CATG</name><value>WAVE</value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL4.DATAMD5</name><value>e66f17fdc243d9316528c516f74d61aa</value><description>MD5 si</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL5.NAME</name><value>GRAVITY.2016-06-15T13-09-52_p2vm.fits</value><description>File</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.CAL5.CATG</name><value>P2VM    </value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.CAL5.CATG</name><value>P2VM</value><description>Category of calibration frame</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.CAL5.DATAMD5</name><value>6918068c969ceef1365c7b7383c96ea6</value><description>MD5 si</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM1.NAME</name><value>static-name</value><description>Use static names for the pro</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM1.VALUE</name><value>false   </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM1.VALUE</name><value>false</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM2.NAME</name><value>bias-subtracted-file</value><description>Save the BIAS_SUBTR</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM2.VALUE</name><value>false   </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM2.VALUE</name><value>false</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM3.NAME</name><value>spectrum-file</value><description>Save the SPECTRUM intermed</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM3.VALUE</name><value>false   </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM3.VALUE</name><value>false</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM4.NAME</name><value>preproc-file</value><description>Save the PREPROC intermedia</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM4.VALUE</name><value>false   </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM4.VALUE</name><value>false</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM5.NAME</name><value>p2vmreduced-file</value><description>Save the P2VMRED interm</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM5.VALUE</name><value>false   </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM5.VALUE</name><value>false</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM6.NAME</name><value>astro-file</value><description>Save the ASTROREDUCED interme</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM6.VALUE</name><value>true    </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM6.VALUE</name><value>true</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM7.NAME</name><value>average-vis</value><description>Average the observation from</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM7.VALUE</name><value>false   </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM7.VALUE</name><value>false</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM8.NAME</name><value>bias-method</value><description>Methode to average the biasp</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM8.VALUE</name><value>MEDIAN  </value><description>Default: 'MEDIAN'</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM8.VALUE</name><value>MEDIAN</value><description>Default: 'MEDIAN'</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM9.NAME</name><value>ditshift-sc</value><description>Shift the time of SC DITs by</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM9.VALUE</name><value>0       </value><description>Default: 0</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM9.VALUE</name><value>0</value><description>Default: 0</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM10.NAME</name><value>nsmooth-snr-ft</value><description>Number of sample to aver</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM10.VALUE</name><value>5       </value><description>Default: 5</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM10.VALUE</name><value>5</value><description>Default: 5</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM11.NAME</name><value>snr-min-ft</value><description>SNR threshold to accept FT f</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM11.VALUE</name><value>3       </value><description>Default: 3</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM11.VALUE</name><value>3</value><description>Default: 3</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM12.NAME</name><value>state-min-ft</value><description>Minimum OPDC state to acce</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM12.VALUE</name><value>1       </value><description>Default: 1</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM12.VALUE</name><value>1</value><description>Default: 1</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM13.NAME</name><value>tracking-min-sc</value><description>Minimum ratio of accept</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM13.VALUE</name><value>0.8     </value><description>Default: 0.8</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM13.VALUE</name><value>0.8</value><description>Default: 0.8</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM14.NAME</name><value>vfactor-min-sc</value><description>vFactor threshold to acc</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM14.VALUE</name><value>0.1     </value><description>Default: 0.1</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM14.VALUE</name><value>0.1</value><description>Default: 0.1</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM15.NAME</name><value>debias-sc</value><description>Subtract the V2 bias from SC</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM15.VALUE</name><value>true    </value><description>Default: true</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM15.VALUE</name><value>true</value><description>Default: true</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM16.NAME</name><value>debias-ft</value><description>Subtract the V2 bias from FT</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM16.VALUE</name><value>true    </value><description>Default: true</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM17.NAME</name><value>nboot   </value><description>Number of bootstrap to compute</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM17.VALUE</name><value>20      </value><description>Default: 20</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM16.VALUE</name><value>true</value><description>Default: true</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM17.NAME</name><value>nboot</value><description>Number of bootstrap to compute</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM17.VALUE</name><value>20</value><description>Default: 20</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM18.NAME</name><value>vis-correction</value><description>Correction of SC visibil</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM18.VALUE</name><value>NONE    </value><description>Default: 'VFACTOR'</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM18.VALUE</name><value>NONE</value><description>Default: 'VFACTOR'</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM19.NAME</name><value>flat-flux</value><description>Flat the OI_FLUX with instrum</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM19.VALUE</name><value>true    </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM19.VALUE</name><value>true</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC1.PARAM20.NAME</name><value>average-sky</value><description>Average the SKYs into a mas</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM20.VALUE</name><value>false   </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC1.PARAM20.VALUE</name><value>false</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.DID</name><value>PRO-1.16</value><description>Data dictionary for PRO</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.TYPE</name><value>REDUCED </value><description>Product type</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.TYPE</name><value>REDUCED</value><description>Product type</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.TECH</name><value>UNDEFINED</value><description>Observation technique</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.SCIENCE</name><value>F</value><description>Scientific product if T</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC2.ID</name><value>gravity_vis</value><description>Pipeline recipe (unique) identifier</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC2.DRS.ID</name><value>cpl-7.0 </value><description>Data Reduction System identifier</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC2.DRS.ID</name><value>cpl-7.0</value><description>Data Reduction System identifier</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC2.PIPE.ID</name><value>GRAVITY Instrument Pipeline 0.9.8</value><description>Pipeline (</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC2.RAW1.NAME</name><value>GRAVITY.2016-06-23T03-15-42_singlescivis.fits</value><description></description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC2.RAW1.CATG</name><value>SINGLE_SCI_VIS</value><description>Category of raw frame</description><type>A</type><unit></unit></keyword>
@@ -634,11 +634,11 @@
 <keyword><name>HIERARCH.ESO.PRO.REC2.CAL11.CATG</name><value>SINGLE_CAL_TF</value><description>Category of calibration fra</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC2.CAL11.DATAMD5</name><value>a695425feffc496870e9cd7d314588e2</value><description>MD5 s</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC2.PARAM1.NAME</name><value>static-name</value><description>Use static names for the pro</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC2.PARAM1.VALUE</name><value>false   </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC2.PARAM1.VALUE</name><value>false</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC2.PARAM2.NAME</name><value>delta-time-calib</value><description>Delta time to interpola</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC2.PARAM2.VALUE</name><value>3600    </value><description>Default: 3600</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC2.PARAM2.VALUE</name><value>3600</value><description>Default: 3600</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.PRO.REC2.PARAM3.NAME</name><value>force-calib</value><description>Force the calibration, don't</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.PRO.REC2.PARAM3.VALUE</name><value>false   </value><description>Default: false</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.PRO.REC2.PARAM3.VALUE</name><value>false</value><description>Default: false</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.QC.CHECK.FLAGS</name><value>2</value><description></description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.QC.CHECK.MSG1</name><value>OPDC has 6 wrong steps</value><description></description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.QC.CHECK.MSG2</name><value>METROLOGY has 1 wrong steps</value><description></description><type>A</type><unit></unit></keyword>
@@ -902,27 +902,27 @@
 <keyword><name>HIERARCH.ESO.COU.GUID.MAG</name><value>10.8</value><description>Given Coude guide star magnitude</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.COU.GUID.MODE</name><value>FIELD_STAB</value><description>VLTI mode of Coude guiding</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.COU.GUID.RA</name><value>261.258635</value><description>17:25:02.0 RA in J2000</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.COU.GUID.STATUS</name><value>ON      </value><description>VLTI guiding substate</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.COU.GUID.STATUS</name><value>ON</value><description>VLTI guiding substate</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.COU.GUID.WAVELEN</name><value>555.</value><description>Effective wavelength</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT1.OPL.END</name><value>21.851192195</value><description>Position at end for DL beam 1</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT1.OPL.START</name><value>21.841347699</value><description>Position at start for DL beam i</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT1.VCM.CURV</name><value>0.000827887</value><description>mm-1 actual curv. of VCM beam i</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.DEL.DLT1.VCM.TRACK</name><value>ON      </value><description>VCM tracking beam i</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.DEL.DLT1.VCM.TRACK</name><value>ON</value><description>VCM tracking beam i</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT2.OPL.END</name><value>13.608584708</value><description>Position at end for DL beam 1</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT2.OPL.START</name><value>13.604542526</value><description>Position at start for DL beam i</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT2.VCM.CURV</name><value>0.000933626</value><description>mm-1 actual curv. of VCM beam i</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.DEL.DLT2.VCM.TRACK</name><value>ON      </value><description>VCM tracking beam i</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.DEL.DLT2.VCM.TRACK</name><value>ON</value><description>VCM tracking beam i</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT3.OPL.END</name><value>57.090532558</value><description>Position at end for DL beam 1</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT3.OPL.START</name><value>57.090522069</value><description>Position at start for DL beam i</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT3.VCM.CURV</name><value>0.00214167</value><description>mm-1 actual curv. of VCM beam i</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.DEL.DLT3.VCM.TRACK</name><value>ON      </value><description>VCM tracking beam i</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.DEL.DLT3.VCM.TRACK</name><value>ON</value><description>VCM tracking beam i</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT4.OPL.END</name><value>28.490224602</value><description>Position at end for DL beam 1</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT4.OPL.START</name><value>28.487526327</value><description>Position at start for DL beam i</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.DLT4.VCM.CURV</name><value>0.001399268</value><description>mm-1 actual curv. of VCM beam i</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.DEL.DLT4.VCM.TRACK</name><value>ON      </value><description>VCM tracking beam i</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.DEL.FT.SENSOR</name><value>GRAVITY </value><description>Fringe Tracker Sensor Name</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.DEL.FT.STATUS</name><value>ON      </value><description>Fringe Tracker Status</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.DEL.REF.NAME</name><value>DL1     </value><description>Reference DEL Name</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.DEL.DLT4.VCM.TRACK</name><value>ON</value><description>VCM tracking beam i</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.DEL.FT.SENSOR</name><value>GRAVITY</value><description>Fringe Tracker Sensor Name</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.DEL.FT.STATUS</name><value>ON</value><description>Fringe Tracker Status</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.DEL.REF.NAME</name><value>DL1</value><description>Reference DEL Name</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.DEL.REF.OPL</name><value>0.</value><description>position</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.FDDL.MET.AVG</name><value>1.25</value><description>FT/2+SC/2 position [mm] .</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.FDDL.MET.GAIN</name><value>100.</value><description>FDDL Metrology Gain [Hz].</description><type>A</type><unit></unit></keyword>
@@ -990,8 +990,8 @@
 <keyword><name>HIERARCH.ESO.FT.ROBJ.DIAMETER</name><value>3.</value><description>Fringe tracking object size in mas</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.FT.ROBJ.MAG</name><value>5.</value><description>Fringe tracking object K-mag(h)</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.FT.ROBJ.NAME</name><value>IRAS17216-3801</value><description>Fringe tracking object name</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.FT.ROBJ.PMA</name><value>0       </value><description>FT object proper motion ra</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.FT.ROBJ.PMD</name><value>0       </value><description>FT object proper motion dec</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.FT.ROBJ.PMA</name><value>0</value><description>FT object proper motion ra</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.FT.ROBJ.PMD</name><value>0</value><description>FT object proper motion dec</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.AIRM.END</name><value>1.047</value><description>Airmass at end.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.AIRM.START</name><value>1.047</value><description>Airmass at start.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.ALT</name><value>72.778</value><description>Altitude angles at start [deg].</description><type>A</type><unit></unit></keyword>
@@ -1006,17 +1006,17 @@
 <keyword><name>HIERARCH.ESO.ISS.AMBI.TEMPDEW</name><value>-20.21</value><description>Observatory ambient dew temperature [C]</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.AMBI.WINDDIR</name><value>343</value><description>Wind direction [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.AMBI.WINDSP</name><value>2.55</value><description>Observatory wind speed [m/s].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR10.NAME</name><value>IN      </value><description>ARAL VINCI feeding optics beam</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR11.NAME</name><value>MIRR    </value><description>ARAL VINCI feeding optics beam</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR12.NAME</name><value>IN      </value><description>ARAL MIDI feeding optics rot be</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR13.NAME</name><value>OUT     </value><description>ARAL MIDI feeding optics rot be</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR14.NAME</name><value>OUT     </value><description>ARAL MIDI feeding optics trans</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR10.NAME</name><value>IN</value><description>ARAL VINCI feeding optics beam</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR11.NAME</name><value>MIRR</value><description>ARAL VINCI feeding optics beam</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR12.NAME</name><value>IN</value><description>ARAL MIDI feeding optics rot be</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR13.NAME</name><value>OUT</value><description>ARAL MIDI feeding optics rot be</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR14.NAME</name><value>OUT</value><description>ARAL MIDI feeding optics trans</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR15.NAME</name><value>invalid value</value><description>ARAL MIDI feeding optics t</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR16.NAME</name><value>FREE    </value><description>ARAL Finito feeding optics A (F</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR17.NAME</name><value>FREE    </value><description>ARAL Finito feeding optics B (F</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR18.NAME</name><value>FREE    </value><description>ARAL Finito feeding optics C (F</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR19.NAME</name><value>        </value><description>ARAL Amber feeding optics A (FR</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR20.NAME</name><value>        </value><description>ARAL Amber feeding optics B (FR</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR16.NAME</name><value>FREE</value><description>ARAL Finito feeding optics A (F</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR17.NAME</name><value>FREE</value><description>ARAL Finito feeding optics B (F</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR18.NAME</name><value>FREE</value><description>ARAL Finito feeding optics C (F</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR19.NAME</name><value></value><description>ARAL Amber feeding optics A (FR</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR20.NAME</name><value></value><description>ARAL Amber feeding optics B (FR</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.ARAL.MIRR21.NAME</name><value>MIRR_IFG</value><description>ARAL Amber feeding optics C (FR</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.AT1.ALT.ENC.END</name><value>1.27003</value><description>ATi alt encoder expo end.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.AT1.ALT.ENC.START</name><value>1.26976</value><description>ATi alt encoder expo start.</description><type>A</type><unit></unit></keyword>
@@ -1051,41 +1051,41 @@
 <keyword><name>HIERARCH.ESO.ISS.AT4.AZ.TIME.END</name><value>57562.1322338</value><description>Timestamp ISS.ATi.AZ.ENC.END.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.AT4.AZ.TIME.START</name><value>57562.1321528</value><description>Timestamp ISS.ATi.AZ.ENC.ST</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.AZ</name><value>324.335</value><description>Azimuth angles at start [deg].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CHOP.ST</name><value>F       </value><description>Chopping status.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CHOP.ST</name><value>F</value><description>Chopping status.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.A1L</name><value>147.610773</value><description>Static optical path length - OPD model</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.A2L</name><value>163.336932</value><description>Static optical path length - OPD model</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.A3L</name><value>115.098352</value><description>Static optical path length - OPD model</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.A4L</name><value>146.876</value><description>Static optical path length - OPD model</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.DL1</name><value>DL6     </value><description>Delay line used.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.DL2</name><value>DL5     </value><description>Delay line used.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.DL3</name><value>DL1     </value><description>Delay line used.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.DL4</name><value>DL2     </value><description>Delay line used.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.DL1</name><value>DL6</value><description>Delay line used.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.DL2</name><value>DL5</value><description>Delay line used.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.DL3</name><value>DL1</value><description>Delay line used.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.DL4</name><value>DL2</value><description>Delay line used.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.INPUT1</name><value>1</value><description>Input channel in lab.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.INPUT2</name><value>3</value><description>Input channel in lab.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.INPUT3</name><value>5</value><description>Input channel in lab.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.INPUT4</name><value>7</value><description>Input channel in lab.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.NTEL</name><value>4</value><description>Number of telescopes used.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.STATION1</name><value>A0      </value><description>Station of telescope 1.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.STATION2</name><value>B2      </value><description>Station of telescope 2.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.STATION3</name><value>D0      </value><description>Station of telescope 3.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.STATION4</name><value>C1      </value><description>Station of telescope 4.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.STATION1</name><value>A0</value><description>Station of telescope 1.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.STATION2</name><value>B2</value><description>Station of telescope 2.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.STATION3</name><value>D0</value><description>Station of telescope 3.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.STATION4</name><value>C1</value><description>Station of telescope 4.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.SWYARD1</name><value>compressed</value><description>Switchyard configuration.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.SWYARD2</name><value>compressed</value><description>Switchyard configuration.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.SWYARD3</name><value>compressed</value><description>Switchyard configuration.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.SWYARD4</name><value>compressed</value><description>Switchyard configuration.</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.T1NAME</name><value>AT1     </value><description>Telescope name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.T1NAME</name><value>AT1</value><description>Telescope name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T1X</name><value>14.636445</value><description>Telescope X coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T1Y</name><value>55.806493</value><description>Telescope Y coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T1Z</name><value>4.53336</value><description>Telescope Z coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.T2NAME</name><value>AT2     </value><description>Telescope name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.T2NAME</name><value>AT2</value><description>Telescope name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T2X</name><value>-0.738695</value><description>Telescope X coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T2Y</name><value>75.895328</value><description>Telescope Y coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T2Z</name><value>4.538432</value><description>Telescope Z coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.T3NAME</name><value>AT3     </value><description>Telescope name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.T3NAME</name><value>AT3</value><description>Telescope name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T3X</name><value>-15.629733</value><description>Telescope X coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T3Y</name><value>45.404005</value><description>Telescope Y coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T3Z</name><value>4.540539</value><description>Telescope Z coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.CONF.T4NAME</name><value>AT4     </value><description>Telescope name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.CONF.T4NAME</name><value>AT4</value><description>Telescope name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T4X</name><value>-5.691398</value><description>Telescope X coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T4Y</name><value>65.734923</value><description>Telescope Y coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.CONF.T4Z</name><value>4.5397</value><description>Telescope Z coordinate - OPD model [m].</description><type>A</type><unit></unit></keyword>
@@ -1095,20 +1095,20 @@
 <keyword><name>HIERARCH.ESO.ISS.GEOELEV</name><value>2669.</value><description>VLTI ground site height above WGS84 [m].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.GEOLAT</name><value>-24.62743941</value><description>VLTI site latitude (UV zero) [deg].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.GEOLON</name><value>-70.40498688</value><description>VLTI site longitude (UV zero) [deg].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.IAS.MIRR9.NAME</name><value>OUT     </value><description>ARAL IAS ALI slide position (OUT,</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.IAS.SELECTED</name><value>NONE    </value><description>Selected image alignment sensor (TC</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ID</name><value>v ISS   </value><description>ISS version string.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.IAS.MIRR9.NAME</name><value>OUT</value><description>ARAL IAS ALI slide position (OUT,</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.IAS.SELECTED</name><value>NONE</value><description>Selected image alignment sensor (TC</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ID</name><value>v ISS</value><description>ISS version string.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.M2POSZ.AT1</name><value>0.166</value><description>Z position for M2 mirror of ATi [mm].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.M2POSZ.AT2</name><value>-0.227323</value><description>Z position for M2 mirror of ATi [mm].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.M2POSZ.AT3</name><value>0.136667</value><description>Z position for M2 mirror of ATi [mm].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.M2POSZ.AT4</name><value>0.061997</value><description>Z position for M2 mirror of ATi [mm].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.MARCEL.LAMP</name><value>invalid value</value><description>ARAL MARCEL calibration lamp (N</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI1.NAME</name><value>OUT     </value><description>ARAL MARCEL beam splitter A (O</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI2.NAME</name><value>OUT     </value><description>ARAL MARCEL beam splitter B (O</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI3.NAME</name><value>OUT     </value><description>ARAL MARCEL beam splitter C (O</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI4.NAME</name><value>OUT     </value><description>ARAL MARCEL beam splitter D (O</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI5.NAME</name><value>OUT     </value><description>ARAL MARCEL beam splitter E (O</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI6.NAME</name><value>OUT     </value><description>ARAL MARCEL beam splitter F (O</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI1.NAME</name><value>OUT</value><description>ARAL MARCEL beam splitter A (O</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI2.NAME</name><value>OUT</value><description>ARAL MARCEL beam splitter B (O</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI3.NAME</name><value>OUT</value><description>ARAL MARCEL beam splitter C (O</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI4.NAME</name><value>OUT</value><description>ARAL MARCEL beam splitter D (O</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI5.NAME</name><value>OUT</value><description>ARAL MARCEL beam splitter E (O</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.MARCEL.OPTI6.NAME</name><value>OUT</value><description>ARAL MARCEL beam splitter F (O</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.MARCEL.TEMP</name><value>700.</value><description>Temperature Marcel [C].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.OPER</name><value>I I Condor</value><description>Name of VLTI operator.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.PARANG.END</name><value>-42.258</value><description>Parallactic angle at end [deg].</description><type>A</type><unit></unit></keyword>
@@ -1147,7 +1147,7 @@
 <keyword><name>HIERARCH.ESO.ISS.TEMP.TUN2</name><value>16.1</value><description>Temp in tunnel centre [C].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.TEMP.TUN3</name><value>13.34</value><description>Temp in tunnel centre [C].</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.TEMP.TUN4</name><value>14.49</value><description>Temp in tunnel L east [C].</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.TRAK.STATUS</name><value>NORMAL  </value><description>Tracking status.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.TRAK.STATUS</name><value>NORMAL</value><description>Tracking status.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.MET.AT1.REC1X</name><value>-588.4324</value><description>Metrolology receiver X position</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.MET.AT1.REC1Y</name><value>10.9997</value><description>Metrolology receiver Y position</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.MET.AT1.REC2X</name><value>1.3545</value><description>Metrolology receiver X position</description><type>A</type><unit></unit></keyword>
@@ -1212,7 +1212,7 @@
 <keyword><name>HIERARCH.ESO.MET.UT4.REC3Y</name><value>-154.8761</value><description>Metrolology receiver Y position</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.MET.UT4.REC4X</name><value>-154.8577</value><description>Metrolology receiver X position</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.MET.UT4.REC4Y</name><value>2611.5428</value><description>Metrolology receiver Y position</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.OCS.DET.IMGNAME</name><value>NGCIR2  </value><description>Data File Name.</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.OCS.DET.IMGNAME</name><value>NGCIR2</value><description>Data File Name.</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OCS.MET.LKDT_FC1</name><value>2016-06-23T01:15:06.712021</value><description>date of beginning</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OCS.MET.LKDT_FC2</name><value>2016-06-23T02:51:15.958021</value><description>date of beginning</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.OCS.MET.LKDT_FC3</name><value>2016-06-23T02:51:15.958021</value><description>date of beginning</description><type>A</type><unit></unit></keyword>
@@ -1363,9 +1363,9 @@
 <keyword><name>ARRAYX</name><value>-5483173.0</value><description>[m] array center X-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
 <keyword><name>ARRAYY</name><value>1951952.0</value><description>[m] array center Y-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
 <keyword><name>ARRAYZ</name><value>-2668147.0</value><description>[m] array center Z-coordinate</description><type>D</type><unit>m|meter|meters</unit></keyword>
-<keyword><name>TELESCOP</name><value>ESO-VLTI-A1234</value><description> ESO &lt;TEL&gt;</description><type>A</type><unit></unit></keyword>
+<keyword><name>TELESCOP</name><value>ESO-VLTI-A1234</value><description>ESO &lt;TEL&gt;</description><type>A</type><unit></unit></keyword>
 <keyword><name>HIERARCH.ESO.ISS.DID</name><value>ESO-VLT-DIC.ISS</value><description>Auto Added Keyword</description><type>A</type><unit></unit></keyword>
-<keyword><name>HIERARCH.ESO.ISS.ID</name><value>v ISS   </value><description>Auto Added Keyword</description><type>A</type><unit></unit></keyword>
+<keyword><name>HIERARCH.ESO.ISS.ID</name><value>v ISS</value><description>Auto Added Keyword</description><type>A</type><unit></unit></keyword>
 </keywords>
 <rows>4</rows><columns>
 <column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
