@@ -19,6 +19,8 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import java.util.List;
+
 /**
  *
  * @author bourgesl
@@ -51,12 +53,17 @@ public final class InstrumentModeManager extends AbstractMapper<InstrumentMode> 
     }
 
     @Override
-    protected InstrumentMode createGlobal(final InstrumentMode local) {
-        return new InstrumentMode(local);
+    protected InstrumentMode createGlobal(final InstrumentMode local, final String uid) {
+        return new InstrumentMode(local, uid);
     }
 
     @Override
     protected String getName(final InstrumentMode src) {
         return src.getInsName();
+    }
+
+    @Override
+    public final List<InstrumentMode> getGlobals() {
+        return getGlobals(InstrumentMode.CMP_INS_MODE);
     }
 }

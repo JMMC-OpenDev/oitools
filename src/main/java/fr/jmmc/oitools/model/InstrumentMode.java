@@ -119,8 +119,8 @@ public final class InstrumentMode {
         this.bandMin = bandMin;
     }
 
-    public InstrumentMode(final InstrumentMode im) {
-        this(im.getInsName(), im.getNbChannels(),
+    public InstrumentMode(final InstrumentMode im, final String insName) {
+        this(insName, im.getNbChannels(),
                 im.getLambdaMin(), im.getLambdaMax(), im.getResPower(), im.getBandMin());
     }
 

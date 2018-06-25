@@ -813,19 +813,11 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Get oiDataPerTarget Map
-     * @return oiDataPerTarget
+     * Return the List of OIData tables keyed by target (name)
+     * @return List of OIData tables keyed by target (name)
      */
     public Map<String, List<OIData>> getOiDataPerTarget() {
         return oiDataPerTarget;
-    }
-
-    /**
-     * Get oiDataPerGranule Map
-     * @return oiDataPerGranule
-     */
-    public Map<Granule, Set<OIData>> getOiDataPerGranule() {
-        return oiDataPerGranule;
     }
 
     /**
@@ -838,6 +830,14 @@ public final class OIFitsFile extends FitsImageFile {
      */
     public List<OIData> getOiDataList(final String target) {
         return getOiDataPerTarget().get(target);
+    }
+
+    /**
+     * Return the Set of OIData tables keyed by Granule
+     * @return Set of OIData tables keyed by Granule
+     */
+    public Map<Granule, Set<OIData>> getOiDataPerGranule() {
+        return oiDataPerGranule;
     }
 
     /*

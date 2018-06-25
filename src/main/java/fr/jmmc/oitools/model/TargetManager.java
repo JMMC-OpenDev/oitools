@@ -19,6 +19,8 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import java.util.List;
+
 /**
  *
  * @author bourgesl
@@ -51,12 +53,18 @@ public final class TargetManager extends AbstractMapper<Target> {
     }
 
     @Override
-    protected Target createGlobal(final Target local) {
-        return new Target(local);
+    protected Target createGlobal(final Target local, final String uid) {
+        return new Target(local, uid);
     }
 
     @Override
     protected String getName(final Target src) {
         return src.getTarget();
     }
+
+    @Override
+    public final List<Target> getGlobals() {
+        return getGlobals(Target.CMP_TARGET);
+    }
+
 }

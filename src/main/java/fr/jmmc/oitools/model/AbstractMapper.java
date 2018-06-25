@@ -21,6 +21,7 @@ package fr.jmmc.oitools.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -41,6 +42,8 @@ public abstract class AbstractMapper<K> {
     /* members */
     /** matcher in use */
     protected final Matcher<K> matcher;
+    /** global uids */
+    protected final Set<String> globalUids = new HashSet<String>();
     /** global item keyed by local item */
     protected final Map<K, K> globalPerLocal = new IdentityHashMap<K, K>();
     /** local items keyed by global item */
@@ -55,6 +58,7 @@ public abstract class AbstractMapper<K> {
      * May be overriden
      */
     public void clear() {
+        globalUids.clear();
         // clear insMode mappings:
         globalPerLocal.clear();
         localsPerGlobal.clear();
@@ -62,7 +66,8 @@ public abstract class AbstractMapper<K> {
 
     public final void dump() {
         if (logger.isLoggable(Level.FINE)) {
-            logger.log(Level.FINE, "Globals: {0}", localsPerGlobal.keySet());
+            logger.log(Level.FINE, "UIDs: {0}", globalUids);
+            logger.log(Level.FINE, "Globals: {0}", getGlobals());
             logger.log(Level.FINE, "Locals:  {0}", globalPerLocal.keySet());
             logger.log(Level.FINE, "Globals <=> Locals mapping: {0}", localsPerGlobal);
         }
@@ -80,8 +85,10 @@ public abstract class AbstractMapper<K> {
 
             final List<K> locals;
             if (match == null) {
+                // Generate UID:
+                final String uid = generateUid(getName(local));
                 // Create global (clone):
-                match = createGlobal(local);
+                match = createGlobal(local, uid);
 
                 locals = new ArrayList<K>(2);
                 localsPerGlobal.put(match, locals);
@@ -99,8 +106,32 @@ public abstract class AbstractMapper<K> {
         }
     }
 
+    private String generateUid(final String name) {
+        String newName = name;
+        int idx = 0;
+
+        while (globalUids.contains(newName)) {
+            idx++;
+            newName = name + "_" + idx;
+        }
+
+        globalUids.add(newName);
+
+        return newName;
+    }
+
+    public final List<K> getGlobals(Comparator<K> comparator) {
+        final List<K> globals = new ArrayList<K>(localsPerGlobal.keySet());
+        Collections.sort(globals, comparator);
+        return globals;
+    }
+
     public final K getGlobal(final K local) {
         return globalPerLocal.get(local);
+    }
+
+    public final boolean hasLocal(final K global) {
+        return getLocals(global) != null;
     }
 
     public final List<K> getLocals(final K global) {
@@ -134,9 +165,11 @@ public abstract class AbstractMapper<K> {
         return results;
     }
 
-    protected abstract K createGlobal(final K local);
+    protected abstract K createGlobal(final K local, final String uid);
 
     protected abstract String getName(final K src);
+    
+    protected abstract List<K> getGlobals();
 
     private static <K> boolean containsInstance(final List<K> list, final K value) {
         final int len = list.size();

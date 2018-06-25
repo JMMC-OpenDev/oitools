@@ -18,9 +18,12 @@ package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.jmcs.util.ToStringable;
-import fr.jmmc.oitools.meta.OIFitsStandard;
+import fr.jmmc.oitools.util.OIFitsFileComparator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,10 +42,10 @@ public class OIFitsCollection implements ToStringable {
     /** instrument mode manager */
     private final static InstrumentModeManager imm = InstrumentModeManager.getInstance();
     /* members */
-    /** OIFits file collection keyed by absolute file path */
-    protected final Map<String, OIFitsFile> oiFitsCollection = new HashMap<String, OIFitsFile>();
-    /** fake OIFitsFile structure (to gather OIData) keyed by global Granule */
-    private final Map<Granule, OIFitsFile> oiFitsPerGranule = new HashMap<Granule, OIFitsFile>();
+    /** OIFits file collection keyed by absolute file path (unordered) */
+    private final Map<String, OIFitsFile> oiFitsPerPath = new HashMap<String, OIFitsFile>();
+    /** Set of OIData tables keyed by Granule */
+    private final Map<Granule, Set<OIData>> oiDataPerGranule = new HashMap<Granule, Set<OIData>>();
 
     /**
      * Protected constructor
@@ -56,7 +59,7 @@ public class OIFitsCollection implements ToStringable {
      */
     public final void clear() {
         // clear all loaded OIFitsFile (in memory):
-        oiFitsCollection.clear();
+        oiFitsPerPath.clear();
 
         clearCache();
     }
@@ -70,15 +73,25 @@ public class OIFitsCollection implements ToStringable {
         // clear insMode mappings:
         imm.clear();
         // clear granules:
-        oiFitsPerGranule.clear();
+        oiDataPerGranule.clear();
     }
 
     public final boolean isEmpty() {
-        return oiFitsCollection.isEmpty();
+        return oiFitsPerPath.isEmpty();
     }
 
-    public final List<OIFitsFile> getOIFitsFiles() {
-        return new ArrayList<OIFitsFile>(oiFitsCollection.values());
+    public final int size() {
+        return oiFitsPerPath.size();
+    }
+
+    public final List<OIFitsFile> getSortedOIFitsFiles() {
+        return getSortedOIFitsFiles(OIFitsFileComparator.INSTANCE);
+    }
+
+    public final List<OIFitsFile> getSortedOIFitsFiles(final Comparator<OIFitsFile> comparator) {
+        final List<OIFitsFile> oiFitsFiles = new ArrayList<OIFitsFile>(oiFitsPerPath.values());
+        Collections.sort(oiFitsFiles, comparator);
+        return oiFitsFiles;
     }
 
     /**
@@ -100,7 +113,7 @@ public class OIFitsCollection implements ToStringable {
             // analyze the given file:
             oifitsFile.analyze();
 
-            oiFitsCollection.put(key, oifitsFile);
+            oiFitsPerPath.put(key, oifitsFile);
 
             logger.log(Level.FINE, "addOIFitsFile: {0}", oifitsFile);
 
@@ -111,7 +124,7 @@ public class OIFitsCollection implements ToStringable {
 
     public final OIFitsFile getOIFitsFile(final String absoluteFilePath) {
         if (absoluteFilePath != null) {
-            return oiFitsCollection.get(absoluteFilePath);
+            return oiFitsPerPath.get(absoluteFilePath);
         }
         return null;
     }
@@ -119,7 +132,7 @@ public class OIFitsCollection implements ToStringable {
     public final OIFitsFile removeOIFitsFile(final OIFitsFile oifitsFile) {
         if (oifitsFile != null) {
             final String key = getFilePath(oifitsFile);
-            final OIFitsFile previous = oiFitsCollection.remove(key);
+            final OIFitsFile previous = oiFitsPerPath.remove(key);
 
             return previous;
         }
@@ -156,12 +169,12 @@ public class OIFitsCollection implements ToStringable {
     public void toString(final StringBuilder sb, final boolean full) {
         ObjectUtils.getObjectInfo(sb, this);
 
-        sb.append("{files=").append(this.oiFitsCollection.keySet());
+        sb.append("{files= ").append(this.oiFitsPerPath.keySet());
 
         if (full) {
-            if (this.oiFitsPerGranule != null) {
-                sb.append(", oiFitsPerGranule=");
-                ObjectUtils.toString(sb, full, this.oiFitsPerGranule);
+            if (this.oiDataPerGranule != null) {
+                sb.append(", oiFitsPerGranule= ");
+                ObjectUtils.toString(sb, full, this.oiDataPerGranule);
             }
         }
         sb.append('}');
@@ -174,8 +187,10 @@ public class OIFitsCollection implements ToStringable {
     public void analyzeCollection() {
         clearCache();
 
+        final List<OIFitsFile> oiFitsFiles = getSortedOIFitsFiles();
+
         // analyze instrument modes & targets:
-        for (OIFitsFile oiFitsFile : oiFitsCollection.values()) {
+        for (OIFitsFile oiFitsFile : oiFitsFiles) {
             for (OIWavelength oiTable : oiFitsFile.getOiWavelengths()) {
                 imm.register(oiTable.getInstrumentMode());
             }
@@ -190,10 +205,8 @@ public class OIFitsCollection implements ToStringable {
         imm.dump();
         tm.dump();
 
-        // This can be replaced by an OIFits merger / filter that creates a new consistent OIFitsFile structure
-        // from criteria (target / insname ...)
-        for (OIFitsFile oiFitsFile : oiFitsCollection.values()) {
-            // Granules:
+        // Build the index between global Granule and a fake OIFitsFile structure (to gather OIData) 
+        for (OIFitsFile oiFitsFile : oiFitsFiles) {
             // reused Granule:
             Granule gg = new Granule();
 
@@ -209,30 +222,39 @@ public class OIFitsCollection implements ToStringable {
                 gg.set(globalTarget, globalInsMode, g.getNight());
 
                 // TODO: keep mapping between global granule and OIFits Granules ?
-                OIFitsFile oiFitsGranule = oiFitsPerGranule.get(gg);
-                if (oiFitsGranule == null) {
-                    oiFitsGranule = new OIFitsFile(OIFitsStandard.VERSION_1);
-
-                    oiFitsPerGranule.put(gg, oiFitsGranule);
+                Set<OIData> oiDataTables = oiDataPerGranule.get(gg);
+                if (oiDataTables == null) {
+                    oiDataTables = new LinkedHashSet<OIData>();
+                    oiDataPerGranule.put(gg, oiDataTables);
                     gg = new Granule();
                 }
 
                 for (OIData data : entry.getValue()) {
-                    oiFitsGranule.addOiTable(data);
+                    oiDataTables.add(data);
                 }
             }
         }
 
         if (logger.isLoggable(Level.FINE)) {
-            logger.log(Level.FINE, "analyzeCollection: Granules: {0}", oiFitsPerGranule.keySet());
+            logger.log(Level.FINE, "analyzeCollection: Granules: {0}", oiDataPerGranule.keySet());
         }
     }
 
-    /** 
-     * Return the OIFitsFile structure per Granule found in loaded files.
-     * @return OIFitsFile structure per Granule
+    /**
+     * Return the Set of OIData tables keyed by Granule
+     * @return Set of OIData tables keyed by Granule
      */
-    public final Map<Granule, OIFitsFile> getOiFitsPerGranule() {
-        return oiFitsPerGranule;
+    public Map<Granule, Set<OIData>> getOiDataPerGranule() {
+        return oiDataPerGranule;
+    }
+
+    public final List<Granule> getSortedGranules(final Comparator<Granule> comparator) {
+        final List<Granule> granules = new ArrayList<Granule>(oiDataPerGranule.keySet());
+        Collections.sort(granules, comparator);
+
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "granules sorted: {0}", granules);
+        }
+        return granules;
     }
 }

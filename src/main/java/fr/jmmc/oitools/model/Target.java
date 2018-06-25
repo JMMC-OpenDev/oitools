@@ -138,8 +138,8 @@ public final class Target {
         this.specTyp = specTyp;
     }
 
-    public Target(final Target t) {
-        this(t.getTarget(), t.getRaEp0(), t.getDecEp0(),
+    public Target(final Target t, final String target) {
+        this(target, t.getRaEp0(), t.getDecEp0(),
                 t.getEquinox(), t.getRaErr(), t.getDecErr(),
                 t.getSysVel(), t.getVelTyp(), t.getVelDef(),
                 t.getPmRa(), t.getPmDec(),
