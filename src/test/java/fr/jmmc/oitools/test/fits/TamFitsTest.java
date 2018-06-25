@@ -256,7 +256,7 @@ public class TamFitsTest implements TestEnv {
                     res = false;
                 } else {
                     logger.log(Level.INFO, "KEYWORD {0} = {1}\t// {2}", new Object[]{key, srcCard.getValue() != null ? "'" + srcCard.getValue() + "'" : "", srcCard.getComment()});
-                    if (!srcCard.getValue().equals(dstCard.getValue())) {
+                    if (!(srcCard.getValue() != null ? srcCard.getValue().equals(dstCard.getValue()) : dstCard.getValue() == null)) {
 
                         res = particularCase(res, key, srcCard, dstCard, sExtName);
 
