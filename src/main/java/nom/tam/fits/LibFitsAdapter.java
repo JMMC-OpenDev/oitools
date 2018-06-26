@@ -131,38 +131,6 @@ public class LibFitsAdapter {
     }
 
     /**
-     * Get the trimmed <CODE>String</CODE> value associated with the given key.
-     *
-     * @param header owning the value
-     * @param keyword the FITS keyword
-     * @return either <CODE>null</CODE> or a String with leading/trailing blanks stripped.
-     */
-    public static final String getTrimmedStringValue(final Header header, final String keyword) {
-        final String s = header.getStringValue(keyword);
-        if (s != null) {
-            return s.trim();
-        }
-        return null;
-    }
-
-    /*
-     * ENHANCEMENT : LAURENT :
-     *
-     * Get the raw <CODE>String</CODE> value
-     *
-     * @param keyword	the FITS keyword
-     * @return either <CODE>null</CODE> or a String
-     */
-    public static String getValue(final Header header, final String keyword) {
-        final HeaderCard fcard = header.findCard(keyword);
-        if (fcard == null) {
-            return null;
-        }
-
-        return fcard.getValue();
-    }
-
-    /**
      * Add or update the CHECKSUM keyword.
      *
      * @param hdu the HDU to be updated.

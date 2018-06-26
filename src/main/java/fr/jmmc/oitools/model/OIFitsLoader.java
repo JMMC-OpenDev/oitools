@@ -366,7 +366,7 @@ public class OIFitsLoader {
                         //content keyword for OIFitsV2 information
                         final Header header = imgHdu.getHeader();
 
-                        final String content = LibFitsAdapter.getTrimmedStringValue(header, FitsConstants.KEYWORD_CONTENT);
+                        final String content = header.getStringValue(FitsConstants.KEYWORD_CONTENT);
 
                         final OIFitsStandard version = (std != null) ? std : OIFitsFile.getOIFitsStandard(content);
 

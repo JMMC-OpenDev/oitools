@@ -236,7 +236,7 @@ public final class FitsUtils {
      */
     public static void dumpHeader(final StringBuilder sb, final Header header) {
 
-        final String extName = LibFitsAdapter.getTrimmedStringValue(header, "EXTNAME");
+        final String extName = header.getStringValue("EXTNAME");
 
         sb.append("--------------------------------------------------------------------------------\n");
         if (extName != null) {
@@ -360,11 +360,11 @@ public final class FitsUtils {
 
         @Override
         public int compare(final BasicHDU hdu1, final BasicHDU hdu2) {
-            String extName1 = LibFitsAdapter.getTrimmedStringValue(hdu1.getHeader(), "EXTNAME");
+            String extName1 = hdu1.getHeader().getStringValue("EXTNAME");
             if (extName1 == null) {
                 extName1 = "";
             }
-            String extName2 = LibFitsAdapter.getTrimmedStringValue(hdu2.getHeader(), "EXTNAME");
+            String extName2 = hdu2.getHeader().getStringValue("EXTNAME");
             if (extName2 == null) {
                 extName2 = "";
             }

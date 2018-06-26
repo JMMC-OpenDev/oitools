@@ -219,8 +219,8 @@ public class TamFitsTest implements TestEnv {
     private static boolean compareHeader(final Header srcHeader, final Header dstHeader) {
         boolean res = true;
 
-        final String sExtName = LibFitsAdapter.getTrimmedStringValue(srcHeader, "EXTNAME");
-        final String dExtName = LibFitsAdapter.getTrimmedStringValue(dstHeader, "EXTNAME");
+        final String sExtName = srcHeader.getStringValue("EXTNAME");
+        final String dExtName = dstHeader.getStringValue("EXTNAME");
 
         if (sExtName != null && !sExtName.equals(dExtName)) {
             logger.log(Level.INFO, "ERROR:  different extension name {0} <> {1}", new Object[]{sExtName, dExtName});
