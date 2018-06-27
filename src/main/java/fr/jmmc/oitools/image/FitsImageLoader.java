@@ -196,6 +196,7 @@ public final class FitsImageLoader {
 
             // read the complete file structure :
             // TODO: unify the readHDU with OIFitsLoader
+            // TODO: see last version of FitsFactory: option allowHeaderRepairs
             final List<BasicHDU> hduList = read(fitsFile);
 
             // processHDUnit all HD units :
@@ -577,7 +578,8 @@ public final class FitsImageLoader {
             }
             if (hasKeyword || OIFitsChecker.isInspectRules()) {
                 // parse keyword value:
-                final Object keywordValue = parseKeyword(checker, hduFits, keyword, LibFitsAdapter.getValue(header, keywordName));
+                HeaderCard card = header.findCard(keywordName);
+                final Object keywordValue = parseKeyword(checker, hduFits, keyword, card != null ? card.getValue() : null);
 
                 // store key and value:
                 // potentially missing values
@@ -720,9 +722,11 @@ public final class FitsImageLoader {
          KEYWORD CDELT3 = '0.000000'
          */
         // but check before if we have data and that CDELT is defined if requested mandatory
+        HeaderCard card1 = header.findCard(FitsImageConstants.KEYWORD_CDELT1);
+        HeaderCard card2 = header.findCard(FitsImageConstants.KEYWORD_CDELT2);
         if (image.getNbCols() > 0 && image.getNbRows() > 0 && requireCdeltKeywords
-                && (LibFitsAdapter.getValue(header, FitsImageConstants.KEYWORD_CDELT1) == null
-                || LibFitsAdapter.getValue(header, FitsImageConstants.KEYWORD_CDELT2) == null)) {
+                && ((card1 == null || card1.getValue() == null)
+                ||  (card2 == null || card2.getValue() == null))) {
             logger.log(Level.WARNING, " Missing keyword(s) [ " + FitsImageConstants.KEYWORD_CDELT1 + "={0} or "
                     + FitsImageConstants.KEYWORD_CDELT2 + "={1} ] in HDU #{2}", new Object[]{header.getStringValue(FitsImageConstants.KEYWORD_CDELT1), header.getStringValue(FitsImageConstants.KEYWORD_CDELT2), image.getFitsImageHDU().getExtNb()});
             throw new IllegalArgumentException(" Missing keyword(s) [ " + FitsImageConstants.KEYWORD_CDELT1 + " or " + FitsImageConstants.KEYWORD_CDELT2 + " ] in HDU #" + image.getFitsImageHDU().getExtNb());
