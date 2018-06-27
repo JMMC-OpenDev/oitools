@@ -18,6 +18,7 @@ package nom.tam.fits;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import nom.tam.fits.header.Standard;
 import static nom.tam.fits.utilities.FitsCheckSum.checksumEnc;
 import nom.tam.util.BufferedDataOutputStream;
 
@@ -26,6 +27,9 @@ import nom.tam.util.BufferedDataOutputStream;
  * @author jammetv
  */
 public class LibFitsAdapter {
+
+    private final static String TYPE_TUNIT = "TUNIT";
+    private final static String TYPE_TDIM = "TDIM";
 
     /**
      * Get the type of a column in the table.
@@ -43,24 +47,6 @@ public class LibFitsAdapter {
         final String tform = table.getColumnFormat(index);
         if (tform != null) {
             return table.getData().getTFORMType(tform);
-        }
-        return 0;
-    }
-
-    /**
-     * Get the type of a varying length column in the table.
-     *
-     * @param table owning the column
-     * @param index The 0-based column index.
-     * @return The type char representing the FITS type or 0 if undefined or an invalid index was requested.
-     * @exception FitsException if an invalid index was requested.
-     */
-    public static final char getColumnVarType(final BinaryTableHDU table, final int index)
-            throws FitsException {
-
-        final String tform = table.getColumnFormat(index);
-        if (tform != null) {
-            return table.getData().getTFORMVarType(tform);
         }
         return 0;
     }
@@ -84,23 +70,6 @@ public class LibFitsAdapter {
     }
 
     /**
-     * Get the dimensions of a column in the table or null if TDIM keyword is not present
-     *
-     * // LAURENT : added method
-     *
-     * @param table owning the column
-     * @param index The 0-based column index.
-     * @return the dimensions of a column of null
-     */
-    public static final int[] getColumnDimensions(final BinaryTableHDU table, final int index) {
-        final String tdims = table.getColumnMeta(index, "TDIM");
-        if (tdims != null) {
-            return BinaryTable.getTDims(tdims);
-        }
-        return null;
-    }
-
-    /**
      * Get the unit of a column in the table.
      *
      * @param table owning the column
@@ -108,7 +77,7 @@ public class LibFitsAdapter {
      * @return The unit of a column or null if undefined or an invalid index was requested.
      */
     public static final String getColumnUnit(final TableHDU table, final int index) {
-        return table.getColumnMeta(index, "TUNIT");
+        return table.getColumnMeta(index, TYPE_TUNIT);
     }
 
     /*
@@ -126,7 +95,7 @@ public class LibFitsAdapter {
         table.setColumnName(index, name, comment);
         if (unit != null && unit.length() > 0) {
             // Insert TUNIT keyword after TFORM
-            table.setColumnMeta(index, "TUNIT", unit, "ntf::tablehdu:tunit|" + (index + 1), true);
+            table.setColumnMeta(index, Standard.TUNITn, unit, "ntf::tablehdu:tunit|" + (index + 1), true);
         }
     }
 
@@ -138,6 +107,7 @@ public class LibFitsAdapter {
      * @return checksum as long value
      * @throws HeaderCardException
      * @author R J Mathar
+     * @throws java.io.IOException if error occurs in write operation
      * @since 2005-10-05
      */
     public static long setChecksum(BasicHDU hdu, final boolean addDataSum)
