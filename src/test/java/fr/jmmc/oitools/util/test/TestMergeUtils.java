@@ -75,6 +75,9 @@ public class TestMergeUtils extends JUnitBaseTest {
                 TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits");
         merge = merge(f1, f2, TEST_DIR_TEST + "mergeTestTarget.fits");
         Assert.assertNotNull("Merge return a null value", merge);
+        
+        // Analyzer needed to compare Targets:
+        merge.analyze();
     }
 
     /**
@@ -89,6 +92,7 @@ public class TestMergeUtils extends JUnitBaseTest {
 
         OITarget oiTarget = merge.getOiTarget();
         Assert.assertEquals("Merge result has more or less than one target", 1, oiTarget.getNbRows());
+        // Compare Target instances:
         Assert.assertEquals("Merge result has not the expected target: " + oiTarget.getTarget(oiTarget.getTargetId()[0]),
                 f1.getOiTarget().getTarget(f1.getOiTarget().getTargetId()[0]),
                 oiTarget.getTarget(oiTarget.getTargetId()[0]));

@@ -82,7 +82,7 @@ public final class Merger {
      * @throws IllegalArgumentException
      */
     public static OIFitsFile process(final Selector selector, final OIFitsStandard std,
-            final OIFitsFile... oiFitsToMerge) throws IllegalArgumentException {
+                                     final OIFitsFile... oiFitsToMerge) throws IllegalArgumentException {
 
         if (oiFitsToMerge == null || oiFitsToMerge.length < 1) {
             throw new IllegalArgumentException("Merge: Missing OIFits inputs");
@@ -93,10 +93,15 @@ public final class Merger {
 
         final Context ctx = new Context(selector, resultFile);
 
+        // 1. Analyze step:
+        // Reuse OIFitsCollection (granule + Target / InsMode managers)
+        // 2. Pre-Filter Data
+        // 3. process Data
         // Process input files:
         for (OIFitsFile fileToMerge : oiFitsToMerge) {
             // analyze first to use Target objects:
-            // fileToMerge.analyze(); // will be usefull in the future
+            fileToMerge.analyze(); // will be usefull in the future
+
             ctx.fileToMerge = fileToMerge;
 
             // Prefilter data, and get all useful Ins, Array and Corr in data tables
@@ -117,7 +122,7 @@ public final class Merger {
                 // Process OI_CORR tables
                 processOICorr(ctx);
 
-                // TODO: ....
+                // TODO: OIINSPOL ?
             }
 
             /* Merge OI_DATA tables */
@@ -160,9 +165,11 @@ public final class Merger {
         if (oiTargetInput == null || oiTargetInput.getNbRows() < 1) {
             throw new IllegalArgumentException(String.format("Merge: target for %s is null or empty", fileToMerge.getAbsoluteFilePath()));
         }
+
         if (oiTargetInput.getNbRows() > 1) {
             throw new IllegalArgumentException("Merge: more than one target for " + fileToMerge.getAbsoluteFilePath());
         }
+
         final String targetName = oiTargetInput.getTarget()[0];
         if (targetName == null || targetName.length() == 0) {
             throw new IllegalArgumentException("Merge: empty target name for " + fileToMerge.getAbsoluteFilePath());
@@ -204,24 +211,24 @@ public final class Merger {
 
             // Browse all OiWavelengths of the file to merge
             for (OIWavelength oiWaveLength : fileToMerge.getOiWavelengths()) {
-                final String oldName = oiWaveLength.getInsName();
+                final String name = oiWaveLength.getInsName();
 
                 // Only if this OiWavelengths is pointed by some data, keep it
-                if (usedNames.contains(oldName)) {
+                if (usedNames.contains(name)) {
                     // If name is already present in result, 
                     // change the name and memorise this change to update data information later
-                    String newName = oldName;
+                    String newName = name;
                     int idx = 0;
                     while (resultFile.getOiWavelength(newName) != null) {
                         idx++;
-                        newName = oldName + "_" + idx;
+                        newName = name + "_" + idx;
                     }
 
                     final OIWavelength newOiWave = (OIWavelength) resultFile.copyTable(oiWaveLength);
                     newOiWave.setInsName(newName);
                     resultFile.addOiTable(newOiWave);
 
-                    mapInsNames.put(oldName, newName);
+                    mapInsNames.put(name, newName);
                 }
             }
             logger.log(Level.INFO, "mapWLNames: {0}", mapInsNames);
@@ -246,24 +253,24 @@ public final class Merger {
 
             // Browse all OIArray of the file to merge
             for (OIArray oiArray : fileToMerge.getOiArrays()) {
-                final String oldName = oiArray.getArrName();
+                final String name = oiArray.getArrName();
 
                 // Only if this OIArray is pointed by some data, keep it
-                if (usedNames.contains(oldName)) {
+                if (usedNames.contains(name)) {
                     // If name is already present in result, 
                     // change the name and memorise this change to update data information later
-                    String newName = oldName;
+                    String newName = name;
                     int idx = 0;
                     while (resultFile.getOiArray(newName) != null) {
                         idx++;
-                        newName = oldName + "_" + idx;
+                        newName = name + "_" + idx;
                     }
 
                     final OIArray newOiArray = (OIArray) resultFile.copyTable(oiArray);
                     newOiArray.setArrName(newName);
                     resultFile.addOiTable(newOiArray);
 
-                    mapArrayNames.put(oldName, newName);
+                    mapArrayNames.put(name, newName);
                 }
             }
             logger.log(Level.INFO, "mapArrayNames: {0}", mapArrayNames);
@@ -288,24 +295,24 @@ public final class Merger {
 
             // Browse all OICorr of the file to merge
             for (OICorr oiCorr : fileToMerge.getOiCorrs()) {
-                final String oldName = oiCorr.getCorrName();
+                final String name = oiCorr.getCorrName();
 
                 // Only if this OICorr is pointed by some data, keep it
-                if (usedNames.contains(oldName)) {
+                if (usedNames.contains(name)) {
                     // If name is already present in result, 
                     // change the name and memorise this change to update data information later
-                    String newName = oldName;
+                    String newName = name;
                     int idx = 0;
                     while (resultFile.getOiCorr(newName) != null) {
                         idx++;
-                        newName = oldName + "_" + idx;
+                        newName = name + "_" + idx;
                     }
 
                     final OICorr newOiCorr = (OICorr) resultFile.copyTable(oiCorr);
                     newOiCorr.setCorrName(newName);
                     resultFile.addOiTable(newOiCorr);
 
-                    mapCorrNames.put(oldName, newName);
+                    mapCorrNames.put(name, newName);
                 }
             }
             logger.log(Level.INFO, "mapCorrNames: {0}", mapCorrNames);
@@ -385,6 +392,15 @@ public final class Merger {
             for (OIData data : fileToMerge.getOiDataList()) {
                 // delegate to generic Selector:
                 if (selector == null || selector.match(data)) {
+                    /*
+                    if (!data.hasSingleTarget()) {
+                        throw new IllegalArgumentException("Filter: more than one target in " + fileToMerge.getAbsoluteFilePath() + " " + data.toString());
+                    } else {
+                        if (ctx.targetId == null) {
+                            ctx.targetId = data.getDistinctTargetId().iterator().next();
+                        }
+                    }
+                     */
                     dataToKeep.add(data);
                     ctx.insUsedByData.add(data.getInsName());
                     ctx.arraysUsedByData.add(data.getArrName());
@@ -418,9 +434,11 @@ public final class Merger {
         OIFitsFile fileToMerge = null;
 
         /**
-         * TODO remove later. NAme of the single accepted target
+         * TODO remove later. Name of the single accepted target
          */
         String targetName = null;
+        /** selected targetId (must be consistent) */
+        Short targetId = null;
         /**
          * Map to link old name to new name for Ins, Array, Corr
          */
