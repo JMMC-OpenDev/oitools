@@ -26,6 +26,7 @@ import fr.jmmc.oitools.meta.DataRange;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
+import java.util.logging.Level;
 
 /**
  * Class for OI_WAVELENGTH table.
@@ -82,7 +83,7 @@ public final class OIWavelength extends OITable {
      */
     public OIWavelength(final OIFitsFile oifitsFile, final OIWavelength src) {
         this(oifitsFile);
-        
+
         this.copyTable(src);
     }
 
@@ -149,7 +150,12 @@ public final class OIWavelength extends OITable {
 
             for (int i = 0; i < nWaves; i++) {
                 double res_ch = effWaves[i] / effBands[i];
-                if (NumberUtils.isFinite(res_ch)) {
+                if (!NumberUtils.isFinite(res_ch)) {
+                    // TODO: use half distance between channels !
+                    if (logger.isLoggable(Level.FINE)) {
+                        logger.log(Level.FINE, "Infinite @ {0}: {1} {2}", new Object[]{i, effWaves[i], effBands[i]});
+                    }
+                } else if (res_ch > 0.0) {
                     total += res_ch;
                     n++;
                 }
@@ -225,7 +231,7 @@ public final class OIWavelength extends OITable {
      * @return the minimum bandwidth
      */
     public float getEffBandMin() {
-        return getEffWaveRange()[0];
+        return getEffBandRange()[0];
     }
 
     /**
@@ -233,7 +239,7 @@ public final class OIWavelength extends OITable {
      * @return the maximum bandwidth
      */
     public float getEffBandMax() {
-        return getEffWaveRange()[1];
+        return getEffBandRange()[1];
     }
 
     /* --- Other methods --- */

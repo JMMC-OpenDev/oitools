@@ -287,7 +287,12 @@ public final class Analyzer implements ModelVisitor {
         final int nbChannels = oiWavelength.getNWave();
         final float lambdaMin = oiWavelength.getEffWaveMin();
         final float lambdaMax = oiWavelength.getEffWaveMax();
-        final float bandMin = oiWavelength.getEffBandMin();
+        float bandMin = oiWavelength.getEffBandMin();
+
+        if (!NumberUtils.isFinite(bandMin) || bandMin <= 0f) {
+            bandMin = Float.NaN;
+        }
+
         // Resolution = mean(lambda / delta_lambda)
         final float resPower = oiWavelength.getResolution();
 
@@ -298,6 +303,8 @@ public final class Analyzer implements ModelVisitor {
         oiWavelength.setInstrumentMode(insMode);
 
         if (isLogDebug) {
+            logger.log(Level.FINE, "process: file: {0}", oiWavelength.getOIFitsFile().getAbsoluteFilePath());
+            logger.log(Level.FINE, "process: {0}", insMode.toString());
             logger.log(Level.FINE, "process: OIWavelength[{0}] range: [{1}, {2}]", new Object[]{oiWavelength, lambdaMin, lambdaMax});
             logger.log(Level.FINE, "process: OIWavelength[{0}]\ninsMode: {1}", new Object[]{oiWavelength, insMode});
         }
