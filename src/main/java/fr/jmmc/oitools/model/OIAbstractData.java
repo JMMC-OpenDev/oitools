@@ -26,6 +26,7 @@ import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -246,14 +247,14 @@ public abstract class OIAbstractData extends OITable {
     }
 
     /**
-     * Return the targetId corresponding to the given target (name) or null if missing
-     * @param target target (name)
-     * @return targetId corresponding to the given target (name) or null if missing
+     * Return the targetId corresponding to the given Target UID (global) or null if missing
+     * @param targetUID target UID (global)
+     * @return targetId corresponding to the given Target UID (global) or null if missing
      */
-    public final Short getTargetId(final String target) {
+    public final Short getTargetId(final String targetUID) {
         final OITarget oiTarget = getOiTarget();
         if (oiTarget != null) {
-            return oiTarget.getTargetId(target);
+            return oiTarget.getTargetId(targetUID);
         }
         return null;
     }

@@ -104,7 +104,6 @@ public final class Analyzer implements ModelVisitor {
         }
 
         if (isLogDebug) {
-            logger.log(Level.FINE, "process: OIFitsFile[{0}] oiDataPerTarget {1}", new Object[]{oiFitsFile.getAbsoluteFilePath(), oiFitsFile.getOiDataPerTarget()});
             logger.log(Level.FINE, "process: OIFitsFile[{0}] granules: {1}", new Object[]{oiFitsFile.getAbsoluteFilePath(), oiFitsFile.getOiDataPerGranule().keySet()});
         }
 
@@ -240,29 +239,6 @@ public final class Analyzer implements ModelVisitor {
             logger.log(Level.FINE, "process: OIData[{0}] nFlagged: {1}", new Object[]{oiData, nFlagged});
         }
         oiData.setNFlagged(nFlagged);
-
-        // FINALLY: Update list of tables per target:
-        if (oiTarget != null) {
-            final Map<String, List<OIData>> oiDataPerTarget = oiData.getOIFitsFile().getOiDataPerTarget();
-
-            final Map<String, Short> targetToTargetId = oiTarget.getTargetToTargetId();
-
-            String target;
-            List<OIData> oiDataTables;
-            for (Map.Entry<String, Short> entry : targetToTargetId.entrySet()) {
-                if (distinctTargetId.contains(entry.getValue())) {
-                    target = entry.getKey();
-
-                    oiDataTables = oiDataPerTarget.get(target);
-                    if (oiDataTables == null) {
-                        oiDataTables = new ArrayList<OIData>();
-                        oiDataPerTarget.put(target, oiDataTables);
-                    }
-
-                    oiDataTables.add(oiData);
-                }
-            }
-        }
     }
 
     /**
@@ -341,7 +317,6 @@ public final class Analyzer implements ModelVisitor {
 
         // TargetId indexes:
         final Map<Short, Integer> targetIdToRowIndex = oiTarget.getTargetIdToRowIndex();
-        final Map<String, Short> targetToTargetId = oiTarget.getTargetToTargetId();
         // Target indexes:
         final Map<Short, Target> targetIdToTarget = oiTarget.getTargetIdToTarget();
         final Map<Target, Short> targetObjToTargetId = oiTarget.getTargetObjToTargetId();
@@ -354,9 +329,6 @@ public final class Analyzer implements ModelVisitor {
 
             targetIdToRowIndex.put(targetId, NumberUtils.valueOf(i));
 
-            // may have name conflicts ie multiple ids for the same target name in OI_TARGET !
-            targetToTargetId.put(targets[i], targetId);
-
             // may create several identical Target objects if the target record is duplicated:
             final Target target = oiTarget.createTarget(i);
 
@@ -367,7 +339,6 @@ public final class Analyzer implements ModelVisitor {
 
         if (isLogDebug) {
             logger.log(Level.FINE, "process: OITarget[{0}] targetIdToRowIndex: {1}", new Object[]{oiTarget, targetIdToRowIndex});
-            logger.log(Level.FINE, "process: OITarget[{0}] targetToTargetId: {1}", new Object[]{oiTarget, targetToTargetId});
             logger.log(Level.FINE, "process: OITarget[{0}] targetIdToTarget: {1}", new Object[]{oiTarget, targetIdToTarget});
             logger.log(Level.FINE, "process: OITarget[{0}] targetObjToTargetId: {1}", new Object[]{oiTarget, targetObjToTargetId});
         }

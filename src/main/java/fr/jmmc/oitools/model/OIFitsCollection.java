@@ -18,11 +18,13 @@ package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.jmcs.util.ToStringable;
+import fr.jmmc.oitools.util.GranuleComparator;
 import fr.jmmc.oitools.util.OIFitsFileComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +35,7 @@ import java.util.logging.Logger;
 /**
  * Manage data collection and provide utility methods.
  */
-public class OIFitsCollection implements ToStringable {
+public final class OIFitsCollection implements ToStringable {
 
     /** logger */
     protected final static Logger logger = Logger.getLogger(OIFitsCollection.class.getName());
@@ -48,16 +50,16 @@ public class OIFitsCollection implements ToStringable {
     private final Map<Granule, Set<OIData>> oiDataPerGranule = new HashMap<Granule, Set<OIData>>();
 
     /**
-     * Protected constructor
+     * Public constructor
      */
-    protected OIFitsCollection() {
+    public OIFitsCollection() {
         super();
     }
 
     /**
      * Clear the OIFits file collection
      */
-    public final void clear() {
+    public void clear() {
         // clear all loaded OIFitsFile (in memory):
         oiFitsPerPath.clear();
 
@@ -76,19 +78,19 @@ public class OIFitsCollection implements ToStringable {
         oiDataPerGranule.clear();
     }
 
-    public final boolean isEmpty() {
+    public boolean isEmpty() {
         return oiFitsPerPath.isEmpty();
     }
 
-    public final int size() {
+    public int size() {
         return oiFitsPerPath.size();
     }
 
-    public final List<OIFitsFile> getSortedOIFitsFiles() {
+    public List<OIFitsFile> getSortedOIFitsFiles() {
         return getSortedOIFitsFiles(OIFitsFileComparator.INSTANCE);
     }
 
-    public final List<OIFitsFile> getSortedOIFitsFiles(final Comparator<OIFitsFile> comparator) {
+    public List<OIFitsFile> getSortedOIFitsFiles(final Comparator<OIFitsFile> comparator) {
         final List<OIFitsFile> oiFitsFiles = new ArrayList<OIFitsFile>(oiFitsPerPath.values());
         Collections.sort(oiFitsFiles, comparator);
         return oiFitsFiles;
@@ -99,7 +101,7 @@ public class OIFitsCollection implements ToStringable {
      * @param oifitsFile OIFits file
      * @return previous OIFits file or null if not present
      */
-    public final OIFitsFile addOIFitsFile(final OIFitsFile oifitsFile) {
+    public OIFitsFile addOIFitsFile(final OIFitsFile oifitsFile) {
         if (oifitsFile != null) {
             final String key = getFilePath(oifitsFile);
 
@@ -122,14 +124,14 @@ public class OIFitsCollection implements ToStringable {
         return null;
     }
 
-    public final OIFitsFile getOIFitsFile(final String absoluteFilePath) {
+    public OIFitsFile getOIFitsFile(final String absoluteFilePath) {
         if (absoluteFilePath != null) {
             return oiFitsPerPath.get(absoluteFilePath);
         }
         return null;
     }
 
-    public final OIFitsFile removeOIFitsFile(final OIFitsFile oifitsFile) {
+    public OIFitsFile removeOIFitsFile(final OIFitsFile oifitsFile) {
         if (oifitsFile != null) {
             final String key = getFilePath(oifitsFile);
             final OIFitsFile previous = oiFitsPerPath.remove(key);
@@ -248,12 +250,86 @@ public class OIFitsCollection implements ToStringable {
         return oiDataPerGranule;
     }
 
-    public final List<Granule> getSortedGranules(final Comparator<Granule> comparator) {
+    public List<Granule> getSortedGranules(final Comparator<Granule> comparator) {
         final List<Granule> granules = new ArrayList<Granule>(oiDataPerGranule.keySet());
         Collections.sort(granules, comparator);
 
-        if (logger.isLoggable(Level.FINE)) {
-            logger.log(Level.FINE, "granules sorted: {0}", granules);
+        logger.log(Level.FINE, "granules sorted: {0}", granules);
+
+        return granules;
+    }
+
+    public List<OIData> findOIData(final String targetUID, final String insModeUID, final NightId nightID,
+                                   final String oiFitsPath, final Integer extNb,
+                                   List<OIData> inputList) {
+
+        List<OIData> oiDataList = inputList;
+
+        if (!this.isEmpty()) {
+            // Find matching Granules:
+            final List<Granule> granules = findGranules(targetUID, insModeUID, nightID);
+
+            if (!granules.isEmpty()) {
+                oiDataList = (oiDataList != null) ? oiDataList : new ArrayList<OIData>();
+
+                for (Granule g : granules) {
+                    final Set<OIData> oiDatas = oiDataPerGranule.get(g);
+
+                    if (oiDatas != null) {
+                        // Apply table selection:
+
+                        // TODO: handle extra filters on OIData ?
+                        if (oiFitsPath == null) {
+                            // add all tables:
+                            for (OIData oiData : oiDatas) {
+                                if (!oiDataList.contains(oiData)) {
+                                    oiDataList.add(oiData);
+                                }
+                            }
+                        } else {
+                            final OIFitsFile oiFitsFile = getOIFitsFile(oiFitsPath);
+
+                            if (oiFitsFile != null) {
+                                // test all tables:
+                                for (OIData oiData : oiDatas) {
+                                    // file path comparison:
+                                    if (oiData.getOIFitsFile().equals(oiFitsFile)) {
+
+                                        // extNb is null means add all tables from file
+                                        if (extNb == null || oiData.getExtNb() == extNb.intValue()) {
+                                            if (!oiDataList.contains(oiData)) {
+                                                oiDataList.add(oiData);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        logger.log(Level.FINE, "findOIData: {0}", oiDataList);
+
+        return oiDataList;
+    }
+
+    public List<Granule> findGranules(final String targetUID, final String insModeUID, final NightId nightID) {
+        final List<Granule> granules = getSortedGranules(GranuleComparator.DEFAULT);
+
+        // null if no match or targetUID / insModeUID is undefined :
+        final Target target = tm.getGlobalByUID(targetUID);
+        final InstrumentMode insMode = imm.getGlobalByUID(insModeUID);
+
+        final Granule pattern = new Granule(target, insMode, nightID);
+
+        for (Iterator<Granule> it = granules.iterator(); it.hasNext();) {
+            final Granule candidate = it.next();
+
+            if (!Granule.MATCHER_LIKE.match(pattern, candidate)) {
+                it.remove();
+            }
         }
         return granules;
     }

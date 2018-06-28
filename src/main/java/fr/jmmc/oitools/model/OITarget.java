@@ -66,8 +66,8 @@ public final class OITarget extends OITable {
     private final static ColumnMeta COLUMN_VELTYP = new ColumnMeta(OIFitsConstants.COLUMN_VELTYP,
             "reference for radial velocity", Types.TYPE_CHAR, 8,
             new String[]{OIFitsConstants.COLUMN_VELTYP_LSR, OIFitsConstants.COLUMN_VELTYP_HELIOCEN,
-                OIFitsConstants.COLUMN_VELTYP_BARYCENT, OIFitsConstants.COLUMN_VELTYP_GEOCENTR,
-                OIFitsConstants.COLUMN_VELTYP_TOPOCENT, OIFitsConstants.UNKNOWN_VALUE});
+                         OIFitsConstants.COLUMN_VELTYP_BARYCENT, OIFitsConstants.COLUMN_VELTYP_GEOCENTR,
+                         OIFitsConstants.COLUMN_VELTYP_TOPOCENT, OIFitsConstants.UNKNOWN_VALUE});
     // Note : UNKNOWN is not in OIFits standard
     /** VELDEF column descriptor */
     private final static ColumnMeta COLUMN_VELDEF = new ColumnMeta(OIFitsConstants.COLUMN_VELDEF,
@@ -98,14 +98,12 @@ public final class OITarget extends OITable {
     /** CATEGORY column descriptor */
     private final static ColumnMeta COLUMN_CATEGORY = new ColumnMeta(OIFitsConstants.COLUMN_CATEGORY,
             "'CAL' or 'SCI'", Types.TYPE_CHAR, 3, true, false, new String[]{OIFitsConstants.COLUMN_CATEGORY_CAL,
-                OIFitsConstants.COLUMN_CATEGORY_SCI}, Units.NO_UNIT, null, null);
+                                                                            OIFitsConstants.COLUMN_CATEGORY_SCI}, Units.NO_UNIT, null, null);
 
     /* members */
  /* cached analyzed data */
     /** mapping of targetId values to row index */
     private final Map<Short, Integer> targetIdToRowIndex = new HashMap<Short, Integer>();
-    /** mapping of target (name) values to targetId */
-    private final Map<String, Short> targetToTargetId = new HashMap<String, Short>();
     /** mapping of targetId values to Target */
     private final Map<Short, Target> targetIdToTarget = new HashMap<Short, Target>();
     /** mapping of Target instances (may have duplicates) to targetId values */
@@ -194,7 +192,7 @@ public final class OITarget extends OITable {
      */
     public OITarget(final OIFitsFile oifitsFile, final OITarget src) {
         this(oifitsFile);
-        
+
         this.copyTable(src);
     }
 
@@ -457,7 +455,6 @@ public final class OITarget extends OITable {
     public void setChanged() {
         super.setChanged();
         targetIdToRowIndex.clear();
-        targetToTargetId.clear();
         targetIdToTarget.clear();
         targetObjToTargetId.clear();
     }
@@ -473,19 +470,6 @@ public final class OITarget extends OITable {
      */
     public Integer getRowIndex(final Short targetId) {
         return targetIdToRowIndex.get(targetId);
-    }
-
-    Map<String, Short> getTargetToTargetId() {
-        return targetToTargetId;
-    }
-
-    /**
-     * Return the targetId corresponding to the given target (name) or null if missing
-     * @param target target (name)
-     * @return targetId corresponding to the given target (name) or null if missing (or null if Analyzer not run)
-     */
-    public Short getTargetId(final String target) {
-        return targetToTargetId.get(target);
     }
 
     Map<Short, Target> getTargetIdToTarget() {
@@ -524,6 +508,25 @@ public final class OITarget extends OITable {
                     getRaErr()[idx], getDecErr()[idx], getSysVel()[idx], getVelTyp()[idx], getVelDef()[idx],
                     getPmRa()[idx], getPmDec()[idx], getPmRaErr()[idx], getPmDecErr()[idx],
                     getParallax()[idx], getParaErr()[idx], getSpecTyp()[idx]);
+        }
+        return null;
+    }
+
+    /**
+     * Return the targetId corresponding to the given Target UID (global) or null if missing
+     * @param targetUID target UID (global)
+     * @return targetId corresponding to the given Target UID (global) or null if missing
+     */
+    public final Short getTargetId(final String targetUID) {
+        final TargetManager tm = TargetManager.getInstance();
+        final Target globalTarget = tm.getGlobalByUID(targetUID);
+        if (globalTarget != null) {
+            for (Target local : tm.getLocals(globalTarget)) {
+                final Short id = targetObjToTargetId.get(local);
+                if (id != null) {
+                    return id;
+                }
+            }
         }
         return null;
     }
