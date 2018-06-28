@@ -22,6 +22,7 @@ package fr.jmmc.oitools.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -43,7 +44,7 @@ public abstract class AbstractMapper<K> {
     /** matcher in use */
     protected final Matcher<K> matcher;
     /** global uids */
-    protected final Set<String> globalUids = new HashSet<String>();
+    protected final Map<String, K> globalUids = new HashMap<String, K>();
     /** global item keyed by local item */
     protected final Map<K, K> globalPerLocal = new IdentityHashMap<K, K>();
     /** local items keyed by global item */
@@ -90,6 +91,9 @@ public abstract class AbstractMapper<K> {
                 // Create global (clone):
                 match = createGlobal(local, uid);
 
+                // insert mapping (uid -> global)
+                globalUids.put(uid, match);
+
                 locals = new ArrayList<K>(2);
                 localsPerGlobal.put(match, locals);
             } else {
@@ -110,13 +114,10 @@ public abstract class AbstractMapper<K> {
         String newName = name;
         int idx = 0;
 
-        while (globalUids.contains(newName)) {
+        while (globalUids.get(newName) != null) {
             idx++;
             newName = name + "_" + idx;
         }
-
-        globalUids.add(newName);
-
         return newName;
     }
 
@@ -124,6 +125,10 @@ public abstract class AbstractMapper<K> {
         final List<K> globals = new ArrayList<K>(localsPerGlobal.keySet());
         Collections.sort(globals, comparator);
         return globals;
+    }
+
+    public final K getGlobalByUID(final String uid) {
+        return globalUids.get(uid);
     }
 
     public final K getGlobal(final K local) {
@@ -168,7 +173,7 @@ public abstract class AbstractMapper<K> {
     protected abstract K createGlobal(final K local, final String uid);
 
     protected abstract String getName(final K src);
-    
+
     protected abstract List<K> getGlobals();
 
     private static <K> boolean containsInstance(final List<K> list, final K value) {
