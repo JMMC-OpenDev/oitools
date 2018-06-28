@@ -43,7 +43,10 @@ public final class InstrumentMode {
     public final static Matcher<InstrumentMode> MATCHER_LIKE = new Matcher<InstrumentMode>() {
 
         /** smallest precision on wavelength */
-        public final static float LAMBDA_PREC = 1e-10f;
+        public final static float LAMBDA_PREC_MAX = 1e-10f;
+
+        /** smallest precision on wavelength */
+        public final static float LAMBDA_PREC_MIN = 1e-7f;
 
         @Override
         public boolean match(final InstrumentMode src, final InstrumentMode other) {
@@ -58,8 +61,10 @@ public final class InstrumentMode {
             // precision = 1/2 channel width ie min(eff_band)/2
             float prec = 0.5f * Math.min(src.getBandMin(), other.getBandMin());
 
-            if (Float.isNaN(prec) || prec < LAMBDA_PREC) {
-                prec = LAMBDA_PREC;
+            if (Float.isNaN(prec) || prec < LAMBDA_PREC_MAX) {
+                prec = LAMBDA_PREC_MAX;
+            } else if (prec > LAMBDA_PREC_MIN) {
+                prec = LAMBDA_PREC_MIN;
             }
 
             // precision = 1e-10 ie 3 digits in nm:
