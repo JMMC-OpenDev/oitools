@@ -30,6 +30,33 @@ public final class Granule {
         TARGET, INS_MODE, NIGHT;
     }
 
+    public final static Matcher<Granule> MATCHER_LIKE = new Matcher<Granule>() {
+
+        @Override
+        public boolean match(final Granule pattern, final Granule candidate) {
+            if (pattern == candidate) {
+                return true;
+            }
+            if (pattern.getTarget() != null && candidate.getTarget() != null) {
+                if (!pattern.getTarget().equals(candidate.getTarget())) {
+                    return false;
+                }
+            }
+            if (pattern.getInsMode() != null && candidate.getInsMode() != null) {
+                if (!pattern.getInsMode().equals(candidate.getInsMode())) {
+                    return false;
+                }
+            }
+            if (pattern.getNight() != null && candidate.getNight() != null) {
+                if (!pattern.getNight().equals(candidate.getNight())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    };
+
+    /* members */
     private Target target;
     private InstrumentMode insMode;
     private NightId night;
