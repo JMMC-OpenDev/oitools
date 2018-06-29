@@ -33,8 +33,6 @@ import nom.tam.fits.FitsException;
 import nom.tam.fits.FitsFactory;
 import nom.tam.fits.Header;
 import nom.tam.fits.HeaderCard;
-import nom.tam.fits.LibFitsAdapter;
-import nom.tam.util.ArrayFuncs;
 import nom.tam.util.BufferedFile;
 
 /**
@@ -234,6 +232,16 @@ public class TamFitsTest implements TestEnv {
 
             if (sCard != dCard) {
                 logger.log(Level.INFO, "{0} different number of header card {1} <> {2}", new Object[]{errorPrefix(sExtName), sCard, dCard});
+                logger.log(Level.INFO, "list srcHeader");
+                for (int i = 0; i < sCard; i++) {
+                    srcHeader.getCard(i);
+                    logger.log(Level.INFO, "   " + srcHeader.getCard(i));
+                }
+                logger.log(Level.INFO, "list dstHeader");
+                for (int i = 0; i < dCard; i++) {
+                    dstHeader.getCard(i);
+                    logger.log(Level.INFO, "   " + dstHeader.getCard(i));
+                }
                 res = false;
             }
             logger.log(Level.INFO, "KEYWORDS = {0}", sCard);
