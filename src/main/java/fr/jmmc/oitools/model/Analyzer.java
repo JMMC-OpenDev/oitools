@@ -47,10 +47,8 @@ public final class Analyzer implements ModelVisitor {
 
     /** cached log debug flag */
     private final boolean isLogDebug = logger.isLoggable(Level.FINE);
-    /** cached combinations for baselines */
-    private final Map<Integer, List<int[]>> comb2TByLen = new HashMap<Integer, List<int[]>>(8);
-    /** cached combinations for triplets */
-    private final Map<Integer, List<int[]>> comb3TByLen = new HashMap<Integer, List<int[]>>(8);
+    /** cached combinations for baselines (staLen, combLen, combinations) */
+    private final Map<Integer, Map<Integer, List<int[]>>> combsCache = new HashMap<Integer, Map<Integer, List<int[]>>>(8);
     /** cached NightId instances */
     private final Map<NightId, NightId> nightIdCache = new HashMap<NightId, NightId>(64);
 
@@ -497,8 +495,9 @@ public final class Analyzer implements ModelVisitor {
                 // store single station configuration:
                 staConfs[i] = staConf;
             }
-
         } else {
+            // StaIndex mapping (distinct present StaIndex arrays) to station configuration:
+            final Map<short[], short[]> mappingStaConf = new HashMap<short[], short[]>(distinctStaIndex.size());
 
             // Guess configurations:
             // simple algorithm works only on distinct values (Aspro2 for now)
@@ -527,385 +526,384 @@ public final class Analyzer implements ModelVisitor {
             // sort station node on its related staIndex counts (smaller count first):
             Collections.sort(nodes);
 
-            final int nodeLen = nodes.size();
-
-            if (isDebug) {
-                logger.fine("Initial StationNodes --------------------------------------");
-
-                for (StationNode n : nodes) {
-                    logger.log(Level.FINE, "Station: {0}\t({1}):\t{2}", new Object[]{n.staId, n.count, n.staLists});
-                }
-                logger.fine("--------------------------------------");
-            }
-
-            // StaIndex mapping (distinct present StaIndex arrays) to station configuration:
-            final Map<short[], short[]> mappingStaConf = new HashMap<short[], short[]>(distinctStaIndex.size());
-
-            // Missing StaIndex (removed baseline or triplets) ordered by natural StationIndex comparator:
-            final Set<List<Short>> missingStaIndexes = new TreeSet<List<Short>>();
-
-            // current guessed station configuration:
-            final Set<Short> guessConf = new HashSet<Short>(8);
-
-            final List<List<Short>> combStaLists = new ArrayList<List<Short>>();
             final StationIndex sortedConf = new StationIndex(10);
-            // StaIndex from combination:
-            final StationIndex cStaList = new StationIndex(staLen);
 
-            final Map<Integer, List<int[]>> combByLen = (staLen == 3) ? comb3TByLen : comb2TByLen;
-            Integer combKey;
-            List<int[]> iCombs;
+            if (staLen == 1) {
+                // try using all stations to form a conf:
+                for (StationNode node : nodes) {
+                    sortedConf.add(node.staId);
+                }
 
-            int confLen;
+                // consider conf always valid:
+                final short[] staConf = toArray(sortedConf);
 
-            StationNode node, other;
-            List<Short> item;
+                // add this configuration:
+                distinctStaConf.add(staConf);
 
-            int[] combination;
-            StationIndex newStaIndex;
-            Short staId;
+                // add mappings:
+                for (short[] staIndex : distinctStaIndex) {
+                    mappingStaConf.put(staIndex, staConf);
+                }
+            } else {
+                if (isDebug) {
+                    logger.fine("Initial StationNodes --------------------------------------");
 
-            int j, k, n, len;
-            Iterator<List<Short>> itStaList;
+                    for (StationNode n : nodes) {
+                        logger.log(Level.FINE, "Station: {0}\t({1}):\t{2}", new Object[]{n.staId, n.count, n.staLists});
+                    }
+                    logger.fine("--------------------------------------");
+                }
 
-            boolean doProcess = true;
-            int nPass = 0;
+                // Missing StaIndex (removed baseline or triplets) ordered by natural StationIndex comparator:
+                final Set<List<Short>> missingStaIndexes = new TreeSet<List<Short>>();
 
-            // Grow pass: add missing baseline or triplets:
-            final int maxStaIndex = CombUtils.comb(nodeLen, staLen);
+                // current guessed station configuration:
+                final Set<Short> guessConf = new HashSet<Short>(8);
 
-            if (isDebug) {
-                logger.log(Level.FINE, "nodes= {0} - maxStaIndex= {1}", new Object[]{nodeLen, maxStaIndex});
-            }
+                final List<List<Short>> combStaLists = new ArrayList<List<Short>>();
+                // StaIndex from combination:
+                final StationIndex cStaList = new StationIndex(staLen);
 
-            // distinct Sorted staIndex arrays from combinations (present + all missing StaIndex):
-            final Set<List<Short>> sortedCombStaIndex = new HashSet<List<Short>>(maxStaIndex);
-            // add all present StaIndex:
-            sortedCombStaIndex.addAll(sortedStaIndex);
+                List<int[]> iCombs;
+                int confLen;
 
-            // distinct processed sorted staConf:
-            final Set<List<Short>> distinctCombStaConf = new HashSet<List<Short>>(64);
+                StationNode node, other;
+                List<Short> item;
 
-            while (doProcess) {
-                nPass++;
-                doProcess = false;
+                int[] combination;
+                StationIndex newStaIndex;
+                Short staId;
 
-                // Process first the last node (sorted so has top most relations):
-                for (n = nodeLen - 1; n >= 0; n--) {
-                    node = nodes.get(n);
+                int j, k, n, len;
+                Iterator<List<Short>> itStaList;
 
-                    // skip marked nodes:
-                    if (!node.mark) {
-                        // try another node ?
-                        doProcess = true;
+                boolean doProcess = true;
+                int nPass = 0;
 
-                        guessConf.add(node.staId);
+                final int nodeLen = nodes.size();
 
-                        // try using all stations to form a conf:
-                        for (itStaList = node.staLists.iterator(); itStaList.hasNext();) {
-                            item = itStaList.next();
+                // Grow pass: add missing baseline or triplets:
+                final int maxStaIndex = CombUtils.comb(nodeLen, staLen);
 
-                            for (k = 0; k < staLen; k++) {
-                                guessConf.add(item.get(k));
+                if (isDebug) {
+                    logger.log(Level.FINE, "nodes= {0} - maxStaIndex= {1}", new Object[]{nodeLen, maxStaIndex});
+                }
+
+                // distinct Sorted staIndex arrays from combinations (present + all missing StaIndex):
+                final Set<List<Short>> sortedCombStaIndex = new HashSet<List<Short>>(maxStaIndex);
+                // add all present StaIndex:
+                sortedCombStaIndex.addAll(sortedStaIndex);
+
+                // distinct processed sorted staConf:
+                final Set<List<Short>> distinctCombStaConf = new HashSet<List<Short>>(64);
+
+                while (doProcess) {
+                    nPass++;
+                    doProcess = false;
+
+                    // Process first the last node (sorted so has top most relations):
+                    for (n = nodeLen - 1; n >= 0; n--) {
+                        node = nodes.get(n);
+
+                        // skip marked nodes:
+                        if (!node.mark) {
+                            // try another node ?
+                            doProcess = true;
+
+                            guessConf.add(node.staId);
+
+                            // try using all stations to form a conf:
+                            for (itStaList = node.staLists.iterator(); itStaList.hasNext();) {
+                                item = itStaList.next();
+
+                                for (k = 0; k < staLen; k++) {
+                                    guessConf.add(item.get(k));
+                                }
                             }
+
+                            // compute missing staIndexes:
+                            sortedConf.clear();
+                            sortedConf.addAll(guessConf);
+                            guessConf.clear();
+                            Collections.sort(sortedConf);
+
+                            // check that this conf is different than other already processed:
+                            if (!distinctCombStaConf.contains(sortedConf)) {
+                                distinctCombStaConf.add(new StationIndex(sortedConf));
+
+                                if (isDebug) {
+                                    logger.log(Level.FINE, "Growing node: {0} - sortedConf = {1}", new Object[]{node.staId, sortedConf});
+                                }
+
+                                // see CombUtils for generics
+                                confLen = sortedConf.size();
+
+                                // get permutations:
+                                iCombs = getCombinations(staLen, confLen);
+
+                                combStaLists.clear();
+
+                                // iCombs is sorted so should keep array sorted as otherStaIds is also sorted !
+                                for (j = 0, len = iCombs.size(); j < len; j++) {
+                                    combination = iCombs.get(j);
+
+                                    cStaList.clear();
+
+                                    for (k = 0; k < staLen; k++) {
+                                        cStaList.add(sortedConf.get(combination[k]));
+                                    }
+
+                                    // only keep new StaIndex arrays (not present nor already handled):
+                                    if (!sortedCombStaIndex.contains(cStaList)) {
+                                        newStaIndex = new StationIndex(cStaList);
+
+                                        // add new StaIndex array in processed StaIndex:
+                                        sortedCombStaIndex.add(newStaIndex);
+
+                                        combStaLists.add(newStaIndex);
+                                    }
+                                }
+
+                                if (isDebug) {
+                                    logger.log(Level.FINE, "node: {0} - combStaLists = {1}", new Object[]{node.staId, combStaLists});
+                                }
+
+                                // Test missing staIndex:
+                                for (j = 0, len = combStaLists.size(); j < len; j++) {
+                                    item = combStaLists.get(j);
+
+                                    // test if present:
+                                    if (!sortedStaIndex.contains(item)) {
+                                        missingStaIndexes.add(item);
+                                    }
+                                }
+
+                                // process all possible staList:
+                                // note: node needs not to be modified as all its stations were used to form the combination (sortedconf)
+                                // add missing baselines in other nodes:
+                                for (j = 0, len = combStaLists.size(); j < len; j++) {
+                                    item = combStaLists.get(j);
+
+                                    for (k = 0; k < staLen; k++) {
+                                        staId = item.get(k);
+
+                                        // skip current node:
+                                        if (staId != node.staId) {
+                                            // add baseline:
+                                            other = staIndexNodes.get(staId);
+
+                                            // ensure other is not null:
+                                            if (other.addStaList(item)) {
+                                                // mark the other node to be processed (again):
+                                                other.mark = false;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            // mark this node as done:
+                            node.mark = true;
+
+                            // exit from this loop:
+                            break;
                         }
+                    } // nodes
 
-                        // compute missing staIndexes:
-                        sortedConf.clear();
-                        sortedConf.addAll(guessConf);
-                        guessConf.clear();
-                        Collections.sort(sortedConf);
+                    if (doProcess) {
+                        // sort station node on its related staIndex counts (smaller count first) after each pass:
+                        Collections.sort(nodes);
 
-                        // check that this conf is different than other already processed:
-                        if (!distinctCombStaConf.contains(sortedConf)) {
-                            distinctCombStaConf.add(new StationIndex(sortedConf));
+                        if (isDebug) {
+                            logger.fine("Current StationNodes --------------------------------------");
+                            for (StationNode s : nodes) {
+                                logger.log(Level.FINE, "Station[{0}]: {1}\t({2}):\t{3}", new Object[]{s.mark, s.staId, s.count, s.staLists});
+                            }
+                            logger.fine("--------------------------------------");
+                        }
+                    }
+
+                } // until doProcess
+
+                if (isDebug) {
+                    logger.log(Level.FINE, "grow {0} pass: done", nPass);
+                }
+
+                // Process clusters pass:
+                doProcess = true;
+                nPass = 0;
+
+                while (doProcess) {
+                    nPass++;
+                    doProcess = false;
+
+                    // Process only the first node (sorted so less relations):
+                    for (n = 0; n < nodeLen; n++) {
+                        node = nodes.get(n);
+
+                        // skip empty nodes:
+                        if (node.count > 0) {
+                            // try another node ?
+                            doProcess = true;
+
+                            guessConf.add(node.staId);
+
+                            // try using all stations to form a conf (even with missing baselines):
+                            for (itStaList = node.staLists.iterator(); itStaList.hasNext();) {
+                                item = itStaList.next();
+
+                                for (k = 0; k < staLen; k++) {
+                                    guessConf.add(item.get(k));
+                                }
+                            }
+
+                            // compute missing staIndexes:
+                            sortedConf.clear();
+                            sortedConf.addAll(guessConf);
+                            guessConf.clear();
+                            Collections.sort(sortedConf);
 
                             if (isDebug) {
-                                logger.log(Level.FINE, "Growing node: {0} - sortedConf = {1}", new Object[]{node.staId, sortedConf});
+                                logger.log(Level.FINE, "Processing node: {0} - sortedConf = {1}", new Object[]{node.staId, sortedConf});
                             }
+
+                            combStaLists.clear();
 
                             // see CombUtils for generics
                             confLen = sortedConf.size();
 
-                            if (isDebug) {
-                                logger.log(Level.FINE, "Get iCombs with len = {0}", confLen);
-                            }
-
+                            // TODO: remove all that code as grow pass has completed everything so don't test combination anymore ?
                             // get permutations:
-                            combKey = NumberUtils.valueOf(confLen);
-
-                            iCombs = combByLen.get(combKey);
-
-                            if (iCombs == null) {
-                                iCombs = CombUtils.generateCombinations(combKey.intValue(), staLen); // 2T or 3T
-                                combByLen.put(combKey, iCombs);
-                            }
-
-                            combStaLists.clear();
+                            iCombs = getCombinations(staLen, confLen);
 
                             // iCombs is sorted so should keep array sorted as otherStaIds is also sorted !
                             for (j = 0, len = iCombs.size(); j < len; j++) {
                                 combination = iCombs.get(j);
 
-                                cStaList.clear();
+                                newStaIndex = new StationIndex(staLen);
 
                                 for (k = 0; k < staLen; k++) {
-                                    cStaList.add(sortedConf.get(combination[k]));
+                                    newStaIndex.add(sortedConf.get(combination[k]));
                                 }
 
-                                // only keep new StaIndex arrays (not present nor already handled):
-                                if (!sortedCombStaIndex.contains(cStaList)) {
-                                    newStaIndex = new StationIndex(cStaList);
-
-                                    // add new StaIndex array in processed StaIndex:
-                                    sortedCombStaIndex.add(newStaIndex);
-
-                                    combStaLists.add(newStaIndex);
-                                }
+                                combStaLists.add(newStaIndex);
                             }
 
                             if (isDebug) {
                                 logger.log(Level.FINE, "node: {0} - combStaLists = {1}", new Object[]{node.staId, combStaLists});
                             }
 
-                            // Test missing staIndex:
+                            // consider conf always valid:
+                            final short[] staConf = toArray(sortedConf);
+
+                            // add this configuration:
+                            distinctStaConf.add(staConf);
+
+                            // add mappings:
                             for (j = 0, len = combStaLists.size(); j < len; j++) {
                                 item = combStaLists.get(j);
 
-                                // test if present:
-                                if (!sortedStaIndex.contains(item)) {
-                                    missingStaIndexes.add(item);
+                                equivStaIndexes = mappingSortedStaIndex.get(item);
+
+                                if (equivStaIndexes != null) {
+                                    // only store staConf for present baselines / triplets (some may be missing):
+                                    for (short[] staIndex : equivStaIndexes) {
+                                        mappingStaConf.put(staIndex, staConf);
+                                    }
                                 }
                             }
 
-                            // process all possible staList:
-                            // note: node needs not to be modified as all its stations were used to form the combination (sortedconf)
-                            // add missing baselines in other nodes:
+                            // remove all staList in node:
+                            node.clear();
+
+                            // remove all possible staIndex in other nodes:
                             for (j = 0, len = combStaLists.size(); j < len; j++) {
                                 item = combStaLists.get(j);
 
                                 for (k = 0; k < staLen; k++) {
                                     staId = item.get(k);
 
-                                    // skip current node:
                                     if (staId != node.staId) {
-                                        // add baseline:
+                                        // remove baseline:
                                         other = staIndexNodes.get(staId);
 
-                                        // ensure other is not null:
-                                        if (other.addStaList(item)) {
-                                            // mark the other node to be processed (again):
-                                            other.mark = false;
+                                        if (other != null) {
+                                            other.removeStaList(item);
                                         }
                                     }
                                 }
                             }
+
+                            // exit from this loop:
+                            break;
                         }
+                    } // nodes
 
-                        // mark this node as done:
-                        node.mark = true;
+                    if (doProcess) {
+                        // sort station node on its related staIndex counts (smaller count first) after each pass:
+                        Collections.sort(nodes);
 
-                        // exit from this loop:
-                        break;
-                    }
-                } // nodes
-
-                if (doProcess) {
-                    // sort station node on its related staIndex counts (smaller count first) after each pass:
-                    Collections.sort(nodes);
-
-                    if (isDebug) {
-                        logger.fine("Current StationNodes --------------------------------------");
-                        for (StationNode s : nodes) {
-                            logger.log(Level.FINE, "Station[{0}]: {1}\t({2}):\t{3}", new Object[]{s.mark, s.staId, s.count, s.staLists});
+                        if (isDebug) {
+                            logger.fine("Current StationNodes --------------------------------------");
+                            for (StationNode s : nodes) {
+                                logger.log(Level.FINE, "Station: {0}\t({1}):\t{2}", new Object[]{s.staId, s.count, s.staLists});
+                            }
+                            logger.fine("--------------------------------------");
                         }
-                        logger.fine("--------------------------------------");
                     }
+
+                } // until doProcess
+
+                if (isDebug) {
+                    logger.log(Level.FINE, "process {0} pass: done", nPass);
                 }
 
-            } // until doProcess
+                // Report missing StaIndex arrays:
+                if (!missingStaIndexes.isEmpty() && logger.isLoggable(Level.FINE)) {
+                    len = missingStaIndexes.size();
 
-            if (isDebug) {
-                logger.log(Level.FINE, "grow {0} pass: done", nPass);
-            }
+                    final int itLen = (staLen * 3 + 2);
+                    final int nPerLine = 120 / itLen;
+                    final StringBuilder sb = new StringBuilder(len * itLen + len / nPerLine + 100);
 
-            // Process clusters pass:
-            doProcess = true;
-            nPass = 0;
-
-            while (doProcess) {
-                nPass++;
-                doProcess = false;
-
-                // Process only the first node (sorted so less relations):
-                for (n = 0; n < nodeLen; n++) {
-                    node = nodes.get(n);
-
-                    // skip empty nodes:
-                    if (node.count > 0) {
-                        // try another node ?
-                        doProcess = true;
-
-                        guessConf.add(node.staId);
-
-                        // try using all stations to form a conf (even with missing baselines):
-                        for (itStaList = node.staLists.iterator(); itStaList.hasNext();) {
-                            item = itStaList.next();
-
-                            for (k = 0; k < staLen; k++) {
-                                guessConf.add(item.get(k));
-                            }
-                        }
-
-                        // compute missing staIndexes:
-                        sortedConf.clear();
-                        sortedConf.addAll(guessConf);
-                        guessConf.clear();
-                        Collections.sort(sortedConf);
-
-                        if (isDebug) {
-                            logger.log(Level.FINE, "Processing node: {0} - sortedConf = {1}", new Object[]{node.staId, sortedConf});
-                        }
-
-                        combStaLists.clear();
-
-                        // see CombUtils for generics
-                        confLen = sortedConf.size();
-
-                        if (isDebug) {
-                            logger.log(Level.FINE, "Get iCombs with len = {0}", confLen);
-                        }
-
-                        // TODO: remove all that code as grow pass has completed everything so don't test combination anymore ?
-                        // get permutations:
-                        combKey = NumberUtils.valueOf(confLen);
-
-                        iCombs = combByLen.get(combKey);
-
-                        if (iCombs == null) {
-                            iCombs = CombUtils.generateCombinations(combKey.intValue(), staLen);
-                            combByLen.put(combKey, iCombs);
-                        }
-
-                        // iCombs is sorted so should keep array sorted as otherStaIds is also sorted !
-                        for (j = 0, len = iCombs.size(); j < len; j++) {
-                            combination = iCombs.get(j);
-
-                            newStaIndex = new StationIndex(staLen);
-
-                            for (k = 0; k < staLen; k++) {
-                                newStaIndex.add(sortedConf.get(combination[k]));
-                            }
-
-                            combStaLists.add(newStaIndex);
-                        }
-
-                        if (isDebug) {
-                            logger.log(Level.FINE, "node: {0} - combStaLists = {1}", new Object[]{node.staId, combStaLists});
-                        }
-
-                        // consider conf always valid:
-                        final short[] staConf = toArray(sortedConf);
-
-                        // add this configuration:
-                        distinctStaConf.add(staConf);
-
-                        // add mappings:
-                        for (j = 0, len = combStaLists.size(); j < len; j++) {
-                            item = combStaLists.get(j);
-
-                            equivStaIndexes = mappingSortedStaIndex.get(item);
-
-                            if (equivStaIndexes != null) {
-                                // only store staConf for present baselines / triplets (some may be missing):
-                                for (short[] staIndex : equivStaIndexes) {
-                                    mappingStaConf.put(staIndex, staConf);
-                                }
-                            }
-                        }
-
-                        // remove all staList in node:
-                        node.clear();
-
-                        // remove all possible staIndex in other nodes:
-                        for (j = 0, len = combStaLists.size(); j < len; j++) {
-                            item = combStaLists.get(j);
-
-                            for (k = 0; k < staLen; k++) {
-                                staId = item.get(k);
-
-                                if (staId != node.staId) {
-                                    // remove baseline:
-                                    other = staIndexNodes.get(staId);
-
-                                    if (other != null) {
-                                        other.removeStaList(item);
-                                    }
-                                }
-                            }
-                        }
-
-                        // exit from this loop:
-                        break;
-                    }
-                } // nodes
-
-                if (doProcess) {
-                    // sort station node on its related staIndex counts (smaller count first) after each pass:
-                    Collections.sort(nodes);
-
-                    if (isDebug) {
-                        logger.fine("Current StationNodes --------------------------------------");
-                        for (StationNode s : nodes) {
-                            logger.log(Level.FINE, "Station: {0}\t({1}):\t{2}", new Object[]{s.staId, s.count, s.staLists});
-                        }
-                        logger.fine("--------------------------------------");
-                    }
-                }
-
-            } // until doProcess
-
-            if (isDebug) {
-                logger.log(Level.FINE, "process {0} pass: done", nPass);
-            }
-
-            // Report missing StaIndex arrays:
-            if (!missingStaIndexes.isEmpty() && logger.isLoggable(Level.FINE)) {
-                len = missingStaIndexes.size();
-
-                final int itLen = (staLen * 3 + 2);
-                final int nPerLine = 120 / itLen;
-                final StringBuilder sb = new StringBuilder(len * itLen + len / nPerLine + 100);
-
-                sb.append("processStaConf: OIData[").append(oiData.toString()).append("]:\n Missing ");
-                sb.append(len).append(" / ").append(sortedStaIndex.size()).append(" StaIndex arrays:\n");
-
-                sb.append('[');
-
-                for (n = 0, k = 0, itStaList = missingStaIndexes.iterator(); itStaList.hasNext(); n++) {
-                    item = itStaList.next();
+                    sb.append("processStaConf: OIData[").append(oiData.toString()).append("]:\n Missing ");
+                    sb.append(len).append(" / ").append(sortedStaIndex.size()).append(" StaIndex arrays:\n");
 
                     sb.append('[');
-                    for (j = 0; j < staLen; j++) {
-                        sb.append(item.get(j)).append(", ");
+
+                    for (n = 0, k = 0, itStaList = missingStaIndexes.iterator(); itStaList.hasNext(); n++) {
+                        item = itStaList.next();
+
+                        sb.append('[');
+                        for (j = 0; j < staLen; j++) {
+                            sb.append(item.get(j)).append(", ");
+                        }
+                        sb.setLength(sb.length() - 2);
+                        sb.append(']');
+
+                        if (n != len) {
+                            sb.append(", ");
+                        }
+
+                        k++;
+                        if (k == nPerLine) {
+                            sb.append('\n');
+                            k = 0;
+                        }
                     }
-                    sb.setLength(sb.length() - 2);
                     sb.append(']');
 
-                    if (n != len) {
-                        sb.append(", ");
-                    }
-
-                    k++;
-                    if (k == nPerLine) {
-                        sb.append('\n');
-                        k = 0;
-                    }
+                    // TODO: sort missing StaIndex arrays (+ formatting ?)
+                    logger.info(sb.toString());
                 }
-                sb.append(']');
+            }
 
-                // TODO: sort missing StaIndex arrays (+ formatting ?)
-                logger.info(sb.toString());
+            if (isDebug) {
+                logger.log(Level.FINE, "mappingStaConf({0}):", staLen);
+
+                for (Map.Entry<short[], short[]> entry : mappingStaConf.entrySet()) {
+                    logger.log(Level.FINE, "{0} : {1}", new Object[]{Arrays.toString(entry.getKey()), Arrays.toString(entry.getValue())});
+                }
             }
 
             // FINALLY: Fill StaConf derived column:
@@ -933,6 +931,35 @@ public final class Analyzer implements ModelVisitor {
                 logger.log(Level.FINE, "StaConf: {0} = {1}", new Object[]{Arrays.toString(item), oiData.getStaNames(item)});
             }
         }
+    }
+
+    private List<int[]> getCombinations(final int staLen, final int confLen) {
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "Get iCombs with len = {0}", confLen);
+        }
+
+        final Integer staKey = NumberUtils.valueOf(staLen);
+
+        Map<Integer, List<int[]>> combsByConfLen = combsCache.get(staKey);
+        if (combsByConfLen == null) {
+            combsByConfLen = new HashMap<Integer, List<int[]>>(8);
+            combsCache.put(staKey, combsByConfLen);
+        }
+
+        final Integer confKey = NumberUtils.valueOf(confLen);
+
+        List<int[]> iCombs = combsByConfLen.get(confKey);
+
+        if (iCombs == null) {
+            iCombs = CombUtils.generateCombinations(confKey.intValue(), staLen); // 1T or 2T or 3T
+            combsByConfLen.put(confKey, iCombs);
+        }
+
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "getCombinations({0},{1}): {2}", new Object[]{staLen, confLen, iCombs});
+        }
+
+        return iCombs;
     }
 
     /**
