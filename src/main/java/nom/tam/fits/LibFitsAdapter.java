@@ -29,7 +29,6 @@ import nom.tam.util.BufferedDataOutputStream;
 public class LibFitsAdapter {
 
     private final static String TYPE_TUNIT = "TUNIT";
-    private final static String TYPE_TDIM = "TDIM";
 
     /**
      * Get the type of a column in the table.
@@ -105,7 +104,7 @@ public class LibFitsAdapter {
      * @param hdu the HDU to be updated.
      * @param addDataSum true to add DATASUM keyword before computing final checksum (header + data)
      * @return checksum as long value
-     * @throws HeaderCardException
+     * @throws HeaderCardException if error about card occurs
      * @author R J Mathar
      * @throws java.io.IOException if error occurs in write operation
      * @since 2005-10-05
