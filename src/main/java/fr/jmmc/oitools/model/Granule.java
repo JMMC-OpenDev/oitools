@@ -66,9 +66,6 @@ public final class Granule {
     }
 
     public Granule(final Target target, final InstrumentMode insMode, final NightId night) {
-        if (target == null && (insMode != null || night != null)) {
-            throw new IllegalStateException("trying to build a new granule with target = null");
-        }
         set(target, insMode, night);
     }
 
@@ -134,6 +131,10 @@ public final class Granule {
             return false;
         }
         return true;
+    }
+
+    public boolean isEmpty() {
+        return (this.target == null) && (this.insMode == null) && (this.night == null);
     }
 
     @Override

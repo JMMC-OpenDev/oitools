@@ -18,6 +18,7 @@ package fr.jmmc.oitools;
 
 import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.model.OIFitsChecker;
+import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFitsWriter;
@@ -37,9 +38,11 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_CONVERT = "convert";
+    private static final String COMMAND_DUMP = "dump";
     private static final String COMMAND_MERGE = "merge";
 
     private static final String OPTION_OUTPUT = "-output";
+    private static final String OPTION_TARGET = "-target";
     private static final String OPTION_INSNAME = "-insname";
 
     /**
@@ -62,7 +65,7 @@ public class OIFitsProcessor extends OIFitsCommand {
             // command processing
             if (COMMAND_HELP.equals(command)) {
                 showArgumentsHelp();
-            } else if ("dump".equals(command)) {
+            } else if (COMMAND_DUMP.equals(command)) {
                 dump(args);
             } else if (COMMAND_LIST.equals(command)) {
                 list(args);
@@ -88,9 +91,17 @@ public class OIFitsProcessor extends OIFitsCommand {
      */
     private static void list(final String[] args) throws FitsException, IOException {
         final List<String> fileLocations = getInputFiles(args);
+        final boolean check = hasOptionArg(args, "-c", "-check");
 
-        // TODO: implement later a simplified output
-        OIFitsViewer.process(false, true, false, false, fileLocations);
+        final OIFitsChecker checker = new OIFitsChecker();
+
+        final OIFitsCollection oiFitsCollection = OIFitsCollection.create(checker, fileLocations);
+
+        if (check) {
+            info("validation results:\n" + checker.getCheckReport());
+        }
+
+        OIFitsCollectionViewer.process(oiFitsCollection);
     }
 
     /**
@@ -101,18 +112,18 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static void dump(final String[] args) throws FitsException, IOException {
         final List<String> fileLocations = getInputFiles(args);
 
-        FitsUtils.setup();        
-        
+        FitsUtils.setup();
+
         final StringBuilder sb = new StringBuilder(16 * 1024);
-        
+
         for (String fileLocation : fileLocations) {
             info("Processing: " + fileLocation);
             try {
                 FitsUtils.dumpFile(fileLocation, false, sb);
-                
+
                 info(sb.toString());
                 sb.setLength(0); // reset
-                
+
             } catch (Exception e) {
                 error("Error reading file '" + fileLocation + "'", e);
             }
@@ -153,29 +164,28 @@ public class OIFitsProcessor extends OIFitsCommand {
         final String outputFilePath = getOutputFilepath(args);
         final boolean check = hasOptionArg(args, "-c", "-check");
 
-        final OIFitsFile[] inputs = new OIFitsFile[fileLocations.size()];
+        // Optional filters:
+        final String targetUID = getOptionArgValue(args, OPTION_TARGET);
+        final String insModeUID = getOptionArgValue(args, OPTION_INSNAME);
 
-        // Get input files
-        for (int i = 0; i < fileLocations.size(); i++) {
-            inputs[i] = OIFitsLoader.loadOIFits(fileLocations.get(i));
+        final OIFitsCollection oiFitsCollection = OIFitsCollection.create(null, fileLocations);
+
+        final Selector selector = new Selector();
+        if (targetUID != null) {
+            selector.setTargetUID(targetUID);
         }
-
-        Selector selector = null;
-        int positionOptionFilter = getOptionArgPosition(args, OPTION_INSNAME, OPTION_INSNAME);
-        if (positionOptionFilter > -1 && args.length > positionOptionFilter + 1) {
-            selector = new Selector();
-            selector.addPattern(Selector.INSTRUMENT_FILTER, args[positionOptionFilter + 1]);
+        if (insModeUID != null) {
+            selector.setInsModeUID(insModeUID);
         }
 
         // Call merge
-        final OIFitsFile result = Merger.process(selector, inputs);
+        final OIFitsFile result = Merger.process(oiFitsCollection, selector);
         if (result.hasOiData()) {
             // Store result
             write(outputFilePath, result, check);
         } else {
             info("Result is empty, no file created.");
         }
-
     }
 
     private static void write(final String outputFilePath, final OIFitsFile result, final boolean check) throws IOException, FitsException {
@@ -185,6 +195,7 @@ public class OIFitsProcessor extends OIFitsCommand {
             info("validation results:\n" + checker.getCheckReport());
         }
 
+        info("Writing: " + outputFilePath);
         // Store result
         OIFitsWriter.writeOIFits(outputFilePath, result);
     }
@@ -221,7 +232,9 @@ public class OIFitsProcessor extends OIFitsCommand {
 
         for (int i = 1; i < args.length; i++) {
             // note: should be generalized to any argument having value(s):
-            if (OPTION_OUTPUT.substring(0, 2).equals(args[i]) || OPTION_OUTPUT.equals(args[i])
+            if (OPTION_OUTPUT.substring(0, 2).equals(args[i])
+                    || OPTION_OUTPUT.equals(args[i])
+                    || OPTION_TARGET.equals(args[i])
                     || OPTION_INSNAME.equals(args[i])) {
                 i++;  // skip next parameter which is the output file
             } else if (args[i].startsWith("-")) {
@@ -248,13 +261,15 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("|------------------------------------------------------------------------------------|");
         info("| command      " + COMMAND_HELP + "           Show this help                                         |");
         info("| command      " + COMMAND_LIST + "           List content of several oifits files                   |");
+        info("| command      " + COMMAND_DUMP + "           Dump the given oifits files                           |");
         info("| command      " + COMMAND_CONVERT + "        Convert the given input file                           |");
         info("| command      " + COMMAND_MERGE + "          Merge several oifits files                             |");
         info("| " + OPTION_OUTPUT.substring(0, 2) + " or " + OPTION_OUTPUT
                 + " <file_path>   Complete path, absolute or relative, for output file   |");
         info("| [-l] or [-log]              Enable logging (quiet by default)                      |");
         info("| [-c] or [-check]            Check output file before writing                       |");
-        info("| [-insname]   <insname_value> Filter result on given insname                        |");
+        info("| [-target]    <target value>  Filter result on given target                         |");
+        info("| [-insname]   <insname value> Filter result on given insname                        |");
         info("--------------------------------------------------------------------------------------");
     }
 

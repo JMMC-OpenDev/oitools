@@ -24,6 +24,7 @@ import static fr.jmmc.oitools.JUnitBaseTest.TEST_DIR_OIFITS;
 import fr.jmmc.oitools.model.OIArray;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsChecker;
+import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIWavelength;
@@ -46,7 +47,7 @@ public class TestMergeFilter extends JUnitBaseTest {
 
     private static final String INPUT_FILE_NAME = "GRAVITY.2016-01-09T05-37-06_singlesci_calibrated.fits";
     private static final String INSNAME_FILTER_VALUE = "SPECTRO_SC";   // SPECTRO_FT
-    
+
     // Common data used by several tests
     private static OIFitsFile input = null;
     private static OIFitsFile mergeFilterBlockAll = null;
@@ -65,20 +66,29 @@ public class TestMergeFilter extends JUnitBaseTest {
         input = OIFitsLoader.loadOIFits(
                 TEST_DIR_OIFITS + INPUT_FILE_NAME);
 
-        Selector selector = new Selector();
+        final OIFitsCollection oiFitsCollection = new OIFitsCollection();
+        oiFitsCollection.addOIFitsFile(input);
+        oiFitsCollection.analyzeCollection();
+
+        final Selector selector = new Selector();
 
         // Filter block data of the files
-        selector.addPattern(Selector.INSTRUMENT_FILTER, "GRAV");
-        mergeFilterBlockAll = Merger.process(selector, input);
+        selector.setInsModeUID("GRAV");
+        mergeFilterBlockAll = Merger.process(oiFitsCollection, selector);
         Assert.assertNotNull("Merge return a null value", mergeFilterBlockAll);
 
         // Filter let pass data of the files
-        selector.addPattern(Selector.INSTRUMENT_FILTER, INSNAME_FILTER_VALUE);
-        mergeFilterPassSome = merge(selector, input);
+        selector.setInsModeUID(INSNAME_FILTER_VALUE);
+        mergeFilterPassSome = Merger.process(oiFitsCollection, selector);
+
+        final OIFitsChecker checker = new OIFitsChecker();
+        mergeFilterPassSome.check(checker);
+        logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
+
         Assert.assertNotNull("Merge return a null value", mergeFilterPassSome);
-        
+
         // Filter don't block any
-        mergeFilterPassAll = Merger.process(input);
+        mergeFilterPassAll = Merger.process(oiFitsCollection);
         Assert.assertNotNull("Merge return a null value", mergeFilterPassAll);
 
     }
@@ -155,16 +165,5 @@ public class TestMergeFilter extends JUnitBaseTest {
         Assert.assertEquals("Bad Insname in result",
                 input.getOiArrays().length, arrayList != null ? arrayList.length : 0);
 
-    }
-
-    private static OIFitsFile merge(final Selector selector, final OIFitsFile... oiFitsToMerge) {
-
-        OIFitsFile mergeResult = Merger.process(selector, oiFitsToMerge);
-
-        final OIFitsChecker checker = new OIFitsChecker();
-        mergeResult.check(checker);
-        logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
-
-        return mergeResult;
     }
 }

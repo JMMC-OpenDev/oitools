@@ -27,7 +27,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     TestMergeUtilsFilesKO.class,
     TestMergeUtils.class,
-    TestMergeUtils3Files.class,
     TestProcessorCommandLine.class,
     TestMergeFilter.class
 })

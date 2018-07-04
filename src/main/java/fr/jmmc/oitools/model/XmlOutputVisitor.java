@@ -683,11 +683,7 @@ public final class XmlOutputVisitor implements ModelVisitor {
         oiFitsFile.analyze();
 
         this.buffer.append("<metadata>\n");
-        if (oiFitsFile.hasOiTarget()) {
-            for (int i = 0; i < oiFitsFile.getOiTarget().getNbTargets(); i++) {
-                this.buffer.append(OIFitsViewer.targetMetadata(oiFitsFile, i, true));
-            }
-        }
+        OIFitsViewer.targetMetadata(oiFitsFile, true, this.buffer);
         this.buffer.append("</metadata>\n");
     }
 

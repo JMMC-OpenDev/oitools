@@ -64,7 +64,7 @@ public class TestProcessorCommandLine {
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
         });
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
-                getOut(result).length() == 0);
+                getOut(result).startsWith("Writing"));
         Assert.assertTrue("No result file created", output.exists());
     }
 
@@ -74,7 +74,7 @@ public class TestProcessorCommandLine {
             TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
-                getOut(result).startsWith("Processing"));
+                getOut(result).startsWith("target_name"));
     }
 
     @Test
@@ -99,7 +99,7 @@ public class TestProcessorCommandLine {
             TEST_DIR_OIFITS + "NGC5128_2005.oifits"
         });
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX], 
-                getOut(result) != null ? getOut(result).startsWith("Result is empty, no file created.") : false);
+                getOut(result).startsWith("Result is empty, no file created."));
         Assert.assertTrue("No result file should be created", !output.exists());
 
         // Filter pass
@@ -107,7 +107,8 @@ public class TestProcessorCommandLine {
             "-o", output.getAbsolutePath(), "-insname", "MIDI/PRISM",
             TEST_DIR_OIFITS + "NGC5128_2005.oifits"
         });
-        Assert.assertTrue("Bad return message: " + result[OUT_INDEX], getOut(result).length() == 0);
+        Assert.assertTrue("Bad return message: " + result[OUT_INDEX], 
+                getOut(result).startsWith("Writing"));
         OIFitsFile mergedFile = OIFitsLoader.loadOIFits(output.getAbsolutePath());
         Assert.assertEquals("Bad number of Ins in merged file", 1, mergedFile.getOiWavelengths().length);
     }

@@ -16,31 +16,89 @@
  */
 package fr.jmmc.oitools.processing;
 
-import fr.jmmc.oitools.model.OIData;
+import fr.jmmc.oitools.model.NightId;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Basic selector
- * TODO: enhance
+ * Basic selector (target UID, instrument mode UID, night Id)
  */
 public final class Selector {
 
-    public static final String INSTRUMENT_FILTER = "INSNAME_PATTERN";
-    private final Map<String, String> patterns = new HashMap<String, String>();
+    private String targetUID = null;
+    private String insModeUID = null;
+    private NightId nightID = null;
 
-    public void addPattern(String name, String value) {
-        patterns.put(name, value);
+    private final Map<String, List<Integer>> extNbsPerOiFitsPath = new HashMap<String, List<Integer>>();
+
+    public Selector() {
+        reset();
     }
 
-    private String getPattern(String name) {
-        return patterns.get(name);
+    public void reset() {
+        targetUID = null;
+        insModeUID = null;
+        nightID = null;
+        extNbsPerOiFitsPath.clear();
     }
 
-    public boolean match(final OIData oiData) {
-        final String patternInsname = getPattern(INSTRUMENT_FILTER);
-        // TODO: support regexp ... ?
-        return (patternInsname == null) || patternInsname.equals(oiData.getInsName());
+    public String getTargetUID() {
+        return targetUID;
+    }
+
+    public void setTargetUID(String targetUID) {
+        this.targetUID = targetUID;
+    }
+
+    public String getInsModeUID() {
+        return insModeUID;
+    }
+
+    public void setInsModeUID(String insModeUID) {
+        this.insModeUID = insModeUID;
+    }
+
+    public NightId getNightID() {
+        return nightID;
+    }
+
+    public void setNightID(NightId nightID) {
+        this.nightID = nightID;
+    }
+
+    public boolean hasTable() {
+        return !extNbsPerOiFitsPath.isEmpty();
+    }
+
+    public void addTable(final String oiFitsPath, final Integer extNb) {
+        List<Integer> extNbs = extNbsPerOiFitsPath.get(oiFitsPath);
+        if (extNbs == null) {
+            extNbs = new ArrayList<Integer>(1);
+            extNbsPerOiFitsPath.put(oiFitsPath, extNbs);
+        }
+        if (extNb != null) {
+            extNbs.add(extNb);
+        }
+    }
+
+    public List<Integer> getTables(final String oiFitsPath) {
+        return extNbsPerOiFitsPath.get(oiFitsPath);
+    }
+
+    public boolean isEmpty() {
+        return (targetUID == null) && (insModeUID == null) && (nightID == null) && (extNbsPerOiFitsPath.isEmpty());
+    }
+
+    @Override
+    public String toString() {
+        return "Selector{"
+                + (targetUID != null ? " targetUID=" + targetUID : "")
+                + (insModeUID != null ? " insModeUID=" + insModeUID : "")
+                + (nightID != null ? " nightID=" + nightID : "")
+                + (!extNbsPerOiFitsPath.isEmpty() ? " extNbsPerOiFitsPath=" + extNbsPerOiFitsPath : "")
+                + '}';
     }
 
 }

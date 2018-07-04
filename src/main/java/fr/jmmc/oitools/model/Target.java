@@ -82,7 +82,7 @@ public final class Target {
     public final static Target UNDEFINED = new Target("UNDEFINED", Double.NaN, Double.NaN,
             Float.NaN, Double.NaN, Double.NaN,
             Double.NaN, "", "", Double.NaN, Double.NaN, Double.NaN, Double.NaN,
-            Float.NaN, Float.NaN, "");
+            Float.NaN, Float.NaN, "", "");
 
     /** members */
     private final String target;
@@ -101,6 +101,7 @@ public final class Target {
     private final float parallax;
     private final float paraErr;
     private final String specTyp;
+    private final String category;
     // cached precomputed hashcode:
     private int hashcode = 0;
 
@@ -119,7 +120,8 @@ public final class Target {
                   final double pmDecErr,
                   final float parallax,
                   final float paraErr,
-                  final String specTyp) {
+                  final String specTyp,
+                  final String category) {
         this.target = target;
         this.raEp0 = raEp0;
         this.decEp0 = decEp0;
@@ -136,6 +138,7 @@ public final class Target {
         this.parallax = parallax;
         this.paraErr = paraErr;
         this.specTyp = specTyp;
+        this.category = category;
     }
 
     public Target(final Target t, final String target) {
@@ -145,7 +148,8 @@ public final class Target {
                 t.getPmRa(), t.getPmDec(),
                 t.getPmRaErr(), t.getPmDecErr(),
                 t.getParallax(), t.getParaErr(),
-                t.getSpecTyp());
+                t.getSpecTyp(),
+                t.getCategory());
     }
 
     /**
@@ -277,6 +281,14 @@ public final class Target {
         return specTyp;
     }
 
+    /**
+     * Get CATEGORY value.
+     * @return CATEGORY
+     */
+    public String getCategory() {
+        return category;
+    }
+
     @Override
     public int hashCode() {
         if (hashcode != 0) {
@@ -300,6 +312,7 @@ public final class Target {
         hash = 11 * hash + Float.floatToIntBits(this.parallax);
         hash = 11 * hash + Float.floatToIntBits(this.paraErr);
         hash = 11 * hash + (this.specTyp != null ? this.specTyp.hashCode() : 0);
+        hash = 11 * hash + (this.category != null ? this.category.hashCode() : 0);
         // cache hash code:
         hashcode = hash;
         return hash;
@@ -365,6 +378,9 @@ public final class Target {
         if ((this.specTyp == null) ? (other.getSpecTyp() != null) : !this.specTyp.equals(other.getSpecTyp())) {
             return false;
         }
+        if ((this.category == null) ? (other.getCategory() != null) : !this.category.equals(other.getCategory())) {
+            return false;
+        }
         return true;
     }
 
@@ -374,7 +390,7 @@ public final class Target {
                 + ", raErr=" + raErr + ", decErr=" + decErr + ", sysvel=" + sysvel
                 + ", velTyp=" + velTyp + ", velDef=" + velDef + ", pmRa=" + pmRa + ", pmDec=" + pmDec
                 + ", pmRaErr=" + pmRaErr + ", pmDecErr=" + pmDecErr + ", parallax=" + parallax + ", paraErr=" + paraErr
-                + ", specTyp=" + specTyp + '}';
+                + ", specTyp=" + specTyp + ", category=" + category + '}';
     }
 
 }

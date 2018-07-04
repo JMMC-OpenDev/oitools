@@ -24,9 +24,9 @@ import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
+import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -122,6 +122,14 @@ public abstract class OIAbstractData extends OITable {
      */
     public final short[] getTargetId() {
         return this.getColumnShort(OIFitsConstants.COLUMN_TARGET_ID);
+    }
+    
+    /**
+     * Define the TARGET_ID column.
+     * @param targetIds the TARGET_ID column.
+     */
+    public void setTargetId(final short[] targetIds) {
+        this.setColumnValue(OIFitsConstants.COLUMN_TARGET_ID, targetIds);
     }
 
     /**
@@ -247,14 +255,27 @@ public abstract class OIAbstractData extends OITable {
     }
 
     /**
-     * Return the targetId corresponding to the given Target UID (global) or null if missing
+     * Return the targetId Matcher corresponding to the given Target UID (global) or null if missing
      * @param targetUID target UID (global)
-     * @return targetId corresponding to the given Target UID (global) or null if missing
+     * @return targetId Matcher corresponding to the given Target UID (global) or null if missing
      */
-    public final Short getTargetId(final String targetUID) {
+    public final TargetIdMatcher getTargetIdMatcher(final String targetUID) {
         final OITarget oiTarget = getOiTarget();
         if (oiTarget != null) {
-            return oiTarget.getTargetId(targetUID);
+            return oiTarget.getTargetIdMatcher(targetUID);
+        }
+        return null;
+    }
+
+    /**
+     * Return the targetId Matcher corresponding to the given Target (global) or null if missing
+     * @param globalTarget target (global)
+     * @return targetId Matcher corresponding to the given Target (global) or null if missing
+     */
+    public final TargetIdMatcher getTargetIdMatcher(final Target globalTarget) {
+        final OITarget oiTarget = getOiTarget();
+        if (oiTarget != null) {
+            return oiTarget.getTargetIdMatcher(globalTarget);
         }
         return null;
     }

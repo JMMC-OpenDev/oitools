@@ -25,7 +25,9 @@ import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -354,12 +356,37 @@ public final class OITarget extends OITable {
     }
 
     /**
-     * Get TARGET column.
+     * Get CATEGORY column.
      * 
-     * @return the array of TARGET (names) or null if undefined
+     * @return the array of CATEGORY or null if undefined
      */
     public String[] getCategory() {
         return getColumnString(OIFitsConstants.COLUMN_CATEGORY);
+    }
+
+    /**
+     * Get the CATEGORY value at the given index.
+     * @param idx index
+     * @return the value of CATEGORY or null if undefined
+     */
+    public String getCategory(int idx) {
+        final String[] category = getCategory();
+        if (category != null) {
+            return category[idx];
+        }
+        return null;
+    }
+
+    /**
+     * Set the CATEGORY value at the given index.
+     * @param idx index
+     * @param value the value of CATEGORY
+     */
+    public void setCategory(int idx, final String value) {
+        final String[] category = getCategory();
+        if (category != null) {
+            category[idx] = value;
+        }
     }
 
     /* --- Other methods --- */
@@ -507,27 +534,87 @@ public final class OITarget extends OITable {
             return new Target(getTarget()[idx], getRaEp0()[idx], getDecEp0()[idx], getEquinox()[idx],
                     getRaErr()[idx], getDecErr()[idx], getSysVel()[idx], getVelTyp()[idx], getVelDef()[idx],
                     getPmRa()[idx], getPmDec()[idx], getPmRaErr()[idx], getPmDecErr()[idx],
-                    getParallax()[idx], getParaErr()[idx], getSpecTyp()[idx]);
+                    getParallax()[idx], getParaErr()[idx], getSpecTyp()[idx],
+                    getCategory(idx));
+        }
+        return null;
+    }
+
+    public void setTarget(final int idx, final short id, final Target target) {
+        if (idx >= 0 && idx < getNbRows()) {
+            getTargetId()[idx] = id;
+            getTarget()[idx] = target.getTarget();
+
+            getRaEp0()[idx] = target.getRaEp0();
+            getDecEp0()[idx] = target.getDecEp0();
+            getEquinox()[idx] = target.getEquinox();
+
+            getRaErr()[idx] = target.getRaErr();
+            getDecErr()[idx] = target.getDecErr();
+
+            getSysVel()[idx] = target.getSysVel();
+            getVelTyp()[idx] = target.getVelTyp();
+            getVelDef()[idx] = target.getVelDef();
+
+            getPmRa()[idx] = target.getPmRa();
+            getPmDec()[idx] = target.getPmDec();
+
+            getPmRaErr()[idx] = target.getPmRaErr();
+            getPmDecErr()[idx] = target.getPmDecErr();
+
+            getParallax()[idx] = target.getParallax();
+            getParaErr()[idx] = target.getParaErr();
+
+            getSpecTyp()[idx] = target.getSpecTyp();
+            setCategory(idx, target.getCategory());
+        }
+    }
+
+    /**
+     * Return the targetId Matcher corresponding to the given Target UID (global) or null if missing
+     * @param targetUID target UID (global)
+     * @return targetId Matcher corresponding to the given Target UID (global) or null if missing
+     */
+    public final TargetIdMatcher getTargetIdMatcher(final String targetUID) {
+        final Target globalTarget = TargetManager.getInstance().getGlobalByUID(targetUID);
+        if (globalTarget != null) {
+            return getTargetIdMatcher(globalTarget);
         }
         return null;
     }
 
     /**
-     * Return the targetId corresponding to the given Target UID (global) or null if missing
-     * @param targetUID target UID (global)
-     * @return targetId corresponding to the given Target UID (global) or null if missing
+     * Return the targetId Matcher corresponding to the given Target (global) or null if missing
+     * @param globalTarget target (global)
+     * @return targetId Matcher corresponding to the given Target (global) or null if missing
      */
-    public final Short getTargetId(final String targetUID) {
-        final TargetManager tm = TargetManager.getInstance();
-        final Target globalTarget = tm.getGlobalByUID(targetUID);
-        if (globalTarget != null) {
-            for (Target local : tm.getLocals(globalTarget)) {
+    public final TargetIdMatcher getTargetIdMatcher(final Target globalTarget) {
+        final Set<Short> matchs = getTargetIds(globalTarget);
+        if (matchs != null) {
+            return new TargetIdMatcher(matchs);
+        }
+        return null;
+    }
+
+    /**
+     * Return the target ids corresponding to the given Target (global) or null if missing
+     * @param globalTarget target (global)
+     * @return target ids corresponding to the given Target (global) or null if missing
+     */
+    public final Set<Short> getTargetIds(final Target globalTarget) {
+        Set<Short> matchs = null;
+        final List<Target> localTargets = TargetManager.getInstance().getLocals(globalTarget);
+        if (localTargets != null) {
+            for (Target local : localTargets) {
                 final Short id = targetObjToTargetId.get(local);
                 if (id != null) {
-                    return id;
+                    if (matchs == null) {
+                        matchs = new HashSet<Short>();
+                    }
+                    matchs.add(id);
                 }
             }
         }
-        return null;
+        return matchs;
     }
 }

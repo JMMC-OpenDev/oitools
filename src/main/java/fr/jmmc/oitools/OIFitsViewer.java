@@ -132,128 +132,132 @@ public final class OIFitsViewer extends OIFitsCommand {
         return output;
     }
 
-    public static StringBuilder targetMetadata(final OIFitsFile oiFitsFile, final int index, final boolean xml) {
-        final StringBuilder sb = new StringBuilder(1024);
+    public static void targetMetadata(final OIFitsFile oiFitsFile, final boolean xml, final StringBuilder sb) {
+        // TODO: use Granule here ?
 
-        final OITarget oiTarget = oiFitsFile.getOiTarget();
+        if (oiFitsFile.hasOiTarget()) {
+            final OITarget oiTarget = oiFitsFile.getOiTarget();
 
-        if (oiTarget != null) {
-            final short targetId = oiTarget.getTargetId()[index];
-            final String targetName = oiTarget.getTarget()[index];
-            final double targetRa = oiTarget.getRaEp0()[index];
-            final double targetDec = oiTarget.getDecEp0()[index];
+            if (oiTarget != null) {
+                final String[] insNames = oiFitsFile.getAcceptedInsNames();
+                Arrays.sort(insNames);
 
-            String[] insNames = oiFitsFile.getAcceptedInsNames();
-            Arrays.sort(insNames);
+                for (int index = 0, len = oiFitsFile.getOiTarget().getNbTargets(); index < len; index++) {
+                    final short targetId = oiTarget.getTargetId()[index];
+                    final String targetName = oiTarget.getTarget()[index];
+                    final double targetRa = oiTarget.getRaEp0()[index];
+                    final double targetDec = oiTarget.getDecEp0()[index];
 
-            for (final String insName : insNames) {
-                /* data from the OIWavelength */
-                final OIWavelength oiWavelength = oiFitsFile.getOiWavelength(insName);
-                if (oiWavelength != null) {
-                    final float minWavelength = oiWavelength.getEffWaveMin();
-                    final float maxWavelength = oiWavelength.getEffWaveMax();
-                    final int nbChannels = oiWavelength.getNWave();
+                    for (final String insName : insNames) {
+                        /* data from the OIWavelength */
+                        final OIWavelength oiWavelength = oiFitsFile.getOiWavelength(insName);
 
-                    // Resolution = lambda / delta_lambda
-                    final float resPower = oiWavelength.getResolution();
+                        if (oiWavelength != null) {
+                            final float minWavelength = oiWavelength.getEffWaveMin();
+                            final float maxWavelength = oiWavelength.getEffWaveMax();
+                            final int nbChannels = oiWavelength.getNWave();
 
-                    // TODO: use Granule here ?
-                    // TODO: move such algo into Analyzer (shared)
-                    /* build a list of different night ids for the couple (target, insname) ie per granule */
-                    final Map<Double, Set<OIData>> oiDataPerNightId = new LinkedHashMap<Double, Set<OIData>>();
-                    for (final OIData oiData : oiFitsFile.getOiDataList()) {
-                        // same INSNAME (ie instrument mode):
-                        // TODO: fuzzy matcher (wavelengths)
-                        if (oiData.getInsName().equals(insName)) {
-                            final short[] targetIds = oiData.getTargetId();
-                            final double[] nightIds = oiData.getNightId();
+                            // Resolution = lambda / delta_lambda
+                            final float resPower = oiWavelength.getResolution();
 
-                            for (int i = 0; i < targetIds.length; i++) {
-                                // same target:
-                                /* TODO: target aliases (check coordinates): use target UID ? */
-                                if (targetIds[i] == targetId) {
-                                    final double nightId = nightIds[i];
-                                    Set<OIData> tables = oiDataPerNightId.get(nightId);
-                                    if (tables == null) {
-                                        tables = new LinkedHashSet<OIData>();
-                                        oiDataPerNightId.put(nightId, tables);
+                            /* build a list of different night ids for the couple (target, insname) ie per granule */
+                            final Map<Double, Set<OIData>> oiDataPerNightId = new LinkedHashMap<Double, Set<OIData>>();
+
+                            for (final OIData oiData : oiFitsFile.getOiDataList()) {
+                                // same INSNAME (ie instrument mode):
+                                // TODO: fuzzy matcher (wavelengths)
+                                if (oiData.getInsName().equals(insName)) {
+                                    final short[] targetIds = oiData.getTargetId();
+                                    final double[] nightIds = oiData.getNightId();
+
+                                    for (int i = 0; i < targetIds.length; i++) {
+                                        // same target:
+                                        /* TODO: target aliases (check coordinates): use target UID ? */
+                                        if (targetIds[i] == targetId) {
+                                            final double nightId = nightIds[i];
+                                            Set<OIData> tables = oiDataPerNightId.get(nightId);
+                                            if (tables == null) {
+                                                tables = new LinkedHashSet<OIData>();
+                                                oiDataPerNightId.put(nightId, tables);
+                                            }
+                                            tables.add(oiData);
+                                        }
                                     }
-                                    tables.add(oiData);
                                 }
                             }
-                        }
-                    }
 
-                    // Statistics per granule:
-                    for (Map.Entry<Double, Set<OIData>> entry : oiDataPerNightId.entrySet()) {
-                        final double nightId = entry.getKey();
-                        final Set<OIData> oiDataTables = entry.getValue();
+                            // Statistics per granule:
+                            for (Map.Entry<Double, Set<OIData>> entry : oiDataPerNightId.entrySet()) {
+                                final double nightId = entry.getKey();
+                                final Set<OIData> oiDataTables = entry.getValue();
 
-                        int nbVis = 0, nbVis2 = 0, nbT3 = 0;
-                        double tMin = Double.POSITIVE_INFINITY, tMax = Double.NEGATIVE_INFINITY;
-                        double intTime = Double.POSITIVE_INFINITY;
-                        String facilityName = "";
+                                int nbVis = 0, nbVis2 = 0, nbT3 = 0;
+                                double tMin = Double.POSITIVE_INFINITY, tMax = Double.NEGATIVE_INFINITY;
+                                double intTime = Double.POSITIVE_INFINITY;
+                                String facilityName = "";
 
-                        for (OIData oiData : oiDataTables) {
-                            /* one oiData table, search for target by targetid (and nightid) */
-                            final short[] targetIds = oiData.getTargetId();
-                            final double[] nightIds = oiData.getNightId();
-                            final double[] mjds = oiData.getMJD();
-                            final double[] intTimes = oiData.getIntTime();
+                                for (OIData oiData : oiDataTables) {
+                                    /* one oiData table, search for target by targetid (and nightid) */
+                                    final short[] targetIds = oiData.getTargetId();
+                                    final double[] nightIds = oiData.getNightId();
+                                    final double[] mjds = oiData.getMJD();
+                                    final double[] intTimes = oiData.getIntTime();
 
-                            for (int i = 0; i < targetIds.length; i++) {
-                                // same target and same night:
-                                if ((targetIds[i] == targetId) && (nightIds[i] == nightId)) {
-                                    // TODO: count flag? what to do with flagged measures?
-                                    // TODO: check for NaN values ?
-                                    // number of rows in data tables:
-                                    if (oiData instanceof OIVis) {
-                                        nbVis += 1;
-                                    } else if (oiData instanceof OIVis2) {
-                                        nbVis2 += 1;
-                                    } else if (oiData instanceof OIT3) {
-                                        nbT3 += 1;
-                                    }
+                                    for (int i = 0; i < targetIds.length; i++) {
+                                        // same target and same night:
+                                        if ((targetIds[i] == targetId) && (nightIds[i] == nightId)) {
+                                            // TODO: count flag? what to do with flagged measures?
+                                            // TODO: check for NaN values ?
+                                            // number of rows in data tables:
+                                            if (oiData instanceof OIVis) {
+                                                nbVis += 1;
+                                            } else if (oiData instanceof OIVis2) {
+                                                nbVis2 += 1;
+                                            } else if (oiData instanceof OIT3) {
+                                                nbT3 += 1;
+                                            }
+                                            // TODO: add OIFlux ?
 
-                                    /* search for minimal and maximal MJD for target */
+                                            /* search for minimal and maximal MJD for target */
  /* TODO: make use of DATE-OBS+TIME[idx] if no MJD */
-                                    final double mjd = mjds[i];
-                                    if (mjd < tMin) {
-                                        tMin = mjd;
-                                    }
-                                    if (mjd > tMax) {
-                                        tMax = mjd;
+                                            final double mjd = mjds[i];
+                                            if (mjd < tMin) {
+                                                tMin = mjd;
+                                            }
+                                            if (mjd > tMax) {
+                                                tMax = mjd;
+                                            }
+
+                                            /* search for minimal (?) INT_TIME for target */
+                                            final double t = intTimes[i];
+                                            if (t < intTime) {
+                                                intTime = t;
+                                            }
+                                        }
                                     }
 
-                                    /* search for minimal (?) INT_TIME for target */
-                                    final double t = intTimes[i];
-                                    if (t < intTime) {
-                                        intTime = t;
+                                    if (facilityName.isEmpty() && oiData.getArrName() != null) {
+                                        facilityName = oiData.getArrName(); // potential multiple ARRNAME values !
                                     }
                                 }
-                            }
 
-                            if (facilityName.isEmpty() && oiData.getArrName() != null) {
-                                facilityName = oiData.getArrName();
+                                if (xml) {
+                                    XmlOutputVisitor.appendRecord(sb, targetName, targetRa,
+                                            targetDec, intTime, tMin, tMax, resPower,
+                                            minWavelength, maxWavelength, facilityName,
+                                            insName, nbVis, nbVis2, nbT3, nbChannels);
+                                } else {
+                                    CsvOutputVisitor.appendRecord(sb, targetName, targetRa,
+                                            targetDec, intTime, tMin, tMax, resPower,
+                                            minWavelength, maxWavelength, facilityName,
+                                            insName, nbVis, nbVis2, nbT3, nbChannels);
+                                }
                             }
-                        }
-
-                        if (xml) {
-                            XmlOutputVisitor.appendRecord(sb, targetName, targetRa,
-                                    targetDec, intTime, tMin, tMax, resPower,
-                                    minWavelength, maxWavelength, facilityName,
-                                    insName, nbVis, nbVis2, nbT3, nbChannels);
-                        } else {
-                            CsvOutputVisitor.appendRecord(sb, targetName, targetRa,
-                                    targetDec, intTime, tMin, tMax, resPower,
-                                    minWavelength, maxWavelength, facilityName,
-                                    insName, nbVis, nbVis2, nbT3, nbChannels);
                         }
                     }
                 }
             }
         }
-        return sb;
     }
 
     /**

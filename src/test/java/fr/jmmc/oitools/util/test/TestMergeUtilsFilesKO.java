@@ -50,7 +50,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
             Assert.fail("Merge with no parameters should raise an exception");
         } catch (IllegalArgumentException iae) {
             Assert.assertTrue(
-                    String.format("Message should contains 'Not enough files as parameters' (is '%s')", iae.getMessage()),
+                    String.format("Message should contain 'Not enough files as parameters' (is '%s')", iae.getMessage()),
                     iae.getMessage().contains("Missing OIFits inputs"));
         }
     }
@@ -72,7 +72,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
             Assert.fail("Merge with an inexisting file should raise an exception");
         } catch (IOException ioe) {
             Assert.assertTrue(
-                    String.format("Message should contains 'File not found' (is '%s')", ioe.getMessage()),
+                    String.format("Message should contain 'File not found' (is '%s')", ioe.getMessage()),
                     ioe.getMessage().contains("File not found"));
         }
 
@@ -83,46 +83,8 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
             Assert.fail("Merge with an inexisting file should raise an exception");
         } catch (IOException ioe) {
             Assert.assertTrue(
-                    String.format("Message should contains 'File not found' (is '%s')", ioe.getMessage()),
+                    String.format("Message should contain 'File not found' (is '%s')", ioe.getMessage()),
                     ioe.getMessage().contains("File not found"));
-        }
-
-    }
-
-    /**
-     * Test exception with 2 files having different targets
-     *
-     * @throws IOException
-     * @throws MalformedURLException
-     * @throws FitsException
-     */
-    @Test
-    public void testDifferentTargets() throws IOException, MalformedURLException, FitsException {
-
-        try {
-            Merger.process(
-                    OIFitsLoader.loadOIFits(TEST_DIR_OIFITS
-                            + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"),
-                    OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
-            Assert.fail("Merge of two files with different target should raise an exception");
-        } catch (IllegalArgumentException iae) {
-            Assert.assertTrue(
-                    String.format("Message should contains 'not the same target' (is '%s')", iae.getMessage()),
-                    iae.getMessage().contains("not the same target"));
-        }
-
-        try {
-            Merger.process(
-                    OIFitsLoader.loadOIFits(
-                            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"),
-                    OIFitsLoader.loadOIFits(
-                            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"),
-                    OIFitsLoader.loadOIFits(TEST_DIR_OIFITS + "NGC5128_2005.oifits"));
-            Assert.fail("Merge of two files with different target should raise an exception");
-        } catch (IllegalArgumentException iae) {
-            Assert.assertTrue(
-                    String.format("Message should contains 'not the same target' (is '%s')", iae.getMessage()),
-                    iae.getMessage().contains("not the same target"));
         }
 
     }
@@ -144,7 +106,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
             Assert.fail("Merge an empty file should raise an exception");
         } catch (FitsException fe) {
             Assert.assertTrue(
-                    String.format("Message should contains 'Invalid OIFits format (no OI table found)' (is '%s')", fe.getMessage()),
+                    String.format("Message should contain 'Invalid OIFits format (no OI table found)' (is '%s')", fe.getMessage()),
                     fe.getMessage().contains("Invalid OIFits format (no OI table found)"));
         }
 
@@ -155,7 +117,7 @@ public class TestMergeUtilsFilesKO extends JUnitBaseTest {
             Assert.fail("Merge an empty file should raise an exception");
         } catch (FitsException fe) {
             Assert.assertTrue(
-                    String.format("Message should contains 'Invalid OIFits format (no OI table found)' (is '%s')", fe.getMessage()),
+                    String.format("Message should contain 'Invalid OIFits format (no OI table found)' (is '%s')", fe.getMessage()),
                     fe.getMessage().contains("Invalid OIFits format (no OI table found)"));
         }
 

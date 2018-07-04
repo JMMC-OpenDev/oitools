@@ -74,7 +74,7 @@ public final class CsvOutputVisitor implements ModelVisitor {
     public CsvOutputVisitor(final boolean verbose) {
         this.verbose = verbose;
 
-        // allocate buffer size (32K or 128K):
+        // allocate buffer size (4K):
         this.buffer = new StringBuilder(4 * 1024);
     }
 
@@ -169,31 +169,28 @@ public final class CsvOutputVisitor implements ModelVisitor {
     private void printMetadata(final OIFitsFile oiFitsFile) {
         /* analyze structure of file to browse by target */
         oiFitsFile.analyze();
-        appendHeader(this.buffer, SEP);
-        if (oiFitsFile.hasOiTarget()) {
-            for (int i = 0; i < oiFitsFile.getOiTarget().getNbTargets(); i++) {
-                this.buffer.append(OIFitsViewer.targetMetadata(oiFitsFile, i, false));
-            }
-        }
+
+        appendHeader(this.buffer);
+        OIFitsViewer.targetMetadata(oiFitsFile, false, this.buffer);
     }
 
-    private static void appendHeader(StringBuilder buffer, String sep) {
+    public static void appendHeader(final StringBuilder buffer) {
         // respect the same order has the one provided in the appendCsvRecord
-        buffer.append("target_name").append(sep)
-                .append("s_ra").append(sep)
-                .append("s_dec").append(sep)
-                .append("t_exptime").append(sep)
-                .append("t_min").append(sep)
-                .append("t_max").append(sep)
-                .append("em_res_power").append(sep)
-                .append("em_min").append(sep)
-                .append("em_max").append(sep)
-                .append("facility_name").append(sep)
-                .append("instrument_name").append(sep)
-                .append("nb_vis").append(sep)
-                .append("nb_vis2").append(sep)
-                .append("nb_t3").append(sep)
-                .append("nb_channels").append(sep)
+        buffer.append("target_name").append(SEP)
+                .append("s_ra").append(SEP)
+                .append("s_dec").append(SEP)
+                .append("t_exptime").append(SEP)
+                .append("t_min").append(SEP)
+                .append("t_max").append(SEP)
+                .append("em_res_power").append(SEP)
+                .append("em_min").append(SEP)
+                .append("em_max").append(SEP)
+                .append("facility_name").append(SEP)
+                .append("instrument_name").append(SEP)
+                .append("nb_vis").append(SEP)
+                .append("nb_vis2").append(SEP)
+                .append("nb_t3").append(SEP)
+                .append("nb_channels").append(SEP)
                 .append('\n');
     }
 

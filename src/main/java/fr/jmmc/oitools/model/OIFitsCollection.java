@@ -16,11 +16,18 @@
  */
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.jmcs.util.ToStringable;
+import fr.jmmc.oitools.processing.Selector;
+import fr.jmmc.oitools.processing.SelectorResult;
 import fr.jmmc.oitools.util.GranuleComparator;
 import fr.jmmc.oitools.util.OIFitsFileComparator;
+import fr.nom.tam.fits.FitsException;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -48,6 +55,30 @@ public final class OIFitsCollection implements ToStringable {
     private final Map<String, OIFitsFile> oiFitsPerPath = new HashMap<String, OIFitsFile>();
     /** Set of OIData tables keyed by Granule */
     private final Map<Granule, Set<OIData>> oiDataPerGranule = new HashMap<Granule, Set<OIData>>();
+
+    public static OIFitsCollection create(final OIFitsChecker checker, final List<String> fileLocations) throws IOException, MalformedURLException, FitsException {
+        final OIFitsCollection oiFitsCollection = new OIFitsCollection();
+
+        // load files:
+        for (String fileLocation : fileLocations) {
+            oiFitsCollection.addOIFitsFile(OIFitsLoader.loadOIFits(checker, fileLocation));
+        }
+        oiFitsCollection.analyzeCollection();
+
+        return oiFitsCollection;
+    }
+
+    public static OIFitsCollection create(final OIFitsFile... oiFitsFiles) {
+        final OIFitsCollection oiFitsCollection = new OIFitsCollection();
+
+        // add files:
+        for (int i = 0; i < oiFitsFiles.length; i++) {
+            oiFitsCollection.addOIFitsFile(oiFitsFiles[i]);
+        }
+        oiFitsCollection.analyzeCollection();
+
+        return oiFitsCollection;
+    }
 
     /**
      * Public constructor
@@ -86,12 +117,16 @@ public final class OIFitsCollection implements ToStringable {
         return oiFitsPerPath.size();
     }
 
+    public Collection<OIFitsFile> getOIFitsFiles() {
+        return oiFitsPerPath.values();
+    }
+
     public List<OIFitsFile> getSortedOIFitsFiles() {
         return getSortedOIFitsFiles(OIFitsFileComparator.INSTANCE);
     }
 
     public List<OIFitsFile> getSortedOIFitsFiles(final Comparator<OIFitsFile> comparator) {
-        final List<OIFitsFile> oiFitsFiles = new ArrayList<OIFitsFile>(oiFitsPerPath.values());
+        final List<OIFitsFile> oiFitsFiles = new ArrayList<OIFitsFile>(getOIFitsFiles());
         Collections.sort(oiFitsFiles, comparator);
         return oiFitsFiles;
     }
@@ -250,6 +285,10 @@ public final class OIFitsCollection implements ToStringable {
         return oiDataPerGranule;
     }
 
+    public List<Granule> getSortedGranules() {
+        return getSortedGranules(GranuleComparator.DEFAULT);
+    }
+
     public List<Granule> getSortedGranules(final Comparator<Granule> comparator) {
         final List<Granule> granules = new ArrayList<Granule>(oiDataPerGranule.keySet());
         Collections.sort(granules, comparator);
@@ -259,47 +298,42 @@ public final class OIFitsCollection implements ToStringable {
         return granules;
     }
 
-    public List<OIData> findOIData(final String targetUID, final String insModeUID, final NightId nightID,
-                                   final String oiFitsPath, final Integer extNb,
-                                   List<OIData> inputList) {
+    public SelectorResult findOIData(final Selector selector) {
+        return findOIData(selector, null);
+    }
 
-        List<OIData> oiDataList = inputList;
+    public SelectorResult findOIData(final Selector selector, final SelectorResult inputResult) {
+        SelectorResult result = inputResult;
 
         if (!this.isEmpty()) {
             // Find matching Granules:
-            final List<Granule> granules = findGranules(targetUID, insModeUID, nightID);
+            final List<Granule> granules = findGranules(selector);
 
-            if (!granules.isEmpty()) {
-                oiDataList = (oiDataList != null) ? oiDataList : new ArrayList<OIData>();
+            if (granules != null && !granules.isEmpty()) {
+                result = (result != null) ? result : new SelectorResult();
 
                 for (Granule g : granules) {
                     final Set<OIData> oiDatas = oiDataPerGranule.get(g);
 
                     if (oiDatas != null) {
                         // Apply table selection:
-
-                        // TODO: handle extra filters on OIData ?
-                        if (oiFitsPath == null) {
+                        if (selector == null || !selector.hasTable()) {
                             // add all tables:
                             for (OIData oiData : oiDatas) {
-                                if (!oiDataList.contains(oiData)) {
-                                    oiDataList.add(oiData);
-                                }
+                                result.addOIData(g, oiData);
                             }
                         } else {
-                            final OIFitsFile oiFitsFile = getOIFitsFile(oiFitsPath);
-
-                            if (oiFitsFile != null) {
-                                // test all tables:
-                                for (OIData oiData : oiDatas) {
-                                    // file path comparison:
-                                    if (oiData.getOIFitsFile().equals(oiFitsFile)) {
-
+                            // test all tables:
+                            for (OIData oiData : oiDatas) {
+                                // file path comparison:
+                                final String oiFitsPath = oiData.getOIFitsFile().getAbsoluteFilePath();
+                                if (oiFitsPath != null) {
+                                    final List<Integer> extNbs = selector.getTables(oiFitsPath);
+                                    // null means the path does not match:
+                                    if (extNbs != null) {
                                         // extNb is null means add all tables from file
-                                        if (extNb == null || oiData.getExtNb() == extNb.intValue()) {
-                                            if (!oiDataList.contains(oiData)) {
-                                                oiDataList.add(oiData);
-                                            }
+                                        if (extNbs.isEmpty() || extNbs.contains(NumberUtils.valueOf(oiData.getExtNb()))) {
+                                            result.addOIData(g, oiData);
                                         }
                                     }
                                 }
@@ -307,28 +341,53 @@ public final class OIFitsCollection implements ToStringable {
                         }
                     }
                 }
+                if (result.isEmpty()) {
+                    result = null;
+                }
             }
         }
 
-        logger.log(Level.FINE, "findOIData: {0}", oiDataList);
+        logger.log(Level.FINE, "findOIData: {0}", result);
 
-        return oiDataList;
+        return result;
     }
 
-    public List<Granule> findGranules(final String targetUID, final String insModeUID, final NightId nightID) {
-        final List<Granule> granules = getSortedGranules(GranuleComparator.DEFAULT);
+    private List<Granule> findGranules(final Selector selector) {
+        final List<Granule> granules = getSortedGranules();
 
-        // null if no match or targetUID / insModeUID is undefined :
-        final Target target = tm.getGlobalByUID(targetUID);
-        final InstrumentMode insMode = imm.getGlobalByUID(insModeUID);
+        if (selector != null && !selector.isEmpty()) {
+            // null if no match or targetUID / insModeUID is undefined :
+            final Target target;
+            if (selector.getTargetUID() != null) {
+                target = tm.getGlobalByUID(selector.getTargetUID());
+                if (target == null) {
+                    // no match means no granule matching
+                    return null;
+                }
+            } else {
+                target = null;
+            }
+            final InstrumentMode insMode;
+            if (selector.getInsModeUID() != null) {
+                insMode = imm.getGlobalByUID(selector.getInsModeUID());
+                if (insMode == null) {
+                    // no match means no granule matching
+                    return null;
+                }
+            } else {
+                insMode = null;
+            }
 
-        final Granule pattern = new Granule(target, insMode, nightID);
+            final Granule pattern = new Granule(target, insMode, selector.getNightID());
 
-        for (Iterator<Granule> it = granules.iterator(); it.hasNext();) {
-            final Granule candidate = it.next();
+            if (!pattern.isEmpty()) {
+                for (Iterator<Granule> it = granules.iterator(); it.hasNext();) {
+                    final Granule candidate = it.next();
 
-            if (!Granule.MATCHER_LIKE.match(pattern, candidate)) {
-                it.remove();
+                    if (!Granule.MATCHER_LIKE.match(pattern, candidate)) {
+                        it.remove();
+                    }
+                }
             }
         }
         return granules;

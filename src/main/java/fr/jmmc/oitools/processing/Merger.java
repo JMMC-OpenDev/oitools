@@ -16,17 +16,24 @@
  */
 package fr.jmmc.oitools.processing;
 
+import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.meta.OIFitsStandard;
+import fr.jmmc.oitools.model.InstrumentMode;
+import fr.jmmc.oitools.model.ModelBase;
 import fr.jmmc.oitools.model.OIArray;
 import fr.jmmc.oitools.model.OICorr;
 import fr.jmmc.oitools.model.OIData;
+import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
+import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
-import java.util.ArrayList;
+import fr.jmmc.oitools.model.Target;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,13 +41,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Processing class to merge given OIFitsFile instances into a single OIFitsFile instance
+ * Processing class to merge the given OIFitsCollection into a single OIFitsFile instance
  *
  * @author jammetv
  */
 public final class Merger {
 
     private static final Logger logger = Logger.getLogger(Merger.class.getName());
+
+    private static final String UNDEFINED = "UNDEFINED";
+    private static final Short UNDEFINED_SHORT = Short.valueOf(ModelBase.UNDEFINED_SHORT);
 
     /**
      * Utility class
@@ -50,89 +60,95 @@ public final class Merger {
     }
 
     /**
-     * Merge of OIFitsFile structure.
+     * Merge the given OIFitsFile instances.
      *
      * @param oiFitsToMerge OIFitsFile instances
      * @return new OIFitsFile instance
      * @throws IllegalArgumentException
      */
     public static OIFitsFile process(final OIFitsFile... oiFitsToMerge) throws IllegalArgumentException {
-        return process(null, oiFitsToMerge);
+        if (oiFitsToMerge == null || oiFitsToMerge.length < 1) {
+            throw new IllegalArgumentException("Merge: Missing OIFits inputs");
+        }
+        final OIFitsCollection oiFitsCollection = OIFitsCollection.create(oiFitsToMerge);
+
+        return process(oiFitsCollection);
+    }
+
+    /**
+     * Merge the given OIFitsCollection
+     *
+     * @param oiFitsCollection OIFits collection
+     * @return new OIFitsFile instance
+     * @throws IllegalArgumentException
+     */
+    public static OIFitsFile process(final OIFitsCollection oiFitsCollection) throws IllegalArgumentException {
+        return process(oiFitsCollection, null, null);
+    }
+
+    /**
+     * Merge the given OIFitsCollection with the given Selector
+     *
+     * @param oiFitsCollection OIFits collection
+     * @param selector optional Selector instance to filter content
+     * @return new OIFitsFile instance
+     * @throws IllegalArgumentException
+     */
+    public static OIFitsFile process(final OIFitsCollection oiFitsCollection, final Selector selector) throws IllegalArgumentException {
+        return process(oiFitsCollection, selector, null);
     }
 
     /**
      * Merge of OIFitsFile structure.
      *
-     * @param selector optional Selector instance to filter OIFits content
-     * @param oiFitsToMerge OIFitsFile instances
-     * @return new OIFitsFile instance
-     * @throws IllegalArgumentException
-     */
-    public static OIFitsFile process(final Selector selector, final OIFitsFile... oiFitsToMerge) throws IllegalArgumentException {
-        return process(selector, null, oiFitsToMerge);
-    }
-
-    /**
-     * Merge of OIFitsFile structure. Note: only one target by input files are accepted and must be the the same (name)
-     *
-     * @param selector optional Selector instance to filter OIFits content
+     * @param oiFitsCollection OIFits collection
+     * @param selector optional Selector instance to filter content
      * @param std OIFits standard for the output OIFitsFile
-     * @param oiFitsToMerge OIFitsFile instances
      * @return new OIFitsFile instance
      * @throws IllegalArgumentException
      */
-    public static OIFitsFile process(final Selector selector, final OIFitsStandard std,
-                                     final OIFitsFile... oiFitsToMerge) throws IllegalArgumentException {
-
-        if (oiFitsToMerge == null || oiFitsToMerge.length < 1) {
+    public static OIFitsFile process(final OIFitsCollection oiFitsCollection, final Selector selector, final OIFitsStandard std) throws IllegalArgumentException {
+        if (oiFitsCollection == null || oiFitsCollection.isEmpty()) {
             throw new IllegalArgumentException("Merge: Missing OIFits inputs");
         }
 
-        // createOIFits
-        final OIFitsFile resultFile = createOIFits(std, oiFitsToMerge);
+        // TODO: inverse => 1 filter data then create OIFits (version from selected files):
+        
+        // 1. CreateOIFits
+        final OIFitsFile resultFile = createOIFits(std, oiFitsCollection.getOIFitsFiles());
 
-        final Context ctx = new Context(selector, resultFile);
+        final Context ctx = new Context(oiFitsCollection, selector, resultFile);
 
-        // 1. Analyze step:
-        // Reuse OIFitsCollection (granule + Target / InsMode managers)
-        // 2. Pre-Filter Data
-        // 3. process Data
-        // Process input files:
-        for (OIFitsFile fileToMerge : oiFitsToMerge) {
-            // analyze first to use Target objects:
-            fileToMerge.analyze(); // will be usefull in the future
-
-            ctx.fileToMerge = fileToMerge;
-
-            // Prefilter data, and get all useful Ins, Array and Corr in data tables
-            filterOfData(ctx);
-
-            /*  Merge metadata FIRST to prepare mappings */
+        // 2. Filter data, and get all referenced Target, OIWavelength, OIArray and OICorr in data tables
+        filterData(ctx);
+        
+        if (ctx.selectorResult != null) {
+            // 3. process Meta Data to prepare mappings:
             // Process OI_TARGET:
             processOITarget(ctx);
 
             // Process OI_WAVELENGTH tables
-            processOIWL(ctx);
+            processOIWavelengths(ctx);
 
             // Process OI_ARRAY tables 
-            processOIArray(ctx);
+            processOIArrays(ctx);
 
             // Specific to OIFits V2
             if (resultFile.isOIFits2()) {
                 // Process OI_CORR tables
-                processOICorr(ctx);
+                processOICorrs(ctx);
 
                 // TODO: OIINSPOL ?
             }
 
-            /* Merge OI_DATA tables */
+            // 4. process Data:
             processOIData(ctx);
         }
 
         return resultFile;
     }
 
-    private static OIFitsFile createOIFits(final OIFitsStandard std, final OIFitsFile[] oiFitsToMerge) {
+    private static OIFitsFile createOIFits(final OIFitsStandard std, final Collection<OIFitsFile> oiFitsToMerge) {
         OIFitsStandard version = std;
 
         if (version == null) {
@@ -145,178 +161,233 @@ public final class Merger {
         }
 
         final OIFitsFile resultFile = new OIFitsFile(version);
-        // TODO: if V2 => use setPrimaryImageHdu() to fill V2 keywords
 
+        if (version == OIFitsStandard.VERSION_2) {
+            final OIPrimaryHDU imageHDU = new OIPrimaryHDU();
+            imageHDU.setContent(FitsConstants.KEYWORD_CONTENT_OIFITS2);
+// TODO: set keywords at the end ?            
+/*            
+            imageHDU.setOrigin("ESO");
+            imageHDU.setDate("2017-10-04");
+            imageHDU.setDateObs("2017-05-23");
+            imageHDU.setAuthor("Charleen");
+            imageHDU.setTelescop("Etoilemagic");
+            imageHDU.setInstrume("VEGA");
+            imageHDU.setObserver("Gilles");
+            imageHDU.setObject("MegaStar");
+            imageHDU.setInsMode("Low_JHK");
+            imageHDU.setReferenc("2017HDTYE.123.43.56");
+            imageHDU.setProgId("074.R-456");
+            imageHDU.setProcsoft("pndg 3.4");
+            imageHDU.setObsTech("SCAN, PH_REF, ...");
+             */
+            resultFile.setPrimaryImageHdu(imageHDU);
+        }
         return resultFile;
     }
 
     /**
-     * Merge OITarget
+     * Filter OiData tables
+     *
+     * @param ctx merge context
+     */
+    private static void filterData(final Context ctx) {
+        logger.log(Level.INFO, "Selector: {0}", ctx.selector);
+
+        SelectorResult result;
+        // 1. Query OIData matching criteria:
+        ctx.selectorResult = result = ctx.oiFitsCollection.findOIData(ctx.selector);
+
+        logger.log(Level.FINE, "selectorResult: {0}", result);
+
+        if (result == null) {
+            logger.log(Level.INFO, "Merge: no matching data");
+            return;
+        }
+
+        logger.log(Level.INFO, "selected targets:  {0}", result.getDistinctTargets());
+        logger.log(Level.INFO, "selected insModes: {0}", result.getDistinctInstrumentModes());
+
+        // 2. Check OIData and collect all OIWavelength, OIArray and OICorr tables:
+        for (OIData oiData : result.getSortedOIDatas()) {
+            // Collect referenced tables:
+            final OITarget oiTarget = oiData.getOiTarget();
+            if (oiTarget != null) {
+                ctx.usedOITargets.add(oiTarget);
+            }
+            final OIWavelength oiWavelength = oiData.getOiWavelength();
+            if (oiWavelength != null) {
+                ctx.usedOIWavelengths.add(oiWavelength);
+            }
+            final OIArray oiArray = oiData.getOiArray();
+            if (oiArray != null) {
+                ctx.usedOIArrays.add(oiArray);
+            }
+            final OICorr oiCorr = oiData.getOiCorr();
+            if (oiCorr != null) {
+                ctx.usedOICorrs.add(oiCorr);
+            }
+            // TODO: OIInspol ?
+        }
+    }
+
+    /**
+     * Process OITarget table
      *
      * @param ctx merge context
      * @throws IllegalArgumentException
      */
     private static void processOITarget(final Context ctx) throws IllegalArgumentException {
-        final OIFitsFile fileToMerge = ctx.fileToMerge;
         final OIFitsFile resultFile = ctx.resultFile;
 
-        final OITarget oiTargetInput = fileToMerge.getOiTarget();
+        // Targets:
+        final List<Target> targets = ctx.selectorResult.getDistinctTargets();
+        final int nbTargets = targets.size();
 
-        if (oiTargetInput == null || oiTargetInput.getNbRows() < 1) {
-            throw new IllegalArgumentException(String.format("Merge: target for %s is null or empty", fileToMerge.getAbsoluteFilePath()));
+        final Map<Target, Short> newTargetIds = new IdentityHashMap<Target, Short>();
+
+        final OITarget newOiTarget = new OITarget(resultFile, nbTargets);
+
+        int i = 0;
+        for (Target target : targets) {
+            final Short targetId = Short.valueOf((short) (i + 1));
+            newOiTarget.setTarget(i++, targetId, target);
+            newTargetIds.put(target, targetId);
         }
 
-        if (oiTargetInput.getNbRows() > 1) {
-            throw new IllegalArgumentException("Merge: more than one target for " + fileToMerge.getAbsoluteFilePath());
-        }
+        resultFile.addOiTable(newOiTarget);
 
-        final String targetName = oiTargetInput.getTarget()[0];
-        if (targetName == null || targetName.length() == 0) {
-            throw new IllegalArgumentException("Merge: empty target name for " + fileToMerge.getAbsoluteFilePath());
-        }
+        final Map<OITarget, Map<Short, Short>> mapOITargetIDs = ctx.mapOITargetIDs;
 
-        final OITarget oiTargetOutput = resultFile.getOiTarget();
+        // Define mapping per OITarget:
+        for (OITarget oiTarget : ctx.usedOITargets) {
+            final Map<Short, Short> mapIds = new HashMap<Short, Short>(4);
 
-        // No exception raised, store target 1 in result
-        if (oiTargetOutput == null || oiTargetOutput.getNbTargets() == 0) {
-            logger.log(Level.INFO, "Target name: {0}", targetName);
+            for (Target target : targets) {
+                final Set<Short> targetIds = oiTarget.getTargetIds(target);
 
-            ctx.targetName = targetName;
+                if (targetIds != null) {
+                    final Short newId = newTargetIds.get(target);
 
-            final OITarget newOiTarget = (OITarget) resultFile.copyTable(oiTargetInput);
-            resultFile.addOiTable(newOiTarget);
-        } else {
-            final String resultTargetName = oiTargetOutput.getTarget()[0];
-
-            if (!targetName.equals(resultTargetName)) {
-                throw new IllegalArgumentException("Merge: files have not the same target [" + targetName + "] vs [" + resultTargetName + "]");
-            }
-        }
-    }
-
-    /**
-     * Merge OIWavelength tables
-     *
-     * @param ctx merge context
-     */
-    private static void processOIWL(final Context ctx) {
-        final OIFitsFile fileToMerge = ctx.fileToMerge;
-
-        // Browse all names of file to merge, change name if already present in result, 
-        // add to map old_name > new name
-        if (fileToMerge.hasOiWavelengths()) {
-            final OIFitsFile resultFile = ctx.resultFile;
-            final Set<String> usedNames = ctx.insUsedByData;
-            final Map<String, String> mapInsNames = ctx.mapInsNames;
-
-            // Browse all OiWavelengths of the file to merge
-            for (OIWavelength oiWaveLength : fileToMerge.getOiWavelengths()) {
-                final String name = oiWaveLength.getInsName();
-
-                // Only if this OiWavelengths is pointed by some data, keep it
-                if (usedNames.contains(name)) {
-                    // If name is already present in result, 
-                    // change the name and memorise this change to update data information later
-                    String newName = name;
-                    int idx = 0;
-                    while (resultFile.getOiWavelength(newName) != null) {
-                        idx++;
-                        newName = name + "_" + idx;
+                    for (Short id : targetIds) {
+                        mapIds.put(id, newId);
                     }
-
-                    final OIWavelength newOiWave = (OIWavelength) resultFile.copyTable(oiWaveLength);
-                    newOiWave.setInsName(newName);
-                    resultFile.addOiTable(newOiWave);
-
-                    mapInsNames.put(name, newName);
                 }
             }
-            logger.log(Level.INFO, "mapWLNames: {0}", mapInsNames);
-            logger.log(Level.INFO, "insnames:   {0}", Arrays.toString(resultFile.getAcceptedInsNames()));
+            mapOITargetIDs.put(oiTarget, mapIds);
+        }
+
+        logger.log(Level.FINE, "newTargetIds:   {0}", newTargetIds);
+        logger.log(Level.FINE, "mapOITargetIDs: {0}", mapOITargetIDs);
+    }
+
+    /**
+     * Process OIWavelength tables
+     *
+     * @param ctx merge context
+     */
+    private static void processOIWavelengths(final Context ctx) {
+        // Browse all used tables, change name if already present in result, add to map [old table <=> new table]
+        if (!ctx.usedOIWavelengths.isEmpty()) {
+            final OIFitsFile resultFile = ctx.resultFile;
+            final Map<OIWavelength, OIWavelength> mapOIWavelengths = ctx.mapOIWavelengths;
+
+            // TODO: use Instrument modes to reduce the output OIWavelength tables
+            // Browse all used OIWavelength tables:
+            for (OIWavelength oiWavelength : ctx.usedOIWavelengths) {
+                final String name = oiWavelength.getInsName();
+
+                // use InsMode to reduce !
+                // If name is already present in result, 
+                // change the name and memorise this change to update data information later
+                String newName = name;
+                int idx = 0;
+
+                // TODO: check if existing OIWavelength in result is not the same ? to remove duplicates
+                while (resultFile.getOiWavelength(newName) != null) {
+                    idx++;
+                    newName = name + "_" + idx;
+                }
+
+                final OIWavelength newOiWavelength = (OIWavelength) resultFile.copyTable(oiWavelength);
+                newOiWavelength.setInsName(newName);
+                resultFile.addOiTable(newOiWavelength);
+
+                mapOIWavelengths.put(oiWavelength, newOiWavelength);
+            }
+            logger.log(Level.INFO, "insNames:         {0}", Arrays.toString(resultFile.getAcceptedInsNames()));
+            logger.log(Level.FINE, "mapOIWavelengths: {0}", mapOIWavelengths);
         }
     }
 
     /**
-     * Merge Array part of OIFitsFiles
+     * Process OIArray tables
      *
      * @param ctx merge context
      */
-    private static void processOIArray(final Context ctx) {
-        final OIFitsFile fileToMerge = ctx.fileToMerge;
-
-        // Browse all names of file to merge, change name if already present in result, 
-        // add to map old_name > new name
-        if (fileToMerge.hasOiArray()) {
+    private static void processOIArrays(final Context ctx) {
+        // Browse all used tables, change name if already present in result, add to map [old table <=> new table]
+        if (!ctx.usedOIArrays.isEmpty()) {
             final OIFitsFile resultFile = ctx.resultFile;
-            final Set<String> usedNames = ctx.arraysUsedByData;
-            final Map<String, String> mapArrayNames = ctx.mapArrayNames;
+            final Map<OIArray, OIArray> mapOIArrays = ctx.mapOIArrays;
 
-            // Browse all OIArray of the file to merge
-            for (OIArray oiArray : fileToMerge.getOiArrays()) {
+            // Browse all used OIArray tables:
+            for (OIArray oiArray : ctx.usedOIArrays) {
                 final String name = oiArray.getArrName();
 
-                // Only if this OIArray is pointed by some data, keep it
-                if (usedNames.contains(name)) {
-                    // If name is already present in result, 
-                    // change the name and memorise this change to update data information later
-                    String newName = name;
-                    int idx = 0;
-                    while (resultFile.getOiArray(newName) != null) {
-                        idx++;
-                        newName = name + "_" + idx;
-                    }
-
-                    final OIArray newOiArray = (OIArray) resultFile.copyTable(oiArray);
-                    newOiArray.setArrName(newName);
-                    resultFile.addOiTable(newOiArray);
-
-                    mapArrayNames.put(name, newName);
+                // If name is already present in result, 
+                // change the name and memorise this change to update data information later
+                String newName = name;
+                int idx = 0;
+                // TODO: check if existing OIArray in result is not the same ? to remove duplicates
+                while (resultFile.getOiArray(newName) != null) {
+                    idx++;
+                    newName = name + "_" + idx;
                 }
+
+                final OIArray newOiArray = (OIArray) resultFile.copyTable(oiArray);
+                newOiArray.setArrName(newName);
+                resultFile.addOiTable(newOiArray);
+
+                mapOIArrays.put(oiArray, newOiArray);
             }
-            logger.log(Level.INFO, "mapArrayNames: {0}", mapArrayNames);
-            logger.log(Level.INFO, "arrnames:      {0}", Arrays.toString(resultFile.getAcceptedArrNames()));
+            logger.log(Level.INFO, "arrNames:    {0}", Arrays.toString(resultFile.getAcceptedArrNames()));
+            logger.log(Level.FINE, "mapOIArrays: {0}", mapOIArrays);
         }
     }
 
     /**
-     * Merge Array part of OIFitsFiles
+     * Process OICorr tables
      *
      * @param ctx merge context
      */
-    private static void processOICorr(final Context ctx) {
-        final OIFitsFile fileToMerge = ctx.fileToMerge;
-
-        // Browse all names of file to merge, change name if already present in result, add to map 
-        // old_name > new name
-        if (fileToMerge.hasOiCorr()) {
+    private static void processOICorrs(final Context ctx) {
+        // Browse all used tables, change name if already present in result, add to map [old table <=> new table]
+        if (!ctx.usedOICorrs.isEmpty()) {
             final OIFitsFile resultFile = ctx.resultFile;
-            final Set<String> usedNames = ctx.corrUsedByData;
-            final Map<String, String> mapCorrNames = ctx.mapCorrNames;
+            final Map<OICorr, OICorr> mapOICorrs = ctx.mapOICorrs;
 
-            // Browse all OICorr of the file to merge
-            for (OICorr oiCorr : fileToMerge.getOiCorrs()) {
+            // Browse all used OICorr tables:
+            for (OICorr oiCorr : ctx.usedOICorrs) {
                 final String name = oiCorr.getCorrName();
 
-                // Only if this OICorr is pointed by some data, keep it
-                if (usedNames.contains(name)) {
-                    // If name is already present in result, 
-                    // change the name and memorise this change to update data information later
-                    String newName = name;
-                    int idx = 0;
-                    while (resultFile.getOiCorr(newName) != null) {
-                        idx++;
-                        newName = name + "_" + idx;
-                    }
-
-                    final OICorr newOiCorr = (OICorr) resultFile.copyTable(oiCorr);
-                    newOiCorr.setCorrName(newName);
-                    resultFile.addOiTable(newOiCorr);
-
-                    mapCorrNames.put(name, newName);
+                // If name is already present in result, 
+                // change the name and memorise this change to update data information later
+                String newName = name;
+                int idx = 0;
+                while (resultFile.getOiCorr(newName) != null) {
+                    idx++;
+                    newName = name + "_" + idx;
                 }
+
+                final OICorr newOiCorr = (OICorr) resultFile.copyTable(oiCorr);
+                newOiCorr.setCorrName(newName);
+                resultFile.addOiTable(newOiCorr);
+
+                mapOICorrs.put(oiCorr, newOiCorr);
             }
-            logger.log(Level.INFO, "mapCorrNames: {0}", mapCorrNames);
-            logger.log(Level.INFO, "corrnames:    {0}", Arrays.toString(resultFile.getAcceptedCorrNames()));
+            logger.log(Level.INFO, "corrNames:  {0}", Arrays.toString(resultFile.getAcceptedCorrNames()));
+            logger.log(Level.FINE, "mapOICorrs: {0}", mapOICorrs);
         }
     }
 
@@ -325,90 +396,105 @@ public final class Merger {
      * @param ctx merge context
      */
     private static void processOIData(final Context ctx) {
-        final List<OIData> dataToKeep = ctx.dataToKeep;
+        final List<OIData> oiDatas = ctx.selectorResult.getSortedOIDatas();
 
-        if (!dataToKeep.isEmpty()) {
+        if (!oiDatas.isEmpty()) {
+            logger.log(Level.INFO, "oiDatas: {0}", oiDatas);
+
             final OIFitsFile resultFile = ctx.resultFile;
 
-            final Map<String, String> mapArrayNames = ctx.mapArrayNames;
-            final Map<String, String> mapInsNames = ctx.mapInsNames;
-            final Map<String, String> mapCorrNames = ctx.mapCorrNames;
+            final Map<OIWavelength, OIWavelength> mapOIWavelengths = ctx.mapOIWavelengths;
+            final Map<OIArray, OIArray> mapOIArrays = ctx.mapOIArrays;
+            final Map<OICorr, OICorr> mapOICorrs = ctx.mapOICorrs;
 
-            for (OIData oiData : dataToKeep) {
-                // Change ARRNAME, INSNAME & CORRNAME keywords:
-                final String newArrName = mapArrayNames.get(oiData.getArrName());
-                // What to do if not found (invalid ref) ?
-                if (newArrName == null) {
-                    logger.log(Level.WARNING, "Invalid ARRNAME[{0}] found !", oiData.getArrName());
-                    continue;
-                }
+            final Map<OITarget, Map<Short, Short>> mapOITargetIDs = ctx.mapOITargetIDs;
 
-                final String newInsName = mapInsNames.get(oiData.getInsName());
-                // What to do if not found (invalid ref) ?
-                if (newInsName == null) {
+            for (OIData oiData : oiDatas) {
+                final String newInsName;
+                final String newArrName;
+                final String newCorrName;
+
+                // INSNAME:
+                final OIWavelength newOiWavelength = mapOIWavelengths.get(oiData.getOiWavelength());
+                if (newOiWavelength == null) {
                     logger.log(Level.WARNING, "Invalid INSNAME[{0}] found !", oiData.getInsName());
                     continue;
                 }
+                newInsName = newOiWavelength.getInsName();
 
-                String newCorrName = null;
-                // optional:
-                if (oiData.getCorrName() != null) {
-                    newCorrName = mapCorrNames.get(oiData.getCorrName());
-                    // What to do if not found (invalid ref) ?
-                    if (newCorrName == null) {
+                // ARRNAME:
+                final OIArray newOiArray = mapOIArrays.get(oiData.getOiArray());
+                if (newOiArray == null) {
+                    newArrName = UNDEFINED;
+                    logger.log(Level.WARNING, "Invalid ARRNAME[{0}] found ! Using [{1}] instead",
+                            new Object[]{oiData.getArrName(), newArrName});
+                } else {
+                    newArrName = newOiArray.getArrName();
+                }
+
+                // Optional CORRNAME:
+                if (oiData.getCorrName() == null) {
+                    newCorrName = null;
+                } else {
+                    final OICorr newOiCorr = mapOICorrs.get(oiData.getOiCorr());
+                    if (newOiCorr == null) {
+                        newCorrName = null;
                         logger.log(Level.WARNING, "Invalid CORRNAME[{0}] found !", oiData.getCorrName());
-                        continue;
+                    } else {
+                        newCorrName = newOiCorr.getCorrName();
                     }
                 }
 
-                final OIData newOIData = (OIData) resultFile.copyTable(oiData);
-                newOIData.setArrName(newArrName);
-                newOIData.setInsName(newInsName);
+                // check Targets:
+                boolean checkTargetId = false;
+                // Should filter targetId on each data row ?
+                final Map<Short, Short> mapIds = mapOITargetIDs.get(oiData.getOiTarget());
 
-                if (newCorrName != null) {
-                    newOIData.setCorrName(newCorrName);
-                }
+                for (Short id : oiData.getDistinctTargetId()) {
+                    final Short newId = mapIds.get(id);
+                    if (newId == null) {
+                        checkTargetId = true;
+                        mapIds.put(id, UNDEFINED_SHORT);
 
-                resultFile.addOiTable(newOIData);
-            }
-        }
-    }
-
-    /**
-     * Filter OiData tables
-     *
-     * @param ctx merge context
-     */
-    private static void filterOfData(final Context ctx) {
-        final OIFitsFile fileToMerge = ctx.fileToMerge;
-
-        final List<OIData> dataToKeep = ctx.dataToKeep;
-        // reset
-        ctx.reset();
-
-        if (fileToMerge.hasOiData()) {
-            final Selector selector = ctx.selector;
-
-            for (OIData data : fileToMerge.getOiDataList()) {
-                // delegate to generic Selector:
-                if (selector == null || selector.match(data)) {
-                    /*
-                    if (!data.hasSingleTarget()) {
-                        throw new IllegalArgumentException("Filter: more than one target in " + fileToMerge.getAbsoluteFilePath() + " " + data.toString());
+                        logger.log(Level.WARNING, "Extra TargetId = {0} found ! Using [{1}] instead (rows should be removed in the future)",
+                                new Object[]{id, UNDEFINED_SHORT});
                     } else {
-                        if (ctx.targetId == null) {
-                            ctx.targetId = data.getDistinctTargetId().iterator().next();
+                        if (!id.equals(newId)) {
+                            checkTargetId = true;
                         }
                     }
-                     */
-                    dataToKeep.add(data);
-                    ctx.insUsedByData.add(data.getInsName());
-                    ctx.arraysUsedByData.add(data.getArrName());
-
-                    if (data.getCorrName() != null) {
-                        ctx.corrUsedByData.add(data.getCorrName());
-                    }
                 }
+
+                logger.log(Level.FINE, "checkTargetId: {0}", checkTargetId);
+                logger.log(Level.FINE, "mapIds:        {0}", mapIds);
+
+                final OIData newOIData = (OIData) resultFile.copyTable(oiData);
+
+                // Change INSNAME, ARRNAME & CORRNAME keywords:
+                newOIData.setArrName(newArrName);
+                newOIData.setInsName(newInsName);
+                newOIData.setCorrName(newCorrName);
+
+                if (checkTargetId) {
+                    final int nRows = oiData.getNbRows();
+
+                    // Fix targetId column:
+                    final short[] targetIds = newOIData.getTargetId();
+                    final short[] newTargetIds = new short[nRows];
+
+                    // Iterate on table rows (i):
+                    for (int i = 0; i < nRows; i++) {
+                        final Short id = Short.valueOf(targetIds[i]);
+                        Short newId = mapIds.get(id);
+                        if (newId == null) {
+                            newId = UNDEFINED_SHORT; // should never happen
+                        }
+                        newTargetIds[i] = newId.shortValue();
+                    }
+                    // TODO: count (-1) then redim the table to this row count and eliminate useless rows in ALL columns !
+                    newOIData.setTargetId(newTargetIds);
+                }
+                resultFile.addOiTable(newOIData);
             }
         }
     }
@@ -417,6 +503,9 @@ public final class Merger {
      * Hold temporary data of merge operation
      */
     static final class Context {
+
+        /** OIFitsCollection instance */
+        final OIFitsCollection oiFitsCollection;
 
         /**
          * Optional Selector
@@ -429,51 +518,33 @@ public final class Merger {
         final OIFitsFile resultFile;
 
         /**
-         * Currently processed file
+         * Optional Selector
          */
-        OIFitsFile fileToMerge = null;
+        SelectorResult selectorResult = null;
+        /**
+         * Set of OITarget, OIWavelength, OIArray and OICorr tables to process
+         */
+        final Set<OITarget> usedOITargets = new HashSet<OITarget>();
+        final Set<OIWavelength> usedOIWavelengths = new HashSet<OIWavelength>();
+        final Set<OIArray> usedOIArrays = new HashSet<OIArray>();
+        final Set<OICorr> usedOICorrs = new HashSet<OICorr>();
 
         /**
-         * TODO remove later. Name of the single accepted target
+         * Map per OITarget between old targetIds (local) to new targetId (global)
          */
-        String targetName = null;
-        /** selected targetId (must be consistent) */
-        Short targetId = null;
+        final Map<OITarget, Map<Short, Short>> mapOITargetIDs = new IdentityHashMap<OITarget, Map<Short, Short>>();
         /**
-         * Map to link old name to new name for Ins, Array, Corr
+         * Map between old table to new tables for OIWavelength, OIArray and OICorr tables
          */
-        final Map<String, String> mapInsNames = new HashMap<String, String>();
-        final Map<String, String> mapArrayNames = new HashMap<String, String>();
-        final Map<String, String> mapCorrNames = new HashMap<String, String>();
-        /**
-         * List of ins, array, corr to keep after browsing and filter of data
-         */
-        final Set<String> insUsedByData = new HashSet<String>();
-        final Set<String> arraysUsedByData = new HashSet<String>();
-        final Set<String> corrUsedByData = new HashSet<String>();
+        final Map<OIWavelength, OIWavelength> mapOIWavelengths = new IdentityHashMap<OIWavelength, OIWavelength>();
+        final Map<OIArray, OIArray> mapOIArrays = new IdentityHashMap<OIArray, OIArray>();
+        final Map<OICorr, OICorr> mapOICorrs = new IdentityHashMap<OICorr, OICorr>();
 
-        /**
-         * All OIData to keep after filter
-         */
-        final List<OIData> dataToKeep = new ArrayList<OIData>();
-
-        private Context(final Selector selector, final OIFitsFile resultFile) {
+        private Context(final OIFitsCollection oiFitsCollection, final Selector selector, final OIFitsFile resultFile) {
+            this.oiFitsCollection = oiFitsCollection;
             this.selector = selector;
             this.resultFile = resultFile;
         }
-
-        public void reset() {
-            dataToKeep.clear();
-            // Reset mapping
-            mapInsNames.clear();
-            mapArrayNames.clear();
-            mapCorrNames.clear();
-            // reset set of object to keep
-            insUsedByData.clear();
-            arraysUsedByData.clear();
-            corrUsedByData.clear();
-        }
-
     }
 
 }
