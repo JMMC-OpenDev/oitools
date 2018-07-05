@@ -18,7 +18,6 @@ package fr.jmmc.oitools.processing;
 
 import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.meta.OIFitsStandard;
-import fr.jmmc.oitools.model.InstrumentMode;
 import fr.jmmc.oitools.model.ModelBase;
 import fr.jmmc.oitools.model.OIArray;
 import fr.jmmc.oitools.model.OICorr;
@@ -30,7 +29,6 @@ import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.model.Target;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
@@ -112,17 +110,25 @@ public final class Merger {
             throw new IllegalArgumentException("Merge: Missing OIFits inputs");
         }
 
-        // TODO: inverse => 1 filter data then create OIFits (version from selected files):
-        
-        // 1. CreateOIFits
-        final OIFitsFile resultFile = createOIFits(std, oiFitsCollection.getOIFitsFiles());
+        final SelectorResult result = filterData(oiFitsCollection, selector);
 
-        final Context ctx = new Context(oiFitsCollection, selector, resultFile);
+        return process(result, std);
+    }
 
-        // 2. Filter data, and get all referenced Target, OIWavelength, OIArray and OICorr in data tables
-        filterData(ctx);
-        
-        if (ctx.selectorResult != null) {
+    public static OIFitsFile process(final SelectorResult result) {
+        return process(result, null);
+    }
+
+    public static OIFitsFile process(final SelectorResult result, final OIFitsStandard std) {
+        // 1. CreateOIFits anyway
+        final OIFitsFile resultFile = createOIFits(std, result);
+
+        if (result != null) {
+            final Context ctx = new Context(result, resultFile);
+
+            // 2. Get all referenced Target, OIWavelength, OIArray and OICorr in data tables
+            collectTables(ctx);
+
             // 3. process Meta Data to prepare mappings:
             // Process OI_TARGET:
             processOITarget(ctx);
@@ -148,14 +154,18 @@ public final class Merger {
         return resultFile;
     }
 
-    private static OIFitsFile createOIFits(final OIFitsStandard std, final Collection<OIFitsFile> oiFitsToMerge) {
+    private static OIFitsFile createOIFits(final OIFitsStandard std, final SelectorResult result) {
         OIFitsStandard version = std;
 
         if (version == null) {
-            // Use the highest version from the given OIFitsFile instances:
-            for (OIFitsFile oiFits : oiFitsToMerge) {
-                if (version == null || oiFits.getVersion().ordinal() > version.ordinal()) {
-                    version = oiFits.getVersion();
+            if (result == null) {
+                version = OIFitsStandard.VERSION_1;
+            } else {
+                // Use the highest version from the OIFitsFile instances corresponding to the result:
+                for (OIFitsFile oiFits : result.getSortedOIFitsFiles()) {
+                    if (version == null || oiFits.getVersion().ordinal() > version.ordinal()) {
+                        version = oiFits.getVersion();
+                    }
                 }
             }
         }
@@ -189,27 +199,37 @@ public final class Merger {
     /**
      * Filter OiData tables
      *
-     * @param ctx merge context
+     * @param oiFitsCollection OIFits collection
+     * @param selector optional Selector instance to filter content
+     * @return Selector result or null if no data match
      */
-    private static void filterData(final Context ctx) {
-        logger.log(Level.INFO, "Selector: {0}", ctx.selector);
+    private static SelectorResult filterData(final OIFitsCollection oiFitsCollection, final Selector selector) {
+        logger.log(Level.INFO, "Selector: {0}", selector);
 
-        SelectorResult result;
-        // 1. Query OIData matching criteria:
-        ctx.selectorResult = result = ctx.oiFitsCollection.findOIData(ctx.selector);
+        // Query OIData matching criteria:
+        final SelectorResult result = oiFitsCollection.findOIData(selector);
 
         logger.log(Level.FINE, "selectorResult: {0}", result);
 
         if (result == null) {
             logger.log(Level.INFO, "Merge: no matching data");
-            return;
+            return null;
         }
 
         logger.log(Level.INFO, "selected targets:  {0}", result.getDistinctTargets());
         logger.log(Level.INFO, "selected insModes: {0}", result.getDistinctInstrumentModes());
 
-        // 2. Check OIData and collect all OIWavelength, OIArray and OICorr tables:
-        for (OIData oiData : result.getSortedOIDatas()) {
+        return result;
+    }
+
+    /**
+     * Collect all OIWavelength, OIArray and OICorr tables from OiData tables
+     *
+     * @param ctx merge context
+     */
+    private static void collectTables(final Context ctx) {
+        // Collect all OIWavelength, OIArray and OICorr tables:
+        for (OIData oiData : ctx.selectorResult.getSortedOIDatas()) {
             // Collect referenced tables:
             final OITarget oiTarget = oiData.getOiTarget();
             if (oiTarget != null) {
@@ -504,45 +524,24 @@ public final class Merger {
      */
     static final class Context {
 
-        /** OIFitsCollection instance */
-        final OIFitsCollection oiFitsCollection;
-
-        /**
-         * Optional Selector
-         */
-        final Selector selector;
-
-        /**
-         * output OIFits
-         */
+        /** Selector result */
+        final SelectorResult selectorResult;
+        /** output OIFits */
         final OIFitsFile resultFile;
-
-        /**
-         * Optional Selector
-         */
-        SelectorResult selectorResult = null;
-        /**
-         * Set of OITarget, OIWavelength, OIArray and OICorr tables to process
-         */
+        /* Set of OITarget, OIWavelength, OIArray and OICorr tables to process */
         final Set<OITarget> usedOITargets = new HashSet<OITarget>();
         final Set<OIWavelength> usedOIWavelengths = new HashSet<OIWavelength>();
         final Set<OIArray> usedOIArrays = new HashSet<OIArray>();
         final Set<OICorr> usedOICorrs = new HashSet<OICorr>();
-
-        /**
-         * Map per OITarget between old targetIds (local) to new targetId (global)
-         */
+        /** Map per OITarget between old targetIds (local) to new targetId (global) */
         final Map<OITarget, Map<Short, Short>> mapOITargetIDs = new IdentityHashMap<OITarget, Map<Short, Short>>();
-        /**
-         * Map between old table to new tables for OIWavelength, OIArray and OICorr tables
-         */
+        /* Map between old table to new tables for OIWavelength, OIArray and OICorr tables */
         final Map<OIWavelength, OIWavelength> mapOIWavelengths = new IdentityHashMap<OIWavelength, OIWavelength>();
         final Map<OIArray, OIArray> mapOIArrays = new IdentityHashMap<OIArray, OIArray>();
         final Map<OICorr, OICorr> mapOICorrs = new IdentityHashMap<OICorr, OICorr>();
 
-        private Context(final OIFitsCollection oiFitsCollection, final Selector selector, final OIFitsFile resultFile) {
-            this.oiFitsCollection = oiFitsCollection;
-            this.selector = selector;
+        private Context(final SelectorResult selectorResult, final OIFitsFile resultFile) {
+            this.selectorResult = selectorResult;
             this.resultFile = resultFile;
         }
     }

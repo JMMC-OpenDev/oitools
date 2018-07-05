@@ -19,7 +19,9 @@ package fr.jmmc.oitools.processing;
 import fr.jmmc.oitools.model.Granule;
 import fr.jmmc.oitools.model.InstrumentMode;
 import fr.jmmc.oitools.model.OIData;
+import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.Target;
+import fr.jmmc.oitools.util.OIFitsFileComparator;
 import fr.jmmc.oitools.util.OITableByFileComparator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -92,6 +94,16 @@ public final class SelectorResult {
             sortedOIDatas = sorted;
         }
         return sortedOIDatas;
+    }
+
+    public List<OIFitsFile> getSortedOIFitsFiles() {
+        final Set<OIFitsFile> oiFitsFiles = new HashSet<OIFitsFile>();
+        for (OIData oiData : oiDatas) {
+            oiFitsFiles.add(oiData.getOIFitsFile());
+        }
+        final List<OIFitsFile> sorted = new ArrayList<OIFitsFile>(oiFitsFiles);
+        Collections.sort(sorted, OIFitsFileComparator.INSTANCE);
+        return sorted;
     }
 
     @Override
