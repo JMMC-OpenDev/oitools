@@ -63,13 +63,15 @@ public final class FitsImage {
     /** sign flag of the coordinate increment along the column axis (true means positive or false negative) */
     private boolean incColPositive = true;
     /** absolute coordinate increment along the column axis (radians per pixel) */
-    private double incCol = 1d;
+    private double incCol = FitsImageConstants.DEFAULT_CDELT;
     /** sign flag of the coordinate increment along the row axis (true means positive or false negative) */
     private boolean incRowPositive = true;
     /** absolute coordinate increment along the row axis (radians per pixel) */
-    private double incRow = 1d;
+    private double incRow = FitsImageConstants.DEFAULT_CDELT;
     /** image area coordinates (radians) */
     private Rectangle2D.Double area = null;
+    /** Rotation in degrees of the image plane */
+    private double rotAngle = Double.NaN;
     /** image data as float[nbRows][nbCols] ie [Y][X] */
     private float[][] data = null;
     /** minimum value in data */
@@ -446,6 +448,30 @@ public final class FitsImage {
             updateArea();
         }
         return this.area;
+    }
+
+    /**
+     * Return true if the rotation angle is defined
+     * @return true if the rotation angle is defined
+     */
+    public boolean isRotAngleDefined() {
+        return !Double.isNaN(this.rotAngle);
+    }
+
+    /**
+     * Return the rotation angle (degrees)
+     * @return rotation angle
+     */
+    public double getRotAngle() {
+        return this.rotAngle;
+    }
+
+    /**
+     * Define the rotation angle (degrees)
+     * @param angDeg rotation angle (degrees)
+     */
+    public void setRotAngle(final double angDeg) {
+        this.rotAngle = angDeg;
     }
 
     /**

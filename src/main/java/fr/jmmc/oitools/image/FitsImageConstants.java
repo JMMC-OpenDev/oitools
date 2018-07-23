@@ -38,9 +38,9 @@ public interface FitsImageConstants {
     public final static String KEYWORD_CRVAL2 = "CRVAL2";
     /** CRVAL3 keyword = Wavelength value at the reference pixel wavelength (Units) */
     public final static String KEYWORD_CRVAL3 = "CRVAL3";
-    /** CDELT1 keyword = Coordinate increment per pixel along the columns (Units) */
+    /** CDELT1 keyword = Coordinate increment per pixel along the columns (RA) (Units) */
     public final static String KEYWORD_CDELT1 = "CDELT1";
-    /** CDELT2 keyword = Coordinate increment per pixel along the rows (Units) */
+    /** CDELT2 keyword = Coordinate increment per pixel along the rows (DEC) (Units) */
     public final static String KEYWORD_CDELT2 = "CDELT2";
     /** CDELT3 keyword = Wavelength increment per pixel along the wavelengths (Units) */
     public final static String KEYWORD_CDELT3 = "CDELT3";
@@ -50,6 +50,8 @@ public interface FitsImageConstants {
     public final static String KEYWORD_CUNIT2 = "CUNIT2";
     /** CUNIT3 keyword = Physical units of the axis 3 = wavelengths (Units) */
     public final static String KEYWORD_CUNIT3 = "CUNIT3";
+    /** CROTA2 keyword = angle between the North and the second axis of the image counted positive to the East */
+    public final static String KEYWORD_CROTA2 = "CROTA2";
 
     /* default values for missing keywords */
     /** default value (1.0) for CRPIXn keywords */

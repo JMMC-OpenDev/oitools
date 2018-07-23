@@ -398,6 +398,11 @@ public final class FitsImageWriter {
             header.addValue(FitsImageConstants.KEYWORD_CUNIT3, FitsUnit.WAVELENGTH_METER.getStandardRepresentation(),
                     "Physical units for CDELT3 and CRVAL3");
         }
+        
+        // Process rotation (deg):
+        if (image.isRotAngleDefined()) {
+            header.addValue(FitsImageConstants.KEYWORD_CROTA2, image.getRotAngle(), "Rotation angle in degrees");
+        }
 
         // Process data min/max:
         /*

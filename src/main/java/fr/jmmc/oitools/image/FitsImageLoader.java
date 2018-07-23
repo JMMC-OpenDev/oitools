@@ -787,6 +787,9 @@ public final class FitsImageLoader {
                 logger.log(Level.WARNING, "Fixed missing Wavelength unit (microns instead of meter): CRVAL3={0} - CDELT3={1}", new Object[]{image.getValRefWL(), image.getIncWL()});
             }
         }
+        
+        // Process rotation (deg):
+        image.setRotAngle(header.getDoubleValue(FitsImageConstants.KEYWORD_CROTA2, Double.NaN));
 
         // Process data min/max:
         /*
