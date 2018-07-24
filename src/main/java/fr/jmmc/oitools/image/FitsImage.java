@@ -70,8 +70,8 @@ public final class FitsImage {
     private double incRow = FitsImageConstants.DEFAULT_CDELT;
     /** image area coordinates (radians) */
     private Rectangle2D.Double area = null;
-    /** Rotation in degrees of the image plane */
-    private double rotAngle = Double.NaN;
+    /** rotation of the image plane (degrees) */
+    private double rotAngle = 0d;
     /** image data as float[nbRows][nbCols] ie [Y][X] */
     private float[][] data = null;
     /** minimum value in data */
@@ -82,6 +82,13 @@ public final class FitsImage {
     private int nData = 0;
     /** sum of data values */
     private double sum = 0d;
+    /* backup of original keyword values */
+    /** original value of the absolute coordinate increment along the column axis (radians per pixel) */
+    private double origIncCol = Double.NaN;
+    /** original value of the absolute coordinate increment along the row axis (radians per pixel) */
+    private double origIncRow = Double.NaN;
+    /** original value of the rotation of the image plane (degrees) */
+    private double origRotAngle = Double.NaN;
 
     /** 
      * Public FitsImage class constructor
@@ -384,6 +391,9 @@ public final class FitsImage {
             this.incColPositive = (incCol >= 0d);
             this.incCol = (this.incColPositive) ? incCol : -incCol;
         }
+        if (Double.isNaN(this.origIncCol)) {
+            this.origIncCol = this.incCol;
+        }
         this.area = null; // reset area
     }
 
@@ -428,6 +438,9 @@ public final class FitsImage {
             this.incRowPositive = (incRow >= 0d);
             this.incRow = (this.incRowPositive) ? incRow : -incRow;
         }
+        if (Double.isNaN(this.origIncRow)) {
+            this.origIncRow = this.incRow;
+        }
         this.area = null; // reset area
     }
 
@@ -455,7 +468,7 @@ public final class FitsImage {
      * @return true if the rotation angle is defined
      */
     public boolean isRotAngleDefined() {
-        return !Double.isNaN(this.rotAngle);
+        return this.rotAngle != 0d;
     }
 
     /**
@@ -472,6 +485,9 @@ public final class FitsImage {
      */
     public void setRotAngle(final double angDeg) {
         this.rotAngle = angDeg;
+        if (Double.isNaN(this.origRotAngle)) {
+            this.origRotAngle = this.rotAngle;
+        }
     }
 
     /**
@@ -576,6 +592,30 @@ public final class FitsImage {
      */
     public void setSum(final double sum) {
         this.sum = sum;
+    }
+
+    /**
+     * Return the original value of the absolute coordinate increment along the column axis (radians per pixel)
+     * @return original value of the absolute coordinate increment along the column axis (radians per pixel)
+     */
+    public double getOrigIncCol() {
+        return origIncCol;
+    }
+
+    /**
+     * Return the original value of the absolute coordinate increment along the row axis (radians per pixel)
+     * @return original value of the absolute coordinate increment along the row axis (radians per pixel)
+     */
+    public double getOrigIncRow() {
+        return origIncRow;
+    }
+
+    /**
+     * Return the original value of the rotation of the image plane (degrees)
+     * @return original value of the rotation of the image plane (degrees)
+     */
+    public double getOrigRotAngle() {
+        return origRotAngle;
     }
 
     // utility methods:

@@ -789,7 +789,7 @@ public final class FitsImageLoader {
         }
         
         // Process rotation (deg):
-        image.setRotAngle(header.getDoubleValue(FitsImageConstants.KEYWORD_CROTA2, Double.NaN));
+        image.setRotAngle(header.getDoubleValue(FitsImageConstants.KEYWORD_CROTA2, 0.0));
 
         // Process data min/max:
         /*
