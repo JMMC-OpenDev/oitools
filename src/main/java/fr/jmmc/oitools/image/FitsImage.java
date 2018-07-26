@@ -97,6 +97,42 @@ public final class FitsImage {
         super();
     }
 
+    public FitsImage clone() {
+        final FitsImage copy = new FitsImage();
+
+        copy.setFitsImageHDU(fitsImageHDU);
+        copy.setImageIndex(imageIndex);
+        copy.setFitsImageIdentifier(imageIdentifier);
+
+        copy.setData(data);
+        copy.setNData(nData);
+
+        copy.setPixRefWL(pixRefWL);
+        copy.setValRefWL(valRefWL);
+        copy.setIncWL(incWL);
+
+        copy.setPixRefCol(pixRefCol);
+        copy.setPixRefRow(pixRefRow);
+
+        copy.setValRefCol(valRefCol);
+        copy.setValRefRow(valRefRow);
+
+        copy.setSignedIncCol(getSignedIncCol());
+        copy.setSignedIncRow(getSignedIncRow());
+
+        copy.setRotAngle(rotAngle);
+
+        copy.setDataMin(dataMin);
+        copy.setDataMax(dataMax);
+        copy.setSum(sum);
+
+        copy.origIncCol = origIncCol;
+        copy.origIncRow = origIncRow;
+        copy.origRotAngle = origRotAngle;
+
+        return copy;
+    }
+
     /* image meta data */
     /**
      * Return the FITS image HDU
@@ -649,6 +685,16 @@ public final class FitsImage {
      */
     public double getMaxAngle() {
         return Math.max(getAngleCol(), getAngleRow());
+    }
+
+    /**
+     * Return the maximum view angle in radians
+     * @param nCols number of columns
+     * @param nRows number of rows
+     * @return maximum view angle in radians
+     */
+    public double getMaxAngle(final int nCols, final int nRows) {
+        return Math.max(nCols * this.incCol, nRows * this.incRow);
     }
 
     /**
