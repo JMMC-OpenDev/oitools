@@ -366,7 +366,7 @@ public final class FitsImageLoader {
      * @throws IllegalArgumentException if unsupported unit or unit conversion is not allowed or missing CDELT keyword
      */
     private static void processHDUnits(final FitsImageFile imgFitsFile, final List<BasicHDU> hdus,
-            final boolean firstOnly, final boolean requireCdeltKeywords) throws FitsException, IOException, IllegalArgumentException {
+                                       final boolean firstOnly, final boolean requireCdeltKeywords) throws FitsException, IOException, IllegalArgumentException {
 
         imgFitsFile.getFitsImageHDUs().addAll(processHDUnits(imgFitsFile.getFileName(), hdus, firstOnly, requireCdeltKeywords));
     }
@@ -397,7 +397,7 @@ public final class FitsImageLoader {
      * @throws IllegalArgumentException if unsupported unit or unit conversion is not allowed or missing CDELT keyword
      */
     public static List<FitsImageHDU> processHDUnits(final String filename, final Collection<BasicHDU> hdus,
-            final boolean firstOnly, final boolean requireCdeltKeywords) throws FitsException, IOException, IllegalArgumentException {
+                                                    final boolean firstOnly, final boolean requireCdeltKeywords) throws FitsException, IOException, IllegalArgumentException {
 
         final int nbHDU = hdus.size();
         if (logger.isLoggable(Level.FINE)) {
@@ -457,8 +457,8 @@ public final class FitsImageLoader {
      * @throws IllegalArgumentException if unsupported unit or unit conversion is not allowed or missing CDELT keyword
      */
     public static FitsImageHDU processHDUnit(final OIFitsChecker checker, final String filename,
-            final ImageHDU imgHdu, final boolean requireCdeltKeywords,
-            final int hduIndex, final FitsImageHDUFactory factory) throws FitsException, IOException {
+                                             final ImageHDU imgHdu, final boolean requireCdeltKeywords,
+                                             final int hduIndex, final FitsImageHDUFactory factory) throws FitsException, IOException {
 
         final int nAxis = getNAxis(imgHdu);
 
@@ -514,8 +514,8 @@ public final class FitsImageLoader {
      * @throws IllegalArgumentException if unsupported unit or unit conversion is not allowed or missing CDELT keyword
      */
     private static FitsImageHDU createImageHDU(final OIFitsChecker checker, final String filename,
-            final ImageHDU imgHdu, final boolean requireCdeltKeywords, final int hduIndex,
-            final FitsImageHDUFactory factory, final int imgCount) throws FitsException {
+                                               final ImageHDU imgHdu, final boolean requireCdeltKeywords, final int hduIndex,
+                                               final FitsImageHDUFactory factory, final int imgCount) throws FitsException {
 
         // Create Image HDU:
         final FitsImageHDU imageHDU = factory.create();
@@ -743,12 +743,17 @@ public final class FitsImageLoader {
         image.setPixRefWL(header.getDoubleValue(FitsImageConstants.KEYWORD_CRPIX3, FitsImageConstants.DEFAULT_CRPIX));
 
         // Process coordinates at the reference pixel:
-        // note: units are ignored but default are Degree
+        // note: units are ignored but default unit is Degrees
+        if (unit2.equals(FitsUnit.NO_UNIT)) {
+            if (!unit1.equals(FitsUnit.NO_UNIT)) {
+                // use same unit (if missing)
+                unit2 = unit1;
+            } else {
+                unit2 = FitsUnit.ANGLE_DEG;
+            }
+        }
         if (unit1.equals(FitsUnit.NO_UNIT)) {
             unit1 = FitsUnit.ANGLE_DEG;
-        }
-        if (unit2.equals(FitsUnit.NO_UNIT)) {
-            unit2 = FitsUnit.ANGLE_DEG;
         }
         /*
          KEYWORD CRVAL1 = '0.'	// Coordinate at reference pixel
@@ -787,7 +792,7 @@ public final class FitsImageLoader {
                 logger.log(Level.WARNING, "Fixed missing Wavelength unit (microns instead of meter): CRVAL3={0} - CDELT3={1}", new Object[]{image.getValRefWL(), image.getIncWL()});
             }
         }
-        
+
         // Process rotation (deg):
         image.setRotAngle(header.getDoubleValue(FitsImageConstants.KEYWORD_CROTA2, 0.0));
 
@@ -950,7 +955,7 @@ public final class FitsImageLoader {
      * @return float[][]
      */
     private static float[][] getImageData(final int rows, final int cols, final int bitpix, final Object array2D,
-            final double bZero, final double bScale) {
+                                          final double bZero, final double bScale) {
 
         if (array2D == null) {
             return null;
