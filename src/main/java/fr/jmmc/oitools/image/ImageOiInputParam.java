@@ -20,10 +20,12 @@
 package fr.jmmc.oitools.image;
 
 import fr.jmmc.oitools.fits.FitsTable;
-import fr.jmmc.oitools.fits.FitsUtils;
-import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This class is a container for IMAGE-OI INPUT PARAM.
@@ -52,42 +54,96 @@ public final class ImageOiInputParam extends FitsTable {
     private final static KeywordMeta KEYWORD_RGL_BETA = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_BETA, "Parameter beta of the regularization", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_RGL_PRIO = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_PRIO, "Identifier of the HDU with the prior image", Types.TYPE_CHAR);
 
-    // Bsmem specific
-    private final static KeywordMeta KEYWORD_AUTO_WGT = new KeywordMeta(ImageOiConstants.KEYWORD_AUTO_WGT,
-            "Automatic regularization weight", Types.TYPE_LOGICAL, true, NO_STR_VALUES);
-    private final static KeywordMeta KEYWORD_FLUXERR = new KeywordMeta(ImageOiConstants.KEYWORD_FLUXERR,
-            "Error on zero-baseline V^2 point", Types.TYPE_DBL, true, NO_STR_VALUES);
+    /** keyword mapping to quickly reset keywords and give their description */
+    private final static Map<String, KeywordMeta> KEYWORD_METAS;
 
-    // Optional subtable
-    private FitsTable subTable = null;
+    static {
+        KEYWORD_METAS = new LinkedHashMap<String, KeywordMeta>(8);
+        // Define Data selection keywords
+        KEYWORD_METAS.put(KEYWORD_TARGET.getName(), KEYWORD_TARGET);
+        KEYWORD_METAS.put(KEYWORD_WAVE_MIN.getName(), KEYWORD_WAVE_MIN);
+        KEYWORD_METAS.put(KEYWORD_WAVE_MAX.getName(), KEYWORD_WAVE_MAX);
+        KEYWORD_METAS.put(KEYWORD_USE_VIS.getName(), KEYWORD_USE_VIS);
+        KEYWORD_METAS.put(KEYWORD_USE_VIS2.getName(), KEYWORD_USE_VIS2);
+        KEYWORD_METAS.put(KEYWORD_USE_T3.getName(), KEYWORD_USE_T3);
 
-    // Image parameters
+        // Define Algorithm settings keywords
+        KEYWORD_METAS.put(KEYWORD_INIT_IMG.getName(), KEYWORD_INIT_IMG);
+        KEYWORD_METAS.put(KEYWORD_MAXITER.getName(), KEYWORD_MAXITER);
+        KEYWORD_METAS.put(KEYWORD_RGL_NAME.getName(), KEYWORD_RGL_NAME);
+        KEYWORD_METAS.put(KEYWORD_RGL_WGT.getName(), KEYWORD_RGL_WGT);
+        KEYWORD_METAS.put(KEYWORD_RGL_ALPH.getName(), KEYWORD_RGL_ALPH);
+        KEYWORD_METAS.put(KEYWORD_RGL_BETA.getName(), KEYWORD_RGL_BETA);
+        KEYWORD_METAS.put(KEYWORD_RGL_PRIO.getName(), KEYWORD_RGL_PRIO);
+    }
+
+    /**
+     * Return the keyword description given its name
+     * @param name keyword name
+     * @return keyword description
+     */
+    public static String getDescription(final String name) {
+        final KeywordMeta meta = KEYWORD_METAS.get(name);
+        if (meta != null) {
+            return meta.getDescription();
+        }
+        return null;
+    }
+
+    /* members */
+    /** flag indicating if the default keywords are being defined */
+    private boolean isDefaultKeyword = true;
+    /** parent keyword metas */
+    private final Set<KeywordMeta> parentKeywordMetas = new LinkedHashSet<KeywordMeta>();
+    /** default keyword names */
+    private final Set<String> defaultKeywords = new LinkedHashSet<String>();
+    /** specific keyword names */
+    private final Set<String> specificKeywords = new LinkedHashSet<String>();
+
+    /**
+     * Public constructor
+     */
     public ImageOiInputParam() {
         super();
 
-        // Register Data selection keywords
-        addKeywordMeta(KEYWORD_TARGET);
-        addKeywordMeta(KEYWORD_WAVE_MIN);
-        addKeywordMeta(KEYWORD_WAVE_MAX);
-        addKeywordMeta(KEYWORD_USE_VIS);
-        addKeywordMeta(KEYWORD_USE_VIS2);
-        addKeywordMeta(KEYWORD_USE_T3);
+        // preserve keywords defined in parents:
+        parentKeywordMetas.addAll(getKeywordsDesc().values());
 
-        // Register Algorithm settings keywords
-        addKeywordMeta(KEYWORD_INIT_IMG);
-        addKeywordMeta(KEYWORD_MAXITER);
-        addKeywordMeta(KEYWORD_RGL_NAME);
-        addKeywordMeta(KEYWORD_RGL_WGT);
-        addKeywordMeta(KEYWORD_RGL_ALPH);
-        addKeywordMeta(KEYWORD_RGL_BETA);
-        addKeywordMeta(KEYWORD_RGL_PRIO);
-
-        addKeywordMeta(KEYWORD_AUTO_WGT);
-        addKeywordMeta(KEYWORD_FLUXERR);
+        resetDefaultKeywords();
 
         // Set default values
+        setNbRows(0);
+        setExtVer(1);
         setExtName(ImageOiConstants.EXTNAME_IMAGE_OI_INPUT_PARAM);
 
+        defineDefaultKeywordValues();
+    }
+
+    /**
+     * Register all default keywords
+     */
+    public final void resetDefaultKeywords() {
+        getKeywordsDesc().clear();
+        // reset keyword names:
+        defaultKeywords.clear();
+        specificKeywords.clear();
+
+        try {
+            isDefaultKeyword = true;
+
+            // Register keywords into Fits table:
+            for (KeywordMeta meta : parentKeywordMetas) {
+                addKeyword(meta);
+            }
+            for (KeywordMeta meta : KEYWORD_METAS.values()) {
+                addKeyword(meta);
+            }
+        } finally {
+            isDefaultKeyword = false;
+        }
+    }
+
+    public final void defineDefaultKeywordValues() {
         // TODO make it dynamic and software dependant
         setWaveMin(-1);
         setWaveMax(-1);
@@ -95,63 +151,68 @@ public final class ImageOiInputParam extends FitsTable {
         setRglWgt(0);
         setRglAlph(0);
         setRglBeta(0);
-        //setRglName("mem_prior"); // set by service later
-        useAutoWgt(true);
-        setFluxErr(0.1);
+
+        // note: setRglName() not used as it is set by Service later
     }
 
     /**
-     * Extand current table with given table elements ( keyword support only, limited to one single table )
-     * @param subTable table to expose, null remove previous tables
+     * Add the given keyword descriptor
+     *
+     * @param meta keyword descriptor
      */
-    public void addSubTable(final FitsTable subTable) {
+    public final void addKeyword(final KeywordMeta meta) {
+        super.addKeywordMeta(meta);
 
-        // clear previous table
-        removeSubTable(this.subTable);
-        this.subTable = subTable;
-        if (subTable == null) {
-            return;
+        final String name = meta.getName();
+        if (isDefaultKeyword) {
+            defaultKeywords.add(name);
+        } else {
+            specificKeywords.add(name);
         }
-
-        // TODO perform some tests to avoid duplicates
-        // add keyword descriptions
-        getKeywordsDesc().putAll(subTable.getKeywordsDesc());
-        // complete with values if no data is present
-        for (String key : subTable.getKeywordsDesc().keySet()) {
-
-            if (getKeywordValue(key) == null) {
-                setKeywordValue(key, subTable.getKeywordValue(key));
-            }
-        }
-
-        // TODO support columns ? not sure....
     }
 
     /**
-     * Get table of specific keywords if any.
-     * @return the table of specific keywords or null
+     * Remove the keyword descriptor given its name
+     *
+     * @param name keyword name
      */
-    public FitsTable getSubTable() {
-        return this.subTable;
+    public final void removeKeyword(final String name) {
+        super.removeKeywordMeta(name);
+        // note: it does not remove its value !
+
+        defaultKeywords.remove(name);
+        specificKeywords.remove(name);
     }
 
-    /**
-     * Remove inclusion of given table.
-     * @param subTable
-     @
-     */
-    private void removeSubTable(final FitsTable subTable) {
+    public Set<String> getDefaultKeywords() {
+        return defaultKeywords;
+    }
 
-        if (subTable == null) {
-            return;
+    public Set<String> getSpecificKeywords() {
+        return specificKeywords;
+    }
+
+    public final void setKeywordDefault(final String name, final String value) {
+        if (getKeywordValue(name) == null) {
+            setKeywordValue(name, value);
         }
+    }
 
-        for (String key : subTable.getKeywordsDesc().keySet()) {
-            // don't remove standard keywords!
-            if (!FitsUtils.isStandardKeyword(key)) {
-                getKeywordsDesc().remove(key);
-                //getKeywordsValue().remove(key);
-            }
+    public final void setKeywordDefaultInt(final String name, final int value) {
+        if (getKeywordValue(name) == null) {
+            setKeywordInt(name, value);
+        }
+    }
+
+    public final void setKeywordDefaultDouble(final String name, final double value) {
+        if (getKeywordValue(name) == null) {
+            setKeywordDouble(name, value);
+        }
+    }
+
+    public final void setKeywordDefaultLogical(final String name, final boolean value) {
+        if (getKeywordValue(name) == null) {
+            setKeywordLogical(name, value);
         }
     }
 
@@ -257,25 +318,6 @@ public final class ImageOiInputParam extends FitsTable {
 
     public void setRglPrio(String rgl_prio) {
         setKeyword(ImageOiConstants.KEYWORD_RGL_PRIO, rgl_prio);
-    }
-
-    // bsmem specific
-    public double getFluxErr() {
-        return getKeywordDouble(ImageOiConstants.KEYWORD_FLUXERR);
-
-    }
-
-    public void setFluxErr(double fluxErr) {
-        setKeywordDouble(ImageOiConstants.KEYWORD_FLUXERR, fluxErr);
-
-    }
-
-    public boolean useAutoWgt() {
-        return getKeywordLogical(ImageOiConstants.KEYWORD_AUTO_WGT);
-    }
-
-    public void useAutoWgt(boolean auto_rgl) {
-        setKeywordLogical(ImageOiConstants.KEYWORD_AUTO_WGT, auto_rgl);
     }
 
 }

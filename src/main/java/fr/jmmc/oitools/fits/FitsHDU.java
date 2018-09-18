@@ -189,12 +189,31 @@ public abstract class FitsHDU extends ModelBase {
     }
 
     /**
+     * Return true if the given keyword descriptor is present
+     *
+     * @param name keyword name
+     * @return true if the given keyword descriptor is present
+     */
+    public final boolean hasKeywordMeta(final String name) {
+        return (getKeywordsDesc(name) != null);
+    }
+
+    /**
      * Add the given keyword descriptor
      *
      * @param meta keyword descriptor
      */
     protected final void addKeywordMeta(final KeywordMeta meta) {
         getKeywordsDesc().put(meta.getName(), meta);
+    }
+
+    /**
+     * Remove the keyword given its name
+     *
+     * @param name keyword name
+     */
+    protected final void removeKeywordMeta(final String name) {
+        getKeywordsDesc().remove(name);
     }
 
     /*
@@ -324,7 +343,7 @@ public abstract class FitsHDU extends ModelBase {
      * @param name keyword name
      * @param value a String value
      */
-    protected final void setKeyword(final String name, final String value) {
+    public final void setKeyword(final String name, final String value) {
         setKeywordValue(name, value);
     }
 
@@ -334,7 +353,7 @@ public abstract class FitsHDU extends ModelBase {
      * @param name keyword name
      * @param value a int value
      */
-    protected final void setKeywordInt(final String name, final int value) {
+    public final void setKeywordInt(final String name, final int value) {
         setKeywordValue(name, NumberUtils.valueOf(value));
     }
 
@@ -344,7 +363,7 @@ public abstract class FitsHDU extends ModelBase {
      * @param name keyword name
      * @param value a double value
      */
-    protected final void setKeywordDouble(final String name, final double value) {
+    public final void setKeywordDouble(final String name, final double value) {
         setKeywordValue(name, Double.valueOf(value));
     }
 
@@ -354,7 +373,7 @@ public abstract class FitsHDU extends ModelBase {
      * @param name keyword name
      * @param value a boolean value
      */
-    protected final void setKeywordLogical(final String name, final boolean value) {
+    public final void setKeywordLogical(final String name, final boolean value) {
         setKeywordValue(name, Boolean.valueOf(value));
     }
 
