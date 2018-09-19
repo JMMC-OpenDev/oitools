@@ -30,17 +30,20 @@ public final class FitsHeaderCard {
     /** header card key */
     private final String key;
     /** optional header card value */
-    private String value;
+    private final String value;
     /** optional header card comment */
-    private String comment;
+    private final String comment;
+    /** flag indicating whether or not this is a string value */
+    private boolean isString;
 
     /**
      * Protected constructor
      * @param key header card key
      * @param value optional header card value
+     * @param isString flag indicating whether or not this is a string value
      * @param comment optional header card comment
      */
-    public FitsHeaderCard(final String key, final String value, final String comment) {
+    public FitsHeaderCard(final String key, final String value, final boolean isString, final String comment) {
         if (key != null && key.length() > HeaderCard.MAX_KEYWORD_LENGTH && !key.startsWith("HIERARCH.")) {
             throw new IllegalArgumentException("Keyword key is too long (max" + HeaderCard.MAX_KEYWORD_LENGTH + " chars) : " + key);
         }
@@ -50,6 +53,7 @@ public final class FitsHeaderCard {
         this.key = key;
         this.value = value;
         this.comment = comment;
+        this.isString = isString;
     }
 
     /**
@@ -66,6 +70,14 @@ public final class FitsHeaderCard {
      */
     public String getValue() {
         return value;
+    }
+
+    /**
+    * Return the flag indicating whether or not this is a string value
+    * @return flag indicating whether or not this is a string value
+    */
+    public boolean isString() {
+        return isString;
     }
 
     /**
@@ -94,7 +106,14 @@ public final class FitsHeaderCard {
     public void toString(final StringBuilder sb) {
         sb.append(key);
         if (value != null) {
-            sb.append(" = ").append(value);
+            sb.append(" = ");
+            if (isString) {
+                sb.append('\'');
+            }
+            sb.append(value);
+            if (isString) {
+                sb.append('\'');
+            }
         }
         if (comment != null) {
             sb.append(" // ").append(comment);

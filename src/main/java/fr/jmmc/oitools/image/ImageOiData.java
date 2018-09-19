@@ -19,7 +19,8 @@
  ******************************************************************************/
 package fr.jmmc.oitools.image;
 
-import fr.jmmc.oitools.model.OIFitsFile;
+import fr.jmmc.oitools.model.OIFitsChecker;
+import java.util.logging.Level;
 
 /**
  * Container of usefull attribute to manage IMAGE-OI process (image data, params)
@@ -27,16 +28,14 @@ import fr.jmmc.oitools.model.OIFitsFile;
  */
 public final class ImageOiData {
 
-    /* members */
-    /** Main OIFitsFile */
-    private final OIFitsFile oifitsFile;
+    public final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ImageOiData.class.getName());
 
+    /* members */
     private final ImageOiInputParam inputParam = new ImageOiInputParam();
     private final ImageOiOutputParam outputParam = new ImageOiOutputParam();
 
-    public ImageOiData(final OIFitsFile oifitsFile) {
+    public ImageOiData() {
         super();
-        this.oifitsFile = oifitsFile;
     }
 
     /**
@@ -51,4 +50,19 @@ public final class ImageOiData {
         return outputParam;
     }
 
+    /*
+     * --- Checker -------------------------------------------------------------
+     */
+    /**
+     * Do syntactical analysis of the table
+     *
+     * @param checker checker component
+     */
+    public void checkSyntax(final OIFitsChecker checker) {
+        logger.log(Level.INFO, "Analysing HDU [{0}]:", inputParam.idToString());
+        inputParam.checkSyntax(checker);
+
+        logger.log(Level.INFO, "Analysing HDU [{0}]:", outputParam.idToString());
+        outputParam.checkSyntax(checker);
+    }
 }

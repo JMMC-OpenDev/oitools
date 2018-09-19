@@ -379,8 +379,7 @@ public abstract class FitsHDU extends ModelBase {
 
     /**
      * Update the keyword value given its name and value. Stored data is
-     * converted from string using the associated meta. COMPLEX and REAL are not
-     * yet supported.
+     * converted from string using the associated meta.
      *
      * @param name keyword name.
      * @param strValue a String value of the object to be stored in keywords.
@@ -475,7 +474,7 @@ public abstract class FitsHDU extends ModelBase {
      * @param comment optional header card comment
      */
     public final void addHeaderCard(final String key, final String value, final String comment) {
-        getHeaderCards().add(new FitsHeaderCard(key, value, comment));
+        getHeaderCards().add(new FitsHeaderCard(key, value, true, comment));
     }
 
     /*

@@ -510,7 +510,7 @@ public class OIFitsLoader {
         }
 
         // try to load IMAGE-OI data
-        final ImageOiData imageOiData = new ImageOiData(this.oiFitsFile);
+        final ImageOiData imageOiData = new ImageOiData();
 
         // report any non-standard OIFits binary tables:
         for (int i = 0; i < nbHDU; i++) {

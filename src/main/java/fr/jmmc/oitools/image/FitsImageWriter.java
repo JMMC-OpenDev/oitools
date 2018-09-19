@@ -273,9 +273,9 @@ public final class FitsImageWriter {
                 final String key = headerCard.getKey();
 
                 // skip already handled keywords:
-                if (!((isImage) ? skipKeyword(key) : FitsUtils.isStandardKeyword(key))) {
+                if (!((isImage) ? skipKeyword(key) : hduFits.hasKeywordMeta(key) || FitsUtils.isStandardKeyword(key))) {
                     // support repeated keywords
-                    header.addLine(new HeaderCard(key, headerCard.getValue(), headerCard.getComment()));
+                    header.addLine(new HeaderCard(key, headerCard.getValue(), headerCard.isString(), headerCard.getComment()));
                 }
             }
         }

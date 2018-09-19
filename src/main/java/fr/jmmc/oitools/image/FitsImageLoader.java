@@ -837,7 +837,7 @@ public final class FitsImageLoader {
                 // no trim:
                 value = card.getValue();
 
-                headerCards.add(new FitsHeaderCard(key, value, card.getComment()));
+                headerCards.add(new FitsHeaderCard(key, value, card.isStringValue(), card.getComment()));
             }
         }
 

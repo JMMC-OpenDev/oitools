@@ -555,6 +555,10 @@ public final class OIFitsFile extends FitsImageFile {
             for (OITable oiTable : getOITableList()) {
                 oiTable.checkSyntax(checker);
             }
+            
+            if (getExistingImageOiData() != null) {
+                getExistingImageOiData().checkSyntax(checker);
+            }
 
             // Define Severity:
             checker.defineSeverity(SeverityProfileFactory.getInstance().getProfile(SeverityProfileFactory.PROFILE_JMMC));
@@ -1241,7 +1245,7 @@ public final class OIFitsFile extends FitsImageFile {
      */
     public ImageOiData getImageOiData() {
         if (imageOiData == null) {
-            imageOiData = new ImageOiData(this);
+            imageOiData = new ImageOiData();
         }
         return imageOiData;
     }

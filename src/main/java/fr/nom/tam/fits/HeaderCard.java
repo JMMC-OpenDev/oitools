@@ -100,6 +100,20 @@ public final class HeaderCard {
         this(key, value, comment, false);
     }
 
+    /** 
+     * LBO: Create a HeaderCard from its component parts
+     * @param key keyword (null for a comment)
+     * @param value value (null for a comment or keyword without an '=')
+     * @param comment comment
+     * @param isString flag indicating whether or not this is a string value
+     * @exception HeaderCardException for any invalid keyword or value
+     */
+    public HeaderCard(String key, String value, boolean isString, String comment)
+            throws HeaderCardException {
+        this(key, value, comment, false);
+        this.isString = isString;
+    }
+    
     /** Create a comment style card.
      *  This constructor builds a card which has no value.
      *  This may be either a comment style card in which case the
