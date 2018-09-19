@@ -35,7 +35,10 @@ public final class ImageOiOutputParam extends FitsTable {
         super();
 
         // TODO add standard keywords
+
         // Set default values
+        setNbRows(0);
+        setExtVer(1);
         setExtName(ImageOiConstants.EXTNAME_IMAGE_OI_OUTPUT_PARAM);
     }
 
