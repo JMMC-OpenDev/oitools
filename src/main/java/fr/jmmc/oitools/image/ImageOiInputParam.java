@@ -19,9 +19,12 @@
  ******************************************************************************/
 package fr.jmmc.oitools.image;
 
+import fr.jmmc.oitools.fits.FitsHeaderCard;
 import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
+import fr.jmmc.oitools.model.OIFitsChecker;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -38,8 +41,8 @@ public final class ImageOiInputParam extends FitsTable {
 
     // Define Data selection keywords
     private final static KeywordMeta KEYWORD_TARGET = new KeywordMeta(ImageOiConstants.KEYWORD_TARGET, "Identifier of the target object to reconstruct", Types.TYPE_CHAR);
-    private final static KeywordMeta KEYWORD_WAVE_MIN = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MIN, "Minimum wavelentgh to select (in meters)", Types.TYPE_DBL);
-    private final static KeywordMeta KEYWORD_WAVE_MAX = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MAX, "Maximum wavelentgh to select (in meters)", Types.TYPE_DBL);
+    private final static KeywordMeta KEYWORD_WAVE_MIN = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MIN, "Minimum wavelength to select (in meters)", Types.TYPE_DBL);
+    private final static KeywordMeta KEYWORD_WAVE_MAX = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MAX, "Maximum wavelength to select (in meters)", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_USE_VIS = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS, "Use complex visibility data if any", Types.TYPE_LOGICAL);
     private final static KeywordMeta KEYWORD_USE_VIS2 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS2, "Use squared visibility data if any", Types.TYPE_LOGICAL);
     private final static KeywordMeta KEYWORD_USE_T3 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_T3, "Use triple product data if any", Types.TYPE_LOGICAL);
@@ -144,7 +147,6 @@ public final class ImageOiInputParam extends FitsTable {
     }
 
     public final void defineDefaultKeywordValues() {
-        // TODO make it dynamic and software dependant
         setWaveMin(-1);
         setWaveMax(-1);
         setMaxiter(200);
@@ -168,6 +170,11 @@ public final class ImageOiInputParam extends FitsTable {
             defaultKeywords.add(name);
         } else {
             specificKeywords.add(name);
+
+            // convert FitsHeaderCards (extra keywords including specific keyword values):
+            if (hasHeaderCards()) {
+                convertHeaderCards(name);
+            }
         }
     }
 
@@ -192,27 +199,57 @@ public final class ImageOiInputParam extends FitsTable {
         return specificKeywords;
     }
 
-    public final void setKeywordDefault(final String name, final String value) {
-        if (getKeywordValue(name) == null) {
+    private final boolean hasKeywordValue(final String name) {
+        return getKeywordValue(name) != null;
+    }
+
+    public final void setKeywordDefault(final String name, final Object value) {
+        if (!hasKeywordValue(name)) {
             setKeywordValue(name, value);
         }
     }
 
     public final void setKeywordDefaultInt(final String name, final int value) {
-        if (getKeywordValue(name) == null) {
+        if (!hasKeywordValue(name)) {
             setKeywordInt(name, value);
         }
     }
 
     public final void setKeywordDefaultDouble(final String name, final double value) {
-        if (getKeywordValue(name) == null) {
+        if (!hasKeywordValue(name)) {
             setKeywordDouble(name, value);
         }
     }
 
     public final void setKeywordDefaultLogical(final String name, final boolean value) {
-        if (getKeywordValue(name) == null) {
+        if (!hasKeywordValue(name)) {
             setKeywordLogical(name, value);
+        }
+    }
+
+    private void convertHeaderCards(final String name) {
+        for (Iterator<FitsHeaderCard> it = getHeaderCards().iterator(); it.hasNext();) {
+            final FitsHeaderCard card = it.next();
+            if (name.equals(card.getKey())) {
+                setKeywordDefaultFromCard(name, card.getValue());
+
+                // remove to avoid any duplicated keyword:
+                it.remove();
+                break;
+            }
+        }
+    }
+
+    private void setKeywordDefaultFromCard(final String name, final String value) {
+        if (!hasKeywordValue(name)) {
+            // Fix Logical (T|F) to Boolean:
+            final String strValue;
+            if (getKeywordsDesc(name).getDataType() == Types.TYPE_LOGICAL) {
+                strValue = "T".equals(value) ? "true" : "false";
+            } else {
+                strValue = value;
+            }
+            updateKeyword(name, strValue);
         }
     }
 
