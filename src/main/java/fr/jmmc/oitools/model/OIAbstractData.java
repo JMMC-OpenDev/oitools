@@ -24,7 +24,6 @@ import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
-import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -123,7 +122,7 @@ public abstract class OIAbstractData extends OITable {
     public final short[] getTargetId() {
         return this.getColumnShort(OIFitsConstants.COLUMN_TARGET_ID);
     }
-    
+
     /**
      * Define the TARGET_ID column.
      * @param targetIds the TARGET_ID column.
@@ -341,5 +340,4 @@ public abstract class OIAbstractData extends OITable {
         }
         return label;
     }
-
 }

@@ -129,6 +129,20 @@ public final class OIT3 extends OIData {
         // Derived SNR column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_T3PHI, "SNR on " + OIFitsConstants.COLUMN_T3PHI,
                 Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_T3PHI + " / " + OIFitsConstants.COLUMN_T3PHIERR + ")"));
+
+        // if IMAGE_OI support is enabled
+        if (DataModel.hasOiModelColumnsSupport()) {
+            // Derived COLUMN_RES_T3AMP_MODEL columns definition (optional)
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_RES_T3AMP_MODEL, "Residual between on " + OIFitsConstants.COLUMN_T3AMP
+                    + " vs " + OIFitsConstants.COLUMN_NS_MODEL_T3AMP + " (sigma)", Types.TYPE_DBL, this,
+                    "(" + OIFitsConstants.COLUMN_T3AMP + " - " + OIFitsConstants.COLUMN_NS_MODEL_T3AMP + ") / " + OIFitsConstants.COLUMN_T3AMPERR,
+                    DataRange.RANGE_SIGMA));
+            // Derived COLUMN_RES_T3PHI_MODEL columns definition (optional)
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_RES_T3PHI_MODEL, "Residual between on " + OIFitsConstants.COLUMN_T3PHI
+                    + " vs " + OIFitsConstants.COLUMN_NS_MODEL_T3PHI + " (sigma)", Types.TYPE_DBL, this,
+                    "distanceAngle(" + OIFitsConstants.COLUMN_T3PHI + "," + OIFitsConstants.COLUMN_NS_MODEL_T3PHI + ") / " + OIFitsConstants.COLUMN_T3PHIERR,
+                    DataRange.RANGE_SIGMA));
+        }
     }
 
     /**
@@ -152,10 +166,10 @@ public final class OIT3 extends OIData {
      */
     public OIT3(final OIFitsFile oifitsFile, final OIT3 src) {
         this(oifitsFile);
-        
+
         this.copyTable(src);
     }
-    
+
     /* --- Columns --- */
     /**
      * Return the T3AMP column.

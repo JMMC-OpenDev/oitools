@@ -833,7 +833,6 @@ public abstract class OIData extends OIAbstractData {
         // handle user expressions
         for (ColumnMeta column : getColumnDerivedDescCollection()) {
             if (column.getName().equals(name)) {
-
                 if (column instanceof WaveColumnMeta) {
                     WaveColumnMeta colMeta = (WaveColumnMeta) column;
 

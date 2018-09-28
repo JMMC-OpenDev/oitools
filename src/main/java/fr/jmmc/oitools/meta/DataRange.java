@@ -33,6 +33,8 @@ public final class DataRange {
     public final static DataRange RANGE_ANGLE = new DataRange("RANGE_ANGLE", -200.0, 200.0);
     /** data range representing visibilities [0; 1] with margins = [-0.1; 1.1] */
     public final static DataRange RANGE_VIS = new DataRange("RANGE_VIS", -0.1, 1.1);
+    /** data range representing sigma [-5; 5] */
+    public final static DataRange RANGE_SIGMA = new DataRange("RANGE_SIGMA", -5.0, 5.0);
 
     /* members */
     /** range name */

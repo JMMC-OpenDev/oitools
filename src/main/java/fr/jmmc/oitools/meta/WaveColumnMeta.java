@@ -55,8 +55,23 @@ public final class WaveColumnMeta extends ArrayColumnMeta {
      * @param oiData OIData object to resolve OIWaveLength reference
      * @param expression expression entered by the user
      */
-    public WaveColumnMeta(final String name, final String desc, final Types dataType, final OIAbstractData oiData, String expression) {
+    public WaveColumnMeta(final String name, final String desc, final Types dataType, final OIAbstractData oiData, final String expression) {
         this(name, desc, dataType, false, false, NO_STR_VALUES, Units.NO_UNIT, null, null, oiData);
+        this.expression = expression;
+    }
+
+    /**
+     * ColumnMeta class constructor
+     *
+     * @param name keyword/column name
+     * @param desc keyword/column descriptive comment
+     * @param dataType keyword/column data type
+     * @param oiData OIData object to resolve OIWaveLength reference
+     * @param expression expression entered by the user
+     * @param dataRange optional data range (may be null)
+     */
+    public WaveColumnMeta(final String name, final String desc, final Types dataType, final OIAbstractData oiData, final String expression, final DataRange dataRange) {
+        this(name, desc, dataType, false, false, NO_STR_VALUES, Units.NO_UNIT, null, dataRange, oiData);
         this.expression = expression;
     }
 

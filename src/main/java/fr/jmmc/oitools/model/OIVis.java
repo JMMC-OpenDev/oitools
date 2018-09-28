@@ -99,13 +99,11 @@ public final class OIVis extends OIData {
 
         // if IMAGE_OI support is enabled
         if (DataModel.hasOiModelColumnsSupport()) {
-
             // VIS MODEL columns definition (optional)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_VISAMP, "model of the visibility amplitude",
                     Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.NO_UNIT, null, DataRange.RANGE_VIS, this));
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_VISPHI, "model of the visibility phase",
                     Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.UNIT_DEGREE, null, DataRange.RANGE_ANGLE, this));
-
         }
 
         // UCOORD  column definition
@@ -169,6 +167,20 @@ public final class OIVis extends OIData {
         // Derived SNR column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_VISPHI, "SNR on " + OIFitsConstants.COLUMN_VISPHI,
                 Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_VISPHI + " / " + OIFitsConstants.COLUMN_VISPHIERR + ")"));
+
+        // if IMAGE_OI support is enabled
+        if (DataModel.hasOiModelColumnsSupport()) {
+            // Derived RES_VISAMP_MODEL columns definition (optional)
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_RES_VISAMP_MODEL, "Residual between on " + OIFitsConstants.COLUMN_VISAMP
+                    + " vs " + OIFitsConstants.COLUMN_NS_MODEL_VISAMP + " (sigma)", Types.TYPE_DBL, this,
+                    "(" + OIFitsConstants.COLUMN_VISAMP + " - " + OIFitsConstants.COLUMN_NS_MODEL_VISAMP + ") / " + OIFitsConstants.COLUMN_VISAMPERR,
+                    DataRange.RANGE_SIGMA));
+            // Derived RES_VISPHI_MODEL columns definition (optional)
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_RES_VISPHI_MODEL, "Residual between on " + OIFitsConstants.COLUMN_VISPHI
+                    + " vs " + OIFitsConstants.COLUMN_NS_MODEL_VISPHI + " (sigma)", Types.TYPE_DBL, this,
+                    "distanceAngle(" + OIFitsConstants.COLUMN_VISPHI + "," + OIFitsConstants.COLUMN_NS_MODEL_VISPHI + ") / " + OIFitsConstants.COLUMN_VISPHIERR,
+                    DataRange.RANGE_SIGMA));
+        }
     }
 
     /**
@@ -192,10 +204,10 @@ public final class OIVis extends OIData {
      */
     public OIVis(final OIFitsFile oifitsFile, final OIVis src) {
         this(oifitsFile);
-        
+
         this.copyTable(src);
     }
-    
+
     /* --- keywords --- */
     /**
      * Get the optional value of AMPTYPE keyword
