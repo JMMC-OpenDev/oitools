@@ -55,7 +55,7 @@ public class JELEval extends ExpressionEvaluator {
      */
     @Override
     public double[][] eval(final OIData oiData, final String colNameEval,
-            final String expression, final boolean testOnly)
+                           final String expression, final boolean testOnly)
             throws RuntimeException {
 
         if (_logger.isLoggable(Level.FINE)) {
@@ -269,7 +269,8 @@ public class JELEval extends ExpressionEvaluator {
         public double getDoubleProperty(final int index) {
             final JELColumn col = columns[index];
 
-            return (col.values2D != null) ? col.values2D[i][j] : col.values1D[i];
+            return (col.values2D != null) ? col.values2D[i][j]
+                    : (col.values1D != null) ? col.values1D[i] : Double.NaN;
         }
     }
 
@@ -280,18 +281,12 @@ public class JELEval extends ExpressionEvaluator {
         final double[][] values2D;
 
         JELColumn(final String name, final double[] values1D) {
-            if (values1D == null) {
-                throw new IllegalArgumentException("Null value for column '" + name + "' !");
-            }
             this.name = name;
             this.values1D = values1D;
             this.values2D = null;
         }
 
         JELColumn(final String name, final double[][] values2D) {
-            if (values2D == null) {
-                throw new IllegalArgumentException("Null value for column '" + name + "' !");
-            }
             this.name = name;
             this.values1D = null;
             this.values2D = values2D;
