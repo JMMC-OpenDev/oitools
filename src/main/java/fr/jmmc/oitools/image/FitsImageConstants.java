@@ -55,9 +55,9 @@ public interface FitsImageConstants {
 
     /* default values for missing keywords */
     /** default value (1.0) for CRPIXn keywords */
-    public final static double DEFAULT_CRPIX = 1d;
+    public final static double DEFAULT_CRPIX = 1.0;
     /** default value (0.0) for CRVALn keywords */
-    public final static double DEFAULT_CRVAL = 0d;
+    public final static double DEFAULT_CRVAL = 0.0;
     /** default value (1.0 rad) for CDELTn keywords */
-    public final static double DEFAULT_CDELT = 1d;
+    public final static double DEFAULT_CDELT = 1.0;
 }

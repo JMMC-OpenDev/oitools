@@ -40,11 +40,11 @@ public final class FitsImage {
     /** image identifier */
     private String imageIdentifier = null;
     /** wavelength position of the reference pixel (real starting from 1.0) */
-    private double pixRefWL = 1d;
+    private double pixRefWL = 1.0;
     /** wavelength value at the reference pixel column (meter) */
-    private double valRefWL = 0d;
+    private double valRefWL = 0.0;
     /** wavelength increment along the wavelength axis (meter per pixel) */
-    private double incWL = 1d;
+    private double incWL = 1.0;
     /** image wavelength in meters (NaN if undefined) */
     private Double wavelength = null;
     /* image related information (may changed during processing) */
@@ -53,13 +53,13 @@ public final class FitsImage {
     /** number of rows */
     private int nbRows = 0;
     /** column position of the reference pixel (real starting from 1.0) */
-    private double pixRefCol = 1d;
+    private double pixRefCol = 1.0;
     /** row position of the reference pixel (real starting from 1.0) */
-    private double pixRefRow = 1d;
+    private double pixRefRow = 1.0;
     /** coordinate value at the reference pixel column (radians) */
-    private double valRefCol = 0d;
+    private double valRefCol = 0.0;
     /** coordinate value at the reference pixel row (radians) */
-    private double valRefRow = 0d;
+    private double valRefRow = 0.0;
     /** sign flag of the coordinate increment along the column axis (true means positive or false negative) */
     private boolean incColPositive = true;
     /** absolute coordinate increment along the column axis (radians per pixel) */
@@ -71,7 +71,7 @@ public final class FitsImage {
     /** image area coordinates (radians) */
     private Rectangle2D.Double area = null;
     /** rotation of the image plane (degrees) */
-    private double rotAngle = 0d;
+    private double rotAngle = 0.0;
     /** image data as float[nbRows][nbCols] ie [Y][X] */
     private float[][] data = null;
     /** minimum value in data */
@@ -81,7 +81,7 @@ public final class FitsImage {
     /** number of data */
     private int nData = 0;
     /** sum of data values */
-    private double sum = 0d;
+    private double sum = 0.0;
     /* backup of original keyword values */
     /** original value of the absolute coordinate increment along the column axis (radians per pixel) */
     private double origIncCol = Double.NaN;
@@ -254,14 +254,14 @@ public final class FitsImage {
         if (this.wavelength == null) {
             // If increment is undefined (NaN):
             if (Double.isNaN(this.incWL)) {
-                if (this.imageIndex > 1 || this.pixRefWL > 1d) {
+                if (this.imageIndex > 1 || this.pixRefWL > 1.0) {
                     // wavelength is undefined:
                     this.wavelength = Double.valueOf(Double.NaN);
                 } else {
                     this.wavelength = Double.valueOf(this.valRefWL);
                 }
             } else {
-                this.wavelength = Double.valueOf(this.valRefWL + ((this.imageIndex - 1) - (this.pixRefWL - 1d)) * this.incWL);
+                this.wavelength = Double.valueOf(this.valRefWL + ((this.imageIndex - 1) - (this.pixRefWL - 1.0)) * this.incWL);
             }
         }
         return this.wavelength.doubleValue();
@@ -424,7 +424,7 @@ public final class FitsImage {
      */
     public void setSignedIncCol(final double incCol) {
         if (incCol != 0.0) {
-            this.incColPositive = (incCol >= 0d);
+            this.incColPositive = (incCol >= 0.0);
             this.incCol = (this.incColPositive) ? incCol : -incCol;
         }
         if (Double.isNaN(this.origIncCol)) {
@@ -471,7 +471,7 @@ public final class FitsImage {
      */
     public void setSignedIncRow(final double incRow) {
         if (incRow != 0.0) {
-            this.incRowPositive = (incRow >= 0d);
+            this.incRowPositive = (incRow >= 0.0);
             this.incRow = (this.incRowPositive) ? incRow : -incRow;
         }
         if (Double.isNaN(this.origIncRow)) {
@@ -504,7 +504,7 @@ public final class FitsImage {
      * @return true if the rotation angle is defined
      */
     public boolean isRotAngleDefined() {
-        return this.rotAngle != 0d;
+        return this.rotAngle != 0.0;
     }
 
     /**
@@ -702,8 +702,8 @@ public final class FitsImage {
      */
     private void updateArea() {
         this.area = new Rectangle2D.Double(
-                this.valRefCol - (this.pixRefCol - 1d) * this.incCol,
-                this.valRefRow - (this.pixRefRow - 1d) * this.incRow,
+                - (this.pixRefCol - 1.0) * this.incCol,
+                - (this.pixRefRow - 1.0) * this.incRow,
                 this.nbCols * this.incCol,
                 this.nbRows * this.incRow);
 
@@ -734,18 +734,18 @@ public final class FitsImage {
             return "NaN";
         }
         double tmp = Math.toDegrees(angle);
-        if (tmp > 1e-1d) {
+        if (tmp > 1e-1) {
             return ((df != null) ? df.format(tmp) : tmp) + " deg";
         }
-        tmp *= 60d;
-        if (tmp > 1e-1d) {
+        tmp *= 60.0;
+        if (tmp > 1e-1) {
             return ((df != null) ? df.format(tmp) : tmp) + " arcmin";
         }
-        tmp *= 60d;
-        if (tmp > 1e-1d) {
+        tmp *= 60.0;
+        if (tmp > 1e-1) {
             return ((df != null) ? df.format(tmp) : tmp) + " arcsec";
         }
-        tmp *= 1000d;
+        tmp *= 1000.0;
         return ((df != null) ? df.format(tmp) : tmp) + " mas";
     }
 
