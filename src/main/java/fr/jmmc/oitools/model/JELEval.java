@@ -61,10 +61,6 @@ public class JELEval extends ExpressionEvaluator {
         if (_logger.isLoggable(Level.FINE)) {
             _logger.log(Level.FINE, "eval: column= {0} expression= {1}", new Object[]{colNameEval, expression});
         }
-        
-        if ("RES_T3PHI_MODEL".equals(colNameEval)) {
-            System.out.println("Test");
-        }
 
         int nRows = oiData.getNbRows();
         int nWaves = oiData.getNWave();
