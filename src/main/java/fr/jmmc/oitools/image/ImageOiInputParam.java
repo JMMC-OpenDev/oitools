@@ -148,7 +148,7 @@ public final class ImageOiInputParam extends FitsTable {
     public final void defineDefaultKeywordValues() {
         setWaveMin(-1);
         setWaveMax(-1);
-        setMaxiter(200);
+        setMaxiter(50);
         setRglWgt(0);
         setRglAlph(0);
         setRglBeta(0);
