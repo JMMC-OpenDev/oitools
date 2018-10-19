@@ -28,6 +28,9 @@ import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.Rule;
+import fr.jmmc.oitools.processing.Resampler;
+import fr.jmmc.oitools.processing.Resize;
+import fr.jmmc.oitools.util.ArrayConvert;
 import fr.nom.tam.fits.BasicHDU;
 import fr.nom.tam.fits.Data;
 import fr.nom.tam.fits.Fits;
@@ -864,7 +867,6 @@ public final class FitsImageLoader {
         final Object allData = fitsData.getData();
 
         if (allData != null) {
-
             // interpret also BSCALE / BZERO (BUNIT) if present
             final int bitPix = hdu.getBitPix();
             final double bZero = hdu.getBZero();
@@ -974,86 +976,20 @@ public final class FitsImageLoader {
             return (float[][]) array2D;
         }
 
-        final float[][] output = new float[rows][cols];
+        // 1 - convert data to float[][]
+        final float[][] output = ArrayConvert.toFloats(rows, cols, array2D);
 
-        // Ignore special case [0x0]
-        if ((rows != 0) && (cols != 0)) {
-            // 1 - convert data to float[][]
+        // 2 - scale data:
+        if (doZero || doScaling) {
             float[] oRow;
-            switch (bitpix) {
-                case BasicHDU.BITPIX_BYTE:
-                    final byte[][] bArray = (byte[][]) array2D;
-                    byte[] bRow;
-                    for (int i, j = 0; j < rows; j++) {
-                        oRow = output[j];
-                        bRow = bArray[j];
-                        for (i = 0; i < cols; i++) {
-                            oRow[i] = (float) (bRow[i] & 0xFF);
-                        }
+            for (int i, j = 0; j < rows; j++) {
+                oRow = output[j];
+                for (i = 0; i < cols; i++) {
+                    if (doScaling) {
+                        oRow[i] = (float) (oRow[i] * bScale);
                     }
-                    break;
-                case BasicHDU.BITPIX_SHORT:
-                    final short[][] sArray = (short[][]) array2D;
-                    short[] sRow;
-                    for (int i, j = 0; j < rows; j++) {
-                        oRow = output[j];
-                        sRow = sArray[j];
-                        for (i = 0; i < cols; i++) {
-                            oRow[i] = (float) sRow[i];
-                        }
-                    }
-                    break;
-                case BasicHDU.BITPIX_INT:
-                    final int[][] iArray = (int[][]) array2D;
-                    int[] iRow;
-                    for (int i, j = 0; j < rows; j++) {
-                        oRow = output[j];
-                        iRow = iArray[j];
-                        for (i = 0; i < cols; i++) {
-                            oRow[i] = (float) iRow[i];
-                        }
-                    }
-                    break;
-                case BasicHDU.BITPIX_LONG:
-                    final long[][] lArray = (long[][]) array2D;
-                    long[] lRow;
-                    for (int i, j = 0; j < rows; j++) {
-                        oRow = output[j];
-                        lRow = lArray[j];
-                        for (i = 0; i < cols; i++) {
-                            oRow[i] = (float) lRow[i];
-                        }
-                    }
-                    break;
-                case BasicHDU.BITPIX_FLOAT:
-                    // nothing to do
-                    break;
-                case BasicHDU.BITPIX_DOUBLE:
-                    final double[][] dArray = (double[][]) array2D;
-                    double[] dRow;
-                    for (int i, j = 0; j < rows; j++) {
-                        oRow = output[j];
-                        dRow = dArray[j];
-                        for (i = 0; i < cols; i++) {
-                            oRow[i] = (float) dRow[i];
-                        }
-                    }
-                    break;
-
-                default:
-            }
-
-            // 2 - scale data:
-            if (doZero || doScaling) {
-                for (int i, j = 0; j < rows; j++) {
-                    oRow = output[j];
-                    for (i = 0; i < cols; i++) {
-                        if (doScaling) {
-                            oRow[i] = (float) (oRow[i] * bScale);
-                        }
-                        if (doZero) {
-                            oRow[i] = (float) (oRow[i] + bZero);
-                        }
+                    if (doZero) {
+                        oRow[i] = (float) (oRow[i] + bZero);
                     }
                 }
             }
