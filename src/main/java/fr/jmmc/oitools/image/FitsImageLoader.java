@@ -28,8 +28,6 @@ import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.Rule;
-import fr.jmmc.oitools.processing.Resampler;
-import fr.jmmc.oitools.processing.Resize;
 import fr.jmmc.oitools.util.ArrayConvert;
 import fr.nom.tam.fits.BasicHDU;
 import fr.nom.tam.fits.Data;
