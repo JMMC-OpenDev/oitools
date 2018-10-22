@@ -65,39 +65,39 @@ import java.util.Arrays;
  * constructor, either using the
  * <a href="#field_summary">filter type constants</a>, or one of the
  * {@code RendereingHints}.
- * <p/>
+ * 
  * For fastest results, use {@link #FILTER_POINT} or {@link #FILTER_BOX}.
  * In most cases, {@link #FILTER_TRIANGLE} will produce acceptable results, while
  * being relatively fast.
  * For higher quality output, use more sophisticated interpolation algorithms,
  * like {@link #FILTER_MITCHELL} or {@link #FILTER_LANCZOS}.
- * <p/>
+ * 
  * Example:
  * <blockquote><pre>
  * BufferedImage image;
- * <p/>
+ * 
  * //...
- * <p/>
+ * 
  * ResampleOp resampler = new ResampleOp(100, 100, ResampleOp.FILTER_TRIANGLE);
  * BufferedImage thumbnail = resampler.filter(image, null);
  * </pre></blockquote>
- * <p/>
+ * 
  * If your imput image is very large, it's possible to first resample using the
  * very fast {@code FILTER_POINT} algorithm, then resample to the wanted size,
  * using a higher quality algorithm:
  * <blockquote><pre>
  * BufferedImage verylLarge;
- * <p/>
+ * 
  * //...
- * <p/>
+ * 
  * int w = 300;
  * int h = 200;
- * <p/>
+ * 
  * BufferedImage temp = new ResampleOp(w * 2, h * 2, FILTER_POINT).filter(verylLarge, null);
- * <p/>
+ * 
  * BufferedImage scaled = new ResampleOp(w, h).filter(temp, null);
  * </pre></blockquote>
- * <p/>
+ * 
  * For maximum performance, this class will use native code, through
  * <a href="http://www.yeo.id.au/jmagick/">JMagick</a>, when available.
  * Otherwise, the class will silently fall back to pure Java mode.
@@ -105,7 +105,7 @@ import java.util.Arrays;
  * {@code com.twelvemonkeys.image.accel} to {@code false}.
  * To allow debug of the native code, set the system property
  * {@code com.twelvemonkeys.image.magick.debug} to {@code true}.
- * <p/>
+ * 
  * This {@code BufferedImageOp} is based on C example code found in
  * <a href="http://www.acm.org/tog/GraphicsGems/">Graphics Gems III</a>,
  * Filtered Image Rescaling, by Dale Schumacher (with additional improvments by
@@ -114,7 +114,7 @@ import java.util.Arrays;
  * <a href="http://www.imagemagick.org/">ImageMagick</a> and
  * Marco Schmidt's <a href="http://schmidt.devlib.org/jiu/">Java Imaging Utilities</a>
  * (which are also adaptions of the same original code from Graphics Gems III).
- * <p/>
+ * 
  * For a description of the various interpolation algorithms, see
  * <em>General Filtered Image Rescaling</em> in <em>Graphics Gems III</em>,
  * Academic Press, 1994.
@@ -123,76 +123,85 @@ import java.util.Arrays;
  */
 public final class Resampler {
 
-    /**
-     * Undefined interpolation, filter method will use default filter.
-     */
-    public final static int FILTER_UNDEFINED = 0;
-    /**
-     * Point interpolation (also known as "nearest neighbour").
-     * Very fast, but low quality
-     * (similar to {@link RenderingHints#VALUE_INTERPOLATION_NEAREST_NEIGHBOR}
-     * and {@link Image#SCALE_REPLICATE}).
-     */
-    public final static int FILTER_POINT = 1;
-    /**
-     * Box interpolation. Fast, but low quality.
-     */
-    public final static int FILTER_BOX = 2;
-    /**
-     * Triangle interpolation (also known as "linear" or "bilinear").
-     * Quite fast, with acceptable quality
-     * (similar to {@link RenderingHints#VALUE_INTERPOLATION_BILINEAR} and
-     * {@link Image#SCALE_AREA_AVERAGING}).
-     */
-    public final static int FILTER_TRIANGLE = 3;
-    /**
-     * Hermite interpolation.
-     */
-    public final static int FILTER_HERMITE = 4;
-    /**
-     * Hanning interpolation.
-     */
-    public final static int FILTER_HANNING = 5;
-    /**
-     * Hamming interpolation.
-     */
-    public final static int FILTER_HAMMING = 6;
-    /**
-     * Blackman interpolation..
-     */
-    public final static int FILTER_BLACKMAN = 7;
-    /**
-     * Gaussian interpolation.
-     */
-    public final static int FILTER_GAUSSIAN = 8;
-    /**
-     * Quadratic interpolation.
-     */
-    public final static int FILTER_QUADRATIC = 9;
-    /**
-     * Cubic interpolation.
-     */
-    public final static int FILTER_CUBIC = 10;
-    /**
-     * Catrom interpolation.
-     */
-    public final static int FILTER_CATROM = 11;
-    /**
-     * Mitchell interpolation. High quality.
-     */
-    public final static int FILTER_MITCHELL = 12; // IM default scale with palette or alpha, or scale up
-    /**
-     * Lanczos interpolation. High quality.
-     */
-    public final static int FILTER_LANCZOS = 13; // IM default
-    /**
-     * Blackman-Bessel interpolation. High quality.
-     */
-    public final static int FILTER_BLACKMAN_BESSEL = 14;
-    /**
-     * Blackman-Sinc interpolation. High quality.
-     */
-    public final static int FILTER_BLACKMAN_SINC = 15;
+    public static final Filter FILTER_DEFAULT = Filter.FILTER_MITCHELL;
+
+    public enum Filter {
+        /**
+         * Point interpolation (also known as "nearest neighbour").
+         * Very fast, but low quality
+         */
+        FILTER_POINT("Point"),
+        /**
+         * Box interpolation. Fast, but low quality.
+         */
+        FILTER_BOX("Box"),
+        /**
+         * Triangle interpolation (also known as "linear" or "bilinear").
+         * Quite fast, with acceptable quality
+         */
+        FILTER_TRIANGLE("Triangle"),
+        /**
+         * Hermite interpolation.
+         */
+        FILTER_HERMITE("Hermite"),
+        /**
+         * Hanning interpolation.
+         */
+        FILTER_HANNING("Hanning"),
+        /**
+         * Hamming interpolation.
+         */
+        FILTER_HAMMING("Hamming"),
+        /**
+         * Blackman interpolation..
+         */
+        FILTER_BLACKMAN("Blackman"),
+        /**
+         * Gaussian interpolation.
+         */
+        FILTER_GAUSSIAN("Gaussian"),
+        /**
+         * Quadratic interpolation.
+         */
+        FILTER_QUADRATIC("Quadratic"),
+        /**
+         * Cubic interpolation.
+         */
+        FILTER_CUBIC("Cubic"),
+        /**
+         * Catrom interpolation.
+         */
+        FILTER_CATROM("Catrom"),
+        /**
+         * Mitchell interpolation. High quality.
+         * IM default scale with palette or alpha, or scale up
+         */
+        FILTER_MITCHELL("Mitchell"),
+        /**
+         * Lanczos interpolation. High quality.
+         * IM default
+         */
+        FILTER_LANCZOS("Lanczos"),
+        /**
+         * Blackman-Bessel interpolation. High quality.
+         */
+        FILTER_BLACKMAN_BESSEL("Blackman Bessel"),
+        /**
+         * Blackman-Sinc interpolation. High quality.
+         */
+        FILTER_BLACKMAN_SINC("Blackman Sinc");
+
+        // member
+        private final String name;
+
+        Filter(final String name) {
+            this.name = name;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+    }
 
     /**
      * Re-samples (scales) the image to the size, and using the algorithm
@@ -200,11 +209,11 @@ public final class Resampler {
      *
      * @param pSource  The image (double[][]) to be filtered
      * @param pDest    The re-sampled image (double[][]) to fill (width x height)
-     * @param filterType interpolation filter algorithm
+     * @param filter interpolation filter algorithm
      * @return The re-sampled image (double[][]).
      * @throws NullPointerException if {@code input} is {@code null}
      */
-    public static final double[][] filter(final double[][] pSource, final double[][] pDest, final int filterType) {
+    public static final double[][] filter(final double[][] pSource, final double[][] pDest, final Filter filter, final boolean positive) {
         if (pSource == null) {
             throw new NullPointerException("Input == null");
         }
@@ -215,43 +224,15 @@ public final class Resampler {
             throw new IllegalStateException("Input == Dest");
         }
 
-        final InterpolationFilter filter = createFilter(validateFilterType(filterType));
+        final InterpolationFilter filterClass = createFilter(filter);
 
-        resample(pSource, pDest, filter);
+        resample(pSource, pDest, filterClass, positive);
 
         return pDest;
     }
 
-    private static int validateFilterType(int pFilterType) {
-        switch (pFilterType) {
-            case FILTER_UNDEFINED:
-            case FILTER_POINT:
-            case FILTER_BOX:
-            case FILTER_TRIANGLE:
-            case FILTER_HERMITE:
-            case FILTER_HANNING:
-            case FILTER_HAMMING:
-            case FILTER_BLACKMAN:
-            case FILTER_GAUSSIAN:
-            case FILTER_QUADRATIC:
-            case FILTER_CUBIC:
-            case FILTER_CATROM:
-            case FILTER_MITCHELL:
-            case FILTER_LANCZOS:
-            case FILTER_BLACKMAN_BESSEL:
-            case FILTER_BLACKMAN_SINC:
-                return pFilterType;
-            default:
-                throw new IllegalArgumentException("Unknown filter type: " + pFilterType);
-        }
-    }
-
-    private static InterpolationFilter createFilter(int pFilterType) {
-        if (pFilterType == FILTER_UNDEFINED) {
-            pFilterType = FILTER_LANCZOS;
-        }
-
-        switch (pFilterType) {
+    private static InterpolationFilter createFilter(Filter filter) {
+        switch (filter) {
             case FILTER_POINT:
                 return new PointFilter();
             case FILTER_BOX:
@@ -283,7 +264,7 @@ public final class Resampler {
             case FILTER_BLACKMAN_SINC:
                 return new BlackmanSincFilter();
             default:
-                throw new IllegalStateException("Unknown filter type: " + pFilterType);
+                throw new IllegalStateException("Unknown filter: " + filter);
         }
     }
 
@@ -784,7 +765,7 @@ public final class Resampler {
 
         Resizes bitmaps while resampling them.
      */
-    private static double[][] resample(final double[][] pSource, final double[][] pDest, final InterpolationFilter pFilter) {
+    private static double[][] resample(final double[][] pSource, final double[][] pDest, final InterpolationFilter pFilter, final boolean positive) {
         final int dstWidth = pDest[0].length;
         final int dstHeight = pDest.length;
 
@@ -848,7 +829,11 @@ public final class Resampler {
                 for (int j = 0; j < contrib.n; j++) {
                     weight += work[contrib.pixels[j]] * contrib.weights[j];
                 }
-                pDest[y][x] = weight;
+                if (positive) {
+                    pDest[y][x] = (weight > 0.0) ? weight : 0.0;
+                } else {
+                    pDest[y][x] = weight;
+                }
             }
         }
         return pDest;
