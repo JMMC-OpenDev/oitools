@@ -165,6 +165,18 @@ public final class Resampler {
          */
         FILTER_QUADRATIC("Quadratic"),
         /**
+         * Hanning interpolation.
+         */
+        FILTER_HANNING2("Hanning2"),
+        /**
+         * Hamming interpolation.
+         */
+        FILTER_HAMMING2("Hamming2"),
+        /**
+         * Blackman interpolation..
+         */
+        FILTER_BLACKMAN2("Blackman2"),
+        /**
          * Cubic interpolation.
          */
         FILTER_CUBIC("Cubic"),
@@ -179,9 +191,25 @@ public final class Resampler {
         FILTER_MITCHELL("Mitchell"),
         /**
          * Lanczos interpolation. High quality.
+         */
+        FILTER_LANCZOS2("Lanczos2"),
+        /**
+         * Hanning interpolation.
+         */
+        FILTER_HANNING3("Hanning3"),
+        /**
+         * Hamming interpolation.
+         */
+        FILTER_HAMMING3("Hamming3"),
+        /**
+         * Blackman interpolation..
+         */
+        FILTER_BLACKMAN3("Blackman3"),
+        /**
+         * Lanczos interpolation. High quality.
          * IM default
          */
-        FILTER_LANCZOS("Lanczos"),
+        FILTER_LANCZOS3("Lanczos3"),
         /**
          * Blackman-Bessel interpolation. High quality.
          */
@@ -234,7 +262,7 @@ public final class Resampler {
     private static InterpolationFilter createFilter(Filter filter) {
         switch (filter) {
             case FILTER_POINT:
-                return new PointFilter();
+                return new BoxFilter(0.0);
             case FILTER_BOX:
                 return new BoxFilter();
             case FILTER_TRIANGLE:
@@ -246,19 +274,33 @@ public final class Resampler {
             case FILTER_HAMMING:
                 return new HammingFilter();
             case FILTER_BLACKMAN:
-                return new BlacmanFilter();
+                return new BlackmanFilter();
             case FILTER_GAUSSIAN:
                 return new GaussianFilter();
             case FILTER_QUADRATIC:
                 return new QuadraticFilter();
+            case FILTER_HANNING2:
+                return new HanningFilter(2.0);
+            case FILTER_HAMMING2:
+                return new HammingFilter(2.0);
+            case FILTER_BLACKMAN2:
+                return new BlackmanFilter(2.0);
             case FILTER_CUBIC:
                 return new CubicFilter();
             case FILTER_CATROM:
                 return new CatromFilter();
             case FILTER_MITCHELL:
                 return new MitchellFilter();
-            case FILTER_LANCZOS:
-                return new LanczosFilter();
+            case FILTER_LANCZOS2:
+                return new LanczosFilter(2.0);
+            case FILTER_HANNING3:
+                return new HanningFilter(3.0);
+            case FILTER_HAMMING3:
+                return new HammingFilter(3.0);
+            case FILTER_BLACKMAN3:
+                return new BlackmanFilter(3.0);
+            case FILTER_LANCZOS3:
+                return new LanczosFilter(3.0);
             case FILTER_BLACKMAN_BESSEL:
                 return new BlackmanBesselFilter();
             case FILTER_BLACKMAN_SINC:
@@ -278,41 +320,27 @@ public final class Resampler {
         double support();
     }
 
-    static final class HermiteFilter implements InterpolationFilter {
-
-        public final double filter(double t) {
-            /* f(t) = 2|t|^3 - 3|t|^2 + 1, -1 <= t <= 1 */
-            if (t < 0.0) {
-                t = -t;
-            }
-            if (t < 1.0) {
-                return (2.0 * t - 3.0) * t * t + 1.0;
-            }
-            return 0.0;
-        }
-
-        public final double support() {
-            return 1.0;
-        }
-    }
-
-    static final class PointFilter extends BoxFilter {
-
-        public PointFilter() {
-            super(0.0);
-        }
-    }
-
-    static class BoxFilter implements InterpolationFilter {
+    static abstract class SupportFilter implements InterpolationFilter {
 
         private final double mSupport;
 
-        public BoxFilter() {
-            mSupport = 0.5;
+        protected SupportFilter(final double pSupport) {
+            mSupport = pSupport;
         }
 
-        protected BoxFilter(double pSupport) {
-            mSupport = pSupport;
+        public final double support() {
+            return mSupport;
+        }
+    }
+
+    static final class BoxFilter extends SupportFilter {
+
+        public BoxFilter() {
+            super(0.5);
+        }
+
+        public BoxFilter(final double pSupport) {
+            super(pSupport);
         }
 
         public final double filter(final double t) {
@@ -320,10 +348,6 @@ public final class Resampler {
                 return 1.0;
             }
             return 0.0;
-        }
-
-        public final double support() {
-            return mSupport;
         }
     }
 
@@ -344,11 +368,40 @@ public final class Resampler {
         }
     }
 
+    static final class HermiteFilter implements InterpolationFilter {
+
+        public final double filter(double t) {
+            /* f(t) = 2|t|^3 - 3|t|^2 + 1, -1 <= t <= 1 */
+            if (t < 0.0) {
+                t = -t;
+            }
+            if (t < 1.0) {
+                return (2.0 * t - 3.0) * t * t + 1.0;
+            }
+            return 0.0;
+        }
+
+        public final double support() {
+            return 1.0;
+        }
+    }
+
+    static final class GaussianFilter implements InterpolationFilter {
+
+        public final double filter(final double t) {
+            return Math.exp(-2.0 * t * t) * Math.sqrt(2.0 / Math.PI);
+        }
+
+        public final double support() {
+            return 1.25;
+        }
+    }
+
     static final class QuadraticFilter implements InterpolationFilter {
 
         // AKA Bell
         public final double filter(double t)/* box (*) box (*) box */ {
-            if (t < 0) {
+            if (t < 0.0) {
                 t = -t;
             }
             if (t < 0.5) {
@@ -372,7 +425,7 @@ public final class Resampler {
         public final double filter(double t)/* box (*) box (*) box (*) box */ {
             final double tt;
 
-            if (t < 0) {
+            if (t < 0.0) {
                 t = -t;
             }
             if (t < 1) {
@@ -390,43 +443,37 @@ public final class Resampler {
         }
     }
 
-    private static double sinc(double x) {
-        x *= Math.PI;
-        if (x != 0.0) {
-            return Math.sin(x) / x;
-        }
-        return 1.0;
-    }
+    static final class CatromFilter implements InterpolationFilter {
 
-    static final class LanczosFilter implements InterpolationFilter {
-
-        // AKA Lanczos3
         public final double filter(double t) {
-            if (t < 0) {
+            if (t < 0.0) {
                 t = -t;
             }
-            if (t < 3.0) {
-                return sinc(t) * sinc(t / 3.0);
+            if (t < 1.0) {
+                return 0.5 * (2.0 + t * t * (-5.0 + t * 3.0));
+            }
+            if (t < 2.0) {
+                return 0.5 * (4.0 + t * (-8.0 + t * (5.0 - t)));
             }
             return 0.0;
         }
 
         public final double support() {
-            return 3.0;
+            return 2.0;
         }
     }
 
-    private final static double B = 1.0 / 3.0;
-    private final static double C = 1.0 / 3.0;
-    private final static double P0 = (6.0 - 2.0 * B) / 6.0;
-    private final static double P2 = (-18.0 + 12.0 * B + 6.0 * C) / 6.0;
-    private final static double P3 = (12.0 - 9.0 * B - 6.0 * C) / 6.0;
-    private final static double Q0 = (8.0 * B + 24.0 * C) / 6.0;
-    private final static double Q1 = (-12.0 * B - 48.0 * C) / 6.0;
-    private final static double Q2 = (6.0 * B + 30.0 * C) / 6.0;
-    private final static double Q3 = (-1.0 * B - 6.0 * C) / 6.0;
-
     static final class MitchellFilter implements InterpolationFilter {
+
+        private final static double B = 1.0 / 3.0;
+        private final static double C = 1.0 / 3.0;
+        private final static double P0 = (6.0 - 2.0 * B) / 6.0;
+        private final static double P2 = (-18.0 + 12.0 * B + 6.0 * C) / 6.0;
+        private final static double P3 = (12.0 - 9.0 * B - 6.0 * C) / 6.0;
+        private final static double Q0 = (8.0 * B + 24.0 * C) / 6.0;
+        private final static double Q1 = (-12.0 * B - 48.0 * C) / 6.0;
+        private final static double Q2 = (6.0 * B + 30.0 * C) / 6.0;
+        private final static double Q3 = (-1.0 * B - 6.0 * C) / 6.0;
 
         public final double filter(double t) {
             if (t < -2.0) {
@@ -452,193 +499,72 @@ public final class Resampler {
         }
     }
 
-    private static double j1(final double t) {
-        final double[] pOne = {
-            0.581199354001606143928050809e+21,
-            -0.6672106568924916298020941484e+20,
-            0.2316433580634002297931815435e+19,
-            -0.3588817569910106050743641413e+17,
-            0.2908795263834775409737601689e+15,
-            -0.1322983480332126453125473247e+13,
-            0.3413234182301700539091292655e+10,
-            -0.4695753530642995859767162166e+7,
-            0.270112271089232341485679099e+4
-        };
-        final double[] qOne = {
-            0.11623987080032122878585294e+22,
-            0.1185770712190320999837113348e+20,
-            0.6092061398917521746105196863e+17,
-            0.2081661221307607351240184229e+15,
-            0.5243710262167649715406728642e+12,
-            0.1013863514358673989967045588e+10,
-            0.1501793594998585505921097578e+7,
-            0.1606931573481487801970916749e+4,
-            0.1e+1
-        };
+    static final class HanningFilter extends SupportFilter {
 
-        double p = pOne[8];
-        double q = qOne[8];
-        for (int i = 7; i >= 0; i--) {
-            p = p * t * t + pOne[i];
-            q = q * t * t + qOne[i];
+        public HanningFilter() {
+            super(1.0);
         }
-        return p / q;
-    }
 
-    private static double p1(final double t) {
-        final double[] pOne = {
-            0.352246649133679798341724373e+5,
-            0.62758845247161281269005675e+5,
-            0.313539631109159574238669888e+5,
-            0.49854832060594338434500455e+4,
-            0.2111529182853962382105718e+3,
-            0.12571716929145341558495e+1
-        };
-        final double[] qOne = {
-            0.352246649133679798068390431e+5,
-            0.626943469593560511888833731e+5,
-            0.312404063819041039923015703e+5,
-            0.4930396490181088979386097e+4,
-            0.2030775189134759322293574e+3,
-            0.1e+1
-        };
-
-        double p = pOne[5];
-        double q = qOne[5];
-        for (int i = 4; i >= 0; i--) {
-            p = p * (8.0 / t) * (8.0 / t) + pOne[i];
-            q = q * (8.0 / t) * (8.0 / t) + qOne[i];
+        public HanningFilter(final double pSupport) {
+            super(pSupport);
         }
-        return p / q;
-    }
-
-    private static double q1(final double t) {
-        final double[] pOne = {
-            0.3511751914303552822533318e+3,
-            0.7210391804904475039280863e+3,
-            0.4259873011654442389886993e+3,
-            0.831898957673850827325226e+2,
-            0.45681716295512267064405e+1,
-            0.3532840052740123642735e-1
-        };
-        final double[] qOne = {
-            0.74917374171809127714519505e+4,
-            0.154141773392650970499848051e+5,
-            0.91522317015169922705904727e+4,
-            0.18111867005523513506724158e+4,
-            0.1038187585462133728776636e+3,
-            0.1e+1
-        };
-
-        double p = pOne[5];
-        double q = qOne[5];
-        for (int i = 4; i >= 0; i--) {
-            p = p * (8.0 / t) * (8.0 / t) + pOne[i];
-            q = q * (8.0 / t) * (8.0 / t) + qOne[i];
-        }
-        return p / q;
-    }
-
-    static double besselOrderOne(double t) {
-        double p, q;
-
-        if (t == 0.0) {
-            return 0.0;
-        }
-        p = t;
-        if (t < 0.0) {
-            t = -t;
-        }
-        if (t < 8.0) {
-            return p * j1(t);
-        }
-        q = Math.sqrt(2.0 / (Math.PI * t)) * (p1(t) * (1.0 / Math.sqrt(2.0) * (Math.sin(t) - Math.cos(t))) - 8.0 / t * q1(t)
-                * (-1.0 / Math.sqrt(2.0) * (Math.sin(t) + Math.cos(t))));
-        if (p < 0.0) {
-            q = -q;
-        }
-        return q;
-    }
-
-    private static double bessel(final double t) {
-        if (t == 0.0) {
-            return Math.PI / 4.0;
-        }
-        return besselOrderOne(Math.PI * t) / (2.0 * t);
-    }
-
-    private static double blackman(final double t) {
-        return 0.42 + 0.50 * Math.cos(Math.PI * t) + 0.08 * Math.cos(2.0 * (Math.PI * t));
-    }
-
-    static final class BlacmanFilter implements InterpolationFilter {
 
         public final double filter(final double t) {
-            return blackman(t);
-        }
-
-        public final double support() {
-            return 1.0;
+            return 0.5 + 0.5 * Math.cos(Math.PI * t / support());
         }
     }
 
-    static final class CatromFilter implements InterpolationFilter {
+    static final class HammingFilter extends SupportFilter {
+
+        public HammingFilter() {
+            super(1.0);
+        }
+
+        public HammingFilter(final double pSupport) {
+            super(pSupport);
+        }
+
+        public final double filter(final double t) {
+            return 0.54 + 0.46 * Math.cos(Math.PI * t / support());
+        }
+    }
+
+    static final class BlackmanFilter extends SupportFilter {
+
+        public BlackmanFilter() {
+            super(1.0);
+        }
+
+        public BlackmanFilter(final double pSupport) {
+            super(pSupport);
+        }
+
+        public final double filter(final double t) {
+            return blackman(t / support());
+        }
+    }
+
+    static final class LanczosFilter extends SupportFilter {
+
+        public LanczosFilter(final double pSupport) {
+            super(pSupport);
+        }
 
         public final double filter(double t) {
-            if (t < 0) {
+            if (t < 0.0) {
                 t = -t;
             }
-            if (t < 1.0) {
-                return 0.5 * (2.0 + t * t * (-5.0 + t * 3.0));
-            }
-            if (t < 2.0) {
-                return 0.5 * (4.0 + t * (-8.0 + t * (5.0 - t)));
+            if (t < support()) {
+                return sinc(t) * sinc(t / support());
             }
             return 0.0;
-        }
-
-        public final double support() {
-            return 2.0;
-        }
-    }
-
-    static final class GaussianFilter implements InterpolationFilter {
-
-        public final double filter(final double t) {
-            return Math.exp(-2.0 * t * t) * Math.sqrt(2.0 / Math.PI);
-        }
-
-        public final double support() {
-            return 1.25;
-        }
-    }
-
-    static final class HanningFilter implements InterpolationFilter {
-
-        public final double filter(final double t) {
-            return 0.5 + 0.5 * Math.cos(Math.PI * t);
-        }
-
-        public final double support() {
-            return 1.0;
-        }
-    }
-
-    static final class HammingFilter implements InterpolationFilter {
-
-        public final double filter(final double t) {
-            return 0.54 + 0.46 * Math.cos(Math.PI * t);
-        }
-
-        public final double support() {
-            return 1.0;
         }
     }
 
     static final class BlackmanBesselFilter implements InterpolationFilter {
 
         public final double filter(final double t) {
-            return blackman(t / 3.2383) * bessel(t);
+            return blackman(t / support()) * bessel(t);
         }
 
         public final double support() {
@@ -649,7 +575,7 @@ public final class Resampler {
     static final class BlackmanSincFilter implements InterpolationFilter {
 
         public final double filter(final double t) {
-            return blackman(t / 4.0) * sinc(t);
+            return blackman(t / support()) * sinc(t);
         }
 
         public final double support() {
@@ -658,7 +584,136 @@ public final class Resampler {
     }
 
     /*
-     *	image rescaling routine
+     * Math functions
+     */
+    private static double blackman(final double t) {
+        return 0.42 + 0.50 * Math.cos(Math.PI * t) + 0.08 * Math.cos(2.0 * (Math.PI * t));
+    }
+
+    private static double sinc(double x) {
+        x *= Math.PI;
+        if (x != 0.0) {
+            return Math.sin(x) / x;
+        }
+        return 1.0;
+    }
+
+    private static double bessel(final double t) {
+        if (t == 0.0) {
+            return Math.PI / 4.0;
+        }
+        return Bessel.besselOrderOne(Math.PI * t) / (2.0 * t);
+    }
+
+    static final class Bessel {
+
+        private final static double[] J1_P1 = {
+            0.581199354001606143928050809e+21,
+            -0.6672106568924916298020941484e+20,
+            0.2316433580634002297931815435e+19,
+            -0.3588817569910106050743641413e+17,
+            0.2908795263834775409737601689e+15,
+            -0.1322983480332126453125473247e+13,
+            0.3413234182301700539091292655e+10,
+            -0.4695753530642995859767162166e+7,
+            0.270112271089232341485679099e+4
+        };
+        private final static double[] J1_Q1 = {
+            0.11623987080032122878585294e+22,
+            0.1185770712190320999837113348e+20,
+            0.6092061398917521746105196863e+17,
+            0.2081661221307607351240184229e+15,
+            0.5243710262167649715406728642e+12,
+            0.1013863514358673989967045588e+10,
+            0.1501793594998585505921097578e+7,
+            0.1606931573481487801970916749e+4,
+            0.1e+1
+        };
+        private final static double[] P1_P1 = {
+            0.352246649133679798341724373e+5,
+            0.62758845247161281269005675e+5,
+            0.313539631109159574238669888e+5,
+            0.49854832060594338434500455e+4,
+            0.2111529182853962382105718e+3,
+            0.12571716929145341558495e+1
+        };
+        private final static double[] P1_Q1 = {
+            0.352246649133679798068390431e+5,
+            0.626943469593560511888833731e+5,
+            0.312404063819041039923015703e+5,
+            0.4930396490181088979386097e+4,
+            0.2030775189134759322293574e+3,
+            0.1e+1
+        };
+        private final static double[] Q1_P1 = {
+            0.3511751914303552822533318e+3,
+            0.7210391804904475039280863e+3,
+            0.4259873011654442389886993e+3,
+            0.831898957673850827325226e+2,
+            0.45681716295512267064405e+1,
+            0.3532840052740123642735e-1
+        };
+        private final static double[] Q1_Q1 = {
+            0.74917374171809127714519505e+4,
+            0.154141773392650970499848051e+5,
+            0.91522317015169922705904727e+4,
+            0.18111867005523513506724158e+4,
+            0.1038187585462133728776636e+3,
+            0.1e+1
+        };
+
+        private static double j1(final double t) {
+            double p = J1_P1[8];
+            double q = J1_Q1[8];
+            for (int i = 7; i >= 0; i--) {
+                p = p * t * t + J1_P1[i];
+                q = q * t * t + J1_Q1[i];
+            }
+            return p / q;
+        }
+
+        private static double p1(final double t) {
+            double p = P1_P1[5];
+            double q = P1_Q1[5];
+            for (int i = 4; i >= 0; i--) {
+                p = p * (8.0 / t) * (8.0 / t) + P1_P1[i];
+                q = q * (8.0 / t) * (8.0 / t) + P1_Q1[i];
+            }
+            return p / q;
+        }
+
+        private static double q1(final double t) {
+            double p = Q1_P1[5];
+            double q = Q1_Q1[5];
+            for (int i = 4; i >= 0; i--) {
+                p = p * (8.0 / t) * (8.0 / t) + Q1_P1[i];
+                q = q * (8.0 / t) * (8.0 / t) + Q1_Q1[i];
+            }
+            return p / q;
+        }
+
+        static double besselOrderOne(double t) {
+            if (t == 0.0) {
+                return 0.0;
+            }
+            double p = t;
+            if (t < 0.0) {
+                t = -t;
+            }
+            if (t < 8.0) {
+                return p * j1(t);
+            }
+            double q = Math.sqrt(2.0 / (Math.PI * t)) * (p1(t) * (1.0 / Math.sqrt(2.0) * (Math.sin(t) - Math.cos(t))) - 8.0 / t * q1(t)
+                    * (-1.0 / Math.sqrt(2.0) * (Math.sin(t) + Math.cos(t))));
+            if (p < 0.0) {
+                q = -q;
+            }
+            return q;
+        }
+    }
+
+    /*
+     * image rescaling routine
      */
     static final class ContributorList {
 
@@ -730,7 +785,7 @@ public final class Resampler {
         for (int j = left, n; j <= right; j++) {
             weight = pFilter.filter((center - j) * fscale) * fscale;
 
-            if (j < 0) {
+            if (j < 0.0) {
                 n = -j;
             } else if (j >= srcLen) {
                 n = (srcLen - j) + srcMax;
@@ -801,6 +856,33 @@ public final class Resampler {
             }
         }
 
+        /*
+        // prepare the geometry
+        Angle *= PI / 180.0;
+        a11 = cos(Angle);
+        a12 = -sin(Angle);
+        a21 = sin(Angle);
+        a22 = cos(Angle);
+        x0 = a11 * (xShift + xOrigin) + a12 * (yShift + yOrigin);
+        y0 = a21 * (xShift + xOrigin) + a22 * (yShift + yOrigin);
+        xShift = xOrigin - x0;
+        yShift = yOrigin - y0;
+
+        // visit all pixels of the output image and assign their value
+        p = OutputImage;
+        for (y = 0L; y < Height; y++) {
+            x0 = a12 * (double)y + xShift;
+            y0 = a22 * (double)y + yShift;
+
+            for (x = 0L; x < Width; x++) {
+                x1 = x0 + a11 * (double)x;
+                y1 = y0 + a21 * (double)x;
+
+                *p++ = (float)InterpolatedValue(ImageRasterArray, Width, Height,
+                                                x1, y1, SplineDegree);
+            }
+        }
+         */
         // TODO: parallelize loops:
         final double[] work = new double[srcHeight];
         double[] row;
