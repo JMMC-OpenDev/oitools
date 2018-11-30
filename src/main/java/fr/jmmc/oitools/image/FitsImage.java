@@ -423,7 +423,7 @@ public final class FitsImage {
      * @param incCol signed coordinate increment along the column axis in radians
      */
     public void setSignedIncCol(final double incCol) {
-        if (incCol != 0.0) {
+        if (!Double.isNaN(incCol) && (incCol != 0.0)) {
             this.incColPositive = (incCol >= 0.0);
             this.incCol = (this.incColPositive) ? incCol : -incCol;
         }
@@ -470,7 +470,7 @@ public final class FitsImage {
      * @param incRow signed coordinate increment along the row axis in radians
      */
     public void setSignedIncRow(final double incRow) {
-        if (incRow != 0.0) {
+        if (!Double.isNaN(incRow) && (incRow != 0.0)) {
             this.incRowPositive = (incRow >= 0.0);
             this.incRow = (this.incRowPositive) ? incRow : -incRow;
         }
@@ -702,8 +702,8 @@ public final class FitsImage {
      */
     private void updateArea() {
         this.area = new Rectangle2D.Double(
-                - (this.pixRefCol - 1.0) * this.incCol,
-                - (this.pixRefRow - 1.0) * this.incRow,
+                -(this.pixRefCol - 1.0) * this.incCol,
+                -(this.pixRefRow - 1.0) * this.incRow,
                 this.nbCols * this.incCol,
                 this.nbRows * this.incRow);
 
