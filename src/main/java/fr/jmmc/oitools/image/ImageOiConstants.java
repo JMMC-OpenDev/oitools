@@ -52,12 +52,14 @@ public interface ImageOiConstants {
     public final static String KEYWORD_MAXITER = "MAXITER";
     /** RGL_NAME keyword */
     public final static String KEYWORD_RGL_NAME = "RGL_NAME";
+    /** AUTO_WGT keyword */
+    public final static String KEYWORD_AUTO_WGT = "AUTO_WGT";
     /** RGL_WGT keyword */
     public final static String KEYWORD_RGL_WGT = "RGL_WGT";
-    /** RGL_ALPH keyword */
-    public final static String KEYWORD_RGL_ALPH = "RGL_ALPH";
-    /** RGL_BETA keyword */
-    public final static String KEYWORD_RGL_BETA = "RGL_BETA";
+    /** FLUX keyword */
+    public final static String KEYWORD_FLUX = "FLUX";
+    /** FLUXERR keyword */
+    public final static String KEYWORD_FLUXERR = "FLUXERR";
     /** RGL_PRIO keyword */
     public final static String KEYWORD_RGL_PRIO = "RGL_PRIO";
 
