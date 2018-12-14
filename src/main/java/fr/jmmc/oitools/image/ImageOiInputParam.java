@@ -52,8 +52,9 @@ public final class ImageOiInputParam extends FitsTable {
     private final static KeywordMeta KEYWORD_MAXITER = new KeywordMeta(ImageOiConstants.KEYWORD_MAXITER, "Maximum number of iterations to run", Types.TYPE_INT);
     private final static KeywordMeta KEYWORD_RGL_NAME = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_NAME, "Name of the regularization method", Types.TYPE_CHAR);
     private final static KeywordMeta KEYWORD_RGL_WGT = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_WGT, "Weight of the regularization", Types.TYPE_DBL);
-    private final static KeywordMeta KEYWORD_RGL_ALPH = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_ALPH, "Parameter alpha of the regularization", Types.TYPE_DBL);
-    private final static KeywordMeta KEYWORD_RGL_BETA = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_BETA, "Parameter beta of the regularization", Types.TYPE_DBL);
+    private final static KeywordMeta KEYWORD_AUTO_WGT = new KeywordMeta(ImageOiConstants.KEYWORD_AUTO_WGT, "Automatic regularization weight", Types.TYPE_LOGICAL);
+    private final static KeywordMeta KEYWORD_FLUX = new KeywordMeta(ImageOiConstants.KEYWORD_FLUX, "Total flux (sum of pixels)", Types.TYPE_DBL);
+    private final static KeywordMeta KEYWORD_FLUXERR = new KeywordMeta(ImageOiConstants.KEYWORD_FLUXERR, " Assumed standard deviation for the total flux ", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_RGL_PRIO = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_PRIO, "Identifier of the HDU with the prior image", Types.TYPE_CHAR);
 
     /** keyword mapping to quickly reset keywords and give their description */
@@ -74,8 +75,9 @@ public final class ImageOiInputParam extends FitsTable {
         KEYWORD_METAS.put(KEYWORD_MAXITER.getName(), KEYWORD_MAXITER);
         KEYWORD_METAS.put(KEYWORD_RGL_NAME.getName(), KEYWORD_RGL_NAME);
         KEYWORD_METAS.put(KEYWORD_RGL_WGT.getName(), KEYWORD_RGL_WGT);
-        KEYWORD_METAS.put(KEYWORD_RGL_ALPH.getName(), KEYWORD_RGL_ALPH);
-        KEYWORD_METAS.put(KEYWORD_RGL_BETA.getName(), KEYWORD_RGL_BETA);
+        KEYWORD_METAS.put(KEYWORD_AUTO_WGT.getName(), KEYWORD_AUTO_WGT);
+        KEYWORD_METAS.put(KEYWORD_FLUX.getName(), KEYWORD_FLUX);
+        KEYWORD_METAS.put(KEYWORD_FLUXERR.getName(), KEYWORD_FLUXERR);
         KEYWORD_METAS.put(KEYWORD_RGL_PRIO.getName(), KEYWORD_RGL_PRIO);
     }
 
@@ -150,8 +152,8 @@ public final class ImageOiInputParam extends FitsTable {
         setWaveMax(-1);
         setMaxiter(50);
         setRglWgt(0);
-        setRglAlph(0);
-        setRglBeta(0);
+        setFlux(1);
+        setFluxErr(0);
 
         // note: setRglName() not used as it is set by Service later
     }
@@ -332,20 +334,29 @@ public final class ImageOiInputParam extends FitsTable {
         setKeywordDouble(ImageOiConstants.KEYWORD_RGL_WGT, rgl_wgt);
     }
 
-    public double getRglAlph() {
-        return getKeywordDouble(ImageOiConstants.KEYWORD_RGL_ALPH);
+    public void getAutoWgt() {
+        getKeywordLogical(ImageOiConstants.KEYWORD_AUTO_WGT);
     }
 
-    public void setRglAlph(double rgl_alph) {
-        setKeywordDouble(ImageOiConstants.KEYWORD_RGL_ALPH, rgl_alph);
+    public void setAutoWgt(boolean AutoWgt) {
+        setKeywordLogical(ImageOiConstants.KEYWORD_AUTO_WGT, AutoWgt);
     }
 
-    public double getRglBeta() {
-        return getKeywordDouble(ImageOiConstants.KEYWORD_RGL_BETA);
+
+    public double getFlux() {
+        return getKeywordDouble(ImageOiConstants.KEYWORD_FLUX);
     }
 
-    public void setRglBeta(double rgl_beta) {
-        setKeywordDouble(ImageOiConstants.KEYWORD_RGL_BETA, rgl_beta);
+    public void setFlux(double flux) {
+        setKeywordDouble(ImageOiConstants.KEYWORD_FLUX, flux);
+    }
+
+    public double getFluxErr() {
+        return getKeywordDouble(ImageOiConstants.KEYWORD_FLUXERR);
+    }
+
+    public void setFluxErr(double FLUXERR) {
+        setKeywordDouble(ImageOiConstants.KEYWORD_FLUXERR, FLUXERR);
     }
 
     public String getRglPrio() {
