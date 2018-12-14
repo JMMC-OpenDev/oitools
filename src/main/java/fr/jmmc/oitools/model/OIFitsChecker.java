@@ -478,7 +478,7 @@ public final class OIFitsChecker {
                 }
             }
         }
-        sb.append('\n').append(getCheckStatus());
+        sb.append('\n').append(getCheckStatus()).append('\n');
 
         return sb;
     }

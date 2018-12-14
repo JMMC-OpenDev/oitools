@@ -781,6 +781,7 @@ WARNING	Invalid ARRAYZ keyword '0.0'
 INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 
 3 warnings, 0 severe errors
+
 </checkReport>
 <rules>
   <rule>

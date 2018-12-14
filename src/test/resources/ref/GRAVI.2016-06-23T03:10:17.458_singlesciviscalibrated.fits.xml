@@ -1990,6 +1990,7 @@ INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
 
 2 warnings, 18 severe errors
+
 </checkReport>
 <rules>
   <rule>
