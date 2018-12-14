@@ -835,6 +835,9 @@
 </OI_VIS2>
 <checkReport>
 Analysing File: A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits
+SEVERE	Missing keyword 'AUTO_WGT'
+SEVERE	Missing keyword 'FLUX'
+SEVERE	Missing keyword 'FLUXERR'
 SEVERE	Missing keyword 'RGL_PRIO'
 Analysing table [OI_ARRAY#3]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
@@ -909,7 +912,7 @@ Analysing table [OI_VIS2#21]
 WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 
-30 warnings, 7 severe errors
+30 warnings, 10 severe errors
 </checkReport>
 <rules>
   <rule>
@@ -939,6 +942,27 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
   </rule>
 </rules>
 <failures>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_MANDATORY</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <member>AUTO_WGT</member>
+    <message>Missing keyword 'AUTO_WGT'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_MANDATORY</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <member>FLUX</member>
+    <message>Missing keyword 'FLUX'</message>
+  </failure>
+  <failure>
+    <severity>SEVERE</severity>
+    <rule>GENERIC_KEYWORD_MANDATORY</rule>
+    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
+    <member>FLUXERR</member>
+    <message>Missing keyword 'FLUXERR'</message>
+  </failure>
   <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>

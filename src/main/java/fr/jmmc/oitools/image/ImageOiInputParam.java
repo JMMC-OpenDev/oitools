@@ -152,6 +152,7 @@ public final class ImageOiInputParam extends FitsTable {
         setWaveMax(-1);
         setMaxiter(50);
         setRglWgt(0);
+        setAutoWgt(true);
         setFlux(1);
         setFluxErr(0);
 
@@ -334,14 +335,13 @@ public final class ImageOiInputParam extends FitsTable {
         setKeywordDouble(ImageOiConstants.KEYWORD_RGL_WGT, rgl_wgt);
     }
 
-    public void getAutoWgt() {
-        getKeywordLogical(ImageOiConstants.KEYWORD_AUTO_WGT);
+    public boolean getAutoWgt() {
+        return getKeywordLogical(ImageOiConstants.KEYWORD_AUTO_WGT);
     }
 
     public void setAutoWgt(boolean AutoWgt) {
         setKeywordLogical(ImageOiConstants.KEYWORD_AUTO_WGT, AutoWgt);
     }
-
 
     public double getFlux() {
         return getKeywordDouble(ImageOiConstants.KEYWORD_FLUX);
