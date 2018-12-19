@@ -151,8 +151,8 @@ public final class ImageOiInputParam extends FitsTable {
         setWaveMin(-1);
         setWaveMax(-1);
         setMaxiter(50);
-        setRglWgt(0.0);
         setAutoWgt(true);
+        setRglWgt(0.0);
         setFlux(1.0);
         setFluxErr(0.01); // 1% error on VIS2
 
@@ -327,20 +327,20 @@ public final class ImageOiInputParam extends FitsTable {
         setKeyword(ImageOiConstants.KEYWORD_RGL_NAME, rgl_name);
     }
 
-    public double getRglWgt() {
-        return getKeywordDouble(ImageOiConstants.KEYWORD_RGL_WGT);
-    }
-
-    public void setRglWgt(double rgl_wgt) {
-        setKeywordDouble(ImageOiConstants.KEYWORD_RGL_WGT, rgl_wgt);
-    }
-
     public boolean isAutoWgt() {
         return getKeywordLogical(ImageOiConstants.KEYWORD_AUTO_WGT);
     }
 
     public void setAutoWgt(boolean auto_wgt) {
         setKeywordLogical(ImageOiConstants.KEYWORD_AUTO_WGT, auto_wgt);
+    }
+
+    public double getRglWgt() {
+        return getKeywordDouble(ImageOiConstants.KEYWORD_RGL_WGT);
+    }
+
+    public void setRglWgt(double rgl_wgt) {
+        setKeywordDouble(ImageOiConstants.KEYWORD_RGL_WGT, rgl_wgt);
     }
 
     public double getFlux() {
