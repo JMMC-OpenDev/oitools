@@ -107,34 +107,31 @@ public abstract class AbstractFileBaseTest extends JUnitBaseTest {
 
     protected static String getColumnValues(FitsTable table, ColumnMeta columnMeta) {
         String propValue = null;
-        
+
         switch (columnMeta.getDataType()) {
             case TYPE_CHAR:
-                String[] chvalue = table.getColumnString(columnMeta.getName());
+                String[] chvalue = table.getColumnAsString(columnMeta.getName());
                 propValue = Arrays.deepToString(chvalue);
                 break;
             case TYPE_SHORT:
                 if (columnMeta.isArray()) {
-                    // Use getColumnAsShorts(s) to handle both std & derived columns
                     short[][] svalues = table.getColumnAsShorts(columnMeta.getName());
                     propValue = Arrays.deepToString(svalues);
                 } else {
-                    short[] svalue = table.getColumnShort(columnMeta.getName());
+                    short[] svalue = table.getColumnAsShort(columnMeta.getName());
                     propValue = Arrays.toString(svalue);
                 }
                 break;
             case TYPE_INT:
                 if (columnMeta.isArray()) {
-                    // Use getColumnAsShorts(s) to handle both std & derived columns
-                    int[][] ivalues = table.getColumnInts(columnMeta.getName());
+                    int[][] ivalues = table.getColumnAsInts(columnMeta.getName());
                     propValue = Arrays.deepToString(ivalues);
                 } else {
-                    int[] ivalue = table.getColumnInt(columnMeta.getName());
+                    int[] ivalue = table.getColumnAsInt(columnMeta.getName());
                     propValue = Arrays.toString(ivalue);
                 }
                 break;
             case TYPE_DBL:
-                // Use getColumnAsDouble(s) to handle both std & derived columns
                 // If column value dont exist, compute it
                 if (columnMeta.isArray()) {
                     double[][] dvalues = table.getColumnAsDoubles(columnMeta.getName());
@@ -148,7 +145,7 @@ public abstract class AbstractFileBaseTest extends JUnitBaseTest {
                 if (columnMeta.isArray()) {
                     // Impossible case in OIFits
                 } else {
-                    float[] fvalue = table.getColumnFloat(columnMeta.getName());
+                    float[] fvalue = table.getColumnAsFloat(columnMeta.getName());
                     propValue = toString(fvalue); // FIXED FORMAT
                 }
                 break;
@@ -177,7 +174,7 @@ public abstract class AbstractFileBaseTest extends JUnitBaseTest {
         }
         return (propValue != null) ? propValue : "null";
     }
-    
+
     protected static String getColunmMinMax(FitsTable table, ColumnMeta columnMeta) {
         String propValue = null;
         final Object minmax = table.getMinMaxColumnValue(columnMeta.getName());

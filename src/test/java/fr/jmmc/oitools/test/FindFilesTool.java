@@ -20,6 +20,8 @@
 package fr.jmmc.oitools.test;
 
 import static fr.jmmc.oitools.JUnitBaseTest.getFitsFiles;
+import fr.jmmc.oitools.OIFitsConstants;
+import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFlux;
@@ -61,34 +63,33 @@ public class FindFilesTool implements TestEnv {
     }
 
     private static void testFile(OIFitsFile oifits) {
+        if (findOIVis(oifits)) {
+            logger.log(Level.WARNING, "findOIVis: {0}", display(oifits));
+        }
+        if (findOIFlux(oifits)) {
+            logger.log(Level.WARNING, "findOIFlux: {0}", display(oifits));
+        }
+        if (multiTargets(oifits)) {
+            logger.log(Level.WARNING, "multiTargets: {0}", display(oifits));
 
-        boolean testCase1 = findOIVis(oifits);
-        if (testCase1) {
-            logger.log(Level.WARNING, "test vis ok : {0}", display(oifits));
+            if (multiTargetsInOIData(oifits)) {
+                logger.log(Level.WARNING, "multiTargetsInOIData: {0}", display(oifits));
+            }
         }
-        boolean testCase2 = findOISpect(oifits);
-        if (testCase2) {
-            logger.log(Level.WARNING, "test spect ok : {0}", display(oifits));
+        if (singleNWave(oifits)) {
+            logger.log(Level.WARNING, "singleNWave: {0}", display(oifits));
         }
-        boolean testCase3 = multiTarget(oifits);
-        if (testCase3) {
-            logger.log(Level.WARNING, "test multi-target ok : {0}", display(oifits));
+        if (multiTables(oifits)) {
+            logger.log(Level.WARNING, "multiTables: {0}", display(oifits));
         }
-        boolean testCase4 = oneNWave(oifits);
-        if (testCase4) {
-            logger.log(Level.WARNING, "test onewave ok : {0}", display(oifits));
+        if (multiNightIds(oifits)) {
+            logger.log(Level.WARNING, "multiNightIds: {0}", display(oifits));
         }
-        boolean testCase5 = multiTable(oifits);
-        if (testCase5) {
-            logger.log(Level.WARNING, "test multi-table ok : {0}", display(oifits));
+        if (isOIFits2(oifits)) {
+            logger.log(Level.WARNING, "isOIFits2: {0}", display(oifits));
         }
-        boolean testCase6 = isV2(oifits);
-        if (testCase6) {
-            logger.log(Level.WARNING, "test V2 ok : {0}", display(oifits));
-        }
-        boolean testCase7 = hasImage(oifits);
-        if (testCase7) {
-            logger.log(Level.WARNING, "test hasImage ok : {0}", display(oifits));
+        if (hasImage(oifits)) {
+            logger.log(Level.WARNING, "hasImage: {0}", display(oifits));
         }
     }
 
@@ -103,7 +104,7 @@ public class FindFilesTool implements TestEnv {
         return false;
     }
 
-    private static boolean findOISpect(OIFitsFile oifits) {
+    private static boolean findOIFlux(OIFitsFile oifits) {
         if (oifits.hasOiFlux()) {
             for (OIFlux oispect : oifits.getOiFlux()) {
                 if (oispect.getNbRows() > 0) {
@@ -114,7 +115,7 @@ public class FindFilesTool implements TestEnv {
         return false;
     }
 
-    private static boolean multiTarget(OIFitsFile oifits) {
+    private static boolean multiTargets(OIFitsFile oifits) {
         if (oifits.hasOiTarget()) {
             if (oifits.getOiTarget().getNbRows() > 2) {
                 return true;
@@ -123,7 +124,31 @@ public class FindFilesTool implements TestEnv {
         return false;
     }
 
-    private static boolean oneNWave(OIFitsFile oifits) {
+    private static boolean multiTargetsInOIData(OIFitsFile oifits) {
+        for (OIData oidata : oifits.getOiDataList()) {
+            if (!oidata.hasSingleTarget()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean multiNightIds(OIFitsFile oifits) {
+        for (OIData oidata : oifits.getOiDataList()) {
+            // compute night ids:
+            final double[] nightIds = oidata.getNightId();
+            // compute min/max to act as distinct !
+            // TODO: add distinct NightIds ?
+            final double[] minMaxNightIds = (double[]) oidata.getMinMaxColumnValue(OIFitsConstants.COLUMN_NIGHT_ID);
+
+            if (minMaxNightIds[0] != minMaxNightIds[1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean singleNWave(OIFitsFile oifits) {
         if (oifits.hasOiWavelengths()) {
             for (OIWavelength oiwave : oifits.getOiWavelengths()) {
                 if (oiwave.getNWave() == 1) {
@@ -134,11 +159,11 @@ public class FindFilesTool implements TestEnv {
         return false;
     }
 
-    private static boolean multiTable(OIFitsFile oifits) {
+    private static boolean multiTables(OIFitsFile oifits) {
         return oifits.getNbOiArrays() > 1 && oifits.getNbOiWavelengths() > 1;
     }
 
-    private static boolean isV2(OIFitsFile oifits) {
+    private static boolean isOIFits2(OIFitsFile oifits) {
         for (OITable oitable : oifits.getOiDataList()) {
             if (oitable.getOiRevn() == 2) {
                 return true;

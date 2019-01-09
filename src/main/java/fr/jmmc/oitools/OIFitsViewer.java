@@ -133,7 +133,8 @@ public final class OIFitsViewer extends OIFitsCommand {
     }
 
     public static void targetMetadata(final OIFitsFile oiFitsFile, final boolean xml, final StringBuilder sb) {
-        // TODO: use Granule here ?
+        // TODO: use OIFitsCollectionViewer instead (based on Granule directly)
+        // used by oidb
 
         if (oiFitsFile.hasOiTarget()) {
             final OITarget oiTarget = oiFitsFile.getOiTarget();

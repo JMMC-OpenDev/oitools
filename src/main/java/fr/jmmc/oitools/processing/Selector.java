@@ -30,7 +30,7 @@ public final class Selector {
     private String targetUID = null;
     private String insModeUID = null;
     private NightId nightID = null;
-
+    // table selection filter expressed as extNb (integer) values + OIFits file (id)
     private final Map<String, List<Integer>> extNbsPerOiFitsPath = new HashMap<String, List<Integer>>();
 
     public Selector() {

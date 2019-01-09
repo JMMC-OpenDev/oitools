@@ -803,11 +803,7 @@ public abstract class FitsTable extends FitsHDU {
 
         /* compute min and max values if not previously set */
         if (range == null) {
-
-            /*
-            * TODO: support min/max on derived columns too
-             */
-            final ColumnMeta column = getColumnsDesc().get(name);
+            final ColumnMeta column = getColumnMeta(name);
 
             if (column != null) {
                 switch (column.getDataType()) {
@@ -837,7 +833,7 @@ public abstract class FitsTable extends FitsHDU {
                                 }
                             }
                         } else {
-                            final short[] sValues = getColumnShort(column.getName());
+                            final short[] sValues = getColumnAsShort(column.getName());
                             if (sValues == null) {
                                 break;
                             }
@@ -858,7 +854,7 @@ public abstract class FitsTable extends FitsHDU {
                         int iMax = Integer.MIN_VALUE;
 
                         if (column.isArray()) {
-                            final int[][] iValues = getColumnInts(column.getName());
+                            final int[][] iValues = getColumnAsInts(column.getName());
                             if (iValues == null) {
                                 break;
                             }
@@ -875,7 +871,7 @@ public abstract class FitsTable extends FitsHDU {
                                 }
                             }
                         } else {
-                            final int[] iValues = getColumnInt(column.getName());
+                            final int[] iValues = getColumnAsInt(column.getName());
                             if (iValues == null) {
                                 break;
                             }
@@ -896,7 +892,7 @@ public abstract class FitsTable extends FitsHDU {
                         double dMax = Double.NEGATIVE_INFINITY;
 
                         if (column.isArray()) {
-                            final double[][] dValues = getColumnDoubles(column.getName());
+                            final double[][] dValues = getColumnAsDoubles(column.getName());
                             if (dValues == null) {
                                 break;
                             }
@@ -913,7 +909,7 @@ public abstract class FitsTable extends FitsHDU {
                                 }
                             }
                         } else {
-                            final double[] dValues = getColumnDouble(column.getName());
+                            final double[] dValues = getColumnAsDouble(column.getName());
                             if (dValues == null) {
                                 break;
                             }
@@ -936,7 +932,7 @@ public abstract class FitsTable extends FitsHDU {
                             // Impossible case in OIFits
                             break;
                         }
-                        final float[] fValues = getColumnFloat(column.getName());
+                        final float[] fValues = getColumnAsFloat(column.getName());
                         if (fValues == null) {
                             break;
                         }
@@ -1089,6 +1085,150 @@ public abstract class FitsTable extends FitsHDU {
      * --- public data access ---------------------------------------------------------
      */
     /**
+     * Return the column data as String array for the given column name
+     * (standard or derived).
+     *
+     * @param name any column name
+     * @return column data as String array or null if undefined or wrong
+     * type
+     */
+    public final String[] getColumnAsString(final String name) {
+        ColumnMeta meta = getColumnDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_CHAR
+                && !meta.isArray()) {
+            return getColumnString(name);
+        }
+        meta = getColumnDerivedDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_CHAR
+                && !meta.isArray()) {
+            return getColumnDerivedString(name);
+        }
+        return null;
+    }
+
+    /**
+     * Return the column data as int array (1D) for the given column name
+     * (standard or derived).
+     *
+     * @param name any column name
+     * @return column data as short array (1D) or null if undefined or wrong
+     * type
+     */
+    public final int[] getColumnAsInt(final String name) {
+        ColumnMeta meta = getColumnDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_INT
+                && !meta.isArray()) {
+            return getColumnInt(name);
+        }
+        meta = getColumnDerivedDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_INT
+                && !meta.isArray()) {
+            return getColumnDerivedInt(name);
+        }
+        return null;
+    }
+
+    /**
+     * Return the column data as short arrays (2D) for the given column name
+     * (standard or derived).
+     *
+     * @param name any column name
+     * @return column data as short arrays (2D) or null if undefined or wrong
+     * type
+     */
+    public final int[][] getColumnAsInts(final String name) {
+        ColumnMeta meta = getColumnDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_INT
+                && meta.isArray()) {
+            return getColumnInts(name);
+        }
+        meta = getColumnDerivedDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_INT
+                && meta.isArray()) {
+            return getColumnDerivedInts(name);
+        }
+        return null;
+    }
+
+    /**
+     * Return the column data as short array (1D) for the given column name
+     * (standard or derived).
+     *
+     * @param name any column name
+     * @return column data as short array (1D) or null if undefined or wrong
+     * type
+     */
+    public final short[] getColumnAsShort(final String name) {
+        ColumnMeta meta = getColumnDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_SHORT
+                && !meta.isArray()) {
+            return getColumnShort(name);
+        }
+        meta = getColumnDerivedDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_SHORT
+                && !meta.isArray()) {
+            return getColumnDerivedShort(name);
+        }
+        return null;
+    }
+
+    /**
+     * Return the column data as short arrays (2D) for the given column name
+     * (standard or derived).
+     *
+     * @param name any column name
+     * @return column data as short arrays (2D) or null if undefined or wrong
+     * type
+     */
+    public final short[][] getColumnAsShorts(final String name) {
+        ColumnMeta meta = getColumnDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_SHORT
+                && meta.isArray()) {
+            return getColumnShorts(name);
+        }
+        meta = getColumnDerivedDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_SHORT
+                && meta.isArray()) {
+            return getColumnDerivedShorts(name);
+        }
+        return null;
+    }
+
+    /**
+     * Return the column data as float array (1D) for the given column name
+     * (standard or derived).
+     *
+     * @param name any column name
+     * @return column data as float array (1D) or null if undefined or wrong
+     * type
+     */
+    public final float[] getColumnAsFloat(final String name) {
+        ColumnMeta meta = getColumnDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_REAL
+                && !meta.isArray()) {
+            return getColumnFloat(name);
+        }
+        meta = getColumnDerivedDesc(name);
+        if (meta != null
+                && meta.getDataType() == Types.TYPE_REAL
+                && !meta.isArray()) {
+            return getColumnDerivedFloat(name);
+        }
+        return null;
+    }
+
+    /**
      * Return the column data as double array (1D) for the given column name
      * (standard or derived). No conversion are performed here: only column
      * storing double values are returned !
@@ -1159,30 +1299,6 @@ public abstract class FitsTable extends FitsHDU {
      * type
      */
     protected double[][] getDerivedColumnAsDoubles(final String name) {
-        return null;
-    }
-
-    /**
-     * Return the column data as short arrays (2D) for the given column name
-     * (standard or derived).
-     *
-     * @param name any column name
-     * @return column data as short arrays (2D) or null if undefined or wrong
-     * type
-     */
-    public final short[][] getColumnAsShorts(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_SHORT
-                && meta.isArray()) {
-            return getColumnShorts(name);
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_SHORT
-                && meta.isArray()) {
-            return getColumnDerivedShorts(name);
-        }
         return null;
     }
 
