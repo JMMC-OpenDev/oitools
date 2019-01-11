@@ -255,26 +255,28 @@ public abstract class OIAbstractData extends OITable {
 
     /**
      * Return the targetId Matcher corresponding to the given Target UID (global) or null if missing
+     * @param tm TargetManager instance
      * @param targetUID target UID (global)
      * @return targetId Matcher corresponding to the given Target UID (global) or null if missing
      */
-    public final TargetIdMatcher getTargetIdMatcher(final String targetUID) {
+    public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final String targetUID) {
         final OITarget oiTarget = getOiTarget();
         if (oiTarget != null) {
-            return oiTarget.getTargetIdMatcher(targetUID);
+            return oiTarget.getTargetIdMatcher(tm, targetUID);
         }
         return null;
     }
 
     /**
      * Return the targetId Matcher corresponding to the given Target (global) or null if missing
+     * @param tm TargetManager instance
      * @param globalTarget target (global)
      * @return targetId Matcher corresponding to the given Target (global) or null if missing
      */
-    public final TargetIdMatcher getTargetIdMatcher(final Target globalTarget) {
+    public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final Target globalTarget) {
         final OITarget oiTarget = getOiTarget();
         if (oiTarget != null) {
-            return oiTarget.getTargetIdMatcher(globalTarget);
+            return oiTarget.getTargetIdMatcher(tm, globalTarget);
         }
         return null;
     }

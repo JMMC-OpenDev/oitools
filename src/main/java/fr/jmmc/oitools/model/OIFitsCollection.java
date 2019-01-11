@@ -46,11 +46,11 @@ public final class OIFitsCollection implements ToStringable {
 
     /** logger */
     protected final static Logger logger = Logger.getLogger(OIFitsCollection.class.getName());
-    /** Target manager */
-    private final static TargetManager tm = TargetManager.getInstance();
-    /** instrument mode manager */
-    private final static InstrumentModeManager imm = InstrumentModeManager.getInstance();
     /* members */
+    /** InstrumentMode manager */
+    private final InstrumentModeManager imm;
+    /** Target manager */
+    private final TargetManager tm;
     /** OIFits file collection keyed by absolute file path (unordered) */
     private final Map<String, OIFitsFile> oiFitsPerPath = new HashMap<String, OIFitsFile>();
     /** Set of OIData tables keyed by Granule */
@@ -84,7 +84,24 @@ public final class OIFitsCollection implements ToStringable {
      * Public constructor
      */
     public OIFitsCollection() {
-        super();
+        this.imm = InstrumentModeManager.newInstanceWithMatcherLike();
+        this.tm = TargetManager.newInstanceWithMatcherLike();
+    }
+
+    /**
+     * Return the instrument mode manager
+     * @return InstrumentModeManager instance
+     */
+    public InstrumentModeManager getInstrumentModeManager() {
+        return imm;
+    }
+
+    /**
+     * Return the Target manager
+     * @return TargetManager instance
+     */
+    public TargetManager getTargetManager() {
+        return tm;
     }
 
     /**
@@ -101,10 +118,10 @@ public final class OIFitsCollection implements ToStringable {
      * Clear the cached meta-data
      */
     public void clearCache() {
+        // clear InstrumentMode mappings:
+        imm.clear();
         // clear Target mappings:
         tm.clear();
-        // clear insMode mappings:
-        imm.clear();
         // clear granules:
         oiDataPerGranule.clear();
     }
@@ -273,8 +290,23 @@ public final class OIFitsCollection implements ToStringable {
         }
 
         if (logger.isLoggable(Level.FINE)) {
-            logger.log(Level.FINE, "analyzeCollection: Granules: {0}", oiDataPerGranule.keySet());
+            logger.log(Level.FINE, "analyzeCollection: Granule / OIData tables: {0}", oiDataPerGranule.keySet());
+            logger.log(Level.FINE, "analyzeCollection: Sorted Granules:");
+
+            final List<Granule> granules = getSortedGranules();
+
+            for (Granule granule : granules) {
+                logger.log(Level.FINE, "analyzeCollection: {0}", detailedGranuletoString(granule));
+            }
         }
+    }
+
+    public String detailedGranuletoString(Granule granule) {
+        return "Granule{target=" + granule.getTarget()
+                + " [aliases: " + tm.getSortedUniqueAliases(granule.getTarget()) + "]"
+                + ", insMode=" + granule.getInsMode()
+                + " [aliases: " + imm.getSortedUniqueAliases(granule.getInsMode()) + "]"
+                + ", night=" + granule.getNight() + '}';
     }
 
     /**
@@ -310,7 +342,7 @@ public final class OIFitsCollection implements ToStringable {
             final List<Granule> granules = findGranules(selector);
 
             if (granules != null && !granules.isEmpty()) {
-                result = (result != null) ? result : new SelectorResult();
+                result = (result != null) ? result : new SelectorResult(this);
 
                 for (Granule g : granules) {
                     final Set<OIData> oiDatas = oiDataPerGranule.get(g);

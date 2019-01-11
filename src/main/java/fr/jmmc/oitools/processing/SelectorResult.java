@@ -19,6 +19,7 @@ package fr.jmmc.oitools.processing;
 import fr.jmmc.oitools.model.Granule;
 import fr.jmmc.oitools.model.InstrumentMode;
 import fr.jmmc.oitools.model.OIData;
+import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.util.OIFitsFileComparator;
@@ -35,6 +36,8 @@ import java.util.Set;
 public final class SelectorResult {
 
     /** members */
+    /** OIFits collection (data source) */
+    private final OIFitsCollection oiFitsCollection;
     /** granule set (insertion ordered) */
     private final Set<Granule> granules = new HashSet<Granule>();
     private final Set<OIData> oiDatas = new HashSet<OIData>();
@@ -43,8 +46,13 @@ public final class SelectorResult {
     private List<InstrumentMode> sortedInstrumentModes = null;
     private List<OIData> sortedOIDatas = null;
 
-    public SelectorResult() {
+    public SelectorResult(final OIFitsCollection oiFitsCollection) {
+        this.oiFitsCollection = oiFitsCollection;
         reset();
+    }
+
+    public OIFitsCollection getOiFitsCollection() {
+        return oiFitsCollection;
     }
 
     public void reset() {

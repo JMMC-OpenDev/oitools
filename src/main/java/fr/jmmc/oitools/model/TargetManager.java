@@ -26,19 +26,12 @@ import java.util.List;
  * @author bourgesl
  */
 public final class TargetManager extends AbstractMapper<Target> {
-
-    /** Singleton pattern */
-    private final static TargetManager INSTANCE = new TargetManager(Target.MATCHER_LIKE);
-
-    /**
-     * Return the Manager singleton
-     * @return singleton instance
-     */
-    public static TargetManager getInstance() {
-        return INSTANCE;
+    
+    public static TargetManager newInstanceWithMatcherLike() {
+        return new TargetManager(Target.MATCHER_LIKE); // based on distance matching
     }
 
-    public TargetManager(final Matcher<Target> matcher) {
+    private TargetManager(final Matcher<Target> matcher) {
         super(matcher);
     }
 

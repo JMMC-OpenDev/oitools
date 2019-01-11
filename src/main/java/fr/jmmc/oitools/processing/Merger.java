@@ -28,6 +28,7 @@ import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.model.Target;
+import fr.jmmc.oitools.model.TargetManager;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -261,6 +262,7 @@ public final class Merger {
         final OIFitsFile resultFile = ctx.resultFile;
 
         // Targets:
+        final TargetManager tm = ctx.selectorResult.getOiFitsCollection().getTargetManager();
         final List<Target> targets = ctx.selectorResult.getDistinctTargets();
         final int nbTargets = targets.size();
 
@@ -284,7 +286,7 @@ public final class Merger {
             final Map<Short, Short> mapIds = new HashMap<Short, Short>(4);
 
             for (Target target : targets) {
-                final Set<Short> targetIds = oiTarget.getTargetIds(target);
+                final Set<Short> targetIds = oiTarget.getTargetIds(tm, target);
 
                 if (targetIds != null) {
                     final Short newId = newTargetIds.get(target);

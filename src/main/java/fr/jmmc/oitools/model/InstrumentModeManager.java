@@ -27,18 +27,11 @@ import java.util.List;
  */
 public final class InstrumentModeManager extends AbstractMapper<InstrumentMode> {
 
-    /** Singleton pattern */
-    private final static InstrumentModeManager INSTANCE = new InstrumentModeManager(InstrumentMode.MATCHER_LIKE);
-
-    /**
-     * Return the Manager singleton
-     * @return singleton instance
-     */
-    public static InstrumentModeManager getInstance() {
-        return INSTANCE;
+    public static InstrumentModeManager newInstanceWithMatcherLike() {
+        return new InstrumentModeManager(InstrumentMode.MATCHER_LIKE); // based on wavelength matching
     }
-
-    public InstrumentModeManager(final Matcher<InstrumentMode> matcher) {
+    
+    private InstrumentModeManager(final Matcher<InstrumentMode> matcher) {
         super(matcher);
     }
 

@@ -572,24 +572,26 @@ public final class OITarget extends OITable {
 
     /**
      * Return the targetId Matcher corresponding to the given Target UID (global) or null if missing
+     * @param tm TargetManager instance
      * @param targetUID target UID (global)
      * @return targetId Matcher corresponding to the given Target UID (global) or null if missing
      */
-    public final TargetIdMatcher getTargetIdMatcher(final String targetUID) {
-        final Target globalTarget = TargetManager.getInstance().getGlobalByUID(targetUID);
+    public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final String targetUID) {
+        final Target globalTarget = tm.getGlobalByUID(targetUID);
         if (globalTarget != null) {
-            return getTargetIdMatcher(globalTarget);
+            return getTargetIdMatcher(tm, globalTarget);
         }
         return null;
     }
 
     /**
      * Return the targetId Matcher corresponding to the given Target (global) or null if missing
+     * @param tm TargetManager instance
      * @param globalTarget target (global)
      * @return targetId Matcher corresponding to the given Target (global) or null if missing
      */
-    public final TargetIdMatcher getTargetIdMatcher(final Target globalTarget) {
-        final Set<Short> matchs = getTargetIds(globalTarget);
+    public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final Target globalTarget) {
+        final Set<Short> matchs = getTargetIds(tm, globalTarget);
         if (matchs != null) {
             return new TargetIdMatcher(matchs);
         }
@@ -598,12 +600,13 @@ public final class OITarget extends OITable {
 
     /**
      * Return the target ids corresponding to the given Target (global) or null if missing
+     * @param tm TargetManager instance
      * @param globalTarget target (global)
      * @return target ids corresponding to the given Target (global) or null if missing
      */
-    public final Set<Short> getTargetIds(final Target globalTarget) {
+    public final Set<Short> getTargetIds(final TargetManager tm, final Target globalTarget) {
         Set<Short> matchs = null;
-        final List<Target> localTargets = TargetManager.getInstance().getLocals(globalTarget);
+        final List<Target> localTargets = tm.getLocals(globalTarget);
         if (localTargets != null) {
             for (Target local : localTargets) {
                 final Short id = targetObjToTargetId.get(local);

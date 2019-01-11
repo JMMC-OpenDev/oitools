@@ -21,15 +21,20 @@ package fr.jmmc.oitools.test;
 
 import static fr.jmmc.oitools.JUnitBaseTest.getFitsFiles;
 import fr.jmmc.oitools.OIFitsConstants;
+import fr.jmmc.oitools.image.FitsImageHDU;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFlux;
 import fr.jmmc.oitools.model.OITable;
+import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIWavelength;
+import fr.jmmc.oitools.model.Target;
+import fr.jmmc.oitools.model.TargetManager;
 import java.io.File;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.logging.Level;
 
 /**
@@ -39,15 +44,26 @@ import java.util.logging.Level;
  */
 public class FindFilesTool implements TestEnv {
 
+//    public final static String FIND_DIR = TEST_DIR;
+    public final static String FIND_DIR = System.getProperty("user.home") + "/data-oidb-mirror/";
+
     public static void main(String[] args) {
+        Locale.setDefault(Locale.US);
+
+        // disable logs below WARNING level:
         System.setProperty("java.util.logging.config.file", "./src/test/resources/logging.properties");
 
-        for (String f : getFitsFiles(new File(TEST_DIR))) {
-            checkFile(f);
+        logger.log(Level.WARNING, "Processing directory: {0}", FIND_DIR);
+
+        int n = 0;
+        for (String filePath : getFitsFiles(new File(FIND_DIR))) {
+            processFile(filePath);
+            n++;
         }
+        logger.log(Level.WARNING, "Processed {0} files", n);
     }
 
-    public static void checkFile(final String absFilePath) {
+    private static void processFile(final String absFilePath) {
         logger.log(Level.INFO, "Checking file : {0}", absFilePath);
 
         try {
@@ -74,6 +90,9 @@ public class FindFilesTool implements TestEnv {
 
             if (multiTargetsInOIData(oifits)) {
                 logger.log(Level.WARNING, "multiTargetsInOIData: {0}", display(oifits));
+            }
+            if (duplicatedTargetNames(oifits)) {
+                logger.log(Level.WARNING, "duplicatedTargetNames: {0}", display(oifits));
             }
         }
         if (singleNWave(oifits)) {
@@ -122,6 +141,58 @@ public class FindFilesTool implements TestEnv {
             }
         }
         return false;
+    }
+
+    private static boolean duplicatedTargetNames(OIFitsFile oifits) {
+        boolean match = false;
+
+        if (oifits.hasOiTarget()) {
+            final OITarget oiTarget = oifits.getOiTarget();
+            final int len = oiTarget.getNbTargets();
+
+            if (len > 2) {
+                if (false) {
+                    final String[] targetNames = oiTarget.getTarget();
+
+                    for (int i = 0; i < len; i++) {
+                        final String refName = targetNames[i];
+                        if (refName != null) {
+
+                            for (int j = i + 1; j < len; j++) {
+                                if (refName.equals(targetNames[j])) {
+                                    match = true;
+
+                                    // rule [OI_TARGET_TARGET_UNIQ] check duplicated values in the TARGET column of the OI_TARGET table
+                                    logger.log(Level.WARNING, "duplicated Target name: {0}", refName);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                final TargetManager tm = TargetManager.newInstanceWithMatcherLike();
+
+                for (Target target : oiTarget.getTargetSet()) {
+                    tm.register(target);
+                }
+
+                // test global mapping ?
+                for (Target target : oiTarget.getTargetSet()) {
+                    final Target globalTarget = tm.getGlobal(target);
+                    if (!target.getTarget().equalsIgnoreCase(globalTarget.getTarget())) {
+                        match = true;
+                        logger.log(Level.WARNING, "Global Target name {0} different than Local Target name {1}",
+                                new Object[]{globalTarget.getTarget(), target.getTarget()});
+                    }
+                }
+                
+                if (match) {
+                    logger.log(Level.WARNING, "Global Targets: {0}", tm.getGlobals());
+                }
+            }
+        }
+        return match;
     }
 
     private static boolean multiTargetsInOIData(OIFitsFile oifits) {
@@ -173,9 +244,11 @@ public class FindFilesTool implements TestEnv {
     }
 
     private static boolean hasImage(OIFitsFile oifits) {
-        boolean ok = oifits.getPrimaryImageHDU() != null;
+        final FitsImageHDU primaryHDU = oifits.getPrimaryImageHDU();
+
+        boolean ok = (primaryHDU != null && primaryHDU.hasImages());
         if (ok) {
-            logger.log(Level.INFO, "image: {0}", oifits.getPrimaryImageHDU());
+            logger.log(Level.INFO, "image: {0}", primaryHDU);
         }
         return ok;
     }
