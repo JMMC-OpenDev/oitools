@@ -24,11 +24,14 @@ import fr.jmmc.oitools.model.Granule;
 import fr.jmmc.oitools.model.InstrumentMode;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsCollection;
+import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIT3;
 import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIVis2;
+import fr.jmmc.oitools.model.OutputVisitor;
 import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.model.TargetIdMatcher;
+import fr.jmmc.oitools.model.TargetManager;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,17 +48,26 @@ public final class OIFitsCollectionViewer {
     }
 
     public static void process(final OIFitsCollection oiFitsCollection) {
-        final StringBuilder buffer = new StringBuilder(4 * 1024);
-        CsvOutputVisitor.appendHeader(buffer);
-        targetMetadata(oiFitsCollection, buffer);
-        OIFitsCommand.info(buffer.toString());
+        final CsvOutputVisitor out = new CsvOutputVisitor(false);
+
+        out.enterMetadata();
+        targetMetadata(oiFitsCollection, out);
+        out.exitMetadata();
+
+        OIFitsCommand.info(out.toString());
     }
 
-    private static void targetMetadata(final OIFitsCollection oiFitsCollection, final StringBuilder sb) {
+    public static void targetMetadata(final OIFitsFile oiFitsFile, final OutputVisitor out) {
+        targetMetadata(OIFitsCollection.create(oiFitsFile), out);
+    }
+
+    public static void targetMetadata(final OIFitsCollection oiFitsCollection, final OutputVisitor out) {
 
         final List<Granule> granules = oiFitsCollection.getSortedGranules();
 
         final Map<Granule, Set<OIData>> oiDataPerGranule = oiFitsCollection.getOiDataPerGranule();
+
+        final TargetManager tm = oiFitsCollection.getTargetManager();
 
         for (Granule granule : granules) {
             final Target target = granule.getTarget();
@@ -85,7 +97,7 @@ public final class OIFitsCollectionViewer {
                 String facilityName = "";
 
                 for (OIData oiData : oiDatas) {
-                    final TargetIdMatcher targetIdMatcher = oiData.getTargetIdMatcher(target);
+                    final TargetIdMatcher targetIdMatcher = oiData.getTargetIdMatcher(tm, target);
 
                     if (targetIdMatcher != null) {
                         /* one oiData table, search for target by targetid (and nightid) */
@@ -133,12 +145,12 @@ public final class OIFitsCollectionViewer {
                     }
                 }
 
-                CsvOutputVisitor.appendRecord(sb, targetName, targetRa,
-                        targetDec, intTime, tMin, tMax, resPower,
-                        minWavelength, maxWavelength, facilityName,
-                        insName, nbVis, nbVis2, nbT3, nbChannels);
+                out.appendMetadataRecord(targetName, targetRa, targetDec,
+                        intTime, tMin, tMax,
+                        resPower, minWavelength, maxWavelength,
+                        facilityName, insName,
+                        nbVis, nbVis2, nbT3, nbChannels);
             }
         }
     }
-
 }

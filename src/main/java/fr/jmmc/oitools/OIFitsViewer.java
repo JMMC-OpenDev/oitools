@@ -29,6 +29,8 @@ import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIVis2;
 import fr.jmmc.oitools.model.OIWavelength;
+import fr.jmmc.oitools.model.OutputVisitor;
+import fr.jmmc.oitools.model.OutputVisitor.TargetMetadataProvider;
 import fr.jmmc.oitools.model.XmlOutputVisitor;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
@@ -63,7 +65,7 @@ public final class OIFitsViewer extends OIFitsCommand {
     }
 
     /**
-     * Creates a new OifitsViewer object.
+     * Creates a new OIFitsViewer object.
      *
      * @param format flag to represent data with less accuracy but a better string representation
      * @param verbose if true the result will contain the table content
@@ -73,7 +75,7 @@ public final class OIFitsViewer extends OIFitsCommand {
     }
 
     /**
-     * Creates a new OifitsViewer object.
+     * Creates a new OIFitsViewer object.
      *
      * @param doXmlOutput enable/disable XML output
      * @param format flag to represent data with less accuracy but a better string representation
@@ -84,7 +86,7 @@ public final class OIFitsViewer extends OIFitsCommand {
     }
 
     /**
-     * Creates a new OifitsViewer object.
+     * Creates a new OIFitsViewer object.
      *
      * @param doXmlOutput enable/disable XML output
      * @param doCsvOutput enable/disable Csv output
@@ -92,9 +94,27 @@ public final class OIFitsViewer extends OIFitsCommand {
      * @param verbose if true the result will contain the table content
      */
     public OIFitsViewer(final boolean doXmlOutput, final boolean doCsvOutput, final boolean format, final boolean verbose) {
+        this(doXmlOutput, doCsvOutput, format, verbose, false); // do not use Granule
+    }
+
+    /**
+     * Creates a new OIFitsViewer object.
+     *
+     * @param doXmlOutput enable/disable XML output
+     * @param doCsvOutput enable/disable Csv output
+     * @param format flag to represent data with less accuracy but a better string representation
+     * @param verbose if true the result will contain the table content
+     * @param useGranules flag to use Granule to generate target Metadata
+     */
+    public OIFitsViewer(final boolean doXmlOutput, final boolean doCsvOutput, final boolean format, final boolean verbose,
+                        final boolean useGranules) {
+
         this.checker = new OIFitsChecker();
-        this.xmlSerializer = (doXmlOutput) ? new XmlOutputVisitor(format, verbose, this.checker) : null;
-        this.tsvSerializer = (doCsvOutput) ? new CsvOutputVisitor(verbose) : null;
+
+        final TargetMetadataProvider metadataProvider = TargetMetadataProvider.getInstance(useGranules);
+
+        this.xmlSerializer = (doXmlOutput) ? new XmlOutputVisitor(metadataProvider, format, verbose, this.checker) : null;
+        this.tsvSerializer = (doCsvOutput) ? new CsvOutputVisitor(metadataProvider, verbose) : null;
     }
 
     /**
@@ -132,10 +152,7 @@ public final class OIFitsViewer extends OIFitsCommand {
         return output;
     }
 
-    public static void targetMetadata(final OIFitsFile oiFitsFile, final boolean xml, final StringBuilder sb) {
-        // TODO: use OIFitsCollectionViewer instead (based on Granule directly)
-        // used by oidb
-
+    public static void targetMetadata(final OIFitsFile oiFitsFile, final OutputVisitor out) {
         if (oiFitsFile.hasOiTarget()) {
             final OITarget oiTarget = oiFitsFile.getOiTarget();
 
@@ -242,17 +259,11 @@ public final class OIFitsViewer extends OIFitsCommand {
                                     }
                                 }
 
-                                if (xml) {
-                                    XmlOutputVisitor.appendRecord(sb, targetName, targetRa,
-                                            targetDec, intTime, tMin, tMax, resPower,
-                                            minWavelength, maxWavelength, facilityName,
-                                            insName, nbVis, nbVis2, nbT3, nbChannels);
-                                } else {
-                                    CsvOutputVisitor.appendRecord(sb, targetName, targetRa,
-                                            targetDec, intTime, tMin, tMax, resPower,
-                                            minWavelength, maxWavelength, facilityName,
-                                            insName, nbVis, nbVis2, nbT3, nbChannels);
-                                }
+                                out.appendMetadataRecord(targetName, targetRa, targetDec,
+                                        intTime, tMin, tMax,
+                                        resPower, minWavelength, maxWavelength,
+                                        facilityName, insName,
+                                        nbVis, nbVis2, nbT3, nbChannels);
                             }
                         }
                     }
@@ -273,6 +284,7 @@ public final class OIFitsViewer extends OIFitsCommand {
         boolean verbose = false;
         boolean tsv = false;
         boolean xml = true;
+        boolean useGranules = false;
 
         final List<String> fileLocations = new ArrayList<String>(args.length);
 
@@ -288,6 +300,8 @@ public final class OIFitsViewer extends OIFitsCommand {
                     verbose = true;
                 } else if (arg.equals("-c") || arg.equals("-check")) {
                     xml = false;
+                } else if (arg.equals("-g") || arg.equals("-granule")) {
+                    useGranules = true;
                 } else if (arg.equals("-l") || arg.equals("-log")) {
                     quiet = false;
                 } else if (arg.equals("-h") || arg.equals("-help")) {
@@ -308,13 +322,13 @@ public final class OIFitsViewer extends OIFitsCommand {
             errorArg("No file location given in arguments.");
         }
 
-        process(xml, tsv, format, verbose, fileLocations);
+        process(xml, tsv, format, verbose, useGranules, fileLocations);
     }
 
     public static void process(final boolean xml, final boolean tsv, final boolean format, final boolean verbose,
-                               final List<String> fileLocations) {
+                               final boolean useGranules, final List<String> fileLocations) {
 
-        final OIFitsViewer viewer = new OIFitsViewer(xml, tsv, format, verbose);
+        final OIFitsViewer viewer = new OIFitsViewer(xml, tsv, format, verbose, useGranules);
 
         if (xml) {
             info("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<oifits_list>");
@@ -358,6 +372,7 @@ public final class OIFitsViewer extends OIFitsCommand {
         info("| [-v] or [-verbose]           Dump all column data                     |");
         info("| [-t] or [-tsv]               Dump object table in tsv format          |");
         info("| [-c] or [-check]             Check only given file(s)                 |");
+        info("| [-g] or [-granule]           Use Granules to get target metadata      |");
         info("-------------------------------------------------------------------------");
     }
 

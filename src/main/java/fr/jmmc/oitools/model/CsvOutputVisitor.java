@@ -19,22 +19,14 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
-import fr.jmmc.oitools.OIFitsViewer;
-
 /**
  * This visitor implementation produces an CSV output of the OIFits file structure
  * @author bourgesl, mella
  */
-public final class CsvOutputVisitor implements ModelVisitor {
+public final class CsvOutputVisitor extends OutputVisitor {
 
     /* constants */
     private final static String SEP = "\t";
-
-    /* members */
-    /** flag to enable/disable the verbose output */
-    private boolean verbose;
-    /** internal buffer */
-    private StringBuilder buffer;
 
     /**
      * Return one CSV string with complete OIFitsFile information
@@ -72,48 +64,16 @@ public final class CsvOutputVisitor implements ModelVisitor {
      * @param verbose if true the result will contain the table content
      */
     public CsvOutputVisitor(final boolean verbose) {
-        this.verbose = verbose;
-
-        // allocate buffer size (4K):
-        this.buffer = new StringBuilder(4 * 1024);
+        this(TargetMetadataProvider.OIFITS_METADATA, verbose);
     }
 
     /**
-     * Return the flag to enable/disable the verbose output
-     * @return flag to enable/disable the verbose output
+     * Create a new CsvOutputVisitor with verbose output i.e. with table data (no formatter used)
+     * @param metadataProvider target metadata provider
+     * @param verbose if true the result will contain the table content
      */
-    public boolean isVerbose() {
-        return verbose;
-    }
-
-    /**
-     * Define the flag to enable/disable the verbose output
-     * @param verbose flag to enable/disable the verbose output
-     */
-    public void setVerbose(final boolean verbose) {
-        this.verbose = verbose;
-    }
-
-    /**
-     * Clear the internal buffer for later reuse
-     */
-    public void reset() {
-        // recycle buffer :
-        this.buffer.setLength(0);
-    }
-
-    /**
-     * Return the buffer content as a string
-     * @return buffer content
-     */
-    @Override
-    public String toString() {
-        final String result = this.buffer.toString();
-
-        // reset the buffer content
-        reset();
-
-        return result;
+    public CsvOutputVisitor(final TargetMetadataProvider metadataProvider, final boolean verbose) {
+        super(metadataProvider, verbose, 4 * 1024);
     }
 
     /**
@@ -123,7 +83,6 @@ public final class CsvOutputVisitor implements ModelVisitor {
      */
     @Override
     public void visit(final OIFitsFile oiFitsFile) {
-
         enterOIFitsFile(oiFitsFile);
 
         // targets
@@ -150,8 +109,8 @@ public final class CsvOutputVisitor implements ModelVisitor {
      * Open the oifits tag with OIFitsFile description
      * @param oiFitsFile OIFitsFile to get its description (file name)
      */
-    private void enterOIFitsFile(final OIFitsFile oiFitsFile) {
-
+    @Override
+    protected void enterOIFitsFile(final OIFitsFile oiFitsFile) {
         if (isVerbose() && oiFitsFile != null && oiFitsFile.getAbsoluteFilePath() != null) {
             this.buffer.append("# filename       ").append((oiFitsFile.getSourceURI() != null)
                     ? oiFitsFile.getSourceURI().toString() : oiFitsFile.getAbsoluteFilePath()).append('\n');
@@ -162,21 +121,15 @@ public final class CsvOutputVisitor implements ModelVisitor {
     /**
      * Close the oifits tag
      */
-    private void exitOIFitsFile() {
+    @Override
+    protected void exitOIFitsFile() {
         // no op
     }
 
-    private void printMetadata(final OIFitsFile oiFitsFile) {
-        /* analyze structure of file to browse by target */
-        oiFitsFile.analyze();
-
-        appendHeader(this.buffer);
-        OIFitsViewer.targetMetadata(oiFitsFile, false, this.buffer);
-    }
-
-    public static void appendHeader(final StringBuilder buffer) {
-        // respect the same order has the one provided in the appendCsvRecord
-        buffer.append("target_name").append(SEP)
+    @Override
+    public void enterMetadata() {
+        // respect the same order has the one provided in the appendRecord
+        this.buffer.append("target_name").append(SEP)
                 .append("s_ra").append(SEP)
                 .append("s_dec").append(SEP)
                 .append("t_exptime").append(SEP)
@@ -194,8 +147,18 @@ public final class CsvOutputVisitor implements ModelVisitor {
                 .append('\n');
     }
 
-    public static void appendRecord(final StringBuilder buffer, final String targetName, final double targetRa, final double targetDec, double intTime, double tMin, double tMax, float resPower, float minWavelength, float maxWavelength, String facilityName, final String insName, int nbVis, int nbVis2, int nbT3, int nbChannels) {
-        buffer.append(targetName).append(SEP)
+    @Override
+    public void exitMetadata() {
+        // no op
+    }
+
+    @Override
+    public void appendMetadataRecord(final String targetName, final double targetRa, final double targetDec,
+                                     double intTime, double tMin, double tMax,
+                                     float resPower, float minWavelength, float maxWavelength,
+                                     String facilityName, final String insName,
+                                     int nbVis, int nbVis2, int nbT3, int nbChannels) {
+        this.buffer.append(targetName).append(SEP)
                 .append(targetRa).append(SEP)
                 .append(targetDec).append(SEP)
                 .append(intTime).append(SEP)

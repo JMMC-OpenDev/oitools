@@ -19,7 +19,6 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
-import fr.jmmc.oitools.OIFitsViewer;
 import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
 import fr.jmmc.oitools.meta.ColumnMeta;
@@ -36,7 +35,7 @@ import java.util.regex.Pattern;
  * This visitor implementation produces an XML output of the OIFits file structure
  * @author bourgesl, mella
  */
-public final class XmlOutputVisitor implements ModelVisitor {
+public final class XmlOutputVisitor extends OutputVisitor {
 
     /* constants */
     /** US number format symbols */
@@ -54,10 +53,6 @@ public final class XmlOutputVisitor implements ModelVisitor {
     /* members */
     /** flag to enable/disable the number formatter */
     private boolean format;
-    /** flag to enable/disable the verbose output */
-    private boolean verbose;
-    /** internal buffer */
-    private StringBuilder buffer;
     /** checker used to store checking messages */
     private final OIFitsChecker checker;
 
@@ -138,12 +133,20 @@ public final class XmlOutputVisitor implements ModelVisitor {
      * @param checker optional OIFitsChecker to dump its report
      */
     public XmlOutputVisitor(final boolean format, final boolean verbose, final OIFitsChecker checker) {
-        this.format = format;
-        this.verbose = verbose;
-        this.checker = checker;
+        this(TargetMetadataProvider.OIFITS_METADATA, format, verbose, checker);
+    }
 
-        // allocate buffer size (32K or 128K):
-        this.buffer = new StringBuilder(((verbose) ? 128 : 32) * 1024);
+    /**
+     * Create a new XmlOutputVisitor with verbose output i.e. with table data (no formatter used)
+     * @param metadataProvider target metadata provider
+     * @param format flag to represent data with less accuracy but a better string representation
+     * @param verbose if true the result will contain the table content
+     * @param checker optional OIFitsChecker to dump its report
+     */
+    public XmlOutputVisitor(final TargetMetadataProvider metadataProvider, final boolean format, final boolean verbose, final OIFitsChecker checker) {
+        super(metadataProvider, verbose, ((verbose) ? 128 : 32) * 1024);
+        this.format = format;
+        this.checker = checker;
     }
 
     /**
@@ -163,56 +166,17 @@ public final class XmlOutputVisitor implements ModelVisitor {
     }
 
     /**
-     * Return the flag to enable/disable the verbose output
-     * @return flag to enable/disable the verbose output
-     */
-    public boolean isVerbose() {
-        return verbose;
-    }
-
-    /**
-     * Define the flag to enable/disable the verbose output
-     * @param verbose flag to enable/disable the verbose output
-     */
-    public void setVerbose(final boolean verbose) {
-        this.verbose = verbose;
-    }
-
-    /**
-     * Clear the internal buffer for later reuse
-     */
-    public void reset() {
-        // recycle buffer :
-        this.buffer.setLength(0);
-    }
-
-    /**
-     * Return the buffer content as a string
-     * @return buffer content
-     */
-    @Override
-    public String toString() {
-        final String result = this.buffer.toString();
-
-        // reset the buffer content
-        reset();
-
-        return result;
-    }
-
-    /**
      * Process the given OIFitsFile element with this visitor implementation :
      * fill the internal buffer with file information
      * @param oiFitsFile OIFitsFile element to visit
      */
     @Override
     public void visit(final OIFitsFile oiFitsFile) {
-
         enterOIFitsFile(oiFitsFile);
 
         // force verbosity to true for OIArray / OIWaveLength tables (to dump their data):
-        final boolean verbosity = this.verbose;
-        this.verbose = true;
+        final boolean verbosity = isVerbose();
+        setVerbose(true);
 
         String[] strings;
 
@@ -264,7 +228,7 @@ public final class XmlOutputVisitor implements ModelVisitor {
         }
 
         // restore verbosity :
-        this.verbose = verbosity;
+        setVerbose(verbosity);
 
         // data tables
         for (final OIData oiData : oiFitsFile.getOiDataList()) {
@@ -288,7 +252,8 @@ public final class XmlOutputVisitor implements ModelVisitor {
      * Open the oifits tag with OIFitsFile description
      * @param oiFitsFile OIFitsFile to get its description (file name)
      */
-    private void enterOIFitsFile(final OIFitsFile oiFitsFile) {
+    @Override
+    protected void enterOIFitsFile(final OIFitsFile oiFitsFile) {
         this.buffer.append("<oifits>\n");
 
         if (oiFitsFile != null && oiFitsFile.getAbsoluteFilePath() != null) {
@@ -314,7 +279,8 @@ public final class XmlOutputVisitor implements ModelVisitor {
     /**
      * Close the oifits tag
      */
-    private void exitOIFitsFile() {
+    @Override
+    protected void exitOIFitsFile() {
         this.buffer.append("</oifits>\n");
     }
 
@@ -325,7 +291,6 @@ public final class XmlOutputVisitor implements ModelVisitor {
      */
     @Override
     public void visit(final OITable oiTable) {
-
         final boolean doOIFitsFile = (this.buffer.length() == 0);
 
         if (doOIFitsFile) {
@@ -400,7 +365,7 @@ public final class XmlOutputVisitor implements ModelVisitor {
 
         this.buffer.append("</columns>\n");
 
-        if (this.verbose) {
+        if (isVerbose()) {
             this.buffer.append("<table>\n<tr>\n");
 
             for (ColumnMeta column : columnsDescCollection) {
@@ -678,17 +643,23 @@ public final class XmlOutputVisitor implements ModelVisitor {
         return out;
     }
 
-    private void printMetadata(final OIFitsFile oiFitsFile) {
-        /* analyze structure of file to browse by target */
-        oiFitsFile.analyze();
-
+    @Override
+    public void enterMetadata() {
         this.buffer.append("<metadata>\n");
-        OIFitsViewer.targetMetadata(oiFitsFile, true, this.buffer);
+    }
+
+    @Override
+    public void exitMetadata() {
         this.buffer.append("</metadata>\n");
     }
 
-    public static void appendRecord(StringBuilder target, String targetName, double targetRa, double targetDec, double intTime, double tMin, double tMax, float resPower, float minWavelength, float maxWavelength, String facilityName, String insName, int nbVis, int nbVis2, int nbT3, int nbChannels) {
-        target.append("  <target>\n")
+    @Override
+    public void appendMetadataRecord(final String targetName, final double targetRa, final double targetDec,
+                                     double intTime, double tMin, double tMax,
+                                     float resPower, float minWavelength, float maxWavelength,
+                                     String facilityName, final String insName,
+                                     int nbVis, int nbVis2, int nbT3, int nbChannels) {
+        this.buffer.append("  <target>\n")
                 .append("    <target_name>").append(encodeTagContent(targetName)).append("</target_name>\n")
                 .append("    <s_ra>").append(targetRa).append("</s_ra>\n")
                 .append("    <s_dec>").append(targetDec).append("</s_dec>\n")
