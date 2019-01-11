@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -149,10 +150,15 @@ public abstract class AbstractMapper<K> {
         final List<K> locals = getLocals(global);
         if (locals != null) {
             final int len = locals.size();
+            final String main = getName(global);
 
-            if (len > 1) {
+            if (len == 1) {
+                final String local = getName(locals.get(0));
+                if (!main.equals(local)) {
+                    return Arrays.asList(new String[]{local});
+                }
+            } else if (len > 1) {
                 final Set<String> aliases = new HashSet<String>();
-                final String main = getName(global);
                 // always put global name:
                 aliases.add(main);
                 for (int j = 0; j < len; j++) {
