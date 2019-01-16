@@ -19,6 +19,13 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.oitools.util.GranuleComparator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * A value-type representing a granule = INSNAME (backend) + TARGET + NIGHT
  *
@@ -142,4 +149,13 @@ public final class Granule {
         return "Granule{" + "target=" + target + ", insMode=" + insMode + ", night=" + night + '}';
     }
 
+    public static <K> List<K> findDistinctGranuleField(final Set<Granule> granules, final GranuleField field) {
+        final Set<K> values = new HashSet<K>();
+        for (Granule g : granules) {
+            values.add((K) g.getField(field));
+        }
+        final List<K> sorted = new ArrayList<K>(values);
+        Collections.sort(sorted, GranuleComparator.getComparator(field));
+        return sorted;
+    }
 }

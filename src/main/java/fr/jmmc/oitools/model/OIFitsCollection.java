@@ -84,8 +84,8 @@ public final class OIFitsCollection implements ToStringable {
      * Public constructor
      */
     public OIFitsCollection() {
-        this.imm = InstrumentModeManager.newInstanceWithMatcherLike();
-        this.tm = TargetManager.newInstanceWithMatcherLike();
+        this.imm = InstrumentModeManager.newInstance();
+        this.tm = TargetManager.newInstance();
     }
 
     /**
@@ -377,6 +377,10 @@ public final class OIFitsCollection implements ToStringable {
                     result = null;
                 }
             }
+            
+            if (result == null) {
+                logger.log(Level.WARNING, "findOIData: no result matching {0}", selector);
+            }
         }
 
         logger.log(Level.FINE, "findOIData: {0}", result);
@@ -409,8 +413,15 @@ public final class OIFitsCollection implements ToStringable {
             } else {
                 insMode = null;
             }
+            
+            final NightId nightId;
+            if (selector.getNightID() != null) {
+                nightId = NightId.getCachedInstance(selector.getNightID());
+            } else {
+                nightId = null;
+            }
 
-            final Granule pattern = new Granule(target, insMode, selector.getNightID());
+            final Granule pattern = new Granule(target, insMode, nightId);
 
             if (!pattern.isEmpty()) {
                 for (Iterator<Granule> it = granules.iterator(); it.hasNext();) {

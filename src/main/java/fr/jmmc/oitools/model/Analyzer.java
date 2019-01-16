@@ -49,8 +49,6 @@ public final class Analyzer implements ModelVisitor {
     private final boolean isLogDebug = logger.isLoggable(Level.FINE);
     /** cached combinations for baselines (staLen, combLen, combinations) */
     private final Map<Integer, Map<Integer, List<int[]>>> combsCache = new HashMap<Integer, Map<Integer, List<int[]>>>(8);
-    /** cached NightId instances */
-    private final Map<NightId, NightId> nightIdCache = new HashMap<NightId, NightId>(64);
 
     /**
      * Return the Manager singleton
@@ -152,7 +150,7 @@ public final class Analyzer implements ModelVisitor {
         // Get targetId column:
         final short[] targetIds = oiData.getTargetId();
         // compute night ids:
-        final double[] nightIds = oiData.getNightId();
+        final int[] nightIds = oiData.getNightId();
 
         // note: if no OITarget table then the target will be Target.UNDEFINED
         final Map<Short, Target> targetIdToTarget = (oiTarget != null) ? oiTarget.getTargetIdToTarget() : null;
@@ -164,12 +162,13 @@ public final class Analyzer implements ModelVisitor {
         // Outputs:
         // Fill distinct Target Id:
         final Set<Short> distinctTargetId = oiData.getDistinctTargetId();
+        // Fill distinct Night Id:
+        final Set<NightId> distinctNightId = oiData.getDistinctNightId();
         // Fill oidata tables per (distinct) Granule:
         final Map<Granule, Set<OIData>> oiDataPerGranule = oiData.getOIFitsFile().getOiDataPerGranule();
 
         // reused NightId:
         NightId n = new NightId();
-        final Map<NightId, NightId> nc = this.nightIdCache;
 
         // reused Granule:
         Granule g = new Granule();
@@ -186,14 +185,14 @@ public final class Analyzer implements ModelVisitor {
             }
 
             // Get Night instance:
-            n.set((int) nightIds[i]);
+            n.set(nightIds[i]);
 
-            NightId night = nc.get(n);
+            NightId night = NightId.getCachedInstance(n);
             if (night == null) {
-                night = n;
-                nc.put(night, night);
+                night = NightId.putCachedInstance(n);
                 n = new NightId();
             }
+            distinctNightId.add(night);
 
             // Update Granule:
             g.set(target, insMode, night);
@@ -212,6 +211,7 @@ public final class Analyzer implements ModelVisitor {
 
         if (isLogDebug) {
             logger.log(Level.FINE, "process: OIData[{0}] distinctTargetId {1}", new Object[]{oiData, distinctTargetId});
+            logger.log(Level.FINE, "process: OIData[{0}] distinctNightId  {1}", new Object[]{oiData, distinctNightId});
         }
 
         // Process station indexes:

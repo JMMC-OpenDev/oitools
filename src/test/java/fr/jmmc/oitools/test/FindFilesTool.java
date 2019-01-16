@@ -20,7 +20,6 @@
 package fr.jmmc.oitools.test;
 
 import static fr.jmmc.oitools.JUnitBaseTest.getFitsFiles;
-import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.image.FitsImageHDU;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsFile;
@@ -171,7 +170,7 @@ public class FindFilesTool implements TestEnv {
                     }
                 }
 
-                final TargetManager tm = TargetManager.newInstanceWithMatcherLike();
+                final TargetManager tm = TargetManager.newInstance();
 
                 for (Target target : oiTarget.getTargetSet()) {
                     tm.register(target);
@@ -186,7 +185,7 @@ public class FindFilesTool implements TestEnv {
                                 new Object[]{globalTarget.getTarget(), target.getTarget()});
                     }
                 }
-                
+
                 if (match) {
                     logger.log(Level.WARNING, "Global Targets: {0}", tm.getGlobals());
                 }
@@ -206,13 +205,7 @@ public class FindFilesTool implements TestEnv {
 
     private static boolean multiNightIds(OIFitsFile oifits) {
         for (OIData oidata : oifits.getOiDataList()) {
-            // compute night ids:
-            final double[] nightIds = oidata.getNightId();
-            // compute min/max to act as distinct !
-            // TODO: add distinct NightIds ?
-            final double[] minMaxNightIds = (double[]) oidata.getMinMaxColumnValue(OIFitsConstants.COLUMN_NIGHT_ID);
-
-            if (minMaxNightIds[0] != minMaxNightIds[1]) {
+            if (!oidata.hasSingleNight()) {
                 return true;
             }
         }

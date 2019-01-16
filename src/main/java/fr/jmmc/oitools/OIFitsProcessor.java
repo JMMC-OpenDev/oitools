@@ -44,6 +44,7 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static final String OPTION_OUTPUT = "-output";
     private static final String OPTION_TARGET = "-target";
     private static final String OPTION_INSNAME = "-insname";
+    private static final String OPTION_NIGHT = "-night";
 
     /**
      * Main entry point.
@@ -167,6 +168,7 @@ public class OIFitsProcessor extends OIFitsCommand {
         // Optional filters:
         final String targetUID = getOptionArgValue(args, OPTION_TARGET);
         final String insModeUID = getOptionArgValue(args, OPTION_INSNAME);
+        final String night = getOptionArgValue(args, OPTION_NIGHT);
 
         final OIFitsCollection oiFitsCollection = OIFitsCollection.create(null, fileLocations);
 
@@ -176,6 +178,9 @@ public class OIFitsProcessor extends OIFitsCommand {
         }
         if (insModeUID != null) {
             selector.setInsModeUID(insModeUID);
+        }
+        if (night != null) {
+            selector.setNightID(Integer.valueOf(night));
         }
 
         // Call merge
@@ -235,7 +240,8 @@ public class OIFitsProcessor extends OIFitsCommand {
             if (OPTION_OUTPUT.substring(0, 2).equals(args[i])
                     || OPTION_OUTPUT.equals(args[i])
                     || OPTION_TARGET.equals(args[i])
-                    || OPTION_INSNAME.equals(args[i])) {
+                    || OPTION_INSNAME.equals(args[i])
+                    || OPTION_NIGHT.equals(args[i])) {
                 i++;  // skip next parameter which is the output file
             } else if (args[i].startsWith("-")) {
                 // ignore short options
@@ -261,15 +267,16 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("|------------------------------------------------------------------------------------|");
         info("| command      " + COMMAND_HELP + "           Show this help                                         |");
         info("| command      " + COMMAND_LIST + "           List content of several oifits files                   |");
-        info("| command      " + COMMAND_DUMP + "           Dump the given oifits files                           |");
+        info("| command      " + COMMAND_DUMP + "           Dump the given oifits files                            |");
         info("| command      " + COMMAND_CONVERT + "        Convert the given input file                           |");
         info("| command      " + COMMAND_MERGE + "          Merge several oifits files                             |");
         info("| " + OPTION_OUTPUT.substring(0, 2) + " or " + OPTION_OUTPUT
                 + " <file_path>   Complete path, absolute or relative, for output file   |");
         info("| [-l] or [-log]              Enable logging (quiet by default)                      |");
         info("| [-c] or [-check]            Check output file before writing                       |");
-        info("| [-target]    <target value>  Filter result on given target                         |");
-        info("| [-insname]   <insname value> Filter result on given insname                        |");
+        info("| [-target]   <target value>  Filter result on given target                          |");
+        info("| [-insname]  <insname value> Filter result on given insname                         |");
+        info("| [-night]    <night value>   Filter result on given night (integer)                 |");
         info("--------------------------------------------------------------------------------------");
     }
 

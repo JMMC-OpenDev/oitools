@@ -4,10 +4,10 @@
 package fr.jmmc.oitools.model;
 
 import java.util.Arrays;
-import java.util.Set;
+import java.util.Collection;
 
 /**
- * 
+ * This generic class matches short values especially for targetIds values.
  * @author bourgesl
  */
 public final class TargetIdMatcher {
@@ -16,7 +16,7 @@ public final class TargetIdMatcher {
     private final short single;
     private final short[] ids;
 
-    TargetIdMatcher(final Set<Short> uids) {
+    TargetIdMatcher(final Collection<Short> uids) {
         if (uids.size() == 1) {
             single = uids.iterator().next().shortValue();
             ids = null;
@@ -44,8 +44,8 @@ public final class TargetIdMatcher {
             return false;
         }
     }
-    
-    public boolean matchAll(final Set<Short> ids) {
+
+    public boolean matchAll(final Collection<Short> ids) {
         for (Short id : ids) {
             if (!match(id.shortValue())) {
                 return false;

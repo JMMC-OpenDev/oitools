@@ -19,6 +19,8 @@ package fr.jmmc.oitools.processing;
 import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 import fr.jmmc.oitools.model.ModelBase;
+import fr.jmmc.oitools.model.NightId;
+import fr.jmmc.oitools.model.NightIdMatcher;
 import fr.jmmc.oitools.model.OIArray;
 import fr.jmmc.oitools.model.OICorr;
 import fr.jmmc.oitools.model.OIData;
@@ -28,6 +30,7 @@ import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.model.Target;
+import fr.jmmc.oitools.model.TargetIdMatcher;
 import fr.jmmc.oitools.model.TargetManager;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -219,6 +222,7 @@ public final class Merger {
 
         logger.log(Level.INFO, "selected targets:  {0}", result.getDistinctTargets());
         logger.log(Level.INFO, "selected insModes: {0}", result.getDistinctInstrumentModes());
+        logger.log(Level.INFO, "selected nightIds: {0}", result.getDistinctNightIds());
 
         return result;
     }
@@ -263,15 +267,16 @@ public final class Merger {
 
         // Targets:
         final TargetManager tm = ctx.selectorResult.getOiFitsCollection().getTargetManager();
-        final List<Target> targets = ctx.selectorResult.getDistinctTargets();
-        final int nbTargets = targets.size();
+        // keep targets associated to selected Granules ONLY:
+        final List<Target> gTargets = ctx.selectorResult.getDistinctTargets();
+        final int nbTargets = gTargets.size();
 
         final Map<Target, Short> newTargetIds = new IdentityHashMap<Target, Short>();
 
         final OITarget newOiTarget = new OITarget(resultFile, nbTargets);
 
         int i = 0;
-        for (Target target : targets) {
+        for (Target target : gTargets) {
             final Short targetId = Short.valueOf((short) (i + 1));
             newOiTarget.setTarget(i++, targetId, target);
             newTargetIds.put(target, targetId);
@@ -285,7 +290,7 @@ public final class Merger {
         for (OITarget oiTarget : ctx.usedOITargets) {
             final Map<Short, Short> mapIds = new HashMap<Short, Short>(4);
 
-            for (Target target : targets) {
+            for (Target target : gTargets) {
                 final Set<Short> targetIds = oiTarget.getTargetIds(tm, target);
 
                 if (targetIds != null) {
@@ -425,6 +430,11 @@ public final class Merger {
 
             final OIFitsFile resultFile = ctx.resultFile;
 
+            // keep nightIds associated to selected Granules ONLY:
+            final List<NightId> gNightIds = ctx.selectorResult.getDistinctNightIds();
+            // prepare NightIds matcher (generic):
+            final NightIdMatcher nightIdMatcher = new NightIdMatcher(gNightIds);
+
             final Map<OIWavelength, OIWavelength> mapOIWavelengths = ctx.mapOIWavelengths;
             final Map<OIArray, OIArray> mapOIArrays = ctx.mapOIArrays;
             final Map<OICorr, OICorr> mapOICorrs = ctx.mapOICorrs;
@@ -470,13 +480,13 @@ public final class Merger {
                 // check Targets:
                 boolean checkTargetId = false;
                 // Should filter targetId on each data row ?
-                final Map<Short, Short> mapIds = mapOITargetIDs.get(oiData.getOiTarget());
+                final Map<Short, Short> mapTargetIds = mapOITargetIDs.get(oiData.getOiTarget());
 
                 for (Short id : oiData.getDistinctTargetId()) {
-                    final Short newId = mapIds.get(id);
+                    final Short newId = mapTargetIds.get(id);
                     if (newId == null) {
                         checkTargetId = true;
-                        mapIds.put(id, UNDEFINED_SHORT);
+                        mapTargetIds.put(id, UNDEFINED_SHORT);
 
                         logger.log(Level.WARNING, "Extra TargetId = {0} found ! Using [{1}] instead (rows should be removed in the future)",
                                 new Object[]{id, UNDEFINED_SHORT});
@@ -488,7 +498,18 @@ public final class Merger {
                 }
 
                 logger.log(Level.FINE, "checkTargetId: {0}", checkTargetId);
-                logger.log(Level.FINE, "mapIds:        {0}", mapIds);
+                logger.log(Level.FINE, "mapIds:        {0}", mapTargetIds);
+
+                // check nightIds:
+                boolean checkNightId = false;
+                // Should filter nightId on each data row ?
+                if (!oiData.hasSingleNight()) {
+                    if (!nightIdMatcher.matchAll(oiData.getDistinctNightId())) {
+                        checkNightId = true;
+                    }
+
+                    logger.log(Level.FINE, "oidata nightIds: {0}", oiData.getDistinctNightId());
+                }
 
                 final OIData newOIData = (OIData) resultFile.copyTable(oiData);
 
@@ -497,24 +518,49 @@ public final class Merger {
                 newOIData.setInsName(newInsName);
                 newOIData.setCorrName(newCorrName);
 
-                if (checkTargetId) {
+                if (checkTargetId || checkNightId) {
                     final int nRows = oiData.getNbRows();
+                    int nSkipRows = 0;
 
-                    // Fix targetId column:
+                    // Update targetId column:
                     final short[] targetIds = newOIData.getTargetId();
                     final short[] newTargetIds = new short[nRows];
 
+                    final int[] nightIds = (checkNightId) ? newOIData.getNightId() : null;
+
                     // Iterate on table rows (i):
                     for (int i = 0; i < nRows; i++) {
-                        final Short id = Short.valueOf(targetIds[i]);
-                        Short newId = mapIds.get(id);
-                        if (newId == null) {
-                            newId = UNDEFINED_SHORT; // should never happen
+                        if (checkTargetId) {
+                            final Short oldTargetId = Short.valueOf(targetIds[i]);
+                            Short newTargetId = mapTargetIds.get(oldTargetId);
+                            if (newTargetId == null) {
+                                newTargetId = UNDEFINED_SHORT; // should never happen
+                            }
+                            newTargetIds[i] = newTargetId.shortValue();
+                        } else {
+                            // preserve id:
+                            newTargetIds[i] = targetIds[i];
                         }
-                        newTargetIds[i] = newId.shortValue();
+                        if (checkNightId) {
+                            if (!nightIdMatcher.match(nightIds[i])) {
+                                // data row does not correspond to current night 
+                                // so flag its targetId to undefined:
+                                newTargetIds[i] = ModelBase.UNDEFINED_SHORT;
+                            }
+                        }
+                        if (newTargetIds[i] == ModelBase.UNDEFINED_SHORT) {
+                            nSkipRows++;
+                        }
                     }
-                    // TODO: count (-1) then redim the table to this row count and eliminate useless rows in ALL columns !
+
+                    if (nSkipRows != 0) {
+                        logger.log(Level.WARNING, "Table[{0}] contains {1} invalid rows (to be pruned in the future)",
+                                new Object[]{newOIData, nSkipRows});
+                    }
                     newOIData.setTargetId(newTargetIds);
+
+                    // TODO: redim the table to the correct row count and eliminate useless rows (based on targetId column) !
+                    // TODO: prune useless rows !
                 }
                 resultFile.addOiTable(newOIData);
             }

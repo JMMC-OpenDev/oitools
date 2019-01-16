@@ -17,7 +17,9 @@
 package fr.jmmc.oitools.processing;
 
 import fr.jmmc.oitools.model.Granule;
+import fr.jmmc.oitools.model.Granule.GranuleField;
 import fr.jmmc.oitools.model.InstrumentMode;
+import fr.jmmc.oitools.model.NightId;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
@@ -44,6 +46,7 @@ public final class SelectorResult {
     /** cached values */
     private List<Target> sortedTargets = null;
     private List<InstrumentMode> sortedInstrumentModes = null;
+    private List<NightId> sortedNightIds = null;
     private List<OIData> sortedOIDatas = null;
 
     public SelectorResult(final OIFitsCollection oiFitsCollection) {
@@ -71,28 +74,23 @@ public final class SelectorResult {
 
     public List<Target> getDistinctTargets() {
         if (sortedTargets == null) {
-            final Set<Target> targets = new HashSet<Target>();
-            for (Granule g : granules) {
-                targets.add(g.getTarget());
-            }
-            final List<Target> sorted = new ArrayList<Target>(targets);
-            Collections.sort(sorted, Target.CMP_TARGET);
-            sortedTargets = sorted;
+            sortedTargets = Granule.findDistinctGranuleField(granules, GranuleField.TARGET);
         }
         return sortedTargets;
     }
 
     public List<InstrumentMode> getDistinctInstrumentModes() {
         if (sortedInstrumentModes == null) {
-            final Set<InstrumentMode> insModes = new HashSet<InstrumentMode>();
-            for (Granule g : granules) {
-                insModes.add(g.getInsMode());
-            }
-            final List<InstrumentMode> sorted = new ArrayList<InstrumentMode>(insModes);
-            Collections.sort(sorted, InstrumentMode.CMP_INS_MODE);
-            sortedInstrumentModes = sorted;
+            sortedInstrumentModes = Granule.findDistinctGranuleField(granules, GranuleField.INS_MODE);
         }
         return sortedInstrumentModes;
+    }
+
+    public List<NightId> getDistinctNightIds() {
+        if (sortedNightIds == null) {
+            sortedNightIds = Granule.findDistinctGranuleField(granules, GranuleField.NIGHT);
+        }
+        return sortedNightIds;
     }
 
     public List<OIData> getSortedOIDatas() {
@@ -118,5 +116,4 @@ public final class SelectorResult {
     public String toString() {
         return "SelectorResult{" + "granules=" + granules + ", oiDatas=" + oiDatas + '}';
     }
-
 }

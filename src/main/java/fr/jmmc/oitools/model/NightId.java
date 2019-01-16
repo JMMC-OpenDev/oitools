@@ -21,6 +21,11 @@ package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.NumberUtils;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A value-type (immutable) representing a single night in any OI_Data table
@@ -29,7 +34,7 @@ import java.util.Comparator;
 public final class NightId {
 
     public final static NightId UNDEFINED = new NightId();
-    
+
     public static final Comparator<NightId> CMP_NIGHT = new Comparator<NightId>() {
         @Override
         public int compare(NightId n1, NightId n2) {
@@ -37,18 +42,43 @@ public final class NightId {
         }
     };
 
+    /** cached NightId instances */
+    private final static Map<NightId, NightId> CACHE = new HashMap<NightId, NightId>(64);
+
+    public static NightId getCachedInstance(final int nightId) {
+        NightId n = new NightId(nightId);
+        NightId night = getCachedInstance(n);
+        if (night == null) {
+            night = putCachedInstance(n);
+        }
+        return night;
+    }
+    
+    public static NightId getCachedInstance(final NightId nightId) {
+        return CACHE.get(nightId);
+    }
+
+    public static NightId putCachedInstance(final NightId nightId) {
+        CACHE.put(nightId, nightId);
+        return nightId;
+    }
+
     /* members */
-    /* nightId = rounded MJD */
+    /** nightId = rounded MJD */
     private int nightId;
 
     public NightId() {
         this(Integer.MAX_VALUE);
     }
 
-    public NightId(final int nightId) {
+    private NightId(final int nightId) {
         set(nightId);
     }
 
+    /**
+     * Warning: never alter a cached instance !
+     * @param nightId nightId value
+     */
     public void set(final int nightId) {
         this.nightId = nightId;
     }

@@ -29,7 +29,7 @@ public final class Selector {
 
     private String targetUID = null;
     private String insModeUID = null;
-    private NightId nightID = null;
+    private Integer nightID = null;
     // table selection filter expressed as extNb (integer) values + OIFits file (id)
     private final Map<String, List<Integer>> extNbsPerOiFitsPath = new HashMap<String, List<Integer>>();
 
@@ -60,11 +60,11 @@ public final class Selector {
         this.insModeUID = insModeUID;
     }
 
-    public NightId getNightID() {
+    public Integer getNightID() {
         return nightID;
     }
 
-    public void setNightID(NightId nightID) {
+    public void setNightID(Integer nightID) {
         this.nightID = nightID;
     }
 

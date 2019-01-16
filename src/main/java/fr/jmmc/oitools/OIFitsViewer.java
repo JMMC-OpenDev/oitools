@@ -179,20 +179,20 @@ public final class OIFitsViewer extends OIFitsCommand {
                             final float resPower = oiWavelength.getResolution();
 
                             /* build a list of different night ids for the couple (target, insname) ie per granule */
-                            final Map<Double, Set<OIData>> oiDataPerNightId = new LinkedHashMap<Double, Set<OIData>>();
+                            final Map<Integer, Set<OIData>> oiDataPerNightId = new LinkedHashMap<Integer, Set<OIData>>();
 
                             for (final OIData oiData : oiFitsFile.getOiDataList()) {
                                 // same INSNAME (ie instrument mode):
                                 // TODO: fuzzy matcher (wavelengths)
                                 if (oiData.getInsName().equals(insName)) {
                                     final short[] targetIds = oiData.getTargetId();
-                                    final double[] nightIds = oiData.getNightId();
+                                    final int[] nightIds = oiData.getNightId();
 
                                     for (int i = 0; i < targetIds.length; i++) {
                                         // same target:
                                         /* TODO: target aliases (check coordinates): use target UID ? */
                                         if (targetIds[i] == targetId) {
-                                            final double nightId = nightIds[i];
+                                            final int nightId = nightIds[i];
                                             Set<OIData> tables = oiDataPerNightId.get(nightId);
                                             if (tables == null) {
                                                 tables = new LinkedHashSet<OIData>();
@@ -205,8 +205,8 @@ public final class OIFitsViewer extends OIFitsCommand {
                             }
 
                             // Statistics per granule:
-                            for (Map.Entry<Double, Set<OIData>> entry : oiDataPerNightId.entrySet()) {
-                                final double nightId = entry.getKey();
+                            for (Map.Entry<Integer, Set<OIData>> entry : oiDataPerNightId.entrySet()) {
+                                final int nightId = entry.getKey();
                                 final Set<OIData> oiDataTables = entry.getValue();
 
                                 int nbVis = 0, nbVis2 = 0, nbT3 = 0;
@@ -217,7 +217,7 @@ public final class OIFitsViewer extends OIFitsCommand {
                                 for (OIData oiData : oiDataTables) {
                                     /* one oiData table, search for target by targetid (and nightid) */
                                     final short[] targetIds = oiData.getTargetId();
-                                    final double[] nightIds = oiData.getNightId();
+                                    final int[] nightIds = oiData.getNightId();
                                     final double[] mjds = oiData.getMJD();
                                     final double[] intTimes = oiData.getIntTime();
 

@@ -148,7 +148,7 @@ public abstract class OIData extends OIAbstractData {
         }
 
         // Derived NIGHT_ID column definition
-        addDerivedColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_NIGHT_ID, "night identifier", Types.TYPE_DBL));
+        addDerivedColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_NIGHT_ID, "night identifier", Types.TYPE_INT));
     }
 
     /*
@@ -591,19 +591,20 @@ public abstract class OIData extends OIAbstractData {
      *
      * @return the computed night identifier
      */
-    public double[] getNightId() {
+    public int[] getNightId() {
         // lazy:
-        double[] nightId = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_NIGHT_ID);
+        int[] nightId = this.getColumnDerivedInt(OIFitsConstants.COLUMN_NIGHT_ID);
 
         if (nightId == null) {
             final int nRows = getNbRows();
-            nightId = new double[nRows];
+            final double[] mjds = getMJD();
 
-            double[] mjds = getMJD();
+            nightId = new int[nRows];
+
             for (int i = 0; i < nRows; i++) {
                 // TODO: use array center coordinates, adjust night
                 // TODO: if no MJD, use DATE-OBS + TIME[i] instead
-                nightId[i] = (double) Math.round(mjds[i]);
+                nightId[i] = (int) Math.round(mjds[i]);
             }
 
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_NIGHT_ID, nightId);
@@ -809,9 +810,6 @@ public abstract class OIData extends OIAbstractData {
         }
         if (OIFitsConstants.COLUMN_HOUR_ANGLE.equals(name)) {
             return getHourAngle();
-        }
-        if (OIFitsConstants.COLUMN_NIGHT_ID.equals(name)) {
-            return getNightId();
         }
         return null;
     }

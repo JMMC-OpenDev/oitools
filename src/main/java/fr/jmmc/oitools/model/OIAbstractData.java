@@ -42,6 +42,8 @@ public abstract class OIAbstractData extends OITable {
     /* cached analyzed data */
     /** distinct targetId values present in this table (identity hashcode) */
     private final Set<Short> distinctTargetId = new LinkedHashSet<Short>();
+    /** distinct nightId values present in this table (identity hashcode) */
+    private final Set<NightId> distinctNightId = new LinkedHashSet<NightId>();
     /** distinct StaIndex values present in this table (identity hashcode) */
     private final Set<short[]> distinctStaIndex = new LinkedHashSet<short[]>();
     /** cached StaNames corresponding to given OIData StaIndex arrays */
@@ -233,6 +235,7 @@ public abstract class OIAbstractData extends OITable {
     public void setChanged() {
         super.setChanged();
         distinctTargetId.clear();
+        distinctNightId.clear();
         distinctStaIndex.clear();
         staIndexesToString.clear();
     }
@@ -279,6 +282,22 @@ public abstract class OIAbstractData extends OITable {
             return oiTarget.getTargetIdMatcher(tm, globalTarget);
         }
         return null;
+    }
+
+    /**
+     * Get distinct nightId values present in this table
+     * @return distinctNightId
+     */
+    public final Set<NightId> getDistinctNightId() {
+        return distinctNightId;
+    }
+
+    /**
+     * Get boolean for distinct nightId values
+     * @return true if size of distinctNightId == 1
+     */
+    public final boolean hasSingleNight() {
+        return getDistinctNightId().size() == 1;
     }
 
     /**

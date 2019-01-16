@@ -40,7 +40,7 @@ public abstract class AbstractMapper<K> {
 
     /** Logger */
     private final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AbstractMapper.class.getName());
-
+    /** empty collection used by sortedAliasesPerGlobal */
     private final static List<String> EMPTY_ALIAS = Collections.emptyList();
 
     /* members */

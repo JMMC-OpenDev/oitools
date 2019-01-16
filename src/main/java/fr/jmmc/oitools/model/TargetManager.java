@@ -26,8 +26,10 @@ import java.util.List;
  * @author bourgesl
  */
 public final class TargetManager extends AbstractMapper<Target> {
-    
-    public static TargetManager newInstanceWithMatcherLike() {
+
+    public static TargetManager newInstance() {
+        // TODO: use factory or system property to select matcher
+//        return new TargetManager(Target.MATCHER_NAME); // based on target name only
         return new TargetManager(Target.MATCHER_LIKE); // based on distance matching
     }
 

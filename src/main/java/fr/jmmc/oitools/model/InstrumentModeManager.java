@@ -27,10 +27,12 @@ import java.util.List;
  */
 public final class InstrumentModeManager extends AbstractMapper<InstrumentMode> {
 
-    public static InstrumentModeManager newInstanceWithMatcherLike() {
+    public static InstrumentModeManager newInstance() {
+        // TODO: use factory or system property to select matcher
+//        return new InstrumentModeManager(InstrumentMode.MATCHER_INSNAME); // based on instrument name only
         return new InstrumentModeManager(InstrumentMode.MATCHER_LIKE); // based on wavelength matching
     }
-    
+
     private InstrumentModeManager(final Matcher<InstrumentMode> matcher) {
         super(matcher);
     }

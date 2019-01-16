@@ -4,35 +4,40 @@
 package fr.jmmc.oitools.model;
 
 import java.util.Arrays;
-import java.util.Set;
+import java.util.Collection;
 
 /**
- * 
+ * This generic class matches integer values especially for nightIds values.
  * @author bourgesl
  */
-public final class TargetIdMatcher {
+public final class NightIdMatcher {
 
     /* members */
-    private final short single;
-    private final short[] ids;
+    private final int single;
+    private final int[] ids;
 
-    TargetIdMatcher(final Set<Short> uids) {
-        if (uids.size() == 1) {
-            single = uids.iterator().next().shortValue();
+    public NightIdMatcher(final NightId nightId) {
+        single = nightId.getNightId();
+        ids = null;
+    }
+
+    public NightIdMatcher(final Collection<NightId> nightIds) {
+        if (nightIds.size() == 1) {
+            single = nightIds.iterator().next().getNightId();
             ids = null;
         } else {
-            final int len = uids.size();
+            final int len = nightIds.size();
             single = -1;
-            ids = new short[len];
+            ids = new int[len];
             int i = 0;
-            for (Short id : uids) {
-                ids[i++] = id.shortValue();
+            for (NightId id : nightIds) {
+                ids[i++] = id.getNightId();
             }
         }
     }
 
-    public boolean match(final short id) {
-        final short[] a = ids; // local var
+    public boolean match(final int id) {
+        final int[] a = ids; // local var
         if (a == null) {
             return (single == id);
         } else {
@@ -44,10 +49,10 @@ public final class TargetIdMatcher {
             return false;
         }
     }
-    
-    public boolean matchAll(final Set<Short> ids) {
-        for (Short id : ids) {
-            if (!match(id.shortValue())) {
+
+    public boolean matchAll(final Collection<NightId> nightIds) {
+        for (NightId id : nightIds) {
+            if (!match(id.getNightId())) {
                 return false;
             }
         }
@@ -56,7 +61,7 @@ public final class TargetIdMatcher {
 
     @Override
     public String toString() {
-        return "TargetIdMatcher{single=" + single + ", ids=" + Arrays.toString(ids) + '}';
+        return "NightIdMatcher{single=" + single + ", ids=" + Arrays.toString(ids) + '}';
     }
 
 }

@@ -70,23 +70,23 @@ public final class OIFitsCollectionViewer {
         final TargetManager tm = oiFitsCollection.getTargetManager();
 
         for (Granule granule : granules) {
-            final Target target = granule.getTarget();
+            final Target gTarget = granule.getTarget();
             // Target info
-            final String targetName = target.getTarget(); // global UID
-            final double targetRa = target.getRaEp0();
-            final double targetDec = target.getDecEp0();
+            final String targetName = gTarget.getTarget(); // global UID
+            final double targetRa = gTarget.getRaEp0();
+            final double targetDec = gTarget.getDecEp0();
 
-            final InstrumentMode insMode = granule.getInsMode();
+            final InstrumentMode gInsMode = granule.getInsMode();
             // OIWavelength info
-            final String insName = insMode.getInsName(); // global UID
-            final float minWavelength = insMode.getLambdaMin();
-            final float maxWavelength = insMode.getLambdaMax();
-            final int nbChannels = insMode.getNbChannels();
+            final String insName = gInsMode.getInsName(); // global UID
+            final float minWavelength = gInsMode.getLambdaMin();
+            final float maxWavelength = gInsMode.getLambdaMax();
+            final int nbChannels = gInsMode.getNbChannels();
             // Resolution = lambda / delta_lambda
-            final float resPower = insMode.getResPower();
+            final float resPower = gInsMode.getResPower();
 
             // night
-            final double nightId = granule.getNight().getNightId();
+            final int gNightId = granule.getNight().getNightId();
 
             final Set<OIData> oiDatas = oiDataPerGranule.get(granule);
             if (oiDatas != null) {
@@ -97,18 +97,18 @@ public final class OIFitsCollectionViewer {
                 String facilityName = "";
 
                 for (OIData oiData : oiDatas) {
-                    final TargetIdMatcher targetIdMatcher = oiData.getTargetIdMatcher(tm, target);
+                    final TargetIdMatcher targetIdMatcher = oiData.getTargetIdMatcher(tm, gTarget);
 
                     if (targetIdMatcher != null) {
                         /* one oiData table, search for target by targetid (and nightid) */
                         final short[] targetIds = oiData.getTargetId();
-                        final double[] nightIds = oiData.getNightId();
+                        final int[] nightIds = oiData.getNightId();
                         final double[] mjds = oiData.getMJD();
                         final double[] intTimes = oiData.getIntTime();
 
                         for (int i = 0; i < targetIds.length; i++) {
                             // same target and same night:
-                            if (targetIdMatcher.match(targetIds[i]) && (nightId == nightIds[i])) {
+                            if (targetIdMatcher.match(targetIds[i]) && (gNightId == nightIds[i])) {
                                 // TODO: count flag? what to do with flagged measures?
                                 // TODO: check for NaN values ?
                                 // number of rows in data tables:

@@ -83,7 +83,7 @@ public final class GranuleComparator implements Comparator<Granule> {
         return 0;
     }
 
-    public Comparator getComparator(GranuleField field) {
+    public static Comparator getComparator(GranuleField field) {
         switch (field) {
             case TARGET:
                 return Target.CMP_TARGET;
