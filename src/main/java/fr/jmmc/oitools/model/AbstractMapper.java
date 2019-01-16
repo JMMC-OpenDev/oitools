@@ -41,6 +41,8 @@ public abstract class AbstractMapper<K> {
     /** Logger */
     private final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AbstractMapper.class.getName());
 
+    private final static List<String> EMPTY_ALIAS = Collections.emptyList();
+
     /* members */
     /** matcher in use */
     protected final Matcher<K> matcher;
@@ -50,6 +52,8 @@ public abstract class AbstractMapper<K> {
     protected final Map<K, K> globalPerLocal = new IdentityHashMap<K, K>();
     /** local items keyed by global item */
     protected final Map<K, List<K>> localsPerGlobal = new IdentityHashMap<K, List<K>>();
+    /** sorted unique aliases by global item */
+    private final Map<K, List<String>> sortedAliasesPerGlobal = new HashMap<K, List<String>>();
 
     protected AbstractMapper(final Matcher<K> matcher) {
         this.matcher = matcher;
@@ -61,9 +65,11 @@ public abstract class AbstractMapper<K> {
      */
     public void clear() {
         globalUids.clear();
-        // clear insMode mappings:
+        // clear mappings:
         globalPerLocal.clear();
         localsPerGlobal.clear();
+        // clear cached aliases:
+        sortedAliasesPerGlobal.clear();
     }
 
     public final void dump() {
@@ -145,35 +151,49 @@ public abstract class AbstractMapper<K> {
     }
 
     public final List<String> getSortedUniqueAliases(final K global) {
-        List<String> results = null;
+        List<String> results = sortedAliasesPerGlobal.get(global);
 
-        final List<K> locals = getLocals(global);
-        if (locals != null) {
-            final int len = locals.size();
-            final String main = getName(global);
+        if (results == null) {
+            // compute aliases:
+            final List<K> locals = getLocals(global);
+            if (locals != null) {
+                final int len = locals.size();
+                final String main = getName(global);
 
-            if (len == 1) {
-                final String local = getName(locals.get(0));
-                if (!main.equals(local)) {
-                    return Arrays.asList(new String[]{local});
-                }
-            } else if (len > 1) {
-                final Set<String> aliases = new HashSet<String>();
-                // always put global name:
-                aliases.add(main);
-                for (int j = 0; j < len; j++) {
-                    aliases.add(getName(locals.get(j)));
-                }
-                // remove global name:
-                aliases.remove(main);
+                if (len == 1) {
+                    final String local = getName(locals.get(0));
+                    if (!main.equals(local)) {
+                        results = Arrays.asList(new String[]{local});
+                    }
+                } else if (len > 1) {
+                    final Set<String> aliases = new HashSet<String>();
+                    // always put global name:
+                    aliases.add(main);
+                    for (int j = 0; j < len; j++) {
+                        aliases.add(getName(locals.get(j)));
+                    }
+                    // remove global name:
+                    aliases.remove(main);
 
-                if (aliases.size() > 1) {
-                    results = new ArrayList<String>(aliases);
-                    Collections.sort(results);
+                    if (aliases.size() > 1) {
+                        results = new ArrayList<String>(aliases);
+                        Collections.sort(results);
+                    }
                 }
             }
+            if (results == null) {
+                results = EMPTY_ALIAS;
+            }
+            // cache aliases:
+            sortedAliasesPerGlobal.put(global, results);
         }
-        return results;
+
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "getSortedUniqueAliases[{0}]: {1}",
+                    new Object[]{getName(global), results});
+        }
+
+        return (results.isEmpty()) ? null : results;
     }
 
     protected abstract K createGlobal(final K local, final String uid);
