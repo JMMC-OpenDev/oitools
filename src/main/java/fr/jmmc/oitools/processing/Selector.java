@@ -49,6 +49,9 @@ public final class Selector {
     }
 
     public void setTargetUID(String targetUID) {
+        if (targetUID != null && targetUID.trim().isEmpty()) {
+            targetUID = null;
+        }
         this.targetUID = targetUID;
     }
 
@@ -57,6 +60,9 @@ public final class Selector {
     }
 
     public void setInsModeUID(String insModeUID) {
+        if (insModeUID != null && insModeUID.trim().isEmpty()) {
+            insModeUID = null;
+        }
         this.insModeUID = insModeUID;
     }
 
@@ -64,7 +70,7 @@ public final class Selector {
         return nightID;
     }
 
-    public void setNightID(Integer nightID) {
+    public void setNightID(final Integer nightID) {
         this.nightID = nightID;
     }
 
