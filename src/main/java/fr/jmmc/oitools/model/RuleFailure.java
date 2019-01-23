@@ -199,10 +199,13 @@ public final class RuleFailure {
      * @return message
      */
     String formatMessage() {
+        if (getRule() == null) {
+            return "";
+        }
         String msg = getRule().getMessage();
 
         msg = msg.replaceAll("\\{\\{FILE\\}\\}",
-                (getFileRef().getAbsoluteFilePath() != null) ? getFileRef().getAbsoluteFilePath() : ""
+                (getFileRef() != null && getFileRef().getAbsoluteFilePath() != null) ? getFileRef().getAbsoluteFilePath() : ""
         );
         msg = msg.replaceAll("\\{\\{HDU\\}\\}",
                 FitsHDU.getHDUId(getExtName(), getExtNb())
@@ -232,9 +235,11 @@ public final class RuleFailure {
 
         sb.append(getSeverity()).append('\t');
 
-        sb.append(getRule().name()).append('\t');
+        if (getRule() != null) {
+            sb.append(getRule().name()).append('\t');
+        }
 
-        if (getFileRef().getAbsoluteFilePath() != null) {
+        if (getFileRef() != null && getFileRef().getAbsoluteFilePath() != null) {
             sb.append(getFileRef().getAbsoluteFilePath());
         }
         sb.append('\t');
@@ -264,9 +269,13 @@ public final class RuleFailure {
 
         sb.append("    <severity>").append(getSeverity()).append("</severity>\n");
 
-        sb.append("    <rule>").append(getRule().name()).append("</rule>\n");
+        if (getRule() != null) {
+            sb.append("    <rule>").append(getRule().name()).append("</rule>\n");
+        }
 
-        getFileRef().toXML(sb);
+        if (getFileRef() != null) {
+            getFileRef().toXML(sb);
+        }
 
         //Display HDU#0
         if (getExtNb() >= 0) {
