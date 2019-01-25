@@ -74,21 +74,21 @@ public final class SelectorResult {
 
     public List<Target> getDistinctTargets() {
         if (sortedTargets == null) {
-            sortedTargets = Granule.findDistinctGranuleField(granules, GranuleField.TARGET);
+            sortedTargets = Granule.getSortedDistinctGranuleField(granules, GranuleField.TARGET);
         }
         return sortedTargets;
     }
 
     public List<InstrumentMode> getDistinctInstrumentModes() {
         if (sortedInstrumentModes == null) {
-            sortedInstrumentModes = Granule.findDistinctGranuleField(granules, GranuleField.INS_MODE);
+            sortedInstrumentModes = Granule.getSortedDistinctGranuleField(granules, GranuleField.INS_MODE);
         }
         return sortedInstrumentModes;
     }
 
     public List<NightId> getDistinctNightIds() {
         if (sortedNightIds == null) {
-            sortedNightIds = Granule.findDistinctGranuleField(granules, GranuleField.NIGHT);
+            sortedNightIds = Granule.getSortedDistinctGranuleField(granules, GranuleField.NIGHT);
         }
         return sortedNightIds;
     }

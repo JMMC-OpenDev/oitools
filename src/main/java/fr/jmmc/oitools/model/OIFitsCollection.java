@@ -19,6 +19,7 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.jmcs.util.ToStringable;
+import fr.jmmc.oitools.model.Granule.GranuleField;
 import fr.jmmc.oitools.processing.Selector;
 import fr.jmmc.oitools.processing.SelectorResult;
 import fr.jmmc.oitools.util.GranuleComparator;
@@ -46,6 +47,17 @@ public final class OIFitsCollection implements ToStringable {
 
     /** logger */
     protected final static Logger logger = Logger.getLogger(OIFitsCollection.class.getName());
+
+    /** flag to allow fixing bad UID for single matches */
+    private final static boolean FIX_BAD_UID_FOR_SINGLE_MATCH;
+
+    static {
+        FIX_BAD_UID_FOR_SINGLE_MATCH = System.getProperty("fix.bad.uid", "false").equalsIgnoreCase("true");
+
+        if (FIX_BAD_UID_FOR_SINGLE_MATCH) {
+            logger.warning("OIFitsCollection: FIX_BAD_UID_FOR_SINGLE_MATCH enabled !");
+        }
+    }
     /* members */
     /** InstrumentMode manager */
     private final InstrumentModeManager imm;
@@ -377,7 +389,7 @@ public final class OIFitsCollection implements ToStringable {
                     result = null;
                 }
             }
-            
+
             if (result == null) {
                 logger.log(Level.WARNING, "findOIData: no result matching {0}", selector);
             }
@@ -392,13 +404,21 @@ public final class OIFitsCollection implements ToStringable {
         final List<Granule> granules = getSortedGranules();
 
         if (selector != null && !selector.isEmpty()) {
+            boolean badTargetUID = false;
+            boolean badInsModeUID = false;
+
             // null if no match or targetUID / insModeUID is undefined :
             final Target target;
             if (selector.getTargetUID() != null) {
                 target = tm.getGlobalByUID(selector.getTargetUID());
                 if (target == null) {
-                    // no match means no granule matching
-                    return null;
+                    if (FIX_BAD_UID_FOR_SINGLE_MATCH) {
+                        badTargetUID = true;
+                        logger.log(Level.WARNING, "Bad UID, discarding targetUID: [{0}]", selector.getTargetUID());
+                    } else {
+                        // no match means no granule matching
+                        return null;
+                    }
                 }
             } else {
                 target = null;
@@ -407,13 +427,18 @@ public final class OIFitsCollection implements ToStringable {
             if (selector.getInsModeUID() != null) {
                 insMode = imm.getGlobalByUID(selector.getInsModeUID());
                 if (insMode == null) {
-                    // no match means no granule matching
-                    return null;
+                    if (FIX_BAD_UID_FOR_SINGLE_MATCH) {
+                        badInsModeUID = true;
+                        logger.log(Level.WARNING, "Bad UID, discarding insModeUID: [{0}]", selector.getInsModeUID());
+                    } else {
+                        // no match means no granule matching
+                        return null;
+                    }
                 }
             } else {
                 insMode = null;
             }
-            
+
             final NightId nightId;
             if (selector.getNightID() != null) {
                 nightId = NightId.getCachedInstance(selector.getNightID());
@@ -429,6 +454,29 @@ public final class OIFitsCollection implements ToStringable {
 
                     if (!Granule.MATCHER_LIKE.match(pattern, candidate)) {
                         it.remove();
+                    }
+                }
+            }
+
+            if (!granules.isEmpty()) {
+                if (badTargetUID) {
+                    // check if selected Granules only have 1 target:
+                    final Set<Target> targets = Granule.getDistinctGranuleField(granules, GranuleField.TARGET);
+                    if (targets.size() != 1) {
+                        logger.log(Level.WARNING, "Multiple target match (incompatible with targetUID: {0}): {1}",
+                                new Object[]{selector.getTargetUID(), targets});
+                        // ambiguous match => no granule matching
+                        return null;
+                    }
+                }
+                if (badInsModeUID) {
+                    // check if selected Granules only have 1 instrument mode:
+                    final Set<InstrumentMode> insModes = Granule.getDistinctGranuleField(granules, GranuleField.INS_MODE);
+                    if (insModes.size() != 1) {
+                        logger.log(Level.WARNING, "Multiple instrument mode match (incompatible with insModeUID: {0}): {1}",
+                                new Object[]{selector.getInsModeUID(), insModes});
+                        // ambiguous match => no granule matching
+                        return null;
                     }
                 }
             }
