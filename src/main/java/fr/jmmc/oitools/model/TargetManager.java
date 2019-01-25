@@ -27,9 +27,21 @@ import java.util.List;
  */
 public final class TargetManager extends AbstractMapper<Target> {
 
+    /** flag to prefer matcher by name */
+    private final static boolean PREFER_MATCHER_NAME;
+
+    static {
+        PREFER_MATCHER_NAME = System.getProperty("target.matcher.name", "false").equalsIgnoreCase("true");
+
+        if (PREFER_MATCHER_NAME) {
+            logger.warning("TargetManager: Using matcher by name !");
+        }
+    }
+
     public static TargetManager newInstance() {
-        // TODO: use factory or system property to select matcher
-//        return new TargetManager(Target.MATCHER_NAME); // based on target name only
+        if (PREFER_MATCHER_NAME) {
+            return new TargetManager(Target.MATCHER_NAME); // based on target name only
+        }
         return new TargetManager(Target.MATCHER_LIKE); // based on distance matching
     }
 

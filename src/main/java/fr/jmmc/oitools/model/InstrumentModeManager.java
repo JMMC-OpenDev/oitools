@@ -27,9 +27,21 @@ import java.util.List;
  */
 public final class InstrumentModeManager extends AbstractMapper<InstrumentMode> {
 
+    /** flag to prefer matcher by name */
+    private final static boolean PREFER_MATCHER_NAME;
+
+    static {
+        PREFER_MATCHER_NAME = System.getProperty("insmode.matcher.name", "false").equalsIgnoreCase("true");
+
+        if (PREFER_MATCHER_NAME) {
+            logger.warning("InstrumentModeManager: Using matcher by name !");
+        }
+    }
+
     public static InstrumentModeManager newInstance() {
-        // TODO: use factory or system property to select matcher
-//        return new InstrumentModeManager(InstrumentMode.MATCHER_INSNAME); // based on instrument name only
+        if (PREFER_MATCHER_NAME) {
+            return new InstrumentModeManager(InstrumentMode.MATCHER_INSNAME); // based on instrument name only
+        }
         return new InstrumentModeManager(InstrumentMode.MATCHER_LIKE); // based on wavelength matching
     }
 

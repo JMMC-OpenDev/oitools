@@ -39,7 +39,7 @@ import java.util.logging.Level;
 public abstract class AbstractMapper<K> {
 
     /** Logger */
-    private final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AbstractMapper.class.getName());
+    protected final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AbstractMapper.class.getName());
     /** empty collection used by sortedAliasesPerGlobal */
     private final static List<String> EMPTY_ALIAS = Collections.emptyList();
 
@@ -126,6 +126,14 @@ public abstract class AbstractMapper<K> {
             newName = name + "_" + idx;
         }
         return newName;
+    }
+
+    public final int getGlobalCount() {
+        return localsPerGlobal.size();
+    }
+
+    public final int getLocalCount() {
+        return globalPerLocal.size();
     }
 
     public final List<K> getGlobals(Comparator<K> comparator) {
