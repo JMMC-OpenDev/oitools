@@ -30,9 +30,9 @@ import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.model.Target;
-import fr.jmmc.oitools.model.TargetIdMatcher;
 import fr.jmmc.oitools.model.TargetManager;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
@@ -518,9 +518,13 @@ public final class Merger {
                 newOIData.setInsName(newInsName);
                 newOIData.setCorrName(newCorrName);
 
+                boolean filterRows = false;
+
                 if (checkTargetId || checkNightId) {
-                    final int nRows = oiData.getNbRows();
-                    int nSkipRows = 0;
+                    final int nRows = newOIData.getNbRows();
+
+                    // prepare mask to indicate rows to keep in output table:
+                    final BitSet maskRows = new BitSet(nRows); // bits set to false by default
 
                     // Update targetId column:
                     final short[] targetIds = newOIData.getTargetId();
@@ -548,21 +552,35 @@ public final class Merger {
                                 newTargetIds[i] = ModelBase.UNDEFINED_SHORT;
                             }
                         }
+
+                        // update mask:
                         if (newTargetIds[i] == ModelBase.UNDEFINED_SHORT) {
-                            nSkipRows++;
+                            filterRows = true;
+                        } else {
+                            maskRows.set(i);
                         }
                     }
-
-                    if (nSkipRows != 0) {
-                        logger.log(Level.WARNING, "Table[{0}] contains {1} invalid rows (to be pruned in the future)",
-                                new Object[]{newOIData, nSkipRows});
-                    }
+                    // update targetId column before table filter:
                     newOIData.setTargetId(newTargetIds);
 
-                    // TODO: redim the table to the correct row count and eliminate useless rows (based on targetId column) !
-                    // TODO: prune useless rows !
+                    if (filterRows) {
+                        final int nKeepRows = maskRows.cardinality();
+
+                        if (nKeepRows <= 0) {
+                            // skip table as no remaining row
+                            continue;
+                        } else {
+                            // redim the table to the correct row count to prune invalid rows:
+                            newOIData.resizeTable(nKeepRows, maskRows);
+                        }
+                    }
                 }
                 resultFile.addOiTable(newOIData);
+
+                if (filterRows) {
+                    logger.log(Level.WARNING, "Table[{0}] filtered from Table[{1}]",
+                            new Object[]{newOIData, oiData});
+                }
             }
         }
     }

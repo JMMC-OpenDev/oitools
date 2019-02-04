@@ -29,6 +29,7 @@ import fr.jmmc.oitools.util.OITableByFileComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,7 +43,8 @@ public final class SelectorResult {
     private final OIFitsCollection oiFitsCollection;
     /** granule set (insertion ordered) */
     private final Set<Granule> granules = new HashSet<Granule>();
-    private final Set<OIData> oiDatas = new HashSet<OIData>();
+    /* preserve order in selected data (per file) */
+    private final Set<OIData> oiDatas = new LinkedHashSet<OIData>();
     /** cached values */
     private List<Target> sortedTargets = null;
     private List<InstrumentMode> sortedInstrumentModes = null;

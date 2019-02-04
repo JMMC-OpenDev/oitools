@@ -99,69 +99,6 @@ public abstract class OITable extends FitsTable {
         this.setOiRevn(revision);
     }
 
-    /**
-     * Copy the table into this instance
-     *
-     * @param src table to copy
-     */
-    protected final void copyTable(final OITable src) throws IllegalArgumentException {
-        // Copy keyword values:
-        for (KeywordMeta keyword : getKeywordDescCollection()) {
-            final String keywordName = keyword.getName();
-
-            if (FitsConstants.KEYWORD_EXT_NAME.equals(keywordName)
-                    || OIFitsConstants.KEYWORD_OI_REVN.equals(keywordName)) {
-                // Ignore ExtName / OiRevn (v1/2) defined in previous constructor
-                continue;
-            }
-
-            // get keyword value:
-            final Object keywordValue = src.getKeywordValue(keywordName);
-
-            // potentially missing values
-            if (keywordValue != null) {
-                if (logger.isLoggable(Level.FINE)) {
-                    logger.log(Level.FINE, "KEYWORD {0} = ''{1}''", new Object[]{keywordName, keywordValue});
-                }
-                setKeywordValue(keywordName, keywordValue);
-            }
-        }
-
-        // Copy header cards ?
-        // Note: how to ensure consistency if the table is modified ?
-        if (src.hasHeaderCards()) {
-            // Copy references to Fits header cards:
-            getHeaderCards().addAll(src.getHeaderCards());
-        }
-
-        // Copy column values:
-        String columnName;
-        Object columnValue;
-
-        // Copy columns:
-        for (ColumnMeta column : getColumnDescCollection()) {
-            columnName = column.getName();
-            columnValue = src.getColumnValue(columnName);
-
-            if (columnValue == null && !column.isOptional()) {
-                columnValue = createColumnArray(column, getNbRows());
-            }
-            
-            // Copy custom units:
-            if (column.isCustomUnits()) {
-                final ColumnMeta srcColumn = src.getColumnDesc(columnName);
-                if (srcColumn != null && srcColumn.isCustomUnits()) {
-                    column.getCustomUnits().set(srcColumn.getCustomUnits());
-                }
-            }
-
-            if (logger.isLoggable(Level.FINE)) {
-                logger.log(Level.FINE, "COLUMN {0} = ''{1}''", new Object[]{columnName, columnValue});
-            }
-            setColumnValue(columnName, columnValue);
-        }
-    }
-
     /*
      * --- OIFits standard Keywords --------------------------------------------
      */

@@ -19,6 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.fits;
 
+import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
@@ -30,6 +31,7 @@ import fr.jmmc.oitools.model.Rule;
 import fr.nom.tam.util.ArrayFuncs;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -105,18 +107,113 @@ public abstract class FitsTable extends FitsHDU {
 
         this.setNbRows(nbRows);
 
-        this.initializeColumnArrays(nbRows);
-    }
-
-    /**
-     * Initialize column arrays according to their format and the current number
-     * of rows (NAXIS2)
-     * @param nbRows number of rows
-     */
-    private void initializeColumnArrays(final int nbRows) {
         for (ColumnMeta column : getColumnDescCollection()) {
             setColumnValue(column.getName(), createColumnArray(column, nbRows));
         }
+    }
+
+    /**
+     * Copy the table into this instance
+     *
+     * @param src table to copy
+     */
+    protected final void copyTable(final FitsTable src) throws IllegalArgumentException {
+        // Copy keyword values:
+        for (KeywordMeta keyword : getKeywordDescCollection()) {
+            final String keywordName = keyword.getName();
+
+            if (FitsConstants.KEYWORD_EXT_NAME.equals(keywordName)
+                    || OIFitsConstants.KEYWORD_OI_REVN.equals(keywordName)) {
+                // Ignore ExtName / OiRevn (v1/2) defined in previous constructor
+                continue;
+            }
+
+            // get keyword value:
+            final Object keywordValue = src.getKeywordValue(keywordName);
+
+            // potentially missing values
+            if (keywordValue != null) {
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "KEYWORD {0} = ''{1}''", new Object[]{keywordName, keywordValue});
+                }
+                setKeywordValue(keywordName, keywordValue);
+            }
+        }
+
+        // Copy header cards ?
+        // Note: how to ensure consistency if the table is modified ?
+        if (src.hasHeaderCards()) {
+            // Copy references to Fits header cards:
+            getHeaderCards().addAll(src.getHeaderCards());
+        }
+
+        // Copy column values:
+        final int nRows = getNbRows();
+        String columnName;
+        Object columnValue;
+
+        for (ColumnMeta column : getColumnDescCollection()) {
+            columnName = column.getName();
+            columnValue = src.getColumnValue(columnName);
+
+            if (columnValue == null && !column.isOptional()) {
+                columnValue = createColumnArray(column, nRows);
+            }
+
+            // Copy custom units:
+            if (column.isCustomUnits()) {
+                final ColumnMeta srcColumn = src.getColumnDesc(columnName);
+                if (srcColumn != null && srcColumn.isCustomUnits()) {
+                    column.getCustomUnits().set(srcColumn.getCustomUnits());
+                }
+            }
+
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "COLUMN {0} = ''{1}''", new Object[]{columnName, columnValue});
+            }
+            setColumnValue(columnName, columnValue);
+        }
+    }
+
+    /**
+     * Resize the table ie column arrays + fix the Fits NAXIS2 keyword value
+     *
+     * @param nbKeepRows number of rows to keep i.e. the Fits NAXIS2 keyword value
+     * @param maskRows bit set indicating which rows to keep (true means keep row)
+     * @throws IllegalArgumentException if the number of rows is less than 1
+     */
+    public final void resizeTable(final int nbKeepRows, final BitSet maskRows) throws IllegalArgumentException {
+        final int nbRows = getNbRows();
+        if (nbKeepRows == nbRows) {
+            return;
+        }
+        if (nbKeepRows < 1) {
+            throw new IllegalArgumentException("Invalid number of rows : the table must have at least 1 row !");
+        }
+
+        // Resize column values:
+        for (ColumnMeta column : getColumnDescCollection()) {
+            final String columnName = column.getName();
+            final Object columnValueOriginal = getColumnValue(columnName);
+
+            final int[] dims = getColumnArrayDims(column, nbKeepRows);
+            final Object columnValue = createColumnArray(column, dims);
+
+            if (columnValueOriginal != null) {
+                // copy data 
+                filterColumnArray(columnValueOriginal, maskRows, columnValue, dims);
+            }
+
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "COLUMN {0} = ''{1}''", new Object[]{columnName, columnValue});
+            }
+            setColumnValue(columnName, columnValue);
+        }
+
+        this.setNbRows(nbKeepRows);
+
+        // reset cached analyzed data:
+        this.setChanged();
     }
 
     /**
@@ -128,6 +225,26 @@ public abstract class FitsTable extends FitsHDU {
      * @return new column arrays
      */
     public Object createColumnArray(final ColumnMeta column, final int nbRows) {
+        return createColumnArray(column, getColumnArrayDims(column, nbRows));
+    }
+
+    protected static Object createColumnArray(final ColumnMeta column, final int[] dims) {
+        // base class :
+        final Class<?> clazz = Types.getBaseClass(column.getDataType());
+
+        Object value = ArrayFuncs.newInstance(clazz, dims); // array value
+
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "column array = {0}", ArrayFuncs.arrayDescription(value));
+        }
+
+        // Ensure arrays are initialized with undefined values:
+        fillUndefinedArrays(value, dims, 0);
+
+        return value;
+    }
+
+    protected static int[] getColumnArrayDims(final ColumnMeta column, final int nbRows) {
         final String name = column.getName();
         final int repeat = column.getRepeat(); // repeat = row size
         final Types type = column.getDataType(); // data type
@@ -163,19 +280,7 @@ public abstract class FitsTable extends FitsHDU {
             dims[ndims] = 2; // 2 values (re, im)
         }
 
-        // base class :
-        final Class<?> clazz = Types.getBaseClass(type);
-
-        Object value = ArrayFuncs.newInstance(clazz, dims); // array value
-
-        if (logger.isLoggable(Level.FINE)) {
-            logger.log(Level.FINE, "column array = {0}", ArrayFuncs.arrayDescription(value));
-        }
-
-        // Ensure arrays are initialized with undefined values:
-        fillUndefinedArrays(value, dims, 0);
-
-        return value;
+        return dims;
     }
 
     /**
@@ -187,7 +292,7 @@ public abstract class FitsTable extends FitsHDU {
      * @param index the index in dimens (current level)
      */
     protected static void fillUndefinedArrays(final Object output, final int[] dimens, final int index) {
-        int xindex = index + 1;
+        final int xindex = index + 1;
 
         if (xindex == dimens.length) {
             if (output instanceof double[]) {
@@ -209,16 +314,78 @@ public abstract class FitsTable extends FitsHDU {
                 /* character/date data type */
                 Arrays.fill((String[]) output, UNDEFINED_STRING);
             } else {
-                logger.log(Level.INFO, "fillEmptyArrays: Unsupported array type: {0}", output.getClass());
+                logger.log(Level.INFO, "fillUndefinedArrays: Unsupported array type: {0}", output.getClass());
             }
-            return;
+        } else {
+            final Object[] oo = (Object[]) output;
+            for (int i = 0, len = dimens[index]; i < len; i++) {
+                fillUndefinedArrays(oo[i], dimens, xindex);
+            }
         }
+    }
 
-        int len = dimens[index];
+    protected static void filterColumnArray(final Object input, final BitSet keepMask, final Object output, final int[] dims) {
+        // no bound checks:
+        if (1 == dims.length) {
+            if (output instanceof double[]) {
+                /* double data type */
+                final double[] os = (double[]) input;
+                final double[] oo = (double[]) output;
 
-        Object[] oo = (Object[]) output;
-        for (int i = 0; i < len; i += 1) {
-            fillUndefinedArrays(oo[i], dimens, xindex);
+                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
+                    oo[j] = os[i];
+                }
+            } else if (output instanceof float[]) {
+                /* real data type */
+                final float[] os = (float[]) input;
+                final float[] oo = (float[]) output;
+
+                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
+                    oo[j] = os[i];
+                }
+            } else if (output instanceof short[]) {
+                /* integer data type */
+                final short[] os = (short[]) input;
+                final short[] oo = (short[]) output;
+
+                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
+                    oo[j] = os[i];
+                }
+            } else if (output instanceof int[]) {
+                /* integer data type */
+                final int[] os = (int[]) input;
+                final int[] oo = (int[]) output;
+
+                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
+                    oo[j] = os[i];
+                }
+            } else if (output instanceof boolean[]) {
+                /* logical data type */
+                final boolean[] os = (boolean[]) input;
+                final boolean[] oo = (boolean[]) output;
+
+                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
+                    oo[j] = os[i];
+                }
+            } else if (output instanceof String[]) {
+                /* character/date data type */
+                final String[] os = (String[]) input;
+                final String[] oo = (String[]) output;
+
+                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
+                    oo[j] = os[i];
+                }
+            } else {
+                logger.log(Level.INFO, "filterColumnArray: Unsupported array type: {0}", output.getClass());
+            }
+        } else {
+            final Object[] os = (Object[]) input;
+            final Object[] oo = (Object[]) output;
+
+            for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
+                // Array copy needed to ensure deep copy (and not mixing sub-arrays):
+                ArrayFuncs.copyArray(os[i], oo[j]);
+            }
         }
     }
 
@@ -1034,6 +1201,7 @@ public abstract class FitsTable extends FitsHDU {
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "checkColumns : {0}", this.toString());
         }
+        final int nRows = getNbRows();
         String columnName;
         Object value;
 
@@ -1051,11 +1219,11 @@ public abstract class FitsTable extends FitsHDU {
             }
             if ((value == null) && OIFitsChecker.isInspectRules()) {
                 // Create a new column value to always enter in column.check(checker) below:
-                value = createColumnArray(column, getNbRows());
+                value = createColumnArray(column, nRows);
             }
             if (value != null) {
                 /* Check the column validity */
-                column.check(checker, this, value, getNbRows());
+                column.check(checker, this, value, nRows);
             }
         }
     }
