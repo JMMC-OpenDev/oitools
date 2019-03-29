@@ -462,6 +462,7 @@ public abstract class OIData extends OIAbstractData {
                     // ensure coordinates are on earth (not undefined; expected correctly set)
                     if (MathUtils.carthesianNorm(arrayXYZ[0], arrayXYZ[1], arrayXYZ[2]) > OIArray.MIN_EARTH_RADIUS) {
 
+                        // note: longitude is not affected by earth's geoid so spherical conversion is enough:
                         final double[] lonLatDist = MathUtils.cartesianToSpherical(arrayXYZ);
                         final double arrayLongitude = Math.toDegrees(lonLatDist[0]);
 
