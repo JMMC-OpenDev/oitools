@@ -28,6 +28,9 @@ import java.util.Comparator;
  */
 public final class InstrumentMode {
 
+    /** INSNAME prefix for GRAVITY */
+    public final static String INSNAME_PREFIX_GRAVITY = "GRAVITY";
+
     public final static Matcher<InstrumentMode> MATCHER_INSNAME = new Matcher<InstrumentMode>() {
 
         @Override
@@ -73,6 +76,12 @@ public final class InstrumentMode {
             }
             if (!NumberUtils.equals(src.getLambdaMax(), other.getLambdaMax(), prec)) {
                 return false;
+            }
+
+            if (src.getInsName().startsWith(INSNAME_PREFIX_GRAVITY)) {
+                // GRAVITY: do not match different polarizations (P1/P2 ...)
+                // i.e. compare INSNAME values:
+                return ModelBase.areEquals(src.getInsName(), other.getInsName());
             }
             return true;
         }
