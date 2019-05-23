@@ -805,6 +805,9 @@ public final class FitsImageLoader {
         // note: data min/max are later recomputed (missing / invalid values or bad precision)
         image.setDataMin(header.getDoubleValue(FitsConstants.KEYWORD_DATAMIN, Double.NaN));
         image.setDataMax(header.getDoubleValue(FitsConstants.KEYWORD_DATAMAX, Double.NaN));
+        
+        // set initial image FOV:
+        image.defineOrigMaxAngle();
     }
 
     /**

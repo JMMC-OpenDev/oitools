@@ -42,7 +42,7 @@ public final class FitsImage {
     /** wavelength position of the reference pixel (real starting from 1.0) */
     private double pixRefWL = 1.0;
     /** wavelength value at the reference pixel column (meter) */
-    private double valRefWL = 0.0;
+    private double valRefWL = Double.NaN;
     /** wavelength increment along the wavelength axis (meter per pixel) */
     private double incWL = 1.0;
     /** image wavelength in meters (NaN if undefined) */
@@ -89,6 +89,8 @@ public final class FitsImage {
     private double origIncRow = Double.NaN;
     /** original value of the rotation of the image plane (degrees) */
     private double origRotAngle = Double.NaN;
+    /** initial max angle (radians) */
+    private double origMaxAngle = Double.NaN;
 
     /** 
      * Public FitsImage class constructor
@@ -129,6 +131,8 @@ public final class FitsImage {
         copy.origIncCol = origIncCol;
         copy.origIncRow = origIncRow;
         copy.origRotAngle = origRotAngle;
+
+        copy.origMaxAngle = origMaxAngle;
 
         return copy;
     }
@@ -654,6 +658,23 @@ public final class FitsImage {
         return origRotAngle;
     }
 
+    /**
+     * Return the initial max angle (radians)
+     * @return initial max angle (radians)
+     */
+    public double getOrigMaxAngle() {
+        return origMaxAngle;
+    }
+
+    /**
+     * Define the initial max angle (radians)
+     */
+    public void defineOrigMaxAngle() {
+        if (Double.isNaN(this.origMaxAngle)) {
+            this.origMaxAngle = this.getMaxAngle();
+        }
+    }
+
     // utility methods:
     /**
      * Return the viewed angle along column axis in radians
@@ -761,6 +782,7 @@ public final class FitsImage {
                 + " RefVal (" + getValRefCol() + ", " + getValRefRow() + ')'
                 + " Increments (" + getSignedIncCol() + ", " + getSignedIncRow() + ')'
                 + " Max view angle (" + getAngleAsString(getMaxAngle()) + ')'
+                + " Initial Max angle (" + getAngleAsString(getOrigMaxAngle()) + ')'
                 + " Area " + getArea()
                 + " Lambda { RefPix " + getPixRefWL() + " RefVal " + getValRefWL()
                 + " Increment " + getIncWL() + "} = " + getWaveLength() + " m.";
