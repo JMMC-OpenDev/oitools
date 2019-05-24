@@ -670,9 +670,7 @@ public final class FitsImage {
      * Define the initial max angle (radians)
      */
     public void defineOrigMaxAngle() {
-        if (Double.isNaN(this.origMaxAngle)) {
-            this.origMaxAngle = this.getMaxAngle();
-        }
+        this.origMaxAngle = this.getMaxAngle();
     }
 
     // utility methods:
