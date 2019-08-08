@@ -22,6 +22,7 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.oitools.OIFitsConstants;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.ColumnMeta;
+import fr.jmmc.oitools.meta.CustomUnits;
 import fr.jmmc.oitools.meta.DataRange;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
@@ -82,6 +83,29 @@ public final class OIVis2 extends OIData {
                     Types.TYPE_INT, 1, true, false, Units.NO_UNIT));
         }
 
+        if (DataModel.hasOiVis2ExtraSupport()) {
+            // Optional extra columns for squared correlated and photmetric fluxes (ASPRO - not OIFits) :
+            // NS_CORRSQ column definition (User unit = photon)
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_CORRSQ, "raw squared correlated flux",
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits().setRepresentation("ph"), OIFitsConstants.COLUMN_NS_CORRSQ_ERR,
+                    DataRange.RANGE_POSITIVE, this));
+
+            // COLUMN_NS_CORRSQ_ERR column definition (User unit = photon)
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_CORRSQ_ERR, "error in raw squared correlated flux",
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits().setRepresentation("ph"), null,
+                    DataRange.RANGE_POSITIVE, this));
+
+            // COLUMN_NS_PHOT column definition (User unit = photon)
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_PHOT, "raw photometric flux (1T)",
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits().setRepresentation("ph"), OIFitsConstants.COLUMN_NS_PHOT_ERR,
+                    DataRange.RANGE_POSITIVE, this));
+
+            // COLUMN_NS_PHOT_ERR column definition (User unit = photon)
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_PHOT_ERR, "error in photometric flux (1T)",
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits().setRepresentation("ph"), null,
+                    DataRange.RANGE_POSITIVE, this));
+        }
+
         // Derived SPATIAL_U_FREQ column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_UCOORD_SPATIAL,
                 "spatial U frequency", Types.TYPE_DBL, this));
@@ -90,9 +114,19 @@ public final class OIVis2 extends OIData {
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VCOORD_SPATIAL,
                 "spatial V frequency", Types.TYPE_DBL, this));
 
-        // Derived SNR column definition
+        // Derived SNR_VIS2 column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_VIS2, "SNR on " + OIFitsConstants.COLUMN_VIS2DATA,
                 Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_VIS2DATA + " / " + OIFitsConstants.COLUMN_VIS2ERR + ")"));
+
+        if (DataModel.hasOiVis2ExtraSupport()) {
+            // Derived SNR_CORRSQ column definition
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_NS_CORRSQ, "SNR on " + OIFitsConstants.COLUMN_NS_CORRSQ,
+                    Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_NS_CORRSQ + " / " + OIFitsConstants.COLUMN_NS_CORRSQ_ERR + ")"));
+
+            // Derived SNR_PHOT column definition
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_NS_PHOT, "SNR on " + OIFitsConstants.COLUMN_NS_PHOT,
+                    Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_NS_PHOT + " / " + OIFitsConstants.COLUMN_NS_PHOT_ERR + ")"));
+        }
 
         // if OI support is enabled
         if (DataModel.hasOiModelColumnsSupport()) {
@@ -168,6 +202,39 @@ public final class OIVis2 extends OIData {
      */
     public int[] getCorrIndxVisData() {
         return this.getColumnInt(OIFitsConstants.COLUMN_CORRINDX_VIS2DATA);
+    }
+
+    /* --- Optional extra columns for squared correlated and photmetric fluxes --- */
+    /**
+     * Return the NS_CORRSQ column.
+     * @return the NS_CORRSQ column.
+     */
+    public double[][] getCorrSq() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_CORRSQ);
+    }
+
+    /**
+     * Return the NS_CORRSQ_ERR column.
+     * @return the NS_CORRSQ_ERR column.
+     */
+    public double[][] getCorrSqErr() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_CORRSQ_ERR);
+    }
+
+    /**
+     * Return the NS_PHOT column.
+     * @return the NS_PHOT column.
+     */
+    public double[][] getPhot() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_PHOT);
+    }
+
+    /**
+     * Return the NS_PHOT_ERR column.
+     * @return the NS_PHOT_ERR column.
+     */
+    public double[][] getPhotErr() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_PHOT_ERR);
     }
 
     /*

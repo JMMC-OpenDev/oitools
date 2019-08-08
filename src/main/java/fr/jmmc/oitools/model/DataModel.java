@@ -66,6 +66,8 @@ public class DataModel {
     private static boolean oiModelColumnsSupport = false;
     /** flag to globally support OI_VIS Complex visibility columns (disabled by default) */
     private static boolean oiVisComplexSupport = false;
+    /** flag to globally support OI_VIS2 extra columns (disabled by default) */
+    private static boolean oiVis2ExtraSupport = false;
 
     /** list used for sorted rules */
     private static final ArrayList<Rule> SORTED_RULES = new ArrayList<Rule>(64);
@@ -104,6 +106,22 @@ public class DataModel {
      */
     public static void setOiVisComplexSupport(boolean oiVisComplexSupport) {
         DataModel.oiVisComplexSupport = oiVisComplexSupport;
+    }
+
+    /**
+     * Get flag to globally support OI_VIS2 extra columns
+     * @return
+     */
+    public static boolean hasOiVis2ExtraSupport() {
+        return oiVis2ExtraSupport;
+    }
+
+    /**
+     * Set flag to globally support OI_VIS2 extra columns
+     * @param oiVis2extraSupport
+     */
+    public static void setOiVis2ExtraSupport(boolean oiVis2extraSupport) {
+        DataModel.oiVis2ExtraSupport = oiVis2extraSupport;
     }
 
     /**

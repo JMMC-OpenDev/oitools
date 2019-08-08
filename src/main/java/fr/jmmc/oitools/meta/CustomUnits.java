@@ -59,9 +59,11 @@ public final class CustomUnits extends Units {
     /**
      * Define the value of unit
      * @param unit unit in the file
+     * @return this
      */
-    public void setRepresentation(final String unit) {
+    public CustomUnits setRepresentation(final String unit) {
         set(unit);
+        return this;
     }
 
     /**

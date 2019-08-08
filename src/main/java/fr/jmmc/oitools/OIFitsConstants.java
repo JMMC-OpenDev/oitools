@@ -290,6 +290,16 @@ public interface OIFitsConstants {
     /** CORRINDX_VIS2DATA column */
     public final static String COLUMN_CORRINDX_VIS2DATA = "CORRINDX_VIS2DATA";
 
+    /* Aspro Extension with square correlated flux and photometry */
+    /** NS_CORRSQ column */
+    public final static String COLUMN_NS_CORRSQ = "NS_CORRSQ";
+    /** NS_CORRSQERR column */
+    public final static String COLUMN_NS_CORRSQ_ERR = "NS_CORRSQERR";
+    /** NS_PHOT column */
+    public final static String COLUMN_NS_PHOT = "NS_PHOT";
+    /** NS_PHOTERR column */
+    public final static String COLUMN_NS_PHOT_ERR = "NS_PHOTERR";
+
     /* OI_T3 table */
     /** T3AMP column */
     public final static String COLUMN_T3AMP = "T3AMP";
@@ -399,6 +409,10 @@ public interface OIFitsConstants {
     public final static String COLUMN_V2COORD_SPATIAL = "V2COORD_SPATIAL";
     /** SNR_VIS2 derived OIVIS2 column as double[][] */
     public final static String COLUMN_SNR_VIS2 = "SNR_VIS2";
+    /** SNR_NS_CORRSQ derived OIVIS2 column as double[][] */
+    public final static String COLUMN_SNR_NS_CORRSQ = "SNR_NS_CORRSQ";
+    /** SNR_NS_PHOT derived OIVIS2 column as double[][] */
+    public final static String COLUMN_SNR_NS_PHOT = "SNR_NS_PHOT";
     /** RES_VIS2_MODEL derived OIVIS2 column as double[][] */
     public final static String COLUMN_RES_VIS2_MODEL = "RES_VIS2_MODEL";
     /** SNR_VISPHI derived OIVIS column as double[][] */
