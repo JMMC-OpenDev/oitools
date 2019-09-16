@@ -408,7 +408,7 @@ public final class XmlOutputVisitor extends OutputVisitor {
             val = hdu.getKeywordValue(keyword.getName());
             // skip missing keywords :
             if (val != null) {
-                this.buffer.append("<keyword><name>").append(keyword.getName()).append("</name><value>").append(val);
+                this.buffer.append("<keyword><name>").append(keyword.getName()).append("</name><value>").append(encodeTagContent(val.toString()));
                 this.buffer.append("</value><description>").append(encodeTagContent(keyword.getDescription())).append("</description><type>");
                 this.buffer.append(keyword.getType()).append("</type><unit>").append(keyword.getUnit()).append("</unit></keyword>\n");
             }
@@ -655,10 +655,10 @@ public final class XmlOutputVisitor extends OutputVisitor {
 
     @Override
     public void appendMetadataRecord(final String targetName, final double targetRa, final double targetDec,
-                                     double intTime, double tMin, double tMax,
-                                     float resPower, float minWavelength, float maxWavelength,
-                                     String facilityName, final String insName,
-                                     int nbVis, int nbVis2, int nbT3, int nbChannels) {
+            double intTime, double tMin, double tMax,
+            float resPower, float minWavelength, float maxWavelength,
+            String facilityName, final String insName,
+            int nbVis, int nbVis2, int nbT3, int nbChannels) {
         this.buffer.append("  <target>\n")
                 .append("    <target_name>").append(encodeTagContent(targetName)).append("</target_name>\n")
                 .append("    <s_ra>").append(targetRa).append("</s_ra>\n")
