@@ -65,9 +65,9 @@ public final class OIFitsFile extends FitsImageFile {
     private ImageOiData imageOiData = null;
     // TODO make next wlen min max getters more generic : stats accross every compatible tables ... (e.g. min/max vis2 e_vis2 ...)
     /** Store min wavelength of oifits file */
-    private double minWavelengthBound;
+    private double minWavelengthBound = Double.MAX_VALUE;
     /** Store max wavelength of oifits file */
-    private double maxWavelengthBound;
+    private double maxWavelengthBound = Double.MIN_VALUE;
 
     /* OIFits structure */
     /** Storage of oi table references */
@@ -440,6 +440,10 @@ public final class OIFitsFile extends FitsImageFile {
      * @return the min wavelength value found on any of the OI_WAVELENGTH tables.
      */
     public double getMinWavelengthBound() {
+        // lazy computation:
+        if (minWavelengthBound == Double.MAX_VALUE) {
+            computeWavelengthBounds();
+        }
         return minWavelengthBound;
     }
 
@@ -448,6 +452,10 @@ public final class OIFitsFile extends FitsImageFile {
      * @return the max wavelength value found on any of the OI_WAVELENGTH tables.
      */
     public double getMaxWavelengthBound() {
+        // lazy computation:
+        if (minWavelengthBound == Double.MIN_VALUE) {
+            computeWavelengthBounds();
+        }
         return maxWavelengthBound;
     }
 
@@ -460,11 +468,26 @@ public final class OIFitsFile extends FitsImageFile {
         // Set wavelength bounds
         minWavelengthBound = Double.MAX_VALUE;
         maxWavelengthBound = Double.MIN_VALUE;
-        for (OIWavelength oiWavelength : getOiWavelengths()) {
-            float omin = oiWavelength.getEffWaveMin();
-            float omax = oiWavelength.getEffWaveMax();
-            minWavelengthBound = (omin < minWavelengthBound) ? omin : minWavelengthBound;
-            maxWavelengthBound = (omax > maxWavelengthBound) ? omax : maxWavelengthBound;
+
+        if (hasOiWavelengths()) {
+            for (OIWavelength oiWavelength : getOiWavelengths()) {
+                final float omin = oiWavelength.getEffWaveMin();
+                final float omax = oiWavelength.getEffWaveMax();
+                minWavelengthBound = (omin < minWavelengthBound) ? omin : minWavelengthBound;
+                maxWavelengthBound = (omax > maxWavelengthBound) ? omax : maxWavelengthBound;
+            }
+        } else {
+            // no OI_WAVELENGTH (OIFITS containing only data files (oifits explorer):
+            // Traverse all OIDATA:
+            for (OIData oiData : getOiDataList()) {
+                OIWavelength oiWavelength = oiData.getOiWavelength();
+                if (oiWavelength != null) {
+                    final float omin = oiWavelength.getEffWaveMin();
+                    final float omax = oiWavelength.getEffWaveMax();
+                    minWavelengthBound = (omin < minWavelengthBound) ? omin : minWavelengthBound;
+                    maxWavelengthBound = (omax > maxWavelengthBound) ? omax : maxWavelengthBound;
+                }
+            }
         }
     }
 
@@ -555,7 +578,7 @@ public final class OIFitsFile extends FitsImageFile {
             for (OITable oiTable : getOITableList()) {
                 oiTable.checkSyntax(checker);
             }
-            
+
             if (getExistingImageOiData() != null) {
                 getExistingImageOiData().checkSyntax(checker);
             }
