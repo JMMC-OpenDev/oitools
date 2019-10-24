@@ -42,8 +42,10 @@ public final class ImageOiInputParam extends FitsTable {
     private final static KeywordMeta KEYWORD_TARGET = new KeywordMeta(ImageOiConstants.KEYWORD_TARGET, "Identifier of the target object to reconstruct", Types.TYPE_CHAR);
     private final static KeywordMeta KEYWORD_WAVE_MIN = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MIN, "Minimum wavelength to select (in meters)", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_WAVE_MAX = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MAX, "Maximum wavelength to select (in meters)", Types.TYPE_DBL);
+// TODO: value can be: ’NONE’, ’ALL’, ’AMP’ or ’PHI’ (string)
     private final static KeywordMeta KEYWORD_USE_VIS = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS, "Use complex visibility data if any", Types.TYPE_LOGICAL);
     private final static KeywordMeta KEYWORD_USE_VIS2 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS2, "Use squared visibility data if any", Types.TYPE_LOGICAL);
+// TODO: value can be: ’NONE’, ’ALL’, ’AMP’ or ’PHI’ (string)    
     private final static KeywordMeta KEYWORD_USE_T3 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_T3, "Use triple product data if any", Types.TYPE_LOGICAL);
 
     // Define Algorithm settings keywords
@@ -255,6 +257,9 @@ public final class ImageOiInputParam extends FitsTable {
         }
     }
 
+    /*
+     * --- Keywords ------------------------------------------------------------
+     */
     public String getTarget() {
         return getKeyword(ImageOiConstants.KEYWORD_TARGET);
     }

@@ -69,4 +69,11 @@ public interface ImageOiConstants {
     /** HDUNAME : keyword */
     public final static String KEYWORD_DESCRIPTION_HDUNAME = "Unique name for the image within the FITS file";
 
+    // Algorithm results keywords
+    /** LAST_IMG keyword */
+    public final static String KEYWORD_LAST_IMG = "LAST_IMG";
+    /** NITER keyword */
+    public final static String KEYWORD_NITER = "NITER";
+    /** CHISQ keyword */
+    public final static String KEYWORD_CHISQ = "CHISQ";
 }

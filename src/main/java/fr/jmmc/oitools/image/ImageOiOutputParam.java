@@ -20,6 +20,8 @@
 package fr.jmmc.oitools.image;
 
 import fr.jmmc.oitools.fits.FitsTable;
+import fr.jmmc.oitools.meta.KeywordMeta;
+import fr.jmmc.oitools.meta.Types;
 
 /**
  * This class is a container for IMAGE-OI OUTPUT PARAM.
@@ -30,11 +32,21 @@ import fr.jmmc.oitools.fits.FitsTable;
  */
 public final class ImageOiOutputParam extends FitsTable {
 
+    // Define Algorithm results keywords
+    private final static KeywordMeta KEYWORD_LAST_IMG = new KeywordMeta(ImageOiConstants.KEYWORD_LAST_IMG, "Identifier of the final image", Types.TYPE_CHAR);
+    private final static KeywordMeta KEYWORD_NITER = new KeywordMeta(ImageOiConstants.KEYWORD_NITER, "Total iterations done in the current program run", Types.TYPE_INT);
+    private final static KeywordMeta KEYWORD_CHISQ = new KeywordMeta(ImageOiConstants.KEYWORD_CHISQ, "Reduced chi-squared", Types.TYPE_DBL);
+    private final static KeywordMeta KEYWORD_FLUX = new KeywordMeta(ImageOiConstants.KEYWORD_FLUX, "Total image flux", Types.TYPE_DBL);
+
     // Image parameters
     public ImageOiOutputParam() {
         super();
 
-        // TODO add standard keywords
+        // add standard keywords
+        addKeywordMeta(KEYWORD_LAST_IMG);
+        addKeywordMeta(KEYWORD_NITER);
+        addKeywordMeta(KEYWORD_CHISQ);
+        addKeywordMeta(KEYWORD_FLUX);
 
         // Set default values
         setNbRows(0);
@@ -42,4 +54,38 @@ public final class ImageOiOutputParam extends FitsTable {
         setExtName(ImageOiConstants.EXTNAME_IMAGE_OI_OUTPUT_PARAM);
     }
 
+    /*
+     * --- Keywords ------------------------------------------------------------
+     */
+    public String getLastImg() {
+        return getKeyword(ImageOiConstants.KEYWORD_LAST_IMG);
+    }
+
+    public void setLastImg(String last_img) {
+        setKeyword(ImageOiConstants.KEYWORD_LAST_IMG, last_img);
+    }
+
+    public int getNiter() {
+        return getKeywordInt(ImageOiConstants.KEYWORD_NITER);
+    }
+
+    public void setNiter(int maxiter) {
+        setKeywordInt(ImageOiConstants.KEYWORD_NITER, maxiter);
+    }
+
+    public double getChiSq() {
+        return getKeywordDouble(ImageOiConstants.KEYWORD_CHISQ);
+    }
+
+    public void setChiSq(double chisq) {
+        setKeywordDouble(ImageOiConstants.KEYWORD_CHISQ, chisq);
+    }
+
+    public double getFlux() {
+        return getKeywordDouble(ImageOiConstants.KEYWORD_FLUX);
+    }
+
+    public void setFlux(double flux) {
+        setKeywordDouble(ImageOiConstants.KEYWORD_FLUX, flux);
+    }
 }
