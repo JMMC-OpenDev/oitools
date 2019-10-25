@@ -65,9 +65,9 @@ public final class OIFitsFile extends FitsImageFile {
     private ImageOiData imageOiData = null;
     // TODO make next wlen min max getters more generic : stats accross every compatible tables ... (e.g. min/max vis2 e_vis2 ...)
     /** Store min wavelength of oifits file */
-    private double minWavelengthBound = Double.MAX_VALUE;
+    private double minWavelengthBound = Double.POSITIVE_INFINITY;
     /** Store max wavelength of oifits file */
-    private double maxWavelengthBound = Double.MIN_VALUE;
+    private double maxWavelengthBound = Double.NEGATIVE_INFINITY;
 
     /* OIFits structure */
     /** Storage of oi table references */
@@ -437,11 +437,12 @@ public final class OIFitsFile extends FitsImageFile {
 
     /**
      * Get the min wavelength value found on any of the OI_WAVELENGTH tables.
-     * @return the min wavelength value found on any of the OI_WAVELENGTH tables.
+     * @return the min wavelength value found on any of the OI_WAVELENGTH tables
+     *          or Double.POSITIVE_INFINITY if none
      */
     public double getMinWavelengthBound() {
         // lazy computation:
-        if (minWavelengthBound == Double.MAX_VALUE) {
+        if (minWavelengthBound == Double.POSITIVE_INFINITY) {
             computeWavelengthBounds();
         }
         return minWavelengthBound;
@@ -450,10 +451,11 @@ public final class OIFitsFile extends FitsImageFile {
     /**
      * Get the max wavelength value found on any of the OI_WAVELENGTH tables.
      * @return the max wavelength value found on any of the OI_WAVELENGTH tables.
+     *          or Double.NEGATIVE_INFINITY if none
      */
     public double getMaxWavelengthBound() {
         // lazy computation:
-        if (minWavelengthBound == Double.MIN_VALUE) {
+        if (minWavelengthBound == Double.NEGATIVE_INFINITY) {
             computeWavelengthBounds();
         }
         return maxWavelengthBound;
@@ -466,8 +468,8 @@ public final class OIFitsFile extends FitsImageFile {
      */
     private void computeWavelengthBounds() {
         // Set wavelength bounds
-        minWavelengthBound = Double.MAX_VALUE;
-        maxWavelengthBound = Double.MIN_VALUE;
+        minWavelengthBound = Double.POSITIVE_INFINITY;
+        maxWavelengthBound = Double.NEGATIVE_INFINITY;
 
         if (hasOiWavelengths()) {
             for (OIWavelength oiWavelength : getOiWavelengths()) {
