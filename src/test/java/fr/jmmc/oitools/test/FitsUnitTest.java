@@ -30,6 +30,8 @@ public class FitsUnitTest {
 
     public static void main(String[] args) {
         test(90.0, "deg", FitsUnit.ANGLE_RAD, Math.PI / 2);
+        test(1.0, "mas", FitsUnit.ANGLE_DEG, (1.0 * (Math.PI / 180.0) / 3600000.0) / (Math.PI / 180.0));
+        test(1.0, "arcsec", FitsUnit.ANGLE_MILLI_ARCSEC, 1e3);
         // Hertz:
         test(1, "hz", FitsUnit.WAVELENGTH_METER, FitsConstants.C_LIGHT);
         test(1, "ghz", FitsUnit.WAVELENGTH_METER, 1e-9 * FitsConstants.C_LIGHT);

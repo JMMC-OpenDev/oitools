@@ -56,6 +56,8 @@ public class Units {
     public final static Units UNIT_METER_PER_SECOND = new Units("UNIT_METER_PER_SECOND", "m/s|m / s|meter per second|meters per second|meter/second|meters/second|meter / second|meters / second");
     /** Units are expressed in arcsec */
     public final static Units UNIT_ARCSEC = new Units("UNIT_ARCSEC", "arcsec|as|arcsecond|arcseconds");
+    /** Units are expressed in milli-arcsec */
+    public final static Units UNIT_MILLI_ARCSEC = new Units("UNIT_MILLI_ARCSEC", "mas|milliarcsec");
     /** Units are expressed in degrees per year */
     public final static Units UNIT_DEGREE_PER_YEAR = new Units("UNIT_DEGREE_PER_YEAR", "deg/yr|deg / yr|degree/yr|degree / yr|degrees/yr|degrees / yr|deg/year|deg / year|degree/year|degree / year|degrees/year|degrees / year");
     /** Units are expressed in hours */

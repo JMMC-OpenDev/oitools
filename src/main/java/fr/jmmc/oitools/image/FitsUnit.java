@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.image;
 
 import fr.jmmc.oitools.fits.FitsConstants;
+import java.util.HashSet;
 
 /**
  * This enumeration provides minimal unit conversion to standard units (rad, m)
@@ -109,6 +110,8 @@ public enum FitsUnit {
     private final double power;
     /** conversion factor of the power value input^(power * factor_power) to the unit reference */
     private final double factor_power;
+    /** possible conversion to units */
+    private final HashSet<FitsUnit> convertTo;
 
     /**
      * Custom constructor
@@ -143,6 +146,10 @@ public enum FitsUnit {
         this.factor = factor;
         this.power = power;
         this.factor_power = factor_power;
+        this.convertTo = (reference == null) ? new HashSet<FitsUnit>() : null;
+        if (reference != null) {
+            reference.convertTo.add(this);
+        }
     }
 
     /**
@@ -182,21 +189,24 @@ public enum FitsUnit {
     public double convert(final double value, final FitsUnit unit) throws IllegalArgumentException {
         // convert to associated reference
         if (this.reference != null) {
-            if (this.reference == unit) {
-                // conversion is possible:
-                double output = value;
+            if ((this.reference != unit) && !this.reference.convertTo.contains(unit)) {
+                throw new IllegalArgumentException("Unit conversion not allowed from [" + getStandardRepresentation()
+                        + "] to [" + unit.getStandardRepresentation() + "] !");
 
-                if (!Double.isNaN(this.power)) {
-                    if (!Double.isNaN(this.factor_power)) {
-                        output *= this.factor_power;
-                    }
-                    output = Math.pow(output, this.power);
-                }
-
-                return this.factor * output;
             }
-            throw new IllegalArgumentException("Unit conversion not allowed from [" + getStandardRepresentation()
-                    + "] to [" + unit.getStandardRepresentation() + "] !");
+            // conversion is possible to reference unit:
+            double output = value;
+
+            if (!Double.isNaN(this.power)) {
+                if (!Double.isNaN(this.factor_power)) {
+                    output *= this.factor_power;
+                }
+                output = Math.pow(output, this.power);
+            }
+
+            output *= this.factor;
+
+            return (this.reference == unit) ? output : this.reference.convert(output, unit);
         }
         // invert conversion if final unit has this unit as reference
         if (unit.reference != null) {
