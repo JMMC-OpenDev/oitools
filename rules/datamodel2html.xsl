@@ -58,7 +58,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
                 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
                 <![endif]-->
-                ]]></xsl:text>                
+                ]]></xsl:text>
             </head>
             <body data-spy="scroll" data-target="#navbar">
                 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -137,15 +137,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <h1>OIFITS DataModel</h1>
                     <xsl:apply-templates select="datamodel/table"/>
                 </div>
-                
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+                <script src="js/jquery-1.12.4.min.js"></script>
                 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
                 <script>
                     function toggleApplyTo() {
                     $('.myhide').toggle();
                     }
                 </script>
-                
+
             </body>
         </html>
     </xsl:template>
@@ -275,7 +275,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             <th>Data type</th>
                             <th></th>
                             <th>Mandatory</th>
-                            <th></th>
+                            <th>(Unit)</th>
                             <th>Description</th>
                             <th>(Values)</th>
                             <th class="myhide">Rules</th>
@@ -334,7 +334,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:otherwise>N</xsl:otherwise>
                     </xsl:choose>
                 </td>
-                <td></td>
+                <td>
+                    <xsl:value-of select="substring(unit, 6)" />
+                </td>
                 <td>
                     <xsl:value-of select="description" />
                 </td>
