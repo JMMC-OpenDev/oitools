@@ -203,8 +203,8 @@
 <rows>11</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
 <column><name>INSNAME</name><description>name of corresponding detector</description><type>A</type><unit></unit></column>
-<column><name>MJD_OBS</name><description>Modified Julian day, start of time lapse</description><type>D</type><unit>day|days</unit><min>57930.0</min><max>57930.0</max></column>
-<column><name>MJD_END</name><description>Modified Julian day, end of time lapse</description><type>D</type><unit>day|days</unit><min>57940.0</min><max>57940.0</max></column>
+<column><name>MJD_OBS</name><description>Modified Julian day, start of time lapse</description><type>D</type><unit>d|day|days</unit><min>57930.0</min><max>57930.0</max></column>
+<column><name>MJD_END</name><description>Modified Julian day, end of time lapse</description><type>D</type><unit>d|day|days</unit><min>57940.0</min><max>57940.0</max></column>
 <column><name>JXX</name><description>Complex Jones matrix component along X axis</description><type>C</type><unit></unit></column>
 <column><name>JYY</name><description>Complex Jones matrix component along Y axis</description><type>C</type><unit></unit></column>
 <column><name>JXY</name><description>Complex Jones matrix component between X and Y axis</description><type>C</type><unit></unit></column>
@@ -245,7 +245,7 @@
 <rows>1</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
 <column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>57940.0</min><max>57940.0</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>57940.0</min><max>57940.0</max></column>
 <column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>500.0</min><max>500.0</max></column>
 <column><name>VISDATA</name><description>raw complex visibilities</description><type>C</type><unit>e</unit></column>
 <column><name>VISERR</name><description>error in raw complex visibilities</description><type>C</type><unit>e</unit></column>
@@ -287,7 +287,7 @@
 <rows>2</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
 <column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>57940.0</min><max>57940.0</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>57940.0</min><max>57940.0</max></column>
 <column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>500.0</min><max>500.0</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>301.5091247558594</min><max>4950.10400390625</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>2.097562551498413</min><max>16.21588706970215</max></column>
@@ -318,7 +318,7 @@
 <rows>3</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
 <column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>57940.0</min><max>57940.0</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>57940.0</min><max>57940.0</max></column>
 <column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>500.0</min><max>500.0</max></column>
 <column><name>T3AMP</name><description>triple product amplitude</description><type>D</type><unit></unit><min>16.127220153808594</min><max>4743.111328125</max></column>
 <column><name>T3AMPERR</name><description>error in triple product amplitude</description><type>D</type><unit></unit><min>0.332174152135849</min><max>19.637706756591797</max></column>
@@ -357,7 +357,7 @@
 </keywords>
 <rows>5</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>57940.0</min><max>57940.0</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>57940.0</min><max>57940.0</max></column>
 <column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>500.0</min><max>500.0</max></column>
 <column><name>FLUXDATA</name><description>flux per telescope</description><type>D</type><unit>Jy</unit><min>14.129551887512207</min><max>293.58209228515625</max></column>
 <column><name>FLUXERR</name><description>error in flux</description><type>D</type><unit>Jy</unit><min>6.086489200592041</min><max>19.562820434570312</max></column>

@@ -428,7 +428,7 @@
 <rows>180</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>18</max></column>
 <column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>56011.03619696394</min><max>56011.43041401478</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>56011.03619696394</min><max>56011.43041401478</max></column>
 <column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>112179.19921875</min><max>1582489.6875</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.09327034498991685</min><max>1.0997977563885757</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.0024906806261090846</min><max>0.11688465573641209</max></column>
@@ -634,7 +634,7 @@
 <rows>120</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>18</max></column>
 <column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>day|days</unit><min>56011.03619696394</min><max>56011.43041401478</max></column>
+<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>56011.03619696394</min><max>56011.43041401478</max></column>
 <column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>112179.19921875</min><max>1582489.6875</max></column>
 <column><name>T3AMP</name><description>triple product amplitude</description><type>D</type><unit></unit><min>1.0</min><max>1.0</max></column>
 <column><name>T3AMPERR</name><description>error in triple product amplitude</description><type>D</type><unit></unit><min>4.743416489778228E9</min><max>6.324555319704304E9</max></column>

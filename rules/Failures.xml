@@ -25415,8 +25415,8 @@
     <member>MJD</member>
     <data>
       <value>day</value>
-      <expected>day|days</expected>
-      <message>Invalid unit for column 'MJD', found 'day' should be 'day|days'</message>
+      <expected>d|day|days</expected>
+      <message>Invalid unit for column 'MJD', found 'day' should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -25571,8 +25571,8 @@
     <member>MJD</member>
     <data>
       <value>day</value>
-      <expected>day|days</expected>
-      <message>Invalid unit for column 'MJD', found 'day' should be 'day|days'</message>
+      <expected>d|day|days</expected>
+      <message>Invalid unit for column 'MJD', found 'day' should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -25701,8 +25701,8 @@
     <member>MJD</member>
     <data>
       <value>day</value>
-      <expected>day|days</expected>
-      <message>Invalid unit for column 'MJD', found 'day' should be 'day|days'</message>
+      <expected>d|day|days</expected>
+      <message>Invalid unit for column 'MJD', found 'day' should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -26312,8 +26312,8 @@
     <member>MJD_END</member>
     <data>
       <value>day</value>
-      <expected>day|days</expected>
-      <message>Invalid unit for column 'MJD_END', found 'day' should be 'day|days'</message>
+      <expected>d|day|days</expected>
+      <message>Invalid unit for column 'MJD_END', found 'day' should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -26325,8 +26325,8 @@
     <member>MJD_OBS</member>
     <data>
       <value>day</value>
-      <expected>day|days</expected>
-      <message>Invalid unit for column 'MJD_OBS', found 'day' should be 'day|days'</message>
+      <expected>d|day|days</expected>
+      <message>Invalid unit for column 'MJD_OBS', found 'day' should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -26468,8 +26468,8 @@
     <member>MJD</member>
     <data>
       <value>day</value>
-      <expected>day|days</expected>
-      <message>Invalid unit for column 'MJD', found 'day' should be 'day|days'</message>
+      <expected>d|day|days</expected>
+      <message>Invalid unit for column 'MJD', found 'day' should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -26676,8 +26676,8 @@
     <member>MJD</member>
     <data>
       <value>day</value>
-      <expected>day|days</expected>
-      <message>Invalid unit for column 'MJD', found 'day' should be 'day|days'</message>
+      <expected>d|day|days</expected>
+      <message>Invalid unit for column 'MJD', found 'day' should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -26832,8 +26832,8 @@
     <member>MJD</member>
     <data>
       <value>day</value>
-      <expected>day|days</expected>
-      <message>Invalid unit for column 'MJD', found 'day' should be 'day|days'</message>
+      <expected>d|day|days</expected>
+      <message>Invalid unit for column 'MJD', found 'day' should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -27053,8 +27053,8 @@
     <member>MJD</member>
     <data>
       <value>day</value>
-      <expected>day|days</expected>
-      <message>Invalid unit for column 'MJD', found 'day' should be 'day|days'</message>
+      <expected>d|day|days</expected>
+      <message>Invalid unit for column 'MJD', found 'day' should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -27403,8 +27403,8 @@
     <extNb>4</extNb>
     <member>MJD</member>
     <data>
-      <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be 'day|days'</message>
+      <value>d|day|days</value>
+      <message>Missing unit for column 'MJD', should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -27547,8 +27547,8 @@
     <extNb>5</extNb>
     <member>MJD</member>
     <data>
-      <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be 'day|days'</message>
+      <value>d|day|days</value>
+      <message>Missing unit for column 'MJD', should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -27667,8 +27667,8 @@
     <extNb>6</extNb>
     <member>MJD</member>
     <data>
-      <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be 'day|days'</message>
+      <value>d|day|days</value>
+      <message>Missing unit for column 'MJD', should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28231,8 +28231,8 @@
     <extNb>5</extNb>
     <member>MJD_END</member>
     <data>
-      <value>day|days</value>
-      <message>Missing unit for column 'MJD_END', should be 'day|days'</message>
+      <value>d|day|days</value>
+      <message>Missing unit for column 'MJD_END', should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28243,8 +28243,8 @@
     <extNb>5</extNb>
     <member>MJD_OBS</member>
     <data>
-      <value>day|days</value>
-      <message>Missing unit for column 'MJD_OBS', should be 'day|days'</message>
+      <value>d|day|days</value>
+      <message>Missing unit for column 'MJD_OBS', should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28375,8 +28375,8 @@
     <extNb>6</extNb>
     <member>MJD</member>
     <data>
-      <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be 'day|days'</message>
+      <value>d|day|days</value>
+      <message>Missing unit for column 'MJD', should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28567,8 +28567,8 @@
     <extNb>7</extNb>
     <member>MJD</member>
     <data>
-      <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be 'day|days'</message>
+      <value>d|day|days</value>
+      <message>Missing unit for column 'MJD', should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28711,8 +28711,8 @@
     <extNb>8</extNb>
     <member>MJD</member>
     <data>
-      <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be 'day|days'</message>
+      <value>d|day|days</value>
+      <message>Missing unit for column 'MJD', should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>
@@ -28915,8 +28915,8 @@
     <extNb>9</extNb>
     <member>MJD</member>
     <data>
-      <value>day|days</value>
-      <message>Missing unit for column 'MJD', should be 'day|days'</message>
+      <value>d|day|days</value>
+      <message>Missing unit for column 'MJD', should be 'd|day|days'</message>
     </data>
   </failure>
   <failure>

@@ -49,7 +49,7 @@ public class Units {
     /** Units are expressed in seconds */
     public final static Units UNIT_SECOND = new Units("UNIT_SECOND", "s|sec|second|seconds");
     /** Units are expressed in julian day */
-    public final static Units UNIT_MJD = new Units("UNIT_MJD", "day|days");
+    public final static Units UNIT_MJD = new Units("UNIT_MJD", "d|day|days");
     /** Units are expressed in years */
     public final static Units UNIT_YEAR = new Units("UNIT_YEAR", "yr|year|years");
     /** Units are expressed in meters per second */
