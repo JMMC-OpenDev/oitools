@@ -43728,7 +43728,7 @@
     </data>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>HDU</extName>
@@ -43736,7 +43736,7 @@
     <message>Skipping non-standard OIFITS 'HDU#0'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -43744,7 +43744,7 @@
     <message>Skipping non-standard OIFITS 'OI_ARRAY#1'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -43752,7 +43752,7 @@
     <message>Skipping non-standard OIFITS 'OI_WAVELENGTH#2'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -43760,7 +43760,7 @@
     <message>Skipping non-standard OIFITS 'OI_TARGET#3'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -43768,7 +43768,7 @@
     <message>Skipping non-standard OIFITS 'OI_VIS#4'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -43776,7 +43776,7 @@
     <message>Skipping non-standard OIFITS 'OI_VIS2#5'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -43784,7 +43784,7 @@
     <message>Skipping non-standard OIFITS 'OI_T3#6'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
@@ -43792,7 +43792,7 @@
     <message>Skipping non-standard OIFITS 'HDU#0'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -43800,7 +43800,7 @@
     <message>Skipping non-standard OIFITS 'OI_ARRAY#1'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -43808,7 +43808,7 @@
     <message>Skipping non-standard OIFITS 'OI_WAVELENGTH#2'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -43816,7 +43816,7 @@
     <message>Skipping non-standard OIFITS 'OI_TARGET#3'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -43824,7 +43824,7 @@
     <message>Skipping non-standard OIFITS 'OI_CORR#4'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -43832,7 +43832,7 @@
     <message>Skipping non-standard OIFITS 'OI_INSPOL#5'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -43840,7 +43840,7 @@
     <message>Skipping non-standard OIFITS 'OI_VIS#6'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -43848,7 +43848,7 @@
     <message>Skipping non-standard OIFITS 'OI_VIS2#7'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -43856,7 +43856,7 @@
     <message>Skipping non-standard OIFITS 'OI_T3#8'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>INFO</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_FLUX</extName>
