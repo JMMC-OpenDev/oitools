@@ -547,13 +547,23 @@ public final class OIFitsFile extends FitsImageFile {
 
                     // Note: arrNames may points to identical arrays ...
                     final int arrNames = getAcceptedArrNames().length;
-                    final int insNames = getAcceptedInsNames().length;
+
+                    /* Consider one single instrument if all insnames start with the main instrume keyword */
+                    final String instrume = primaryHDU.getInstrume();
+                    boolean sameInstrument = true;
+                    for (String insname : getAcceptedInsNames()) {
+                        if (!insname.startsWith(instrume)) {
+                            sameInstrument = false;
+                        }
+                    }
+                    final boolean multiInstruments = !sameInstrument && getAcceptedInsNames().length > 1;
+
                     // Note: targetIds may contain duplicates or identical targets ...
                     final int targets = getAcceptedTargetIds().length;
 
                     /* rule [MAIN_HEADER_TYPE_MULTI] check if main header keywords are set to 'MULTI' for heterogeneous content */
-                    if ((arrNames > 1 || insNames > 1 || targets > 1) || OIFitsChecker.isInspectRules()) {
-                        primaryHDU.checkMultiKeywords(checker, arrNames, insNames, targets);
+                    if ((arrNames > 1 || multiInstruments || targets > 1) || OIFitsChecker.isInspectRules()) {
+                        primaryHDU.checkMultiKeywords(checker, arrNames, multiInstruments, targets);
                     }
                 }
 

@@ -863,11 +863,11 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * Check specific keywords for multiple observations
      * @param checker checker component
      */
-    void checkMultiKeywords(final OIFitsChecker checker, final int arrnames, final int insnames, final int targets) {
+    void checkMultiKeywords(final OIFitsChecker checker, final int arrnames, final boolean multiInstruments, final int targets) {
         if (arrnames > 1 || OIFitsChecker.isInspectRules()) {
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_TELESCOP);
         }
-        if (insnames > 1 || OIFitsChecker.isInspectRules()) {
+        if (multiInstruments || OIFitsChecker.isInspectRules()) {
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSTRUME);
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSMODE);
         }
