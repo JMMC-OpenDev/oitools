@@ -552,8 +552,9 @@ public final class OIFitsFile extends FitsImageFile {
                     final String instrume = primaryHDU.getInstrume();
                     boolean sameInstrument = true;
                     for (String insname : getAcceptedInsNames()) {
-                        if (!insname.startsWith(instrume)) {
+                        if (instrume==null || !insname.startsWith(instrume)) {
                             sameInstrument = false;
+                            break;
                         }
                     }
                     final boolean multiInstruments = !sameInstrument && getAcceptedInsNames().length > 1;
