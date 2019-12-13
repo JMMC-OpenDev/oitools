@@ -1920,13 +1920,6 @@
 </OI_FLUX>
 <checkReport>
 Analysing File: GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits
-Analysing HDU [HDU#0]
-INFO	The keyword 'INSMODE' has the value 'SINGLE,MEDIUM,COMBINED,COMBINED' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'INSTRUME' has the value 'GRAVITY' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'OBSERVER' has the value 'UNKNOWN' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'PROCSOFT' has the value 'GRAVITY pipeline 0.9.8' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'PROG_ID' has the value '60.A-9174(A)' but should be set to 'MULTI' for multiple observations
-INFO	The keyword 'REFERENC' has the value '2001PASP..112.1133P' but should be set to 'MULTI' for multiple observations
 Analysing table [OI_ARRAY#1]
 WARNING	Missing column 'FOV'
 WARNING	Missing column 'FOVTYPE'
@@ -2019,95 +2012,12 @@ INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <paragraph>JMMC</paragraph>
   </rule>
   <rule>
-    <name>MAIN_HEADER_TYPE_MULTI</name>
-    <description>check if main header keywords are set to 'MULTI' for heterogeneous content</description>
-    <paragraph>V2.MAIN_HEADER_Table(3)</paragraph>
-  </rule>
-  <rule>
     <name>UNKNOWN_COLUMN</name>
     <description>check if the column belongs to the OIFITS standard and version</description>
     <paragraph>JMMC</paragraph>
   </rule>
 </rules>
 <failures>
-  <failure>
-    <severity>INFO</severity>
-    <rule>MAIN_HEADER_TYPE_MULTI</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>INSMODE</member>
-    <data>
-      <value>SINGLE,MEDIUM,COMBINED,COMBINED</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'INSMODE' has the value 'SINGLE,MEDIUM,COMBINED,COMBINED' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>MAIN_HEADER_TYPE_MULTI</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>INSTRUME</member>
-    <data>
-      <value>GRAVITY</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'INSTRUME' has the value 'GRAVITY' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>MAIN_HEADER_TYPE_MULTI</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>OBSERVER</member>
-    <data>
-      <value>UNKNOWN</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'OBSERVER' has the value 'UNKNOWN' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>MAIN_HEADER_TYPE_MULTI</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>PROCSOFT</member>
-    <data>
-      <value>GRAVITY pipeline 0.9.8</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'PROCSOFT' has the value 'GRAVITY pipeline 0.9.8' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>MAIN_HEADER_TYPE_MULTI</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>PROG_ID</member>
-    <data>
-      <value>60.A-9174(A)</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'PROG_ID' has the value '60.A-9174(A)' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>MAIN_HEADER_TYPE_MULTI</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>HDU</extName>
-    <extNb>0</extNb>
-    <member>REFERENC</member>
-    <data>
-      <value>2001PASP..112.1133P</value>
-      <expected>MULTI</expected>
-      <message>The keyword 'REFERENC' has the value '2001PASP..112.1133P' but should be set to 'MULTI' for multiple observations</message>
-    </data>
-  </failure>
   <failure>
     <severity>WARNING</severity>
     <rule>GENERIC_COL_MANDATORY</rule>
