@@ -65,6 +65,10 @@ public abstract class FitsTable extends FitsHDU {
      * Map storing derived column definitions
      */
     private Map<String, ColumnMeta> columnsDerivedDesc = null;
+    /**
+     * Map storing column aliases to column names
+     */
+    private final Map<String, String> columnsAliases = new HashMap<String, String>();
     /* data */
     /**
      * Map storing column values
@@ -423,6 +427,25 @@ public abstract class FitsTable extends FitsHDU {
     }
 
     /**
+     * Return the Map storing column aliases
+     *
+     * @return Map storing column alias
+     */
+    public final Map<String, String> getColumnsAliases() {
+        return this.columnsAliases;
+    }
+
+    /**
+     * Return the column name given its alias
+     *
+     * @param alias column alias
+     * @return column name or null if undefined
+     */
+    public final String getColumnNameByAlias(final String alias) {
+        return getColumnsAliases().get(alias);
+    }
+
+    /**
      * Return the column definition given its name
      *
      * @param name column name
@@ -457,6 +480,10 @@ public abstract class FitsTable extends FitsHDU {
      */
     protected final void addColumnMeta(final ColumnMeta meta) {
         getColumnsDesc().put(meta.getName(), meta);
+
+        if (meta.getAlias() != null) {
+            getColumnsAliases().put(meta.getAlias(), meta.getName());
+        }
     }
 
     /**

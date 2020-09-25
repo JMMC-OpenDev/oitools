@@ -75,7 +75,7 @@ public class TestMergeUtils extends JUnitBaseTest {
                 TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits");
         merge = merge(f1, f2, TEST_DIR_TEST + "mergeTestTarget.fits");
         Assert.assertNotNull("Merge return a null value", merge);
-        
+
         // Analyzer needed to compare Targets:
         merge.analyze();
     }
@@ -98,14 +98,10 @@ public class TestMergeUtils extends JUnitBaseTest {
                 oiTarget.getTarget(oiTarget.getTargetId()[0]));
 
         OIWavelength[] oiWl = merge.getOiWavelengths();
-        Assert.assertEquals("Merge result has bad number of WL",
-                f1.getOiWavelengths().length + f2.getOiWavelengths().length,
-                oiWl.length);
+        Assert.assertEquals("Merge result has bad number of WL", f1.getOiWavelengths().length, oiWl.length); // same tables
 
         OIArray[] oiArray = merge.getOiArrays();
-        Assert.assertEquals("Merge result has bad number of array",
-                f1.getOiArrays().length + f2.getOiArrays().length,
-                oiArray.length);
+        Assert.assertEquals("Merge result has bad number of array", f1.getOiArrays().length, oiArray.length); // same tables
     }
 
     /**

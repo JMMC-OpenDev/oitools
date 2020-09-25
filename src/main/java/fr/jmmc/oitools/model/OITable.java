@@ -22,10 +22,8 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.fits.FitsTable;
-import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
-import java.util.logging.Level;
 
 /**
  * Base Class for all OI_* tables.

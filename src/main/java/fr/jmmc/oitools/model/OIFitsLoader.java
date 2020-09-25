@@ -677,6 +677,7 @@ public class OIFitsLoader {
 
         // Report any EXTRA column:
         final Map<String, ColumnMeta> columnsDesc = table.getColumnsDesc();
+        final Map<String, String> columnsAliases = table.getColumnsAliases();
 
         for (int i = 0, nCols = hdu.getNCols(); i < nCols; i++) {
             name = hdu.getColumnName(i);
@@ -689,7 +690,7 @@ public class OIFitsLoader {
                     data.addKeywordValue("[FORMAT]");
                 }
             }
-            if (!columnsDesc.containsKey(name)) {
+            if (!columnsDesc.containsKey(name) && !columnsAliases.containsKey(name)) {
                 // rule [UNKNOWN_COLUMN] check if the column belongs to the OIFITS standard and version
                 checker.ruleFailed(Rule.UNKNOWN_COLUMN, table, name).addKeywordValue(hdu.getColumnLength(i) + "" + hdu.getColumnType(i));
             }

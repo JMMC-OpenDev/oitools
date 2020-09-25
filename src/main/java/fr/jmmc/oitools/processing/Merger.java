@@ -31,11 +31,12 @@ import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.model.TargetManager;
+import fr.jmmc.oitools.util.OITableComparator;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.IdentityHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -319,30 +320,50 @@ public final class Merger {
             final OIFitsFile resultFile = ctx.resultFile;
             final Map<OIWavelength, OIWavelength> mapOIWavelengths = ctx.mapOIWavelengths;
 
-            // TODO: use Instrument modes to reduce the output OIWavelength tables
+            // TODO: use Instrument modes to reduce the output OIWavelength tables ? ie fuzzy comparison
             // Browse all used OIWavelength tables:
             for (OIWavelength oiWavelength : ctx.usedOIWavelengths) {
                 final String name = oiWavelength.getInsName();
 
-                // use InsMode to reduce !
                 // If name is already present in result, 
                 // change the name and memorise this change to update data information later
                 String newName = name;
                 int idx = 0;
+                OIWavelength prevOiWavelength = null;
 
-                // TODO: check if existing OIWavelength in result is not the same ? to remove duplicates
-                while (resultFile.getOiWavelength(newName) != null) {
+                for (;;) {
+                    prevOiWavelength = resultFile.getOiWavelength(newName);
+
+                    if (prevOiWavelength == null) {
+                        // table is not present
+                        break;
+                    } else {
+                        // check if the existing table in resultFile is exactly the same ? (to remove duplicates)
+                        if (OITableComparator.STRICT_COMPARATOR.compareTable(oiWavelength, prevOiWavelength)) {
+                            logger.log(Level.INFO, "Same tables: {0} vs {1}", new Object[]{oiWavelength, prevOiWavelength});
+                            // table is the same
+                            break;
+                        }
+                    }
+                    // use another suffix (_nn):
                     idx++;
                     newName = name + "_" + idx;
                 }
 
-                final OIWavelength newOiWavelength = (OIWavelength) resultFile.copyTable(oiWavelength);
-                newOiWavelength.setInsName(newName);
-                resultFile.addOiTable(newOiWavelength);
+                final OIWavelength newOiWavelength;
 
+                if (prevOiWavelength != null) {
+                    // use the previous table
+                    newOiWavelength = prevOiWavelength;
+                } else {
+                    // add the new table (copy):
+                    newOiWavelength = (OIWavelength) resultFile.copyTable(oiWavelength);
+                    newOiWavelength.setInsName(newName);
+                    resultFile.addOiTable(newOiWavelength);
+                }
                 mapOIWavelengths.put(oiWavelength, newOiWavelength);
             }
-            logger.log(Level.INFO, "insNames:         {0}", Arrays.toString(resultFile.getAcceptedInsNames()));
+            logger.log(Level.INFO, "insNames: {0}", Arrays.toString(resultFile.getAcceptedInsNames()));
             logger.log(Level.FINE, "mapOIWavelengths: {0}", mapOIWavelengths);
         }
     }
@@ -366,19 +387,41 @@ public final class Merger {
                 // change the name and memorise this change to update data information later
                 String newName = name;
                 int idx = 0;
-                // TODO: check if existing OIArray in result is not the same ? to remove duplicates
-                while (resultFile.getOiArray(newName) != null) {
+                OIArray prevOiArray = null;
+
+                for (;;) {
+                    prevOiArray = resultFile.getOiArray(newName);
+
+                    if (prevOiArray == null) {
+                        // table is not present
+                        break;
+                    } else {
+                        // check if the existing table in resultFile is exactly the same ? (to remove duplicates)
+                        if (OITableComparator.STRICT_COMPARATOR.compareTable(oiArray, prevOiArray)) {
+                            logger.log(Level.INFO, "Same tables: {0} vs {1}", new Object[]{oiArray, prevOiArray});
+                            // table is the same
+                            break;
+                        }
+                    }
+                    // use another suffix (_nn):
                     idx++;
                     newName = name + "_" + idx;
                 }
 
-                final OIArray newOiArray = (OIArray) resultFile.copyTable(oiArray);
-                newOiArray.setArrName(newName);
-                resultFile.addOiTable(newOiArray);
+                final OIArray newOiArray;
 
+                if (prevOiArray != null) {
+                    // use the previous table
+                    newOiArray = prevOiArray;
+                } else {
+                    // add the new table (copy):
+                    newOiArray = (OIArray) resultFile.copyTable(oiArray);
+                    newOiArray.setArrName(newName);
+                    resultFile.addOiTable(newOiArray);
+                }
                 mapOIArrays.put(oiArray, newOiArray);
             }
-            logger.log(Level.INFO, "arrNames:    {0}", Arrays.toString(resultFile.getAcceptedArrNames()));
+            logger.log(Level.INFO, "arrNames: {0}", Arrays.toString(resultFile.getAcceptedArrNames()));
             logger.log(Level.FINE, "mapOIArrays: {0}", mapOIArrays);
         }
     }
@@ -507,7 +550,6 @@ public final class Merger {
                     if (!nightIdMatcher.matchAll(oiData.getDistinctNightId())) {
                         checkNightId = true;
                     }
-
                     logger.log(Level.FINE, "oidata nightIds: {0}", oiData.getDistinctNightId());
                 }
 
@@ -595,10 +637,10 @@ public final class Merger {
         /** output OIFits */
         final OIFitsFile resultFile;
         /* Set of OITarget, OIWavelength, OIArray and OICorr tables to process */
-        final Set<OITarget> usedOITargets = new HashSet<OITarget>();
-        final Set<OIWavelength> usedOIWavelengths = new HashSet<OIWavelength>();
-        final Set<OIArray> usedOIArrays = new HashSet<OIArray>();
-        final Set<OICorr> usedOICorrs = new HashSet<OICorr>();
+        final Set<OITarget> usedOITargets = new LinkedHashSet<OITarget>();
+        final Set<OIWavelength> usedOIWavelengths = new LinkedHashSet<OIWavelength>();
+        final Set<OIArray> usedOIArrays = new LinkedHashSet<OIArray>();
+        final Set<OICorr> usedOICorrs = new LinkedHashSet<OICorr>();
         /** Map per OITarget between old targetIds (local) to new targetId (global) */
         final Map<OITarget, Map<Short, Short>> mapOITargetIDs = new IdentityHashMap<OITarget, Map<Short, Short>>();
         /* Map between old table to new tables for OIWavelength, OIArray and OICorr tables */

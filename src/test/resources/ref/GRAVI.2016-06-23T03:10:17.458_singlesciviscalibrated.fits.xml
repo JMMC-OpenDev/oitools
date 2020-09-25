@@ -1949,7 +1949,6 @@ INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
-INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
 Analysing table [OI_VIS#9]
 SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
@@ -1974,7 +1973,6 @@ INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#12]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
-INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [210D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.FT_POS' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.LKDT_MET_FC' with format [1D]
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D]
@@ -2266,18 +2264,6 @@ INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
     <extName>OI_FLUX</extName>
     <extNb>8</extNb>
-    <member>FLUX</member>
-    <data>
-      <value>5D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#8.FLUX' with format [5D]</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>UNKNOWN_COLUMN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>8</extNb>
     <member>TIME</member>
     <data>
       <value>1D</value>
@@ -2507,18 +2493,6 @@ INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <extNb>12</extNb>
     <member>OI_REVN</member>
     <message>Missing keyword 'OI_REVN'</message>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>UNKNOWN_COLUMN</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_FLUX</extName>
-    <extNb>12</extNb>
-    <member>FLUX</member>
-    <data>
-      <value>210D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.FLUX' with format [210D]</message>
-    </data>
   </failure>
   <failure>
     <severity>INFO</severity>

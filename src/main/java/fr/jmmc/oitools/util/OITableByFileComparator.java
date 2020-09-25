@@ -35,7 +35,12 @@ public final class OITableByFileComparator implements Comparator<OITable> {
 
     @Override
     public int compare(final OITable t1, final OITable t2) {
-        return String.CASE_INSENSITIVE_ORDER.compare(getFileName(t1), getFileName(t2));
+        int res = String.CASE_INSENSITIVE_ORDER.compare(getFileName(t1), getFileName(t2));
+        // ensure sorting by extNb() to have stable sort
+        if (res == 0) {
+            res = Integer.compare(t1.getExtNb(), t2.getExtNb());
+        }
+        return res;
     }
 
     public static String getFileName(final OITable t) {
