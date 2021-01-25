@@ -1,19 +1,3 @@
-/* 
- * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 /*******************************************************************************
  *                 jMCS project ( http://www.jmmc.fr/dev/jmcs )
  *******************************************************************************
@@ -48,7 +32,7 @@ import java.text.NumberFormat;
 
 /**
  * This class is copied from Jmcs (same package) in order to let OITools compile properly 
- * but at runtime only one NumberUtils class will be loaded (by class loader)
+ * but at runtime only one implementation will be loaded (by class loader)
  * 
  * Note: Jmcs Changes must be reported here to avoid runtime issues !
  * 
@@ -70,9 +54,13 @@ public final class NumberUtils {
     /** shared Double = 1 instance */
     public final static Double DBL_ONE = Double.valueOf(1d);
     /** default formatter */
-    private final static NumberFormat _fmtDef = NumberFormat.getInstance();
+    private final static NumberFormat _fmtDef;
     /** scientific formatter */
-    private final static NumberFormat _fmtScience = new DecimalFormat("0.0##E0");
+    private final static NumberFormat _fmtScience = new DecimalFormat("0.000E0");
+    
+    static {
+        _fmtDef = new DecimalFormat("0.000");
+    }
 
     /**
      * Private constructor
@@ -134,6 +122,15 @@ public final class NumberUtils {
     }
 
     /**
+     * Adjust the given double value to keep only 1 decimal digit
+     * @param value value to adjust
+     * @return double value with only 1 decimal digit
+     */
+    public static double trimTo1Digits(final double value) {
+        return ((long) (10.0 * value)) / 10.0;
+    }
+
+    /**
      * Adjust the given double value to keep only 3 decimal digits
      * @param value value to adjust
      * @return double value with only 3 decimal digits
@@ -152,9 +149,18 @@ public final class NumberUtils {
     }
 
     /**
+     * Adjust the given double value to keep only 9 decimal digits
+     * @param value value to adjust
+     * @return double value with only 9 decimal digits
+     */
+    public static double trimTo9Digits(final double value) {
+        return ((long) (1e9d * value)) / 1e9d;
+    }
+
+    /**
      * Format the given double value using custom formaters:
-     * - '0'     if abs(val) < 1e-9
-     * - 0.000   if 1e-3 < abs(val) < 1e6
+     * - '0'     if abs(val) &lt; 1e-9
+     * - 0.000   if 1e-3 &lt; abs(val) &lt; 1e6
      * - 0.0##E0 else
      * 
      * Note: this method is not thread safe (synchronization must be performed by callers)
