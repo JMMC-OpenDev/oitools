@@ -1,19 +1,3 @@
-/* 
- * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 /*******************************************************************************
  *                 jMCS project ( http://www.jmmc.fr/dev/jmcs )
  *******************************************************************************
@@ -49,8 +33,15 @@ import java.text.NumberFormat;
 import java.util.Date;
 
 /**
+ * This class is copied from Jmcs (same package) in order to let OITools compile properly 
+ * but at runtime only one implementation will be loaded (by class loader)
+ * 
+ * Note: Jmcs Changes must be reported here to avoid runtime issues !
+ * 
+ * 
  * Helper methods related to Formatter (NumberFormat, DateFormat ...)
- * @author bourgesl
+ *
+ * @author Laurent BOURGES.
  */
 public final class FormatterUtils {
 

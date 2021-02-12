@@ -1,19 +1,3 @@
-/* 
- * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 /*******************************************************************************
  *                 jMCS project ( http://www.jmmc.fr/dev/jmcs )
  *******************************************************************************
@@ -43,21 +27,29 @@
  ******************************************************************************/
 package fr.jmmc.jmcs.network;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * This class is copied from Jmcs (same package) in order to let OITools compile properly 
+ * but at runtime only one implementation will be loaded (by class loader)
+ * 
+ * Note: Jmcs Changes must be reported here to avoid runtime issues !
+ * 
+ * 
  * This class gathers general network settings:
  * - socket and connect timeouts;
  * - proxy (host / port).
  *
- * It only uses Java System properties and environment settings: simplified from jMCS version.
+ * It uses Java System properties and also jMCS Preferences to get the proxy settings.
  * 
  * @author Laurent BOURGES, Guillaume MELLA.
  */
@@ -72,6 +64,8 @@ public final class NetworkSettings {
     public static final String PROPERTY_DEFAULT_READ_TIMEOUT = "sun.net.client.defaultReadTimeout";
     /** Use System Proxies */
     public static final String PROPERTY_USE_SYSTEM_PROXIES = "java.net.useSystemProxies";
+    /** HTTP User agent */
+    public static final String PROPERTY_USER_AGENT = "http.agent";
     /** Java plug-in proxy list */
     public static final String PROPERTY_JAVA_PLUGIN_PROXY_LIST = "javaplugin.proxy.config.list";
     /** HTTP proxy host */
@@ -101,6 +95,8 @@ public final class NetworkSettings {
     private final static String JMMC_WEB_URL = "http://" + JMMC_WEB_HOST;
     /** cached JMMC web URL */
     private static URI JMMC_WEB_URI = null;
+    /** Prefix of the preference which stores optional IP addresses */
+    public static final String PREFIX_PREFERENCE_IP = "ip.";
 
     /**
      * Forbidden constructor
@@ -115,15 +111,24 @@ public final class NetworkSettings {
      */
     public static void main(final String[] args) {
         defineDefaults();
+
+        getHostIP(JMMC_WEB_HOST);
     }
 
     /**
      * Define default values (timeouts, proxy ...)
      */
     public static void defineDefaults() {
+        defineUserAgent();
         defineTimeouts();
-
         defineProxy();
+    }
+
+    /**
+     * Define the HTTP User agent
+     */
+    public static void defineUserAgent() {
+        // No impl
     }
 
     /**
@@ -254,5 +259,41 @@ public final class NetworkSettings {
             JMMC_WEB_URI = URI.create(JMMC_WEB_URL);
         }
         return JMMC_WEB_URI;
+    }
+
+    /**
+     * Return the IP address of the given host name
+     * @param hostname host name to lookup
+     * @return IP address
+     */
+    public static String getHostIP(final String hostname) {
+        return getHostIP(hostname, null);
+    }
+
+    /**
+     * Return the IP address of the given host name
+     * @param hostname host name to lookup
+     * @param defaultIP (optional) default IP address (hard-coded)
+     * @return IP address
+     */
+    public static String getHostIP(final String hostname, final String defaultIP) {
+        String ipAddr = null;
+        if ((hostname != null) && (hostname.length() != 0)) {
+            try {
+                // DNS query (if the network is available):
+                ipAddr = InetAddress.getByName(hostname).getHostAddress();
+
+            } catch (UnknownHostException uhe) {
+                _logger.log(Level.SEVERE, "Host resolution failed: {0}", uhe.getMessage());
+            }
+
+            if (((ipAddr == null) || (ipAddr.length() == 0)) && (defaultIP != null) && (defaultIP.length() != 0)) {
+                _logger.info("Use the hard-coded IP address.");
+                ipAddr = defaultIP;
+            }
+
+            _logger.log(Level.INFO, "getHostIP[{0}] = {1}", new Object[]{hostname, ipAddr});
+        }
+        return ipAddr;
     }
 }
