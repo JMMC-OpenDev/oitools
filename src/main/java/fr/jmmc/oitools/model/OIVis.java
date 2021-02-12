@@ -410,6 +410,22 @@ public final class OIVis extends OIData {
         return this.getColumnInt(OIFitsConstants.COLUMN_CORRINDX_IVIS);
     }
 
+    /* --- Optional extra columns for OI-Interface Model --- */
+    /**
+     * Return the NS_MODEL_VISAMP column.
+     * @return the NS_MODEL_VISAMP column.
+     */
+    public double[][] getModelVisAmp() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_MODEL_VISAMP);
+    }
+
+    /**
+     * Return the NS_MODEL_VISPHI column.
+     * @return the NS_MODEL_VISPHI column.
+     */
+    public double[][] getModelVisPhi() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_MODEL_VISPHI);
+    }
 
     /*
      * --- public data access ---------------------------------------------------------

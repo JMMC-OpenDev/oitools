@@ -72,13 +72,11 @@ public final class OIT3 extends OIData {
 
         // if OI support is enabled
         if (DataModel.hasOiModelColumnsSupport()) {
-
             // T3 MODEL columns definition (optional)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_T3AMP, "model of the triple product amplitude",
                     Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.NO_UNIT, null, DataRange.RANGE_POSITIVE, this));
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_T3PHI, "model of the triple product phase",
                     Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.UNIT_DEGREE, null, DataRange.RANGE_ANGLE, this));
-
         }
 
         // U1COORD  column definition
@@ -251,6 +249,22 @@ public final class OIT3 extends OIData {
         return this.getColumnInt(OIFitsConstants.COLUMN_CORRINDX_T3PHI);
     }
 
+    /* --- Optional extra columns for OI-Interface Model --- */
+    /**
+     * Return the NS_MODEL_T3AMP column.
+     * @return the NS_MODEL_T3AMP column.
+     */
+    public double[][] getModelT3Amp() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_MODEL_T3AMP);
+    }
+
+    /**
+     * Return the NS_MODEL_T3PHI column.
+     * @return the NS_MODEL_T3PHI column.
+     */
+    public double[][] getModelT3Phi() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_MODEL_T3PHI);
+    }
 
     /*
      * --- public data access ---------------------------------------------------------

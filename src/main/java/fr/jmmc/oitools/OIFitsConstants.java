@@ -111,8 +111,31 @@ public interface OIFitsConstants {
     public final static String COLUMN_TARGET_ID = "TARGET_ID";
     /** STA_INDEX column */
     public final static String COLUMN_STA_INDEX = "STA_INDEX";
+    /** special prefix for column names (OI-Interface Model) */
+    public final static String COLUMN_PREFIX_NS_MODEL = "NS_MODEL_";
 
-    /* OI_ARRAY table */
+    /*
+    New columns in OI_VIS table
+    Label             Format   Description
+    NS_MODEL_VISAMP   D(NWAVE) Model of the visibility amplitude
+    NSMODELVISAMPERR  D(NWAVE) Model of the error in visibility amplitude (optional)            TODO
+    NSMODELVISPHI     D(NWAVE) Model of the visibility phase in degrees
+    NSMODELVISPHIERR  D(NWAVE) Model of the error in visibility phase in degrees (optional)     TODO
+    
+    New column in OI_VIS2 table
+    Label             Format   Description
+    NS_MODEL_VIS2     D(NWAVE) Model of the squared visibility
+    NS_MODEL_VIS2ERR  D(NWAVE) Model of the error in squared visibility (optional)
+    
+    New columns in OI_T3 table
+    Label             Format   Description
+    NS_MODEL_T3AMP    D(NWAVE) Model of the triple-product amplitude
+    NS_MODEL_T3AMPERR D(NWAVE) Model of the error in triple-product amplitude (optional)        TODO
+    NS_MODEL_T3PHI    D(NWAVE) Model of the triple-product phase in degrees
+    NS_MODEL_T3PHIERR D(NWAVE) Model of the error in triple-product phase in degrees (optional) TODO
+     */
+
+ /* OI_ARRAY table */
     /** FRAME   keyword */
     public final static String KEYWORD_FRAME = "FRAME";
     /** FRAME GEOCENTRIC keyword value */
@@ -244,13 +267,13 @@ public interface OIFitsConstants {
     /** VISAMP column */
     public final static String COLUMN_VISAMP = "VISAMP";
     /** VISAMP MODEL column */
-    public final static String COLUMN_NS_MODEL_VISAMP = "NS_MODEL_VISAMP";
+    public final static String COLUMN_NS_MODEL_VISAMP = COLUMN_PREFIX_NS_MODEL + COLUMN_VISAMP;
     /** VISAMPERR column */
     public final static String COLUMN_VISAMPERR = "VISAMPERR";
     /** VISPHI column */
     public final static String COLUMN_VISPHI = "VISPHI";
     /** VISPHI MODEL column */
-    public final static String COLUMN_NS_MODEL_VISPHI = "NS_MODEL_VISPHI";
+    public final static String COLUMN_NS_MODEL_VISPHI = COLUMN_PREFIX_NS_MODEL + COLUMN_VISPHI;
     /** VISPHIERR column */
     public final static String COLUMN_VISPHIERR = "VISPHIERR";
     /* OIFits standard 2.0 */
@@ -282,10 +305,14 @@ public interface OIFitsConstants {
     /* OI_VIS2 table */
     /** VIS2DATA column */
     public final static String COLUMN_VIS2DATA = "VIS2DATA";
-    /** VIS2DATA MODEL column */
-    public final static String COLUMN_NS_MODEL_VIS2DATA = "NS_MODEL_VIS2DATA";
     /** VIS2ERR column */
     public final static String COLUMN_VIS2ERR = "VIS2ERR";
+    /** VIS2DATA MODEL column */
+    public final static String COLUMN_NS_MODEL_VIS2DATA = COLUMN_PREFIX_NS_MODEL + COLUMN_VIS2DATA;
+    /** VIS2 MODEL column (alias for VIS2DATA MODEL) */
+    public final static String COLUMN_NS_MODEL_VIS2DATA_ALIAS = COLUMN_PREFIX_NS_MODEL + "VIS2";
+    /** VIS2ERR MODEL column */
+    public final static String COLUMN_NS_MODEL_VIS2ERR = COLUMN_PREFIX_NS_MODEL + COLUMN_VIS2ERR;
     /* OIFits standard 2.0 */
     /** CORRINDX_VIS2DATA column */
     public final static String COLUMN_CORRINDX_VIS2DATA = "CORRINDX_VIS2DATA";
@@ -304,13 +331,13 @@ public interface OIFitsConstants {
     /** T3AMP column */
     public final static String COLUMN_T3AMP = "T3AMP";
     /** T3AMP MODEL column */
-    public final static String COLUMN_NS_MODEL_T3AMP = "NS_MODEL_T3AMP";
+    public final static String COLUMN_NS_MODEL_T3AMP = COLUMN_PREFIX_NS_MODEL + COLUMN_T3AMP;
     /** T3AMPERR column */
     public final static String COLUMN_T3AMPERR = "T3AMPERR";
     /** T3PHI column */
     public final static String COLUMN_T3PHI = "T3PHI";
     /** T3PHI MODEL column */
-    public final static String COLUMN_NS_MODEL_T3PHI = "NS_MODEL_T3PHI";
+    public final static String COLUMN_NS_MODEL_T3PHI = COLUMN_PREFIX_NS_MODEL + COLUMN_T3PHI;
     /** T3PHIERR column */
     public final static String COLUMN_T3PHIERR = "T3PHIERR";
     /** U1COORD column */

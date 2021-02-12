@@ -51,12 +51,15 @@ public final class OIVis2 extends OIData {
 
         // if OI support is enabled
         if (DataModel.hasOiModelColumnsSupport()) {
-            // VIS2 MODEL column definition (optional)
+            // VIS2DATA MODEL column definition (optional)
             ColumnMeta colMeta = new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA, "model of the squared visibility",
                     Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.NO_UNIT, null, DataRange.RANGE_POSITIVE, this);
             // NS_MODEL_VIS2 column definition (bsmem convention)
-            colMeta.setAlias("NS_MODEL_VIS2");
+            colMeta.setAlias(OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA_ALIAS);
             addColumnMeta(colMeta);
+            // VIS2ERR MODEL column definition (optional)
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_VIS2ERR, "model of error in squared visibility",
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.NO_UNIT, null, DataRange.RANGE_POSITIVE, this));
         }
 
         // UCOORD  column definition
@@ -202,6 +205,23 @@ public final class OIVis2 extends OIData {
      */
     public int[] getCorrIndxVisData() {
         return this.getColumnInt(OIFitsConstants.COLUMN_CORRINDX_VIS2DATA);
+    }
+
+    /* --- Optional extra columns for OI-Interface Model --- */
+    /**
+     * Return the NS_MODEL_VIS2DATA column.
+     * @return the NS_MODEL_VIS2DATA column.
+     */
+    public double[][] getModelVis2Data() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA);
+    }
+
+    /**
+     * Return the NS_MODEL_VIS2ERR column.
+     * @return the NS_MODEL_VIS2ERR column.
+     */
+    public double[][] getModelVis2Err() {
+        return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_MODEL_VIS2ERR);
     }
 
     /* --- Optional extra columns for squared correlated and photmetric fluxes --- */
