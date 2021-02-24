@@ -434,26 +434,32 @@ public interface OIFitsConstants {
     public final static String COLUMN_U2COORD_SPATIAL = "U2COORD_SPATIAL";
     /** V2COORD_SPATIAL derived OIData column as double[][] */
     public final static String COLUMN_V2COORD_SPATIAL = "V2COORD_SPATIAL";
+    
     /** SNR_VIS2 derived OIVIS2 column as double[][] */
     public final static String COLUMN_SNR_VIS2 = "SNR_VIS2";
+    /** SNR_MODEL_VIS2 derived OIVIS2 column as double[][] */
+    public final static String COLUMN_SNR_MODEL_VIS2 = "SNR_MODEL_VIS2";
     /** SNR_NS_CORRSQ derived OIVIS2 column as double[][] */
     public final static String COLUMN_SNR_NS_CORRSQ = "SNR_NS_CORRSQ";
     /** SNR_NS_PHOT derived OIVIS2 column as double[][] */
     public final static String COLUMN_SNR_NS_PHOT = "SNR_NS_PHOT";
     /** RES_VIS2_MODEL derived OIVIS2 column as double[][] */
     public final static String COLUMN_RES_VIS2_MODEL = "RES_VIS2_MODEL";
+    
     /** SNR_VISPHI derived OIVIS column as double[][] */
     public final static String COLUMN_SNR_VISPHI = "SNR_VISPHI";
     /** RES_VISAMP_MODEL derived OIVIS column as double[][] */
     public final static String COLUMN_RES_VISAMP_MODEL = "RES_VISAMP_MODEL";
     /** RES_VISPHI_MODEL derived OIVIS column as double[][] */
     public final static String COLUMN_RES_VISPHI_MODEL = "RES_VISPHI_MODEL";
+    
     /** SNR_T3PHI derived T3 column as double[][] */
     public final static String COLUMN_SNR_T3PHI = "SNR_T3PHI";
     /** RES_T3AMP_MODEL derived T3 column as double[][] */
     public final static String COLUMN_RES_T3AMP_MODEL = "RES_T3AMP_MODEL";
     /** RES_T3PHI_MODEL derived T3 column as double[][] */
     public final static String COLUMN_RES_T3PHI_MODEL = "RES_T3PHI_MODEL";
+    
     /** Resolution value */
     public final static String VALUE_RESOLUTION = "RESOLUTION";
 }

@@ -133,6 +133,10 @@ public final class OIVis2 extends OIData {
 
         // if OI support is enabled
         if (DataModel.hasOiModelColumnsSupport()) {
+            // Derived SNR_MODEL_VIS2 column definition
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_MODEL_VIS2, "SNR on " + OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA,
+                    Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA + " / " + OIFitsConstants.COLUMN_VIS2ERR + ")"));
+
             // Derived RES_VIS2_MODEL column definition
             addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_RES_VIS2_MODEL, "Residual between on " + OIFitsConstants.COLUMN_VIS2DATA
                     + " vs " + OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA + " (sigma)", Types.TYPE_DBL, this,
