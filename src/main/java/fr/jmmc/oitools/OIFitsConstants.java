@@ -446,6 +446,8 @@ public interface OIFitsConstants {
     /** RES_VIS2_MODEL derived OIVIS2 column as double[][] */
     public final static String COLUMN_RES_VIS2_MODEL = "RES_VIS2_MODEL";
     
+    /** SNR_VISAMP derived OIVIS column as double[][] */
+    public final static String COLUMN_SNR_VISAMP = "SNR_VISAMP";
     /** SNR_VISPHI derived OIVIS column as double[][] */
     public final static String COLUMN_SNR_VISPHI = "SNR_VISPHI";
     /** RES_VISAMP_MODEL derived OIVIS column as double[][] */
@@ -453,6 +455,8 @@ public interface OIFitsConstants {
     /** RES_VISPHI_MODEL derived OIVIS column as double[][] */
     public final static String COLUMN_RES_VISPHI_MODEL = "RES_VISPHI_MODEL";
     
+    /** SNR_T3AMP derived T3 column as double[][] */
+    public final static String COLUMN_SNR_T3AMP = "SNR_T3AMP";
     /** SNR_T3PHI derived T3 column as double[][] */
     public final static String COLUMN_SNR_T3PHI = "SNR_T3PHI";
     /** RES_T3AMP_MODEL derived T3 column as double[][] */

@@ -165,6 +165,8 @@ public final class OIVis extends OIData {
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VCOORD_SPATIAL, "spatial V frequency", Types.TYPE_DBL, this));
 
         // Derived SNR column definition
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_VISAMP, "SNR on " + OIFitsConstants.COLUMN_VISAMP,
+                Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_VISAMP + " / " + OIFitsConstants.COLUMN_VISAMPERR + ")"));
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_VISPHI, "SNR on " + OIFitsConstants.COLUMN_VISPHI,
                 Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_VISPHI + " / " + OIFitsConstants.COLUMN_VISPHIERR + ")"));
 
