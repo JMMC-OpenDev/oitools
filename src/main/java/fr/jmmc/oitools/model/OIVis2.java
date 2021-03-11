@@ -87,7 +87,7 @@ public final class OIVis2 extends OIData {
         }
 
         if (DataModel.hasOiVis2ExtraSupport()) {
-            // Optional extra columns for squared correlated and photmetric fluxes (ASPRO - not OIFits) :
+            // Optional extra columns for squared correlated and photometric fluxes (ASPRO - not OIFits) :
             // NS_CORRSQ column definition (User unit = photon)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_CORRSQ, "raw squared correlated flux",
                     Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits().setRepresentation("ph"), OIFitsConstants.COLUMN_NS_CORRSQ_ERR,
@@ -228,7 +228,7 @@ public final class OIVis2 extends OIData {
         return this.getColumnDoubles(OIFitsConstants.COLUMN_NS_MODEL_VIS2ERR);
     }
 
-    /* --- Optional extra columns for squared correlated and photmetric fluxes --- */
+    /* --- Optional extra columns for squared correlated and photometric fluxes --- */
     /**
      * Return the NS_CORRSQ column.
      * @return the NS_CORRSQ column.
