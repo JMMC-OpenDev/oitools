@@ -65,9 +65,9 @@
     <t_exptime>60.0</t_exptime>
     <t_min>51836.958449</t_min>
     <t_max>51836.972222</t_max>
-    <em_res_power>6.668</em_res_power>
-    <em_min>1.667E-6</em_min>
-    <em_max>1.667E-6</em_max>
+    <em_res_power>6.667999985902832</em_res_power>
+    <em_min>1.6669999922669376E-6</em_min>
+    <em_max>1.6669999922669376E-6</em_max>
     <facility_name>COAST</facility_name>
     <instrument_name>COAST_NICMOS</instrument_name>
     <nb_vis>1</nb_vis>
@@ -82,9 +82,9 @@
     <t_exptime>100.0</t_exptime>
     <t_min>51836.101222</t_min>
     <t_max>51836.101222</t_max>
-    <em_res_power>6.668</em_res_power>
-    <em_min>1.667E-6</em_min>
-    <em_max>1.667E-6</em_max>
+    <em_res_power>6.667999985902832</em_res_power>
+    <em_min>1.6669999922669376E-6</em_min>
+    <em_max>1.6669999922669376E-6</em_max>
     <facility_name></facility_name>
     <instrument_name>COAST_NICMOS</instrument_name>
     <nb_vis>0</nb_vis>
@@ -108,7 +108,7 @@
 <rows>4</rows><columns>
 <column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
 <column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
-<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
+<column><name>STA_INDEX</name><description>station number</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>0.4</min><max>0.4</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-11.24</min><max>8.727</max></column>
 <column><name>FOV</name><description>Photometric field of view (arcsec)</description><type>D</type><unit>arcsec|as|arcsecond|arcseconds</unit><min>0.5</min><max>0.5</max></column>
@@ -216,9 +216,9 @@
 </keywords>
 <rows>1</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>51836.960394</min><max>51836.960394</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>60.0</min><max>60.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>51836.960394</min><max>51836.960394</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>60.0</min><max>60.0</max></column>
 <column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.0445</min><max>0.0445</max></column>
 <column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.0091</min><max>0.0091</max></column>
 <column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>17.03</min><max>17.03</max></column>
@@ -249,9 +249,9 @@
 </keywords>
 <rows>2</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>51836.958449</min><max>51836.960394</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>60.0</min><max>60.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>51836.958449</min><max>51836.960394</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>60.0</min><max>60.0</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.51</min><max>0.677</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.064</min><max>0.071</max></column>
 <column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-8.52302</min><max>0.95628</max></column>
@@ -280,9 +280,9 @@
 </keywords>
 <rows>1</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>51836.972222</min><max>51836.972222</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>100.0</min><max>100.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>51836.972222</min><max>51836.972222</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>100.0</min><max>100.0</max></column>
 <column><name>T3AMP</name><description>triple product amplitude</description><type>D</type><unit></unit><min>0.00345</min><max>0.00345</max></column>
 <column><name>T3AMPERR</name><description>error in triple product amplitude</description><type>D</type><unit></unit><min>1.2E-4</min><max>1.2E-4</max></column>
 <column><name>T3PHI</name><description>triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>3.533</min><max>3.533</max></column>
@@ -317,8 +317,8 @@
 </keywords>
 <rows>2</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>51836.101222</min><max>51836.972222</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>100.0</min><max>100.0</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>51836.101222</min><max>51836.972222</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>100.0</min><max>100.0</max></column>
 <column><name>FLUXDATA</name><description>flux per telescope</description><type>D</type><unit>Jy</unit><min>1.2678</min><max>1.3781</max></column>
 <column><name>FLUXERR</name><description>error in flux</description><type>D</type><unit>Jy</unit><min>0.0134</min><max>0.0635</max></column>
 <column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>

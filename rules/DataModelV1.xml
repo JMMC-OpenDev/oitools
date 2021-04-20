@@ -141,8 +141,8 @@
     </standards>
   </rule>
   <rule>
-    <name>GENERIC_COL_ERR</name>
-    <description>check if the UNFLAGGED *ERR column values are valid (positive or NULL)</description>
+    <name>GENERIC_COL_ERR_FIX</name>
+    <description>fix the UNFLAGGED *ERR column invalid values (negative values set to NaN)</description>
     <paragraph>JMMC</paragraph>
     <subjects>
       <apply>OI_T3.T3AMPERR</apply>
@@ -540,8 +540,11 @@
     <subjects>
       <apply>OI_ARRAY.DIAMETER</apply>
       <apply>OI_T3.INT_TIME</apply>
+      <apply>OI_T3.MJD</apply>
       <apply>OI_VIS.INT_TIME</apply>
+      <apply>OI_VIS.MJD</apply>
       <apply>OI_VIS2.INT_TIME</apply>
+      <apply>OI_VIS2.MJD</apply>
       <apply>OI_WAVELENGTH.EFF_BAND</apply>
       <apply>OI_WAVELENGTH.EFF_WAVE</apply>
     </subjects>
@@ -1522,7 +1525,7 @@
   <column>
     <name>STA_INDEX</name>
     <datatype>TYPE_SHORT</datatype>
-    <description>station index</description>
+    <description>station number</description>
     <optional>false</optional>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
@@ -1809,7 +1812,7 @@
   <column>
     <name>TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>UTC time of observation</description>
+    <description>UTC start time of observation</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -1830,9 +1833,9 @@
   <column>
     <name>MJD</name>
     <datatype>TYPE_DBL</datatype>
-    <description>modified Julian Day</description>
+    <description>Modified Julian Day (start date of observation)</description>
     <optional>false</optional>
-    <unit>UNIT_MJD</unit>
+    <unit>UNIT_DAYS</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
@@ -1840,15 +1843,20 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
       <applyrule>GENERIC_MJD_RANGE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>INT_TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>integration time</description>
+    <description>Integration time</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -1894,7 +1902,7 @@
     <optional>false</optional>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
@@ -1935,7 +1943,7 @@
     <unit>UNIT_DEGREE</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
@@ -2132,7 +2140,7 @@
   <column>
     <name>TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>UTC time of observation</description>
+    <description>UTC start time of observation</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -2153,9 +2161,9 @@
   <column>
     <name>MJD</name>
     <datatype>TYPE_DBL</datatype>
-    <description>modified Julian Day</description>
+    <description>Modified Julian Day (start date of observation)</description>
     <optional>false</optional>
-    <unit>UNIT_MJD</unit>
+    <unit>UNIT_DAYS</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
@@ -2163,15 +2171,20 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
       <applyrule>GENERIC_MJD_RANGE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>INT_TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>integration time</description>
+    <description>Integration time</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -2217,7 +2230,7 @@
     <optional>false</optional>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
@@ -2414,7 +2427,7 @@
   <column>
     <name>TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>UTC time of observation</description>
+    <description>UTC start time of observation</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -2435,9 +2448,9 @@
   <column>
     <name>MJD</name>
     <datatype>TYPE_DBL</datatype>
-    <description>modified Julian Day</description>
+    <description>Modified Julian Day (start date of observation)</description>
     <optional>false</optional>
-    <unit>UNIT_MJD</unit>
+    <unit>UNIT_DAYS</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
@@ -2445,15 +2458,20 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
       <applyrule>GENERIC_MJD_RANGE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>INT_TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>integration time</description>
+    <description>Integration time</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -2498,7 +2516,7 @@
     <optional>false</optional>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
@@ -2539,7 +2557,7 @@
     <unit>UNIT_DEGREE</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>

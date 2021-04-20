@@ -207,8 +207,8 @@
     </standards>
   </rule>
   <rule>
-    <name>GENERIC_COL_ERR</name>
-    <description>check if the UNFLAGGED *ERR column values are valid (positive or NULL)</description>
+    <name>GENERIC_COL_ERR_FIX</name>
+    <description>fix the UNFLAGGED *ERR column invalid values (negative values set to NaN)</description>
     <paragraph>JMMC</paragraph>
     <subjects>
       <apply>OI_FLUX.FLUXERR</apply>
@@ -783,11 +783,18 @@
     <paragraph>JMMC</paragraph>
     <subjects>
       <apply>OI_ARRAY.DIAMETER</apply>
+      <apply>OI_ARRAY.FOV</apply>
       <apply>OI_CORR.CORR</apply>
       <apply>OI_FLUX.INT_TIME</apply>
+      <apply>OI_FLUX.MJD</apply>
+      <apply>OI_INSPOL.MJD_END</apply>
+      <apply>OI_INSPOL.MJD_OBS</apply>
       <apply>OI_T3.INT_TIME</apply>
+      <apply>OI_T3.MJD</apply>
       <apply>OI_VIS.INT_TIME</apply>
+      <apply>OI_VIS.MJD</apply>
       <apply>OI_VIS2.INT_TIME</apply>
+      <apply>OI_VIS2.MJD</apply>
       <apply>OI_WAVELENGTH.EFF_BAND</apply>
       <apply>OI_WAVELENGTH.EFF_WAVE</apply>
     </subjects>
@@ -1006,7 +1013,6 @@
     <subjects>
       <apply>MAIN_HEADER.CONTENT</apply>
       <apply>MAIN_HEADER.DATE</apply>
-      <apply>MAIN_HEADER.DATE-OBS</apply>
       <apply>MAIN_HEADER.INSMODE</apply>
       <apply>MAIN_HEADER.INSTRUME</apply>
       <apply>MAIN_HEADER.OBJECT</apply>
@@ -1652,12 +1658,11 @@
     <name>DATE-OBS</name>
     <datatype>TYPE_CHAR</datatype>
     <description>Start date of observation</description>
-    <optional>false</optional>
+    <optional>true</optional>
     <rules>
       <applyrule>GENERIC_DATE_OBS_RANGE</applyrule>
       <applyrule>GENERIC_DATE_OBS_STANDARD</applyrule>
       <applyrule>GENERIC_KEYWORD_FORMAT</applyrule>
-      <applyrule>GENERIC_KEYWORD_MANDATORY</applyrule>
     </rules>
   </keyword>
   <keyword>
@@ -2496,7 +2501,7 @@
   <column>
     <name>STA_INDEX</name>
     <datatype>TYPE_SHORT</datatype>
-    <description>station index</description>
+    <description>station number</description>
     <optional>false</optional>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
@@ -2563,9 +2568,14 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>FOVTYPE</name>
@@ -2997,7 +3007,7 @@
     <datatype>TYPE_DBL</datatype>
     <description>Modified Julian day, start of time lapse</description>
     <optional>false</optional>
-    <unit>UNIT_MJD</unit>
+    <unit>UNIT_DAYS</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
@@ -3005,18 +3015,23 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
       <applyrule>OI_INSPOL_MJD_DIFF</applyrule>
       <applyrule>OI_INSPOL_MJD_RANGE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>MJD_END</name>
     <datatype>TYPE_DBL</datatype>
     <description>Modified Julian day, end of time lapse</description>
     <optional>false</optional>
-    <unit>UNIT_MJD</unit>
+    <unit>UNIT_DAYS</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
@@ -3024,10 +3039,15 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
       <applyrule>OI_INSPOL_MJD_RANGE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>JXX</name>
@@ -3280,7 +3300,7 @@
   <column>
     <name>TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>UTC time of observation</description>
+    <description>UTC start time of observation</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -3301,9 +3321,9 @@
   <column>
     <name>MJD</name>
     <datatype>TYPE_DBL</datatype>
-    <description>modified Julian Day</description>
+    <description>Modified Julian Day (start date of observation)</description>
     <optional>false</optional>
-    <unit>UNIT_MJD</unit>
+    <unit>UNIT_DAYS</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
@@ -3311,15 +3331,20 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
       <applyrule>GENERIC_MJD_RANGE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>INT_TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>integration time</description>
+    <description>Integration time</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -3366,7 +3391,7 @@
     <unit>UNIT_CUSTOM</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
     </rules>
@@ -3406,7 +3431,7 @@
     <unit>UNIT_DEGREE</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
@@ -3494,6 +3519,8 @@
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
+      <applyrule>GENERIC_COL_UNIT</applyrule>
+      <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
       <applyrule>GENERIC_CORRINDX_MAX</applyrule>
       <applyrule>GENERIC_CORRINDX_MIN</applyrule>
       <applyrule>GENERIC_CORRINDX_UNIQ</applyrule>
@@ -3511,6 +3538,8 @@
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
+      <applyrule>GENERIC_COL_UNIT</applyrule>
+      <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
       <applyrule>GENERIC_CORRINDX_MAX</applyrule>
       <applyrule>GENERIC_CORRINDX_MIN</applyrule>
       <applyrule>GENERIC_CORRINDX_UNIQ</applyrule>
@@ -3545,6 +3574,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <errorcolumn>RVISERR</errorcolumn>
   </column>
   <column>
     <name>RVISERR</name>
@@ -3554,29 +3584,16 @@
     <unit>UNIT_CUSTOM</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
-  </column>
-  <column>
-    <name>CORRINDX_RVIS</name>
-    <datatype>TYPE_INT</datatype>
-    <description>Index into correlation matrix for 1st RVIS element</description>
-    <optional>true</optional>
-    <rules>
-      <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_FORMAT</applyrule>
-      <applyrule>GENERIC_COL_NBROWS</applyrule>
-      <applyrule>GENERIC_CORRINDX_MAX</applyrule>
-      <applyrule>GENERIC_CORRINDX_MIN</applyrule>
-      <applyrule>GENERIC_CORRINDX_UNIQ</applyrule>
-      <applyrule>OI_VIS_CORRINDX</applyrule>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>IVIS</name>
@@ -3591,6 +3608,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <errorcolumn>IVISERR</errorcolumn>
   </column>
   <column>
     <name>IVISERR</name>
@@ -3600,12 +3618,35 @@
     <unit>UNIT_CUSTOM</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <datarange>
+      <name>RANGE_POSITIVE</name>
+      <min>0.0</min>
+    </datarange>
+  </column>
+  <column>
+    <name>CORRINDX_RVIS</name>
+    <datatype>TYPE_INT</datatype>
+    <description>Index into correlation matrix for 1st RVIS element</description>
+    <optional>true</optional>
+    <rules>
+      <applyrule>GENERIC_COL_DIM</applyrule>
+      <applyrule>GENERIC_COL_FORMAT</applyrule>
+      <applyrule>GENERIC_COL_NBROWS</applyrule>
+      <applyrule>GENERIC_COL_UNIT</applyrule>
+      <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_CORRINDX_MAX</applyrule>
+      <applyrule>GENERIC_CORRINDX_MIN</applyrule>
+      <applyrule>GENERIC_CORRINDX_UNIQ</applyrule>
+      <applyrule>OI_VIS_CORRINDX</applyrule>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
   </column>
   <column>
     <name>CORRINDX_IVIS</name>
@@ -3616,6 +3657,8 @@
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
+      <applyrule>GENERIC_COL_UNIT</applyrule>
+      <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
       <applyrule>GENERIC_CORRINDX_MAX</applyrule>
       <applyrule>GENERIC_CORRINDX_MIN</applyrule>
       <applyrule>GENERIC_CORRINDX_UNIQ</applyrule>
@@ -3758,7 +3801,7 @@
   <column>
     <name>TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>UTC time of observation</description>
+    <description>UTC start time of observation</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -3779,9 +3822,9 @@
   <column>
     <name>MJD</name>
     <datatype>TYPE_DBL</datatype>
-    <description>modified Julian Day</description>
+    <description>Modified Julian Day (start date of observation)</description>
     <optional>false</optional>
-    <unit>UNIT_MJD</unit>
+    <unit>UNIT_DAYS</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
@@ -3789,15 +3832,20 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
       <applyrule>GENERIC_MJD_RANGE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>INT_TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>integration time</description>
+    <description>Integration time</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -3843,7 +3891,7 @@
     <optional>false</optional>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
@@ -3931,6 +3979,8 @@
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
+      <applyrule>GENERIC_COL_UNIT</applyrule>
+      <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
       <applyrule>GENERIC_CORRINDX_MAX</applyrule>
       <applyrule>GENERIC_CORRINDX_MIN</applyrule>
       <applyrule>GENERIC_CORRINDX_UNIQ</applyrule>
@@ -4073,7 +4123,7 @@
   <column>
     <name>TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>UTC time of observation</description>
+    <description>UTC start time of observation</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -4094,9 +4144,9 @@
   <column>
     <name>MJD</name>
     <datatype>TYPE_DBL</datatype>
-    <description>modified Julian Day</description>
+    <description>Modified Julian Day (start date of observation)</description>
     <optional>false</optional>
-    <unit>UNIT_MJD</unit>
+    <unit>UNIT_DAYS</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
@@ -4104,15 +4154,20 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
       <applyrule>GENERIC_MJD_RANGE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>INT_TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>integration time</description>
+    <description>Integration time</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -4157,7 +4212,7 @@
     <optional>false</optional>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
@@ -4198,7 +4253,7 @@
     <unit>UNIT_DEGREE</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
@@ -4320,6 +4375,8 @@
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
+      <applyrule>GENERIC_COL_UNIT</applyrule>
+      <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
       <applyrule>GENERIC_CORRINDX_MAX</applyrule>
       <applyrule>GENERIC_CORRINDX_MIN</applyrule>
       <applyrule>GENERIC_CORRINDX_UNIQ</applyrule>
@@ -4337,6 +4394,8 @@
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
+      <applyrule>GENERIC_COL_UNIT</applyrule>
+      <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
       <applyrule>GENERIC_CORRINDX_MAX</applyrule>
       <applyrule>GENERIC_CORRINDX_MIN</applyrule>
       <applyrule>GENERIC_CORRINDX_UNIQ</applyrule>
@@ -4518,9 +4577,9 @@
   <column>
     <name>MJD</name>
     <datatype>TYPE_DBL</datatype>
-    <description>modified Julian Day</description>
+    <description>Modified Julian Day (start date of observation)</description>
     <optional>false</optional>
-    <unit>UNIT_MJD</unit>
+    <unit>UNIT_DAYS</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
@@ -4528,15 +4587,20 @@
       <applyrule>GENERIC_COL_NBROWS</applyrule>
       <applyrule>GENERIC_COL_UNIT</applyrule>
       <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
+      <applyrule>GENERIC_COL_VAL_POSITIVE</applyrule>
       <applyrule>GENERIC_MJD_RANGE</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
+    <datarange>
+      <name>RANGE_POSITIVE_STRICT</name>
+      <min>0.0</min>
+    </datarange>
   </column>
   <column>
     <name>INT_TIME</name>
     <datatype>TYPE_DBL</datatype>
-    <description>integration time</description>
+    <description>Integration time</description>
     <optional>false</optional>
     <unit>UNIT_SECOND</unit>
     <rules>
@@ -4584,7 +4648,7 @@
     <unit>UNIT_CUSTOM</unit>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
-      <applyrule>GENERIC_COL_ERR</applyrule>
+      <applyrule>GENERIC_COL_ERR_FIX</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
@@ -4636,6 +4700,8 @@
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
+      <applyrule>GENERIC_COL_UNIT</applyrule>
+      <applyrule>GENERIC_COL_UNIT_EXIST</applyrule>
       <applyrule>GENERIC_CORRINDX_MAX</applyrule>
       <applyrule>GENERIC_CORRINDX_MIN</applyrule>
       <applyrule>GENERIC_CORRINDX_UNIQ</applyrule>

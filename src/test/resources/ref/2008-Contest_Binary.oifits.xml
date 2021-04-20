@@ -60,9 +60,9 @@
     <t_exptime>0.0</t_exptime>
     <t_min>54231.20833333349</t_min>
     <t_max>54231.30833333731</t_max>
-    <em_res_power>45.50003</em_res_power>
-    <em_min>1.5E-6</em_min>
-    <em_max>1.75E-6</em_max>
+    <em_res_power>45.50002705748283</em_res_power>
+    <em_min>1.500000053056283E-6</em_min>
+    <em_max>1.7500000240033842E-6</em_max>
     <facility_name>CHARA</facility_name>
     <instrument_name>MIRC_H</instrument_name>
     <nb_vis>0</nb_vis>
@@ -86,7 +86,7 @@
 <rows>6</rows><columns>
 <column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
 <column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
-<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>0</min><max>5</max></column>
+<column><name>STA_INDEX</name><description>station number</description><type>I</type><unit></unit><min>0</min><max>5</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.0</min><max>1.0</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-93.06554195842023</min><max>249.62211993641506</max></column>
 </columns>
@@ -138,9 +138,9 @@
 </keywords>
 <rows>75</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>0</min><max>0</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>18000.0</min><max>26640.000343322754</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>54231.20833333349</min><max>54231.30833333731</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>18000.0</min><max>26640.000343322754</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>54231.20833333349</min><max>54231.30833333731</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>3.623561642598361E-4</min><max>1.0163370370864868</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>2.6190056814812124E-4</min><max>0.12863819301128387</max></column>
 <column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-303.37229872444675</min><max>246.60017210558712</max></column>
@@ -240,9 +240,9 @@
 </keywords>
 <rows>100</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>0</min><max>0</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>18000.0</min><max>26640.000343322754</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>54231.20833333349</min><max>54231.30833333731</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>18000.0</min><max>26640.000343322754</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>54231.20833333349</min><max>54231.30833333731</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
 <column><name>T3AMP</name><description>triple product amplitude</description><type>D</type><unit></unit><min>4.157445437158458E-5</min><max>0.3686613440513611</max></column>
 <column><name>T3AMPERR</name><description>error in triple product amplitude</description><type>D</type><unit></unit><min>7.171485049184412E-5</min><max>0.06159747391939163</max></column>
 <column><name>T3PHI</name><description>triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-177.9101104736328</min><max>141.37591552734375</max></column>
@@ -369,9 +369,12 @@ WARNING	Invalid ARRAYZ keyword '0.0'
 INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_TARGET#2]
 SEVERE	TARGET_ID[0] cannot be &lt; 1 at row 0
+Analysing table [OI_VIS2#4]
+INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0
 Analysing table [OI_T3#5]
 INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
 INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0
 
 3 warnings, 2 severe errors
 
@@ -381,6 +384,11 @@ INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
     <name>GENERIC_COL_UNIT_EXIST</name>
     <description>check if the column unit exists</description>
     <paragraph>V2.4§2</paragraph>
+  </rule>
+  <rule>
+    <name>GENERIC_COL_VAL_POSITIVE</name>
+    <description>check if column values are finite and positive</description>
+    <paragraph>JMMC</paragraph>
   </rule>
   <rule>
     <name>OI_ARRAY_STA_INDEX_MIN</name>
@@ -479,6 +487,19 @@ INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
   </failure>
   <failure>
     <severity>INFO</severity>
+    <rule>GENERIC_COL_VAL_POSITIVE</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>4</extNb>
+    <member>INT_TIME</member>
+    <data>
+      <value>0.0</value>
+      <row>0</row>
+      <message>Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
     <rule>GENERIC_COL_UNIT_EXIST</rule>
     <file>2008-Contest_Binary.oifits</file>
     <extName>OI_T3</extName>
@@ -499,6 +520,19 @@ INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
     <data>
       <value>deg|degree|degrees</value>
       <message>Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>GENERIC_COL_VAL_POSITIVE</rule>
+    <file>2008-Contest_Binary.oifits</file>
+    <extName>OI_T3</extName>
+    <extNb>5</extNb>
+    <member>INT_TIME</member>
+    <data>
+      <value>0.0</value>
+      <row>0</row>
+      <message>Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0</message>
     </data>
   </failure>
 </failures>

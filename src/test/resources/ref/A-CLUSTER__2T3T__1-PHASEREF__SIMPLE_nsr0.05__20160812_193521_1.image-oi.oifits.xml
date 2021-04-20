@@ -67,9 +67,9 @@
     <t_exptime>120.0</t_exptime>
     <t_min>2457608.3125</t_min>
     <t_max>2457608.479166667</t_max>
-    <em_res_power>5.314634</em_res_power>
-    <em_min>2.179E-6</em_min>
-    <em_max>2.179E-6</em_max>
+    <em_res_power>5.314633790097918</em_res_power>
+    <em_min>2.17899992094317E-6</em_min>
+    <em_max>2.17899992094317E-6</em_max>
     <facility_name>VLTI_1</facility_name>
     <instrument_name>PRIMAMBR</instrument_name>
     <nb_vis>54</nb_vis>
@@ -84,9 +84,9 @@
     <t_exptime>120.0</t_exptime>
     <t_min>2457608.5</t_min>
     <t_max>2457608.6875</t_max>
-    <em_res_power>5.314634</em_res_power>
-    <em_min>2.179E-6</em_min>
-    <em_max>2.179E-6</em_max>
+    <em_res_power>5.314633790097918</em_res_power>
+    <em_min>2.17899992094317E-6</em_min>
+    <em_max>2.17899992094317E-6</em_max>
     <facility_name>VLTI_1</facility_name>
     <instrument_name>PRIMAMBR</instrument_name>
     <nb_vis>60</nb_vis>
@@ -110,7 +110,7 @@
 <rows>2</rows><columns>
 <column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
 <column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
-<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
+<column><name>STA_INDEX</name><description>station number</description><type>I</type><unit></unit><min>1</min><max>4</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-68.33377753186052</min><max>0.0</max></column>
 </columns>
@@ -136,7 +136,7 @@
 <rows>2</rows><columns>
 <column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
 <column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
-<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>15</max></column>
+<column><name>STA_INDEX</name><description>station number</description><type>I</type><unit></unit><min>1</min><max>15</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-90.78660190549294</min><max>31.242553648086183</max></column>
 </columns>
@@ -162,7 +162,7 @@
 <rows>2</rows><columns>
 <column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
 <column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
-<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>18</min><max>24</max></column>
+<column><name>STA_INDEX</name><description>station number</description><type>I</type><unit></unit><min>18</min><max>24</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-95.5014776162963</min><max>80.62763013930758</max></column>
 </columns>
@@ -188,7 +188,7 @@
 <rows>2</rows><columns>
 <column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
 <column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
-<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>15</min><max>23</max></column>
+<column><name>STA_INDEX</name><description>station number</description><type>I</type><unit></unit><min>15</min><max>23</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-90.78660190549294</min><max>114.45958217307238</max></column>
 </columns>
@@ -214,7 +214,7 @@
 <rows>2</rows><columns>
 <column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
 <column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
-<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>18</min><max>22</max></column>
+<column><name>STA_INDEX</name><description>station number</description><type>I</type><unit></unit><min>18</min><max>22</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-95.5014776162963</min><max>106.64805474365541</max></column>
 </columns>
@@ -240,7 +240,7 @@
 <rows>2</rows><columns>
 <column><name>TEL_NAME</name><description>telescope name</description><type>A</type><unit></unit></column>
 <column><name>STA_NAME</name><description>station name</description><type>A</type><unit></unit></column>
-<column><name>STA_INDEX</name><description>station index</description><type>I</type><unit></unit><min>1</min><max>30</max></column>
+<column><name>STA_INDEX</name><description>station number</description><type>I</type><unit></unit><min>1</min><max>30</max></column>
 <column><name>DIAMETER</name><description>element diameter</description><type>E</type><unit>m|meter|meters</unit><min>1.8</min><max>1.8</max></column>
 <column><name>STAXYZ</name><description>station coordinates relative to array center</description><type>D</type><unit>m|meter|meters</unit><min>-55.811603344981414</min><max>121.5351487803091</max></column>
 </columns>
@@ -281,9 +281,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.7052673474776464</min><max>0.863086723516492</max></column>
 <column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
 <column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-3.600498551267398</min><max>0.9145399528914274</max></column>
@@ -329,9 +329,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.4982087792217097</min><max>0.7610280626608384</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.042596087001355934</min><max>0.05194834614411298</max></column>
 <column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-13.80279238513562</min><max>-0.06906334264946423</max></column>
@@ -375,9 +375,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.1660860996916096</min><max>0.8678748402361691</max></column>
 <column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
 <column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-96.23282325674154</min><max>8.446480537001182</max></column>
@@ -423,9 +423,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.030440256722399417</min><max>0.7570833418131621</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.010372138210747388</min><max>0.051976167819037654</max></column>
 <column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-48.09298007299763</min><max>-4.093634081399388</max></column>
@@ -469,9 +469,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.20268467309171267</min><max>0.9594445763958096</max></column>
 <column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
 <column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-139.45732939571644</min><max>76.90384914854795</max></column>
@@ -517,9 +517,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.03975910198113945</min><max>0.9170381099978511</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.01225859006584584</min><max>0.05734938608560918</max></column>
 <column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-56.02664822770429</min><max>45.3789387917301</max></column>
@@ -563,9 +563,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.22233662822490544</min><max>0.881564172162074</max></column>
 <column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
 <column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-176.35644235311653</min><max>-50.50548144065057</max></column>
@@ -611,9 +611,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.049082936777199895</min><max>0.7733425522696797</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.01367512781977536</min><max>0.05254816095555119</max></column>
 <column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-84.06266926629401</min><max>-20.821088930119927</max></column>
@@ -657,9 +657,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.30055037697247194</min><max>0.8087555515454591</max></column>
 <column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
 <column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-94.59321462982216</min><max>40.2659625466018</max></column>
@@ -705,9 +705,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.08772351211433908</min><max>0.6484942069562986</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.017807934175310222</min><max>0.048373861685730636</max></column>
 <column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-46.26259247287164</min><max>6.300722978269773</max></column>
@@ -751,9 +751,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>0.13124025178356077</min><max>0.8997031919726902</max></column>
 <column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>0.03</min><max>0.03</max></column>
 <column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>-180.2246069532392</min><max>179.31552191246428</max></column>
@@ -799,9 +799,9 @@
 </keywords>
 <rows>19</rows><columns>
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
-<column><name>TIME</name><description>UTC time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
-<column><name>MJD</name><description>modified Julian Day</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
-<column><name>INT_TIME</name><description>integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
+<column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>-4.5</min><max>4.5</max></column>
+<column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>2457608.3125</min><max>2457608.6875</max></column>
+<column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>120.0</min><max>120.0</max></column>
 <column><name>VIS2DATA</name><description>squared visibility</description><type>D</type><unit></unit><min>0.018378790059992066</min><max>0.8125340255023689</max></column>
 <column><name>VIS2ERR</name><description>error in squared visibility</description><type>D</type><unit></unit><min>0.0077569745095467</min><max>0.05385731420366379</max></column>
 <column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>-137.5606707431637</min><max>-34.071107288366555</max></column>

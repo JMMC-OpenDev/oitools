@@ -6,9 +6,13 @@ SEVERE	TARGET_ID[0] cannot be < 1 at row 0
 Analysing table [OI_VIS#4]
 INFO	Missing unit for column 'VISPHI', should be 'deg|degree|degrees'
 INFO	Missing unit for column 'VISPHIERR', should be 'deg|degree|degrees'
+INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be > 0
+Analysing table [OI_VIS2#5]
+INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be > 0
 Analysing table [OI_T3#6]
 INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
 INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be > 0
 Analysing File: 2008-Contest_Binary.oifits
 Analysing table [OI_ARRAY#1]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
@@ -18,9 +22,12 @@ WARNING	Invalid ARRAYZ keyword '0.0'
 INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_TARGET#2]
 SEVERE	TARGET_ID[0] cannot be < 1 at row 0
+Analysing table [OI_VIS2#4]
+INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be > 0
 Analysing table [OI_T3#5]
 INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
 INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
+INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be > 0
 Analysing File: 2009-11-eps_Aur-avg5.oifits
 Analysing table [OI_ARRAY#1]
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
@@ -243,6 +250,7 @@ INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
 INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 Analysing File: 2012-03-24_ALL_oiDataCalib.fits
 Analysing table [OI_ARRAY#3]
+INFO	Invalid value for column 'DIAMETER' line 0, found '0.0'  should be > 0
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
@@ -420,12 +428,14 @@ INFO	The keyword 'INSMODE' has the value 'SYNTHETIC' but should be set to 'MULTI
 Analysing table [OI_TARGET#1]
 SEVERE	TARGET_ID[0] cannot be < 1 at row 0
 Analysing table [OI_ARRAY#2]
+INFO	Invalid value for column 'FOV' line 0, found '0.0'  should be > 0
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
 WARNING	Invalid ARRAYX keyword '100.0'
 WARNING	Invalid ARRAYY keyword '200.0'
 WARNING	Invalid ARRAYZ keyword '300.0'
 INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_ARRAY#3]
+INFO	Invalid value for column 'FOV' line 0, found '0.0'  should be > 0
 SEVERE	STA_INDEX[0] cannot be < 1 at row 0
 WARNING	Invalid ARRAYX keyword '10.0'
 WARNING	Invalid ARRAYY keyword '20.0'
@@ -436,21 +446,27 @@ SEVERE	Can't check repeat for column 'JXY'
 SEVERE	Can't check repeat for column 'JYX'
 SEVERE	Can't check repeat for column 'JYY'
 Analysing table [OI_VIS#8]
+INFO	Invalid value for column 'MJD' line 0, found '0.0'  should be > 0
 WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [2.3148149193730205E-4] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS#9]
+INFO	Invalid value for column 'MJD' line 0, found '0.0'  should be > 0
 WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [0.009259259328246117] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#10]
+INFO	Invalid value for column 'MJD' line 0, found '0.0'  should be > 0
 WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [2.3148149193730205E-4] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#11]
+INFO	Invalid value for column 'MJD' line 0, found '0.0'  should be > 0
 WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [0.009259259328246117] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_T3#12]
+INFO	Invalid value for column 'MJD' line 0, found '0.0'  should be > 0
 WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [2.3148149193730205E-4] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_T3#13]
+INFO	Invalid value for column 'MJD' line 0, found '0.0'  should be > 0
 WARNING	MJD [0.0] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [0.009259259328246117] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_FLUX#14]
@@ -549,6 +565,8 @@ SEVERE	Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|
 SEVERE	Unsupported table OI_FLUX#12 in OIFITS V1.0
 INFO	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
 Analysing File: Mystery-Med_H-AmberVISPHI.oifits
+Analysing table [OI_ARRAY#1]
+INFO	Invalid value for column 'DIAMETER' line 0, found '0.0'  should be > 0
 Analysing table [OI_TARGET#2]
 WARNING	The target DECEP0 coordinate is 0.0 at row 0
 WARNING	The target RAEP0 coordinate is 0.0 at row 0
@@ -567,9 +585,26 @@ INFO	Skipping non-standard OIFITS column 'OI_VIS#4.VISCOVRI' with format [16D]
 Analysing table [OI_VIS2#5]
 INFO	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
 Analysing table [OI_T3#6]
+INFO	Fixed value at index 0 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 1 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 2 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 3 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 4 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 5 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 6 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 7 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 8 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 9 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 10 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 11 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 12 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 13 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 14 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 15 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
 INFO	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
 Analysing File: T_PYX_oiDataCalib.fits
 Analysing table [OI_ARRAY#4]
+INFO	Invalid value for column 'DIAMETER' line 0, found '0.0'  should be > 0
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
