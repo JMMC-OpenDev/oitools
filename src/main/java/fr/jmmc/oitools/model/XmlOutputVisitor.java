@@ -317,7 +317,6 @@ public final class XmlOutputVisitor extends OutputVisitor {
 
                 Object range = oiTable.getMinMaxColumnValue(column.getName());
                 if (range != null) {
-
                     switch (column.getDataType()) {
                         case TYPE_CHAR:
                             // Not Applicable
@@ -358,11 +357,9 @@ public final class XmlOutputVisitor extends OutputVisitor {
                         // do nothing
                     }
                 }
-
                 this.buffer.append("</column>\n");
             }
         }
-
         this.buffer.append("</columns>\n");
 
         if (isVerbose()) {
@@ -656,7 +653,7 @@ public final class XmlOutputVisitor extends OutputVisitor {
     @Override
     public void appendMetadataRecord(final String targetName, final double targetRa, final double targetDec,
                                      double intTime, double tMin, double tMax,
-                                     float resPower, float minWavelength, float maxWavelength,
+                                     double resPower, double minWavelength, double maxWavelength,
                                      String facilityName, final String insName,
                                      int nbVis, int nbVis2, int nbT3, int nbChannels) {
         this.buffer.append("  <target>\n")

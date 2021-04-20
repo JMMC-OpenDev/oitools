@@ -49,8 +49,8 @@ public class TestProcessorCommandLine {
     @Test
     public void testNoOutputFile() {
         String[] result = callProcessor(new String[]{"merge",
-            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
-            "-o"});
+                                                     TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
+                                                     "-o"});
         Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
                 getError(result).startsWith("No output file"));
     }
@@ -60,8 +60,8 @@ public class TestProcessorCommandLine {
         File output = new File(JUnitBaseTest.TEST_DIR_TEST + "merge_result.fits");
         output.delete();
         String[] result = callProcessor(new String[]{"merge", "-o", output.getAbsolutePath(),
-            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
-            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
+                                                     TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
+                                                     TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
         });
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
                 getOut(result).startsWith("Writing"));
@@ -71,7 +71,7 @@ public class TestProcessorCommandLine {
     @Test
     public void testList() {
         String[] result = callProcessor(new String[]{"list",
-            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
+                                                     TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
         Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
                 getOut(result).startsWith("target_name"));
@@ -81,9 +81,9 @@ public class TestProcessorCommandLine {
     public void testConvert() {
         File output = new File(JUnitBaseTest.TEST_DIR_TEST + "convert_result.fits");
         output.delete();
-        
+
         callProcessor(new String[]{"convert", "-o", output.getAbsolutePath(),
-            TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
+                                   TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
         Assert.assertTrue("No output file present.", output.exists());
     }
@@ -95,19 +95,19 @@ public class TestProcessorCommandLine {
 
         // Filter block
         String[] result = callProcessor(new String[]{"merge",
-            "-o", output.getAbsolutePath(), "-insname", "SPECTRO_SC",
-            TEST_DIR_OIFITS + "NGC5128_2005.oifits"
+                                                     "-o", output.getAbsolutePath(), "-insname", "SPECTRO_SC",
+                                                     TEST_DIR_OIFITS + "NGC5128_2005.oifits"
         });
-        Assert.assertTrue("Bad return message: " + result[OUT_INDEX], 
+        Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
                 getOut(result).startsWith("Result is empty, no file created."));
         Assert.assertTrue("No result file should be created", !output.exists());
 
         // Filter pass
         result = callProcessor(new String[]{"merge",
-            "-o", output.getAbsolutePath(), "-insname", "MIDI/PRISM",
-            TEST_DIR_OIFITS + "NGC5128_2005.oifits"
+                                            "-o", output.getAbsolutePath(), "-insname", "MIDI/PRISM",
+                                            TEST_DIR_OIFITS + "NGC5128_2005.oifits"
         });
-        Assert.assertTrue("Bad return message: " + result[OUT_INDEX], 
+        Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
                 getOut(result).startsWith("Writing"));
         OIFitsFile mergedFile = OIFitsLoader.loadOIFits(output.getAbsolutePath());
         Assert.assertEquals("Bad number of Ins in merged file", 1, mergedFile.getOiWavelengths().length);

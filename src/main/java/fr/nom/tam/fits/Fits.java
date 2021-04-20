@@ -434,7 +434,7 @@ public final class Fits {
      * @param seekable Can one seek on the stream.  This parameter is ignored.
      */
     protected void streamInit(InputStream str, boolean compressed,
-            boolean seekable)
+                              boolean seekable)
             throws FitsException {
         streamInit(str);
     }

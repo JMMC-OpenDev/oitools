@@ -39,6 +39,8 @@ import java.util.Set;
 public final class SelectorResult {
 
     /** members */
+    /** selector to get criterias */
+    private Selector selector = null;
     /** OIFits collection (data source) */
     private final OIFitsCollection oiFitsCollection;
     /** granule set (insertion ordered) */
@@ -56,13 +58,30 @@ public final class SelectorResult {
         reset();
     }
 
-    public OIFitsCollection getOiFitsCollection() {
-        return oiFitsCollection;
-    }
-
     public void reset() {
+        selector = null;
         granules.clear();
         oiDatas.clear();
+        sortedTargets = null;
+        sortedInstrumentModes = null;
+        sortedNightIds = null;
+        sortedOIDatas = null;
+    }
+
+    public boolean hasSelector() {
+        return (selector != null);
+    }
+
+    public Selector getSelector() {
+        return selector;
+    }
+
+    public void setSelector(final Selector selector) {
+        this.selector = selector;
+    }
+
+    public OIFitsCollection getOiFitsCollection() {
+        return oiFitsCollection;
     }
 
     public boolean isEmpty() {

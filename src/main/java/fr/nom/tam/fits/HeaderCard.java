@@ -113,7 +113,7 @@ public final class HeaderCard {
         this(key, value, comment, false);
         this.isString = isString;
     }
-    
+
     /** Create a comment style card.
      *  This constructor builds a card which has no value.
      *  This may be either a comment style card in which case the

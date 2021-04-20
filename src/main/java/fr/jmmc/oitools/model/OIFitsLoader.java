@@ -545,7 +545,7 @@ public class OIFitsLoader {
                 if (!processed[i] || OIFitsChecker.isInspectRules()) {
                     // rule [UNKNOWN_TABLE] check if the table belongs to the OIFITS standard and version
                     checker.inspectRuleFailed(Rule.UNKNOWN_TABLE, OIFitsChecker.FILE_RULE, oiFitsFile.getVersion());
-                    
+
                     // TODO: other header-data units may appear in the file, provided their EXTNAMEs do not begin with “OI_”.
                     // TODO: special case:
                     checker.ruleFailed(Rule.UNKNOWN_TABLE, extName, i);

@@ -28,6 +28,7 @@ import fr.jmmc.oitools.model.ModelVisitor;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OITable;
 import fr.jmmc.oitools.model.Rule;
+import fr.jmmc.oitools.model.range.Range;
 import fr.nom.tam.util.ArrayFuncs;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -200,18 +201,19 @@ public abstract class FitsTable extends FitsHDU {
             final String columnName = column.getName();
             final Object columnValueOriginal = getColumnValue(columnName);
 
-            final int[] dims = getColumnArrayDims(column, nbKeepRows);
-            final Object columnValue = createColumnArray(column, dims);
-
+            // ignore optional columns (null):
             if (columnValueOriginal != null) {
+                final int[] dims = getColumnArrayDims(column, nbKeepRows);
+                final Object columnValue = createColumnArray(column, dims);
+
                 // copy data 
                 filterColumnArray(columnValueOriginal, maskRows, columnValue, dims);
-            }
 
-            if (logger.isLoggable(Level.FINE)) {
-                logger.log(Level.FINE, "COLUMN {0} = ''{1}''", new Object[]{columnName, columnValue});
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "COLUMN {0} = ''{1}''", new Object[]{columnName, columnValue});
+                }
+                setColumnValue(columnName, columnValue);
             }
-            setColumnValue(columnName, columnValue);
         }
 
         this.setNbRows(nbKeepRows);
@@ -985,13 +987,52 @@ public abstract class FitsTable extends FitsHDU {
     }
 
     /**
+     * Return the column range given its name
+     *
+     * @param name column name
+     * @return Range instance
+     */
+    public final Range getColumnRange(final String name) {
+        final String key = name + "_RANGE";
+
+        /* retrieve value in columnsRangeValue map of associated column */
+        Range cached = (Range) getColumnsRangeValue().get(key);
+
+        if (cached == null) {
+            final Object range = getMinMaxColumnValue(name);
+
+            if (range != null) {
+                if (range instanceof double[]) {
+                    final double[] dRange = (double[]) range;
+                    cached = new Range(dRange[0], dRange[1]);
+                } else if (range instanceof float[]) {
+                    final float[] fRange = (float[]) range;
+                    cached = new Range(fRange[0], fRange[1]);
+                } else if (range instanceof int[]) {
+                    final int[] iRange = (int[]) range;
+                    cached = new Range(iRange[0], iRange[1]);
+                } else if (range instanceof short[]) {
+                    final short[] sRange = (short[]) range;
+                    cached = new Range(sRange[0], sRange[1]);
+                }
+            }
+            if (cached == null) {
+                cached = Range.UNDEFINED_RANGE;
+            }
+            /* store in associated column range value */
+            getColumnsRangeValue().put(key, cached);
+        }
+        return cached;
+    }
+
+    /**
      * Return the minimum and maximum column value given its name The returned
      * value can be null if the column has never been defined
      *
      * @param name column name
      * @return [min;max] values or null if undefined
      */
-    public Object getMinMaxColumnValue(final String name) {
+    public final Object getMinMaxColumnValue(final String name) {
         /* retrieve range in columnsRangeValue map of associated column */
         Object range = getColumnsRangeValue().get(name);
 
@@ -1153,11 +1194,9 @@ public abstract class FitsTable extends FitsHDU {
                     // do nothing
                 }
             }
-
             /* store in associated column range value */
             getColumnsRangeValue().put(name, range);
         }
-
         return range;
     }
 

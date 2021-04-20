@@ -39,7 +39,7 @@ public class FitsImageFile extends ModelBase {
      * Public constructor
      */
     public FitsImageFile() {
-        this((String)null);
+        this((String) null);
     }
 
     /**

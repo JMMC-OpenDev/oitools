@@ -421,20 +421,20 @@ public final class OITarget extends OITable {
                 checker.ruleFailed(Rule.OI_TARGET_COORD, this, OIFitsConstants.COLUMN_DECEP0).addValueAt(coorDec[i], i);
             }
 
-            if (targetNames[i] == null || OIFitsChecker.isInspectRules()) {
+            if ((targetNames[i] == null) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_TARGET_TARGET] check if the TARGET column values have a not null or empty value
                 checker.ruleFailed(Rule.OI_TARGET_TARGET, this, OIFitsConstants.COLUMN_TARGET).addValueAt(targetNames[i], i);
             }
-            if (targetNames[i] != null || OIFitsChecker.isInspectRules()) {
+            if ((targetNames[i] != null) || OIFitsChecker.isInspectRules()) {
                 final short refId = targetIds[i];
-                if (refId < 1 || OIFitsChecker.isInspectRules()) {
+                if ((refId < 1) || OIFitsChecker.isInspectRules()) {
                     // rule [OI_TARGET_TARGETID_MIN] check if the TARGET_ID values >= 1
                     checker.ruleFailed(Rule.OI_TARGET_TARGETID_MIN, this, OIFitsConstants.COLUMN_TARGET).addValueAt(refId, i);
                 }
                 final String refName = targetNames[i];
 
                 for (int j = i + 1; j < len; j++) {
-                    if (refId == targetIds[j] || OIFitsChecker.isInspectRules()) {
+                    if ((refId == targetIds[j]) || OIFitsChecker.isInspectRules()) {
                         // rule [OI_TARGET_TARGETID_UNIQ] check duplicated indexes in the TARGET_ID column of the OI_TARGET table
                         checker.ruleFailed(Rule.OI_TARGET_TARGETID_UNIQ, this, OIFitsConstants.COLUMN_TARGET_ID).addValueAtRows(refId, i, j);
                     }

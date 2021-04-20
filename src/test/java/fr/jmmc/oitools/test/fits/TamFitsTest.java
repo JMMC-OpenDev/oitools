@@ -288,7 +288,7 @@ public class TamFitsTest implements TestEnv {
         }
         return res;
     }
-    
+
     private static String errorPrefix(final String sExtName) {
         if (sExtName != null) {
             return "ERROR: " + sExtName;

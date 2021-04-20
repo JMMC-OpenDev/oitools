@@ -19,13 +19,16 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.util.GranuleComparator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * A value-type representing a granule = INSNAME (backend) + TARGET + NIGHT
@@ -33,6 +36,9 @@ import java.util.Set;
  * @author bourgesl
  */
 public final class Granule {
+
+    /** logger */
+    protected final static Logger logger = Logger.getLogger(Granule.class.getName());
 
     public enum GranuleField {
         TARGET, INS_MODE, NIGHT;
@@ -45,18 +51,33 @@ public final class Granule {
             if (pattern == candidate) {
                 return true;
             }
-            if (pattern.getTarget() != null && candidate.getTarget() != null) {
+            if ((pattern.getTarget() != null) && (candidate.getTarget() != null)) {
                 if (!pattern.getTarget().equals(candidate.getTarget())) {
                     return false;
                 }
             }
-            if (pattern.getInsMode() != null && candidate.getInsMode() != null) {
+            if ((pattern.getInsMode() != null) && (candidate.getInsMode() != null)) {
                 if (!pattern.getInsMode().equals(candidate.getInsMode())) {
                     return false;
                 }
             }
-            if (pattern.getNight() != null && candidate.getNight() != null) {
+            if ((pattern.getNight() != null) && (candidate.getNight() != null)) {
                 if (!pattern.getNight().equals(candidate.getNight())) {
+                    return false;
+                }
+            }
+            if (pattern.hasDistinctStaNames() && candidate.hasDistinctStaNames()) {
+                if (!Granule.match(pattern.getDistinctStaNames(), candidate.getDistinctStaNames())) {
+                    return false;
+                }
+            }
+            if (pattern.hasDistinctMjdRanges() && candidate.hasDistinctMjdRanges()) {
+                if (!Range.matchRanges(pattern.getDistinctMjdRanges(), candidate.getDistinctMjdRanges())) {
+                    return false;
+                }
+            }
+            if (pattern.hasDistinctWavelengthRanges() && (candidate.getInsMode() != null)) {
+                if (!Range.matchRange(pattern.getDistinctMjdRanges(), candidate.getInsMode().getWavelengthRange())) {
                     return false;
                 }
             }
@@ -68,6 +89,13 @@ public final class Granule {
     private Target target;
     private InstrumentMode insMode;
     private NightId night;
+    /* extra information (filters) */
+    /** Set of distinct staNames */
+    private Set<String> distinctStaNames = null;
+    /** distinct MJD values */
+    private Set<Range> distinctMjdRanges = null;
+    /** distinct Wavelength values */
+    private Set<Range> distinctWavelengthRanges = null;
 
     public Granule() {
         this(null, null, null);
@@ -142,12 +170,51 @@ public final class Granule {
     }
 
     public boolean isEmpty() {
-        return (this.target == null) && (this.insMode == null) && (this.night == null);
+        return (this.target == null) && (this.insMode == null) && (this.night == null)
+                && !hasDistinctStaNames() && !hasDistinctMjdRanges() && !hasDistinctWavelengthRanges();
+    }
+
+    /* extra information (filters) */
+    public boolean hasDistinctStaNames() {
+        return (distinctStaNames != null) && !distinctStaNames.isEmpty();
+    }
+
+    public Set<String> getDistinctStaNames() {
+        if (distinctStaNames == null) {
+            distinctStaNames = new LinkedHashSet<String>();
+        }
+        return distinctStaNames;
+    }
+
+    public boolean hasDistinctMjdRanges() {
+        return (distinctMjdRanges != null) && !distinctMjdRanges.isEmpty();
+    }
+
+    public Set<Range> getDistinctMjdRanges() {
+        if (distinctMjdRanges == null) {
+            distinctMjdRanges = new LinkedHashSet<Range>();
+        }
+        return distinctMjdRanges;
+    }
+
+    public boolean hasDistinctWavelengthRanges() {
+        return (distinctWavelengthRanges != null) && !distinctWavelengthRanges.isEmpty();
+    }
+
+    public Set<Range> getDistinctWavelengthRanges() {
+        if (distinctWavelengthRanges == null) {
+            distinctWavelengthRanges = new LinkedHashSet<Range>();
+        }
+        return distinctWavelengthRanges;
     }
 
     @Override
     public String toString() {
-        return "Granule{" + "target=" + target + ", insMode=" + insMode + ", night=" + night + '}';
+        return "Granule{" + "target=" + target + ", insMode=" + insMode + ", night=" + night
+                + ", distinctStaNames=" + distinctStaNames
+                + ", distinctMjdRanges=" + distinctMjdRanges
+                + ", distinctWavelengthRanges=" + distinctWavelengthRanges
+                + '}';
     }
 
     public static <K> Set<K> getDistinctGranuleField(final Collection<Granule> granules, final GranuleField field) {
@@ -163,5 +230,14 @@ public final class Granule {
         final List<K> sorted = new ArrayList<K>(values);
         Collections.sort(sorted, GranuleComparator.getComparator(field));
         return sorted;
+    }
+
+    public static boolean match(final Set<String> selected, final Set<String> candidates) {
+        for (String sel : selected) {
+            if (candidates.contains(sel)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

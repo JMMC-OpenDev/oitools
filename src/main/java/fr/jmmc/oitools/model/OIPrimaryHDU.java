@@ -45,7 +45,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
 
     /* constants */
     /** keyword value 'MULTI' */
-    private final static String VALUE_MULTI = "MULTI";
+    public final static String VALUE_MULTI = "MULTI";
     /**
      * ORIGIN keyword descriptor
      */
@@ -57,27 +57,27 @@ public final class OIPrimaryHDU extends FitsImageHDU {
     private final static KeywordMeta KEYWORD_DATE = new KeywordMeta(FitsConstants.KEYWORD_DATE,
             "Date the HDU was written", Types.TYPE_CHAR);
     /**
-     * DATE_OBS keyword descriptor
+     * DATE_OBS keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_DATE_OBS = new KeywordMeta(FitsConstants.KEYWORD_DATE_OBS,
-            "Start date of observation", Types.TYPE_CHAR);
+            "Start date of observation", Types.TYPE_CHAR, true, NO_STR_VALUES);
     /**
      * CONTENT keyword descriptor
      */
     private final static KeywordMeta KEYWORD_CONTENT = new KeywordMeta(FitsConstants.KEYWORD_CONTENT,
             "Must contain only the string 'OIFITS2'", Types.TYPE_CHAR);
     /**
-     * AUTHOR keyword descriptor
+     * AUTHOR keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_AUTHOR = new KeywordMeta(FitsConstants.KEYWORD_AUTHOR,
             "As defined in FITS norm", Types.TYPE_CHAR, true, NO_STR_VALUES);
     /**
-     * DATASUM keyword descriptor
+     * DATASUM keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_DATASUM = new KeywordMeta(FitsConstants.KEYWORD_DATASUM,
             "HDU datasum", Types.TYPE_CHAR, true, NO_STR_VALUES);
     /**
-     * CHECKSUM keyword descriptor
+     * CHECKSUM keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_CHECKSUM = new KeywordMeta(FitsConstants.KEYWORD_CHECKSUM,
             "HDU checksum", Types.TYPE_CHAR, true, NO_STR_VALUES);
@@ -107,107 +107,107 @@ public final class OIPrimaryHDU extends FitsImageHDU {
     private final static KeywordMeta KEYWORD_OBJECT = new KeywordMeta(FitsConstants.KEYWORD_OBJECT,
             "Object Identifier", Types.TYPE_CHAR);
     /**
-     * REFERENC keyword descriptor
+     * REFERENC keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_REFERENC = new KeywordMeta(FitsConstants.KEYWORD_REFERENC,
             "Bibliographic reference", Types.TYPE_CHAR, true, NO_STR_VALUES);
     /**
-     * PROG_ID keyword descriptor
+     * PROG_ID keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_PROG_ID = new KeywordMeta(OIFitsConstants.KEYWORD_PROG_ID,
             "Program ID", Types.TYPE_CHAR, true, NO_STR_VALUES);
     /**
-     * PROCSOFT keyword descriptor
+     * PROCSOFT keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_PROCSOFT = new KeywordMeta(OIFitsConstants.KEYWORD_PROCSOFT,
             "Versioned Data Reduction Software", Types.TYPE_CHAR, true, NO_STR_VALUES);
     /**
-     * OBSTECH keyword descriptor
+     * OBSTECH keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_OBSTECH = new KeywordMeta(OIFitsConstants.KEYWORD_OBSTECH,
             "Technique of observation", Types.TYPE_CHAR, true, NO_STR_VALUES);
     /**
-     * RA keyword descriptor
+     * RA keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_RA = new KeywordMeta(OIFitsConstants.KEYWORD_RA,
             "Target Right Ascension at mean EQUINOX (deg)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * DEC keyword descriptor
+     * DEC keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_DEC = new KeywordMeta(OIFitsConstants.KEYWORD_DEC,
             "Target Declination at mean EQUINOX (deg)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * EQUINOX keyword descriptor
+     * EQUINOX keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_EQUINOX = new KeywordMeta(OIFitsConstants.KEYWORD_EQUINOX,
             "Standard FK5 (years)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * RADECSYS keyword descriptor
+     * RADECSYS keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_RADECSYS = new KeywordMeta(OIFitsConstants.KEYWORD_RADECSYS,
             "Coordinate reference frame", Types.TYPE_CHAR, true, NO_STR_VALUES);
     /**
-     * SPECSYS keyword descriptor
+     * SPECSYS keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_SPECSYS = new KeywordMeta(OIFitsConstants.KEYWORD_SPECSYS,
             "Reference frame for spectral coord.", Types.TYPE_CHAR, true, NO_STR_VALUES);
     /**
-     * TEXPTIME keyword descriptor
+     * TEXPTIME keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_TEXPTIME = new KeywordMeta(OIFitsConstants.KEYWORD_TEXPTIME,
             "Maximum elapsed time for data point (s)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * MJD_OBS keyword descriptor
+     * MJD_OBS keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_MJD_OBS = new KeywordMeta(OIFitsConstants.KEYWORD_MJD_OBS,
             "Start of observations (MJD)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * MJD_END keyword descriptor
+     * MJD_END keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_MJD_END = new KeywordMeta(OIFitsConstants.KEYWORD_MJD_END,
             "End of observations (MJD)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * BASE_MIN keyword descriptor
+     * BASE_MIN keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_BASE_MIN = new KeywordMeta(OIFitsConstants.KEYWORD_BASE_MIN,
             "Minimum projected baseline length (m)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * BASE_MAX keyword descriptor
+     * BASE_MAX keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_BASE_MAX = new KeywordMeta(OIFitsConstants.KEYWORD_BASE_MAX,
             "Maximum projected baseline length (m)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * WAVELMIN keyword descriptor
+     * WAVELMIN keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_WAVELMIN = new KeywordMeta(OIFitsConstants.KEYWORD_WAVELMIN,
             "Minimum wavelength (nm)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * WAVELMAX keyword descriptor
+     * WAVELMAX keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_WAVELMAX = new KeywordMeta(OIFitsConstants.KEYWORD_WAVELMAX,
             "Maximum wavelength (nm)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * NUM_CHAN keyword descriptor
+     * NUM_CHAN keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_NUM_CHAN = new KeywordMeta(OIFitsConstants.KEYWORD_NUM_CHAN,
             "Total number of spectral channels", Types.TYPE_INT, true, NO_STR_VALUES);
     /**
-     * SPEC_RES keyword descriptor
+     * SPEC_RES keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_SPEC_RES = new KeywordMeta(OIFitsConstants.KEYWORD_SPEC_RES,
             "Reference spectral resolution (λ/Δ)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * VIS2ERR keyword descriptor
+     * VIS2ERR keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_VIS2ERR = new KeywordMeta(OIFitsConstants.KEYWORD_VIS2ERR,
             "Representative V² error (%)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * VISPHERR keyword descriptor
+     * VISPHERR keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_VISPHERR = new KeywordMeta(OIFitsConstants.KEYWORD_VISPHERR,
             "Representative Diff. Vis. Phase error (deg)", Types.TYPE_DBL, true, NO_STR_VALUES);
     /**
-     * T3PHIERR keyword descriptor
+     * T3PHIERR keyword descriptor (optional)
      */
     private final static KeywordMeta KEYWORD_T3PHIERR = new KeywordMeta(OIFitsConstants.KEYWORD_T3PHIERR,
             "Representative Closure Phase error (deg)", Types.TYPE_DBL, true, NO_STR_VALUES);
@@ -232,13 +232,13 @@ public final class OIPrimaryHDU extends FitsImageHDU {
         // DATE_OBS keyword definition
         addKeywordMeta(KEYWORD_CONTENT);
 
-        // AUTHOR keyword definition
+        // AUTHOR keyword definition (optional)
         addKeywordMeta(KEYWORD_AUTHOR);
 
-        // DATASUM keyword definition
+        // DATASUM keyword definition (optional)
         addKeywordMeta(KEYWORD_DATASUM);
 
-        // CHECKSUM keyword definition
+        // CHECKSUM keyword definition (optional)
         addKeywordMeta(KEYWORD_CHECKSUM);
 
         // TELESCOP keyword definition
@@ -256,67 +256,67 @@ public final class OIPrimaryHDU extends FitsImageHDU {
         // OBJECT keyword definition
         addKeywordMeta(KEYWORD_OBJECT);
 
-        // REFERENC keyword definition
+        // REFERENC keyword definition (optional)
         addKeywordMeta(KEYWORD_REFERENC);
 
-        // PROG_ID keyword definition
+        // PROG_ID keyword definition (optional)
         addKeywordMeta(KEYWORD_PROG_ID);
 
-        // PROCSOFT keyword definition
+        // PROCSOFT keyword definition (optional)
         addKeywordMeta(KEYWORD_PROCSOFT);
 
-        // OBSTECH keyword definition
+        // OBSTECH keyword definition (optional)
         addKeywordMeta(KEYWORD_OBSTECH);
 
-        // RA keyword definition
+        // RA keyword definition (optional)
         addKeywordMeta(KEYWORD_RA);
 
-        // DEC keyword definition
+        // DEC keyword definition (optional)
         addKeywordMeta(KEYWORD_DEC);
 
-        // EQUINOX keyword definition
+        // EQUINOX keyword definition (optional)
         addKeywordMeta(KEYWORD_EQUINOX);
 
-        // RADECSYS keyword definition
+        // RADECSYS keyword definition (optional)
         addKeywordMeta(KEYWORD_RADECSYS);
 
-        // SPECSYS keyword definition
+        // SPECSYS keyword definition (optional)
         addKeywordMeta(KEYWORD_SPECSYS);
 
-        // TEXPTIME keyword definition
+        // TEXPTIME keyword definition (optional)
         addKeywordMeta(KEYWORD_TEXPTIME);
 
-        // MJD_OBS keyword definition
+        // MJD_OBS keyword definition (optional)
         addKeywordMeta(KEYWORD_MJD_OBS);
 
-        // MJD_END keyword definition
+        // MJD_END keyword definition (optional)
         addKeywordMeta(KEYWORD_MJD_END);
 
-        // BASE_MIN keyword definition
+        // BASE_MIN keyword definition (optional)
         addKeywordMeta(KEYWORD_BASE_MIN);
 
-        // BASE_MAX keyword definition
+        // BASE_MAX keyword definition (optional)
         addKeywordMeta(KEYWORD_BASE_MAX);
 
-        // WAVELMIN keyword definition
+        // WAVELMIN keyword definition (optional)
         addKeywordMeta(KEYWORD_WAVELMIN);
 
-        // WAVELMAX keyword definition
+        // WAVELMAX keyword definition (optional)
         addKeywordMeta(KEYWORD_WAVELMAX);
 
-        // NUM_CHAN keyword definition
+        // NUM_CHAN keyword definition (optional)
         addKeywordMeta(KEYWORD_NUM_CHAN);
 
-        // SPEC_RES keyword definition
+        // SPEC_RES keyword definition (optional)
         addKeywordMeta(KEYWORD_SPEC_RES);
 
-        // VIS2ERR keyword definition
+        // VIS2ERR keyword definition (optional)
         addKeywordMeta(KEYWORD_VIS2ERR);
 
-        // VISPHERR keyword definition
+        // VISPHERR keyword definition (optional)
         addKeywordMeta(KEYWORD_VISPHERR);
 
-        // T3PHIERR keyword definition
+        // T3PHIERR keyword definition (optional)
         addKeywordMeta(KEYWORD_T3PHIERR);
     }
 
@@ -576,7 +576,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of RA keyword
      */
     public double getRa() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_RA, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_RA, UNDEFINED_DBL);
     }
 
     /**
@@ -592,7 +592,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of DEC keyword
      */
     public double getDec() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_DEC, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_DEC, UNDEFINED_DBL);
     }
 
     /**
@@ -608,7 +608,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of EQUINOX keyword
      */
     public double getEquinox() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_EQUINOX, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_EQUINOX, UNDEFINED_DBL);
     }
 
     /**
@@ -656,7 +656,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of TEXPTIME keyword
      */
     public double getTexpTime() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_TEXPTIME, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_TEXPTIME, UNDEFINED_DBL);
     }
 
     /**
@@ -672,7 +672,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of MJD_OBS keyword
      */
     public double getMJDObs() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_MJD_OBS, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_MJD_OBS, UNDEFINED_DBL);
     }
 
     /**
@@ -688,7 +688,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of MJD_END keyword
      */
     public double getMJDEnd() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_MJD_END, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_MJD_END, UNDEFINED_DBL);
     }
 
     /**
@@ -704,7 +704,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of BASE_MIN keyword
      */
     public double getBaseMin() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_BASE_MIN, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_BASE_MIN, UNDEFINED_DBL);
     }
 
     /**
@@ -720,7 +720,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of BASE_MAX keyword
      */
     public double getBaseMax() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_BASE_MAX, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_BASE_MAX, UNDEFINED_DBL);
     }
 
     /**
@@ -736,7 +736,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of WAVELMIN keyword
      */
     public double getWavelMin() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_WAVELMIN, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_WAVELMIN, UNDEFINED_DBL);
     }
 
     /**
@@ -752,7 +752,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of WAVELMAX keyword
      */
     public double getWavelMax() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_WAVELMAX, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_WAVELMAX, UNDEFINED_DBL);
     }
 
     /**
@@ -784,7 +784,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of SPEC_RES keyword
      */
     public double getSpecRes() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_SPEC_RES, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_SPEC_RES, UNDEFINED_DBL);
     }
 
     /**
@@ -800,7 +800,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of VIS2ERR keyword
      */
     public double getVis2Err() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_VIS2ERR, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_VIS2ERR, UNDEFINED_DBL);
     }
 
     /**
@@ -816,7 +816,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of VISPHERR keyword
      */
     public double getVisPhiErr() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_VISPHERR, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_VISPHERR, UNDEFINED_DBL);
     }
 
     /**
@@ -832,7 +832,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @return the value of T3PHIERR keyword
      */
     public double getT3PhiErr() {
-        return getKeywordDouble(OIFitsConstants.KEYWORD_T3PHIERR, Double.NaN);
+        return getKeywordDouble(OIFitsConstants.KEYWORD_T3PHIERR, UNDEFINED_DBL);
     }
 
     /**
@@ -855,8 +855,8 @@ public final class OIPrimaryHDU extends FitsImageHDU {
         super.checkSyntax(checker);
 
         checkDateObsKeyword(checker, OIFitsConstants.KEYWORD_DATE_OBS, this);
-        checkMJD(checker, OIFitsConstants.KEYWORD_MJD_OBS, getKeywordDouble(OIFitsConstants.KEYWORD_MJD_OBS, Double.NaN));
-        checkMJD(checker, OIFitsConstants.KEYWORD_MJD_END, getKeywordDouble(OIFitsConstants.KEYWORD_MJD_END, Double.NaN));
+        checkMJD(checker, OIFitsConstants.KEYWORD_MJD_OBS, getKeywordDouble(OIFitsConstants.KEYWORD_MJD_OBS, UNDEFINED_DBL));
+        checkMJD(checker, OIFitsConstants.KEYWORD_MJD_END, getKeywordDouble(OIFitsConstants.KEYWORD_MJD_END, UNDEFINED_DBL));
     }
 
     /**
@@ -864,14 +864,14 @@ public final class OIPrimaryHDU extends FitsImageHDU {
      * @param checker checker component
      */
     void checkMultiKeywords(final OIFitsChecker checker, final int arrnames, final boolean multiInstruments, final int targets) {
-        if (arrnames > 1 || OIFitsChecker.isInspectRules()) {
+        if ((arrnames > 1) || OIFitsChecker.isInspectRules()) {
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_TELESCOP);
         }
         if (multiInstruments || OIFitsChecker.isInspectRules()) {
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSTRUME);
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_INSMODE);
         }
-        if (targets > 1 || OIFitsChecker.isInspectRules()) {
+        if ((targets > 1) || OIFitsChecker.isInspectRules()) {
             checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_OBJECT);
         }
         checkKeywordValueIsMulti(checker, FitsConstants.KEYWORD_OBSERVER);
@@ -883,8 +883,8 @@ public final class OIPrimaryHDU extends FitsImageHDU {
 
     private void checkKeywordValueIsMulti(final OIFitsChecker checker, final String keywordName) {
         final String value = getKeyword(keywordName);
-        if (value != null || OIFitsChecker.isInspectRules()) {
-            if ((value != null && !value.startsWith(VALUE_MULTI)) || OIFitsChecker.isInspectRules()) {
+        if ((value != null) || OIFitsChecker.isInspectRules()) {
+            if (((value != null) && !value.startsWith(VALUE_MULTI)) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.MAIN_HEADER_TYPE_MULTI, this, keywordName).addKeywordValue(value, VALUE_MULTI);
             }
         }

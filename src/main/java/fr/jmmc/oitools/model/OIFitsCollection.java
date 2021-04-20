@@ -33,6 +33,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -65,8 +66,12 @@ public final class OIFitsCollection implements ToStringable {
     private final TargetManager tm;
     /** OIFits file collection keyed by absolute file path (unordered) */
     private final Map<String, OIFitsFile> oiFitsPerPath = new HashMap<String, OIFitsFile>();
+    /** Distinct Granules */
+    private final Map<Granule, Granule> distinctGranules = new HashMap<Granule, Granule>();
     /** Set of OIData tables keyed by Granule */
     private final Map<Granule, Set<OIData>> oiDataPerGranule = new HashMap<Granule, Set<OIData>>();
+    /** Map of used staNames to StaNamesDir (reference StaNames / orientation) */
+    private final Map<String, StaNamesDir> usedStaNamesMap = new LinkedHashMap<String, StaNamesDir>();
 
     public static OIFitsCollection create(final OIFitsChecker checker, final List<String> fileLocations) throws IOException, MalformedURLException, FitsException {
         final OIFitsCollection oiFitsCollection = new OIFitsCollection();
@@ -135,7 +140,9 @@ public final class OIFitsCollection implements ToStringable {
         // clear Target mappings:
         tm.clear();
         // clear granules:
+        distinctGranules.clear();
         oiDataPerGranule.clear();
+        usedStaNamesMap.clear();
     }
 
     public boolean isEmpty() {
@@ -255,7 +262,7 @@ public final class OIFitsCollection implements ToStringable {
 
         final List<OIFitsFile> oiFitsFiles = getSortedOIFitsFiles();
 
-        // analyze instrument modes & targets:
+        // analyze instrument modes & targets & StaNames:
         for (OIFitsFile oiFitsFile : oiFitsFiles) {
             for (OIWavelength oiTable : oiFitsFile.getOiWavelengths()) {
                 imm.register(oiTable.getInstrumentMode());
@@ -266,6 +273,9 @@ public final class OIFitsCollection implements ToStringable {
                     tm.register(target);
                 }
             }
+
+            // Merge usedStaNamesMap:
+            usedStaNamesMap.putAll(oiFitsFile.getUsedStaNamesMap());
         }
 
         imm.dump();
@@ -287,12 +297,24 @@ public final class OIFitsCollection implements ToStringable {
 
                 gg.set(globalTarget, globalInsMode, g.getNight());
 
+                Granule globalGranule = distinctGranules.get(gg);
+                if (globalGranule == null) {
+                    distinctGranules.put(gg, gg);
+                    globalGranule = gg;
+                    gg = new Granule();
+                }
+
+                // Update distinct MJD Ranges on shared granule:
+                globalGranule.getDistinctMjdRanges().addAll(g.getDistinctMjdRanges());
+
+                // Update distinct StaNames on shared granule:
+                globalGranule.getDistinctStaNames().addAll(g.getDistinctStaNames());
+
                 // TODO: keep mapping between global granule and OIFits Granules ?
-                Set<OIData> oiDataTables = oiDataPerGranule.get(gg);
+                Set<OIData> oiDataTables = oiDataPerGranule.get(globalGranule);
                 if (oiDataTables == null) {
                     oiDataTables = new LinkedHashSet<OIData>();
-                    oiDataPerGranule.put(gg, oiDataTables);
-                    gg = new Granule();
+                    oiDataPerGranule.put(globalGranule, oiDataTables);
                 }
 
                 for (OIData data : entry.getValue()) {
@@ -302,12 +324,11 @@ public final class OIFitsCollection implements ToStringable {
         }
 
         if (logger.isLoggable(Level.FINE)) {
-            logger.log(Level.FINE, "analyzeCollection: Granule / OIData tables: {0}", oiDataPerGranule.keySet());
+            logger.log(Level.FINE, "analyzeCollection: usedStaNamesMap: {0}", usedStaNamesMap);
+            logger.log(Level.FINE, "analyzeCollection: Granule / OIData tables: {0}", distinctGranules.keySet());
             logger.log(Level.FINE, "analyzeCollection: Sorted Granules:");
 
-            final List<Granule> granules = getSortedGranules();
-
-            for (Granule granule : granules) {
+            for (Granule granule : getSortedGranules()) {
                 logger.log(Level.FINE, "analyzeCollection: {0}", detailedGranuletoString(granule));
             }
         }
@@ -318,7 +339,18 @@ public final class OIFitsCollection implements ToStringable {
                 + " [aliases: " + tm.getSortedUniqueAliases(granule.getTarget()) + "]"
                 + ", insMode=" + granule.getInsMode()
                 + " [aliases: " + imm.getSortedUniqueAliases(granule.getInsMode()) + "]"
-                + ", night=" + granule.getNight() + '}';
+                + ", night=" + granule.getNight()
+                + ", distinctMjdRanges=" + granule.getDistinctMjdRanges()
+                + ", distinctStaNames=" + granule.getDistinctStaNames()
+                + '}';
+    }
+
+    /**
+     * Return the Distinct Granules
+     * @return Distinct Granules
+     */
+    public Map<Granule, Granule> getDistinctGranules() {
+        return distinctGranules;
     }
 
     /**
@@ -329,12 +361,20 @@ public final class OIFitsCollection implements ToStringable {
         return oiDataPerGranule;
     }
 
+    /**
+     * Return the Map of sorted staNames to StaNamesDir
+     * @return Map of sorted staNames to StaNamesDir
+     */
+    public Map<String, StaNamesDir> getUsedStaNamesMap() {
+        return usedStaNamesMap;
+    }
+
     public List<Granule> getSortedGranules() {
         return getSortedGranules(GranuleComparator.DEFAULT);
     }
 
     public List<Granule> getSortedGranules(final Comparator<Granule> comparator) {
-        final List<Granule> granules = new ArrayList<Granule>(oiDataPerGranule.keySet());
+        final List<Granule> granules = new ArrayList<Granule>(distinctGranules.keySet());
         Collections.sort(granules, comparator);
 
         logger.log(Level.FINE, "granules sorted: {0}", granules);
@@ -361,13 +401,13 @@ public final class OIFitsCollection implements ToStringable {
 
                     if (oiDatas != null) {
                         // Apply table selection:
-                        if (selector == null || !selector.hasTable()) {
+                        if ((selector == null) || !selector.hasTable()) {
                             // add all tables:
                             for (OIData oiData : oiDatas) {
                                 result.addOIData(g, oiData);
                             }
                         } else {
-                            // test all tables:
+                            // test all data tables:
                             for (OIData oiData : oiDatas) {
                                 // file path comparison:
                                 final String oiFitsPath = oiData.getOIFitsFile().getAbsoluteFilePath();
@@ -395,6 +435,9 @@ public final class OIFitsCollection implements ToStringable {
             }
         }
 
+        if (result != null) {
+            result.setSelector(selector);
+        }
         logger.log(Level.FINE, "findOIData: {0}", result);
 
         return result;
@@ -448,7 +491,23 @@ public final class OIFitsCollection implements ToStringable {
 
             final Granule pattern = new Granule(target, insMode, nightId);
 
+            // Baselines criteria:
+            if (selector.hasBaselines()) {
+                pattern.getDistinctStaNames().addAll(selector.getBaselines());
+            }
+
+            // MJD ranges criteria:
+            if (selector.hasMJDRanges()) {
+                pattern.getDistinctMjdRanges().addAll(selector.getMJDRanges());
+            }
+
+            // Wavelength ranges criteria:
+            if (selector.hasWavelengthRange()) {
+                pattern.getDistinctWavelengthRanges().addAll(selector.getWavelengthRanges());
+            }
+
             if (!pattern.isEmpty()) {
+                // Match Granules:
                 for (Iterator<Granule> it = granules.iterator(); it.hasNext();) {
                     final Granule candidate = it.next();
 
@@ -482,5 +541,14 @@ public final class OIFitsCollection implements ToStringable {
             }
         }
         return granules;
+    }
+
+    static boolean match(final List<String> selected, final Set<String> candidates) {
+        for (String sel : selected) {
+            if (candidates.contains(sel)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -99,7 +99,7 @@ public final class WaveColumnMeta extends ArrayColumnMeta {
      * @param oiData OIData object to resolve OIWaveLength reference
      */
     public WaveColumnMeta(final String name, final String desc, final Types dataType, final String errName,
-            final DataRange dataRange, final OIAbstractData oiData) {
+                          final DataRange dataRange, final OIAbstractData oiData) {
         this(name, desc, dataType, false, false, NO_STR_VALUES, Units.NO_UNIT, errName, dataRange, oiData);
     }
 
@@ -128,7 +128,7 @@ public final class WaveColumnMeta extends ArrayColumnMeta {
      * @param oiData OIData object to resolve OIWaveLength reference
      */
     public WaveColumnMeta(final String name, final String desc, final Types dataType, final String errName,
-            final boolean optional, final OIAbstractData oiData) {
+                          final boolean optional, final OIAbstractData oiData) {
         this(name, desc, dataType, optional, false, NO_STR_VALUES, Units.NO_UNIT, errName, null, oiData);
     }
 
@@ -156,7 +156,7 @@ public final class WaveColumnMeta extends ArrayColumnMeta {
      * @param oiData OIData object to resolve OIWaveLength reference
      */
     public WaveColumnMeta(final String name, final String desc, final Types dataType, final Units unit,
-            final DataRange dataRange, final OIAbstractData oiData) {
+                          final DataRange dataRange, final OIAbstractData oiData) {
         this(name, desc, dataType, false, false, NO_STR_VALUES, unit, null, dataRange, oiData);
     }
 
@@ -172,7 +172,7 @@ public final class WaveColumnMeta extends ArrayColumnMeta {
      * @param oiData OIData object to resolve OIWaveLength reference
      */
     public WaveColumnMeta(final String name, final String desc, final Types dataType, final Units unit,
-            final String errName, final DataRange dataRange, final OIAbstractData oiData) {
+                          final String errName, final DataRange dataRange, final OIAbstractData oiData) {
         this(name, desc, dataType, false, false, NO_STR_VALUES, unit, errName, dataRange, oiData);
     }
 
@@ -191,7 +191,7 @@ public final class WaveColumnMeta extends ArrayColumnMeta {
      * @param oiData OIData object to resolve OIWaveLength reference
      */
     public WaveColumnMeta(final String name, final String desc, final Types dataType, final boolean optional, final boolean is3D,
-            final String[] acceptedValues, final Units unit, final String errName, final DataRange dataRange, final OIAbstractData oiData) {
+                          final String[] acceptedValues, final Units unit, final String errName, final DataRange dataRange, final OIAbstractData oiData) {
         super(name, desc, dataType, 0, optional, is3D, acceptedValues, unit, errName, dataRange);
 
         this.oiAbsData = oiData;

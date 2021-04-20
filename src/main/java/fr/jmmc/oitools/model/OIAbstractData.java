@@ -24,8 +24,13 @@ import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
+import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_STRING;
+import static fr.jmmc.oitools.model.ModelBase.logger;
+import fr.jmmc.oitools.model.range.Range;
+import java.util.Arrays;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -46,8 +51,10 @@ public abstract class OIAbstractData extends OITable {
     private final Set<NightId> distinctNightId = new LinkedHashSet<NightId>();
     /** distinct StaIndex values present in this table (identity hashcode) */
     private final Set<short[]> distinctStaIndex = new LinkedHashSet<short[]>();
-    /** cached StaNames corresponding to given OIData StaIndex arrays */
+    /** cached StaNames corresponding to given OIData StaIndex arrays (identity hashcode) */
     private final Map<short[], String> staIndexesToString = new IdentityHashMap<short[], String>();
+    /** map of distinct StaIndex arrays to sorted StaNames + orientation (identity hashcode) */
+    private final Map<short[], StaNamesDir> staIndexesToSortedStaNamesDir = new IdentityHashMap<short[], StaNamesDir>();
 
     /**
      * Protected OIAbstractData class constructor
@@ -207,8 +214,7 @@ public abstract class OIAbstractData extends OITable {
     public void checkKeywords(final OIFitsChecker checker) {
         super.checkKeywords(checker);
 
-        if (OIFitsChecker.isInspectRules()
-                || (getArrName() != null && getOiArray() == null)) {
+        if (OIFitsChecker.isInspectRules() || ((getArrName() != null) && (getOiArray() == null))) {
             // rule [ARRNAME_REF] check if an OI_ARRAY table matches the ARRNAME keyword
             checker.ruleFailed(Rule.ARRNAME_REF, this, OIFitsConstants.KEYWORD_ARRNAME).addKeywordValue(getArrName());
         }
@@ -220,11 +226,9 @@ public abstract class OIAbstractData extends OITable {
      * @param name column name
      */
     protected void checkMJDColumn(final OIFitsChecker checker, final String name) {
-        final double[] minMaxMjd = (double[]) getMinMaxColumnValue(name);
-        if (minMaxMjd != null) {
-            checkMJD(checker, name, minMaxMjd[0]);
-            checkMJD(checker, name, minMaxMjd[1]);
-        }
+        final Range mjdRange = getColumnRange(name);
+        checkMJD(checker, name, mjdRange.getMin());
+        checkMJD(checker, name, mjdRange.getMax());
     }
 
     /* --- data analysis --- */
@@ -238,6 +242,7 @@ public abstract class OIAbstractData extends OITable {
         distinctNightId.clear();
         distinctStaIndex.clear();
         staIndexesToString.clear();
+        staIndexesToSortedStaNamesDir.clear();
     }
 
     /**
@@ -317,8 +322,8 @@ public abstract class OIAbstractData extends OITable {
     }
 
     /**
-     * Unused
-     * @return distinctStaIndexes
+     * Used by OIFitsExplorer
+     * @return distinct StaIndexes as arrays
      */
     public final short[][] getDistinctStaIndexes() {
         final short[][] distinctStaIndexes = new short[distinctStaIndex.size()][];
@@ -330,8 +335,23 @@ public abstract class OIAbstractData extends OITable {
     }
 
     /**
-     * Cached StaNames corresponding to given OIData StaIndex arrays
-     * @param staIndexes staIndexes table
+     * Return the StaName value corresponding to given OIData StaIndex value
+     * @param staIndex staIndex as short
+     * @return StaName if found; staIndex as String otherwise
+     */
+    public String getStaName(final short staIndex) {
+        final OIArray oiArray = getOiArray();
+
+        if (oiArray != null) {
+            return oiArray.getStaName(staIndex);
+        }
+        // fallback if ARRNAME is missing:
+        return Short.toString(staIndex);
+    }
+
+    /**
+     * Cached StaNames corresponding to given OIData StaIndex arrays (IDENTITY)
+     * @param staIndexes staIndex array
      * @return label
      */
     public final String getStaNames(final short[] staIndexes) {
@@ -361,4 +381,69 @@ public abstract class OIAbstractData extends OITable {
         }
         return label;
     }
+
+    /**
+     * Get the map of distinct StaIndex arrays to sorted StaNames + orientation (identity hashcode)
+     * @return map of distinct StaIndex arrays to sorted StaNames + orientation (identity hashcode)
+     */
+    public final Map<short[], StaNamesDir> getStaIndexesToSortedStaNamesDir() {
+        return staIndexesToSortedStaNamesDir;
+    }
+
+    /**
+     * Get the StaNamesDir corresponding to given OIData StaIndex arrays
+     * @param staIndexes staIndex array
+     * @return StaNamesDir or null
+     */
+    public final StaNamesDir getSortedStaNamesDir(final short[] staIndexes) {
+        return staIndexesToSortedStaNamesDir.get(staIndexes);
+    }
+
+    /**
+     * Return the real (used) staNames values
+     * @param usedStaNamesMap Map of used staNames to StaNamesDir (reference StaNames / orientation)
+     * @param staIndexes staIndex array
+     * @return real (used) staNames values
+     */
+    public String getRealStaNames(final Map<String, StaNamesDir> usedStaNamesMap,
+                                  final short[] staIndexes) {
+        if (staIndexes != null) {
+            final StaNamesDir sortedStaNamesDir = getSortedStaNamesDir(staIndexes);
+
+            if (sortedStaNamesDir == null) {
+                logger.log(Level.WARNING, "getRealStaNames: bad staIndexesToSortedStaNamesDir: missing {0}", Arrays.toString(staIndexes));
+            } else {
+                // find the previous (real) baseline corresponding to the sorted StaNames (stable):
+                final StaNamesDir refStaNamesDir = usedStaNamesMap.get(sortedStaNamesDir.getStaNames());
+
+                if (refStaNamesDir == null) {
+                    logger.log(Level.WARNING, "getRealStaNames: bad usedStaNamesMap: missing {0}", sortedStaNamesDir.getStaNames());
+                } else {
+                    return refStaNamesDir.getStaNames();
+                }
+            }
+        }
+        return UNDEFINED_STRING;
+    }
+
+    /**
+     * Find the StaIndexes instances corresponding to the selected StaNames (using getRealStaNames)
+     * @param usedStaNamesMap Map of used staNames to StaNamesDir (reference StaNames / orientation)
+     * @param selectedStaNames selected StaNames to match
+     * @param staIndexMatching set to store StaIndexes instances
+     */
+    public void getMatchingStaIndexes(final Map<String, StaNamesDir> usedStaNamesMap,
+                                      final List<String> selectedStaNames,
+                                      final Set<short[]> staIndexMatching) {
+        staIndexMatching.clear();
+
+        for (final short[] staIndexes : getDistinctStaIndex()) {
+            final String staNames = getRealStaNames(usedStaNamesMap, staIndexes);
+
+            if (selectedStaNames.contains(staNames)) {
+                staIndexMatching.add(staIndexes);
+            }
+        }
+    }
+
 }

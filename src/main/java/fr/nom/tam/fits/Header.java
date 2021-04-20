@@ -1256,7 +1256,7 @@ public final class Header implements FitsElement {
 
         while (iter.hasNext()) {
             card = (HeaderCard) iter.next();
-  
+
 // LAURENT: Fixed NPE if key is NULL:            
 //            if (!card.isKeyValuePair() && card.getKey().equals("END")) {
             if ("END".equals(card.getKey())) {

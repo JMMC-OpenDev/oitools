@@ -32,7 +32,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class JELCalcTest extends JUnitBaseTest {
-    
+
     private final static int N = 1000;
 
     @Test
@@ -96,7 +96,7 @@ public class JELCalcTest extends JUnitBaseTest {
             logger.info("Evaluation ...");
 
             final long startTime = System.nanoTime();
-            
+
             // Evaluate (Can do it now any number of times FAST !!!)
             for (int n = 0; n < N; n++) {
 

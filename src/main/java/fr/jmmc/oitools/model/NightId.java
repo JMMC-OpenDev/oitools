@@ -22,10 +22,7 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.jmcs.util.NumberUtils;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * A value-type (immutable) representing a single night in any OI_Data table
@@ -53,7 +50,7 @@ public final class NightId {
         }
         return night;
     }
-    
+
     public static NightId getCachedInstance(final NightId nightId) {
         return CACHE.get(nightId);
     }

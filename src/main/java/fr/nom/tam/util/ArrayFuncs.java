@@ -702,7 +702,7 @@ public final class ArrayFuncs implements PrimitiveInfo {
          * new array when needed.
          */
 
-        /* First create the full new array. */
+ /* First create the full new array. */
         Object mimic = mimicArray(array, newType);
         if (mimic == null) {
             return mimic;

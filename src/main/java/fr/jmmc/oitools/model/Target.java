@@ -20,6 +20,9 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.NumberUtils;
+import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_DBL;
+import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_FLOAT;
+import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_STRING;
 import fr.jmmc.oitools.util.CoordUtils;
 import java.util.Comparator;
 import java.util.logging.Level;
@@ -32,6 +35,22 @@ public final class Target {
 
     /** Logger */
     final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Target.class.getName());
+
+    /** distance in degrees to consider same targets (default: 1 arcsecs) */
+    public final static double SAME_TARGET_DISTANCE;
+
+    static {
+        double distance;
+        try {
+            distance = Double.parseDouble(System.getProperty("target.matcher.dist", "1.0"));
+        } catch (NumberFormatException nfe) {
+            logger.log(Level.WARNING, "Invalid System property 'target.matcher.dist': {0}", System.getProperty("target.matcher.dist"));
+            distance = 1.0;
+        }
+        SAME_TARGET_DISTANCE = distance;
+
+        logger.log(Level.INFO, "Matcher<Target>: SAME_TARGET_DISTANCE : {0}", SAME_TARGET_DISTANCE);
+    }
 
     public final static Matcher<Target> MATCHER_NAME = new Matcher<Target>() {
 
@@ -47,9 +66,6 @@ public final class Target {
 
     public final static Matcher<Target> MATCHER_LIKE = new Matcher<Target>() {
 
-        /** distance in degrees to consider same targets = 1 arcsecs */
-        public final static double SAME_TARGET_DISTANCE = 1d * CoordUtils.ARCSEC_IN_DEGREES;
-
         @Override
         public boolean match(final Target src, final Target other) {
             if (src == other) {
@@ -61,12 +77,10 @@ public final class Target {
 
             final boolean match = (distance <= SAME_TARGET_DISTANCE);
 
-            if (match) {
-                if (logger.isLoggable(Level.FINE)) {
-                    logger.log(Level.FINE, "match [{0} vs {1}] = {2} arcsec",
-                            new Object[]{src.getTarget(), other.getTarget(),
-                                         NumberUtils.trimTo3Digits(distance * CoordUtils.DEG_IN_ARCSEC)});
-                }
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "match = {0} [{1} vs {2}] = {3} arcsec",
+                        new Object[]{match, src.getTarget(), other.getTarget(),
+                                     NumberUtils.trimTo3Digits(distance * CoordUtils.DEG_IN_ARCSEC)});
             }
             return match;
         }
@@ -79,10 +93,10 @@ public final class Target {
         }
     };
 
-    public final static Target UNDEFINED = new Target("UNDEFINED", Double.NaN, Double.NaN,
-            Float.NaN, Double.NaN, Double.NaN,
-            Double.NaN, "", "", Double.NaN, Double.NaN, Double.NaN, Double.NaN,
-            Float.NaN, Float.NaN, "", "");
+    public final static Target UNDEFINED = new Target(ModelBase.UNDEFINED, UNDEFINED_DBL, UNDEFINED_DBL,
+            UNDEFINED_FLOAT, UNDEFINED_DBL, UNDEFINED_DBL,
+            UNDEFINED_DBL, UNDEFINED_STRING, UNDEFINED_STRING, UNDEFINED_DBL, UNDEFINED_DBL, UNDEFINED_DBL, UNDEFINED_DBL,
+            UNDEFINED_FLOAT, UNDEFINED_FLOAT, UNDEFINED_STRING, UNDEFINED_STRING);
 
     /** members */
     private final String target;

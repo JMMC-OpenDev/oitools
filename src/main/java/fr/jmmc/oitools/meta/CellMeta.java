@@ -247,7 +247,7 @@ public class CellMeta {
      * @return CustomUnits (no checks).
      */
     public final CustomUnits getCustomUnits() {
-        return (CustomUnits)this.unit;
+        return (CustomUnits) this.unit;
     }
 
     /**

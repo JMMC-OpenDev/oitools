@@ -62,7 +62,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <dependency>
             <groupId>org.gnu.jel</groupId>
             <artifactId>JEL</artifactId>
-            <version>2.1.1-jdk5</version>
+            <version>2.1.2</version>
         </dependency>
 
     </dependencies>
@@ -82,10 +82,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         <inherited>false</inherited>
                         <phase>process-resources</phase> <!-- just before compilation -->
                         <configuration>
-                            <file>lib/jel-2.1.1_jdk5.jar</file>
+                            <file>lib/jel-2.1.2.jar</file>
                             <groupId>org.gnu.jel</groupId>
                             <artifactId>JEL</artifactId>
-                            <version>2.1.1-jdk5</version>
+                            <version>2.1.2</version>
                             <packaging>jar</packaging>
                         </configuration>
                     </execution>

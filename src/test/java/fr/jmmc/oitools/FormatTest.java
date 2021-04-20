@@ -91,7 +91,7 @@ public class FormatTest {
     private static void testDateObs(final String dateObs, final boolean expected) {
 
         final OIFitsFile oiFitsFile = new OIFitsFile(OIFitsStandard.VERSION_1);
-        
+
         final OIWavelength oiwl = new OIWavelength(oiFitsFile, 1);
         oiwl.setInsName("TEST");
         oiFitsFile.addOiTable(oiwl);

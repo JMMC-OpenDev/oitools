@@ -43,9 +43,10 @@ import java.util.logging.Logger;
  * @author bourgesl
  */
 public final class OIFitsChecker {
+
     /** 'FILE' rules = applyTo & Rule name matcher */
     public final static String FILE_RULE = "FILE";
-    
+
     public enum InspectMode {
         NORMAL,
         CASE_V2_IN_V1;

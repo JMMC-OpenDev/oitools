@@ -15,7 +15,7 @@
  * 
  *      Tom McGlynn
  */
-/*
+ /*
  * This class provides a modifiable map in which the comment fields for FITS
  * header keywords
  * produced by this library are set.  The map is a simple String -> String

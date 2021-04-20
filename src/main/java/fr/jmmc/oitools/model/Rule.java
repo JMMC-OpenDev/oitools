@@ -83,10 +83,11 @@ public enum Rule {
             RuleDataType.NONE,
             "Can't check repeat for column '{{MEMBER}}'"
     ),
-    GENERIC_COL_ERR("check if the UNFLAGGED *ERR column values are valid (positive or NULL)",
+    GENERIC_COL_ERR_FIX(RuleType.FIX,
+            "fix the UNFLAGGED *ERR column invalid values (negative values set to NaN)",
             Const.JMMC,
             RuleDataType.VALUE_ROW_COL,
-            "Invalid value at index {{COL}} for column '{{MEMBER}}' line {{ROW}}, found '{{VALUE}}' should be >= 0 or NaN or flagged out"
+            "Fixed value at index {{COL}} for column '{{MEMBER}}' line {{ROW}}, found '{{VALUE}} set to NaN (should be > 0 or NaN or flagged out)"
     ),
     GENERIC_COL_FORMAT("check if the column format matches the expected format (data type and dimensions)",
             "V2.4§1",
@@ -126,7 +127,7 @@ public enum Rule {
     GENERIC_COL_VAL_POSITIVE("check if column values are finite and positive",
             Const.JMMC,
             RuleDataType.VALUE_ROW,
-            "Invalid value for column '{{MEMBER}}' line {{ROW}}, found '{{VALUE}}'  should be >= 0"
+            "Invalid value for column '{{MEMBER}}' line {{ROW}}, found '{{VALUE}}'  should be > 0"
     ),
     GENERIC_CORRINDX_MIN("check if the CORRINDX values >= 1",
             "V2.7.2§4",
@@ -414,11 +415,11 @@ public enum Rule {
         if (OIFitsChecker.isInspectRules()) {
             if (getDataType() != expected) {
                 // special case GENERIC_COL_VAL_ACCEPTED_INT: RuleDataType.VALUE_EXPECTED_ROW_COL already checked
-                if (this == Rule.GENERIC_COL_VAL_ACCEPTED_INT && expected == RuleDataType.VALUE_EXPECTED_ROW) {
+                if ((this == Rule.GENERIC_COL_VAL_ACCEPTED_INT) && (expected == RuleDataType.VALUE_EXPECTED_ROW)) {
                     return;
                 }
                 // special case GENERIC_COL_VAL_POSITIVE: RuleDataType.VALUE_EXPECTED_ROW_COL already checked
-                if (this == Rule.GENERIC_COL_VAL_POSITIVE && expected == RuleDataType.VALUE_EXPECTED_ROW) {
+                if ((this == Rule.GENERIC_COL_VAL_POSITIVE) && (expected == RuleDataType.VALUE_ROW_COL)) {
                     return;
                 }
                 throw new IllegalStateException("Rule " + name() + " type expected: " + expected + " - type found: " + getDataType());

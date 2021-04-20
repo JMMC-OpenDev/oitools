@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsConstants;
+import fr.jmmc.oitools.meta.ArrayColumnMeta;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.CustomUnits;
@@ -34,6 +35,22 @@ import fr.jmmc.oitools.util.MathUtils;
  * Class for OI_VIS table.
  */
 public final class OIVis extends OIData {
+
+    /** CORRINDX_VISAMP column descriptor */
+    private final static ColumnMeta COLUMN_CORRINDX_VISAMP = new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_VISAMP,
+            "Index into correlation matrix for 1st VISAMP element", Types.TYPE_INT, 1, true, false, Units.NO_UNIT);
+
+    /** CORRINDX_VISPHI column descriptor */
+    private final static ColumnMeta COLUMN_CORRINDX_VISPHI = new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_VISPHI,
+            "Index into correlation matrix for 1st VISPHI element", Types.TYPE_INT, 1, true, false, Units.NO_UNIT);
+
+    /** CORRINDX_RVIS column descriptor */
+    private final static ColumnMeta COLUMN_CORRINDX_RVIS = new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_RVIS,
+            "Index into correlation matrix for 1st RVIS element", Types.TYPE_INT, 1, true, false, Units.NO_UNIT);
+
+    /** CORRINDX_IVIS column descriptor */
+    private final static ColumnMeta COLUMN_CORRINDX_IVIS = new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_IVIS,
+            "Index into correlation matrix for 1st IVIS element", Types.TYPE_INT, 1, true, false, Units.NO_UNIT);
 
     /**
      * Public OIVis class constructor
@@ -64,7 +81,8 @@ public final class OIVis extends OIData {
             // Optional Complex visibilities (ASPRO or AMBER - not OIFits) :
             // VISDATA column definition (User unit)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISDATA, "raw complex visibilities",
-                    Types.TYPE_COMPLEX, true, false, NO_STR_VALUES, new CustomUnits(), OIFitsConstants.COLUMN_VISERR, null, this));
+                    Types.TYPE_COMPLEX, true, false, NO_STR_VALUES, new CustomUnits(), OIFitsConstants.COLUMN_VISERR, null, this)
+                    .setOrientationDependent(true));
 
             // VISERR  column definition (User unit)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISERR, "error in raw complex visibilities",
@@ -91,7 +109,8 @@ public final class OIVis extends OIData {
 
         // VISPHI  column definition
         addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISPHI, "visibility phase", Types.TYPE_DBL,
-                Units.UNIT_DEGREE, OIFitsConstants.COLUMN_VISPHIERR, DataRange.RANGE_ANGLE, this));
+                Units.UNIT_DEGREE, OIFitsConstants.COLUMN_VISPHIERR, DataRange.RANGE_ANGLE, this)
+                .setOrientationDependent(true));
 
         // VISPHIERR  column definition
         addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISPHIERR, "error in visibility phase",
@@ -103,7 +122,8 @@ public final class OIVis extends OIData {
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_VISAMP, "model of the visibility amplitude",
                     Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.NO_UNIT, null, DataRange.RANGE_VIS, this));
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_VISPHI, "model of the visibility phase",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.UNIT_DEGREE, null, DataRange.RANGE_ANGLE, this));
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.UNIT_DEGREE, null, DataRange.RANGE_ANGLE, this)
+                    .setOrientationDependent(true));
         }
 
         // UCOORD  column definition
@@ -113,8 +133,8 @@ public final class OIVis extends OIData {
         addColumnMeta(COLUMN_VCOORD);
 
         // STA_INDEX  column definition
-        addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_STA_INDEX, "station numbers contributing to the data",
-                Types.TYPE_SHORT, 2) {
+        addColumnMeta(new ArrayColumnMeta(OIFitsConstants.COLUMN_STA_INDEX, "station numbers contributing to the data",
+                Types.TYPE_SHORT, 2, false) {
             @Override
             public short[] getIntAcceptedValues() {
                 return getAcceptedStaIndexes();
@@ -125,44 +145,42 @@ public final class OIVis extends OIData {
         addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_FLAG, "flag", Types.TYPE_LOGICAL, this));
 
         if (oifitsFile.isOIFits2()) {
-            // Derived CORRINDX_VISAMP column definition
-            addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_VISAMP, "Index into correlation matrix for 1st VISAMP element",
-                    Types.TYPE_INT, 1, true, false, Units.NO_UNIT));
-            // Derived CORRINDX_VISPHI column definition
-            addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_VISPHI, "Index into correlation matrix for 1st VISPHI element",
-                    Types.TYPE_INT, 1, true, false, Units.NO_UNIT));
-            // Derived VISREFMAP column definition
+            // CORRINDX_VISAMP column definition
+            addColumnMeta(COLUMN_CORRINDX_VISAMP);
+            // CORRINDX_VISPHI column definition
+            addColumnMeta(COLUMN_CORRINDX_VISPHI);
+            // VISREFMAP column definition
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VISREFMAP, "Matrix of indexes for establishing the reference channels",
                     Types.TYPE_LOGICAL, true, true, NO_STR_VALUES, Units.NO_UNIT, null, null, this));
 
-            // Derived RVIS column definition (User unit)
+            // RVIS column definition (User unit)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_RVIS, "Complex coherent flux (Real) in units of TUNITn",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), null, null, this));
-            // Derived RVISERR column definition (User unit)
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), OIFitsConstants.COLUMN_RVISERR, null, this)
+                    .setOrientationDependent(true));
+            // RVISERR column definition (User unit)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_RVISERR, "Error RVIS",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), null, null, this));
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), null, DataRange.RANGE_POSITIVE, this));
 
-            // Derived CORRINDX_RVIS column definition
-            addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_RVIS, "Index into correlation matrix for 1st RVIS element",
-                    Types.TYPE_INT, 1, true, false, Units.NO_UNIT));
-
-            // Derived IVIS column definition (User unit)
+            // IVIS column definition (User unit)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_IVIS, "Complex coherent flux (Imaginary) in units of TUNITn",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), null, null, this));
-            // Derived IVISERR column definition (User unit)
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), OIFitsConstants.COLUMN_IVISERR, null, this)
+                    .setOrientationDependent(true));
+            // IVISERR column definition (User unit)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_IVISERR, "Error IVIS",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), null, null, this));
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits(), null, DataRange.RANGE_POSITIVE, this));
 
-            // Derived CORRINDX_IVIS column definition
-            addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_IVIS, "Index into correlation matrix for 1st IVIS element",
-                    Types.TYPE_INT, 1, true, false, Units.NO_UNIT));
+            // CORRINDX_RVIS column definition
+            addColumnMeta(COLUMN_CORRINDX_RVIS);
+            addColumnMeta(COLUMN_CORRINDX_IVIS);
         }
 
         // Derived SPATIAL_U_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_UCOORD_SPATIAL, "spatial U frequency", Types.TYPE_DBL, this));
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_UCOORD_SPATIAL, "spatial U frequency", Types.TYPE_DBL, this)
+                .setOrientationDependent(true));
 
         // Derived SPATIAL_V_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VCOORD_SPATIAL, "spatial V frequency", Types.TYPE_DBL, this));
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VCOORD_SPATIAL, "spatial V frequency", Types.TYPE_DBL, this)
+                .setOrientationDependent(true));
 
         // Derived SNR column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_VISAMP, "SNR on " + OIFitsConstants.COLUMN_VISAMP,
@@ -181,7 +199,8 @@ public final class OIVis extends OIData {
             addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_RES_VISPHI_MODEL, "Residual between on " + OIFitsConstants.COLUMN_VISPHI
                     + " vs " + OIFitsConstants.COLUMN_NS_MODEL_VISPHI + " (sigma)", Types.TYPE_DBL, this,
                     "distanceAngle(" + OIFitsConstants.COLUMN_VISPHI + "," + OIFitsConstants.COLUMN_NS_MODEL_VISPHI + ") / " + OIFitsConstants.COLUMN_VISPHIERR,
-                    DataRange.RANGE_SIGMA));
+                    DataRange.RANGE_SIGMA)
+                    .setOrientationDependent(true));
         }
     }
 
@@ -572,12 +591,12 @@ public final class OIVis extends OIData {
     public void checkSyntax(final OIFitsChecker checker) {
         super.checkSyntax(checker);
 
+        checkColumnError(checker, getFlag(), getVisAmpErr(), this, OIFitsConstants.COLUMN_VISAMPERR);
+        checkColumnError(checker, getFlag(), getVisPhiErr(), this, OIFitsConstants.COLUMN_VISPHIERR);
+
         // optional columns
         final double[][] rvisErr = getRVisErr();
         final double[][] ivisErr = getIVisErr();
-
-        checkColumnError(checker, getFlag(), getVisAmpErr(), this, OIFitsConstants.COLUMN_VISAMPERR);
-        checkColumnError(checker, getFlag(), getVisPhiErr(), this, OIFitsConstants.COLUMN_VISPHIERR);
         if (rvisErr != null) {
             checkColumnError(checker, getFlag(), rvisErr, this, OIFitsConstants.COLUMN_RVISERR);
         }
@@ -595,10 +614,9 @@ public final class OIVis extends OIData {
         final int[] corrindx_visRvis = getCorrIndxRVis();
         final int[] corrindx_visIvis = getCorrIndxIVis();
 
-        if (corrindx_visAmp != null || corrindx_visPhi != null
-                || corrindx_visRvis != null || corrindx_visIvis != null) {
+        if ((corrindx_visAmp != null) || (corrindx_visPhi != null) || (corrindx_visRvis != null) || (corrindx_visIvis != null)) {
 
-            if (oiCorr == null || OIFitsChecker.isInspectRules()) {
+            if ((oiCorr == null) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_VIS_CORRINDX] check if the referenced OI_CORR table exists when the column CORRINDX_VISAMP, CORRINDX_VISPHI, CORRINDX_RVIS or CORRINDX_IVIS is present
 
                 // column is defined
@@ -615,7 +633,7 @@ public final class OIVis extends OIData {
                     checker.ruleFailed(Rule.OI_VIS_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_IVIS);
                 }
             }
-            if (oiCorr != null || OIFitsChecker.isInspectRules()) {
+            if ((oiCorr != null) || OIFitsChecker.isInspectRules()) {
                 // column is defined
                 if (corrindx_visAmp != null) {
                     checkCorrIndex(checker, oiCorr, this, OIFitsConstants.COLUMN_CORRINDX_VISAMP, corrindx_visAmp);

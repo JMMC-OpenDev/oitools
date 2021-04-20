@@ -31,9 +31,12 @@ import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
 import fr.jmmc.oitools.meta.WaveColumnMeta;
 import static fr.jmmc.oitools.model.ModelBase.logger;
+import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.util.MathUtils;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -44,7 +47,11 @@ public abstract class OIData extends OIAbstractData {
 
     /* constants */
     /** Inverse of century */
-    public final static double INV_CENTURY = 1d / 36525d; // 1/ (100 * YEAR)
+    public final static double INV_CENTURY = 1.0 / 36525.0; // 1/ (100 * YEAR)
+    /** JD to Seconds */
+    public final static double JD_TO_SECOND = 86400.0;
+    /** Seconds to JD */
+    public final static double SECOND_TO_JD = 1.0 / 86400.0;
 
     /* static descriptors */
     /** DATE-OBS keyword descriptor */
@@ -52,19 +59,43 @@ public abstract class OIData extends OIAbstractData {
             "UTC start date of observations", Types.TYPE_CHAR);
     /** TIME column descriptor */
     private final static ColumnMeta COLUMN_TIME = new ColumnMeta(OIFitsConstants.COLUMN_TIME,
-            "UTC time of observation", Types.TYPE_DBL, Units.UNIT_SECOND, DataRange.RANGE_POSITIVE);
+            "UTC start time of observation", Types.TYPE_DBL, Units.UNIT_SECOND, DataRange.RANGE_POSITIVE);
     /** MJD column descriptor */
     private final static ColumnMeta COLUMN_MJD = new ColumnMeta(OIFitsConstants.COLUMN_MJD,
-            "modified Julian Day", Types.TYPE_DBL, Units.UNIT_MJD);
+            "Modified Julian Day (start date of observation)", Types.TYPE_DBL, Units.UNIT_DAYS, DataRange.RANGE_POSITIVE_STRICT);
     /** INT_TIME column descriptor */
     private final static ColumnMeta COLUMN_INT_TIME = new ColumnMeta(OIFitsConstants.COLUMN_INT_TIME,
-            "integration time", Types.TYPE_DBL, Units.UNIT_SECOND, DataRange.RANGE_POSITIVE_STRICT);
+            "Integration time", Types.TYPE_DBL, Units.UNIT_SECOND, DataRange.RANGE_POSITIVE_STRICT);
     /** UCOORD column descriptor */
     protected final static ColumnMeta COLUMN_UCOORD = new ColumnMeta(OIFitsConstants.COLUMN_UCOORD,
-            "U coordinate of the data", Types.TYPE_DBL, Units.UNIT_METER);
+            "U coordinate of the data", Types.TYPE_DBL, Units.UNIT_METER).setOrientationDependent(true);
     /** VCOORD column descriptor */
     protected final static ColumnMeta COLUMN_VCOORD = new ColumnMeta(OIFitsConstants.COLUMN_VCOORD,
-            "V coordinate of the data", Types.TYPE_DBL, Units.UNIT_METER);
+            "V coordinate of the data", Types.TYPE_DBL, Units.UNIT_METER).setOrientationDependent(true);
+
+    /** HOUR_ANGLE column descriptor */
+    private final static ColumnMeta COLUMN_HOUR_ANGLE = new ColumnMeta(OIFitsConstants.COLUMN_HOUR_ANGLE,
+            "hour angle", Types.TYPE_DBL, Units.UNIT_HOUR);
+    /** RADIUS column descriptor */
+    private final static ColumnMeta COLUMN_RADIUS = new ColumnMeta(OIFitsConstants.COLUMN_RADIUS,
+            "radius i.e. projected base line", Types.TYPE_DBL, Units.UNIT_METER, DataRange.RANGE_POSITIVE);
+    /** POS_ANGLE column descriptor */
+    private final static ColumnMeta COLUMN_POS_ANGLE = new ColumnMeta(OIFitsConstants.COLUMN_POS_ANGLE,
+            "position angle of the projected base line", Types.TYPE_DBL, Units.UNIT_DEGREE, DataRange.RANGE_ANGLE)
+            .setOrientationDependent(true);
+    /** NIGHT_ID column descriptor */
+    private final static ColumnMeta COLUMN_NIGHT_ID = new ColumnMeta(OIFitsConstants.COLUMN_NIGHT_ID,
+            "night identifier", Types.TYPE_INT);
+    /** MJD_START column descriptor */
+    private final static ColumnMeta COLUMN_MJD_START = new ColumnMeta(OIFitsConstants.COLUMN_MJD_START_R,
+            "Modified Julian Day (start date of observation)", Types.TYPE_DBL, Units.UNIT_DAYS, DataRange.RANGE_POSITIVE_STRICT);
+    /** MJD_END column descriptor */
+    private final static ColumnMeta COLUMN_MJD_END = new ColumnMeta(OIFitsConstants.COLUMN_MJD_END_R,
+            "Modified Julian Day (end date of observation)", Types.TYPE_DBL, Units.UNIT_DAYS, DataRange.RANGE_POSITIVE_STRICT);
+
+    /** STA_CONF column descriptor */
+    private final static ColumnMeta COLUMN_STA_CONF = new ColumnMeta(OIFitsConstants.COLUMN_STA_CONF,
+            "station configuration", Types.TYPE_SHORT, 2); // Fake repeat to mimic 2D array
 
     /** members */
     /** cached reference on OI_WAVELENGTH table associated to this OIData table */
@@ -76,6 +107,8 @@ public abstract class OIData extends OIAbstractData {
     private int nFlagged = -1;
     /** distinct StaConf values present in this table (station configuration) (sorted) */
     private final Set<short[]> distinctStaConf = new LinkedHashSet<short[]>();
+    /** distinct MJD values present in this table */
+    private final Map<Range, Range> distinctMjdRanges = new LinkedHashMap<Range, Range>();
 
     /**
      * Protected OIData class constructor
@@ -127,28 +160,31 @@ public abstract class OIData extends OIAbstractData {
         // INT_TIME  column definition
         addColumnMeta(COLUMN_INT_TIME);
 
-        // Derived STA_CONF column definition
-        addDerivedColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_STA_CONF, "station configuration", Types.TYPE_SHORT, 2)); // fake repeat to mimic 2D array
-
         // Derived EFF_WAVE (double) column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_EFF_WAVE, "effective wavelength of channel", Types.TYPE_DBL, Units.UNIT_METER, this));
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_EFF_WAVE,
+                "effective wavelength of channel", Types.TYPE_DBL, Units.UNIT_METER, this));
 
         if (useCommonCols) {
             // Derived HOUR_ANGLE column definition
-            addDerivedColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_HOUR_ANGLE, "hour angle", Types.TYPE_DBL, Units.UNIT_HOUR));
-
+            addDerivedColumnMeta(COLUMN_HOUR_ANGLE);
             // Derived RADIUS column definition
-            addDerivedColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_RADIUS, "radius i.e. projected base line", Types.TYPE_DBL, Units.UNIT_METER, DataRange.RANGE_POSITIVE));
-
+            addDerivedColumnMeta(COLUMN_RADIUS);
             // Derived POS_ANGLE column definition
-            addDerivedColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_POS_ANGLE, "position angle of the projected base line", Types.TYPE_DBL, Units.UNIT_DEGREE, DataRange.RANGE_ANGLE));
-
+            addDerivedColumnMeta(COLUMN_POS_ANGLE);
             // Derived SPATIAL_FREQ column definition
-            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SPATIAL_FREQ, "spatial frequencies", Types.TYPE_DBL, DataRange.RANGE_POSITIVE, this));
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SPATIAL_FREQ,
+                    "spatial frequencies", Types.TYPE_DBL, DataRange.RANGE_POSITIVE, this));
         }
 
         // Derived NIGHT_ID column definition
-        addDerivedColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_NIGHT_ID, "night identifier", Types.TYPE_INT));
+        addDerivedColumnMeta(COLUMN_NIGHT_ID);
+        // Derived MJD_START column definition
+        addDerivedColumnMeta(COLUMN_MJD_START);
+        // Derived MJD_END column definition
+        addDerivedColumnMeta(COLUMN_MJD_END);
+
+        // Derived STA_CONF column definition
+        addDerivedColumnMeta(COLUMN_STA_CONF);
     }
 
     /*
@@ -308,7 +344,6 @@ public abstract class OIData extends OIAbstractData {
         }
     }
 
-
     /* --- Alternate data representation methods --- */
     /**
      * Return the effective wavelength of channel as double arrays (2D)
@@ -332,7 +367,6 @@ public abstract class OIData extends OIAbstractData {
             }
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_EFF_WAVE, effWaveDbls);
         }
-
         return effWaveDbls;
     }
 
@@ -351,7 +385,6 @@ public abstract class OIData extends OIAbstractData {
             // not filled here: see Analyzer
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_STA_CONF, staConfs);
         }
-
         return staConfs;
     }
 
@@ -393,7 +426,6 @@ public abstract class OIData extends OIAbstractData {
             }
             this.setColumnDerivedValue(name, spatialCoord);
         }
-
         return spatialCoord;
     }
 
@@ -477,7 +509,7 @@ public abstract class OIData extends OIAbstractData {
                         final short[] targetId = getTargetId();
 
                         // Get MJD column:
-                        final double[] mjd = getMJD();
+                        final double[] mjds = getMJD();
 
                         Integer rowTarget;
                         double j2000, gmst, T, EPS, OMEGA, L, L1, dL, dE, dT, gast, last;
@@ -489,7 +521,7 @@ public abstract class OIData extends OIAbstractData {
                             // http://www.mathworks.com/matlabcentral/fileexchange/28232-convert-julian-date-to-greenwich-apparent-sidereal-time/content/JD2GAST.m
 
                             // let j2000 OI_DATA%OI_VIS2%COL%MJD-51544.5
-                            j2000 = mjd[i] - MJD_2000; // days from J2000
+                            j2000 = mjds[i] - MJD_2000; // days from J2000
 
                             // let julcen j2000/36525.0 (fraction of epoch/century time elapsed since J2000)
                             T = j2000 * INV_CENTURY;
@@ -580,10 +612,8 @@ public abstract class OIData extends OIAbstractData {
                     }
                 }
             }
-
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_HOUR_ANGLE, hourAngle);
         }
-
         return hourAngle;
     }
 
@@ -603,15 +633,98 @@ public abstract class OIData extends OIAbstractData {
             nightId = new int[nRows];
 
             for (int i = 0; i < nRows; i++) {
-                // TODO: use array center coordinates, adjust night
-                // TODO: if no MJD, use DATE-OBS + TIME[i] instead
-                nightId[i] = (int) Math.round(mjds[i]);
-            }
+                final double mjd = mjds[i];
 
+                if (Double.isNaN(mjd)) {
+                    // TODO: if no MJD, use DATE-OBS + TIME[i] instead
+                    nightId[i] = UNDEFINED_INT;
+                } else {
+                    // TODO: use array center coordinates, adjust night
+                    // TODO: if no MJD, use DATE-OBS + TIME[i] instead
+                    nightId[i] = (int) Math.round(mjd);
+                }
+            }
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_NIGHT_ID, nightId);
         }
-
         return nightId;
+    }
+
+    /**
+     * Return the mjd start column.
+     *
+     * @return the mjd start column
+     */
+    public double[] getMJDStart() {
+        // lazy:
+        double[] mjdStart = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_MJD_START_R);
+
+        if (mjdStart == null) {
+            final int nRows = getNbRows();
+            final double[] mjds = getMJD();
+
+            mjdStart = new double[nRows];
+
+            for (int i = 0; i < nRows; i++) {
+                final double mjd = mjds[i];
+
+                if (Double.isNaN(mjd)) {
+                    mjdStart[i] = UNDEFINED_DBL;
+                } else {
+                    // round down to 1s:
+                    mjdStart[i] = Math.floor(mjd * JD_TO_SECOND) * SECOND_TO_JD;
+
+                    if (logger.isLoggable(Level.FINE)) {
+                        logger.log(Level.FINE, "mjdStart: {0} => {1}", new Object[]{mjd, mjdStart[i]});
+                    }
+                }
+            }
+            this.setColumnDerivedValue(OIFitsConstants.COLUMN_MJD_START_R, mjdStart);
+        }
+        return mjdStart;
+    }
+
+    /**
+     * Return the mjd end column.
+     *
+     * @return the mjd end column
+     */
+    public double[] getMJDEnd() {
+        // lazy:
+        double[] mjdEnd = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_MJD_END_R);
+
+        if (mjdEnd == null) {
+            final int nRows = getNbRows();
+            final double[] mjds = getMJD();
+            final double[] intTimes = getIntTime();
+
+            mjdEnd = new double[nRows];
+
+            for (int i = 0; i < nRows; i++) {
+                final double mjd = mjds[i];
+
+                if (Double.isNaN(mjd)) {
+                    mjdEnd[i] = UNDEFINED_DBL;
+                } else {
+                    final double intTime = intTimes[i];
+
+                    double sEnd = mjd * JD_TO_SECOND;
+
+                    if (Double.isNaN(intTime)) {
+                        sEnd += 1.0; // start = end + 1s ?
+                    } else {
+                        sEnd += intTime;
+                    }
+                    // round up to 1s:
+                    mjdEnd[i] = Math.ceil(sEnd) * SECOND_TO_JD;
+
+                    if (logger.isLoggable(Level.FINE)) {
+                        logger.log(Level.FINE, "mjdEnd: {0} => {1}", new Object[]{mjd + intTime, mjdEnd[i]});
+                    }
+                }
+            }
+            this.setColumnDerivedValue(OIFitsConstants.COLUMN_MJD_END_R, mjdEnd);
+        }
+        return mjdEnd;
     }
 
     /* --- Utility methods for cross-referencing --- */
@@ -639,7 +752,6 @@ public abstract class OIData extends OIAbstractData {
         if (this.oiWavelengthRef != null) {
             return this.oiWavelengthRef;
         }
-
         final String insName = getInsName();
         if (insName != null) {
             final OIWavelength oiWavelength = getOIFitsFile().getOiWavelength(insName);
@@ -656,7 +768,6 @@ public abstract class OIData extends OIAbstractData {
             }
             return oiWavelength;
         }
-
         return null;
     }
 
@@ -669,7 +780,6 @@ public abstract class OIData extends OIAbstractData {
         if (this.oiCorrRef != null) {
             return this.oiCorrRef;
         }
-
         final String corrName = getCorrName();
         if (corrName != null) {
             final OICorr oiCorr = getOIFitsFile().getOiCorr(corrName);
@@ -685,7 +795,6 @@ public abstract class OIData extends OIAbstractData {
             }
             return oiCorr;
         }
-
         return null;
     }
 
@@ -737,12 +846,11 @@ public abstract class OIData extends OIAbstractData {
 
                 for (int j = k + 1; j < indexes.length; j++) {
                     // rule [GENERIC_STA_INDEX_UNIQ] check duplicated indexes inside each STA_INDEX column values (data table)
-                    if (refId == indexes[j] || OIFitsChecker.isInspectRules()) {
+                    if ((refId == indexes[j]) || OIFitsChecker.isInspectRules()) {
                         checker.ruleFailed(Rule.GENERIC_STA_INDEX_UNIQ, oiData, OIFitsConstants.COLUMN_STA_INDEX).addValueAtCols(refId, i, k, j);
                     }
                 }
             }
-
         }
     }
 
@@ -769,11 +877,11 @@ public abstract class OIData extends OIAbstractData {
             final int idxI = corrindx[row];
 
             // rule [GENERIC_CORRINDX_MIN] check if the CORRINDX values >= 1
-            if (idxI < 1 || OIFitsChecker.isInspectRules()) {
+            if ((idxI < 1) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.GENERIC_CORRINDX_MIN, oidata, colName).addValueAt(idxI, row);
             }
             // rule [GENERIC_CORRINDX_MAX] check if the CORRINDX values <= NDATA
-            if (idxI > ndata || OIFitsChecker.isInspectRules()) {
+            if ((idxI > ndata) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.GENERIC_CORRINDX_MAX, oidata, colName).addValuesAt(idxI, ndata, row);
             }
 
@@ -788,9 +896,7 @@ public abstract class OIData extends OIAbstractData {
                 }
             }
         }
-
     }
-
 
     /*
      * --- public data access ---------------------------------------------------------
@@ -803,14 +909,20 @@ public abstract class OIData extends OIAbstractData {
      */
     @Override
     protected double[] getDerivedColumnAsDouble(final String name) {
+        if (OIFitsConstants.COLUMN_HOUR_ANGLE.equals(name)) {
+            return getHourAngle();
+        }
         if (OIFitsConstants.COLUMN_RADIUS.equals(name)) {
             return getRadius();
         }
         if (OIFitsConstants.COLUMN_POS_ANGLE.equals(name)) {
             return getPosAngle();
         }
-        if (OIFitsConstants.COLUMN_HOUR_ANGLE.equals(name)) {
-            return getHourAngle();
+        if (OIFitsConstants.COLUMN_MJD_START_R.equals(name)) {
+            return getMJDStart();
+        }
+        if (OIFitsConstants.COLUMN_MJD_END_R.equals(name)) {
+            return getMJDEnd();
         }
         return null;
     }
@@ -851,36 +963,9 @@ public abstract class OIData extends OIAbstractData {
     @Override
     public void setChanged() {
         super.setChanged();
-        distinctStaConf.clear();
         nFlagged = -1;
-    }
-
-    /**
-     * Return the wavelenth range (min - max)
-     * @return float[]{min, max}
-     */
-    public final float[] getEffWaveRange() {
-        final OIWavelength oiWavelength = getOiWavelength();
-        if (oiWavelength != null) {
-            return oiWavelength.getEffWaveRange();
-        }
-        return null;
-    }
-
-    /**
-     * Get the distinct StaConf values present in this table (station configuration)
-     * @return distinctStaConf
-     */
-    public Set<short[]> getDistinctStaConf() {
-        return distinctStaConf;
-    }
-
-    /**
-     * Get the size of distinct StaConf values present in this table
-     * @return distinctStaConf size
-     */
-    public int getDistinctStaConfCount() {
-        return distinctStaConf.size();
+        distinctStaConf.clear();
+        distinctMjdRanges.clear();
     }
 
     /**
@@ -900,42 +985,81 @@ public abstract class OIData extends OIAbstractData {
     }
 
     /**
-     * Return true if the given error value is valid ie. NaN or is positive or equals to 0
-     * @param checker checker component
-     * @param flags the FLAG column
-     * @param err error value
-     * @param oidata oiData table
-     * @param colName column name
+     * Get the distinct StaConf values present in this table (station configuration)
+     * @return distinctStaConf
      */
-    public static void checkColumnError(final OIFitsChecker checker, final boolean[][] flags, final double[][] err,
-                                        final OIData oidata, final String colName) {
+    public Set<short[]> getDistinctStaConf() {
+        return distinctStaConf;
+    }
 
-        boolean[] rowFlag;
-        double[] rowErr;
+    /**
+     * Get the size of distinct StaConf values present in this table
+     * @return distinctStaConf size
+     */
+    public int getDistinctStaConfCount() {
+        return distinctStaConf.size();
+    }
 
-        for (int i = 0, j; i < err.length; i++) {
-            rowFlag = flags[i];
-            rowErr = err[i];
+    /**
+     * Get boolean for distinct mjd values
+     * @return true if size of distinctMjd == 1
+     */
+    public final boolean hasSingleMJDRange() {
+        return getDistinctMJDRanges().size() == 1;
+    }
 
-            for (j = 0; j < rowErr.length; j++) {
-                if (!rowFlag[j] || OIFitsChecker.isInspectRules()) {
-                    // Not flagged:
-                    if (!isErrorValid(rowErr[j]) || OIFitsChecker.isInspectRules()) {
-                        // rule [GENERIC_COL_ERR] check if the UNFLAGGED *ERR column values are valid (positive or NULL)
-                        checker.ruleFailed(Rule.GENERIC_COL_ERR, oidata, colName).addColValueAt(rowErr[j], i, j);
-                    }
-                }
-            }
+    /**
+     * Get distinct mjd ranges present in this table
+     * @return distinctTargetId
+     */
+    public final Map<Range, Range> getDistinctMJDRanges() {
+        return distinctMjdRanges;
+    }
+
+    /**
+     * Return the wavelenth range
+     * @return wavelenth range
+     */
+    public final Range getEffWaveRange() {
+        final OIWavelength oiWavelength = getOiWavelength();
+        if (oiWavelength != null) {
+            return oiWavelength.getEffWaveRange();
         }
+        return null;
     }
 
     /**
      * Return true if the given error value is valid ie. NaN or is positive or equals to 0
-     * @param err error value
-     * @return true if the given error value is valid
+     * @param checker checker component
+     * @param flags the FLAG column
+     * @param errors error value
+     * @param oidata oiData table
+     * @param colName column name
      */
-    public static boolean isErrorValid(final double err) {
-        return NumberUtils.isFinitePositive(err) || Double.isNaN(err);
+    public static void checkColumnError(final OIFitsChecker checker, final boolean[][] flags, final double[][] errors,
+                                        final OIData oidata, final String colName) {
+        boolean[] rowFlag;
+        double[] rowErr;
+
+        for (int i = 0, j; i < errors.length; i++) {
+            rowFlag = flags[i];
+            rowErr = errors[i];
+
+            for (j = 0; j < rowErr.length; j++) {
+                final double err = rowErr[j];
+                boolean fixed = false;
+
+                if (!ColumnMeta.isPositiveValueValid(err)) {
+                    rowErr[j] = UNDEFINED_DBL;
+                    fixed = true;
+                }
+                // Not flagged ?
+                if ((!rowFlag[j] && fixed) || OIFitsChecker.isInspectRules()) {
+                    // rule [GENERIC_COL_ERR] check if the UNFLAGGED *ERR column values are valid (positive or NULL)
+                    checker.ruleFailed(Rule.GENERIC_COL_ERR_FIX, oidata, colName).addColValueAt(err, i, j);
+                }
+            }
+        }
     }
 
     /**

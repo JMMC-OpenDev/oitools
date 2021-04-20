@@ -32,6 +32,7 @@ import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.model.OutputVisitor;
 import fr.jmmc.oitools.model.OutputVisitor.TargetMetadataProvider;
 import fr.jmmc.oitools.model.XmlOutputVisitor;
+import fr.jmmc.oitools.model.range.Range;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -171,12 +172,13 @@ public final class OIFitsViewer extends OIFitsCommand {
                         final OIWavelength oiWavelength = oiFitsFile.getOiWavelength(insName);
 
                         if (oiWavelength != null) {
-                            final float minWavelength = oiWavelength.getEffWaveMin();
-                            final float maxWavelength = oiWavelength.getEffWaveMax();
                             final int nbChannels = oiWavelength.getNWave();
+                            final Range effWaveRange = oiWavelength.getEffWaveRange();
+                            final double minWavelength = effWaveRange.getMin();
+                            final double maxWavelength = effWaveRange.getMax();
 
                             // Resolution = lambda / delta_lambda
-                            final float resPower = oiWavelength.getResolution();
+                            final double resPower = oiWavelength.getResolution();
 
                             /* build a list of different night ids for the couple (target, insname) ie per granule */
                             final Map<Integer, Set<OIData>> oiDataPerNightId = new LinkedHashMap<Integer, Set<OIData>>();

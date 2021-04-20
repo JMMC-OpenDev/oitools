@@ -32,6 +32,12 @@ import fr.jmmc.oitools.model.OutputVisitor;
 import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.model.TargetIdMatcher;
 import fr.jmmc.oitools.model.TargetManager;
+import fr.jmmc.oitools.model.range.Range;
+import fr.jmmc.oitools.util.StationNamesComparator;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,6 +48,15 @@ import java.util.Set;
  * @author bourgesl, mella
  */
 public final class OIFitsCollectionViewer {
+
+    /** Logger */
+    protected final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(OIFitsCollectionViewer.class.getName());
+
+    /* constants */
+    private final static String SEP = "\t";
+
+    /** double formatter for MJD (6 digits) to have 1s precision */
+    private final static NumberFormat df6 = new DecimalFormat("0.00000#");
 
     private OIFitsCollectionViewer() {
         super();
@@ -79,11 +94,11 @@ public final class OIFitsCollectionViewer {
             final InstrumentMode gInsMode = granule.getInsMode();
             // OIWavelength info
             final String insName = gInsMode.getInsName(); // global UID
-            final float minWavelength = gInsMode.getLambdaMin();
-            final float maxWavelength = gInsMode.getLambdaMax();
             final int nbChannels = gInsMode.getNbChannels();
+            final double minWavelength = gInsMode.getLambdaMin();
+            final double maxWavelength = gInsMode.getLambdaMax();
             // Resolution = lambda / delta_lambda
-            final float resPower = gInsMode.getResPower();
+            final double resPower = gInsMode.getResPower();
 
             // night
             final int gNightId = granule.getNight().getNightId();
@@ -101,12 +116,15 @@ public final class OIFitsCollectionViewer {
 
                     if (targetIdMatcher != null) {
                         /* one oiData table, search for target by targetid (and nightid) */
+                        final int nbRows = oiData.getNbRows();
                         final short[] targetIds = oiData.getTargetId();
                         final int[] nightIds = oiData.getNightId();
                         final double[] mjds = oiData.getMJD();
                         final double[] intTimes = oiData.getIntTime();
 
-                        for (int i = 0; i < targetIds.length; i++) {
+                        boolean match = false;
+
+                        for (int i = 0; i < nbRows; i++) {
                             // same target and same night:
                             if (targetIdMatcher.match(targetIds[i]) && (gNightId == nightIds[i])) {
                                 // TODO: count flag? what to do with flagged measures?
@@ -136,10 +154,11 @@ public final class OIFitsCollectionViewer {
                                 if (t < intTime) {
                                     intTime = t;
                                 }
-                            }
-                        }
 
-                        if (facilityName.isEmpty() && oiData.getArrName() != null) {
+                                match = true;
+                            }
+                        } // rows
+                        if (match && facilityName.isEmpty() && oiData.getArrName() != null) {
                             facilityName = oiData.getArrName(); // potential multiple ARRNAME values !
                         }
                     }
@@ -151,6 +170,78 @@ public final class OIFitsCollectionViewer {
                         facilityName, insName,
                         nbVis, nbVis2, nbT3, nbChannels);
             }
+        }
+    }
+
+    public static void processBaselines(final OIFitsCollection oiFitsCollection) {
+        final StringBuilder sb = new StringBuilder(1024);
+
+        baselinesPerGranule(oiFitsCollection, sb);
+
+        OIFitsCommand.info(sb.toString());
+    }
+
+    public static void baselinesPerGranule(final OIFitsCollection oiFitsCollection, final StringBuilder out) {
+        out.append("instrument_name").append(SEP)
+                .append("em_min").append(SEP)
+                .append("em_max").append(SEP)
+                .append("night_id").append(SEP)
+                .append("target_name").append(SEP)
+                .append("s_ra").append(SEP)
+                .append("s_dec").append(SEP)
+                .append("mjds").append(SEP)
+                .append("baselines").append('\n');
+
+        final List<Granule> granules = oiFitsCollection.getSortedGranules();
+
+        final List<String> sortedStaNames = new ArrayList<String>(16);
+        final List<Range> sortedMJDRanges = new ArrayList<Range>(16);
+
+        for (Granule granule : granules) {
+            final Target gTarget = granule.getTarget();
+            // Target info
+            final String targetName = gTarget.getTarget(); // global UID
+            final double targetRa = gTarget.getRaEp0();
+            final double targetDec = gTarget.getDecEp0();
+
+            final InstrumentMode gInsMode = granule.getInsMode();
+            // OIWavelength info
+            final String insName = gInsMode.getInsName(); // global UID
+            final double minWavelength = gInsMode.getLambdaMin();
+            final double maxWavelength = gInsMode.getLambdaMax();
+
+            // night
+            final int gNightId = granule.getNight().getNightId();
+
+            // Sort StaNames by name:
+            sortedStaNames.clear();
+            sortedStaNames.addAll(granule.getDistinctStaNames());
+            Collections.sort(sortedStaNames, StationNamesComparator.INSTANCE);
+
+            // Sort MJD Ranges:
+            sortedMJDRanges.clear();
+            sortedMJDRanges.addAll(granule.getDistinctMjdRanges());
+            Collections.sort(sortedMJDRanges);
+
+            out.append(insName).append(SEP)
+                    .append(minWavelength).append(SEP)
+                    .append(maxWavelength).append(SEP)
+                    .append(gNightId).append(SEP)
+                    .append(targetName).append(SEP)
+                    .append(targetRa).append(SEP)
+                    .append(targetDec).append(SEP);
+
+            // distinct MJD ranges:
+            for (Range r : sortedMJDRanges) {
+                out.append('[').append(df6.format(r.getMin())).append(',').append(df6.format(r.getMax())).append("] ");
+            }
+            out.append(SEP);
+
+            // distinct StaNames:
+            for (String staName : sortedStaNames) {
+                out.append(staName).append(' ');
+            }
+            out.append('\n');
         }
     }
 }

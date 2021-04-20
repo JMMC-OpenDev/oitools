@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.meta.ColumnMeta;
+import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_DBL;
 import gnu.jel.CompilationException;
 import gnu.jel.CompiledExpression;
 import gnu.jel.DVMap;
@@ -84,7 +85,7 @@ public class JELEval extends ExpressionEvaluator {
 
             // skip the derived column being evaluated:
             // to avoid infinite recursion:
-            if (!colName.equalsIgnoreCase(colNameEval)) {
+            if (!colNameEval.equalsIgnoreCase(colName)) {
                 jelNames[n++] = colName;
             }
         }
@@ -193,7 +194,7 @@ public class JELEval extends ExpressionEvaluator {
 
             // reset results to NaN
             for (int i = 0; i < nRows; i++) {
-                Arrays.fill(result[i], Double.NaN);
+                Arrays.fill(result[i], UNDEFINED_DBL);
             }
         } catch (Throwable th) {
             // impossible case
@@ -210,7 +211,7 @@ public class JELEval extends ExpressionEvaluator {
     /**
      * This class is public and overridden public methods are required by JEL
      */
-    public static class VariableResolver extends DVMap {
+    public final static class VariableResolver extends DVMap {
 
         // all possible column names
         final String[] names;
@@ -243,7 +244,7 @@ public class JELEval extends ExpressionEvaluator {
 
         private int getColumnIndex(final String colName) {
             for (int i = 0; i < names.length; i++) {
-                if (names[i] != null && colName.equalsIgnoreCase(names[i])) {
+                if ((names[i] != null) && colName.equalsIgnoreCase(names[i])) {
                     return i;
                 }
             }
@@ -257,7 +258,7 @@ public class JELEval extends ExpressionEvaluator {
     /**
      * This class is public and overridden public methods are required by JEL
      */
-    public static class VariableProvider {
+    public final static class VariableProvider {
 
         final JELColumn[] columns;
         int i = -1;
@@ -271,7 +272,7 @@ public class JELEval extends ExpressionEvaluator {
             final JELColumn col = columns[index];
 
             return (col.values2D != null) ? col.values2D[i][j]
-                    : (col.values1D != null) ? col.values1D[i] : Double.NaN;
+                    : (col.values1D != null) ? col.values1D[i] : UNDEFINED_DBL;
         }
     }
 

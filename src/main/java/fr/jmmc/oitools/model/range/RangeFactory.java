@@ -1,5 +1,5 @@
-/* 
- * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
+/*
+ * Copyright (C) 2021 CNRS - JMMC project ( http://www.jmmc.fr )
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,20 +17,38 @@
 /*******************************************************************************
  * JMMC project ( http://www.jmmc.fr ) - Copyright (C) CNRS.
  ******************************************************************************/
-package fr.jmmc.oitools.test;
+package fr.jmmc.oitools.model.range;
+
+import java.util.ArrayList;
 
 /**
- * This interface holds several constants
- * @author bourgesl
+ * This interface defines the range factory pattern
+ * 
+ * @author Laurent BOURGES.
  */
-public interface TestEnv {
+public interface RangeFactory {
 
-    /** folder containing oidata test files. By default $home/oidata/ */
-    public final static String TEST_DIR = System.getProperty("user.home") + "/oidata/";
-    /** folder containing copied oidata files. By default $home/oidata/copy/ */
-    public final static String COPY_DIR = TEST_DIR + "copy/";
+    /**
+     * Return a Range instance with given minimum and maximum value
+     * @param min minimum value
+     * @param max maximum value
+     * @return Range instance
+     */
+    public Range valueOf(final double min, final double max);
 
-    /* constants */
-    /** Logger associated to test classes */
-    public final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TestEnv.class.getName());
+    /**
+     * Return a List of Range
+     * @return List of Range
+     */
+    public ArrayList<Range> getList();
+
+    /**
+     * Reset the factory state
+     */
+    public void reset();
+
+    /**
+     * Dump the factory statistics
+     */
+    public void dumpStats();
 }

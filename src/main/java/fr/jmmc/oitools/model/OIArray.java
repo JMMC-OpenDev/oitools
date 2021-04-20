@@ -64,7 +64,7 @@ public final class OIArray extends OITable {
             "station name", Types.TYPE_CHAR, 16);
     /** STA_INDEX column descriptor */
     private final static ColumnMeta COLUMN_STA_INDEX = new ColumnMeta(OIFitsConstants.COLUMN_STA_INDEX,
-            "station index", Types.TYPE_SHORT);
+            "station number", Types.TYPE_SHORT);
     /** DIAMETER column descriptor */
     private final static ColumnMeta COLUMN_DIAMETER = new ColumnMeta(OIFitsConstants.COLUMN_DIAMETER,
             "element diameter", Types.TYPE_REAL, Units.UNIT_METER, DataRange.RANGE_POSITIVE_STRICT);
@@ -74,17 +74,17 @@ public final class OIArray extends OITable {
 
     /** FOV column descriptor */
     public final static ColumnMeta COLUMN_FOV = new ColumnMeta(OIFitsConstants.COLUMN_FOV,
-            "Photometric field of view (arcsec)", Types.TYPE_DBL, 1, false, false, Units.UNIT_ARCSEC);
+            "Photometric field of view (arcsec)", Types.TYPE_DBL, Units.UNIT_ARCSEC, DataRange.RANGE_POSITIVE_STRICT);
     /** FOV_TYPE column descriptor */
     public final static ColumnMeta COLUMN_FOVTYPE = new ColumnMeta(OIFitsConstants.COLUMN_FOVTYPE,
-            "Model for FOV: 'FWHM' or 'RADIUS'", Types.TYPE_CHAR, 6, false, false, new String[]{OIFitsConstants.COLUMN_FOVTYPE_FWHM,
-                OIFitsConstants.COLUMN_FOVTYPE_RADIUS}, Units.NO_UNIT, null, null);
+            "Model for FOV: 'FWHM' or 'RADIUS'", Types.TYPE_CHAR, 6, new String[]{OIFitsConstants.COLUMN_FOVTYPE_FWHM,
+                                                                                  OIFitsConstants.COLUMN_FOVTYPE_RADIUS});
 
     /* members */
     /** cached analyzed data */
     /** mapping of staIndex values to row index */
     private final Map<Short, Integer> staIndexToRowIndex = new HashMap<Short, Integer>();
-    /** cached StaNames corresponding to given OIData StaIndex arrays */
+    /** cached StaNames corresponding to given OIData StaIndex arrays (identity hashcode) */
     private final Map<short[], String> staIndexesToStaNames = new IdentityHashMap<short[], String>();
 
     /**
@@ -150,7 +150,7 @@ public final class OIArray extends OITable {
      */
     public OIArray(final OIFitsFile oifitsFile, final OIArray src) {
         this(oifitsFile);
-        
+
         this.copyTable(src);
     }
 
@@ -390,7 +390,7 @@ public final class OIArray extends OITable {
         super.checkSyntax(checker);
 
         // rule [OI_ARRAY_ARRNAME] check the ARRNAME keyword has a not null or empty value
-        if ((getArrName() != null && getArrName().length() == 0) || OIFitsChecker.isInspectRules()) {
+        if (((getArrName() != null) && (getArrName().length() == 0)) || OIFitsChecker.isInspectRules()) {
             checker.ruleFailed(Rule.OI_ARRAY_ARRNAME, this, OIFitsConstants.KEYWORD_ARRNAME);
         }
 
@@ -400,26 +400,27 @@ public final class OIArray extends OITable {
             // ensure coordinates != 0 (not undefined; expected correctly set)
             final double norm = MathUtils.carthesianNorm(arrayXYZ[0], arrayXYZ[1], arrayXYZ[2]);
             // rule [OI_ARRAY_XYZ] check if the ARRAY_XYZ keyword values corresponds to a proper coordinate on earth
-            if ((Double.isNaN(norm) || norm <= MIN_EARTH_RADIUS) || OIFitsChecker.isInspectRules()) {
+            if ((Double.isNaN(norm) || (norm <= MIN_EARTH_RADIUS)) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.OI_ARRAY_XYZ, this, OIFitsConstants.KEYWORD_ARRAY_X).addKeywordValue(arrayXYZ[0]);
                 checker.ruleFailed(Rule.OI_ARRAY_XYZ, this, OIFitsConstants.KEYWORD_ARRAY_Y).addKeywordValue(arrayXYZ[1]);
                 checker.ruleFailed(Rule.OI_ARRAY_XYZ, this, OIFitsConstants.KEYWORD_ARRAY_Z).addKeywordValue(arrayXYZ[2]);
 
                 // Fix known interferometer (from ASPRO2 conf 2017.7):
-                if (getArrName() != null) {
+                final String arrName = getArrName();
+                if (arrName != null) {
                     // rule [OI_ARRAY_XYZ_FIX] fix the ARRAY_XYZ keyword values (to VLTI or CHARA according to the ARRNAME keyword) when the ARRAY_XYZ keyword values are incorrect
                     final String fixed;
-                    if (getArrName().startsWith("VLTI")) {
+                    if (arrName.startsWith("VLTI")) {
                         fixed = "VLTI";
                         setArrayXYZ(1942014.1545180853, -5455311.818167002, -2654530.4375114734);
-                    } else if (getArrName().startsWith("CHARA")) {
+                    } else if (arrName.startsWith("CHARA")) {
                         fixed = "CHARA";
                         setArrayXYZ(-2476998.047780274, -4647390.089884061, 3582240.6122966344);
                     } else {
                         // other interferometers ?
                         fixed = null;
                     }
-                    if (fixed != null || OIFitsChecker.isInspectRules()) {
+                    if ((fixed != null) || OIFitsChecker.isInspectRules()) {
                         checker.ruleFailed(Rule.OI_ARRAY_XYZ_FIX, this).addFixedValue(fixed);
                     }
                 }
@@ -430,20 +431,20 @@ public final class OIArray extends OITable {
         final String[] staNames = getStaName();
 
         for (int i = 0; i < staIndexes.length; i++) {
-            if (staNames[i] == null || OIFitsChecker.isInspectRules()) {
+            if ((staNames[i] == null) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_ARRAY_STA_NAME] check if the STA_NAME column values have a not null or empty value
                 checker.ruleFailed(Rule.OI_ARRAY_STA_NAME, this, OIFitsConstants.COLUMN_STA_NAME).addValueAt(staNames[i], i);
             }
-            if (staNames[i] != null || OIFitsChecker.isInspectRules()) {
+            if ((staNames[i] != null) || OIFitsChecker.isInspectRules()) {
                 final short refId = staIndexes[i];
                 final String refName = staNames[i];
                 // rule [OI_ARRAY_STA_INDEX_MIN] check if the STA_INDEX values >= 1
-                if (refId < 1 || OIFitsChecker.isInspectRules()) {
+                if ((refId < 1) || OIFitsChecker.isInspectRules()) {
                     checker.ruleFailed(Rule.OI_ARRAY_STA_INDEX_MIN, this, OIFitsConstants.COLUMN_STA_INDEX).addValueAt(refId, i);
                 }
                 for (int j = i + 1; j < staIndexes.length; j++) {
                     // rule [OI_ARRAY_STA_INDEX_UNIQ] check duplicated indexes in the STA_INDEX column of the OI_ARRAY table
-                    if (refId == staIndexes[j] || OIFitsChecker.isInspectRules()) {
+                    if ((refId == staIndexes[j]) || OIFitsChecker.isInspectRules()) {
                         checker.ruleFailed(Rule.OI_ARRAY_STA_INDEX_UNIQ, this, OIFitsConstants.COLUMN_STA_INDEX).addValueAtRows(refId, i, j);
                     }
                     // rule [OI_ARRAY_STA_NAME_UNIQ] check duplicated values in the STA_NAME column of the OI_ARRAY table
@@ -483,6 +484,22 @@ public final class OIArray extends OITable {
      */
     public Integer getRowIndex(final Short staIndex) {
         return getStaIndexToRowIndex().get(staIndex);
+    }
+
+    /**
+     * Return the StaName value corresponding to given OIData StaIndex value
+     * @param staIndex staIndex as short
+     * @return StaName if found; staIndex as String otherwise
+     */
+    public String getStaName(final short staIndex) {
+        final Integer i = getRowIndex(Short.valueOf(staIndex));
+
+        if (i == null) {
+            return Short.toString(staIndex);
+        } else {
+            final String[] staNames = getStaName();
+            return staNames[i];
+        }
     }
 
     /**

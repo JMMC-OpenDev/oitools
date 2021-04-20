@@ -39,6 +39,8 @@ public abstract class ModelBase {
     public final static double UNDEFINED_DBL = Double.NaN;
     /** undefined String value = "" */
     public final static String UNDEFINED_STRING = "";
+    /** "UNDEFINED' String value */
+    public static final String UNDEFINED = "UNDEFINED";
     /** empty int array */
     protected final static short[] EMPTY_SHORT_ARRAY = new short[0];
     /** empty float array */

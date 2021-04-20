@@ -17,8 +17,11 @@
 package fr.jmmc.oitools.processing;
 
 import fr.jmmc.oitools.fits.FitsConstants;
+import fr.jmmc.oitools.image.FitsImageHDU;
+import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 import fr.jmmc.oitools.model.ModelBase;
+import static fr.jmmc.oitools.model.ModelBase.UNDEFINED;
 import fr.jmmc.oitools.model.NightId;
 import fr.jmmc.oitools.model.NightIdMatcher;
 import fr.jmmc.oitools.model.OIArray;
@@ -29,12 +32,16 @@ import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
+import fr.jmmc.oitools.model.StaNamesDir;
 import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.model.TargetManager;
+import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.util.OITableComparator;
+import fr.nom.tam.fits.FitsDate;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -52,7 +59,6 @@ public final class Merger {
 
     private static final Logger logger = Logger.getLogger(Merger.class.getName());
 
-    private static final String UNDEFINED = "UNDEFINED";
     private static final Short UNDEFINED_SHORT = Short.valueOf(ModelBase.UNDEFINED_SHORT);
 
     /**
@@ -131,8 +137,11 @@ public final class Merger {
         if (result != null) {
             final Context ctx = new Context(result, resultFile);
 
-            // 2. Get all referenced Target, OIWavelength, OIArray and OICorr in data tables
+            // 2. Get all referenced OIPrimaryHDU, Target, OIWavelength, OIArray and OICorr in data tables
             collectTables(ctx);
+
+            // 2.1 Process Primary header
+            processOIPrimaryHDU(ctx);
 
             // 3. process Meta Data to prepare mappings:
             // Process OI_TARGET:
@@ -155,7 +164,6 @@ public final class Merger {
             // 4. process Data:
             processOIData(ctx);
         }
-
         return resultFile;
     }
 
@@ -170,35 +178,19 @@ public final class Merger {
                 for (OIFitsFile oiFits : result.getSortedOIFitsFiles()) {
                     if (version == null || oiFits.getVersion().ordinal() > version.ordinal()) {
                         version = oiFits.getVersion();
+
+                        if (version == OIFitsStandard.VERSION_2) {
+                            // max(version) selected:
+                            break;
+                        }
                     }
                 }
             }
         }
 
-        final OIFitsFile resultFile = new OIFitsFile(version);
+        logger.log(Level.INFO, "Using OIFITS {0}", version);
 
-        if (version == OIFitsStandard.VERSION_2) {
-            final OIPrimaryHDU imageHDU = new OIPrimaryHDU();
-            imageHDU.setContent(FitsConstants.KEYWORD_CONTENT_OIFITS2);
-// TODO: set keywords at the end ?            
-/*            
-            imageHDU.setOrigin("ESO");
-            imageHDU.setDate("2017-10-04");
-            imageHDU.setDateObs("2017-05-23");
-            imageHDU.setAuthor("Charleen");
-            imageHDU.setTelescop("Etoilemagic");
-            imageHDU.setInstrume("VEGA");
-            imageHDU.setObserver("Gilles");
-            imageHDU.setObject("MegaStar");
-            imageHDU.setInsMode("Low_JHK");
-            imageHDU.setReferenc("2017HDTYE.123.43.56");
-            imageHDU.setProgId("074.R-456");
-            imageHDU.setProcsoft("pndg 3.4");
-            imageHDU.setObsTech("SCAN, PH_REF, ...");
-             */
-            resultFile.setPrimaryImageHdu(imageHDU);
-        }
-        return resultFile;
+        return new OIFitsFile(version);
     }
 
     /**
@@ -236,6 +228,11 @@ public final class Merger {
     private static void collectTables(final Context ctx) {
         // Collect all OIWavelength, OIArray and OICorr tables:
         for (OIData oiData : ctx.selectorResult.getSortedOIDatas()) {
+            // Collect Primary header:
+            final OIPrimaryHDU primaryHDU = oiData.getOIFitsFile().getOIPrimaryHDU();
+            if (primaryHDU != null) {
+                ctx.usedOIPrimaryHDU.add(primaryHDU);
+            }
             // Collect referenced tables:
             final OITarget oiTarget = oiData.getOiTarget();
             if (oiTarget != null) {
@@ -255,6 +252,109 @@ public final class Merger {
             }
             // TODO: OIInspol ?
         }
+    }
+
+    /**
+     * Process Primary header
+     *
+     * @param ctx merge context
+     * @throws IllegalArgumentException
+     */
+    private static void processOIPrimaryHDU(final Context ctx) throws IllegalArgumentException {
+        final FitsImageHDU imageHdu;
+
+        if (ctx.resultFile.getVersion() == OIFitsStandard.VERSION_2) {
+            final OIPrimaryHDU primaryHdu;
+
+            if (ctx.usedOIPrimaryHDU.size() == 1) {
+                // single file => keep this primary HDU:
+                primaryHdu = ctx.usedOIPrimaryHDU.iterator().next();
+            } else {
+                primaryHdu = new OIPrimaryHDU();
+
+                // note: ignore header cards (extra keywords)
+                final Map<String, Set<String>> keyValues = new HashMap<String, Set<String>>(32);
+
+                // Collect distinct values for mandatory keywords:
+                for (OIPrimaryHDU hdu : ctx.usedOIPrimaryHDU) {
+                    if (logger.isLoggable(Level.FINE)) {
+                        logger.log(Level.FINE, "Dump HDU: {0}", hdu.idToString());
+                    }
+
+                    for (KeywordMeta keyword : hdu.getKeywordDescCollection()) {
+                        final String keywordName = keyword.getName();
+
+                        if (!keyword.isOptional()) {
+                            // get keyword value :
+                            final Object keywordValue = hdu.getKeywordValue(keywordName);
+
+                            if (keywordValue == null) {
+                                // skip missing values
+                                continue;
+                            }
+
+                            if (logger.isLoggable(Level.FINE)) {
+                                logger.log(Level.FINE, "Get {0} = {1}", new Object[]{keywordName, keywordValue});
+                            }
+
+                            Set<String> values = keyValues.get(keywordName);
+                            if (values == null) {
+                                values = new LinkedHashSet<String>();
+                                keyValues.put(keywordName, values);
+                            }
+                            values.add(keywordValue.toString());
+                        }
+                    }
+                }
+                // fill OIFITS2 Mandatory keywords:
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "keyValues: {0}", keyValues);
+                }
+
+                // note: not really correct as filters can reduce the number of valid entries (TARGET ...)
+                for (KeywordMeta keyword : primaryHdu.getKeywordDescCollection()) {
+                    final String keywordName = keyword.getName();
+
+                    if (!keyword.isOptional()) {
+                        final Set<String> values = keyValues.get(keywordName);
+
+                        final String keywordValue;
+                        if (values == null) {
+                            keywordValue = UNDEFINED;
+                        } else {
+                            if (values.size() == 1) {
+                                keywordValue = values.iterator().next();
+                            } else {
+                                keywordValue = OIPrimaryHDU.VALUE_MULTI;
+                            }
+                        }
+                        if (logger.isLoggable(Level.FINE)) {
+                            logger.log(Level.FINE, "Set {0} = {1}", new Object[]{keywordName, keywordValue});
+                        }
+                        primaryHdu.setKeyword(keywordName, keywordValue);
+                    }
+                }
+            }
+
+            if (ctx.resultFile.getVersion() == OIFitsStandard.VERSION_2) {
+                primaryHdu.setContent(FitsConstants.KEYWORD_CONTENT_OIFITS2);
+            }
+
+            // set date:
+            primaryHdu.setDate(FitsDate.getFitsDateString());
+
+            imageHdu = primaryHdu;
+        } else {
+            imageHdu = new FitsImageHDU();
+
+            // set date:
+            imageHdu.addHeaderCard(FitsConstants.KEYWORD_DATE, FitsDate.getFitsDateString(), "Date the HDU was written");
+        }
+
+        // Update history:
+        imageHdu.addHeaderHistory("Written by JMMC OITools");
+
+        ctx.resultFile.setPrimaryImageHdu(imageHdu);
     }
 
     /**
@@ -356,6 +456,10 @@ public final class Merger {
                     // use the previous table
                     newOiWavelength = prevOiWavelength;
                 } else {
+                    /*
+                    TODO: implement wavelength filter (range)
+                     */
+
                     // add the new table (copy):
                     newOiWavelength = (OIWavelength) resultFile.copyTable(oiWavelength);
                     newOiWavelength.setInsName(newName);
@@ -466,7 +570,8 @@ public final class Merger {
      * @param ctx merge context
      */
     private static void processOIData(final Context ctx) {
-        final List<OIData> oiDatas = ctx.selectorResult.getSortedOIDatas();
+        final SelectorResult selectorResult = ctx.selectorResult;
+        final List<OIData> oiDatas = selectorResult.getSortedOIDatas();
 
         if (!oiDatas.isEmpty()) {
             logger.log(Level.INFO, "oiDatas: {0}", oiDatas);
@@ -474,9 +579,38 @@ public final class Merger {
             final OIFitsFile resultFile = ctx.resultFile;
 
             // keep nightIds associated to selected Granules ONLY:
-            final List<NightId> gNightIds = ctx.selectorResult.getDistinctNightIds();
+            final List<NightId> gNightIds = selectorResult.getDistinctNightIds();
             // prepare NightIds matcher (generic):
             final NightIdMatcher nightIdMatcher = new NightIdMatcher(gNightIds);
+
+            final Selector selector = selectorResult.getSelector();
+
+            // MJD ranges criteria:
+            final List<Range> gMJDRanges;
+            final Set<Range> mjdRangeMatchings;
+
+            if ((selector != null) && selector.hasMJDRanges()) {
+                gMJDRanges = selector.getMJDRanges();
+                mjdRangeMatchings = new HashSet<Range>();
+            } else {
+                gMJDRanges = null;
+                mjdRangeMatchings = null;
+            }
+
+            // Baselines criteria:
+            final List<String> gBaselines;
+            final Map<String, StaNamesDir> usedStaNamesMap;
+            final Set<short[]> staIndexMatchings; // identity
+
+            if ((selector != null) && selector.hasBaselines()) {
+                gBaselines = selectorResult.getSelector().getBaselines();
+                usedStaNamesMap = selectorResult.getOiFitsCollection().getUsedStaNamesMap();
+                staIndexMatchings = new HashSet<short[]>();
+            } else {
+                gBaselines = null;
+                usedStaNamesMap = null;
+                staIndexMatchings = null;
+            }
 
             final Map<OIWavelength, OIWavelength> mapOIWavelengths = ctx.mapOIWavelengths;
             final Map<OIArray, OIArray> mapOIArrays = ctx.mapOIArrays;
@@ -553,6 +687,50 @@ public final class Merger {
                     logger.log(Level.FINE, "oidata nightIds: {0}", oiData.getDistinctNightId());
                 }
 
+                // check MJD ranges:
+                boolean checkMJDRanges = false;
+                if ((gMJDRanges != null) && (mjdRangeMatchings != null)) {
+                    final Set<Range> oiDataMJDRanges = oiData.getDistinctMJDRanges().keySet();
+
+                    logger.log(Level.FINE, "oiData distinct MJD ranges: {0}", oiDataMJDRanges);
+
+                    // collect matching mjd ranges:
+                    Range.getMatchingRanges(gMJDRanges, oiDataMJDRanges, mjdRangeMatchings);
+
+                    if (mjdRangeMatchings.isEmpty()) {
+                        logger.log(Level.FINE, "Skip {0}, no matching MJD range", oiData);
+                        continue;
+                    }
+                    logger.log(Level.FINE, "oidata matching MJD ranges: {0}", mjdRangeMatchings);
+
+                    if (oiDataMJDRanges.size() > mjdRangeMatchings.size()) {
+                        checkMJDRanges = true;
+                    }
+                }
+
+                // check baselines:
+                boolean checkBaselines = false;
+                if ((gBaselines != null) && (staIndexMatchings != null)) {
+                    if (logger.isLoggable(Level.FINE)) {
+                        logger.log(Level.FINE, "oiData distinct StaIndexes: {0}", oiData.getDistinctStaIndex());
+                    }
+                    // collect matching baselines (as usual staIndex instances):
+                    oiData.getMatchingStaIndexes(usedStaNamesMap, gBaselines, staIndexMatchings);
+
+                    if (staIndexMatchings.isEmpty()) {
+                        logger.log(Level.FINE, "Skip {0}, no matching baseline", oiData);
+                        continue;
+                    }
+                    logger.log(Level.FINE, "staIndexMatching: {0}", staIndexMatchings);
+
+                    if (oiData.getDistinctStaIndex().size() > staIndexMatchings.size()) {
+                        checkBaselines = true;
+                    }
+                }
+
+                /*
+                    TODO: implement wavelength filter (range)
+                 */
                 final OIData newOIData = (OIData) resultFile.copyTable(oiData);
 
                 // Change INSNAME, ARRNAME & CORRNAME keywords:
@@ -562,7 +740,7 @@ public final class Merger {
 
                 boolean filterRows = false;
 
-                if (checkTargetId || checkNightId) {
+                if (checkTargetId || checkNightId || checkMJDRanges || checkBaselines) {
                     final int nRows = newOIData.getNbRows();
 
                     // prepare mask to indicate rows to keep in output table:
@@ -573,6 +751,8 @@ public final class Merger {
                     final short[] newTargetIds = new short[nRows];
 
                     final int[] nightIds = (checkNightId) ? newOIData.getNightId() : null;
+                    final double[] mjds = (checkMJDRanges) ? newOIData.getMJD() : null;
+                    final short[][] staIndexes = (checkBaselines) ? newOIData.getStaIndex() : null;
 
                     // Iterate on table rows (i):
                     for (int i = 0; i < nRows; i++) {
@@ -590,6 +770,20 @@ public final class Merger {
                         if (checkNightId) {
                             if (!nightIdMatcher.match(nightIds[i])) {
                                 // data row does not correspond to current night 
+                                // so flag its targetId to undefined:
+                                newTargetIds[i] = ModelBase.UNDEFINED_SHORT;
+                            }
+                        }
+                        if (checkMJDRanges) {
+                            if ((mjdRangeMatchings != null) && !Range.contains(mjdRangeMatchings, mjds[i])) {
+                                // data row does not correspond to selected MJD ranges 
+                                // so flag its targetId to undefined:
+                                newTargetIds[i] = ModelBase.UNDEFINED_SHORT;
+                            }
+                        }
+                        if (checkBaselines) {
+                            if ((staIndexMatchings != null) && !staIndexMatchings.contains(staIndexes[i])) {
+                                // data row does not correspond to selected baselines
                                 // so flag its targetId to undefined:
                                 newTargetIds[i] = ModelBase.UNDEFINED_SHORT;
                             }
@@ -636,7 +830,8 @@ public final class Merger {
         final SelectorResult selectorResult;
         /** output OIFits */
         final OIFitsFile resultFile;
-        /* Set of OITarget, OIWavelength, OIArray and OICorr tables to process */
+        /* Set of OIPrimaryHDU, OITarget, OIWavelength, OIArray and OICorr tables to process */
+        final Set<OIPrimaryHDU> usedOIPrimaryHDU = new LinkedHashSet<OIPrimaryHDU>();
         final Set<OITarget> usedOITargets = new LinkedHashSet<OITarget>();
         final Set<OIWavelength> usedOIWavelengths = new LinkedHashSet<OIWavelength>();
         final Set<OIArray> usedOIArrays = new LinkedHashSet<OIArray>();

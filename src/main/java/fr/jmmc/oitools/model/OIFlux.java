@@ -34,6 +34,10 @@ import fr.jmmc.oitools.meta.WaveColumnMeta;
  */
 public final class OIFlux extends OIData {
 
+    /** CORRINDX_FLUXDATA column descriptor */
+    private final static ColumnMeta COLUMN_CORRINDX_FLUXDATA = new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_FLUXDATA,
+            "Index into correlation matrix for 1st FLUXDATA element", Types.TYPE_INT, 1, true, false, Units.NO_UNIT);
+
     /** 
      * Public OIFlux class constructor
      * @param oifitsFile main OifitsFile
@@ -55,11 +59,10 @@ public final class OIFlux extends OIData {
                 Types.TYPE_CHAR, true, new String[]{OIFitsConstants.COLUMN_FOVTYPE_FWHM, OIFitsConstants.COLUMN_FOVTYPE_RADIUS}));
 
         // FLUXDATA column definition (User unit)
-        ColumnMeta colMeta = new WaveColumnMeta(OIFitsConstants.COLUMN_FLUXDATA, "flux per telescope", Types.TYPE_DBL,
-                new CustomUnits(), OIFitsConstants.COLUMN_FLUXERR, DataRange.RANGE_POSITIVE, this);
-        // GRAVITY: FLUX column definition (optional)
-        colMeta.setAlias(OIFitsConstants.COLUMN_FLUX);
-        addColumnMeta(colMeta);
+        addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_FLUXDATA, "flux per telescope", Types.TYPE_DBL,
+                new CustomUnits(), OIFitsConstants.COLUMN_FLUXERR, DataRange.RANGE_POSITIVE, this)
+                // GRAVITY: FLUX column definition (optional)
+                .setAlias(OIFitsConstants.COLUMN_FLUX));
 
         // FLUXERR  column definition (User unit)
         addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_FLUXERR, "error in flux", Types.TYPE_DBL,
@@ -78,8 +81,11 @@ public final class OIFlux extends OIData {
         addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_FLAG, "flag", Types.TYPE_LOGICAL, this));
 
         // CORRINDX_FLUXDATA  column definition
-        addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_FLUXDATA, "Index into correlation matrix for 1st FLUXDATA element",
-                Types.TYPE_INT, 1, true, false, Units.NO_UNIT));
+        addColumnMeta(COLUMN_CORRINDX_FLUXDATA);
+
+        // Derived SNR column definition
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_FLUX, "SNR on " + OIFitsConstants.COLUMN_FLUXDATA,
+                Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_FLUXDATA + " / " + OIFitsConstants.COLUMN_FLUXERR + ")"));
     }
 
     /**
@@ -103,7 +109,7 @@ public final class OIFlux extends OIData {
      */
     public OIFlux(final OIFitsFile oifitsFile, final OIFlux src) {
         this(oifitsFile);
-        
+
         this.copyTable(src);
     }
 
@@ -250,7 +256,7 @@ public final class OIFlux extends OIData {
 
         if (corrindx_data != null) {
             // rule [OI_FLUX_CORRINDX] check if the referenced OI_CORR table exists when the column CORRINDX_FLUXDATA is present
-            if (oiCorr == null || OIFitsChecker.isInspectRules()) {
+            if ((oiCorr == null) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.OI_FLUX_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_FLUXDATA);
             }
             if (oiCorr != null) {

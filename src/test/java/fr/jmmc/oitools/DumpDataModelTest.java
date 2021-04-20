@@ -29,7 +29,7 @@ import org.junit.Test;
  * @author kempsc
  */
 public class DumpDataModelTest {
-    
+
     @Test
     public void dumpDataModels() {
         try {
@@ -39,5 +39,5 @@ public class DumpDataModelTest {
             throw new RuntimeException(th);
         }
     }
-    
+
 }

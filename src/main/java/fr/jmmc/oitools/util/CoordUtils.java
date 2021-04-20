@@ -63,7 +63,7 @@ public final class CoordUtils {
          * no.2, 1984, p159.
          */
 
-         /* haversine formula: better precision than cosinus law */
+ /* haversine formula: better precision than cosinus law */
         final double sd2 = Math.sin(0.5d * (dec2 - dec1));
         final double sr2 = Math.sin(0.5d * (ra2 - ra1));
 

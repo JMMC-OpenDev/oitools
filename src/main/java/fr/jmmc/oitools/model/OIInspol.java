@@ -22,6 +22,7 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.meta.ArrayColumnMeta;
 import fr.jmmc.oitools.meta.ColumnMeta;
+import fr.jmmc.oitools.meta.DataRange;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
@@ -47,10 +48,10 @@ public final class OIInspol extends OIAbstractData {
 
     /** MJD_OBS  column descriptor */
     private final static ColumnMeta COLUMN_MJD_OBS = new ColumnMeta(OIFitsConstants.COLUMN_MJD_OBS,
-            "Modified Julian day, start of time lapse", Types.TYPE_DBL, Units.UNIT_MJD);
+            "Modified Julian day, start of time lapse", Types.TYPE_DBL, Units.UNIT_DAYS, DataRange.RANGE_POSITIVE_STRICT);
     /** MJD_END  column descriptor */
     private final static ColumnMeta COLUMN_MJD_END = new ColumnMeta(OIFitsConstants.COLUMN_MJD_END,
-            "Modified Julian day, end of time lapse", Types.TYPE_DBL, Units.UNIT_MJD);
+            "Modified Julian day, end of time lapse", Types.TYPE_DBL, Units.UNIT_DAYS, DataRange.RANGE_POSITIVE_STRICT);
 
     /** number of wavelengths (TODO) */
     private final int nWaves;
@@ -143,10 +144,10 @@ public final class OIInspol extends OIAbstractData {
      */
     public OIInspol(final OIFitsFile oifitsFile, final OIInspol src) {
         this(oifitsFile);
-        
+
         this.copyTable(src);
     }
-    
+
     /* --- keywords --- */
     /**
      * Get the value of NPOL keyword
@@ -283,16 +284,15 @@ public final class OIInspol extends OIAbstractData {
 
     private void checkMJDInspol(OIFitsChecker checker, double[] mjdObs, double[] mjdEnd) {
         for (int i = 0; i < mjdObs.length; i++) {
-
-            if (mjdObs[i] < 0 || OIFitsChecker.isInspectRules()) {
+            if ((mjdObs[i] < 0) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_INSPOL_MJD_RANGE] check if MJD values in data tables are within MJD intervals (MJD_OBS and MJD_END columns) of the referenced OI_INSPOL table [!! TBD in data tables !!]
                 // WARNING: MJD_OBS can be begin a 0, there are no expected bounds
                 checker.ruleFailed(Rule.OI_INSPOL_MJD_RANGE, this, OIFitsConstants.COLUMN_MJD_OBS).addValueAt(mjdObs[i], i);
             }
-            if (mjdEnd[i] < 0 || OIFitsChecker.isInspectRules()) {
+            if ((mjdEnd[i] < 0) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.OI_INSPOL_MJD_RANGE, this, OIFitsConstants.COLUMN_MJD_END).addValueAt(mjdEnd[i], i);
             }
-            if (mjdObs[i] > mjdEnd[i] || OIFitsChecker.isInspectRules()) {
+            if ((mjdObs[i] > mjdEnd[i]) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.OI_INSPOL_MJD_DIFF, this, OIFitsConstants.COLUMN_MJD_OBS).addValuesAt(mjdObs[i], mjdEnd[i], i);
             }
         }

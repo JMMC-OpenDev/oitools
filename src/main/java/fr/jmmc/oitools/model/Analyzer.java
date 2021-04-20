@@ -20,6 +20,8 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.NumberUtils;
+import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_DBL;
+import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.util.CombUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,7 +102,10 @@ public final class Analyzer implements ModelVisitor {
         }
 
         if (isLogDebug) {
-            logger.log(Level.FINE, "process: OIFitsFile[{0}] granules: {1}", new Object[]{oiFitsFile.getAbsoluteFilePath(), oiFitsFile.getOiDataPerGranule().keySet()});
+            logger.log(Level.FINE, "process: OIFitsFile[{0}] usedStaNamesMap: {1}",
+                    new Object[]{oiFitsFile.getAbsoluteFilePath(), oiFitsFile.getUsedStaNamesMap().entrySet()});
+            logger.log(Level.FINE, "process: OIFitsFile[{0}] granules: {1}",
+                    new Object[]{oiFitsFile.getAbsoluteFilePath(), oiFitsFile.getDistinctGranules().keySet()});
         }
 
         if (logger.isLoggable(Level.FINE)) {
@@ -109,8 +114,7 @@ public final class Analyzer implements ModelVisitor {
     }
 
     /**
-     * Process the given OITable element with this visitor implementation :
-     * fill the internal buffer with table information
+     * Process the given OITable element with this visitor implementation
      * @param oiTable OITable element to visit
      */
     @Override
@@ -133,16 +137,41 @@ public final class Analyzer implements ModelVisitor {
      */
     private void process(final OIData oiData) {
         if (isLogDebug) {
-            logger.log(Level.FINE, "process: OIData[{0}] OIWavelength range: {1}", new Object[]{oiData, Arrays.toString(oiData.getEffWaveRange())});
+            logger.log(Level.FINE, "process: OIData[{0}] OIWavelength range: {1}", new Object[]{oiData, oiData.getEffWaveRange()});
         }
 
         // reset cached analyzed data:
         oiData.setChanged();
 
+        // First: station indexes & configurations:
+        if (oiData.getStaIndex() != null) {
+            processStaIndex(oiData);
+        }
+
         // dimensions:
         final int nRows = oiData.getNbRows();
-        final int nWaves = oiData.getNWave();
 
+        // Count Flags:
+        int nFlagged = 0;
+
+        if (oiData.getFlag() != null) {
+            final boolean[][] flags = oiData.getFlag();
+
+            final int nWaves = oiData.getNWave();
+
+            boolean[] row;
+            for (int i = 0, j; i < nRows; i++) {
+                row = flags[i];
+                for (j = 0; j < nWaves; j++) {
+                    if (row[j]) {
+                        nFlagged++;
+                    }
+                }
+            }
+        }
+        oiData.setNFlagged(nFlagged);
+
+        // Extract Granules of this table (targetId, nightId, insMode, mjd):
         // Get referenced tables:
         final OITarget oiTarget = oiData.getOiTarget();
         final OIWavelength oiWavelength = oiData.getOiWavelength();
@@ -151,12 +180,18 @@ public final class Analyzer implements ModelVisitor {
         final short[] targetIds = oiData.getTargetId();
         // compute night ids:
         final int[] nightIds = oiData.getNightId();
+        // StaIndex column:
+        final short[][] staIndexes = oiData.getStaIndex();
+        // Get MJDStart column:
+        final double[] mjdStart = oiData.getMJDStart();
+        // Get MJDStart column:
+        final double[] mjdEnd = oiData.getMJDEnd();
 
         // note: if no OITarget table then the target will be Target.UNDEFINED
         final Map<Short, Target> targetIdToTarget = (oiTarget != null) ? oiTarget.getTargetIdToTarget() : null;
 
         // Resolve instrument mode:
-        // TODO: if no OIWaveLength but have insname => may create an InstrumentMode("Missing<insname>"):
+        // Note: if no OIWaveLength but have insname => may create an InstrumentMode("Missing<insname>"):
         final InstrumentMode insMode = (oiWavelength != null) ? oiWavelength.getInstrumentMode() : InstrumentMode.UNDEFINED;
 
         // Outputs:
@@ -164,15 +199,25 @@ public final class Analyzer implements ModelVisitor {
         final Set<Short> distinctTargetId = oiData.getDistinctTargetId();
         // Fill distinct Night Id:
         final Set<NightId> distinctNightId = oiData.getDistinctNightId();
+        // Fill distinct MJD ranges:
+        final Map<Range, Range> distinctMjdRanges = oiData.getDistinctMJDRanges();
+        // Fill distinct Granule:
+        final Map<Granule, Granule> distinctGranules = oiData.getOIFitsFile().getDistinctGranules();
         // Fill oidata tables per (distinct) Granule:
         final Map<Granule, Set<OIData>> oiDataPerGranule = oiData.getOIFitsFile().getOiDataPerGranule();
+        // Fill used staNames to StaNamesDir (reference StaNames / orientation):
+        final Map<String, StaNamesDir> usedStaNamesMap = oiData.getOIFitsFile().getUsedStaNamesMap();
 
         // reused NightId:
         NightId n = new NightId();
 
+        // reused Range:
+        Range r = new Range();
+
         // reused Granule:
         Granule g = new Granule();
 
+        // Process all rows to identify Granule and its associated fields:
         for (int i = 0; i < nRows; i++) {
             final Short targetId = Short.valueOf(targetIds[i]);
             distinctTargetId.add(targetId);
@@ -194,49 +239,72 @@ public final class Analyzer implements ModelVisitor {
             }
             distinctNightId.add(night);
 
-            // Update Granule:
-            g.set(target, insMode, night);
+            // Get MJD Range:
+            r.set(mjdStart[i], mjdEnd[i]);
 
-            // Lookup pre-existing Granule (same granule fields):
-            Set<OIData> oiDataTables = oiDataPerGranule.get(g);
-            if (oiDataTables == null) {
-                oiDataTables = new LinkedHashSet<OIData>();
-                oiDataPerGranule.put(g, oiDataTables);
-                g = new Granule();
+            Range mjdRange = distinctMjdRanges.get(r);
+            if (mjdRange == null) {
+                distinctMjdRanges.put(r, r);
+                mjdRange = r;
+                r = new Range();
             }
-            // update tables associated to the current granule:
-            // TODO: generate mask(rows = i indices) (BitSet ?) for every table corresponding to the granule ?
-            oiDataTables.add(oiData);
-        }
 
-        if (isLogDebug) {
-            logger.log(Level.FINE, "process: OIData[{0}] distinctTargetId {1}", new Object[]{oiData, distinctTargetId});
-            logger.log(Level.FINE, "process: OIData[{0}] distinctNightId  {1}", new Object[]{oiData, distinctNightId});
-        }
+            // Get corresponding StaName:
+            String staNames = null;
+            if (staIndexes != null) {
+                final short[] staIndex = staIndexes[i];
 
-        // Process station indexes:
-        if (oiData.getStaIndex() != null) {
-            processStaIndex(oiData);
-        }
+                // resolve sorted StaNames (reference) to get its orientation:
+                final StaNamesDir sortedStaNamesDir = oiData.getSortedStaNamesDir(staIndex);
 
-        // Count Flags:
-        final boolean[][] flags = oiData.getFlag();
+                if (sortedStaNamesDir != null) {
+                    // find the previous (real) baseline corresponding to the sorted StaNames (stable):
+                    final StaNamesDir refStaNamesDir = usedStaNamesMap.get(sortedStaNamesDir.getStaNames());
 
-        int nFlagged = 0;
-        boolean[] row;
-        for (int i = 0, j; i < nRows; i++) {
-            row = flags[i];
-            for (j = 0; j < nWaves; j++) {
-                if (row[j]) {
-                    nFlagged++;
+                    if (refStaNamesDir == null) {
+                        logger.log(Level.WARNING, "bad usedStaNamesMap: missing {0}", sortedStaNamesDir.getStaNames());
+                    } else {
+                        staNames = refStaNamesDir.getStaNames();
+                    }
                 }
             }
+
+            // Update / Resolve Granule:
+            g.set(target, insMode, night);
+
+            Granule granule = distinctGranules.get(g);
+            if (granule == null) {
+                distinctGranules.put(g, g);
+                granule = g;
+                g = new Granule();
+            }
+
+            // Update distinct MJD Ranges on shared granule:
+            granule.getDistinctMjdRanges().add(mjdRange);
+
+            // Update distinct StaNames on shared granule:
+            if (staNames != null) {
+                granule.getDistinctStaNames().add(staNames);
+            }
+
+            // Lookup pre-existing Granule (same granule fields):
+            Set<OIData> oiDataTables = oiDataPerGranule.get(granule);
+            if (oiDataTables == null) {
+                oiDataTables = new LinkedHashSet<OIData>();
+                oiDataPerGranule.put(granule, oiDataTables);
+            }
+            // update tables associated to the current granule:
+            oiDataTables.add(oiData);
+
+            // TODO: generate mask(rows = i indices) (BitSet ?) for every table corresponding to the granule ?
         }
 
         if (isLogDebug) {
             logger.log(Level.FINE, "process: OIData[{0}] nFlagged: {1}", new Object[]{oiData, nFlagged});
+            logger.log(Level.FINE, "process: OIData[{0}] distinctTargetId {1}", new Object[]{oiData, distinctTargetId});
+            logger.log(Level.FINE, "process: OIData[{0}] distinctNightId  {1}", new Object[]{oiData, distinctNightId});
+            logger.log(Level.FINE, "process: OIData[{0}] distinctMjdRanges {1}", new Object[]{oiData, distinctMjdRanges});
         }
-        oiData.setNFlagged(nFlagged);
     }
 
     /**
@@ -283,19 +351,20 @@ public final class Analyzer implements ModelVisitor {
 
         final String insName = oiWavelength.getInsName();
         final int nbChannels = oiWavelength.getNWave();
-        final float lambdaMin = oiWavelength.getEffWaveMin();
-        final float lambdaMax = oiWavelength.getEffWaveMax();
-        float bandMin = oiWavelength.getEffBandMin();
+        // compute lazily the wavelength min/max:
+        final Range effWaveRange = oiWavelength.getEffWaveRange();
+        // compute lazily the bandwidth min/max:
+        double bandMin = oiWavelength.getEffBandRange().getMin();
 
-        if (!NumberUtils.isFinite(bandMin) || bandMin <= 0f) {
-            bandMin = Float.NaN;
+        if (!NumberUtils.isFinitePositive(bandMin)) {
+            bandMin = UNDEFINED_DBL;
         }
 
         // Resolution = mean(lambda / delta_lambda)
-        final float resPower = oiWavelength.getResolution();
+        final double resPower = oiWavelength.getResolution();
 
         // TODO: extract only instrument Name ie parse first alpha characters to cleanup weird INSNAME values
-        final InstrumentMode insMode = new InstrumentMode(insName, nbChannels, lambdaMin, lambdaMax, resPower, bandMin);
+        final InstrumentMode insMode = new InstrumentMode(insName, nbChannels, effWaveRange, resPower, bandMin);
 
         // Associate the InstrumentMode instance to the OIWavelength table (locally)
         oiWavelength.setInstrumentMode(insMode);
@@ -303,7 +372,7 @@ public final class Analyzer implements ModelVisitor {
         if (isLogDebug) {
             logger.log(Level.FINE, "process: file: {0}", oiWavelength.getOIFitsFile().getAbsoluteFilePath());
             logger.log(Level.FINE, "process: {0}", insMode.toString());
-            logger.log(Level.FINE, "process: OIWavelength[{0}] range: [{1}, {2}]", new Object[]{oiWavelength, lambdaMin, lambdaMax});
+            logger.log(Level.FINE, "process: OIWavelength[{0}] range: {1}]", new Object[]{oiWavelength, effWaveRange});
             logger.log(Level.FINE, "process: OIWavelength[{0}]\ninsMode: {1}", new Object[]{oiWavelength, insMode});
         }
     }
@@ -327,7 +396,6 @@ public final class Analyzer implements ModelVisitor {
         final Map<Target, Short> targetObjToTargetId = oiTarget.getTargetObjToTargetId();
         // Columns
         final short[] targetIds = oiTarget.getTargetId();
-        final String[] targets = oiTarget.getTarget();
 
         for (int i = 0, len = oiTarget.getNbRows(); i < len; i++) {
             final Short targetId = Short.valueOf(targetIds[i]);
@@ -355,7 +423,6 @@ public final class Analyzer implements ModelVisitor {
      * @param oiData OIData table to process
      */
     private void processStaIndex(final OIData oiData) {
-
         final int nRows = oiData.getNbRows();
 
         // StaIndex column:
@@ -363,58 +430,134 @@ public final class Analyzer implements ModelVisitor {
 
         // distinct staIndex arrays:
         final Set<short[]> distinctStaIndex = oiData.getDistinctStaIndex();
+        // mapping to sorted staNames:
+        final Map<short[], StaNamesDir> staIndexesToSortedStaNamesDir = oiData.getStaIndexesToSortedStaNamesDir();
 
         if (nRows != 0) {
             // Get size of StaIndex arrays once:
             final int staLen = staIndexes[0].length;
+            {
+                final StationIndex staList = new StationIndex(staLen);
+                final Map<StationIndex, short[]> mappingStaList = new HashMap<StationIndex, short[]>(128);
 
-            final StationIndex staList = new StationIndex(staLen);
+                for (int i = 0, j; i < nRows; i++) {
+                    final short[] staIndex = staIndexes[i];
 
-            final Map<StationIndex, short[]> mappingStaList = new HashMap<StationIndex, short[]>(128);
+                    // prepare Station index:
+                    staList.clear();
 
-            short[] staIndex;
-            short[] uniqueStaIndex;
+                    for (j = 0; j < staLen; j++) {
+                        staList.add(Short.valueOf(staIndex[j]));
+                    }
 
-            for (int i = 0, j; i < nRows; i++) {
-                staIndex = staIndexes[i];
+                    // Find existing array:
+                    final short[] uniqueStaIndex = mappingStaList.get(staList);
 
-                // prepare Station index:
-                staList.clear();
+                    if (uniqueStaIndex == null) {
+                        // not found:
+                        // store same array instance present in the row:
+                        distinctStaIndex.add(staIndex);
 
-                for (j = 0; j < staLen; j++) {
-                    staList.add(Short.valueOf(staIndex[j]));
+                        // store mapping:
+                        mappingStaList.put(new StationIndex(staList), staIndex);
+                    } else {
+                        // store distinct instance (minimize array instances):
+                        staIndexes[i] = uniqueStaIndex;
+                    }
                 }
+            }
 
-                // TODO: warning: StaIndex arrays are not sorted so 'AB' <> 'BA'
-                // Find existing array:
-                uniqueStaIndex = mappingStaList.get(staList);
+            // Fill used staNames to StaNamesDir (reference StaNames / orientation):
+            final Map<String, StaNamesDir> usedStaNamesMap = oiData.getOIFitsFile().getUsedStaNamesMap();
 
-                if (uniqueStaIndex == null) {
-                    // not found:
-                    // store same array instance present in row:
-                    distinctStaIndex.add(staIndex);
+            // 2nd step: fill mapping:
+            if (staLen >= 2) {
+                final String[] staIndexNamesSorted = new String[staLen];
 
-                    // store mapping:
-                    mappingStaList.put(new StationIndex(staList), staIndex);
-                } else {
-                    // store distinct instance (minimize array instances):
-                    staIndexes[i] = uniqueStaIndex;
+                for (final short[] staIndex : distinctStaIndex) {
+                    // Note: use another array instance as Data.getStaNames(staIndexSorted) uses identity map
+                    final short[] staIndexSorted = new short[staLen];
+
+                    // prepare Station names:
+                    for (int j = 0; j < staLen; j++) {
+                        staIndexSorted[j] = staIndex[j];
+                        staIndexNamesSorted[j] = oiData.getStaName(staIndexSorted[j]);
+                    }
+
+                    // Sort at least: 2 items:
+                    int perm = testAndSwap(staIndexSorted, staIndexNamesSorted, 0, 1);
+
+                    // now: indices (0 1) sorted
+                    if (staLen == 3) {
+                        // triplet:
+                        perm += testAndSwap(staIndexSorted, staIndexNamesSorted, 0, 2);
+                        perm += testAndSwap(staIndexSorted, staIndexNamesSorted, 1, 2);
+                    }
+
+                    final boolean orientation = (perm % 2 == 0);
+
+                    final String staNames = oiData.getStaNames(staIndex);
+                    final String sortedStaNames = oiData.getStaNames(staIndexSorted);
+
+                    if (isLogDebug) {
+                        logger.log(Level.FINE, "Baseline: [{0} = {1}], sorted: [{2} = {3}] perm: {4} orientation: {5}",
+                                new Object[]{Arrays.toString(staIndex), staNames,
+                                             Arrays.toString(staIndexSorted), Arrays.toString(staIndexNamesSorted),
+                                             perm, orientation});
+                    }
+
+                    final StaNamesDir sortedStaNamesDir = new StaNamesDir(sortedStaNames, orientation);
+
+                    staIndexesToSortedStaNamesDir.put(staIndex, sortedStaNamesDir);
+
+                    // global level (OIFits):
+                    // find the previous (real) baseline corresponding to the sorted StaNames (stable):
+                    final StaNamesDir refStaNamesDir = usedStaNamesMap.get(sortedStaNames);
+                    if (refStaNamesDir == null) {
+                        // store this (real) baseline corresponding to the sorted StaNames (stable) with the reference orientation flag:
+                        usedStaNamesMap.put(sortedStaNames, new StaNamesDir(staNames, sortedStaNamesDir.isOrientation()));
+                    }
                 }
+            } else {
+                // 1T (OI_FLUX):
+                for (final short[] staIndex : distinctStaIndex) {
+                    final String staNames = oiData.getStaNames(staIndex);
+                    final StaNamesDir sortedStaNamesDir = new StaNamesDir(staNames, true);
 
-                // TODO: add an extra (derived) column to store sorted StaIndex (equivalence)
-                // and also have distinctSortedStaIndex (GUI ?)
+                    staIndexesToSortedStaNamesDir.put(staIndex, sortedStaNamesDir);
+                    usedStaNamesMap.put(staNames, sortedStaNamesDir);
+                }
             }
         }
 
         if (isLogDebug) {
-            logger.log(Level.FINE, "processStaIndex: OIData[{0}] distinctStaIndex:", oiData);
+            logger.log(Level.FINE, "processStaIndex: OIData[{0}] distinctStaIndex:", oiData.idToString());
+            for (short[] staIndex : distinctStaIndex) {
+                logger.log(Level.FINE, "Baseline: {0} = {1}", new Object[]{Arrays.toString(staIndex), oiData.getStaNames(staIndex)});
+            }
 
-            for (short[] item : distinctStaIndex) {
-                logger.log(Level.FINE, "Baseline: {0} = {1}", new Object[]{Arrays.toString(item), oiData.getStaNames(item)});
+            logger.log(Level.FINE, "processStaIndex: OIData[{0}] staIndexesToSortedStaNamesDir:", oiData.idToString());
+            for (Map.Entry<short[], StaNamesDir> e : staIndexesToSortedStaNamesDir.entrySet()) {
+                logger.log(Level.FINE, "{0} : {1}", new Object[]{Arrays.toString(e.getKey()), e.getValue()});
             }
         }
-
         processStaConf(oiData);
+    }
+
+    private static int testAndSwap(final short[] staIndexSorted, final String[] staIndexNamesSorted, final int i1, final int i2) {
+        if (staIndexNamesSorted[i1].compareTo(staIndexNamesSorted[i2]) >= 0) {
+            // swap both arrays:
+            final short i = staIndexSorted[i1];
+            staIndexSorted[i1] = staIndexSorted[i2];
+            staIndexSorted[i2] = i;
+
+            final String s = staIndexNamesSorted[i1];
+            staIndexNamesSorted[i1] = staIndexNamesSorted[i2];
+            staIndexNamesSorted[i2] = s;
+            return 1;
+        }
+        // already sorted
+        return 0;
     }
 
     /**
@@ -1128,15 +1271,7 @@ public final class Analyzer implements ModelVisitor {
             }
             final StationIndex other = (StationIndex) o;
 
-            final int len = size();
-            /*
-             // not necessary:
-             final int len2 = other.size();
-             if (len != len2) {
-             return false;
-             }
-             */
-            for (int i = 0; i < len; i++) {
+            for (int i = 0, len = size(); i < len; i++) {
                 if (get(i).shortValue() != other.get(i).shortValue()) {
                     return false;
                 }

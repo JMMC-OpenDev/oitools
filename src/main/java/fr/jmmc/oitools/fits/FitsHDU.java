@@ -477,6 +477,14 @@ public abstract class FitsHDU extends ModelBase {
         getHeaderCards().add(new FitsHeaderCard(key, value, true, comment));
     }
 
+    /**
+     * Add a new extra HISTORY keyword (header card)
+     * @param comment header card comment
+     */
+    public final void addHeaderHistory(final String comment) {
+        addHeaderCard(FitsConstants.KEYWORD_HISTORY, null, comment);
+    }
+
     /*
      * --- OIFits standard Keywords --------------------------------------------
      */
@@ -557,13 +565,13 @@ public abstract class FitsHDU extends ModelBase {
             // get keyword value :
             value = getKeywordValue(keywordName);
 
-            if (value == null || OIFitsChecker.isInspectRules()) {
+            if ((value == null) || OIFitsChecker.isInspectRules()) {
                 if (!keyword.isOptional()) {
                     // rule [GENERIC_KEYWORD_MANDATORY]
                     checker.ruleFailed(Rule.GENERIC_KEYWORD_MANDATORY, this, keywordName);
                 }
             }
-            if (value != null || OIFitsChecker.isInspectRules()) {
+            if ((value != null) || OIFitsChecker.isInspectRules()) {
 
                 if ((value == null) && OIFitsChecker.isInspectRules()) {
                     // InspectRules: fix null value in following check():
@@ -584,7 +592,7 @@ public abstract class FitsHDU extends ModelBase {
      * @param kDataType Types
      */
     public void checkKeywordFormat(final OIFitsChecker checker, final FitsHDU hduFits, final KeywordMeta keyword, final Types kDataType) {
-        if (kDataType != keyword.getDataType() || OIFitsChecker.isInspectRules()) {
+        if ((kDataType != keyword.getDataType()) || OIFitsChecker.isInspectRules()) {
             // rule [GENERIC_KEYWORD_FORMAT] check if the keyword format matches the expected format (data type)
             checker.ruleFailed(Rule.GENERIC_KEYWORD_FORMAT, hduFits, keyword.getName()).addKeywordValue(kDataType.getRepresentation(), keyword.getType());
         }
@@ -599,7 +607,7 @@ public abstract class FitsHDU extends ModelBase {
     public void checkMJD(final OIFitsChecker checker, final String name, final double mjd) {
         // rule [GENERIC_MJD_RANGE] check if the MJD value is within 'normal' range (1933 - 2150)
         // mjd can be NaN and then is not checked:
-        if ((mjd < MJD_1933 || mjd > MJD_2150) || OIFitsChecker.isInspectRules()) {
+        if (((mjd < MJD_1933) || (mjd > MJD_2150)) || OIFitsChecker.isInspectRules()) {
             checker.ruleFailed(Rule.GENERIC_MJD_RANGE, this, name).addKeywordValue(mjd, MJD_1933 + " - " + MJD_2150);
         }
     }
@@ -613,12 +621,12 @@ public abstract class FitsHDU extends ModelBase {
     public static void checkDateObsKeyword(final OIFitsChecker checker, final String name, final FitsHDU hdu) {
         final String dateObs = hdu.getKeyword(name);
 
-        if (dateObs != null || OIFitsChecker.isInspectRules()) {
+        if ((dateObs != null) || OIFitsChecker.isInspectRules()) {
             final SimpleDateFormat sdf = new SimpleDateFormat(FitsConstants.FORMAT_DATE);
             sdf.setLenient(false);
 
             boolean valid = false;
-            if (dateObs != null && !dateObs.isEmpty()) {
+            if ((dateObs != null) && !dateObs.isEmpty()) {
                 try {
                     final Date date = sdf.parse(dateObs);
                     // convert again to string
@@ -641,7 +649,7 @@ public abstract class FitsHDU extends ModelBase {
                 final Calendar cal = sdf.getCalendar();
                 final int year = cal.get(Calendar.YEAR);
 
-                if ((year < YEAR_MIN || year > YEAR_MAX) || OIFitsChecker.isInspectRules()) {
+                if (((year < YEAR_MIN) || (year > YEAR_MAX)) || OIFitsChecker.isInspectRules()) {
                     // rule [GENERIC_DATE_OBS_RANGE] check if the DATE_OBS value is within 'normal' range (1933 - 2150)
                     checker.ruleFailed(Rule.GENERIC_DATE_OBS_RANGE, hdu, OIFitsConstants.KEYWORD_DATE_OBS).addKeywordValue(dateObs, ("" + YEAR_MIN + " - " + YEAR_MAX));
                 }

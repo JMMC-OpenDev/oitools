@@ -206,7 +206,7 @@ public final class OITableUtils implements TestEnv {
      *  the method recurses.
      */
     public static boolean arrayEquals(Object x, Object y, boolean useTol, double tolf, double told,
-            final DoubleWrapper maxAbsErrWrapper, final DoubleWrapper maxRelErrWrapper) {
+                                      final DoubleWrapper maxAbsErrWrapper, final DoubleWrapper maxRelErrWrapper) {
 
         // Handle the special cases first.
         // We treat null == null so that two object arrays
@@ -282,7 +282,7 @@ public final class OITableUtils implements TestEnv {
 
     /** Compare two double arrays using a given tolerance */
     public static boolean doubleArrayEquals(final double[] x, final double[] y, final double tol,
-            final DoubleWrapper maxAbsErrWrapper, final DoubleWrapper maxRelErrWrapper) {
+                                            final DoubleWrapper maxAbsErrWrapper, final DoubleWrapper maxRelErrWrapper) {
         boolean res = true;
         double maxAbsErr = 0d;
         double maxRelErr = 0d;
@@ -328,7 +328,7 @@ public final class OITableUtils implements TestEnv {
 
     /** Compare two float arrays using a given tolerance */
     public static boolean floatArrayEquals(final float[] x, final float[] y, final double tol,
-            final DoubleWrapper maxAbsErrWrapper, final DoubleWrapper maxRelErrWrapper) {
+                                           final DoubleWrapper maxAbsErrWrapper, final DoubleWrapper maxRelErrWrapper) {
         boolean res = true;
         double maxAbsErr = 0d;
         double maxRelErr = 0d;

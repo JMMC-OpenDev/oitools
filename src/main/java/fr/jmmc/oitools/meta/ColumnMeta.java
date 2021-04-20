@@ -48,6 +48,8 @@ public class ColumnMeta extends CellMeta {
     private final DataRange dataRange;
     /** optional column alias ie alternate name (may be null) */
     private String alias = null;
+    /** optional flag to indicate column values depend on baseline / triplet (staIndex) orientation (false by default) */
+    private boolean isOrientationDependent = false;
 
     /**
      * ColumnMeta class constructor with cardinality of 1 and without unit
@@ -201,8 +203,7 @@ public class ColumnMeta extends CellMeta {
      * @return true if the value is multiple
      */
     public final boolean isArray() {
-        return getDataType() != Types.TYPE_CHAR
-                && (getRepeat() > 1 || this instanceof ArrayColumnMeta);
+        return getDataType() != Types.TYPE_CHAR && ((getRepeat() > 1) || this instanceof ArrayColumnMeta);
     }
 
     /**
@@ -253,9 +254,20 @@ public class ColumnMeta extends CellMeta {
     /**
      * Define the optional column alias
      * @param alias optional column alias
+     * @return this
      */
-    public final void setAlias(final String alias) {
+    public final ColumnMeta setAlias(final String alias) {
         this.alias = alias;
+        return this; // fluent API
+    }
+
+    public final boolean isOrientationDependent() {
+        return isOrientationDependent;
+    }
+
+    public final ColumnMeta setOrientationDependent(final boolean orientationDependent) {
+        this.isOrientationDependent = orientationDependent;
+        return this;
     }
 
     /* ---  checker --- */
@@ -529,12 +541,7 @@ public class ColumnMeta extends CellMeta {
                     float val;
                     for (int r = 0; r < columnRows; r++) {
                         val = fValues[r];
-                        error = true;
-
-                        // ignore NaN:
-                        if (NumberUtils.isFinitePositive(val) || Float.isNaN(val)) {
-                            error = false;
-                        }
+                        error = !isPositiveValueValid(val);
 
                         if (error || OIFitsChecker.isInspectRules()) {
                             // rule [GENERIC_COL_VAL_POSITIVE] check if column values are finite and positive
@@ -553,18 +560,12 @@ public class ColumnMeta extends CellMeta {
 
                         for (int c = 0, rlen = values.length; c < rlen; c++) {
                             val = values[c];
-                            error = true;
-
-                            // ignore NaN:
-                            if (NumberUtils.isFinitePositive(val) || Float.isNaN(val)) {
-                                error = false;
-                            }
+                            error = !isPositiveValueValid(val);
 
                             if (error || OIFitsChecker.isInspectRules()) {
                                 // rule [GENERIC_COL_VAL_POSITIVE] check if column values are finite and positive
                                 checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addColValueAt(val, r, c);
                             }
-
                         }
                         return;
                     }
@@ -573,18 +574,13 @@ public class ColumnMeta extends CellMeta {
 
             if (getDataType() == Types.TYPE_DBL) {
                 if (!isArray) {
-                    // OIData: INT_TIME, CORR (1D)
+                    // OIData: FOV, INT_TIME, CORR (1D)
                     final double[] fValues = (double[]) value;
 
                     double val;
                     for (int r = 0; r < columnRows; r++) {
                         val = fValues[r];
-                        error = true;
-
-                        // ignore NaN:
-                        if (NumberUtils.isFinitePositive(val) || Double.isNaN(val)) {
-                            error = false;
-                        }
+                        error = !isPositiveValueValid(val);
 
                         if (error || OIFitsChecker.isInspectRules()) {
                             // rule [GENERIC_COL_VAL_POSITIVE] check if column values are finite and positive
@@ -603,18 +599,12 @@ public class ColumnMeta extends CellMeta {
 
                         for (int c = 0, rlen = values.length; c < rlen; c++) {
                             val = values[c];
-                            error = true;
-
-                            // ignore NaN:
-                            if (NumberUtils.isFinitePositive(val) || Double.isNaN(val)) {
-                                error = false;
-                            }
+                            error = !isPositiveValueValid(val);
 
                             if (error || OIFitsChecker.isInspectRules()) {
                                 // rule [GENERIC_COL_VAL_POSITIVE] check if column values are finite and positive
                                 checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addColValueAt(val, r, c);
                             }
-
                         }
                         return;
                     }
@@ -623,5 +613,23 @@ public class ColumnMeta extends CellMeta {
 
             logger.log(Level.SEVERE, "Incompatible data type {0} with positive values for column ''{1}'' ...", new Object[]{getDataType(), colName});
         }
+    }
+
+    /**
+     * Return true if the given value is valid ie. NaN or is positive or greater than 0.0
+     * @param val error value
+     * @return true if the given error value is valid
+     */
+    public static boolean isPositiveValueValid(final float val) {
+        return Float.isNaN(val) || NumberUtils.isFinitePositive(val);
+    }
+
+    /**
+     * Return true if the given value is valid ie. NaN or is positive or greater than 0.0
+     * @param val error value
+     * @return true if the given error value is valid
+     */
+    public static boolean isPositiveValueValid(final double val) {
+        return Double.isNaN(val) || NumberUtils.isFinitePositive(val);
     }
 }

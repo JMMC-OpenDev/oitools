@@ -41,15 +41,15 @@ public final class OICorr extends OITable {
     private final static KeywordMeta KEYWORD_NDATA = new KeywordMeta(OIFitsConstants.KEYWORD_NDATA,
             "Number of correlated data", Types.TYPE_INT);
 
-    /** IINDX  keyword descriptor */
+    /** IINDX column descriptor */
     private final static ColumnMeta COLUMN_IINDX = new ColumnMeta(OIFitsConstants.COLUMN_IINDX,
             "First index of correlation matrix element", Types.TYPE_INT);
 
-    /** JINDX  keyword descriptor */
+    /** JINDX column descriptor */
     private final static ColumnMeta COLUMN_JINDX = new ColumnMeta(OIFitsConstants.COLUMN_JINDX,
             "Second index of correlation matrix element", Types.TYPE_INT);
 
-    /** CORR  keyword descriptor */
+    /** CORR column descriptor */
     private final static ColumnMeta COLUMN_CORR = new ColumnMeta(OIFitsConstants.COLUMN_CORR,
             "Matrix element (IINDX, JINDX)", Types.TYPE_DBL, Units.NO_UNIT, DataRange.RANGE_POSITIVE_STRICT);
 
@@ -60,19 +60,19 @@ public final class OICorr extends OITable {
     public OICorr(final OIFitsFile oifitsFile) {
         super(oifitsFile);
 
-        // CORRNAME  keyword definition
+        // CORRNAME keyword definition
         addKeywordMeta(KEYWORD_CORRNAME);
 
-        // NDATA  keyword definition
+        // NDATA keyword definition
         addKeywordMeta(KEYWORD_NDATA);
 
-        // IINDX  keyword definition
+        // IINDX column definition
         addColumnMeta(COLUMN_IINDX);
 
-        // JINDX  keyword definition
+        // JINDX column definition
         addColumnMeta(COLUMN_JINDX);
 
-        // CORR  keyword definition
+        // CORR column definition
         addColumnMeta(COLUMN_CORR);
     }
 
@@ -94,10 +94,10 @@ public final class OICorr extends OITable {
      */
     public OICorr(final OIFitsFile oifitsFile, final OICorr src) {
         this(oifitsFile);
-        
+
         this.copyTable(src);
     }
-    
+
     /* --- keywords --- */
     /**
      * Get the CORRNAME keyword value.
@@ -175,7 +175,7 @@ public final class OICorr extends OITable {
         super.checkSyntax(checker);
 
         // rule [OI_CORR_CORRNAME] check the CORRNAME keyword has a not null or empty value
-        if ((getCorrName() != null && getCorrName().length() == 0) || OIFitsChecker.isInspectRules()) {
+        if (((getCorrName() != null) && (getCorrName().length() == 0)) || OIFitsChecker.isInspectRules()) {
             checker.ruleFailed(Rule.OI_CORR_CORRNAME, this, OIFitsConstants.KEYWORD_CORRNAME);
         }
         final int nRows = getNbRows();
@@ -191,23 +191,22 @@ public final class OICorr extends OITable {
             final int idxJ = jIndx[i];
 
             // rule [OI_CORR_IINDEX_MIN] check if the IINDEX values >= 1 (JINDEX >= 2)
-            if (idxI < 1 || OIFitsChecker.isInspectRules()) {
+            if ((idxI < 1) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.OI_CORR_IINDEX_MIN, this, OIFitsConstants.COLUMN_IINDX).addValueAt(idxI, i);
             }
             // rule [OI_CORR_JINDEX_SUP] check if the JINDEX values > IINDEX values
-            if (idxJ <= idxI || OIFitsChecker.isInspectRules()) {
+            if ((idxJ <= idxI) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.OI_CORR_JINDEX_SUP, this, OIFitsConstants.COLUMN_JINDX).addValuesAt(idxJ, idxI, i);
             }
             // rule [OI_CORR_IJINDEX_MAX] check if the IINDEX values <= NDATA and JINDEX values <= NDATA
-            if (idxI > ndata || OIFitsChecker.isInspectRules()) {
+            if ((idxI > ndata) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.OI_CORR_IJINDEX_MAX, this, OIFitsConstants.COLUMN_IINDX).addValuesAt(idxI, ndata, i);
             }
-            if (idxJ > ndata || OIFitsChecker.isInspectRules()) {
+            if ((idxJ > ndata) || OIFitsChecker.isInspectRules()) {
                 checker.ruleFailed(Rule.OI_CORR_IJINDEX_MAX, this, OIFitsConstants.COLUMN_JINDX).addValuesAt(idxJ, ndata, i);
             }
         }
 
         getOIFitsFile().checkCrossReference(this, checker);
-
     }
 }

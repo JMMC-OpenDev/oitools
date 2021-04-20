@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.meta.ColumnMeta;
+import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_DBL;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Level;
@@ -54,7 +55,7 @@ final class JythonEval extends ExpressionEvaluator {
      */
     @Override
     public double[][] eval(final OIData oiData, final String colNameEval,
-            final String expression, final boolean testOnly)
+                           final String expression, final boolean testOnly)
             throws RuntimeException {
 
         // From OIData table:
@@ -181,7 +182,7 @@ final class JythonEval extends ExpressionEvaluator {
             script.append("from math import *\n\n");
 
             script.append("def user_func():\n");
-            script.append("\treturn " + expression + "\n\n");
+            script.append("\treturn ").append(expression).append("\n\n");
 
             // Loops on rows x wavelengths:
             script.append("for _i in range(_rows):\n");
@@ -197,7 +198,7 @@ final class JythonEval extends ExpressionEvaluator {
             colName = "EFF_WAVE";
             varName = "_input_" + colName;
             // 1D on wavelengths:
-            script.append("\t\t" + colName + " = " + varName + "[_i][_j]\n");
+            script.append("\t\t").append(colName).append(" = ").append(varName).append("[_i][_j]\n");
             // attention aux tableaux:
             // 2D [i][j]
             // 1D [i] // rows
@@ -212,12 +213,12 @@ final class JythonEval extends ExpressionEvaluator {
                     case TYPE_DBL:
                         if (column.isArray()) {
                             // 2D:
-                            script.append("\t\t" + colName + " = " + varName + "[_i][_j]\n");
+                            script.append("\t\t").append(colName).append(" = ").append(varName).append("[_i][_j]\n");
                             break;
                         }
 
                         // 1D on rows:
-                        script.append("\t\t" + colName + " = " + varName + "[_i]\n");
+                        script.append("\t\t").append(colName).append(" = ").append(varName).append("[_i]\n");
                         break;
 
                     case TYPE_CHAR:
@@ -236,7 +237,7 @@ final class JythonEval extends ExpressionEvaluator {
 
                 // Special case for wavelengths:
                 colName = "EFF_WAVE";
-                script.append("\n\t\tprint '" + colName + ":'," + colName + "\n");
+                script.append("\n\t\tprint '").append(colName).append(":',").append(colName).append("\n");
 
                 for (ColumnMeta column : columnsDescCollection) {
 
@@ -245,7 +246,7 @@ final class JythonEval extends ExpressionEvaluator {
                     // Warning: only columns with double[][] or double[] values in PythonInterpreter:
                     switch (column.getDataType()) {
                         case TYPE_DBL:
-                            script.append("\t\tprint '" + colName + ":'," + colName + "\n");
+                            script.append("\t\tprint '").append(colName).append(":',").append(colName).append("\n");
                             break;
 
                         case TYPE_CHAR:
@@ -277,7 +278,7 @@ final class JythonEval extends ExpressionEvaluator {
 
             // reset results to NaN
             for (int i = 0; i < nRows; i++) {
-                Arrays.fill(result[i], Double.NaN);
+                Arrays.fill(result[i], UNDEFINED_DBL);
             }
         }
 

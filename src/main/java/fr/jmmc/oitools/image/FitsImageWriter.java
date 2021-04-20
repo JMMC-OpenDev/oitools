@@ -166,7 +166,7 @@ public final class FitsImageWriter {
      * @throws IOException IO failure
      */
     private static void createHDUnits(final Fits fitsFile, final List<FitsImageHDU> imageHDUs,
-            final String fileName, final int startIdx) throws FitsException, IOException {
+                                      final String fileName, final int startIdx) throws FitsException, IOException {
 
         int i = startIdx;
 
@@ -266,7 +266,6 @@ public final class FitsImageWriter {
      */
     private static void processHeaderCards(final Header header, final FitsHDU hduFits) throws HeaderCardException {
         if (hduFits.hasHeaderCards()) {
-
             final boolean isImage = (hduFits instanceof FitsImageHDU);
 
             for (FitsHeaderCard headerCard : hduFits.getHeaderCards()) {
@@ -340,7 +339,7 @@ public final class FitsImageWriter {
      * @throws FitsException if any FITS error occurred
      */
     private static void processImageKeywords(final Header header, final FitsImage image,
-            final boolean isFitsCube) throws FitsException {
+                                             final boolean isFitsCube) throws FitsException {
         // Note : a fits keyword has a KEY, VALUE AND COMMENT
 
         // skip x-y axes dimensions (handled by nom.tam.Fits) :
@@ -398,7 +397,7 @@ public final class FitsImageWriter {
             header.addValue(FitsImageConstants.KEYWORD_CUNIT3, FitsUnit.WAVELENGTH_METER.getStandardRepresentation(),
                     "Physical units for CDELT3 and CRVAL3");
         }
-        
+
         // Process rotation (deg):
         if (image.isRotAngleDefined()) {
             header.addValue(FitsImageConstants.KEYWORD_CROTA2, image.getRotAngle(), "Rotation angle in degrees");

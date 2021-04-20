@@ -25,7 +25,7 @@ public abstract class OutputVisitor implements ModelVisitor {
         };
 
         public abstract void targetMetadata(final OIFitsFile oiFitsFile, final OutputVisitor out);
-        
+
         public static TargetMetadataProvider getInstance(final boolean useGranules) {
             return useGranules ? GRANULE_METADATA : OIFITS_METADATA;
         }
@@ -118,7 +118,7 @@ public abstract class OutputVisitor implements ModelVisitor {
 
     public abstract void appendMetadataRecord(final String targetName, final double targetRa, final double targetDec,
                                               double intTime, double tMin, double tMax,
-                                              float resPower, float minWavelength, float maxWavelength,
+                                              double resPower, double minWavelength, double maxWavelength,
                                               String facilityName, final String insName,
                                               int nbVis, int nbVis2, int nbT3, int nbChannels);
 }

@@ -170,20 +170,20 @@ public final class FitsUtil {
             Thread copier = new Thread(
                     new Runnable() {
 
-                        public void run() {
-                            try {
-                                byte[] buffer = new byte[8192];
-                                int len;
-                                while ((len = compressed.read(buffer, 0, buffer.length)) > 0) {
-                                    input.write(buffer, 0, len);
-                                }
-                                compressed.close();
-                                input.close();
-                            } catch (IOException e) {
-                                return;
-                            }
+                public void run() {
+                    try {
+                        byte[] buffer = new byte[8192];
+                        int len;
+                        while ((len = compressed.read(buffer, 0, buffer.length)) > 0) {
+                            input.write(buffer, 0, len);
                         }
-                    });
+                        compressed.close();
+                        input.close();
+                    } catch (IOException e) {
+                        return;
+                    }
+                }
+            });
             copier.start();
             return proc.getInputStream();
         } catch (Exception e) {

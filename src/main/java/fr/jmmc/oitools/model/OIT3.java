@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsConstants;
+import fr.jmmc.oitools.meta.ArrayColumnMeta;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.DataRange;
@@ -47,6 +48,14 @@ public final class OIT3 extends OIData {
     private final static ColumnMeta COLUMN_V2COORD = new ColumnMeta(OIFitsConstants.COLUMN_V2COORD,
             "V coordinate of baseline BC of the triangle", Types.TYPE_DBL, Units.UNIT_METER);
 
+    /** CORRINDX_T3AMP column descriptor */
+    private final static ColumnMeta COLUMN_CORRINDX_T3AMP = new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_T3AMP,
+            "Index into correlation matrix for 1st T3AMP element", Types.TYPE_INT, 1, true, false, Units.NO_UNIT);
+
+    /** CORRINDX_T3PHI column descriptor */
+    private final static ColumnMeta COLUMN_CORRINDX_T3PHI = new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_T3PHI,
+            "Index into correlation matrix for 1st T3PHI element", Types.TYPE_INT, 1, true, false, Units.NO_UNIT);
+
     /**
      * Public OIT3 class constructor
      * @param oifitsFile main OifitsFile
@@ -64,7 +73,8 @@ public final class OIT3 extends OIData {
 
         // T3PHI  column definition
         addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_T3PHI, "triple product phase", Types.TYPE_DBL,
-                Units.UNIT_DEGREE, OIFitsConstants.COLUMN_T3PHIERR, DataRange.RANGE_ANGLE, this));
+                Units.UNIT_DEGREE, OIFitsConstants.COLUMN_T3PHIERR, DataRange.RANGE_ANGLE, this)
+                .setOrientationDependent(true));
 
         // T3PHIERR  column definition
         addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_T3PHIERR, "error in triple product phase",
@@ -76,9 +86,11 @@ public final class OIT3 extends OIData {
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_T3AMP, "model of the triple product amplitude",
                     Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.NO_UNIT, null, DataRange.RANGE_POSITIVE, this));
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_T3PHI, "model of the triple product phase",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.UNIT_DEGREE, null, DataRange.RANGE_ANGLE, this));
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.UNIT_DEGREE, null, DataRange.RANGE_ANGLE, this)
+                    .setOrientationDependent(true));
         }
 
+        // TODO: make U/V 1/2 orientation dependent:
         // U1COORD  column definition
         addColumnMeta(COLUMN_U1COORD);
 
@@ -92,8 +104,8 @@ public final class OIT3 extends OIData {
         addColumnMeta(COLUMN_V2COORD);
 
         // STA_INDEX  column definition
-        addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_STA_INDEX, "station numbers contributing to the data",
-                Types.TYPE_SHORT, 3) {
+        addColumnMeta(new ArrayColumnMeta(OIFitsConstants.COLUMN_STA_INDEX, "station numbers contributing to the data",
+                Types.TYPE_SHORT, 3, false) {
             @Override
             public short[] getIntAcceptedValues() {
                 return getAcceptedStaIndexes();
@@ -105,13 +117,12 @@ public final class OIT3 extends OIData {
 
         if (oifitsFile.isOIFits2()) {
             // CORRINDX_T3AMP  column definition
-            addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_T3AMP, "Index into correlation matrix for 1st T3AMP element",
-                    Types.TYPE_INT, 1, true, false, Units.NO_UNIT));
+            addColumnMeta(COLUMN_CORRINDX_T3AMP);
             // CORRINDX_T3PHI  column definition
-            addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_T3PHI, "Index into correlation matrix for 1st T3PHI element",
-                    Types.TYPE_INT, 1, true, false, Units.NO_UNIT));
+            addColumnMeta(COLUMN_CORRINDX_T3PHI);
         }
 
+        // TODO: make U/V 1/2 orientation dependent:
         // Derived SPATIAL_U1_FREQ column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U1COORD_SPATIAL, "spatial U1 frequency", Types.TYPE_DBL, this));
 
@@ -141,7 +152,8 @@ public final class OIT3 extends OIData {
             addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_RES_T3PHI_MODEL, "Residual between on " + OIFitsConstants.COLUMN_T3PHI
                     + " vs " + OIFitsConstants.COLUMN_NS_MODEL_T3PHI + " (sigma)", Types.TYPE_DBL, this,
                     "distanceAngle(" + OIFitsConstants.COLUMN_T3PHI + "," + OIFitsConstants.COLUMN_NS_MODEL_T3PHI + ") / " + OIFitsConstants.COLUMN_T3PHIERR,
-                    DataRange.RANGE_SIGMA));
+                    DataRange.RANGE_SIGMA)
+                    .setOrientationDependent(true));
         }
     }
 
@@ -318,30 +330,118 @@ public final class OIT3 extends OIData {
                 final double[] u2coord = getU2Coord();
                 final double[] v2coord = getV2Coord();
 
-                double dist1, dist2, dist3;
+                double r1, r2, r3, radius;
                 double[] row;
-                double c;
-                for (int i = 0, j; i < nRows; i++) {
-                    row = spatialFreq[i];
 
-                    // mimic OIlib/yorick/oidata.i cridx3
-                    dist1 = MathUtils.carthesianNorm(u1coord[i], v1coord[i]);
-                    dist2 = MathUtils.carthesianNorm(u2coord[i], v2coord[i]);
+                for (int i = 0, j; i < nRows; i++) {
+                    r1 = MathUtils.carthesianNorm(u1coord[i], v1coord[i]); // AB
+                    r2 = MathUtils.carthesianNorm(u2coord[i], v2coord[i]); // BC
 
                     // (u3, v3) = (u1, v1) + (u2, v2)
-                    dist3 = MathUtils.carthesianNorm(u1coord[i] + u2coord[i], v1coord[i] + v2coord[i]);
+                    r3 = MathUtils.carthesianNorm(u1coord[i] + u2coord[i], v1coord[i] + v2coord[i]); // AC
 
-                    c = Math.max(Math.max(dist1, dist2), dist3);
+                    // consistent with getRadius():
+                    radius = Math.max(Math.max(r1, r2), r3);
+
+                    row = spatialFreq[i];
 
                     for (j = 0; j < nWaves; j++) {
-                        row[j] = c / effWaves[j];
+                        row[j] = radius / effWaves[j];
                     }
                 }
             }
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_SPATIAL_FREQ, spatialFreq);
         }
-
         return spatialFreq;
+    }
+
+    /**
+     * Return the radius column i.e. projected base line (m).
+     *
+     * @return the computed radius r[x] (x for coordIndex)
+     */
+    @Override
+    public double[] getRadius() {
+        // lazy:
+        double[] radius = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_RADIUS);
+
+        if (radius == null) {
+            final int nRows = getNbRows();
+            radius = new double[nRows];
+
+            final double[] u1coord = getU1Coord();
+            final double[] v1coord = getV1Coord();
+            final double[] u2coord = getU2Coord();
+            final double[] v2coord = getV2Coord();
+
+            double r1, r2, r3;
+
+            for (int i = 0; i < nRows; i++) {
+                r1 = MathUtils.carthesianNorm(u1coord[i], v1coord[i]); // AB
+                r2 = MathUtils.carthesianNorm(u2coord[i], v2coord[i]); // BC
+
+                // (u3, v3) = (u1, v1) + (u2, v2)
+                r3 = MathUtils.carthesianNorm(u1coord[i] + u2coord[i], v1coord[i] + v2coord[i]); // AC
+
+                // consistent with getPosAngle():
+                radius[i] = Math.max(Math.max(r1, r2), r3);
+            }
+            this.setColumnDerivedValue(OIFitsConstants.COLUMN_RADIUS, radius);
+        }
+        return radius;
+    }
+
+    /**
+     * Return the position angle column i.e. position angle of the projected base line (deg).
+     *
+     * @return the computed position angle r[x] (x for coordIndex)
+     */
+    @Override
+    public double[] getPosAngle() {
+        // lazy:
+        double[] angle = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_POS_ANGLE);
+
+        if (angle == null) {
+            final int nRows = getNbRows();
+            angle = new double[nRows];
+
+            final double[] u1coord = getU1Coord();
+            final double[] v1coord = getV1Coord();
+            final double[] u2coord = getU2Coord();
+            final double[] v2coord = getV2Coord();
+
+            double u3, v3;
+            double r1, r2, r3;
+
+            for (int i = 0, j; i < nRows; i++) {
+                r1 = MathUtils.carthesianNorm(u1coord[i], v1coord[i]); // AB
+                r2 = MathUtils.carthesianNorm(u2coord[i], v2coord[i]); // BC
+
+                // (u3, v3) = (u1, v1) + (u2, v2)
+                u3 = u1coord[i] + u2coord[i];
+                v3 = v1coord[i] + v2coord[i];
+                r3 = MathUtils.carthesianNorm(u3, v3); // AC
+
+                j = (r1 >= r2) ? ((r1 >= r3) ? (1) : (3)) : ((r2 >= r3) ? (2) : (3));
+
+                switch (j) {
+                    case 1: // AB
+                        angle[i] = Math.atan2(u1coord[i], v1coord[i]);
+                        break;
+                    case 2: // BC
+                        angle[i] = Math.atan2(u2coord[i], v2coord[i]);
+                        break;
+                    case 3: // AC
+                        angle[i] = Math.atan2(u3, v3);
+                        break;
+                    default:
+                        angle[i] = 0d;
+                }
+                angle[i] = Math.toDegrees(angle[i]);
+            }
+            this.setColumnDerivedValue(OIFitsConstants.COLUMN_POS_ANGLE, angle);
+        }
+        return angle;
     }
 
     /**
@@ -384,99 +484,6 @@ public final class OIT3 extends OIData {
         return getSpatialCoord(OIFitsConstants.COLUMN_V2COORD_SPATIAL, OIFitsConstants.COLUMN_V2COORD);
     }
 
-    /**
-     * Return the radius column i.e. projected base line (m).
-     *
-     * @return the computed radius r[x] (x for coordIndex)
-     */
-    @Override
-    public double[] getRadius() {
-        // lazy:
-        double[] radius = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_RADIUS);
-
-        if (radius == null) {
-            final int nRows = getNbRows();
-            radius = new double[nRows];
-
-            final double[] u1coord = getU1Coord();
-            final double[] v1coord = getV1Coord();
-            final double[] u2coord = getU2Coord();
-            final double[] v2coord = getV2Coord();
-
-            double r1, r2, r3;
-
-            for (int i = 0; i < nRows; i++) {
-                r1 = MathUtils.carthesianNorm(u1coord[i], v1coord[i]);
-                r2 = MathUtils.carthesianNorm(u2coord[i], v2coord[i]);
-
-                // (u3, v3) = (u1, v1) + (u2, v2)
-                r3 = MathUtils.carthesianNorm(u1coord[i] + u2coord[i], v1coord[i] + v2coord[i]);
-
-                radius[i] = Math.max(Math.max(r1, r2), r3);
-            }
-
-            this.setColumnDerivedValue(OIFitsConstants.COLUMN_RADIUS, radius);
-        }
-
-        return radius;
-    }
-
-    /**
-     * Return the position angle column i.e. position angle of the projected base line (deg).
-     *
-     * @return the computed position angle r[x] (x for coordIndex)
-     */
-    @Override
-    public double[] getPosAngle() {
-        // lazy:
-        double[] angle = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_POS_ANGLE);
-
-        if (angle == null) {
-            final int nRows = getNbRows();
-            angle = new double[nRows];
-
-            final double[] u1coord = getU1Coord();
-            final double[] v1coord = getV1Coord();
-            final double[] u2coord = getU2Coord();
-            final double[] v2coord = getV2Coord();
-
-            double u3, v3;
-            double r1, r2, r3;
-
-            for (int i = 0, j; i < nRows; i++) {
-                r1 = MathUtils.carthesianNorm(u1coord[i], v1coord[i]);
-                r2 = MathUtils.carthesianNorm(u2coord[i], v2coord[i]);
-
-                // (u3, v3) = (u1, v1) + (u2, v2)
-                u3 = u1coord[i] + u2coord[i];
-                v3 = v1coord[i] + v2coord[i];
-                r3 = MathUtils.carthesianNorm(u3, v3);
-
-                j = (r1 >= r2) ? ((r1 >= r3) ? (1) : (3)) : ((r2 >= r3) ? (2) : (3));
-
-                switch (j) {
-                    case 1: // r1
-                        angle[i] = Math.atan2(u1coord[i], v1coord[i]);
-                        break;
-                    case 2: // r2
-                        angle[i] = Math.atan2(u2coord[i], v2coord[i]);
-                        break;
-                    case 3: // r3
-                        angle[i] = Math.atan2(u3, v3);
-                        break;
-                    default:
-                        angle[i] = 0d;
-                }
-
-                angle[i] = Math.toDegrees(angle[i]);
-            }
-
-            this.setColumnDerivedValue(OIFitsConstants.COLUMN_POS_ANGLE, angle);
-        }
-
-        return angle;
-    }
-
     /* --- Other methods --- */
     /**
      * Do syntactical analysis.
@@ -497,9 +504,9 @@ public final class OIT3 extends OIData {
         final int[] corrindx_T3amp = getCorrIndxT3Amp();
         final int[] corrindx_T3phi = getCorrIndxT3Phi();
 
-        if (corrindx_T3amp != null || corrindx_T3phi != null) {
+        if ((corrindx_T3amp != null) || (corrindx_T3phi != null)) {
             // rule [OI_T3_CORRINDX] check if the referenced OI_CORR exists when the column CORRINDX_T3AMP or CORRINDX_T3PHI is present
-            if (oiCorr == null || OIFitsChecker.isInspectRules()) {
+            if ((oiCorr == null) || OIFitsChecker.isInspectRules()) {
                 if (corrindx_T3amp != null) {
                     checker.ruleFailed(Rule.OI_T3_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_T3AMP);
                 }
@@ -507,7 +514,7 @@ public final class OIT3 extends OIData {
                     checker.ruleFailed(Rule.OI_T3_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_T3PHI);
                 }
             }
-            if (oiCorr != null || OIFitsChecker.isInspectRules()) {
+            if ((oiCorr != null) || OIFitsChecker.isInspectRules()) {
                 // column is defined
                 if (corrindx_T3amp != null) {
                     checkCorrIndex(checker, oiCorr, this, OIFitsConstants.COLUMN_CORRINDX_T3AMP, corrindx_T3amp);
@@ -517,6 +524,5 @@ public final class OIT3 extends OIData {
                 }
             }
         }
-
     }
 }

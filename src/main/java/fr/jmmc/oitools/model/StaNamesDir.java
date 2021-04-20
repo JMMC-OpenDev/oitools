@@ -1,5 +1,5 @@
-/* 
- * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
+/*
+ * Copyright (C) 2021 CNRS - JMMC project ( http://www.jmmc.fr )
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,20 +17,28 @@
 /*******************************************************************************
  * JMMC project ( http://www.jmmc.fr ) - Copyright (C) CNRS.
  ******************************************************************************/
-package fr.jmmc.oitools.test;
+package fr.jmmc.oitools.model;
 
-/**
- * This interface holds several constants
- * @author bourgesl
- */
-public interface TestEnv {
+public final class StaNamesDir {
 
-    /** folder containing oidata test files. By default $home/oidata/ */
-    public final static String TEST_DIR = System.getProperty("user.home") + "/oidata/";
-    /** folder containing copied oidata files. By default $home/oidata/copy/ */
-    public final static String COPY_DIR = TEST_DIR + "copy/";
+    private final String staNames;
+    private final boolean orientation;
 
-    /* constants */
-    /** Logger associated to test classes */
-    public final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TestEnv.class.getName());
+    public StaNamesDir(final String staNames, final boolean orientation) {
+        this.staNames = staNames;
+        this.orientation = orientation;
+    }
+
+    public String getStaNames() {
+        return staNames;
+    }
+
+    public boolean isOrientation() {
+        return orientation;
+    }
+
+    @Override
+    public String toString() {
+        return "StaNamesDir{staNames=" + staNames + ", orientation=" + orientation + '}';
+    }
 }

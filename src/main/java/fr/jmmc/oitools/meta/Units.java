@@ -48,8 +48,8 @@ public class Units {
     public final static Units UNIT_DEGREE = new Units("UNIT_DEGREE", "deg|degree|degrees");
     /** Units are expressed in seconds */
     public final static Units UNIT_SECOND = new Units("UNIT_SECOND", "s|sec|second|seconds");
-    /** Units are expressed in julian day */
-    public final static Units UNIT_MJD = new Units("UNIT_MJD", "d|day|days");
+    /** Units are expressed in days */
+    public final static Units UNIT_DAYS = new Units("UNIT_DAYS", "d|day|days");
     /** Units are expressed in years */
     public final static Units UNIT_YEAR = new Units("UNIT_YEAR", "yr|year|years");
     /** Units are expressed in meters per second */
@@ -64,8 +64,8 @@ public class Units {
     public final static Units UNIT_HOUR = new Units("UNIT_HOUR", "h|hour|hours");
 
     /* members */
-    /** units name */
-    private final String name;
+    /** label of unit (debug) */
+    private final String label;
     /** string representation separated by '|' */
     private String representation;
     /** representation array */
@@ -73,11 +73,11 @@ public class Units {
 
     /**
      * Protected constructor
-     * @param name name parameter
+     * @param label label of unit (debug)
      * @param allowedValues string containing several representation separated by '|'
      */
-    protected Units(final String name, final String allowedValues) {
-        this.name = name;
+    protected Units(final String label, final String allowedValues) {
+        this.label = label;
         set(allowedValues);
     }
 
@@ -138,8 +138,8 @@ public class Units {
             return UNIT_DEGREE;
         } else if (UNIT_SECOND.checkTokens(unit)) {
             return UNIT_SECOND;
-        } else if (UNIT_MJD.checkTokens(unit)) {
-            return UNIT_MJD;
+        } else if (UNIT_DAYS.checkTokens(unit)) {
+            return UNIT_DAYS;
         } else if (UNIT_YEAR.checkTokens(unit)) {
             return UNIT_YEAR;
         } else if (UNIT_METER_PER_SECOND.checkTokens(unit)) {
@@ -161,7 +161,7 @@ public class Units {
      */
     @Override
     public String toString() {
-        return name;
+        return label;
     }
 
 }

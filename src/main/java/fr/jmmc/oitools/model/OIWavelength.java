@@ -26,6 +26,7 @@ import fr.jmmc.oitools.meta.DataRange;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
+import fr.jmmc.oitools.model.range.Range;
 import java.util.logging.Level;
 
 /**
@@ -134,15 +135,15 @@ public final class OIWavelength extends OITable {
      * Return the resolution (mean) from all couples lambda / delta_lambda ie (wavelength / bandpass)
      * @return resolution
      */
-    public Float getResolution() {
+    public Double getResolution() {
         /* retrieve value in columnsRangeValue map of associated column */
-        Float value = (Float) getColumnsRangeValue().get(OIFitsConstants.VALUE_RESOLUTION);
+        Double value = (Double) getColumnsRangeValue().get(OIFitsConstants.VALUE_RESOLUTION);
 
         /* compute resolution value if not previously set */
         if (value == null) {
             final int nWaves = getNWave();
 
-            final float[] effWaves = getEffWave();
+            final double[] effWaves = getEffWaveAsDouble();
             final float[] effBands = getEffBand();
 
             int n = 0;
@@ -150,6 +151,7 @@ public final class OIWavelength extends OITable {
 
             for (int i = 0; i < nWaves; i++) {
                 double res_ch = effWaves[i] / effBands[i];
+
                 if (!NumberUtils.isFinite(res_ch)) {
                     // TODO: use half distance between channels !
                     if (logger.isLoggable(Level.FINE)) {
@@ -160,13 +162,11 @@ public final class OIWavelength extends OITable {
                     n++;
                 }
             }
-
-            value = (n != 0) ? Float.valueOf((float) (total / n)) : Float.NaN;
+            value = (n != 0) ? Double.valueOf(total / n) : UNDEFINED_DBL;
 
             /* store value in associated column range value */
             getColumnsRangeValue().put(OIFitsConstants.VALUE_RESOLUTION, value);
         }
-
         return value;
     }
 
@@ -190,7 +190,6 @@ public final class OIWavelength extends OITable {
 
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_EFF_WAVE, effWaveDbls);
         }
-
         return effWaveDbls;
     }
 
@@ -198,48 +197,16 @@ public final class OIWavelength extends OITable {
      * Return the wavelength range
      * @return the wavelength range
      */
-    public float[] getEffWaveRange() {
-        return (float[]) getMinMaxColumnValue(OIFitsConstants.COLUMN_EFF_WAVE);
-    }
-
-    /**
-     * Return the minimum wavelength
-     * @return the minimum wavelength
-     */
-    public float getEffWaveMin() {
-        return getEffWaveRange()[0];
-    }
-
-    /**
-     * Return the maximum wavelength
-     * @return the maximum wavelength
-     */
-    public float getEffWaveMax() {
-        return getEffWaveRange()[1];
+    public Range getEffWaveRange() {
+        return getColumnRange(OIFitsConstants.COLUMN_EFF_WAVE);
     }
 
     /**
      * Return the bandwidth range
      * @return the bandwidth range
      */
-    public float[] getEffBandRange() {
-        return (float[]) getMinMaxColumnValue(OIFitsConstants.COLUMN_EFF_BAND);
-    }
-
-    /**
-     * Return the minimum bandwidth
-     * @return the minimum bandwidth
-     */
-    public float getEffBandMin() {
-        return getEffBandRange()[0];
-    }
-
-    /**
-     * Return the maximum bandwidth
-     * @return the maximum bandwidth
-     */
-    public float getEffBandMax() {
-        return getEffBandRange()[1];
+    public Range getEffBandRange() {
+        return getColumnRange(OIFitsConstants.COLUMN_EFF_BAND);
     }
 
     /* --- Other methods --- */
@@ -260,20 +227,23 @@ public final class OIWavelength extends OITable {
     public void checkSyntax(final OIFitsChecker checker) {
         super.checkSyntax(checker);
 
-        if ((getInsName() != null && getInsName().length() == 0) || OIFitsChecker.isInspectRules()) {
+        if (((getInsName() != null) && (getInsName().length() == 0)) || OIFitsChecker.isInspectRules()) {
             /* Problem: INSNAME keyword has value "", that should not be
              * possible. */
             // rule [OI_WAVELENGTH_INSNAME] check the INSNAME keyword has a not null or empty value
             checker.ruleFailed(Rule.OI_WAVELENGTH_INSNAME, this, OIFitsConstants.KEYWORD_INSNAME);
         }
 
-        for (int i = 0; i < getEffWave().length; i++) {
-            if ((getEffWave()[i] < 1.00E-7f || getEffWave()[i] > 20.00E-6f) || OIFitsChecker.isInspectRules()) {
+        final int nWaves = getNWave();
+        final float[] effWaves = getEffWave();
+
+        for (int i = 0; i < nWaves; i++) {
+            final float effWave = effWaves[i];
+            if (((effWave < 0.1E-6f) || (effWave > 20.0E-6f)) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_WAVELENGTH_EFFWAVE] check if the EFF_WAVE column values are within range [0.1x10^-6 - 20x10^-6]
-                checker.ruleFailed(Rule.OI_WAVELENGTH_EFF_WAVE, this, OIFitsConstants.COLUMN_EFF_WAVE).addValueAt(getEffWave()[i], i);
+                checker.ruleFailed(Rule.OI_WAVELENGTH_EFF_WAVE, this, OIFitsConstants.COLUMN_EFF_WAVE).addValueAt(effWave, i);
             }
         }
-        // TODO: check effband <0 ?
 
         getOIFitsFile().checkCrossReference(this, checker);
     }

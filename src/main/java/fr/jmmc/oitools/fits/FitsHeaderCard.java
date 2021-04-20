@@ -73,9 +73,9 @@ public final class FitsHeaderCard {
     }
 
     /**
-    * Return the flag indicating whether or not this is a string value
-    * @return flag indicating whether or not this is a string value
-    */
+     * Return the flag indicating whether or not this is a string value
+     * @return flag indicating whether or not this is a string value
+     */
     public boolean isString() {
         return isString;
     }

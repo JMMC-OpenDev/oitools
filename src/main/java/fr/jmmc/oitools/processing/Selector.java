@@ -16,7 +16,7 @@
  */
 package fr.jmmc.oitools.processing;
 
-import fr.jmmc.oitools.model.NightId;
+import fr.jmmc.oitools.model.range.Range;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +32,12 @@ public final class Selector {
     private Integer nightID = null;
     // table selection filter expressed as extNb (integer) values + OIFits file (id)
     private final Map<String, List<Integer>> extNbsPerOiFitsPath = new HashMap<String, List<Integer>>();
+    // criteria on baselines (1, 2 or 3T)
+    private List<String> baselines = null;
+    // criteria on MJD ranges
+    private List<Range> mjdRanges = null;
+    // criteria on wavelength ranges
+    private List<Range> wavelengthRanges = null;
 
     public Selector() {
         reset();
@@ -42,6 +48,9 @@ public final class Selector {
         insModeUID = null;
         nightID = null;
         extNbsPerOiFitsPath.clear();
+        baselines = null;
+        mjdRanges = null;
+        wavelengthRanges = null;
     }
 
     public String getTargetUID() {
@@ -49,7 +58,7 @@ public final class Selector {
     }
 
     public void setTargetUID(String targetUID) {
-        if (targetUID != null && targetUID.trim().isEmpty()) {
+        if ((targetUID != null) && targetUID.trim().isEmpty()) {
             targetUID = null;
         }
         this.targetUID = targetUID;
@@ -60,7 +69,7 @@ public final class Selector {
     }
 
     public void setInsModeUID(String insModeUID) {
-        if (insModeUID != null && insModeUID.trim().isEmpty()) {
+        if ((insModeUID != null) && insModeUID.trim().isEmpty()) {
             insModeUID = null;
         }
         this.insModeUID = insModeUID;
@@ -78,6 +87,10 @@ public final class Selector {
         return !extNbsPerOiFitsPath.isEmpty();
     }
 
+    public List<Integer> getTables(final String oiFitsPath) {
+        return extNbsPerOiFitsPath.get(oiFitsPath);
+    }
+
     public void addTable(final String oiFitsPath, final Integer extNb) {
         List<Integer> extNbs = extNbsPerOiFitsPath.get(oiFitsPath);
         if (extNbs == null) {
@@ -89,22 +102,58 @@ public final class Selector {
         }
     }
 
-    public List<Integer> getTables(final String oiFitsPath) {
-        return extNbsPerOiFitsPath.get(oiFitsPath);
+    public boolean hasBaselines() {
+        return (baselines != null) && !baselines.isEmpty();
+    }
+
+    public List<String> getBaselines() {
+        return baselines;
+    }
+
+    public void setBaselines(final List<String> baselines) {
+        this.baselines = baselines;
+    }
+
+    public boolean hasMJDRanges() {
+        return (mjdRanges != null) && !mjdRanges.isEmpty();
+    }
+
+    public List<Range> getMJDRanges() {
+        return mjdRanges;
+    }
+
+    public void setMJDRanges(final List<Range> mjdRanges) {
+        this.mjdRanges = mjdRanges;
+    }
+
+    public boolean hasWavelengthRange() {
+        return (wavelengthRanges != null) && !wavelengthRanges.isEmpty();
+    }
+
+    public List<Range> getWavelengthRanges() {
+        return wavelengthRanges;
+    }
+
+    public void setWavelengthRanges(final List<Range> wavelengthRanges) {
+        this.wavelengthRanges = wavelengthRanges;
     }
 
     public boolean isEmpty() {
-        return (targetUID == null) && (insModeUID == null) && (nightID == null) && (extNbsPerOiFitsPath.isEmpty());
+        return (targetUID == null) && (insModeUID == null) && (nightID == null)
+                && !hasTable() && !hasMJDRanges() && !hasBaselines();
     }
 
     @Override
     public String toString() {
-        return "Selector{"
-                + (targetUID != null ? " targetUID=" + targetUID : "")
-                + (insModeUID != null ? " insModeUID=" + insModeUID : "")
-                + (nightID != null ? " nightID=" + nightID : "")
-                + (!extNbsPerOiFitsPath.isEmpty() ? " extNbsPerOiFitsPath=" + extNbsPerOiFitsPath : "")
-                + '}';
+        return "Selector["
+                + ((targetUID != null) ? " targetUID: " + targetUID : "")
+                + ((insModeUID != null) ? " insModeUID: " + insModeUID : "")
+                + ((nightID != null) ? " nightID: " + nightID : "")
+                + (hasTable() ? " extNbsPerOiFitsPath: " + extNbsPerOiFitsPath : "")
+                + (hasBaselines() ? " baselines: " + baselines : "")
+                + (hasMJDRanges() ? " mjdRanges: " + mjdRanges : "")
+                + (hasWavelengthRange() ? " wavelengthRanges: " + wavelengthRanges : "")
+                + ']';
     }
 
 }

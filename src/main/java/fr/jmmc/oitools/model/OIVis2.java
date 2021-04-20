@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsConstants;
+import fr.jmmc.oitools.meta.ArrayColumnMeta;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.CustomUnits;
@@ -33,6 +34,10 @@ import fr.jmmc.oitools.util.MathUtils;
  * Class for OI_VIS2 table.
  */
 public final class OIVis2 extends OIData {
+
+    /** CORRINDX_VIS2DATA column descriptor */
+    private final static ColumnMeta COLUMN_CORRINDX_VIS2DATA = new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_VIS2DATA,
+            "Index into correlation matrix for 1st VIS2DATA element", Types.TYPE_INT, 1, true, false, Units.NO_UNIT);
 
     /**
      * Public OIVis2 class constructor
@@ -52,11 +57,10 @@ public final class OIVis2 extends OIData {
         // if OI support is enabled
         if (DataModel.hasOiModelColumnsSupport()) {
             // VIS2DATA MODEL column definition (optional)
-            ColumnMeta colMeta = new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA, "model of the squared visibility",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.NO_UNIT, null, DataRange.RANGE_POSITIVE, this);
-            // NS_MODEL_VIS2 column definition (bsmem convention)
-            colMeta.setAlias(OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA_ALIAS);
-            addColumnMeta(colMeta);
+            addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA, "model of the squared visibility",
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.NO_UNIT, null, DataRange.RANGE_VIS, this)
+                    // NS_MODEL_VIS2 column definition (bsmem convention)
+                    .setAlias(OIFitsConstants.COLUMN_NS_MODEL_VIS2DATA_ALIAS));
             // VIS2ERR MODEL column definition (optional)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_MODEL_VIS2ERR, "model of error in squared visibility",
                     Types.TYPE_DBL, true, false, NO_STR_VALUES, Units.NO_UNIT, null, DataRange.RANGE_POSITIVE, this));
@@ -69,8 +73,8 @@ public final class OIVis2 extends OIData {
         addColumnMeta(COLUMN_VCOORD);
 
         // STA_INDEX  column definition
-        addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_STA_INDEX,
-                "station numbers contributing to the data", Types.TYPE_SHORT, 2) {
+        addColumnMeta(new ArrayColumnMeta(OIFitsConstants.COLUMN_STA_INDEX, "station numbers contributing to the data",
+                Types.TYPE_SHORT, 2, false) {
             @Override
             public short[] getIntAcceptedValues() {
                 return getAcceptedStaIndexes();
@@ -82,8 +86,7 @@ public final class OIVis2 extends OIData {
 
         if (oifitsFile.isOIFits2()) {
             // CORRINDX_VIS2DATA  column definition
-            addColumnMeta(new ColumnMeta(OIFitsConstants.COLUMN_CORRINDX_VIS2DATA, "Index into correlation matrix for 1st VIS2DATA element",
-                    Types.TYPE_INT, 1, true, false, Units.NO_UNIT));
+            addColumnMeta(COLUMN_CORRINDX_VIS2DATA);
         }
 
         if (DataModel.hasOiVis2ExtraSupport()) {
@@ -111,11 +114,11 @@ public final class OIVis2 extends OIData {
 
         // Derived SPATIAL_U_FREQ column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_UCOORD_SPATIAL,
-                "spatial U frequency", Types.TYPE_DBL, this));
+                "spatial U frequency", Types.TYPE_DBL, this).setOrientationDependent(true));
 
         // Derived SPATIAL_V_FREQ column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VCOORD_SPATIAL,
-                "spatial V frequency", Types.TYPE_DBL, this));
+                "spatial V frequency", Types.TYPE_DBL, this).setOrientationDependent(true));
 
         // Derived SNR_VIS2 column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_VIS2, "SNR on " + OIFitsConstants.COLUMN_VIS2DATA,
@@ -415,11 +418,11 @@ public final class OIVis2 extends OIData {
         final int[] corrindx_vis2data = getCorrIndxVisData();
 
         if (corrindx_vis2data != null) {
-            if (oiCorr == null || OIFitsChecker.isInspectRules()) {
+            if ((oiCorr == null) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_VIS2_CORRINDX] check if the referenced OI_CORR table exists when the column CORRINDX_VIS2DATA is present
                 checker.ruleFailed(Rule.OI_VIS2_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_VIS2DATA);
             }
-            if (oiCorr != null || OIFitsChecker.isInspectRules()) {
+            if ((oiCorr != null) || OIFitsChecker.isInspectRules()) {
                 // column is defined
                 checkCorrIndex(checker, oiCorr, this, OIFitsConstants.COLUMN_CORRINDX_VIS2DATA, corrindx_vis2data);
             }

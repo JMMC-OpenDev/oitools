@@ -356,9 +356,9 @@ public class JUnitBaseTest {
             return trimTrailingZeros(DF_FULL_DOUBLE.format(value));
         }
     }
-    
+
     private static String trimTrailingZeros(final String number) {
-        if(number.contains(".")) {
+        if (number.contains(".")) {
             final int pos = number.lastIndexOf('E');
             if (pos != -1) {
                 String num = number.substring(0, pos);

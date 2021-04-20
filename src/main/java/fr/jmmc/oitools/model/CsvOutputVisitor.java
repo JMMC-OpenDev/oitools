@@ -155,7 +155,7 @@ public final class CsvOutputVisitor extends OutputVisitor {
     @Override
     public void appendMetadataRecord(final String targetName, final double targetRa, final double targetDec,
                                      double intTime, double tMin, double tMax,
-                                     float resPower, float minWavelength, float maxWavelength,
+                                     double resPower, double minWavelength, double maxWavelength,
                                      String facilityName, final String insName,
                                      int nbVis, int nbVis2, int nbT3, int nbChannels) {
         this.buffer.append(targetName).append(SEP)

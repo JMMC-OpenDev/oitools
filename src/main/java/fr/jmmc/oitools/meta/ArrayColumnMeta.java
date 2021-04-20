@@ -53,7 +53,7 @@ public class ArrayColumnMeta extends ColumnMeta {
      * @param dataRange optional data range (may be null)
      */
     public ArrayColumnMeta(final String name, final String desc, final Types dataType, final int repeat, final boolean optional, final boolean is3D,
-            final String[] acceptedValues, final Units unit, final String errName, final DataRange dataRange) {
+                           final String[] acceptedValues, final Units unit, final String errName, final DataRange dataRange) {
         super(name, desc, dataType, repeat, optional, is3D, acceptedValues, unit, errName, dataRange);
     }
 

@@ -22,6 +22,7 @@ import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFitsWriter;
+import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.processing.Merger;
 import fr.jmmc.oitools.processing.Selector;
 import fr.nom.tam.fits.FitsException;
@@ -37,14 +38,20 @@ public class OIFitsProcessor extends OIFitsCommand {
 
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_LIST_BL = "list_baselines";
     private static final String COMMAND_CONVERT = "convert";
     private static final String COMMAND_DUMP = "dump";
     private static final String COMMAND_MERGE = "merge";
 
+    private static final String OPTION_MATCH_SEP = "-separation";
     private static final String OPTION_OUTPUT = "-output";
+    /* filter options */
     private static final String OPTION_TARGET = "-target";
     private static final String OPTION_INSNAME = "-insname";
     private static final String OPTION_NIGHT = "-night";
+    private static final String OPTION_BASELINES = "-baselines";
+    private static final String OPTION_MJD_RANGES = "-mjds";
+    private static final String OPTION_WL_RANGES = "-wavelengths";
 
     /**
      * Main entry point.
@@ -70,6 +77,8 @@ public class OIFitsProcessor extends OIFitsCommand {
                 dump(args);
             } else if (COMMAND_LIST.equals(command)) {
                 list(args);
+            } else if (COMMAND_LIST_BL.equals(command)) {
+                listBaselines(args);
             } else if (COMMAND_CONVERT.equals(command)) {
                 copy(args);
             } else if (COMMAND_MERGE.equals(command)) {
@@ -85,6 +94,13 @@ public class OIFitsProcessor extends OIFitsCommand {
         }
     }
 
+    private static void handleArgSeparation(final String[] args) {
+        final String sep = getOptionArgValue(args, OPTION_MATCH_SEP);
+        if (sep != null) {
+            System.setProperty("target.matcher.dist", sep);
+        }
+    }
+
     /**
      * List content of files
      *
@@ -93,6 +109,8 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static void list(final String[] args) throws FitsException, IOException {
         final List<String> fileLocations = getInputFiles(args);
         final boolean check = hasOptionArg(args, "-c", "-check");
+
+        handleArgSeparation(args);
 
         final OIFitsChecker checker = new OIFitsChecker();
 
@@ -103,6 +121,28 @@ public class OIFitsProcessor extends OIFitsCommand {
         }
 
         OIFitsCollectionViewer.process(oiFitsCollection);
+    }
+
+    /**
+     * List baselines of files
+     *
+     * @param args command line arguments.
+     */
+    private static void listBaselines(final String[] args) throws FitsException, IOException {
+        final List<String> fileLocations = getInputFiles(args);
+        final boolean check = hasOptionArg(args, "-c", "-check");
+
+        handleArgSeparation(args);
+
+        final OIFitsChecker checker = new OIFitsChecker();
+
+        final OIFitsCollection oiFitsCollection = OIFitsCollection.create(checker, fileLocations);
+
+        if (check) {
+            info("validation results:\n" + checker.getCheckReport());
+        }
+
+        OIFitsCollectionViewer.processBaselines(oiFitsCollection);
     }
 
     /**
@@ -165,10 +205,15 @@ public class OIFitsProcessor extends OIFitsCommand {
         final String outputFilePath = getOutputFilepath(args);
         final boolean check = hasOptionArg(args, "-c", "-check");
 
+        handleArgSeparation(args);
+
         // Optional filters:
         final String targetUID = getOptionArgValue(args, OPTION_TARGET);
         final String insModeUID = getOptionArgValue(args, OPTION_INSNAME);
         final String night = getOptionArgValue(args, OPTION_NIGHT);
+        final String mjds = getOptionArgValue(args, OPTION_MJD_RANGES);
+        final String baselines = getOptionArgValue(args, OPTION_BASELINES);
+        final String wavelengths = getOptionArgValue(args, OPTION_WL_RANGES);
 
         final OIFitsCollection oiFitsCollection = OIFitsCollection.create(null, fileLocations);
 
@@ -182,10 +227,35 @@ public class OIFitsProcessor extends OIFitsCommand {
         if (night != null) {
             selector.setNightID(Integer.valueOf(night));
         }
+        if (baselines != null) {
+            selector.setBaselines(parseBaselines(baselines));
+        }
+        if (mjds != null) {
+            selector.setMJDRanges(parseRanges(mjds));
+        }
+        if (wavelengths != null) {
+            selector.setWavelengthRanges(parseRanges(wavelengths));
+        }
 
         // Call merge
         final OIFitsFile result = Merger.process(oiFitsCollection, selector);
+
         if (result.hasOiData()) {
+            // Add history:
+            for (OIFitsFile oiFitsFile : oiFitsCollection.getSortedOIFitsFiles()) {
+                result.getPrimaryImageHDU().addHeaderHistory("Input: " + oiFitsFile.getFileName());
+            }
+            if (!selector.isEmpty()) {
+                result.getPrimaryImageHDU().addHeaderHistory(
+                        "CLI args: "
+                        + ((targetUID != null) ? OPTION_TARGET + " " + targetUID : "")
+                        + ((insModeUID != null) ? OPTION_INSNAME + " " + insModeUID : "")
+                        + ((night != null) ? OPTION_NIGHT + " " + night : "")
+                        + ((baselines != null) ? OPTION_BASELINES + " " + baselines : "")
+                        + ((mjds != null) ? OPTION_MJD_RANGES + " " + mjds : "")
+                        + ((wavelengths != null) ? OPTION_WL_RANGES + " " + wavelengths : "")
+                );
+            }
             // Store result
             write(outputFilePath, result, check);
         } else {
@@ -238,10 +308,14 @@ public class OIFitsProcessor extends OIFitsCommand {
         for (int i = 1; i < args.length; i++) {
             // note: should be generalized to any argument having value(s):
             if (OPTION_OUTPUT.substring(0, 2).equals(args[i])
+                    || OPTION_MATCH_SEP.equals(args[i])
                     || OPTION_OUTPUT.equals(args[i])
                     || OPTION_TARGET.equals(args[i])
                     || OPTION_INSNAME.equals(args[i])
-                    || OPTION_NIGHT.equals(args[i])) {
+                    || OPTION_NIGHT.equals(args[i])
+                    || OPTION_BASELINES.equals(args[i])
+                    || OPTION_MJD_RANGES.equals(args[i])
+                    || OPTION_WL_RANGES.equals(args[i])) {
                 i++;  // skip next parameter which is the output file
             } else if (args[i].startsWith("-")) {
                 // ignore short options
@@ -267,17 +341,58 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("|------------------------------------------------------------------------------------|");
         info("| command      " + COMMAND_HELP + "           Show this help                                         |");
         info("| command      " + COMMAND_LIST + "           List content of several oifits files                   |");
+        info("| command      " + COMMAND_LIST_BL + " List baselines and triplets used by several oifits files      |");
         info("| command      " + COMMAND_DUMP + "           Dump the given oifits files                            |");
         info("| command      " + COMMAND_CONVERT + "        Convert the given input file                           |");
         info("| command      " + COMMAND_MERGE + "          Merge several oifits files                             |");
-        info("| " + OPTION_OUTPUT.substring(0, 2) + " or " + OPTION_OUTPUT
-                + " <file_path>   Complete path, absolute or relative, for output file   |");
+        info("|------------------------------------------------------------------------------------|");
         info("| [-l] or [-log]              Enable logging (quiet by default)                      |");
         info("| [-c] or [-check]            Check output file before writing                       |");
-        info("| [-target]   <target value>  Filter result on given target                          |");
-        info("| [-insname]  <insname value> Filter result on given insname                         |");
-        info("| [-night]    <night value>   Filter result on given night (integer)                 |");
+        info("| [-separation] <value>       Separation in arcsec for the target matcher            |");
+        info("| [-o] or [-output] <file_path> Complete path, absolute or relative, for output file |");
+        info("| [-target] <value>           Filter result on given Target                          |");
+        info("| [-insname] <value>          Filter result on given InsName                         |");
+        info("| [-night] <value>            Filter result on given Night (integer)                 |");
+        info("| [-baselines] <values>       Filter result on given Baselines or Triplets (comma-separated) |");
+        info("| [-mjds] <values>            Filter result on given MJD ranges (comma-separated pairs) |");
+        info("| [-wavelengths] <values>     Filter result on given wavelength ranges (comma-separated pairs) |");
         info("--------------------------------------------------------------------------------------");
     }
 
+    public static List<String> parseBaselines(final String baselines) {
+        final String[] values = baselines.split(",");
+
+        final List<String> baselineList = new ArrayList<String>(values.length);
+        for (String value : values) {
+            baselineList.add(value.trim());
+        }
+        if (baselineList.isEmpty()) {
+            return null;
+        }
+        return baselineList;
+    }
+
+    public static List<Range> parseRanges(final String mjds) {
+        final String[] values = mjds.split(",");
+
+        if ((values.length % 2) == 1) {
+            throw new IllegalStateException("Invalid ranges (" + values.length + " items): " + mjds);
+        }
+        final List<Range> ranges = new ArrayList<Range>(values.length);
+
+        for (int i = 0; i < values.length; i += 2) {
+            final double min = Double.valueOf(values[i]);
+            final double max = Double.valueOf(values[i + 1]);
+
+            if (min > max) {
+                throw new IllegalStateException("Invalid range [" + min + "," + max + "]");
+            }
+
+            ranges.add(new Range(min, max));
+        }
+        if (ranges.isEmpty()) {
+            return null;
+        }
+        return ranges;
+    }
 }

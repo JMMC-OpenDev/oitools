@@ -258,7 +258,7 @@ public final class FitsImage {
         if (this.wavelength == null) {
             // If increment is undefined (NaN):
             if (Double.isNaN(this.incWL)) {
-                if (this.imageIndex > 1 || this.pixRefWL > 1.0) {
+                if ((this.imageIndex > 1) || (this.pixRefWL > 1.0)) {
                     // wavelength is undefined:
                     this.wavelength = Double.valueOf(Double.NaN);
                 } else {

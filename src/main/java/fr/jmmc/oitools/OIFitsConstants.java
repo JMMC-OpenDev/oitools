@@ -422,6 +422,10 @@ public interface OIFitsConstants {
     public final static String COLUMN_SPATIAL_FREQ = "SPATIAL_FREQ";
     /** NIGHT_ID derived OiData column as double[] */
     public final static String COLUMN_NIGHT_ID = "NIGHT_ID";
+    /** MJD_START derived OiData column as double[] */
+    public final static String COLUMN_MJD_START_R = "MJD_START";
+    /** MJD_END derived OiData column as double[] */
+    public final static String COLUMN_MJD_END_R = "MJD_END";
     /** UCOORD_SPATIAL derived OIData column as double[][] */
     public final static String COLUMN_UCOORD_SPATIAL = "UCOORD_SPATIAL";
     /** VCOORD_SPATIAL derived OIData column as double[][] */
@@ -434,7 +438,7 @@ public interface OIFitsConstants {
     public final static String COLUMN_U2COORD_SPATIAL = "U2COORD_SPATIAL";
     /** V2COORD_SPATIAL derived OIData column as double[][] */
     public final static String COLUMN_V2COORD_SPATIAL = "V2COORD_SPATIAL";
-    
+
     /** SNR_VIS2 derived OIVIS2 column as double[][] */
     public final static String COLUMN_SNR_VIS2 = "SNR_VIS2";
     /** SNR_MODEL_VIS2 derived OIVIS2 column as double[][] */
@@ -445,7 +449,7 @@ public interface OIFitsConstants {
     public final static String COLUMN_SNR_NS_PHOT = "SNR_NS_PHOT";
     /** RES_VIS2_MODEL derived OIVIS2 column as double[][] */
     public final static String COLUMN_RES_VIS2_MODEL = "RES_VIS2_MODEL";
-    
+
     /** SNR_VISAMP derived OIVIS column as double[][] */
     public final static String COLUMN_SNR_VISAMP = "SNR_VISAMP";
     /** SNR_VISPHI derived OIVIS column as double[][] */
@@ -454,7 +458,7 @@ public interface OIFitsConstants {
     public final static String COLUMN_RES_VISAMP_MODEL = "RES_VISAMP_MODEL";
     /** RES_VISPHI_MODEL derived OIVIS column as double[][] */
     public final static String COLUMN_RES_VISPHI_MODEL = "RES_VISPHI_MODEL";
-    
+
     /** SNR_T3AMP derived T3 column as double[][] */
     public final static String COLUMN_SNR_T3AMP = "SNR_T3AMP";
     /** SNR_T3PHI derived T3 column as double[][] */
@@ -463,7 +467,10 @@ public interface OIFitsConstants {
     public final static String COLUMN_RES_T3AMP_MODEL = "RES_T3AMP_MODEL";
     /** RES_T3PHI_MODEL derived T3 column as double[][] */
     public final static String COLUMN_RES_T3PHI_MODEL = "RES_T3PHI_MODEL";
-    
+
+    /** SNR_FLUX derived OI_FLUX column as double[][] */
+    public final static String COLUMN_SNR_FLUX = "SNR_FLUX";
+
     /** Resolution value */
     public final static String VALUE_RESOLUTION = "RESOLUTION";
 }
