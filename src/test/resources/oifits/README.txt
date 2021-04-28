@@ -10,7 +10,7 @@ This readme describes why the following files were selected. Their peculiarities
 
 -2008-Contest_Binary.oifits : Frist file for test, no particular, but no OI_VIS table.
 
--2009-11-esp_Aur-avg5.oifits : A lot of table for OI_ARRAY (26), OI_WAVELENGTH (26), OI_VIS2(26), OI_T3(26).
+-2009-11-eps_Aur-avg5.oifits : A lot of table for OI_ARRAY (26), OI_WAVELENGTH (26), OI_VIS2(26), OI_T3(26).
 
 -2012-03-24_ALL_oiDataCalib.fits : A lot of target (18)
 

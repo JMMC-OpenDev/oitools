@@ -285,12 +285,13 @@ public final class ArrayFuncs implements PrimitiveInfo {
                 return;
             }
             for (int i = 0; i < x.length; i += 1) {
-                copyArray(x, y);
+                copyArray(x[i], y[i]);
             }
-        }
-        int len = Array.getLength(original);
+        } else {
+            int len = Array.getLength(original);
 
-        System.arraycopy(original, 0, copy, 0, len);
+            System.arraycopy(original, 0, copy, 0, len);
+        }
     }
 
     /** Find the dimensions of an object.

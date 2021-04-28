@@ -22,6 +22,7 @@ package fr.jmmc.oitools.model.range;
 import fr.jmmc.jmcs.util.ObjectUtils;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -153,6 +154,10 @@ public final class Range implements Comparable<Range> {
         return (getMin() <= other.getMax()) && (getMax() >= other.getMin());
     }
 
+    public boolean overlapFully(final Range other) {
+        return (getMin() <= other.getMin()) && (getMax() >= other.getMax());
+    }
+
     public static boolean matchRange(final Collection<Range> selected, final Range candidate) {
         for (Range sel : selected) {
             if (sel.overlap(candidate)) {
@@ -171,6 +176,59 @@ public final class Range implements Comparable<Range> {
             }
         }
         return false;
+    }
+
+    public static boolean matchFully(final Range selected, final Collection<Range> candidates) {
+        for (Range cand : candidates) {
+            if (selected.overlapFully(cand)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean matchFully(final Collection<Range> selected, final Range candidate) {
+        final Set<Range> matchSelected = new HashSet<Range>();
+        for (Range sel : selected) {
+            if (sel.overlapFully(candidate)) {
+                matchSelected.add(sel);
+            }
+        }
+        return (selected.size() == matchSelected.size());
+    }
+
+    public static boolean matchFully(final Collection<Range> selected, final Collection<Range> candidates) {
+        final Set<Range> matchSelected = new HashSet<Range>();
+        for (Range cand : candidates) {
+            for (Range sel : selected) {
+                if (sel.overlapFully(cand)) {
+                    matchSelected.add(sel);
+                }
+            }
+        }
+        return (selected.size() == matchSelected.size());
+    }
+
+    public static void getMatchingSelected(final Collection<Range> selected, final Range candidate, final Set<Range> matching) {
+        matching.clear();
+
+        for (Range sel : selected) {
+            if (sel.overlap(candidate)) {
+                matching.add(sel);
+            }
+        }
+    }
+
+    public static void getMatchingSelected(final Collection<Range> selected, final Collection<Range> candidates, final Set<Range> matching) {
+        matching.clear();
+
+        for (Range sel : selected) {
+            for (Range cand : candidates) {
+                if (sel.overlap(cand)) {
+                    matching.add(sel);
+                }
+            }
+        }
     }
 
     public static void getMatchingRanges(final Collection<Range> selected, final Collection<Range> candidates, final Set<Range> matching) {
@@ -269,14 +327,7 @@ public final class Range implements Comparable<Range> {
      * @param value value to test
      * @return true if the given value is inside given ranges
      */
-    public static boolean contains(final List<Range> ranges, final double value) {
-        if (ranges == null) {
-            return false;
-        }
-        return find(ranges, value) != null;
-    }
-
-    public static boolean contains(final Set<Range> ranges, final double value) {
+    public static boolean contains(final Collection<Range> ranges, final double value) {
         if (ranges == null) {
             return false;
         }

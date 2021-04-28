@@ -502,7 +502,7 @@ public final class OIFitsCollection implements ToStringable {
             }
 
             // Wavelength ranges criteria:
-            if (selector.hasWavelengthRange()) {
+            if (selector.hasWavelengthRanges()) {
                 pattern.getDistinctWavelengthRanges().addAll(selector.getWavelengthRanges());
             }
 

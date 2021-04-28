@@ -24,12 +24,14 @@ import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
+import fr.jmmc.oitools.meta.WaveColumnMeta;
 import fr.jmmc.oitools.model.ModelVisitor;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OITable;
 import fr.jmmc.oitools.model.Rule;
 import fr.jmmc.oitools.model.range.Range;
 import fr.nom.tam.util.ArrayFuncs;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -188,13 +190,26 @@ public abstract class FitsTable extends FitsHDU {
      * @throws IllegalArgumentException if the number of rows is less than 1
      */
     public final void resizeTable(final int nbKeepRows, final BitSet maskRows) throws IllegalArgumentException {
+        resizeTable(nbKeepRows, maskRows, null);
+    }
+
+    /**
+     * Resize the table ie column arrays + fix the Fits NAXIS2 keyword value
+     *
+     * @param nbKeepRows number of rows to keep i.e. the Fits NAXIS2 keyword value
+     * @param maskRows bit set indicating which rows to keep (true means keep row)
+     * @param maskWavelengths bit set indicating which wavelength to keep (true means keep index)
+     * @throws IllegalArgumentException if the number of rows is less than 1
+     */
+    public final void resizeTable(final int nbKeepRows, final BitSet maskRows, final BitSet maskWavelengths) throws IllegalArgumentException {
         final int nbRows = getNbRows();
-        if (nbKeepRows == nbRows) {
+        if ((nbKeepRows == nbRows) && (maskWavelengths == null)) {
             return;
         }
         if (nbKeepRows < 1) {
             throw new IllegalArgumentException("Invalid number of rows : the table must have at least 1 row !");
         }
+        final int nbKeepWl = (maskWavelengths != null) ? maskWavelengths.cardinality() : -1;
 
         // Resize column values:
         for (ColumnMeta column : getColumnDescCollection()) {
@@ -203,11 +218,11 @@ public abstract class FitsTable extends FitsHDU {
 
             // ignore optional columns (null):
             if (columnValueOriginal != null) {
-                final int[] dims = getColumnArrayDims(column, nbKeepRows);
+                final int[] dims = getColumnArrayDims(column, nbKeepRows, nbKeepWl);
                 final Object columnValue = createColumnArray(column, dims);
 
-                // copy data 
-                filterColumnArray(columnValueOriginal, maskRows, columnValue, dims);
+                // copy data (may filter wavelengths)
+                filterColumnArray(columnName, columnValueOriginal, columnValue, (dims.length == 1), maskRows, nbKeepWl, maskWavelengths);
 
                 if (logger.isLoggable(Level.FINE)) {
                     logger.log(Level.FINE, "COLUMN {0} = ''{1}''", new Object[]{columnName, columnValue});
@@ -231,7 +246,7 @@ public abstract class FitsTable extends FitsHDU {
      * @return new column arrays
      */
     public Object createColumnArray(final ColumnMeta column, final int nbRows) {
-        return createColumnArray(column, getColumnArrayDims(column, nbRows));
+        return createColumnArray(column, getColumnArrayDims(column, nbRows, -1));
     }
 
     protected static Object createColumnArray(final ColumnMeta column, final int[] dims) {
@@ -250,10 +265,12 @@ public abstract class FitsTable extends FitsHDU {
         return value;
     }
 
-    protected static int[] getColumnArrayDims(final ColumnMeta column, final int nbRows) {
+    protected static int[] getColumnArrayDims(final ColumnMeta column, final int nbRows, final int nbWl) {
         final String name = column.getName();
-        final int repeat = column.getRepeat(); // repeat = row size
         final Types type = column.getDataType(); // data type
+
+        // fixed array size:
+        final int repeat = ((nbWl != -1) && column instanceof WaveColumnMeta) ? nbWl : column.getRepeat();
 
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "COLUMN [{0}] [{1}{2}]", new Object[]{name, repeat, column.getType()});
@@ -320,7 +337,8 @@ public abstract class FitsTable extends FitsHDU {
                 /* character/date data type */
                 Arrays.fill((String[]) output, UNDEFINED_STRING);
             } else {
-                logger.log(Level.INFO, "fillUndefinedArrays: Unsupported array type: {0}", output.getClass());
+                logger.log(Level.INFO, "fillUndefinedArrays: Unsupported array type: {0}",
+                        (output != null) ? output.getClass() : null);
             }
         } else {
             final Object[] oo = (Object[]) output;
@@ -330,68 +348,130 @@ public abstract class FitsTable extends FitsHDU {
         }
     }
 
-    protected static void filterColumnArray(final Object input, final BitSet keepMask, final Object output, final int[] dims) {
+    protected static void filterColumnArray(final String columnName, final Object input, final Object output, final boolean is1D,
+                                            final BitSet keepMaskRows, final int nbKeepWl, final BitSet keepMaskWavelengths) {
         // no bound checks:
-        if (1 == dims.length) {
-            if (output instanceof double[]) {
-                /* double data type */
-                final double[] os = (double[]) input;
-                final double[] oo = (double[]) output;
-
-                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
-                    oo[j] = os[i];
-                }
-            } else if (output instanceof float[]) {
-                /* real data type */
-                final float[] os = (float[]) input;
-                final float[] oo = (float[]) output;
-
-                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
-                    oo[j] = os[i];
-                }
-            } else if (output instanceof short[]) {
-                /* integer data type */
-                final short[] os = (short[]) input;
-                final short[] oo = (short[]) output;
-
-                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
-                    oo[j] = os[i];
-                }
-            } else if (output instanceof int[]) {
-                /* integer data type */
-                final int[] os = (int[]) input;
-                final int[] oo = (int[]) output;
-
-                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
-                    oo[j] = os[i];
-                }
-            } else if (output instanceof boolean[]) {
-                /* logical data type */
-                final boolean[] os = (boolean[]) input;
-                final boolean[] oo = (boolean[]) output;
-
-                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
-                    oo[j] = os[i];
-                }
-            } else if (output instanceof String[]) {
-                /* character/date data type */
-                final String[] os = (String[]) input;
-                final String[] oo = (String[]) output;
-
-                for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
-                    oo[j] = os[i];
-                }
-            } else {
-                logger.log(Level.INFO, "filterColumnArray: Unsupported array type: {0}", output.getClass());
-            }
+        if (is1D) {
+            filterColumnArray1D(columnName, input, output, keepMaskRows);
         } else {
             final Object[] os = (Object[]) input;
             final Object[] oo = (Object[]) output;
 
-            for (int i = keepMask.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMask.nextSetBit(i + 1), j++) {
+            for (int i = keepMaskRows.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMaskRows.nextSetBit(i + 1), j++) {
                 // Array copy needed to ensure deep copy (and not mixing sub-arrays):
-                ArrayFuncs.copyArray(os[i], oo[j]);
+                filterColumnArray(columnName, os[i], oo[j], nbKeepWl, keepMaskWavelengths);
             }
+        }
+    }
+
+    private static void filterColumnArray(final String columnName, final Object input, final Object output,
+                                          final int nbKeepWl, final BitSet keepMaskWavelengths) {
+
+        final String oname = input.getClass().getName();
+        final String cname = output.getClass().getName();
+
+        if (!oname.equals(cname)) {
+            return;
+        }
+
+        if (oname.charAt(0) != '[') {
+            return;
+        }
+
+        if (oname.charAt(1) == '[') {
+            // N dimensions
+            final Object[] os = (Object[]) input;
+            final Object[] oo = (Object[]) output;
+
+            if (os.length == oo.length) {
+                // dimensions matches:
+                for (int i = 0; i < os.length; i += 1) {
+                    filterColumnArray(columnName, os[i], oo[i], nbKeepWl, keepMaskWavelengths);
+                }
+            } else {
+                if (keepMaskWavelengths == null) {
+                    logger.log(Level.WARNING, "filterColumnArray[{0}] invalid dimensions: {1} != {2}", new Object[]{columnName, os.length, oo.length});
+                } else if (nbKeepWl != oo.length) {
+                    logger.log(Level.WARNING, "filterColumnArray[{0}] invalid dimensions: {1} != {2}", new Object[]{columnName, nbKeepWl, oo.length});
+                } else {
+                    // dimensions matches:
+                    filterColumnArray(columnName, input, output, false, keepMaskWavelengths, nbKeepWl, keepMaskWavelengths);
+                }
+            }
+        } else {
+            // 1 dimension:
+            final int oLen = Array.getLength(input);
+            final int cLen = Array.getLength(output);
+
+            if (oLen == cLen) {
+                // dimensions matches:
+                System.arraycopy(input, 0, output, 0, oLen);
+            } else {
+                if (keepMaskWavelengths == null) {
+                    logger.log(Level.WARNING, "filterColumnArray[{0}] invalid dimensions: {1} != {2}", new Object[]{columnName, oLen, cLen});
+                } else if (nbKeepWl != cLen) {
+                    logger.log(Level.WARNING, "filterColumnArray[{0}] invalid dimensions: {1} != {2}", new Object[]{columnName, nbKeepWl, cLen});
+                } else {
+                    // dimensions matches:
+                    filterColumnArray1D(columnName, input, output, keepMaskWavelengths);
+                }
+            }
+        }
+    }
+
+    protected static void filterColumnArray1D(final String columnName, final Object input, final Object output, final BitSet keepMaskRows) {
+        // no bound checks:
+        if (output instanceof double[]) {
+            /* double data type */
+            final double[] os = (double[]) input;
+            final double[] oo = (double[]) output;
+
+            for (int i = keepMaskRows.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMaskRows.nextSetBit(i + 1), j++) {
+                oo[j] = os[i];
+            }
+        } else if (output instanceof float[]) {
+            /* real data type */
+            final float[] os = (float[]) input;
+            final float[] oo = (float[]) output;
+
+            for (int i = keepMaskRows.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMaskRows.nextSetBit(i + 1), j++) {
+                oo[j] = os[i];
+            }
+        } else if (output instanceof short[]) {
+            /* integer data type */
+            final short[] os = (short[]) input;
+            final short[] oo = (short[]) output;
+
+            for (int i = keepMaskRows.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMaskRows.nextSetBit(i + 1), j++) {
+                oo[j] = os[i];
+            }
+        } else if (output instanceof int[]) {
+            /* integer data type */
+            final int[] os = (int[]) input;
+            final int[] oo = (int[]) output;
+
+            for (int i = keepMaskRows.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMaskRows.nextSetBit(i + 1), j++) {
+                oo[j] = os[i];
+            }
+        } else if (output instanceof boolean[]) {
+            /* logical data type */
+            final boolean[] os = (boolean[]) input;
+            final boolean[] oo = (boolean[]) output;
+
+            for (int i = keepMaskRows.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMaskRows.nextSetBit(i + 1), j++) {
+                oo[j] = os[i];
+            }
+        } else if (output instanceof String[]) {
+            /* character/date data type */
+            final String[] os = (String[]) input;
+            final String[] oo = (String[]) output;
+
+            for (int i = keepMaskRows.nextSetBit(0), j = 0, len = oo.length; i >= 0 && j < len; i = keepMaskRows.nextSetBit(i + 1), j++) {
+                oo[j] = os[i];
+            }
+        } else {
+            logger.log(Level.INFO, "filterColumnArray[{0}]: Unsupported array type: {1}",
+                    new Object[]{columnName, (output != null) ? output.getClass() : null});
         }
     }
 

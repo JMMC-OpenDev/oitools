@@ -77,7 +77,7 @@ public final class Granule {
                 }
             }
             if (pattern.hasDistinctWavelengthRanges() && (candidate.getInsMode() != null)) {
-                if (!Range.matchRange(pattern.getDistinctMjdRanges(), candidate.getInsMode().getWavelengthRange())) {
+                if (!Range.matchRange(pattern.getDistinctWavelengthRanges(), candidate.getInsMode().getWavelengthRange())) {
                     return false;
                 }
             }

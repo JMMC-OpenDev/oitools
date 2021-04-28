@@ -126,7 +126,7 @@ public final class Selector {
         this.mjdRanges = mjdRanges;
     }
 
-    public boolean hasWavelengthRange() {
+    public boolean hasWavelengthRanges() {
         return (wavelengthRanges != null) && !wavelengthRanges.isEmpty();
     }
 
@@ -140,7 +140,7 @@ public final class Selector {
 
     public boolean isEmpty() {
         return (targetUID == null) && (insModeUID == null) && (nightID == null)
-                && !hasTable() && !hasMJDRanges() && !hasBaselines();
+                && !hasTable() && !hasBaselines() && !hasMJDRanges() && !hasWavelengthRanges();
     }
 
     @Override
@@ -152,7 +152,7 @@ public final class Selector {
                 + (hasTable() ? " extNbsPerOiFitsPath: " + extNbsPerOiFitsPath : "")
                 + (hasBaselines() ? " baselines: " + baselines : "")
                 + (hasMJDRanges() ? " mjdRanges: " + mjdRanges : "")
-                + (hasWavelengthRange() ? " wavelengthRanges: " + wavelengthRanges : "")
+                + (hasWavelengthRanges() ? " wavelengthRanges: " + wavelengthRanges : "")
                 + ']';
     }
 

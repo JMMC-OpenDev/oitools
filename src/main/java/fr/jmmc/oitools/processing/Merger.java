@@ -419,6 +419,21 @@ public final class Merger {
         if (!ctx.usedOIWavelengths.isEmpty()) {
             final OIFitsFile resultFile = ctx.resultFile;
             final Map<OIWavelength, OIWavelength> mapOIWavelengths = ctx.mapOIWavelengths;
+            final Map<OIWavelength, BitSet> maskOIWavelengths = ctx.maskOIWavelengths;
+
+            final Selector selector = ctx.selectorResult.getSelector();
+
+            // MJD ranges criteria:
+            final List<Range> gWlRanges;
+            final Set<Range> wlRangeMatchings;
+
+            if ((selector != null) && selector.hasWavelengthRanges()) {
+                gWlRanges = selector.getWavelengthRanges();
+                wlRangeMatchings = new HashSet<Range>();
+            } else {
+                gWlRanges = null;
+                wlRangeMatchings = null;
+            }
 
             // TODO: use Instrument modes to reduce the output OIWavelength tables ? ie fuzzy comparison
             // Browse all used OIWavelength tables:
@@ -451,21 +466,87 @@ public final class Merger {
                 }
 
                 final OIWavelength newOiWavelength;
+                BitSet maskRows = null;
 
                 if (prevOiWavelength != null) {
                     // use the previous table
                     newOiWavelength = prevOiWavelength;
                 } else {
-                    /*
-                    TODO: implement wavelength filter (range)
-                     */
-
                     // add the new table (copy):
                     newOiWavelength = (OIWavelength) resultFile.copyTable(oiWavelength);
                     newOiWavelength.setInsName(newName);
+
+                    // check wavelength ranges:
+                    boolean checkWlRanges = false;
+                    if ((gWlRanges != null) && (wlRangeMatchings != null)) {
+                        final Range wavelengthRange = oiWavelength.getInstrumentMode().getWavelengthRange();
+
+                        logger.log(Level.FINE, "wavelength ranges: {0}", wavelengthRange);
+
+                        // get matching wavelength ranges:
+                        Range.getMatchingSelected(gWlRanges, wavelengthRange, wlRangeMatchings);
+
+                        if (wlRangeMatchings.isEmpty()) {
+                            logger.log(Level.FINE, "Skip {0}, no matching wavelength range", oiWavelength);
+                            continue;
+                        }
+                        logger.log(Level.FINE, "matching wavelength ranges: {0}", wlRangeMatchings);
+
+                        checkWlRanges = !Range.matchFully(wlRangeMatchings, wavelengthRange);
+                    }
+
+                    boolean filterRows = false;
+
+                    if (checkWlRanges) {
+                        final int nRows = newOiWavelength.getNbRows();
+
+                        // prepare mask to indicate rows to keep in output table:
+                        maskRows = new BitSet(nRows); // bits set to false by default
+
+                        final float[] effWaves = (checkWlRanges) ? newOiWavelength.getEffWave() : null;
+
+                        // Iterate on table rows (i):
+                        for (int i = 0; i < nRows; i++) {
+                            boolean skip = false;
+
+                            if (checkWlRanges) {
+                                if ((wlRangeMatchings != null) && !Range.contains(wlRangeMatchings, effWaves[i])) {
+                                    // data row does not correspond to selected wavelength ranges 
+                                    skip = true;
+                                }
+                            }
+
+                            // update mask:
+                            if (skip) {
+                                filterRows = true;
+                            } else {
+                                maskRows.set(i);
+                            }
+                        }
+                        if (filterRows) {
+                            final int nKeepRows = maskRows.cardinality();
+
+                            if (nKeepRows <= 0) {
+                                // skip table as no remaining row
+                                continue;
+                            } else if (nKeepRows == nRows) {
+                                // skip filter later in OIData:
+                                maskRows = null;
+                            } else {
+                                // redim the table to the correct row count to prune invalid rows:
+                                newOiWavelength.resizeTable(nKeepRows, maskRows);
+                            }
+                        }
+                    }
                     resultFile.addOiTable(newOiWavelength);
+
+                    if (filterRows) {
+                        logger.log(Level.WARNING, "Table[{0}] filtered from Table[{1}]",
+                                new Object[]{newOiWavelength, oiWavelength});
+                    }
                 }
                 mapOIWavelengths.put(oiWavelength, newOiWavelength);
+                maskOIWavelengths.put(oiWavelength, maskRows);
             }
             logger.log(Level.INFO, "insNames: {0}", Arrays.toString(resultFile.getAcceptedInsNames()));
             logger.log(Level.FINE, "mapOIWavelengths: {0}", mapOIWavelengths);
@@ -613,6 +694,7 @@ public final class Merger {
             }
 
             final Map<OIWavelength, OIWavelength> mapOIWavelengths = ctx.mapOIWavelengths;
+            final Map<OIWavelength, BitSet> maskOIWavelengths = ctx.maskOIWavelengths;
             final Map<OIArray, OIArray> mapOIArrays = ctx.mapOIArrays;
             final Map<OICorr, OICorr> mapOICorrs = ctx.mapOICorrs;
 
@@ -630,6 +712,12 @@ public final class Merger {
                     continue;
                 }
                 newInsName = newOiWavelength.getInsName();
+
+                final BitSet maskWavelengths = maskOIWavelengths.get(oiData.getOiWavelength());
+                logger.log(Level.FINE, "Mask WL: {0}", maskWavelengths);
+
+                // check wavelengths:
+                boolean checkWavelengths = (maskWavelengths != null);
 
                 // ARRNAME:
                 final OIArray newOiArray = mapOIArrays.get(oiData.getOiArray());
@@ -663,11 +751,12 @@ public final class Merger {
                     final Short newId = mapTargetIds.get(id);
                     if (newId == null) {
                         checkTargetId = true;
+                        // mark this id as UNDEFINED to be filtered out:
                         mapTargetIds.put(id, UNDEFINED_SHORT);
 
-                        logger.log(Level.WARNING, "Extra TargetId = {0} found ! Using [{1}] instead (rows should be removed in the future)",
-                                new Object[]{id, UNDEFINED_SHORT});
+                        logger.log(Level.INFO, "Filter TargetId = {0}.", id);
                     } else {
+                        // targetId value are different between input table and output:
                         if (!id.equals(newId)) {
                             checkTargetId = true;
                         }
@@ -685,27 +774,6 @@ public final class Merger {
                         checkNightId = true;
                     }
                     logger.log(Level.FINE, "oidata nightIds: {0}", oiData.getDistinctNightId());
-                }
-
-                // check MJD ranges:
-                boolean checkMJDRanges = false;
-                if ((gMJDRanges != null) && (mjdRangeMatchings != null)) {
-                    final Set<Range> oiDataMJDRanges = oiData.getDistinctMJDRanges().keySet();
-
-                    logger.log(Level.FINE, "oiData distinct MJD ranges: {0}", oiDataMJDRanges);
-
-                    // collect matching mjd ranges:
-                    Range.getMatchingRanges(gMJDRanges, oiDataMJDRanges, mjdRangeMatchings);
-
-                    if (mjdRangeMatchings.isEmpty()) {
-                        logger.log(Level.FINE, "Skip {0}, no matching MJD range", oiData);
-                        continue;
-                    }
-                    logger.log(Level.FINE, "oidata matching MJD ranges: {0}", mjdRangeMatchings);
-
-                    if (oiDataMJDRanges.size() > mjdRangeMatchings.size()) {
-                        checkMJDRanges = true;
-                    }
                 }
 
                 // check baselines:
@@ -728,9 +796,25 @@ public final class Merger {
                     }
                 }
 
-                /*
-                    TODO: implement wavelength filter (range)
-                 */
+                // check MJD ranges:
+                boolean checkMJDRanges = false;
+                if ((gMJDRanges != null) && (mjdRangeMatchings != null)) {
+                    final Set<Range> oiDataMJDRanges = oiData.getDistinctMJDRanges().keySet();
+
+                    logger.log(Level.FINE, "oiData distinct MJD ranges: {0}", oiDataMJDRanges);
+
+                    // get matching wavelength ranges:
+                    Range.getMatchingSelected(gMJDRanges, oiDataMJDRanges, mjdRangeMatchings);
+
+                    if (mjdRangeMatchings.isEmpty()) {
+                        logger.log(Level.FINE, "Skip {0}, no matching MJD range", oiData);
+                        continue;
+                    }
+                    logger.log(Level.FINE, "matching MJD ranges: {0}", mjdRangeMatchings);
+
+                    checkMJDRanges = !Range.matchFully(oiDataMJDRanges, mjdRangeMatchings);
+                }
+
                 final OIData newOIData = (OIData) resultFile.copyTable(oiData);
 
                 // Change INSNAME, ARRNAME & CORRNAME keywords:
@@ -740,11 +824,12 @@ public final class Merger {
 
                 boolean filterRows = false;
 
-                if (checkTargetId || checkNightId || checkMJDRanges || checkBaselines) {
+                final BitSet maskRows;
+                if (checkTargetId || checkNightId || checkBaselines || checkMJDRanges || checkWavelengths) {
                     final int nRows = newOIData.getNbRows();
 
                     // prepare mask to indicate rows to keep in output table:
-                    final BitSet maskRows = new BitSet(nRows); // bits set to false by default
+                    maskRows = new BitSet(nRows); // bits set to false by default
 
                     // Update targetId column:
                     final short[] targetIds = newOIData.getTargetId();
@@ -756,6 +841,8 @@ public final class Merger {
 
                     // Iterate on table rows (i):
                     for (int i = 0; i < nRows; i++) {
+                        boolean skip = false;
+
                         if (checkTargetId) {
                             final Short oldTargetId = Short.valueOf(targetIds[i]);
                             Short newTargetId = mapTargetIds.get(oldTargetId);
@@ -767,39 +854,42 @@ public final class Merger {
                             // preserve id:
                             newTargetIds[i] = targetIds[i];
                         }
-                        if (checkNightId) {
+                        if (newTargetIds[i] == ModelBase.UNDEFINED_SHORT) {
+                            skip = true;
+                        }
+
+                        if (checkNightId && !skip) {
                             if (!nightIdMatcher.match(nightIds[i])) {
-                                // data row does not correspond to current night 
-                                // so flag its targetId to undefined:
-                                newTargetIds[i] = ModelBase.UNDEFINED_SHORT;
+                                // data row does not correspond to current night
+                                skip = true;
                             }
                         }
-                        if (checkMJDRanges) {
+                        if (checkMJDRanges && !skip) {
+// wrong range: see wl ranges !                            
                             if ((mjdRangeMatchings != null) && !Range.contains(mjdRangeMatchings, mjds[i])) {
                                 // data row does not correspond to selected MJD ranges 
-                                // so flag its targetId to undefined:
-                                newTargetIds[i] = ModelBase.UNDEFINED_SHORT;
+                                skip = true;
                             }
                         }
-                        if (checkBaselines) {
+                        if (checkBaselines && !skip) {
                             if ((staIndexMatchings != null) && !staIndexMatchings.contains(staIndexes[i])) {
                                 // data row does not correspond to selected baselines
-                                // so flag its targetId to undefined:
-                                newTargetIds[i] = ModelBase.UNDEFINED_SHORT;
+                                skip = true;
                             }
                         }
 
                         // update mask:
-                        if (newTargetIds[i] == ModelBase.UNDEFINED_SHORT) {
+                        if (skip) {
                             filterRows = true;
                         } else {
                             maskRows.set(i);
                         }
                     }
+
                     // update targetId column before table filter:
                     newOIData.setTargetId(newTargetIds);
 
-                    if (filterRows) {
+                    if (filterRows || checkWavelengths) {
                         final int nKeepRows = maskRows.cardinality();
 
                         if (nKeepRows <= 0) {
@@ -807,7 +897,7 @@ public final class Merger {
                             continue;
                         } else {
                             // redim the table to the correct row count to prune invalid rows:
-                            newOIData.resizeTable(nKeepRows, maskRows);
+                            newOIData.resizeTable(nKeepRows, maskRows, maskWavelengths);
                         }
                     }
                 }
@@ -842,6 +932,8 @@ public final class Merger {
         final Map<OIWavelength, OIWavelength> mapOIWavelengths = new IdentityHashMap<OIWavelength, OIWavelength>();
         final Map<OIArray, OIArray> mapOIArrays = new IdentityHashMap<OIArray, OIArray>();
         final Map<OICorr, OICorr> mapOICorrs = new IdentityHashMap<OICorr, OICorr>();
+        /** Map between old table to BitSet (mask) for OIWavelength */
+        final Map<OIWavelength, BitSet> maskOIWavelengths = new IdentityHashMap<OIWavelength, BitSet>();
 
         private Context(final SelectorResult selectorResult, final OIFitsFile resultFile) {
             this.selectorResult = selectorResult;
