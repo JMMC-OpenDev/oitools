@@ -4,6 +4,14 @@
  This software is released under the MIT License.
  https://opensource.org/licenses/MIT
 -->
+See:
+<http://www.jmmc.fr/twiki/bin/view/Jmmc/Software/JmmcOiTools>
+
+OIFits validation rules:
+
+* [OIFITS V1](http://htmlpreview.github.io/?https://github.com/JMMC-OpenDev/OITools/blob/master/rules/DataModelV1_output.html)
+* [OIFITS V2](http://htmlpreview.github.io/?https://github.com/JMMC-OpenDev/OITools/blob/master/rules/DataModelV2_output.html)
+
 Code conventions
 ================
 

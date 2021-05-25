@@ -1,16 +1,8 @@
-# OITools
+# OITools    ![JMMC logo](doc/JMMC-logo.jpg)
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)  <img src="https://travis-ci.org/JMMC-OpenDev/OITools.svg" alt="build status"/>
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)  ![build](https://travis-ci.org/JMMC-OpenDev/OITools.svg)
 
-This is a java library dedicated to reading / writing OIFITS files (based on the nom.tam.fits library) developped by the JMMC technical team.
-
-See:
-<http://www.jmmc.fr/twiki/bin/view/Jmmc/Software/JmmcOiTools>
-
-OIFits validation rules:
-
-* [OIFITS V1](http://htmlpreview.github.io/?https://github.com/JMMC-OpenDev/OITools/blob/master/rules/DataModelV1_output.html)
-* [OIFITS V2](http://htmlpreview.github.io/?https://github.com/JMMC-OpenDev/OITools/blob/master/rules/DataModelV2_output.html)
+This is a java library dedicated to reading / writing OIFITS files (based on the nom.tam.fits library) developed by the JMMC technical team.
 
 ## Setup
 
@@ -84,6 +76,6 @@ display the file content of input file(s) in CSV format files contents  (granule
   * `-baselines`
   * `-wavelength`
 
-  Targets are gathered according to their name and positions, the separation for the target matcher can be tune by  the `-separation <value>` keyword (default: 10? ).
+  Targets are gathered according to their name and positions, the separation for the target matcher can be tune by  the keyword `-separation <value>`  (default: 10? ).
 
 ## [Developers corner](doc/DevelopersCorner.md)
