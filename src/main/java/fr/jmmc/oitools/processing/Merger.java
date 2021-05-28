@@ -587,6 +587,8 @@ public final class Merger {
                             // table is the same
                             break;
                         }
+                        // TODO: try all other possibilities ie all OI_ARRAYs having the same same
+                        // Use hash or checksum to avoid costly raw table comparison ?
                     }
                     // use another suffix (_nn):
                     idx++;
