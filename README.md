@@ -76,6 +76,6 @@ display the file content of input file(s) in CSV format files contents  (granule
   * `-baselines`
   * `-wavelength`
 
-  Targets are gathered according to their name and positions, the separation for the target matcher can be tune by  the keyword `-separation <value>`  (default: 10? ).
+  Targets are gathered according to their name and positions, the separation for the target matcher can be tune by  the keyword `-separation <value>`  (default: `1 arcsec` ).
 
 ## [Developers corner](doc/DevelopersCorner.md)

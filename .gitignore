@@ -10,3 +10,4 @@ src/test/resources/logging.properties
 /src/test/resources/test/fits/*
 /src/test/resources/test/oifits/*
 /target/
+/parent-pom/target/
