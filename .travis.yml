@@ -15,13 +15,24 @@ before_script:
   - echo $HOME
   - echo $MAVEN_OPTS
 
-script: 
-  - mvn clean install -Djarsigner.skip=true -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script:
+  - mvn clean install -Djarsigner.skip=true -DskipTests=true  -B -V
   - mvn test -Djava.util.logging.config.file=./src/test/resources/logging.properties -Djarsigner.skip=true -B
 
 install: true
 
+after_success:
+- touch target/apidoc/.nojekyll
+- mv  rules/{DataModelV1_output.html,DataModelV2_output.html} target/apidoc/.
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  local_dir: target/apidoc
+  committer_from_gh: true
+  on:
+    branch: master
+
 cache:
   directories:
     - $HOME/.m2
-
