@@ -38,6 +38,15 @@ Several shell scripts are used to handle the reference & test files (regression)
 | ./sortRefProperties.sh | Sort (alphabetically) the REFERENCE property files |
 | ./rules/toHtml.sh | Convert DataModelV?.xml to html pages |
 
+
+First time only: install parent-pom and missing libraries in the local maven repository:
+```
+cd parent-pom
+mvn -Dassembly.skipAssembly -Djarsigner.skip=true clean install
+cd ..
+mvn process-resources
+```
+
 *Update procedure*:
 * mvn clean install
 * update.sh (check diff) use Ctrl+C to interrupt the shell script before overriding reference files
