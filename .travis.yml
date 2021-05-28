@@ -22,13 +22,13 @@ script:
 install: true
 
 after_success:
-- touch target/apidoc/.nojekyll
-- mv  rules/{DataModelV1_output.html,DataModelV2_output.html} target/apidoc/.
+- touch target/apidocs/.nojekyll
+- mv  rules/{DataModelV1_output.html,DataModelV2_output.html} target/apidocs/.
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GH_TOKEN
-  local_dir: target/apidoc
+  local_dir: target/apidocs
   committer_from_gh: true
   on:
     branch: master
