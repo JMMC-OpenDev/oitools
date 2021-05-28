@@ -48,6 +48,10 @@ public final class CoordUtils {
      */
     public static double computeDistanceInDegrees(final double raDeg1, final double decDeg1,
                                                   final double raDeg2, final double decDeg2) {
+        
+        if (Double.isNaN(raDeg1 + raDeg2 + decDeg1 + decDeg2)) {
+            return Double.NaN;
+        }
 
         /* Convert all the given angle from degrees to rad */
         final double ra1 = Math.toRadians(raDeg1);
