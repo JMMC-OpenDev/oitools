@@ -54,21 +54,32 @@ Usage: fr.jmmc.oitools.OIFitsProcessor command -o <path_output_file> <file locat
 --------------------------------------------------------------------------------------
 ```
 
+Examples
+========
+All examples are made using data selected from the [test folder](src/test/resources/oifits/)
+
 * `oilist input_file_location [input_file_location …]`
 display the file content of input file(s) in CSV format files contents  (granules like OiDB):
 
 | target name | target right ascension | target declination | exposure time | t_min (mjd) | t_max (mjd)| spectral resolution  | shorter wavelength | larger wavelength | facility name  | instrument name | number of visibilities | number of squared visibilities | number of bispectra  | number of spectral channels  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
+```bash
+oilist GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits
+target_name     s_ra    s_dec   t_exptime       t_min   t_max   em_res_power    em_min  em_max  facility_name   instrument_name nb_vis  nb_vis2 nb_t3   nb_channels
+IRAS17216-3801  261.2771541666667       -38.066788888888894     36.54999999999172       57562.13387079336       57562.134832901625      25.75830610631207       2.0264997147023678E-6   2.347295094295987E-6       VLTI    GRAVITY_FT      6       6       4       5
+IRAS17216-3801  261.2771541666667       -38.066788888888894     0.0     57562.1339081338        57562.135323171286      1008.6521574069673      1.990000100704492E-6    2.4500000108673703E-6   VLTI    GRAVITY_SC 6       6       4       210
+```
+
 * `oip list_baselines`
 
 * `oip dump` print headers of all HDUs.
 
-* `oiconvert -o <output_file_path> input_file_location` load the input file in memory and write directly to the output file. By this way some cleanup (keywords, columns) is done.
-
+<!-- * `oiconvert -o <output_file_path> input_file_location` load the input file in memory and write directly to the output file. By this way some cleanup (keywords, columns) is done.
+ -->
 * `oimerge -o <output_file_path> input_file_location [input_file_location …]` merge multiple files with filter support, targets are gathered and merged into a single OI_TARGET table.
 
-    Available filters are:
+    Available filters are (multiple arguments must be comma separated):
   * `-target`
   * `-insname`
   * `-night`
