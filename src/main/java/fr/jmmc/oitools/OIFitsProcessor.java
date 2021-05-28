@@ -22,6 +22,7 @@ import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
 import fr.jmmc.oitools.model.OIFitsWriter;
+import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.processing.Merger;
 import fr.jmmc.oitools.processing.Selector;
@@ -97,7 +98,11 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static void handleArgSeparation(final String[] args) {
         final String sep = getOptionArgValue(args, OPTION_MATCH_SEP);
         if (sep != null) {
-            System.setProperty("target.matcher.dist", sep);
+            try {
+                Target.MATCHER_LIKE.setSeparationInArcsec(Double.parseDouble(sep));
+            } catch (NumberFormatException nfe) {
+                error("Invalid separation: " + sep);
+            }
         }
     }
 

@@ -19,38 +19,16 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
-import fr.jmmc.jmcs.util.NumberUtils;
 import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_DBL;
 import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_FLOAT;
 import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_STRING;
-import fr.jmmc.oitools.util.CoordUtils;
 import java.util.Comparator;
-import java.util.logging.Level;
 
 /**
  * A value-type (immutable) representing a single target in any OI_Target table
  * @author bourgesl
  */
 public final class Target {
-
-    /** Logger */
-    final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Target.class.getName());
-
-    /** distance in degrees to consider same targets (default: 1 arcsecs) */
-    public final static double SAME_TARGET_DISTANCE;
-
-    static {
-        double distance;
-        try {
-            distance = Double.parseDouble(System.getProperty("target.matcher.dist", "1.0"));
-        } catch (NumberFormatException nfe) {
-            logger.log(Level.WARNING, "Invalid System property 'target.matcher.dist': {0}", System.getProperty("target.matcher.dist"));
-            distance = 1.0;
-        }
-        SAME_TARGET_DISTANCE = distance;
-
-        logger.log(Level.INFO, "Matcher<Target>: SAME_TARGET_DISTANCE : {0}", SAME_TARGET_DISTANCE);
-    }
 
     public final static Matcher<Target> MATCHER_NAME = new Matcher<Target>() {
 
@@ -64,27 +42,7 @@ public final class Target {
         }
     };
 
-    public final static Matcher<Target> MATCHER_LIKE = new Matcher<Target>() {
-
-        @Override
-        public boolean match(final Target src, final Target other) {
-            if (src == other) {
-                return true;
-            }
-            // only check ra/dec:
-            final double distance = CoordUtils.computeDistanceInDegrees(src.getRaEp0(), src.getDecEp0(),
-                    other.getRaEp0(), other.getDecEp0());
-
-            final boolean match = (distance <= SAME_TARGET_DISTANCE);
-
-            if (logger.isLoggable(Level.FINE)) {
-                logger.log(Level.FINE, "match = {0} [{1} vs {2}] = {3} arcsec",
-                        new Object[]{match, src.getTarget(), other.getTarget(),
-                                     NumberUtils.trimTo3Digits(distance * CoordUtils.DEG_IN_ARCSEC)});
-            }
-            return match;
-        }
-    };
+    public final static TargetMatcherDistance MATCHER_LIKE = new TargetMatcherDistance();
 
     public static final Comparator<Target> CMP_TARGET = new Comparator<Target>() {
         @Override
