@@ -29,7 +29,7 @@ cd parent-pom
 mvn -Dassembly.skipAssembly -Djarsigner.skip=true clean install
 cd ..
 mvn process-resources
-mvn clean install
+mvn -Djarsigner.skip=true clean install
 ```
 
 [Javadoc](https://ferreolS.github.io/OITools/index.html)
