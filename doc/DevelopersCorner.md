@@ -24,6 +24,7 @@ Development wiki
 Building instruction
 ====
 
+First time only: install parent-pom and missing libraries in the local maven repository:
 ```bash
 cd parent-pom
 mvn -Dassembly.skipAssembly -Djarsigner.skip=true clean install

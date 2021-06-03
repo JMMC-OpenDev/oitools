@@ -54,18 +54,24 @@ public final class TargetMatcherDistance implements Matcher<Target> {
     /**
      * Define the separation in degrees
      * @param separation separation in degrees
+     * @return true if the separation is changed
      */
-    public void setSeparation(final double separation) {
-        logger.log(Level.INFO, "Matcher<Target>: separation: {0} as", separation * CoordUtils.DEG_IN_ARCSEC);
-        this.separation = separation;
+    public boolean setSeparation(final double separation) {
+        if (this.separation != separation) {
+            logger.log(Level.INFO, "Matcher<Target>: separation: {0} as", separation * CoordUtils.DEG_IN_ARCSEC);
+            this.separation = separation;
+            return true;
+        }
+        return false;
     }
 
     /**
      * Define the separation in degrees
      * @param separation separation in degrees
+     * @return true if the separation is changed
      */
-    public void setSeparationInArcsec(final double separation) {
-        setSeparation(separation * CoordUtils.ARCSEC_IN_DEGREES);
+    public boolean setSeparationInArcsec(final double separation) {
+        return setSeparation(separation * CoordUtils.ARCSEC_IN_DEGREES);
     }
 
     public static double parseSeparationInArcsec(final String separation) {
