@@ -349,19 +349,27 @@ public final class Analyzer implements ModelVisitor {
         // reset cached analyzed data:
         oiWavelength.setChanged();
 
-        final String insName = oiWavelength.getInsName();
-        final int nbChannels = oiWavelength.getNWave();
         // compute lazily the wavelength min/max:
         final Range effWaveRange = oiWavelength.getEffWaveRange();
         // compute lazily the bandwidth min/max:
-        double bandMin = oiWavelength.getEffBandRange().getMin();
+        final Range effBandRange = oiWavelength.getEffBandRange();
+
+        // Mean Resolution = mean(lambda / delta_lambda)
+        final double resPower = oiWavelength.getResolution();
+
+        // Compute wavelength rank index (disabled as unused):
+        /*
+        oiWavelength.getEffWaveRankIndex();
+         */
+        // Create the instrument mode:
+        final String insName = oiWavelength.getInsName();
+        final int nbChannels = oiWavelength.getNWave();
+
+        double bandMin = effBandRange.getMin();
 
         if (!NumberUtils.isFinitePositive(bandMin)) {
             bandMin = UNDEFINED_DBL;
         }
-
-        // Resolution = mean(lambda / delta_lambda)
-        final double resPower = oiWavelength.getResolution();
 
         // TODO: extract only instrument Name ie parse first alpha characters to cleanup weird INSNAME values
         final InstrumentMode insMode = new InstrumentMode(insName, nbChannels, effWaveRange, resPower, bandMin);
@@ -371,7 +379,7 @@ public final class Analyzer implements ModelVisitor {
 
         if (isLogDebug) {
             logger.log(Level.FINE, "process: file: {0}", oiWavelength.getOIFitsFile().getAbsoluteFilePath());
-            logger.log(Level.FINE, "process: {0}", insMode.toString());
+            logger.log(Level.FINE, "process: {0}", insName);
             logger.log(Level.FINE, "process: OIWavelength[{0}] range: {1}]", new Object[]{oiWavelength, effWaveRange});
             logger.log(Level.FINE, "process: OIWavelength[{0}]\ninsMode: {1}", new Object[]{oiWavelength, insMode});
         }

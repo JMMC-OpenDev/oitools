@@ -27,6 +27,9 @@ import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
 import fr.jmmc.oitools.model.range.Range;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 
 /**
@@ -35,7 +38,10 @@ import java.util.logging.Level;
 public final class OIWavelength extends OITable {
 
     /* constants */
- /* static descriptors */
+    /** WL_RANK_IDX derived OIWavelength column as int[] */
+    public final static String COLUMN_WLEN_RANK_IDX = "WL_RANK_IDX";
+
+    /* static descriptors */
     /** INSNAME keyword descriptor */
     private final static KeywordMeta KEYWORD_INSNAME = new KeywordMeta(OIFitsConstants.KEYWORD_INSNAME,
             "name of detector for cross-referencing", Types.TYPE_CHAR);
@@ -207,6 +213,42 @@ public final class OIWavelength extends OITable {
      */
     public Range getEffBandRange() {
         return getColumnRange(OIFitsConstants.COLUMN_EFF_BAND);
+    }
+
+    /**
+     * Return the rank index for the effective wavelength of channel (UNUSED)
+     * @return rank index for the effective wavelength of channel
+     */
+    public int[] getEffWaveRankIndex() {
+        int[] ranks = (int[]) getColumnDerivedInt(COLUMN_WLEN_RANK_IDX);
+
+        /* compute rank index if not previously set */
+        if (ranks == null) {
+            final int nWaves = getNWave();
+            ranks = new int[nWaves];
+            final double[] effWaves = getEffWaveAsDouble();
+
+            final ArrayList<Integer> idxList = new ArrayList<Integer>(nWaves);
+            for (int i = 0; i < nWaves; i++) {
+                idxList.add(NumberUtils.valueOf(i));
+            }
+            // Sort index by wavelength:
+            Collections.sort(idxList, new Comparator<Integer>() {
+                @Override
+                public int compare(final Integer i1, final Integer i2) {
+                    // compare wavelengths:
+                    return Double.compare(effWaves[i1], effWaves[i2]);
+                }
+            });
+            // Store to rank index:
+            for (int i = 0, j; i < nWaves; i++) {
+                j = idxList.get(i);
+                ranks[i] = j;
+                // System.out.println("rank[" + i + " => " + j + "]: " + effWaves[j]);
+            }
+            setColumnDerivedValue(COLUMN_WLEN_RANK_IDX, ranks);
+        }
+        return ranks;
     }
 
     /* --- Other methods --- */
