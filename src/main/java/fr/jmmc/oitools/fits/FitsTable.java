@@ -251,7 +251,7 @@ public abstract class FitsTable extends FitsHDU {
 
     protected static Object createColumnArray(final ColumnMeta column, final int[] dims) {
         // base class :
-        final Class<?> clazz = Types.getBaseClass(column.getDataType());
+        final Class<?> clazz = column.getBaseClass();
 
         Object value = ArrayFuncs.newInstance(clazz, dims); // array value
 

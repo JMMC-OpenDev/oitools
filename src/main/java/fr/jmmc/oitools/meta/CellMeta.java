@@ -206,14 +206,22 @@ public class CellMeta {
     }
 
     /**
-     * Get type.
+     * Get the data type.
      *
-     * @return the type.
+     * @return the data type.
      */
     public final Types getDataType() {
         return this.dataType;
     }
 
+    /**
+     * Return the java class representation of the data type
+     * @return java class representation
+     */
+    public final Class<?> getBaseClass() {
+        return Types.getBaseClass(getDataType());
+    }
+    
     /**
      * Get type.
      *
