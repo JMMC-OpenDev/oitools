@@ -29,16 +29,17 @@ package fr.jmmc.jmcs.util;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class is copied from Jmcs (same package) in order to let OITools compile properly 
  * but at runtime only one implementation will be loaded (by class loader)
  * 
- * Note: Jmcs Changes must be reported here to avoid runtime issues !
- * 
- * 
  * Handles double number comparisons with absolute error and number helper methods
  * http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
+ * 
+ * Note: Jmcs Changes must be reported to OItools to avoid runtime issues !
  *
  * @author Laurent BOURGES.
  */
@@ -67,6 +68,36 @@ public final class NumberUtils {
      */
     private NumberUtils() {
         super();
+    }
+
+    /**
+     * Parse the String value as a double
+     * @param value string value
+     * @return Double or null if number format exception
+     */
+    public static Double parseDouble(final String value) {
+        Double res = null;
+        try {
+            res = Double.valueOf(value);
+        } catch (NumberFormatException nfe) {
+            Logger.getLogger(NumberUtils.class.getName()).log(Level.FINEST, "parseDouble failure: {0}", value);
+        }
+        return res;
+    }
+
+    /**
+     * Parse the String value as an integer
+     * @param value string value
+     * @return Integer or null if number format exception
+     */
+    public static Integer parseInteger(final String value) {
+        Integer res = null;
+        try {
+            res = valueOf(value);
+        } catch (NumberFormatException nfe) {
+            Logger.getLogger(NumberUtils.class.getName()).log(Level.FINEST, "parseInteger failure: {0}", value);
+        }
+        return res;
     }
 
     /**

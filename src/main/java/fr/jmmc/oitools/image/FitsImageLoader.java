@@ -20,6 +20,8 @@
 package fr.jmmc.oitools.image;
 
 import fr.jmmc.jmcs.util.NumberUtils;
+import static fr.jmmc.jmcs.util.NumberUtils.parseDouble;
+import static fr.jmmc.jmcs.util.NumberUtils.parseInteger;
 import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
@@ -996,40 +998,6 @@ public final class FitsImageLoader {
             }
         }
         return output;
-    }
-
-    /**
-     * Parse the String value as a double
-     * @param value string value
-     * @return Double or null if number format exception
-     */
-    private static Double parseDouble(final String value) {
-        Double res = null;
-        try {
-            res = Double.valueOf(value);
-        } catch (NumberFormatException nfe) {
-            if (logger.isLoggable(Level.FINEST)) {
-                logger.log(Level.FINEST, "parseDouble failure: {0}", value);
-            }
-        }
-        return res;
-    }
-
-    /**
-     * Parse the String value as an integer
-     * @param value string value
-     * @return Integer or null if number format exception
-     */
-    private static Integer parseInteger(final String value) {
-        Integer res = null;
-        try {
-            res = NumberUtils.valueOf(value);
-        } catch (NumberFormatException nfe) {
-            if (logger.isLoggable(Level.FINEST)) {
-                logger.log(Level.FINEST, "parseInteger failure: {0}", value);
-            }
-        }
-        return res;
     }
 
 }

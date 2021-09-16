@@ -19,6 +19,8 @@
  ******************************************************************************/
 package fr.jmmc.oitools.fits;
 
+import static fr.jmmc.jmcs.util.NumberUtils.parseDouble;
+import static fr.jmmc.jmcs.util.NumberUtils.parseInteger;
 import fr.nom.tam.fits.HeaderCard;
 
 /**
@@ -35,6 +37,8 @@ public final class FitsHeaderCard {
     private final String comment;
     /** flag indicating whether or not this is a string value */
     private boolean isString;
+    /** optional parsed card value */
+    private Object parsedValue = null;
 
     /**
      * Protected constructor
@@ -100,7 +104,7 @@ public final class FitsHeaderCard {
     }
 
     /**
-     * Returns a string representation of this table
+     * Returns a string representation of this Fits header card
      * @param sb string builder to append to
      */
     public void toString(final StringBuilder sb) {
@@ -118,5 +122,50 @@ public final class FitsHeaderCard {
         if (comment != null) {
             sb.append(" // ").append(comment);
         }
+    }
+
+    /**
+     * Returns an object representation of this Fits header card or null
+     * It tries to guess the type (Boolean / Double / Integer) according to the String value
+     * @return String / Boolean / Double / Integer instance or null
+     */
+    public Object parseValue() {
+        if (value == null) {
+            return null;
+        }
+        // value is not null:
+        // use cached parsed value:
+        if (parsedValue != null) {
+            return parsedValue;
+        }
+        // else do parse value:
+        if (isString) {
+            return parsedValue = value;
+        }
+
+        // Logical
+        if (value.startsWith("T")) {
+            return parsedValue = Boolean.TRUE;
+        }
+        if (value.startsWith("F")) {
+            return parsedValue = Boolean.FALSE;
+        }
+
+        // Numeric keywords:
+        if (value.indexOf('.') == -1) {
+            // check for Integers:
+            final Integer i = parseInteger(value);
+            if (i != null) {
+                return parsedValue = i;
+            }
+        } else {
+            // check for Doubles:
+            final Double d = parseDouble(value);
+            if (d != null) {
+                return parsedValue = d;
+            }
+        }
+        // fallback, return string
+        return parsedValue = value;
     }
 }

@@ -447,8 +447,8 @@ public abstract class FitsHDU extends ModelBase {
             return "";
         }
         final StringBuilder sb = new StringBuilder(1024);
-        for (FitsHeaderCard h : this.headerCards) {
-            h.toString(sb);
+        for (FitsHeaderCard card : this.headerCards) {
+            card.toString(sb);
             sb.append(separator);
         }
         return sb.toString();
@@ -475,6 +475,22 @@ public abstract class FitsHDU extends ModelBase {
      */
     public final void addHeaderCard(final String key, final String value, final String comment) {
         getHeaderCards().add(new FitsHeaderCard(key, value, true, comment));
+    }
+
+    /**
+     * Find the first header card (in the card list) corresponding to the given key
+     * @param key header card key
+     * @return header card or null if none found
+     */
+    public final FitsHeaderCard findFirstHeaderCard(final String key) {
+        if (this.headerCards != null) {
+            for (FitsHeaderCard card : this.headerCards) {
+                if (key.equals(card.getKey())) {
+                    return card;
+                }
+            }
+        }
+        return null;
     }
 
     /**
