@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,15 +19,8 @@
  ******************************************************************************/
 package fr.jmmc.oitools.image;
 
-import fr.jmmc.oitools.fits.FitsHeaderCard;
-import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * This class is a container for IMAGE-OI INPUT PARAM.
@@ -36,7 +29,7 @@ import java.util.Set;
  *
  * @author mellag
  */
-public final class ImageOiInputParam extends FitsTable {
+public final class ImageOiInputParam extends ImageOiParam {
 
     // Define Data selection keywords
     private final static KeywordMeta KEYWORD_TARGET = new KeywordMeta(ImageOiConstants.KEYWORD_TARGET, "Identifier of the target object to reconstruct", Types.TYPE_CHAR);
@@ -45,7 +38,7 @@ public final class ImageOiInputParam extends FitsTable {
 // TODO: value can be: ’NONE’, ’ALL’, ’AMP’ or ’PHI’ (string)
     private final static KeywordMeta KEYWORD_USE_VIS = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS, "Use complex visibility data if any", Types.TYPE_LOGICAL);
     private final static KeywordMeta KEYWORD_USE_VIS2 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS2, "Use squared visibility data if any", Types.TYPE_LOGICAL);
-// TODO: value can be: ’NONE’, ’ALL’, ’AMP’ or ’PHI’ (string)    
+// TODO: value can be: ’NONE’, ’ALL’, ’AMP’ or ’PHI’ (string)
     private final static KeywordMeta KEYWORD_USE_T3 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_T3, "Use triple product data if any", Types.TYPE_LOGICAL);
 
     // Define Algorithm settings keywords
@@ -59,11 +52,7 @@ public final class ImageOiInputParam extends FitsTable {
     private final static KeywordMeta KEYWORD_FLUXERR = new KeywordMeta(ImageOiConstants.KEYWORD_FLUXERR, " Assumed standard deviation for the total flux ", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_RGL_PRIO = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_PRIO, "Identifier of the HDU with the prior image", Types.TYPE_CHAR);
 
-    /** keyword mapping to quickly reset keywords and give their description */
-    private final static Map<String, KeywordMeta> KEYWORD_METAS;
-
     static {
-        KEYWORD_METAS = new LinkedHashMap<String, KeywordMeta>(8);
         // Define Data selection keywords
         KEYWORD_METAS.put(KEYWORD_TARGET.getName(), KEYWORD_TARGET);
         KEYWORD_METAS.put(KEYWORD_WAVE_MIN.getName(), KEYWORD_WAVE_MIN);
@@ -96,57 +85,13 @@ public final class ImageOiInputParam extends FitsTable {
         return null;
     }
 
-    /* members */
-    /** flag indicating if the default keywords are being defined */
-    private boolean isDefaultKeyword = true;
-    /** parent keyword metas */
-    private final Set<KeywordMeta> parentKeywordMetas = new LinkedHashSet<KeywordMeta>();
-    /** default keyword names */
-    private final Set<String> defaultKeywords = new LinkedHashSet<String>();
-    /** specific keyword names */
-    private final Set<String> specificKeywords = new LinkedHashSet<String>();
-
     /**
      * Public constructor
      */
     public ImageOiInputParam() {
         super();
-
-        // preserve keywords defined in parents:
-        parentKeywordMetas.addAll(getKeywordsDesc().values());
-
-        resetDefaultKeywords();
-
-        // Set default values
-        setNbRows(0);
-        setExtVer(1);
         setExtName(ImageOiConstants.EXTNAME_IMAGE_OI_INPUT_PARAM);
-
         defineDefaultKeywordValues();
-    }
-
-    /**
-     * Register all default keywords
-     */
-    public final void resetDefaultKeywords() {
-        getKeywordsDesc().clear();
-        // reset keyword names:
-        defaultKeywords.clear();
-        specificKeywords.clear();
-
-        try {
-            isDefaultKeyword = true;
-
-            // Register keywords into Fits table:
-            for (KeywordMeta meta : parentKeywordMetas) {
-                addKeyword(meta);
-            }
-            for (KeywordMeta meta : KEYWORD_METAS.values()) {
-                addKeyword(meta);
-            }
-        } finally {
-            isDefaultKeyword = false;
-        }
     }
 
     public final void defineDefaultKeywordValues() {
@@ -159,102 +104,6 @@ public final class ImageOiInputParam extends FitsTable {
         setFluxErr(0.01); // 1% error on VIS2
 
         // note: setRglName() not used as it is set by Service later
-    }
-
-    /**
-     * Add the given keyword descriptor
-     *
-     * @param meta keyword descriptor
-     */
-    public final void addKeyword(final KeywordMeta meta) {
-        super.addKeywordMeta(meta);
-
-        final String name = meta.getName();
-        if (isDefaultKeyword) {
-            defaultKeywords.add(name);
-        } else {
-            specificKeywords.add(name);
-
-            // convert FitsHeaderCards (extra keywords including specific keyword values):
-            if (hasHeaderCards()) {
-                convertHeaderCards(name);
-            }
-        }
-    }
-
-    /**
-     * Remove the keyword descriptor given its name
-     *
-     * @param name keyword name
-     */
-    public final void removeKeyword(final String name) {
-        super.removeKeywordMeta(name);
-        // note: it does not remove its value !
-
-        defaultKeywords.remove(name);
-        specificKeywords.remove(name);
-    }
-
-    public Set<String> getDefaultKeywords() {
-        return defaultKeywords;
-    }
-
-    public Set<String> getSpecificKeywords() {
-        return specificKeywords;
-    }
-
-    private final boolean hasKeywordValue(final String name) {
-        return getKeywordValue(name) != null;
-    }
-
-    public final void setKeywordDefault(final String name, final Object value) {
-        if (!hasKeywordValue(name)) {
-            setKeywordValue(name, value);
-        }
-    }
-
-    public final void setKeywordDefaultInt(final String name, final int value) {
-        if (!hasKeywordValue(name)) {
-            setKeywordInt(name, value);
-        }
-    }
-
-    public final void setKeywordDefaultDouble(final String name, final double value) {
-        if (!hasKeywordValue(name)) {
-            setKeywordDouble(name, value);
-        }
-    }
-
-    public final void setKeywordDefaultLogical(final String name, final boolean value) {
-        if (!hasKeywordValue(name)) {
-            setKeywordLogical(name, value);
-        }
-    }
-
-    private void convertHeaderCards(final String name) {
-        for (Iterator<FitsHeaderCard> it = getHeaderCards().iterator(); it.hasNext();) {
-            final FitsHeaderCard card = it.next();
-            if (name.equals(card.getKey())) {
-                setKeywordDefaultFromCard(name, card.getValue());
-
-                // remove to avoid any duplicated keyword:
-                it.remove();
-                break;
-            }
-        }
-    }
-
-    private void setKeywordDefaultFromCard(final String name, final String value) {
-        if (!hasKeywordValue(name)) {
-            // Fix Logical (T|F) to Boolean:
-            final String strValue;
-            if (getKeywordsDesc(name).getDataType() == Types.TYPE_LOGICAL) {
-                strValue = "T".equals(value) ? "true" : "false";
-            } else {
-                strValue = value;
-            }
-            updateKeyword(name, strValue);
-        }
     }
 
     /*
