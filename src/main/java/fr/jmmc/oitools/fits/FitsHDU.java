@@ -172,13 +172,9 @@ public abstract class FitsHDU extends ModelBase {
      * @return nth element of the keyword definitions or null if out of range
      */
     public final KeywordMeta getKeywordDesc(final int index) {
-        // TODO: optimize this method to avoid allocation (used by JTable Model)
-        // ie use a new list of keyword names (and column names)
         if (index >= 0 && index < this.keywordsDesc.size()) {
-            final Set<Entry<String, KeywordMeta>> entries = this.keywordsDesc.entrySet();
-
             int i = 0;
-            for (Iterator<Entry<String, KeywordMeta>> it = entries.iterator(); it.hasNext(); i++) {
+            for (Iterator<Entry<String, KeywordMeta>> it = this.keywordsDesc.entrySet().iterator(); it.hasNext(); i++) {
                 final Entry<String, KeywordMeta> e = it.next();
                 if (i == index) {
                     return e.getValue();
