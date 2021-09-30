@@ -22,6 +22,8 @@ package fr.jmmc.oitools.image;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * This class is a container for IMAGE-OI OUTPUT PARAM.
@@ -38,18 +40,19 @@ public final class ImageOiOutputParam extends ImageOiParam {
     private final static KeywordMeta KEYWORD_CHISQ = new KeywordMeta(ImageOiConstants.KEYWORD_CHISQ, "Reduced chi-squared", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_FLUX = new KeywordMeta(ImageOiConstants.KEYWORD_FLUX, "Total image flux", Types.TYPE_DBL);
 
+    private final static Map<String,KeywordMeta> stdImgOIOuputKeywords;
     static {
+        stdImgOIOuputKeywords = new LinkedHashMap<>();
         Arrays.asList(
             KEYWORD_LAST_IMG, KEYWORD_NITER, KEYWORD_CHISQ, KEYWORD_FLUX
         ).forEach(keywordMeta -> {
-            KEYWORD_METAS.put(keywordMeta.getName(), keywordMeta);
+            stdImgOIOuputKeywords.put(keywordMeta.getName(), keywordMeta);
         });
     }
 
     // Image parameters
     public ImageOiOutputParam() {
-        super();
-        setExtName(ImageOiConstants.EXTNAME_IMAGE_OI_OUTPUT_PARAM);
+        super(stdImgOIOuputKeywords, ImageOiConstants.EXTNAME_IMAGE_OI_OUTPUT_PARAM);
     }
 
     /*

@@ -24,7 +24,6 @@ import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -42,28 +41,28 @@ public abstract class ImageOiParam extends FitsTable {
     /** specific keyword names */
     private final Set<String> specificKeywords = new LinkedHashSet<>();
 
-    /** keyword mapping to quickly reset keywords and give their description.
-     * Filled in statically in subclasses.
-     */
-    protected final static Map<String, KeywordMeta> KEYWORD_METAS;
-    static { KEYWORD_METAS = new LinkedHashMap<>(8); }
+    /** standard keywords defined in the two subclasses Input and Output. */
+    private final Map<String,KeywordMeta> stdImgOIKeywords;
 
     /**
      * Public constructor
+     * @param stdImgOIKeywords required.
+     * @param extName required.
      */
-    public ImageOiParam () {
+    public ImageOiParam (final Map<String,KeywordMeta> stdImgOIKeywords, final String extName) {
         super();
 
         // preserve keywords defined in parents:
         parentKeywordMetas.addAll(getKeywordsDesc().values());
 
+        this.stdImgOIKeywords = stdImgOIKeywords;
+
+        resetDefaultKeywords();
+
         // Set default values
         setNbRows(0);
         setExtVer(1);
-
-        // KEYWORD_METAS is modified in subclasses but statically
-        // so there is no problem with this call in constructor
-        resetDefaultKeywords();
+        setExtName(extName);
     }
 
     /**
@@ -82,7 +81,7 @@ public abstract class ImageOiParam extends FitsTable {
             for (KeywordMeta meta : parentKeywordMetas) {
                 addKeyword(meta);
             }
-            for (KeywordMeta meta : KEYWORD_METAS.values()) {
+            for (KeywordMeta meta : stdImgOIKeywords.values()) {
                 addKeyword(meta);
             }
         } finally {

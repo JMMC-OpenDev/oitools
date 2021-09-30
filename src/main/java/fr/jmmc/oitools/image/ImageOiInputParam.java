@@ -21,6 +21,9 @@ package fr.jmmc.oitools.image;
 
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * This class is a container for IMAGE-OI INPUT PARAM.
@@ -52,24 +55,17 @@ public final class ImageOiInputParam extends ImageOiParam {
     private final static KeywordMeta KEYWORD_FLUXERR = new KeywordMeta(ImageOiConstants.KEYWORD_FLUXERR, " Assumed standard deviation for the total flux ", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_RGL_PRIO = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_PRIO, "Identifier of the HDU with the prior image", Types.TYPE_CHAR);
 
+    private final static Map<String,KeywordMeta> stdImgOIInputKeywords;
     static {
-        // Define Data selection keywords
-        KEYWORD_METAS.put(KEYWORD_TARGET.getName(), KEYWORD_TARGET);
-        KEYWORD_METAS.put(KEYWORD_WAVE_MIN.getName(), KEYWORD_WAVE_MIN);
-        KEYWORD_METAS.put(KEYWORD_WAVE_MAX.getName(), KEYWORD_WAVE_MAX);
-        KEYWORD_METAS.put(KEYWORD_USE_VIS.getName(), KEYWORD_USE_VIS);
-        KEYWORD_METAS.put(KEYWORD_USE_VIS2.getName(), KEYWORD_USE_VIS2);
-        KEYWORD_METAS.put(KEYWORD_USE_T3.getName(), KEYWORD_USE_T3);
-
-        // Define Algorithm settings keywords
-        KEYWORD_METAS.put(KEYWORD_INIT_IMG.getName(), KEYWORD_INIT_IMG);
-        KEYWORD_METAS.put(KEYWORD_MAXITER.getName(), KEYWORD_MAXITER);
-        KEYWORD_METAS.put(KEYWORD_RGL_NAME.getName(), KEYWORD_RGL_NAME);
-        KEYWORD_METAS.put(KEYWORD_RGL_WGT.getName(), KEYWORD_RGL_WGT);
-        KEYWORD_METAS.put(KEYWORD_AUTO_WGT.getName(), KEYWORD_AUTO_WGT);
-        KEYWORD_METAS.put(KEYWORD_FLUX.getName(), KEYWORD_FLUX);
-        KEYWORD_METAS.put(KEYWORD_FLUXERR.getName(), KEYWORD_FLUXERR);
-        KEYWORD_METAS.put(KEYWORD_RGL_PRIO.getName(), KEYWORD_RGL_PRIO);
+        stdImgOIInputKeywords = new LinkedHashMap<>();
+        Arrays.asList(
+            KEYWORD_TARGET, KEYWORD_WAVE_MIN, KEYWORD_WAVE_MAX,
+            KEYWORD_USE_VIS, KEYWORD_USE_VIS2, KEYWORD_USE_T3,
+            KEYWORD_INIT_IMG, KEYWORD_MAXITER, KEYWORD_RGL_NAME, KEYWORD_RGL_WGT,
+            KEYWORD_AUTO_WGT, KEYWORD_FLUX, KEYWORD_FLUXERR, KEYWORD_RGL_PRIO
+        ).forEach(keywordMeta -> {
+            stdImgOIInputKeywords.put(keywordMeta.getName(), keywordMeta);
+        });
     }
 
     /**
@@ -78,7 +74,7 @@ public final class ImageOiInputParam extends ImageOiParam {
      * @return keyword description
      */
     public static String getDescription(final String name) {
-        final KeywordMeta meta = KEYWORD_METAS.get(name);
+        final KeywordMeta meta = stdImgOIInputKeywords.get(name);
         if (meta != null) {
             return meta.getDescription();
         }
@@ -89,8 +85,7 @@ public final class ImageOiInputParam extends ImageOiParam {
      * Public constructor
      */
     public ImageOiInputParam() {
-        super();
-        setExtName(ImageOiConstants.EXTNAME_IMAGE_OI_INPUT_PARAM);
+        super(stdImgOIInputKeywords, ImageOiConstants.EXTNAME_IMAGE_OI_INPUT_PARAM);
         defineDefaultKeywordValues();
     }
 
