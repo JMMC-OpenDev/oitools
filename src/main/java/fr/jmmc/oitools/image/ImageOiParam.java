@@ -32,8 +32,6 @@ import java.util.Set;
 /** Common behaviour between ImageOIIntputParam & ImageOIOutputParam. */
 public abstract class ImageOiParam extends FitsTable {
 
-    public final static SimpleDateFormat keywordDateFormat = new SimpleDateFormat("yyyy/MM/dd kk'h'mm:ss Z");
-
     /* members */
     /** flag indicating if the default keywords are being defined */
     private boolean isDefaultKeyword = true;
