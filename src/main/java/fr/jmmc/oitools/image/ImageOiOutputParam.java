@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,9 +19,11 @@
  ******************************************************************************/
 package fr.jmmc.oitools.image;
 
-import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * This class is a container for IMAGE-OI OUTPUT PARAM.
@@ -30,7 +32,7 @@ import fr.jmmc.oitools.meta.Types;
  *
  * @author mellag
  */
-public final class ImageOiOutputParam extends FitsTable {
+public final class ImageOiOutputParam extends ImageOiParam {
 
     // Define Algorithm results keywords
     private final static KeywordMeta KEYWORD_LAST_IMG = new KeywordMeta(ImageOiConstants.KEYWORD_LAST_IMG, "Identifier of the final image", Types.TYPE_CHAR);
@@ -38,20 +40,19 @@ public final class ImageOiOutputParam extends FitsTable {
     private final static KeywordMeta KEYWORD_CHISQ = new KeywordMeta(ImageOiConstants.KEYWORD_CHISQ, "Reduced chi-squared", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_FLUX = new KeywordMeta(ImageOiConstants.KEYWORD_FLUX, "Total image flux", Types.TYPE_DBL);
 
+    private final static Map<String,KeywordMeta> IMAGE_OI_OUTPUT_STD_KEYWORDS;
+    static {
+        IMAGE_OI_OUTPUT_STD_KEYWORDS = new LinkedHashMap<>();
+        Arrays.asList(
+            KEYWORD_LAST_IMG, KEYWORD_NITER, KEYWORD_CHISQ, KEYWORD_FLUX
+        ).forEach(keywordMeta -> {
+            IMAGE_OI_OUTPUT_STD_KEYWORDS.put(keywordMeta.getName(), keywordMeta);
+        });
+    }
+
     // Image parameters
     public ImageOiOutputParam() {
-        super();
-
-        // add standard keywords
-        addKeywordMeta(KEYWORD_LAST_IMG);
-        addKeywordMeta(KEYWORD_NITER);
-        addKeywordMeta(KEYWORD_CHISQ);
-        addKeywordMeta(KEYWORD_FLUX);
-
-        // Set default values
-        setNbRows(0);
-        setExtVer(1);
-        setExtName(ImageOiConstants.EXTNAME_IMAGE_OI_OUTPUT_PARAM);
+        super(IMAGE_OI_OUTPUT_STD_KEYWORDS, ImageOiConstants.EXTNAME_IMAGE_OI_OUTPUT_PARAM);
     }
 
     /*
