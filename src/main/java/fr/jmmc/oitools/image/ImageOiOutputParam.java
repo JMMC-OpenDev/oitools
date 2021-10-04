@@ -40,19 +40,19 @@ public final class ImageOiOutputParam extends ImageOiParam {
     private final static KeywordMeta KEYWORD_CHISQ = new KeywordMeta(ImageOiConstants.KEYWORD_CHISQ, "Reduced chi-squared", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_FLUX = new KeywordMeta(ImageOiConstants.KEYWORD_FLUX, "Total image flux", Types.TYPE_DBL);
 
-    private final static Map<String,KeywordMeta> stdImgOIOuputKeywords;
+    private final static Map<String,KeywordMeta> IMAGE_OI_OUTPUT_STD_KEYWORDS;
     static {
-        stdImgOIOuputKeywords = new LinkedHashMap<>();
+        IMAGE_OI_OUTPUT_STD_KEYWORDS = new LinkedHashMap<>();
         Arrays.asList(
             KEYWORD_LAST_IMG, KEYWORD_NITER, KEYWORD_CHISQ, KEYWORD_FLUX
         ).forEach(keywordMeta -> {
-            stdImgOIOuputKeywords.put(keywordMeta.getName(), keywordMeta);
+            IMAGE_OI_OUTPUT_STD_KEYWORDS.put(keywordMeta.getName(), keywordMeta);
         });
     }
 
     // Image parameters
     public ImageOiOutputParam() {
-        super(stdImgOIOuputKeywords, ImageOiConstants.EXTNAME_IMAGE_OI_OUTPUT_PARAM);
+        super(IMAGE_OI_OUTPUT_STD_KEYWORDS, ImageOiConstants.EXTNAME_IMAGE_OI_OUTPUT_PARAM);
     }
 
     /*

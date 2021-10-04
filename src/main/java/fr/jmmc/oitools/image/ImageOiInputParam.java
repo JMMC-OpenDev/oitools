@@ -55,16 +55,16 @@ public final class ImageOiInputParam extends ImageOiParam {
     private final static KeywordMeta KEYWORD_FLUXERR = new KeywordMeta(ImageOiConstants.KEYWORD_FLUXERR, " Assumed standard deviation for the total flux ", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_RGL_PRIO = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_PRIO, "Identifier of the HDU with the prior image", Types.TYPE_CHAR);
 
-    private final static Map<String,KeywordMeta> stdImgOIInputKeywords;
+    private final static Map<String,KeywordMeta> IMAGE_OI_INPUT_STD_KEYWORDS;
     static {
-        stdImgOIInputKeywords = new LinkedHashMap<>();
+        IMAGE_OI_INPUT_STD_KEYWORDS = new LinkedHashMap<>();
         Arrays.asList(
             KEYWORD_TARGET, KEYWORD_WAVE_MIN, KEYWORD_WAVE_MAX,
             KEYWORD_USE_VIS, KEYWORD_USE_VIS2, KEYWORD_USE_T3,
             KEYWORD_INIT_IMG, KEYWORD_MAXITER, KEYWORD_RGL_NAME, KEYWORD_RGL_WGT,
             KEYWORD_AUTO_WGT, KEYWORD_FLUX, KEYWORD_FLUXERR, KEYWORD_RGL_PRIO
         ).forEach(keywordMeta -> {
-            stdImgOIInputKeywords.put(keywordMeta.getName(), keywordMeta);
+            IMAGE_OI_INPUT_STD_KEYWORDS.put(keywordMeta.getName(), keywordMeta);
         });
     }
 
@@ -74,7 +74,7 @@ public final class ImageOiInputParam extends ImageOiParam {
      * @return keyword description
      */
     public static String getDescription(final String name) {
-        final KeywordMeta meta = stdImgOIInputKeywords.get(name);
+        final KeywordMeta meta = IMAGE_OI_INPUT_STD_KEYWORDS.get(name);
         if (meta != null) {
             return meta.getDescription();
         }
@@ -85,7 +85,7 @@ public final class ImageOiInputParam extends ImageOiParam {
      * Public constructor
      */
     public ImageOiInputParam() {
-        super(stdImgOIInputKeywords, ImageOiConstants.EXTNAME_IMAGE_OI_INPUT_PARAM);
+        super(IMAGE_OI_INPUT_STD_KEYWORDS, ImageOiConstants.EXTNAME_IMAGE_OI_INPUT_PARAM);
         defineDefaultKeywordValues();
     }
 
