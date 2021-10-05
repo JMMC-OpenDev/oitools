@@ -220,41 +220,42 @@ public class FitsDate {
      *  @param timeOfDay	Should time of day information be included?
      */
     public static String getFitsDateString(Date epoch, boolean timeOfDay) {
+        if (epoch != null) {
+            try {
+                GregorianCalendar cal = new GregorianCalendar(
+                        TimeZone.getTimeZone("GMT"));
 
-        try {
-            GregorianCalendar cal = new GregorianCalendar(
-                    TimeZone.getTimeZone("GMT"));
+                cal.setTime(epoch);
 
-            cal.setTime(epoch);
+                StringBuilder fitsDate = new StringBuilder();
+                DecimalFormat df = new DecimalFormat("0000");
+                fitsDate.append(df.format(cal.get(Calendar.YEAR)));
+                fitsDate.append('-');
+                df = new DecimalFormat("00");
 
-            StringBuilder fitsDate = new StringBuilder();
-            DecimalFormat df = new DecimalFormat("0000");
-            fitsDate.append(df.format(cal.get(Calendar.YEAR)));
-            fitsDate.append('-');
-            df = new DecimalFormat("00");
+                fitsDate.append(df.format(cal.get(Calendar.MONTH) + 1));
+                fitsDate.append('-');
+                fitsDate.append(df.format(cal.get(Calendar.DAY_OF_MONTH)));
 
-            fitsDate.append(df.format(cal.get(Calendar.MONTH) + 1));
-            fitsDate.append('-');
-            fitsDate.append(df.format(cal.get(Calendar.DAY_OF_MONTH)));
+                if (timeOfDay) {
+                    fitsDate.append('T');
+                    fitsDate.append(df.format(cal.get(Calendar.HOUR_OF_DAY)));
+                    fitsDate.append(':');
+                    fitsDate.append(df.format(cal.get(Calendar.MINUTE)));
+                    fitsDate.append(':');
+                    fitsDate.append(df.format(cal.get(Calendar.SECOND)));
+                    fitsDate.append('.');
+                    df = new DecimalFormat("000");
+                    fitsDate.append(df.format(cal.get(Calendar.MILLISECOND)));
+                }
 
-            if (timeOfDay) {
-                fitsDate.append('T');
-                fitsDate.append(df.format(cal.get(Calendar.HOUR_OF_DAY)));
-                fitsDate.append(':');
-                fitsDate.append(df.format(cal.get(Calendar.MINUTE)));
-                fitsDate.append(':');
-                fitsDate.append(df.format(cal.get(Calendar.SECOND)));
-                fitsDate.append('.');
-                df = new DecimalFormat("000");
-                fitsDate.append(df.format(cal.get(Calendar.MILLISECOND)));
+                return fitsDate.toString();
+
+            } catch (Exception e) {
+                // ignored
             }
-
-            return fitsDate.toString();
-
-        } catch (Exception e) {
-
-            return "";
         }
+        return "";
     }
 
     public String toString() {

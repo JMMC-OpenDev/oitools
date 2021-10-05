@@ -64,7 +64,7 @@ public interface FitsConstants {
     public final static String KEYWORD_ORIGIN = "ORIGIN";
     /** DATE keyword = Date the HDU was written */
     public final static String KEYWORD_DATE = "DATE";
-    /** DATE_OBS keyword = Strat date of observation */
+    /** DATE_OBS keyword = Start date of observation */
     public final static String KEYWORD_DATE_OBS = "DATE-OBS";
     /** CONTENT keyword = Must contain only the string "OIFITS2" */
     public final static String KEYWORD_CONTENT = "CONTENT";
