@@ -39,10 +39,10 @@ public final class ImageOiInputParam extends ImageOiParam {
     private final static KeywordMeta KEYWORD_WAVE_MIN = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MIN, "Minimum wavelength to select (in meters)", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_WAVE_MAX = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MAX, "Maximum wavelength to select (in meters)", Types.TYPE_DBL);
 // TODO: value can be: ’NONE’, ’ALL’, ’AMP’ or ’PHI’ (string)
-    private final static KeywordMeta KEYWORD_USE_VIS = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS, "Use complex visibility data if any", Types.TYPE_LOGICAL);
+    private final static KeywordMeta KEYWORD_USE_VIS = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS, "Use complex visibility data if any", Types.TYPE_CHAR);
     private final static KeywordMeta KEYWORD_USE_VIS2 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS2, "Use squared visibility data if any", Types.TYPE_LOGICAL);
 // TODO: value can be: ’NONE’, ’ALL’, ’AMP’ or ’PHI’ (string)
-    private final static KeywordMeta KEYWORD_USE_T3 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_T3, "Use triple product data if any", Types.TYPE_LOGICAL);
+    private final static KeywordMeta KEYWORD_USE_T3 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_T3, "Use triple product data if any", Types.TYPE_CHAR);
 
     // Define Algorithm settings keywords
     // TODO init-img keyword could be checked like OIDATA.INSNAME or OIDATA.ARRNAME to be sure that one or more HDUs are present with this name.
@@ -67,6 +67,20 @@ public final class ImageOiInputParam extends ImageOiParam {
             IMAGE_OI_INPUT_STD_KEYWORDS.put(keywordMeta.getName(), keywordMeta);
         });
     }
+
+    public final static String USE_VIS_NONE = "NONE";
+    public final static String USE_VIS_ALL = "ALL";
+    public final static String USE_VIS_AMP = "AMP";
+    public final static String USE_VIS_PHI = "PHI";
+    public final static String[] USE_VIS_VALUES
+            = new String[]{USE_VIS_NONE, USE_VIS_ALL, USE_VIS_AMP, USE_VIS_PHI};
+
+    public final static String USE_T3_NONE = "NONE";
+    public final static String USE_T3_ALL = "ALL";
+    public final static String USE_T3_AMP = "AMP";
+    public final static String USE_T3_PHI = "PHI";
+    public final static String[] USE_T3_VALUES
+            = new String[]{USE_T3_NONE, USE_T3_ALL, USE_T3_AMP, USE_T3_PHI};
 
     /**
      * Return the keyword description given its name
@@ -128,12 +142,12 @@ public final class ImageOiInputParam extends ImageOiParam {
         setKeywordDouble(ImageOiConstants.KEYWORD_WAVE_MAX, wave_max);
     }
 
-    public boolean useVis() {
-        return getKeywordLogical(ImageOiConstants.KEYWORD_USE_VIS);
+    public String useVis() {
+        return getKeyword(ImageOiConstants.KEYWORD_USE_VIS);
     }
 
-    public void useVis(boolean use_vis) {
-        setKeywordLogical(ImageOiConstants.KEYWORD_USE_VIS, use_vis);
+    public void useVis(String use_vis) {
+        setKeyword(ImageOiConstants.KEYWORD_USE_VIS, use_vis);
     }
 
     public boolean useVis2() {
@@ -144,12 +158,12 @@ public final class ImageOiInputParam extends ImageOiParam {
         setKeywordLogical(ImageOiConstants.KEYWORD_USE_VIS2, use_vis2);
     }
 
-    public boolean useT3() {
-        return getKeywordLogical(ImageOiConstants.KEYWORD_USE_T3);
+    public String useT3() {
+        return getKeyword(ImageOiConstants.KEYWORD_USE_T3);
     }
 
-    public void useT3(boolean use_t3) {
-        setKeywordLogical(ImageOiConstants.KEYWORD_USE_T3, use_t3);
+    public void useT3(String use_t3) {
+        setKeyword(ImageOiConstants.KEYWORD_USE_T3, use_t3);
     }
 
     public String getInitImg() {
