@@ -1,0 +1,49 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Build (Maven)
+        run: |
+          echo $HOME
+          echo $MAVEN_OPTS
+          java -version
+          echo "1. Install parent-pom and local libs"
+          cd parent-pom
+          mvn -Dassembly.skipAssembly -Djarsigner.skip=true clean install
+          cd ..
+          mvn process-resources
+          echo "2. Build"
+          mvn clean install -Djarsigner.skip=true -DskipTests=true -Dmaven.javadoc.skip=false -B -V
+          echo "3. Test"
+          mvn test -Djava.util.logging.config.file=./src/test/resources/logging.properties -Djarsigner.skip=true -B
+          echo "4. Make archive"
+          cd target
+          tar cvfz ../oitools-bin.tar.gz oitools-*.jar apidocs
+          echo "That's All, folks !"
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: oitools-bin
+          path: oitools-bin.tar.gz
+

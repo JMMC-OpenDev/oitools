@@ -11,3 +11,4 @@ src/test/resources/logging.properties
 /src/test/resources/test/oifits/*
 /target/
 /parent-pom/target/
+oitools-bin.tar.gz
