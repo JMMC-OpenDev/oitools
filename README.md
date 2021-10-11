@@ -1,7 +1,7 @@
 # OITools    ![JMMC logo](doc/JMMC-logo.jpg)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
-[![Build](https://github.com/JMMC-OpenDev/oitools/actions/workflows/build.yml/badge.svg)](https://github.com/JMMC-OpenDev/oitools/.github/workflows/build.yml)
+[![Build](https://github.com/JMMC-OpenDev/oitools/actions/workflows/build.yml/badge.svg)](https://github.com/JMMC-OpenDev/oitools/blob/master/.github/workflows/build.yml)
 
 This is a java library dedicated to reading / writing OIFITS files (based on the nom.tam.fits library) developed by the JMMC technical team.
 
