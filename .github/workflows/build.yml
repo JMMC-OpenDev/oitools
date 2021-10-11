@@ -3,7 +3,11 @@ name: CI
 # Controls when the workflow will run
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -38,7 +42,8 @@ jobs:
           mvn test -Djava.util.logging.config.file=./src/test/resources/logging.properties -Djarsigner.skip=true -B
           echo "4. Make archive"
           cd target
-          tar cvfz ../oitools-bin.tar.gz oitools-*.jar apidocs
+          tar cvfz ../oitools-bin.tar.gz oitools-*.jar
+          # TODO: publish apidocs on github pages
           echo "That's All, folks !"
 
       - name: Upload
