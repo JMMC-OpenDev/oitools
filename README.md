@@ -4,6 +4,14 @@
 
 This is a java library dedicated to reading / writing OIFITS files (based on the nom.tam.fits library) developed by the JMMC technical team.
 
+See [Developers corner](doc/DevelopersCorner.md)
+
+
+## OIFits standard versions:
+* [OIFITS V1](https://jmmc-opendev.github.io/oitools/rules/DataModelV1_output.html)
+* [OIFITS V2](https://jmmc-opendev.github.io/oitools/rules/DataModelV2_output.html)
+
+
 ## Setup
 
 1. _Download_ the last jar (`oitools-TRUNK.jar`) from release place <https://github.com/JMMC-OpenDev/OITools/releases/>
@@ -23,6 +31,7 @@ This is a java library dedicated to reading / writing OIFITS files (based on the
         alias oiconvert="oip convert"
         alias oimerge="oip merge"
         ```
+
 
 ## Usage & Examples
 
@@ -55,6 +64,7 @@ Usage: fr.jmmc.oitools.OIFitsProcessor command -o <path_output_file> <file locat
 | [-wavelengths] <values>     Filter result on given wavelength ranges (comma-separated pairs) |
 --------------------------------------------------------------------------------------
 ```
+
 
 * `oilist input_file_location [input_file_location …]`
 display the file content of input file(s) in CSV format files contents  (granules like OiDB):
@@ -114,6 +124,7 @@ HD45677	97.071446	-13.05308	0.07500000298023224	58465.21247333342	58465.35976816
 HD45677	97.071446	-13.05308	0.07500000298023224	58466.225046249856	58466.2779251908	47.39237355339858	2.841224613803206E-6	4.209076450933935E-6	VLTI	MATISSE	48	48	32	64
 ```
 
+
 * `oip list_baselines` display similar information as `oilist` plus the station/baselines used.
 
 *Example showing that the stations used are: `A0` `B2` `C1` `D0` and the file contains all combinaison of baselines and triplets:*
@@ -124,6 +135,7 @@ instrument_name	em_min	em_max	night_id	target_name	s_ra	s_dec	mjds	baselines
 GRAVITY_FT	2.0264997147023678E-6	2.347295094295987E-6	57562	IRAS17216-3801	261.2771541666667	-38.066788888888894	[57562.133866,57562.136111] [57562.133947,57562.136748] [57562.13412,57562.13522] [57562.13412,57562.135231] [57562.13412,57562.135243] [57562.134745,57562.135336] [57562.13478,57562.135243] [57562.13478,57562.135498] [57562.134815,57562.135266] [57562.134826,57562.135266] 	A0 B2 C1 D0 B2-A0 C1-A0 C1-B2 C1-D0 D0-A0 D0-B2 C1-B2-A0 C1-D0-A0 C1-D0-B2 D0-B2-A0
 GRAVITY_SC	1.990000100704492E-6	2.4500000108673703E-6	57562	IRAS17216-3801	261.2771541666667	-38.066788888888894	[57562.13390,57562.136343] [57562.13397,57562.133981] [57562.13397,57562.137454] [57562.135312,57562.13544] 	A0 B2 C1 D0 B2-A0 C1-A0 C1-B2 C1-D0 D0-A0 D0-B2 C1-B2-A0 C1-D0-A0 C1-D0-B2 D0-B2-A0
 ```
+
 
 * `oip dump` print headers of all HDUs.
 
@@ -141,7 +153,7 @@ GRAVITY_SC	1.990000100704492E-6	2.4500000108673703E-6	57562	IRAS17216-3801	261.2
   * `-wavelength`
 
 
-*Extracting flux from Gravity science instrument at wavelengths between 2.15 and 2.2  &#956;m*:
+* Extracting flux from Gravity science instrument at wavelengths between 2.15 and 2.2  &#956;m*:
 
 ```bash
 % oimerge -insname GRAVITY_SC  -baselines A0,B2,C1,D0 -wavelengths 2.15E-6,2.20E-6 -o output.fits  GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits
@@ -150,6 +162,3 @@ Writing: output.fits
 target_name	s_ra	s_dec	t_exptime	t_min	t_max	em_res_power	em_min	em_max	facility_name	instrument_name	nb_vis	nb_vis2	nb_t3	nb_channels
 IRAS17216-3801	261.2771541666667	-38.066788888888894	300.0	57562.133972453696	57562.133972453696	988.1521592210469	2.1506698431039695E-6	2.1990908862790093E-6	VLTI	GRAVITY_SC	0	0	0	23
 ```
-
-
-## [Developers corner](doc/DevelopersCorner.md)
