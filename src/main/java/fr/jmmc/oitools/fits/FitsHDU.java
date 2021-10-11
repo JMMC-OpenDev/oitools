@@ -400,6 +400,39 @@ public abstract class FitsHDU extends ModelBase {
         }
     }
 
+    /**
+     * Return a string representation of keywords
+     *
+     * @param sb buffer
+     * @param separator separator to use after each keyword
+     */
+    public final void getKeywordsAsString(final StringBuilder sb, final String separator) {
+        if (!getKeywordsValue().isEmpty()) {
+            for (KeywordMeta keyword : getKeywordDescCollection()) {
+                final String keywordName = keyword.getName();
+
+                Object value = getKeywordValue(keywordName);
+
+                // ignore empty keywords:
+                if (value != null) {
+                    sb.append(keywordName);
+                    sb.append(" = ");
+
+                    final boolean isString = (value instanceof String);
+                    if (isString) {
+                        sb.append('\'');
+                    }
+                    sb.append(value);
+                    if (isString) {
+                        sb.append('\'');
+                    }
+                    sb.append(" // ").append(keyword.getDescription());
+                    sb.append(separator);
+                }
+            }
+        }
+    }
+
     /* --- Extra keywords --- */
     /**
      * Return true if the optional list of extra FITS header cards is not empty
@@ -443,11 +476,25 @@ public abstract class FitsHDU extends ModelBase {
             return "";
         }
         final StringBuilder sb = new StringBuilder(1024);
-        for (FitsHeaderCard card : this.headerCards) {
-            card.toString(sb);
-            sb.append(separator);
+
+        getHeaderCardsAsString(sb, separator);
+
+        return (sb.length() != 0) ? sb.toString() : "";
+    }
+
+    /**
+     * Return a string representation of the list of header cards
+     *
+     * @param sb buffer
+     * @param separator separator to use after each header card
+     */
+    public final void getHeaderCardsAsString(final StringBuilder sb, final String separator) {
+        if (this.headerCards != null) {
+            for (FitsHeaderCard card : this.headerCards) {
+                card.toString(sb);
+                sb.append(separator);
+            }
         }
-        return sb.toString();
     }
 
     /**
@@ -495,6 +542,21 @@ public abstract class FitsHDU extends ModelBase {
      */
     public final void addHeaderHistory(final String comment) {
         addHeaderCard(FitsConstants.KEYWORD_HISTORY, null, comment);
+    }
+
+    /**
+     * Return a string representation of the header (keywords and header cards)
+     *
+     * @param separator separator to use after each keyword
+     * @return string representation of the header (keywords and header cards)
+     */
+    public final String getHeaderAsString(final String separator) {
+        final StringBuilder sb = new StringBuilder(1024);
+
+        getHeaderCardsAsString(sb, separator);
+        getKeywordsAsString(sb, separator);
+
+        return (sb.length() != 0) ? sb.toString() : "";
     }
 
     /*

@@ -137,7 +137,7 @@ public class FitsImageHDU extends FitsHDU {
      */
     public final String toString(final boolean detailled) {
         return idToString() + "[" + getImageCount() + ']'
-                + ((detailled) ? "{\n" + getHeaderCardsAsString("\n") + '}' + '\n' + getFitsImages() : "");
+                + ((detailled) ? "{\n" + getHeaderAsString("\n") + '}' + '\n' + getFitsImages() : "");
     }
 
     /**
