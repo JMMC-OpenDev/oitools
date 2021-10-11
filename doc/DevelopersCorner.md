@@ -8,8 +8,8 @@
 OIFits validation rules
 ================
 
-* [OIFITS V1](https://jmmc-opendev.github.io/OITools/rules/DataModelV1_output.html)
-* [OIFITS V2](https://jmmc-opendev.github.io/OITools/rules/DataModelV2_output.html)
+* [OIFITS V1](https://jmmc-opendev.github.io/oitools/rules/DataModelV1_output.html)
+* [OIFITS V2](https://jmmc-opendev.github.io/oitools/rules/DataModelV2_output.html)
 
 Code conventions
 ================
@@ -33,8 +33,10 @@ mvn process-resources
 mvn -Djarsigner.skip=true clean install
 ```
 
-[Javadoc](https://ferreolS.github.io/OITools/index.html)
-====
+<!---
+Dead link: to be fixed asap (travis -> github actions)
+[Javadoc](https://ferreolS.github.io/oitools/index.html)
+-->
 
 Shell scripts
 =============
