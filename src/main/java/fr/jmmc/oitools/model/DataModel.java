@@ -69,6 +69,9 @@ public class DataModel {
     /** flag to globally support OI_VIS2 extra columns (disabled by default) */
     private static boolean oiVis2ExtraSupport = false;
 
+    /** flag to enable renaming of fitsImageIdentifier with the filename in FitsImageWriter.createImageData. */
+    private static boolean renameFitsImageIdentifierDuringWrite = true;
+
     /** list used for sorted rules */
     private static final ArrayList<Rule> SORTED_RULES = new ArrayList<Rule>(64);
 
@@ -533,5 +536,19 @@ public class DataModel {
         } finally {
             OIFitsChecker.setInspectRules(false);
         }
+    }
+
+    /**
+     * @return the renameFitsImageIdentifierDuringWrite
+     */
+    public static boolean isRenameFitsImageIdentifierDuringWrite() {
+        return renameFitsImageIdentifierDuringWrite;
+    }
+
+    /**
+     * @param aRenameFitsImageIdentifierDuringWrite the renameFitsImageIdentifierDuringWrite to set
+     */
+    public static void setRenameFitsImageIdentifierDuringWrite(boolean aRenameFitsImageIdentifierDuringWrite) {
+        renameFitsImageIdentifierDuringWrite = aRenameFitsImageIdentifierDuringWrite;
     }
 }

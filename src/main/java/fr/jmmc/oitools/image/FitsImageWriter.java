@@ -24,6 +24,7 @@ import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
 import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.meta.KeywordMeta;
+import fr.jmmc.oitools.model.DataModel;
 import fr.nom.tam.fits.BasicHDU;
 import fr.nom.tam.fits.Data;
 import fr.nom.tam.fits.Fits;
@@ -233,7 +234,9 @@ public final class FitsImageWriter {
                 }
                 if (fileName != null) {
                     // update the fits image identifier:
-                    image.setFitsImageIdentifier(fileName + '#' + hduIndex);
+                    if (DataModel.isRenameFitsImageIdentifierDuringWrite()) {
+                        image.setFitsImageIdentifier(fileName + '#' + hduIndex);
+                    }
                 }
                 data = image.getData();
             } else {
@@ -248,7 +251,9 @@ public final class FitsImageWriter {
                     }
                     if (fileName != null) {
                         // update the fits image identifier:
-                        image.setFitsImageIdentifier(fileName + '#' + hduIndex);
+                        if (DataModel.isRenameFitsImageIdentifierDuringWrite()) {
+                            image.setFitsImageIdentifier(fileName + '#' + hduIndex);
+                        }
                     }
                     fArray[i] = image.getData();
                 }
