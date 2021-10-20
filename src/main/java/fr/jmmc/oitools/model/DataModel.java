@@ -69,6 +69,7 @@ public class DataModel {
     /** flag to globally support OI_VIS2 extra columns (disabled by default) */
     private static boolean oiVis2ExtraSupport = false;
 
+
     /** list used for sorted rules */
     private static final ArrayList<Rule> SORTED_RULES = new ArrayList<Rule>(64);
 
@@ -534,4 +535,5 @@ public class DataModel {
             OIFitsChecker.setInspectRules(false);
         }
     }
+
 }

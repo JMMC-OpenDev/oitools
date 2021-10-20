@@ -52,6 +52,8 @@ public final class FitsImageWriter {
     private final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FitsImageWriter.class.getName());
     /** skip keywords when copying fits header cards present in FitsImage */
     private final static Set<String> SKIP_KEYWORDS = new HashSet<String>(32);
+    /** flag to enable renaming of fitsImageIdentifier with the filename in FitsImageWriter.createImageData. */
+    private static boolean updateFitsImageIdentifierOnWrite = true;
 
     static {
         FitsUtils.setup();
@@ -79,6 +81,20 @@ public final class FitsImageWriter {
 
         // Preserve few standard keywords (write pre-loaded values):
         SKIP_KEYWORDS.remove(FitsConstants.KEYWORD_EXT_NAME);
+    }
+
+    /**
+     * @return the updateFitsImageIdentifierOnWrite
+     */
+    public static boolean isUpdateFitsImageIdentifierOnWrite() {
+        return updateFitsImageIdentifierOnWrite;
+    }
+
+    /**
+     * @param newUpdateFitsImageIdentifierOnWrite the updateFitsImageIdentifierOnWrite to set
+     */
+    public static void setUpdateFitsImageIdentifierOnWrite(boolean newUpdateFitsImageIdentifierOnWrite) {
+        updateFitsImageIdentifierOnWrite = newUpdateFitsImageIdentifierOnWrite;
     }
 
     /**
@@ -233,7 +249,9 @@ public final class FitsImageWriter {
                 }
                 if (fileName != null) {
                     // update the fits image identifier:
-                    image.setFitsImageIdentifier(fileName + '#' + hduIndex);
+                    if (isUpdateFitsImageIdentifierOnWrite()) {
+                        image.setFitsImageIdentifier(fileName + '#' + hduIndex);
+                    }
                 }
                 data = image.getData();
             } else {
@@ -248,7 +266,9 @@ public final class FitsImageWriter {
                     }
                     if (fileName != null) {
                         // update the fits image identifier:
-                        image.setFitsImageIdentifier(fileName + '#' + hduIndex);
+                        if (isUpdateFitsImageIdentifierOnWrite()) {
+                            image.setFitsImageIdentifier(fileName + '#' + hduIndex);
+                        }
                     }
                     fArray[i] = image.getData();
                 }
