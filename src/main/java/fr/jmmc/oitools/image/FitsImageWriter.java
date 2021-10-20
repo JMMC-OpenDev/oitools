@@ -234,7 +234,7 @@ public final class FitsImageWriter {
                 }
                 if (fileName != null) {
                     // update the fits image identifier:
-                    if (DataModel.isRenameFitsImageIdentifierDuringWrite()) {
+                    if (DataModel.isUpdateFitsImageIdentifierOnWrite()) {
                         image.setFitsImageIdentifier(fileName + '#' + hduIndex);
                     }
                 }
@@ -251,7 +251,7 @@ public final class FitsImageWriter {
                     }
                     if (fileName != null) {
                         // update the fits image identifier:
-                        if (DataModel.isRenameFitsImageIdentifierDuringWrite()) {
+                        if (DataModel.isUpdateFitsImageIdentifierOnWrite()) {
                             image.setFitsImageIdentifier(fileName + '#' + hduIndex);
                         }
                     }

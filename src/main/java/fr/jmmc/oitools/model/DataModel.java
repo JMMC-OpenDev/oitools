@@ -70,7 +70,7 @@ public class DataModel {
     private static boolean oiVis2ExtraSupport = false;
 
     /** flag to enable renaming of fitsImageIdentifier with the filename in FitsImageWriter.createImageData. */
-    private static boolean renameFitsImageIdentifierDuringWrite = true;
+    private static boolean updateFitsImageIdentifierOnWrite = true;
 
     /** list used for sorted rules */
     private static final ArrayList<Rule> SORTED_RULES = new ArrayList<Rule>(64);
@@ -539,16 +539,16 @@ public class DataModel {
     }
 
     /**
-     * @return the renameFitsImageIdentifierDuringWrite
+     * @return the updateFitsImageIdentifierOnWrite
      */
-    public static boolean isRenameFitsImageIdentifierDuringWrite() {
-        return renameFitsImageIdentifierDuringWrite;
+    public static boolean isUpdateFitsImageIdentifierOnWrite() {
+        return updateFitsImageIdentifierOnWrite;
     }
 
     /**
-     * @param aRenameFitsImageIdentifierDuringWrite the renameFitsImageIdentifierDuringWrite to set
+     * @param updateFitsImageIdentifierOnWrite the updateFitsImageIdentifierOnWrite to set
      */
-    public static void setRenameFitsImageIdentifierDuringWrite(boolean aRenameFitsImageIdentifierDuringWrite) {
-        renameFitsImageIdentifierDuringWrite = aRenameFitsImageIdentifierDuringWrite;
+    public static void setUpdateFitsImageIdentifierOnWrite(boolean updateFitsImageIdentifierOnWrite) {
+        DataModel.updateFitsImageIdentifierOnWrite = updateFitsImageIdentifierOnWrite;
     }
 }
