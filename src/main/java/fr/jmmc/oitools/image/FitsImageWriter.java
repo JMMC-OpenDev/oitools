@@ -24,7 +24,6 @@ import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
 import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.meta.KeywordMeta;
-import fr.jmmc.oitools.model.DataModel;
 import fr.nom.tam.fits.BasicHDU;
 import fr.nom.tam.fits.Data;
 import fr.nom.tam.fits.Fits;
@@ -53,6 +52,8 @@ public final class FitsImageWriter {
     private final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FitsImageWriter.class.getName());
     /** skip keywords when copying fits header cards present in FitsImage */
     private final static Set<String> SKIP_KEYWORDS = new HashSet<String>(32);
+    /** flag to enable renaming of fitsImageIdentifier with the filename in FitsImageWriter.createImageData. */
+    private static boolean updateFitsImageIdentifierOnWrite = true;
 
     static {
         FitsUtils.setup();
@@ -80,6 +81,20 @@ public final class FitsImageWriter {
 
         // Preserve few standard keywords (write pre-loaded values):
         SKIP_KEYWORDS.remove(FitsConstants.KEYWORD_EXT_NAME);
+    }
+
+    /**
+     * @return the updateFitsImageIdentifierOnWrite
+     */
+    public static boolean isUpdateFitsImageIdentifierOnWrite() {
+        return updateFitsImageIdentifierOnWrite;
+    }
+
+    /**
+     * @param newUpdateFitsImageIdentifierOnWrite the updateFitsImageIdentifierOnWrite to set
+     */
+    public static void setUpdateFitsImageIdentifierOnWrite(boolean newUpdateFitsImageIdentifierOnWrite) {
+        updateFitsImageIdentifierOnWrite = newUpdateFitsImageIdentifierOnWrite;
     }
 
     /**
@@ -234,7 +249,7 @@ public final class FitsImageWriter {
                 }
                 if (fileName != null) {
                     // update the fits image identifier:
-                    if (DataModel.isUpdateFitsImageIdentifierOnWrite()) {
+                    if (isUpdateFitsImageIdentifierOnWrite()) {
                         image.setFitsImageIdentifier(fileName + '#' + hduIndex);
                     }
                 }
@@ -251,7 +266,7 @@ public final class FitsImageWriter {
                     }
                     if (fileName != null) {
                         // update the fits image identifier:
-                        if (DataModel.isUpdateFitsImageIdentifierOnWrite()) {
+                        if (isUpdateFitsImageIdentifierOnWrite()) {
                             image.setFitsImageIdentifier(fileName + '#' + hduIndex);
                         }
                     }
