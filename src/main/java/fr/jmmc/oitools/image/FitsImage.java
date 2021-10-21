@@ -28,7 +28,7 @@ import java.util.logging.Level;
  * 
  * @author bourgesl
  */
-public final class FitsImage {
+public final class FitsImage implements Cloneable {
 
     /** Logger associated to image classes */
     private final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FitsImage.class.getName());
@@ -99,42 +99,36 @@ public final class FitsImage {
         super();
     }
 
-    public FitsImage clone() {
-        final FitsImage copy = new FitsImage();
-
-        copy.setFitsImageHDU(fitsImageHDU);
-        copy.setImageIndex(imageIndex);
-        copy.setFitsImageIdentifier(imageIdentifier);
-
-        copy.setData(data);
-        copy.setNData(nData);
-
-        copy.setPixRefWL(pixRefWL);
-        copy.setValRefWL(valRefWL);
-        copy.setIncWL(incWL);
-
-        copy.setPixRefCol(pixRefCol);
-        copy.setPixRefRow(pixRefRow);
-
-        copy.setValRefCol(valRefCol);
-        copy.setValRefRow(valRefRow);
-
-        copy.setSignedIncCol(getSignedIncCol());
-        copy.setSignedIncRow(getSignedIncRow());
-
-        copy.setRotAngle(rotAngle);
-
-        copy.setDataMin(dataMin);
-        copy.setDataMax(dataMax);
-        copy.setSum(sum);
-
-        copy.origIncCol = origIncCol;
-        copy.origIncRow = origIncRow;
-        copy.origRotAngle = origRotAngle;
-
-        copy.origMaxAngle = origMaxAngle;
-
-        return copy;
+    /** deep-clone, every field is :
+     * - either primitive : shallow-cloned by super.clone(),
+     * - either immutable : shallow-cloned by super.clone(),
+     * - either field `fitsImageHDU` : shallow-cloned by super.clone(), that field is a "parent" reference,
+     *   it contains a reference to this very FitsImage being cloned, so attempting to deep-clone it would loop,
+     * - either field `area` : deep-cloned manually,
+     * - either field `data` : deep-cloned manually and by Array.clone().
+     * Note that the setters are not all trivial :
+     * they do not solely assign the param value to the field, see setData() for example.
+     * But as they do not have side effects (to a database for example), and they only modify FitsImage fields,
+     * it is correct to clone by copying the field values, without calling the setters.
+     * @throws CloneNotSupportedException
+     * @return clone 
+     */
+    @Override
+    public FitsImage clone() throws CloneNotSupportedException {
+        FitsImage clone = (FitsImage) super.clone();
+        if (this.area != null) {
+            clone.area = new Rectangle2D.Double(
+                    this.area.getX(), this.area.getY(), this.area.getWidth(), this.area.getHeight());
+        }
+        if (this.data != null) {
+            clone.data = this.data.clone();
+            for (int i = 0; i < clone.data.length; i++) {
+                if (this.data[i] != null) {
+                    clone.data[i] = this.data[i].clone();
+                }
+            }
+        }
+        return clone;
     }
 
     /* image meta data */

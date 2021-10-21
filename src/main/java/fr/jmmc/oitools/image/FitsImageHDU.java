@@ -25,6 +25,7 @@ import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.ModelVisitor;
+import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import java.util.List;
  * This class is a container (HDU) for Fits Image (single or Fits cube)
  * @author bourgesl, mellag
  */
-public class FitsImageHDU extends FitsHDU {
+public class FitsImageHDU extends FitsHDU implements Cloneable {
 
     /**
      * optional HDUNAME keyword descriptor for IMAGE-OI
@@ -62,6 +63,36 @@ public class FitsImageHDU extends FitsHDU {
      */
     public final String getHduName() {
         return getKeyword(ImageOiConstants.KEYWORD_HDUNAME);
+    }
+
+    /** deep-clone
+     * field `checksum` : primitive, shallow-cloned manually
+     * field `fitsImages` : shallow-cloned by LinkedList.clone(), elements manually deep-cloned by FitsImage.clone().
+     * @return clone
+     * @throws CloneNotSupportedException
+     */
+    @Override
+    public FitsImageHDU clone() throws CloneNotSupportedException {
+        FitsImageHDU clone = (FitsImageHDU) super.clone();
+
+        // work-around to update the final cloned field `fitsImage`
+        try {
+            Field fitsImageField = FitsImageHDU.class.getDeclaredField("fitsImages");
+            fitsImageField.setAccessible(true);
+            fitsImageField.set(clone, ((LinkedList) this.fitsImages).clone());
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new CloneNotSupportedException(e.getMessage());
+        }
+
+        clone.fitsImages.replaceAll(fitsImage -> {
+            try {
+                return fitsImage.clone();
+            } catch (CloneNotSupportedException e) {
+                return null;
+            }
+        });
+
+        return clone;
     }
 
     /**
