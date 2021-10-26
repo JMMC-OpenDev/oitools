@@ -99,7 +99,8 @@ public final class FitsImage implements Cloneable {
         super();
     }
 
-    /** deep-clone, every field is :
+    /** deep-clone.
+     * every field is :
      * - either primitive : shallow-cloned by super.clone(),
      * - either immutable : shallow-cloned by super.clone(),
      * - either field `fitsImageHDU` : shallow-cloned by super.clone(), that field is a "parent" reference,

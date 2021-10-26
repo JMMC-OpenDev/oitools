@@ -27,6 +27,7 @@ import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.ModelBase;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.Rule;
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -105,6 +106,63 @@ public abstract class FitsHDU extends ModelBase {
         // constructor, next keywords will be common to every subclass :
         // EXTNAME keyword definition (optional) without defining accepted values:
         addKeywordMeta(KEYWORD_EXTNAME);
+    }
+
+    /** deep-clone.
+     * field `applyRules` shallow-cloned with HashSet.clone() and reflexion because final ;
+     *    its elements are from an Enum
+     * field `extNb` primitive, shallow-cloned by super.clone()
+     * field `keywordsDesc` shallow-cloned with by LinkedHashMap.clone() and reflexion because final ;
+     *    its elements seems to behave immutably.
+     * field `keywordsValue` shallow-cloned with HashMap.clone() and reflexion because final ;
+     *   at the time of writing, keyword values are always primitive or immutable, so no need to clone them.
+     *   see fr.jmmc.oitools.meta.Types.getBaseClass() to check it.
+     * field `headerCards` shallow-cloned by ArrayList.clone(), its elements are immutable.
+    @return clone
+    @throws CloneNotSupportedException
+     */
+    @Override
+    protected FitsHDU clone() throws CloneNotSupportedException {
+        FitsHDU clone = (FitsHDU) super.clone();
+
+        if (clone.applyRules != null) {
+            // work-around to update the final cloned field `applyRules`
+            try {
+                Field applyRulesField = FitsHDU.class.getDeclaredField("applyRules");
+                applyRulesField.setAccessible(true);
+                applyRulesField.set(clone, ((HashSet) this.applyRules).clone());
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new CloneNotSupportedException(e.getMessage());
+            }
+        }
+
+        if (clone.keywordsDesc != null) {
+            // work-around to update the final cloned field `keywordsDesc`
+            try {
+                Field keywordsDescField = FitsHDU.class.getDeclaredField("keywordsDesc");
+                keywordsDescField.setAccessible(true);
+                keywordsDescField.set(clone, ((LinkedHashMap) this.keywordsDesc).clone());
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new CloneNotSupportedException(e.getMessage());
+            }
+        }
+
+        if (clone.keywordsValue != null) {
+            // work-around to update the final cloned field `keywordsValue`
+            try {
+                Field keywordsValueField = FitsHDU.class.getDeclaredField("keywordsValue");
+                keywordsValueField.setAccessible(true);
+                keywordsValueField.set(clone, ((HashMap) this.keywordsValue).clone());
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new CloneNotSupportedException(e.getMessage());
+            }
+        }
+
+        if (clone.headerCards != null) {
+            clone.headerCards = (ArrayList) this.headerCards.clone();
+        }
+
+        return clone;
     }
 
     /* --- Rules --- */

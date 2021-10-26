@@ -28,6 +28,7 @@ import fr.jmmc.oitools.model.ModelVisitor;
 import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * This class is a container (HDU) for Fits Image (single or Fits cube)
@@ -65,9 +66,10 @@ public class FitsImageHDU extends FitsHDU implements Cloneable {
         return getKeyword(ImageOiConstants.KEYWORD_HDUNAME);
     }
 
-    /** deep-clone
-     * field `checksum` : primitive, shallow-cloned manually
-     * field `fitsImages` : shallow-cloned by LinkedList.clone(), elements manually deep-cloned by FitsImage.clone().
+    /** deep-clone.
+     * field `checksum` : primitive, shallow-cloned by super.clone().
+     * field `fitsImages` : shallow-cloned by LinkedList.clone() and reflexion because final ;
+     *   its elements iteratively deep-cloned by FitsImage.clone().
      * @return clone
      * @throws CloneNotSupportedException
      */
@@ -75,22 +77,27 @@ public class FitsImageHDU extends FitsHDU implements Cloneable {
     public FitsImageHDU clone() throws CloneNotSupportedException {
         FitsImageHDU clone = (FitsImageHDU) super.clone();
 
-        // work-around to update the final cloned field `fitsImage`
-        try {
-            Field fitsImageField = FitsImageHDU.class.getDeclaredField("fitsImages");
-            fitsImageField.setAccessible(true);
-            fitsImageField.set(clone, ((LinkedList) this.fitsImages).clone());
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new CloneNotSupportedException(e.getMessage());
-        }
+        if (clone.fitsImages != null) {
 
-        clone.fitsImages.replaceAll(fitsImage -> {
+            // work-around to update the final cloned field `fitsImage`
             try {
-                return fitsImage.clone();
-            } catch (CloneNotSupportedException e) {
-                return null;
+                Field fitsImageField = FitsImageHDU.class.getDeclaredField("fitsImages");
+                fitsImageField.setAccessible(true);
+                fitsImageField.set(clone, ((LinkedList) this.fitsImages).clone());
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                throw new CloneNotSupportedException(e.getMessage());
             }
-        });
+
+            // cloning elements of fitsImages
+            FitsImage fitsImage = null;
+            for (ListIterator<FitsImage> iter = clone.fitsImages.listIterator();
+                    iter.hasNext();
+                    fitsImage = iter.next()) {
+                if (fitsImage != null) {
+                    iter.set(fitsImage.clone());
+                }
+            }
+        }
 
         return clone;
     }
