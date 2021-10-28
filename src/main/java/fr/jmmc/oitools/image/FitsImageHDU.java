@@ -89,16 +89,15 @@ public class FitsImageHDU extends FitsHDU implements Cloneable {
             }
 
             // cloning elements of fitsImages
-            FitsImage fitsImage = null;
-            for (ListIterator<FitsImage> iter = clone.fitsImages.listIterator();
-                    iter.hasNext();
-                    fitsImage = iter.next()) {
+            ListIterator<FitsImage> iter = clone.fitsImages.listIterator();
+            while (iter.hasNext()) {
+                FitsImage fitsImage = iter.next();
                 if (fitsImage != null) {
-                    iter.set(fitsImage.clone());
+                    FitsImage clonedFitsImage = fitsImage.clone();
+                    iter.set(clonedFitsImage);
                 }
             }
         }
-
         return clone;
     }
 
