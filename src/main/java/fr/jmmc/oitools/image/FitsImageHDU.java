@@ -25,16 +25,14 @@ import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.ModelVisitor;
-import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * This class is a container (HDU) for Fits Image (single or Fits cube)
  * @author bourgesl, mellag
  */
-public class FitsImageHDU extends FitsHDU implements Cloneable {
+public class FitsImageHDU extends FitsHDU {
 
     /**
      * optional HDUNAME keyword descriptor for IMAGE-OI
@@ -66,40 +64,34 @@ public class FitsImageHDU extends FitsHDU implements Cloneable {
         return getKeyword(ImageOiConstants.KEYWORD_HDUNAME);
     }
 
-    /** deep-clone.
-     * field `checksum` : primitive, shallow-cloned by super.clone().
-     * field `fitsImages` : shallow-cloned by LinkedList.clone() and reflexion because final ;
-     *   its elements iteratively deep-cloned by FitsImage.clone().
-     * @return clone
-     * @throws CloneNotSupportedException
+    /** Copy-constructor.
+     * calls super copy-constructor.
+     * each FitsImage is copied: their data is shallow-copied, and their FitsImageHDU is updated.
+    @param source the FitsImageHDU to copy.
+     * !!! Remember to check this method when you modify fields of this class !!!
      */
-    @Override
-    public FitsImageHDU clone() throws CloneNotSupportedException {
-        FitsImageHDU clone = (FitsImageHDU) super.clone();
+    public FitsImageHDU(final FitsImageHDU source) {
+        // calling copy of FitsHDU
+        super(source);
 
-        if (clone.fitsImages != null) {
+        // HDUNAME keyword definition (optional)
+        addKeywordMeta(KEYWORD_HDUNAME);
 
-            // work-around to update the final cloned field `fitsImage`
-            try {
-                Field fitsImageField = FitsImageHDU.class.getDeclaredField("fitsImages");
-                fitsImageField.setAccessible(true);
-                fitsImageField.set(clone, ((LinkedList) this.fitsImages).clone());
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                throw new CloneNotSupportedException(e.getMessage());
-            }
+        // TODO: what do we put in checksum ?
 
-            // cloning elements of fitsImages
-            ListIterator<FitsImage> iter = clone.fitsImages.listIterator();
-            while (iter.hasNext()) {
-                FitsImage fitsImage = iter.next();
-                if (fitsImage != null) {
-                    FitsImage clonedFitsImage = fitsImage.clone();
-                    clonedFitsImage.setFitsImageHDU(clone);
-                    iter.set(clonedFitsImage);
-                }
-            }
-        }
-        return clone;
+        // copy fitsImages
+        source.fitsImages.forEach(fitsImageSource -> {
+
+            final FitsImage fitsImageCopy = new FitsImage();
+
+            // copy of the FitsImage (the data is shallow-copied)
+            fitsImageCopy.copyImage(fitsImageSource);
+
+            // update of the fitsImageHDU
+            fitsImageCopy.setFitsImageHDU(this);
+            
+            this.fitsImages.add(fitsImageCopy);
+        });
     }
 
     /**

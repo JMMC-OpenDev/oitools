@@ -27,7 +27,6 @@ import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.ModelBase;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.Rule;
-import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -108,61 +107,66 @@ public abstract class FitsHDU extends ModelBase {
         addKeywordMeta(KEYWORD_EXTNAME);
     }
 
-    /** deep-clone.
-     * field `applyRules` shallow-cloned with HashSet.clone() and reflexion because final ;
-     *    its elements are from an Enum
-     * field `extNb` primitive, shallow-cloned by super.clone()
-     * field `keywordsDesc` shallow-cloned with by LinkedHashMap.clone() and reflexion because final ;
-     *    its elements seems to behave immutably.
-     * field `keywordsValue` shallow-cloned with HashMap.clone() and reflexion because final ;
-     *   at the time of writing, keyword values are always primitive or immutable, so no need to clone them.
-     *   see fr.jmmc.oitools.meta.Types.getBaseClass() to check it.
-     * field `headerCards` shallow-cloned by ArrayList.clone(), its elements are immutable.
-    @return clone
-    @throws CloneNotSupportedException
+    /** Copy-constructor.
+    @param source required.
      */
-    @Override
-    protected FitsHDU clone() throws CloneNotSupportedException {
-        FitsHDU clone = (FitsHDU) super.clone();
+    protected FitsHDU(final FitsHDU source) {
+        // we do not copy superclass: it is all static fields
+        this();
+        // we do not copy applyRules
+        // we copy extNb
+        this.extNb = source.extNb;
+        // we copy the keyword metas and values, and the header cards.
+        copyKeywordsDesc(source);
+        copyKeywordsValues(source);
+        copyHeaderCards(source);
+    }
 
-        if (clone.applyRules != null) {
-            // work-around to update the final cloned field `applyRules`
-            try {
-                Field applyRulesField = FitsHDU.class.getDeclaredField("applyRules");
-                applyRulesField.setAccessible(true);
-                applyRulesField.set(clone, ((HashSet) this.applyRules).clone());
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                throw new CloneNotSupportedException(e.getMessage());
+    /** Copy-method for keywords metas.
+     * copy the KeywordMetas from the source to this object.
+    @param source required.
+     */
+    protected final void copyKeywordsDesc(final FitsHDU source) {
+        this.keywordsDesc.putAll(source.keywordsDesc);
+    }
+
+    /** Copy-method for keywords values.
+     * copy the keywords from the source to this object.
+     * Only the keywords described in this.getKeywordDescCollection().
+    @param source required.
+     */
+    protected final void copyKeywordsValues(final FitsHDU source) {
+        for (KeywordMeta keyword : getKeywordDescCollection()) {
+            final String keywordName = keyword.getName();
+
+            // TODO: is this code correct ?
+            if (FitsConstants.KEYWORD_EXT_NAME.equals(keywordName)
+                    || OIFitsConstants.KEYWORD_OI_REVN.equals(keywordName)) {
+                // Ignore ExtName / OiRevn (v1/2) defined in previous constructor
+                continue;
+            }
+
+            // get keyword value:
+            final Object keywordValue = source.getKeywordValue(keywordName);
+
+            // potentially missing values
+            if (keywordValue != null) {
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "KEYWORD {0} = ''{1}''", new Object[]{keywordName, keywordValue});
+                }
+                setKeywordValue(keywordName, keywordValue);
             }
         }
+    }
 
-        if (clone.keywordsDesc != null) {
-            // work-around to update the final cloned field `keywordsDesc`
-            try {
-                Field keywordsDescField = FitsHDU.class.getDeclaredField("keywordsDesc");
-                keywordsDescField.setAccessible(true);
-                keywordsDescField.set(clone, ((LinkedHashMap) this.keywordsDesc).clone());
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                throw new CloneNotSupportedException(e.getMessage());
-            }
+    /** Copy-method for header cards.
+    @param source required.
+     */
+    protected final void copyHeaderCards(final FitsHDU source) {
+        if (source.hasHeaderCards()) {
+            // Copy references to Fits header cards:
+            getHeaderCards().addAll(source.getHeaderCards());
         }
-
-        if (clone.keywordsValue != null) {
-            // work-around to update the final cloned field `keywordsValue`
-            try {
-                Field keywordsValueField = FitsHDU.class.getDeclaredField("keywordsValue");
-                keywordsValueField.setAccessible(true);
-                keywordsValueField.set(clone, ((HashMap) this.keywordsValue).clone());
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                throw new CloneNotSupportedException(e.getMessage());
-            }
-        }
-
-        if (clone.headerCards != null) {
-            clone.headerCards = (ArrayList) this.headerCards.clone();
-        }
-
-        return clone;
     }
 
     /* --- Rules --- */

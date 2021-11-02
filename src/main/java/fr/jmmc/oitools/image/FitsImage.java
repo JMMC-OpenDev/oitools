@@ -28,7 +28,7 @@ import java.util.logging.Level;
  * 
  * @author bourgesl
  */
-public final class FitsImage implements Cloneable {
+public final class FitsImage {
 
     /** Logger associated to image classes */
     private final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FitsImage.class.getName());
@@ -99,37 +99,52 @@ public final class FitsImage implements Cloneable {
         super();
     }
 
-    /** deep-clone.
-     * every field is :
-     * - either primitive : shallow-cloned by super.clone(),
-     * - either immutable : shallow-cloned by super.clone(),
-     * - either field `fitsImageHDU` : shallow-cloned by super.clone(), that field is a "parent" reference,
-     *   it contains a reference to this very FitsImage being cloned, so attempting to deep-clone it would loop,
-     * - either field `area` : deep-cloned manually,
-     * - either field `data` : deep-cloned manually and by Array.clone().
-     * Note that the setters are not all trivial :
-     * they do not solely assign the param value to the field, see setData() for example.
-     * But as they do not have side effects (to a database for example), and they only modify FitsImage fields,
-     * it is correct to clone by copying the field values, without calling the setters.
-     * @throws CloneNotSupportedException
-     * @return clone 
+    /** Copy-method to copy the image.
+     * shallow-copy the data.
+    @param source required.
      */
-    @Override
-    public FitsImage clone() throws CloneNotSupportedException {
-        FitsImage clone = (FitsImage) super.clone();
-        if (this.area != null) {
-            clone.area = new Rectangle2D.Double(
-                    this.area.getX(), this.area.getY(), this.area.getWidth(), this.area.getHeight());
-        }
-        if (this.data != null) {
-            clone.data = this.data.clone();
-            for (int i = 0; i < clone.data.length; i++) {
-                if (this.data[i] != null) {
-                    clone.data[i] = this.data[i].clone();
-                }
-            }
-        }
-        return clone;
+    public void copyImage(final FitsImage source) {
+
+        this.setFitsImageHDU(source.fitsImageHDU);
+        this.setImageIndex(source.imageIndex);
+        this.setFitsImageIdentifier(source.imageIdentifier);
+
+        // shallow copy the data
+        this.setData(source.data);
+        this.setNData(source.nData);
+
+        this.setPixRefWL(source.pixRefWL);
+        this.setValRefWL(source.valRefWL);
+        this.setIncWL(source.incWL);
+
+        this.setPixRefCol(source.pixRefCol);
+        this.setPixRefRow(source.pixRefRow);
+
+        this.setValRefCol(source.valRefCol);
+        this.setValRefRow(source.valRefRow);
+
+        this.setSignedIncCol(source.getSignedIncCol());
+        this.setSignedIncRow(source.getSignedIncRow());
+
+        this.setRotAngle(source.rotAngle);
+
+        this.setDataMin(source.dataMin);
+        this.setDataMax(source.dataMax);
+        this.setSum(source.sum);
+
+        this.origIncCol = source.origIncCol;
+        this.origIncRow = source.origIncRow;
+        this.origRotAngle = source.origRotAngle;
+
+        this.origMaxAngle = source.origMaxAngle;
+    }
+
+    public FitsImage clone() {
+        final FitsImage copy = new FitsImage();
+
+        copy.copyImage(this);
+
+        return copy;
     }
 
     /* image meta data */

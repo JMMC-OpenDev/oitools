@@ -19,7 +19,6 @@
  ******************************************************************************/
 package fr.jmmc.oitools.fits;
 
-import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
@@ -125,34 +124,10 @@ public abstract class FitsTable extends FitsHDU {
      * @param src table to copy
      */
     protected final void copyTable(final FitsTable src) throws IllegalArgumentException {
-        // Copy keyword values:
-        for (KeywordMeta keyword : getKeywordDescCollection()) {
-            final String keywordName = keyword.getName();
-
-            if (FitsConstants.KEYWORD_EXT_NAME.equals(keywordName)
-                    || OIFitsConstants.KEYWORD_OI_REVN.equals(keywordName)) {
-                // Ignore ExtName / OiRevn (v1/2) defined in previous constructor
-                continue;
-            }
-
-            // get keyword value:
-            final Object keywordValue = src.getKeywordValue(keywordName);
-
-            // potentially missing values
-            if (keywordValue != null) {
-                if (logger.isLoggable(Level.FINE)) {
-                    logger.log(Level.FINE, "KEYWORD {0} = ''{1}''", new Object[]{keywordName, keywordValue});
-                }
-                setKeywordValue(keywordName, keywordValue);
-            }
-        }
-
-        // Copy header cards ?
-        // Note: how to ensure consistency if the table is modified ?
-        if (src.hasHeaderCards()) {
-            // Copy references to Fits header cards:
-            getHeaderCards().addAll(src.getHeaderCards());
-        }
+        // Copy keyword values
+        copyKeywordsValues(src);
+        // copy header cards
+        copyHeaderCards(src);
 
         // Copy column values:
         final int nRows = getNbRows();
