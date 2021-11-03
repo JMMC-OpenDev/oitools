@@ -68,7 +68,6 @@ public class FitsImageHDU extends FitsHDU {
      * calls super copy-constructor.
      * each FitsImage is copied: their data is shallow-copied, and their FitsImageHDU is updated.
     @param source the FitsImageHDU to copy.
-     * !!! Remember to check this method when you modify fields of this class !!!
      */
     public FitsImageHDU(final FitsImageHDU source) {
         // calling copy of FitsHDU
@@ -82,10 +81,8 @@ public class FitsImageHDU extends FitsHDU {
         // copy fitsImages
         source.fitsImages.forEach(fitsImageSource -> {
 
-            final FitsImage fitsImageCopy = new FitsImage();
-
             // copy of the FitsImage (the data is shallow-copied)
-            fitsImageCopy.copyImage(fitsImageSource);
+            final FitsImage fitsImageCopy = new FitsImage(fitsImageSource);
 
             // update of the fitsImageHDU
             fitsImageCopy.setFitsImageHDU(this);

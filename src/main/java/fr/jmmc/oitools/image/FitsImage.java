@@ -99,11 +99,11 @@ public final class FitsImage {
         super();
     }
 
-    /** Copy-method to copy the image.
+    /** Copy-constructor to copy the image.
      * shallow-copy the data.
     @param source required.
      */
-    public void copyImage(final FitsImage source) {
+    public FitsImage(final FitsImage source) {
 
         this.setFitsImageHDU(source.fitsImageHDU);
         this.setImageIndex(source.imageIndex);
@@ -140,11 +140,7 @@ public final class FitsImage {
     }
 
     public FitsImage clone() {
-        final FitsImage copy = new FitsImage();
-
-        copy.copyImage(this);
-
-        return copy;
+        return new FitsImage(this);
     }
 
     /* image meta data */
