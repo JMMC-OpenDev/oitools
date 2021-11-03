@@ -107,39 +107,40 @@ public abstract class FitsHDU extends ModelBase {
         addKeywordMeta(KEYWORD_EXTNAME);
     }
 
-    /** Copy-constructor.
-    @param source required.
+    /** 
+     * Copy-constructor
+     * @param source HDU to copy from (required)
      */
     protected FitsHDU(final FitsHDU source) {
-        // we do not copy superclass: it is all static fields
         this();
-        // we do not copy applyRules
-        // we copy extNb
-        this.extNb = source.extNb;
+        // ignore applyRules
+        this.extNb = source.getExtNb();
         // we copy the keyword metas and values, and the header cards.
         copyKeywordsDesc(source);
         copyKeywordsValues(source);
         copyHeaderCards(source);
     }
 
-    /** Copy-method for keywords metas.
+    /** 
+     * Copy-method for keywords metas.
      * copy the KeywordMetas from the source to this object.
-    @param source required.
+     * @param source HDU to copy from (required)
      */
     protected final void copyKeywordsDesc(final FitsHDU source) {
-        this.keywordsDesc.putAll(source.keywordsDesc);
+        this.keywordsDesc.putAll(source.getKeywordsDesc());
     }
 
-    /** Copy-method for keywords values.
+    /** 
+     * Copy-method for keywords values.
      * copy the keywords from the source to this object.
      * Only the keywords described in this.getKeywordDescCollection().
-    @param source required.
+     * @param source HDU to copy from (required)
      */
     protected final void copyKeywordsValues(final FitsHDU source) {
         for (KeywordMeta keyword : getKeywordDescCollection()) {
             final String keywordName = keyword.getName();
 
-            // TODO: is this code correct ?
+            // Ignore FitsTable keywords defined by constructors:
             if (FitsConstants.KEYWORD_EXT_NAME.equals(keywordName)
                     || OIFitsConstants.KEYWORD_OI_REVN.equals(keywordName)) {
                 // Ignore ExtName / OiRevn (v1/2) defined in previous constructor
@@ -159,8 +160,9 @@ public abstract class FitsHDU extends ModelBase {
         }
     }
 
-    /** Copy-method for header cards.
-    @param source required.
+    /** 
+     * Copy-method for header cards.
+     * @param source HDU to copy from (required)
      */
     protected final void copyHeaderCards(final FitsHDU source) {
         if (source.hasHeaderCards()) {

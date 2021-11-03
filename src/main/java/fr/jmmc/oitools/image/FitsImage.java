@@ -96,51 +96,55 @@ public final class FitsImage {
      * Public FitsImage class constructor
      */
     public FitsImage() {
-        super();
+        this(null);
     }
 
-    /** Copy-constructor to copy the image.
-     * shallow-copy the data.
-    @param source required.
+    /** 
+     * Public FitsImage class constructor
+     * @param fitsImageHDU parent HDU
      */
-    public FitsImage(final FitsImage source) {
+    public FitsImage(final FitsImageHDU fitsImageHDU) {
+        this.fitsImageHDU = fitsImageHDU;
+    }
 
-        this.setFitsImageHDU(source.fitsImageHDU);
-        this.setImageIndex(source.imageIndex);
-        this.setFitsImageIdentifier(source.imageIdentifier);
+    /** 
+     * Copy-constructor to copy the image,
+     * shallow-copy the data.
+     * @param fitsImageHDU parent HDU
+     * @param source Image to copy from (required)
+     */
+    public FitsImage(final FitsImageHDU fitsImageHDU, final FitsImage source) {
+        this(fitsImageHDU);
+        this.setImageIndex(source.getImageIndex());
+        this.setFitsImageIdentifier(source.getFitsImageIdentifier());
 
         // shallow copy the data
-        this.setData(source.data);
-        this.setNData(source.nData);
+        this.setData(source.getData());
+        this.setNData(source.getNData());
 
-        this.setPixRefWL(source.pixRefWL);
-        this.setValRefWL(source.valRefWL);
-        this.setIncWL(source.incWL);
+        this.setPixRefWL(source.getPixRefWL());
+        this.setValRefWL(source.getValRefWL());
+        this.setIncWL(source.getIncWL());
 
-        this.setPixRefCol(source.pixRefCol);
-        this.setPixRefRow(source.pixRefRow);
+        this.setPixRefCol(source.getPixRefCol());
+        this.setPixRefRow(source.getPixRefRow());
 
-        this.setValRefCol(source.valRefCol);
-        this.setValRefRow(source.valRefRow);
+        this.setValRefCol(source.getValRefCol());
+        this.setValRefRow(source.getValRefRow());
 
         this.setSignedIncCol(source.getSignedIncCol());
         this.setSignedIncRow(source.getSignedIncRow());
 
-        this.setRotAngle(source.rotAngle);
+        this.setRotAngle(source.getRotAngle());
 
-        this.setDataMin(source.dataMin);
-        this.setDataMax(source.dataMax);
-        this.setSum(source.sum);
+        this.setDataMin(source.getDataMin());
+        this.setDataMax(source.getDataMax());
+        this.setSum(source.getSum());
 
-        this.origIncCol = source.origIncCol;
-        this.origIncRow = source.origIncRow;
-        this.origRotAngle = source.origRotAngle;
-
-        this.origMaxAngle = source.origMaxAngle;
-    }
-
-    public FitsImage clone() {
-        return new FitsImage(this);
+        this.origIncCol = source.getOrigIncCol();
+        this.origIncRow = source.getOrigIncRow();
+        this.origRotAngle = source.getOrigRotAngle();
+        this.origMaxAngle = source.getOrigMaxAngle();
     }
 
     /* image meta data */

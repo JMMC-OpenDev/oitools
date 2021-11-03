@@ -55,19 +55,10 @@ public class FitsImageHDU extends FitsHDU {
         addKeywordMeta(KEYWORD_HDUNAME);
     }
 
-    /* image meta data */
-    /**
-     * Get the optional HDUNAME keyword for IMAGE-OI model.
-     * @return  the hduName value of null
-     */
-    public final String getHduName() {
-        return getKeyword(ImageOiConstants.KEYWORD_HDUNAME);
-    }
-
-    /** Copy-constructor.
-     * calls super copy-constructor.
+    /** 
+     * Copy-constructor calls super copy-constructor.
      * each FitsImage is copied: their data is shallow-copied, and their FitsImageHDU is updated.
-    @param source the FitsImageHDU to copy.
+     * @param source HDU to copy from (required)
      */
     public FitsImageHDU(final FitsImageHDU source) {
         // calling copy of FitsHDU
@@ -76,19 +67,22 @@ public class FitsImageHDU extends FitsHDU {
         // HDUNAME keyword definition (optional)
         addKeywordMeta(KEYWORD_HDUNAME);
 
-        // TODO: what do we put in checksum ?
+        // set checksum to undefined:
+        setChecksum(0l);
 
-        // copy fitsImages
-        source.fitsImages.forEach(fitsImageSource -> {
+        // copy fitsImages (the data is shallow-copied)
+        source.getFitsImages().forEach(
+                fitsImageSource -> this.fitsImages.add(new FitsImage(this, fitsImageSource))
+        );
+    }
 
-            // copy of the FitsImage (the data is shallow-copied)
-            final FitsImage fitsImageCopy = new FitsImage(fitsImageSource);
-
-            // update of the fitsImageHDU
-            fitsImageCopy.setFitsImageHDU(this);
-            
-            this.fitsImages.add(fitsImageCopy);
-        });
+    /* image meta data */
+    /**
+     * Get the optional HDUNAME keyword for IMAGE-OI model.
+     * @return  the hduName value of null
+     */
+    public final String getHduName() {
+        return getKeyword(ImageOiConstants.KEYWORD_HDUNAME);
     }
 
     /**

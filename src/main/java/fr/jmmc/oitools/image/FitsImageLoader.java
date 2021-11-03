@@ -528,9 +528,7 @@ public final class FitsImageLoader {
 
         // load all images in fits cube:
         for (int imageIndex = 1; imageIndex <= imgCount; imageIndex++) {
-            final FitsImage image = new FitsImage();
-            // define image HDU:
-            image.setFitsImageHDU(imageHDU);
+            final FitsImage image = new FitsImage(imageHDU);
 
             // define the fits image identifier:
             image.setFitsImageIdentifier(filename + '#' + hduIndex + '-' + imageIndex + '/' + imgCount);
