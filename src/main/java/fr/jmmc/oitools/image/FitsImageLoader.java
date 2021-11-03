@@ -22,6 +22,7 @@ package fr.jmmc.oitools.image;
 import fr.jmmc.jmcs.util.NumberUtils;
 import static fr.jmmc.jmcs.util.NumberUtils.parseDouble;
 import static fr.jmmc.jmcs.util.NumberUtils.parseInteger;
+import fr.jmmc.oitools.fits.ChecksumHelper;
 import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
@@ -223,18 +224,6 @@ public final class FitsImageLoader {
                 }
             }
         }
-    }
-
-    /**
-     * Update the checksum keyword for the given HDU
-     * @param hdu hdu to processHDUnit
-     * @return checksum value
-     * @throws FitsException if any FITS error occurred
-     * @throws IOException IO failure
-     */
-    public static long updateChecksum(final BasicHDU hdu) throws FitsException, IOException {
-        // compute and add checksum into HDU (header):
-        return Fits.setChecksum(hdu, false);
     }
 
     /**
@@ -496,9 +485,9 @@ public final class FitsImageLoader {
         // Load images:
         final FitsImageHDU imageHDU = createImageHDU(checker, filename, imgHdu, requireCdeltKeywords, hduIndex, factory, imgCount);
 
-        if (imageHDU.getImageCount() != 0) {
+        if (imageHDU.hasImages()) {
             // update checksum:
-            imageHDU.setChecksum(updateChecksum(imgHdu));
+            imageHDU.setChecksum(ChecksumHelper.updateChecksum(imgHdu));
         }
         return imageHDU;
     }

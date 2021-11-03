@@ -19,6 +19,9 @@
  ******************************************************************************/
 package fr.jmmc.oitools.fits;
 
+import fr.nom.tam.fits.BasicHDU;
+import fr.nom.tam.fits.Fits;
+import fr.nom.tam.fits.FitsException;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,6 +44,17 @@ public final class ChecksumHelper {
 
     private ChecksumHelper() {
         // forbidden
+    }
+
+    /**
+     * Update the checksum keyword for the given HDU
+     * @param hdu hdu to processHDUnit
+     * @return checksum value
+     * @throws FitsException if any FITS error occurred
+     */
+    public static long updateChecksum(final BasicHDU hdu) throws FitsException {
+        // compute and add checksum into HDU (header):
+        return Fits.setChecksum(hdu, false);
     }
 
     public static String computeMD5(final File file) {

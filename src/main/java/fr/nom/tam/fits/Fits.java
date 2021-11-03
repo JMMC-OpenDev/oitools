@@ -949,7 +949,7 @@ public final class Fits {
      * @since 2005-10-05
      */
     public static long setChecksum(BasicHDU hdu)
-            throws HeaderCardException, FitsException, IOException {
+            throws HeaderCardException, FitsException {
         return setChecksum(hdu, true);
     }
 
@@ -963,7 +963,7 @@ public final class Fits {
      * @since 2005-10-05
      */
     public static long setChecksum(BasicHDU hdu, final boolean addDataSum)
-            throws HeaderCardException, FitsException, IOException {
+            throws HeaderCardException, FitsException {
         /* the next line with the delete is needed to avoid some unexpected
          *  problems with non.tam.fits.Header.checkCard() which otherwise says
          *  it expected PCOUNT and found DATE.

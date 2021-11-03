@@ -19,6 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.image;
 
+import fr.jmmc.oitools.fits.ChecksumHelper;
 import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
@@ -136,9 +137,9 @@ public final class FitsImageWriter {
 
             // process all fitsImageHDUs :
             createHDUnits(imgFitsFile, fitsFile);
-            bf = new BufferedFile(absFilePath, "rw");
 
             // write the fits file :
+            bf = new BufferedFile(absFilePath, "rw");
             fitsFile.write(bf);
 
             // flush and close :
@@ -173,11 +174,11 @@ public final class FitsImageWriter {
     }
 
     /**
-     * Create all Fits HD units corresponding to Fits images more parameters
+     * Create all Fits HDUnits corresponding to Fits images
      * @param fitsFile fits file
-     * @param imageHDUs list of FitsImageHDU
-     * @param fileName 
-     * @param startIdx begin
+     * @param imageHDUs list of FitsImageHDU to process
+     * @param fileName optional filename used to update FitsImageIdentifier
+     * @param startIdx optional starting hdu index used to update FitsImageIdentifier
      * @throws FitsException if any FITS error occurred
      * @throws IOException IO failure
      */
@@ -193,10 +194,20 @@ public final class FitsImageWriter {
     }
 
     /**
+     * Create the Fits HDUnit corresponding to the given FitsImageHDU
+     * @param imageHDU FitsImageHDU to process
+     * @return BasicHDU
+     * @throws FitsException if any FITS error occurred
+     */
+    public static BasicHDU createHDUnit(final FitsImageHDU imageHDU) throws FitsException {
+        return createHDUnit(imageHDU, null, 0);
+    }
+
+    /**
      * createHDUnit more params
      * @param imageHDU FitsImageFile structure to write
-     * @param fileName 
-     * @param hduIndex 
+     * @param fileName optional filename used to update FitsImageIdentifier
+     * @param hduIndex optional hdu index used to update FitsImageIdentifier
      * @return BasicHDU
      * @throws FitsException if any FITS error occurred
      */
@@ -213,7 +224,7 @@ public final class FitsImageWriter {
         final Header header = ImageHDU.manufactureHeader(fitsData);
 
         // create HDU :
-        final ImageHDU hdu = new ImageHDU(header, fitsData);
+        final ImageHDU imgHdu = new ImageHDU(header, fitsData);
 
         // Finalize Header :
         // Add image keywords in the header :
@@ -223,14 +234,18 @@ public final class FitsImageWriter {
 
         processKeywords(header, imageHDU);
 
-        return hdu;
+        if (imageHDU.hasImages()) {
+            // update checksum:
+            imageHDU.setChecksum(ChecksumHelper.updateChecksum(imgHdu));
+        }
+        return imgHdu;
     }
 
     /**
      * createImageData
      * @param imageHDU FitsImageFile structure to write
-     * @param fileName 
-     * @param hduIndex 
+     * @param fileName optional filename used to update FitsImageIdentifier
+     * @param hduIndex optional hdu index used to update FitsImageIdentifier
      * @return BasicHDU
      * @throws FitsException if any FITS error occurred
      */
@@ -240,18 +255,18 @@ public final class FitsImageWriter {
         if (nImages == 0) {
             return new ImageData();
         } else {
-            Object data;
+            final boolean doUpdateFitsImageIdentifier = isUpdateFitsImageIdentifierOnWrite() && (fileName != null);
             final List<FitsImage> fitsImages = imageHDU.getFitsImages();
+            Object data;
+
             if (nImages == 1) {
                 final FitsImage image = fitsImages.get(0);
                 if (image.getData() == null) {
                     throw new FitsException("No image data in FitsImage !");
                 }
-                if (fileName != null) {
-                    // update the fits image identifier:
-                    if (isUpdateFitsImageIdentifierOnWrite()) {
-                        image.setFitsImageIdentifier(fileName + '#' + hduIndex);
-                    }
+                // update the fits image identifier:
+                if (doUpdateFitsImageIdentifier) {
+                    image.setFitsImageIdentifier(fileName + '#' + hduIndex);
                 }
                 data = image.getData();
             } else {
@@ -260,15 +275,12 @@ public final class FitsImageWriter {
 
                 for (int i = 0; i < nImages; i++) {
                     final FitsImage image = fitsImages.get(i);
-
                     if (image.getData() == null) {
                         throw new FitsException("No image data in FitsImage !");
                     }
-                    if (fileName != null) {
-                        // update the fits image identifier:
-                        if (isUpdateFitsImageIdentifierOnWrite()) {
-                            image.setFitsImageIdentifier(fileName + '#' + hduIndex);
-                        }
+                    // update the fits image identifier:
+                    if (doUpdateFitsImageIdentifier) {
+                        image.setFitsImageIdentifier(fileName + '#' + hduIndex);
                     }
                     fArray[i] = image.getData();
                 }

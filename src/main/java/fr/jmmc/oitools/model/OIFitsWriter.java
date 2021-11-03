@@ -108,9 +108,8 @@ public class OIFitsWriter {
             // process all OI_* tables :
             createHDUnits(fitsFile);
 
-            bf = new BufferedFile(absFilePath, "rw");
-
             // write the fits file :
+            bf = new BufferedFile(absFilePath, "rw");
             fitsFile.write(bf);
 
             // flush and close :

@@ -19,12 +19,15 @@
  ******************************************************************************/
 package fr.jmmc.oitools.image;
 
+import fr.jmmc.oitools.fits.ChecksumHelper;
 import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.ModelVisitor;
+import fr.nom.tam.fits.BasicHDU;
+import fr.nom.tam.fits.FitsException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -74,6 +77,20 @@ public class FitsImageHDU extends FitsHDU {
         source.getFitsImages().forEach(
                 fitsImageSource -> this.fitsImages.add(new FitsImage(this, fitsImageSource))
         );
+    }
+
+    /**
+     * Compute the checksum on current images (FITS header + data)
+     * Note: costly operation: it creates a new nom.tam.fits.HDU (structure + data copy) to compute checksum.
+     * @throws FitsException if any FITS error occurred
+     */
+    public void updateChecksum() throws FitsException {
+        if (hasImages()) {
+            // Costly operation:
+            final BasicHDU imgHdu = FitsImageWriter.createHDUnit(this);
+            // update checksum:
+            setChecksum(ChecksumHelper.updateChecksum(imgHdu));
+        }
     }
 
     /* image meta data */
