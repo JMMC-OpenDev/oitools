@@ -107,6 +107,70 @@ public abstract class FitsHDU extends ModelBase {
         addKeywordMeta(KEYWORD_EXTNAME);
     }
 
+    /** 
+     * Copy-constructor
+     * @param source HDU to copy from (required)
+     */
+    protected FitsHDU(final FitsHDU source) {
+        this();
+        // ignore applyRules
+        this.extNb = source.getExtNb();
+        // we copy the keyword metas and values, and the header cards.
+        copyKeywordsDesc(source);
+        copyKeywordsValues(source);
+        copyHeaderCards(source);
+    }
+
+    /** 
+     * Copy-method for keywords metas.
+     * copy the KeywordMetas from the source to this object.
+     * @param source HDU to copy from (required)
+     */
+    protected final void copyKeywordsDesc(final FitsHDU source) {
+        this.keywordsDesc.putAll(source.getKeywordsDesc());
+    }
+
+    /** 
+     * Copy-method for keywords values.
+     * copy the keywords from the source to this object.
+     * Only the keywords described in this.getKeywordDescCollection().
+     * @param source HDU to copy from (required)
+     */
+    protected final void copyKeywordsValues(final FitsHDU source) {
+        for (KeywordMeta keyword : getKeywordDescCollection()) {
+            final String keywordName = keyword.getName();
+
+            // Ignore FitsTable keywords defined by constructors:
+            if (FitsConstants.KEYWORD_EXT_NAME.equals(keywordName)
+                    || OIFitsConstants.KEYWORD_OI_REVN.equals(keywordName)) {
+                // Ignore ExtName / OiRevn (v1/2) defined in previous constructor
+                continue;
+            }
+
+            // get keyword value:
+            final Object keywordValue = source.getKeywordValue(keywordName);
+
+            // potentially missing values
+            if (keywordValue != null) {
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "KEYWORD {0} = ''{1}''", new Object[]{keywordName, keywordValue});
+                }
+                setKeywordValue(keywordName, keywordValue);
+            }
+        }
+    }
+
+    /** 
+     * Copy-method for header cards.
+     * @param source HDU to copy from (required)
+     */
+    protected final void copyHeaderCards(final FitsHDU source) {
+        if (source.hasHeaderCards()) {
+            // Copy references to Fits header cards:
+            getHeaderCards().addAll(source.getHeaderCards());
+        }
+    }
+
     /* --- Rules --- */
     /**
      * Get the applyRules

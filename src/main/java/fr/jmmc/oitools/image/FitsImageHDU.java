@@ -55,6 +55,27 @@ public class FitsImageHDU extends FitsHDU {
         addKeywordMeta(KEYWORD_HDUNAME);
     }
 
+    /** 
+     * Copy-constructor calls super copy-constructor.
+     * each FitsImage is copied: their data is shallow-copied, and their FitsImageHDU is updated.
+     * @param source HDU to copy from (required)
+     */
+    public FitsImageHDU(final FitsImageHDU source) {
+        // calling copy of FitsHDU
+        super(source);
+
+        // HDUNAME keyword definition (optional)
+        addKeywordMeta(KEYWORD_HDUNAME);
+
+        // set checksum to undefined:
+        setChecksum(0l);
+
+        // copy fitsImages (the data is shallow-copied)
+        source.getFitsImages().forEach(
+                fitsImageSource -> this.fitsImages.add(new FitsImage(this, fitsImageSource))
+        );
+    }
+
     /* image meta data */
     /**
      * Get the optional HDUNAME keyword for IMAGE-OI model.

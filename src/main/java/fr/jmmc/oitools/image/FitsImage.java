@@ -96,45 +96,55 @@ public final class FitsImage {
      * Public FitsImage class constructor
      */
     public FitsImage() {
-        super();
+        this(null);
     }
 
-    public FitsImage clone() {
-        final FitsImage copy = new FitsImage();
+    /** 
+     * Public FitsImage class constructor
+     * @param fitsImageHDU parent HDU
+     */
+    public FitsImage(final FitsImageHDU fitsImageHDU) {
+        this.fitsImageHDU = fitsImageHDU;
+    }
 
-        copy.setFitsImageHDU(fitsImageHDU);
-        copy.setImageIndex(imageIndex);
-        copy.setFitsImageIdentifier(imageIdentifier);
+    /** 
+     * Copy-constructor to copy the image,
+     * shallow-copy the data.
+     * @param fitsImageHDU parent HDU
+     * @param source Image to copy from (required)
+     */
+    public FitsImage(final FitsImageHDU fitsImageHDU, final FitsImage source) {
+        this(fitsImageHDU);
+        this.setImageIndex(source.getImageIndex());
+        this.setFitsImageIdentifier(source.getFitsImageIdentifier());
 
-        copy.setData(data);
-        copy.setNData(nData);
+        // shallow copy the data
+        this.setData(source.getData());
+        this.setNData(source.getNData());
 
-        copy.setPixRefWL(pixRefWL);
-        copy.setValRefWL(valRefWL);
-        copy.setIncWL(incWL);
+        this.setPixRefWL(source.getPixRefWL());
+        this.setValRefWL(source.getValRefWL());
+        this.setIncWL(source.getIncWL());
 
-        copy.setPixRefCol(pixRefCol);
-        copy.setPixRefRow(pixRefRow);
+        this.setPixRefCol(source.getPixRefCol());
+        this.setPixRefRow(source.getPixRefRow());
 
-        copy.setValRefCol(valRefCol);
-        copy.setValRefRow(valRefRow);
+        this.setValRefCol(source.getValRefCol());
+        this.setValRefRow(source.getValRefRow());
 
-        copy.setSignedIncCol(getSignedIncCol());
-        copy.setSignedIncRow(getSignedIncRow());
+        this.setSignedIncCol(source.getSignedIncCol());
+        this.setSignedIncRow(source.getSignedIncRow());
 
-        copy.setRotAngle(rotAngle);
+        this.setRotAngle(source.getRotAngle());
 
-        copy.setDataMin(dataMin);
-        copy.setDataMax(dataMax);
-        copy.setSum(sum);
+        this.setDataMin(source.getDataMin());
+        this.setDataMax(source.getDataMax());
+        this.setSum(source.getSum());
 
-        copy.origIncCol = origIncCol;
-        copy.origIncRow = origIncRow;
-        copy.origRotAngle = origRotAngle;
-
-        copy.origMaxAngle = origMaxAngle;
-
-        return copy;
+        this.origIncCol = source.getOrigIncCol();
+        this.origIncRow = source.getOrigIncRow();
+        this.origRotAngle = source.getOrigRotAngle();
+        this.origMaxAngle = source.getOrigMaxAngle();
     }
 
     /* image meta data */
