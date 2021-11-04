@@ -204,7 +204,7 @@ public final class FitsImageWriter {
     }
 
     /**
-     * createHDUnit more params
+     * Create the Fits HDUnit corresponding to the given FitsImageHDU (do not update checksum)
      * @param imageHDU FitsImageFile structure to write
      * @param fileName optional filename used to update FitsImageIdentifier
      * @param hduIndex optional hdu index used to update FitsImageIdentifier
@@ -212,6 +212,21 @@ public final class FitsImageWriter {
      * @throws FitsException if any FITS error occurred
      */
     public static BasicHDU createHDUnit(final FitsImageHDU imageHDU, final String fileName, final int hduIndex) throws FitsException {
+        // note: checksum set to false as BSMEM has troubles (cfits io)
+        return createHDUnit(imageHDU, fileName, hduIndex, false);
+    }
+
+    /**
+     * Create the Fits HDUnit corresponding to the given FitsImageHDU
+     * @param imageHDU FitsImageFile structure to write
+     * @param fileName optional filename used to update FitsImageIdentifier
+     * @param hduIndex optional hdu index used to update FitsImageIdentifier
+     * @param updateChecksum true to update checksum
+     * @return BasicHDU
+     * @throws FitsException if any FITS error occurred
+     */
+    public static BasicHDU createHDUnit(final FitsImageHDU imageHDU, final String fileName, final int hduIndex,
+                                        final boolean updateChecksum) throws FitsException {
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "createHDUnit: {0}", imageHDU);
         }
@@ -234,7 +249,7 @@ public final class FitsImageWriter {
 
         processKeywords(header, imageHDU);
 
-        if (imageHDU.hasImages()) {
+        if (updateChecksum && imageHDU.hasImages()) {
             // update checksum:
             imageHDU.setChecksum(ChecksumHelper.updateChecksum(imgHdu));
         }
