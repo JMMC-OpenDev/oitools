@@ -486,8 +486,13 @@ public final class FitsImageLoader {
         final FitsImageHDU imageHDU = createImageHDU(checker, filename, imgHdu, requireCdeltKeywords, hduIndex, factory, imgCount);
 
         if (imageHDU.hasImages()) {
-            // update checksum:
-            imageHDU.setChecksum(ChecksumHelper.updateChecksum(imgHdu));
+            try {
+                // update checksum:
+                imageHDU.setChecksum(ChecksumHelper.updateChecksum(imgHdu));
+            } catch (FitsException fe) {
+                logger.log(Level.SEVERE, "Checksum failure on HDU: {0}", imageHDU.toString(true));
+                throw fe;
+            }
         }
         return imageHDU;
     }
