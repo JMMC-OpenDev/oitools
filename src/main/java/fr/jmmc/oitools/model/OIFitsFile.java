@@ -583,6 +583,18 @@ public final class OIFitsFile extends FitsImageFile {
                 }
             }
 
+            // validate FitsImageHDUs:
+            {
+                final boolean skipFirst = isOIFits2();
+                int i = 0;
+                for (FitsImageHDU imgHdu : getFitsImageHDUs()) {
+                    if (!skipFirst || (i != 0)) {
+                        imgHdu.checkSyntax(checker);
+                    }
+                    i++;
+                }
+            }
+
             // NOTE: may check twice the loaded OIFits: how to avoid duplications ?
             // Only 1 case: column format => use OIFitsChecker.skipFormat flag to avoid duplicated failures
             for (OITable oiTable : getOITableList()) {
