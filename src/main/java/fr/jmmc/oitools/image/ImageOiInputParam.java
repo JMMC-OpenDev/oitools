@@ -55,14 +55,24 @@ public final class ImageOiInputParam extends ImageOiParam {
     private final static KeywordMeta KEYWORD_FLUXERR = new KeywordMeta(ImageOiConstants.KEYWORD_FLUXERR, " Assumed standard deviation for the total flux ", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_RGL_PRIO = new KeywordMeta(ImageOiConstants.KEYWORD_RGL_PRIO, "Identifier of the HDU with the prior image", Types.TYPE_CHAR);
 
-    private final static Map<String,KeywordMeta> IMAGE_OI_INPUT_STD_KEYWORDS;
+    public final static double DEF_KEYWORD_WAVE_MIN = -1.0;
+    public final static double DEF_KEYWORD_WAVE_MAX = -1.0;
+    public final static int DEF_KEYWORD_MAXITER = 50;
+
+    public final static boolean DEF_KEYWORD_AUTO_WGT = true;
+    public final static double DEF_KEYWORD_RGL_WGT = 0.0;
+    public final static double DEF_KEYWORD_FLUX = 1.0;
+    public final static double DEF_KEYWORD_FLUXERR = 0.01; // 1% error on VIS2
+
+    private final static Map<String, KeywordMeta> IMAGE_OI_INPUT_STD_KEYWORDS;
+
     static {
         IMAGE_OI_INPUT_STD_KEYWORDS = new LinkedHashMap<>();
         Arrays.asList(
-            KEYWORD_TARGET, KEYWORD_WAVE_MIN, KEYWORD_WAVE_MAX,
-            KEYWORD_USE_VIS, KEYWORD_USE_VIS2, KEYWORD_USE_T3,
-            KEYWORD_INIT_IMG, KEYWORD_MAXITER, KEYWORD_RGL_NAME, KEYWORD_RGL_WGT,
-            KEYWORD_AUTO_WGT, KEYWORD_FLUX, KEYWORD_FLUXERR, KEYWORD_RGL_PRIO
+                KEYWORD_TARGET, KEYWORD_WAVE_MIN, KEYWORD_WAVE_MAX,
+                KEYWORD_USE_VIS, KEYWORD_USE_VIS2, KEYWORD_USE_T3,
+                KEYWORD_INIT_IMG, KEYWORD_MAXITER, KEYWORD_RGL_NAME, KEYWORD_RGL_WGT,
+                KEYWORD_AUTO_WGT, KEYWORD_FLUX, KEYWORD_FLUXERR, KEYWORD_RGL_PRIO
         ).forEach(keywordMeta -> {
             IMAGE_OI_INPUT_STD_KEYWORDS.put(keywordMeta.getName(), keywordMeta);
         });
@@ -90,16 +100,19 @@ public final class ImageOiInputParam extends ImageOiParam {
     }
 
     public final void defineDefaultKeywordValues() {
-        setWaveMin(-1.0);
-        setWaveMax(-1.0);
-        setMaxiter(50);
-        setAutoWgt(true);
-        setRglWgt(0.0);
-        setFlux(1.0);
-        setFluxErr(0.01); // 1% error on VIS2
+        setWaveMin(DEF_KEYWORD_WAVE_MIN);
+        setWaveMax(DEF_KEYWORD_WAVE_MAX);
+        setMaxiter(DEF_KEYWORD_MAXITER);
+
+        setAutoWgt(DEF_KEYWORD_AUTO_WGT);
+        setRglWgt(DEF_KEYWORD_RGL_WGT);
+        setFlux(DEF_KEYWORD_FLUX);
+        setFluxErr(DEF_KEYWORD_FLUXERR);
 
         // note: setRglName() not used as it is set by Service later
     }
+
+//TODO: check if this values are the Table defaults => change such defaults by software defaults.
 
     /*
      * --- Keywords ------------------------------------------------------------
