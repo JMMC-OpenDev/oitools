@@ -731,8 +731,8 @@ public final class FitsImage {
      */
     private void updateArea() {
         this.area = new Rectangle2D.Double(
-                -(this.pixRefCol - 1.0) * this.incCol,
-                -(this.pixRefRow - 1.0) * this.incRow,
+                -(this.pixRefCol - 0.5) * this.incCol,
+                -(this.pixRefRow - 0.5) * this.incRow,
                 this.nbCols * this.incCol,
                 this.nbRows * this.incRow);
 
