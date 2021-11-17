@@ -101,7 +101,7 @@ public abstract class FitsHDU extends ModelBase {
     protected FitsHDU() {
         super();
 
-        // since every class constructor of OI table calls super
+        // since every class constructor of OITable calls super
         // constructor, next keywords will be common to every subclass :
         // EXTNAME keyword definition (optional) without defining accepted values:
         addKeywordMeta(KEYWORD_EXTNAME);
@@ -655,9 +655,9 @@ public abstract class FitsHDU extends ModelBase {
     }
 
     /**
-     * Returns a string representation of this table
+     * Returns a string representation of this hdu
      *
-     * @return a string representation of this table
+     * @return a string representation of this hdu
      */
     @Override
     public String toString() {
@@ -668,7 +668,7 @@ public abstract class FitsHDU extends ModelBase {
      * --- Checker -------------------------------------------------------------
      */
     /**
-     * Do syntactical analysis of the table
+     * Do syntactical analysis of the hdu
      *
      * @param checker checker component
      */
@@ -683,7 +683,7 @@ public abstract class FitsHDU extends ModelBase {
     }
 
     /**
-     * Check syntax of table's keywords. It consists in checking all mandatory
+     * Check syntax of hdu's keywords. It consists in checking all mandatory
      * keywords are present, with right name, right format and right values (if
      * they do belong to a given set of accepted values).
      *
