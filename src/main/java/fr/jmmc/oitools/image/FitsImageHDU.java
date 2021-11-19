@@ -30,6 +30,7 @@ import fr.nom.tam.fits.BasicHDU;
 import fr.nom.tam.fits.FitsException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * This class is a container (HDU) for Fits Image (single or Fits cube)
@@ -82,14 +83,18 @@ public class FitsImageHDU extends FitsHDU {
     /**
      * Compute the checksum on current images (FITS header + data)
      * Note: costly operation: it creates a new nom.tam.fits.HDU (structure + data copy) to compute checksum.
-     * @throws FitsException if any FITS error occurred
      */
-    public void updateChecksum() throws FitsException {
+    public void updateChecksum() {
         if (hasImages()) {
-            // Costly operation:
-            final BasicHDU imgHdu = FitsImageWriter.createHDUnit(this);
-            // update checksum:
-            setChecksum(ChecksumHelper.updateChecksum(imgHdu));
+            try {
+                // Costly operation:
+                final BasicHDU imgHdu = FitsImageWriter.createHDUnit(this);
+                // update checksum:
+                setChecksum(ChecksumHelper.updateChecksum(imgHdu));
+            } catch (FitsException fe) {
+                logger.log(Level.SEVERE, "Checksum failure on HDU: {0}", this.toString(true));
+                logger.log(Level.SEVERE, "Checksum exception:", fe);
+            }
         }
     }
 
