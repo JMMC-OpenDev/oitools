@@ -62,7 +62,6 @@ public final class ImageOiInputParam extends ImageOiParam {
     public final static boolean DEF_KEYWORD_AUTO_WGT = true;
     public final static double DEF_KEYWORD_RGL_WGT = 0.0;
     public final static double DEF_KEYWORD_FLUX = 1.0;
-    public final static double DEF_KEYWORD_FLUXERR = 0.01; // 1% error on VIS2
 
     private final static Map<String, KeywordMeta> IMAGE_OI_INPUT_STD_KEYWORDS;
 
@@ -106,8 +105,6 @@ public final class ImageOiInputParam extends ImageOiParam {
 
         setAutoWgt(DEF_KEYWORD_AUTO_WGT);
         setRglWgt(DEF_KEYWORD_RGL_WGT);
-        setFlux(DEF_KEYWORD_FLUX);
-        setFluxErr(DEF_KEYWORD_FLUXERR);
 
         // note: setRglName() not used as it is set by Service later
     }
