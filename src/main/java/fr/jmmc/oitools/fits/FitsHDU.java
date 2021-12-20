@@ -585,6 +585,15 @@ public abstract class FitsHDU extends ModelBase {
     }
 
     /**
+     * Remove the given extra keyword (header card)
+     * @param card FitsHeaderCard instance to remove
+     * @return true if removed; false if missing
+     */
+    public final boolean removeHeaderCard(final FitsHeaderCard card) {
+        return getHeaderCards().remove(card);
+    }
+
+    /**
      * Find the first header card (in the card list) corresponding to the given key
      * @param key header card key
      * @return header card or null if none found
@@ -598,6 +607,19 @@ public abstract class FitsHDU extends ModelBase {
             }
         }
         return null;
+    }
+
+    /**
+     * Remove the first header card (in the card list) corresponding to the given key
+     * @param key header card key
+     * @return true if removed or missing; false otherwise
+     */
+    public final boolean removeFirstHeaderCard(final String key) {
+        FitsHeaderCard card = findFirstHeaderCard(key);
+        if (card != null) {
+            return removeHeaderCard(card);
+        }
+        return true;
     }
 
     /**
