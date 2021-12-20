@@ -23,7 +23,6 @@ import fr.jmmc.oitools.fits.FitsHeaderCard;
 import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
-import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Map;
