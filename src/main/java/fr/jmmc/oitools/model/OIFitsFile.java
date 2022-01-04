@@ -277,7 +277,7 @@ public final class OIFitsFile extends FitsImageFile {
      * Unregister an OI_* table.
      * @param oiTable reference on one OI_* table
      */
-    protected void unregisterOiTable(final OITable oiTable) {
+    public void unregisterOiTable(final OITable oiTable) {
         this.oiTables.remove(oiTable);
 
         if (oiTable instanceof OITarget) {
