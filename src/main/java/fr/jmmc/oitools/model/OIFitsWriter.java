@@ -25,6 +25,7 @@ import fr.jmmc.oitools.fits.FitsUtils;
 import fr.jmmc.oitools.image.FitsImageHDU;
 import fr.jmmc.oitools.image.FitsImageWriter;
 import fr.jmmc.oitools.image.ImageOiData;
+import fr.jmmc.oitools.image.ImageOiOutputParam;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.nom.tam.fits.BasicHDU;
@@ -192,7 +193,10 @@ public class OIFitsWriter {
         fitsFile.addHDU(createBinaryTable(imageOiData.getInputParam()));
         // Add IMAGE-OI OUTPUT PARAM table (is binary table, not image)
         // TODO: check if OutputParam is empty ?
-        fitsFile.addHDU(createBinaryTable(imageOiData.getOutputParam()));
+        ImageOiOutputParam outputParams = imageOiData.getExistingOutputParam();
+        if (outputParams != null) {
+            fitsFile.addHDU(createBinaryTable(outputParams));
+        }
     }
 
     /**

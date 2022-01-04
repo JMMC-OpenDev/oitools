@@ -171,15 +171,6 @@ public abstract class FitsHDU extends ModelBase {
         }
     }
 
-    /**
-     * remove all keywords and header cards
-     */
-    public void resetFitsHDU() {
-        this.getKeywordsDesc().clear();
-        this.getKeywordsValue().clear();
-        this.getHeaderCards().clear();
-    }
-
     /* --- Rules --- */
     /**
      * Get the applyRules
