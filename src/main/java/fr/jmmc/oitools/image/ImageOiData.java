@@ -32,7 +32,7 @@ public final class ImageOiData {
 
     /* members */
     private final ImageOiInputParam inputParam = new ImageOiInputParam();
-    private ImageOiOutputParam outputParam = null; // lazily created in getOutputParam
+    private ImageOiOutputParam outputParam = null; // lazily created
 
     public ImageOiData() {
         super();
@@ -47,7 +47,7 @@ public final class ImageOiData {
     }
 
     /** 
-     * @return outputParam but initialize it if null
+     * @return output params table (create a new table if null)
      */
     public ImageOiOutputParam getOutputParam() {
         if (outputParam == null) {
@@ -55,16 +55,16 @@ public final class ImageOiData {
         }
         return outputParam;
     }
-    
+
     /**
-     * @return outputParam (can be null)
+     * @return output params table (can be null)
      */
     public ImageOiOutputParam getExistingOutputParam() {
         return outputParam;
     }
-    
-    /** nullify outputParam. */
-    public void removeOutputParam () {
+
+    /** remove the output params table */
+    public void removeOutputParam() {
         this.outputParam = null;
     }
 

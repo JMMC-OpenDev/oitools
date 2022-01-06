@@ -192,8 +192,7 @@ public class OIFitsWriter {
         // Add IMAGE-OI INPUT PARAM table (is binary table, not image)
         fitsFile.addHDU(createBinaryTable(imageOiData.getInputParam()));
         // Add IMAGE-OI OUTPUT PARAM table (is binary table, not image)
-        // TODO: check if OutputParam is empty ?
-        ImageOiOutputParam outputParams = imageOiData.getExistingOutputParam();
+        final ImageOiOutputParam outputParams = imageOiData.getExistingOutputParam();
         if (outputParams != null) {
             fitsFile.addHDU(createBinaryTable(outputParams));
         }
