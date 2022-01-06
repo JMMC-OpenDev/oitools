@@ -32,7 +32,7 @@ public final class ImageOiData {
 
     /* members */
     private final ImageOiInputParam inputParam = new ImageOiInputParam();
-    private final ImageOiOutputParam outputParam = new ImageOiOutputParam();
+    private ImageOiOutputParam outputParam = null; // lazily created
 
     public ImageOiData() {
         super();
@@ -46,8 +46,26 @@ public final class ImageOiData {
         return inputParam;
     }
 
+    /** 
+     * @return output params table (create a new table if null)
+     */
     public ImageOiOutputParam getOutputParam() {
+        if (outputParam == null) {
+            outputParam = new ImageOiOutputParam();
+        }
         return outputParam;
+    }
+
+    /**
+     * @return output params table (can be null)
+     */
+    public ImageOiOutputParam getExistingOutputParam() {
+        return outputParam;
+    }
+
+    /** remove the output params table */
+    public void removeOutputParam() {
+        this.outputParam = null;
     }
 
     /*
@@ -62,7 +80,9 @@ public final class ImageOiData {
         logger.log(Level.INFO, "Analysing HDU [{0}]:", inputParam.idToString());
         inputParam.checkSyntax(checker);
 
-        logger.log(Level.INFO, "Analysing HDU [{0}]:", outputParam.idToString());
-        outputParam.checkSyntax(checker);
+        if (outputParam != null) {
+            logger.log(Level.INFO, "Analysing HDU [{0}]:", outputParam.idToString());
+            outputParam.checkSyntax(checker);
+        }
     }
 }

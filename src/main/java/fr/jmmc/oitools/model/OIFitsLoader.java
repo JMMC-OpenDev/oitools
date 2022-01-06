@@ -30,6 +30,7 @@ import fr.jmmc.oitools.image.FitsImageHDUFactory;
 import fr.jmmc.oitools.image.FitsImageLoader;
 import fr.jmmc.oitools.image.ImageOiConstants;
 import fr.jmmc.oitools.image.ImageOiData;
+import fr.jmmc.oitools.image.ImageOiOutputParam;
 import fr.jmmc.oitools.meta.ArrayColumnMeta;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.OIFitsStandard;

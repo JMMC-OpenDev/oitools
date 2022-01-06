@@ -836,12 +836,8 @@
 <checkReport>
 Analysing File: A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits
 SEVERE	Missing keyword 'AUTO_WGT'
-SEVERE	Missing keyword 'CHISQ'
-SEVERE	Missing keyword 'FLUX'
 SEVERE	Missing keyword 'FLUX'
 SEVERE	Missing keyword 'FLUXERR'
-SEVERE	Missing keyword 'LAST_IMG'
-SEVERE	Missing keyword 'NITER'
 SEVERE	Missing keyword 'RGL_PRIO'
 Analysing table [OI_ARRAY#3]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
@@ -916,7 +912,7 @@ Analysing table [OI_VIS2#21]
 WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 
-30 warnings, 14 severe errors
+30 warnings, 10 severe errors
 
 </checkReport>
 <rules>
@@ -958,20 +954,6 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
-    <member>CHISQ</member>
-    <message>Missing keyword 'CHISQ'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_KEYWORD_MANDATORY</rule>
-    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
-    <member>FLUX</member>
-    <message>Missing keyword 'FLUX'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_KEYWORD_MANDATORY</rule>
-    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <member>FLUX</member>
     <message>Missing keyword 'FLUX'</message>
   </failure>
@@ -981,20 +963,6 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <member>FLUXERR</member>
     <message>Missing keyword 'FLUXERR'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_KEYWORD_MANDATORY</rule>
-    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
-    <member>LAST_IMG</member>
-    <message>Missing keyword 'LAST_IMG'</message>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_KEYWORD_MANDATORY</rule>
-    <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
-    <member>NITER</member>
-    <message>Missing keyword 'NITER'</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>
