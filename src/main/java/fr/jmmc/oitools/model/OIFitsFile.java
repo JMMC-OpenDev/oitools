@@ -176,24 +176,24 @@ public final class OIFitsFile extends FitsImageFile {
 
     /**
      * Remove the given OI_* tables from this OIFitsFile structure.
-     * Only valid for data tables (OI_VIS, OI_VIS2, OI_T3) tables
      * @param oiTable OI_* table to remove
      */
-    public void removeOiTable(final OIData oiTable) {
+    public void removeOiTable(final OITable oiTable) {
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "Unregistering object for {0}", oiTable.idToString());
         }
         unregisterOiTable(oiTable);
-
-        // TODO: remove oiTable in insNameToOiWavelength and arrNameToOiArray if needed
-        computeWavelengthBounds();
+        if (oiTable instanceof OIData) {
+            // reset cached wavelength range:
+            wavelengthRange = null;
+        }
     }
 
     /**
      * Register valid OI_* tables (keyword and column values must be defined).
      * @param oiTable reference on one OI_* table
      */
-    protected void registerOiTable(final OITable oiTable) {
+    void registerOiTable(final OITable oiTable) {
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "Registering object for {0}", oiTable.idToString());
         }
@@ -236,10 +236,10 @@ public final class OIFitsFile extends FitsImageFile {
                 }
                 v.add(o);
             } else {
-                logger.warning("INSNAME of OI_WAVELENGTH table is null during building step");
+                logger.warning("INSNAME of OI_WAVELENGTH table is null in register()");
             }
-
-            computeWavelengthBounds();
+            // reset cached wavelength range:
+            wavelengthRange = null;
         } else if (oiTable instanceof OIArray) {
             final OIArray o = (OIArray) oiTable;
             final String arrName = o.getArrName();
@@ -253,7 +253,7 @@ public final class OIFitsFile extends FitsImageFile {
                 }
                 v.add(o);
             } else {
-                logger.warning("ARRNAME of OI_ARRAY table is null during building step");
+                logger.warning("ARRNAME of OI_ARRAY table is null in register()");
             }
         } else if (oiTable instanceof OICorr) {
             final OICorr o = (OICorr) oiTable;
@@ -268,7 +268,7 @@ public final class OIFitsFile extends FitsImageFile {
                 }
                 v.add(o);
             } else {
-                logger.warning("CORRNAME of OI_CORR table is null during building step");
+                logger.warning("CORRNAME of OI_CORR table is null in register()");
             }
         }
     }
@@ -277,7 +277,7 @@ public final class OIFitsFile extends FitsImageFile {
      * Unregister an OI_* table.
      * @param oiTable reference on one OI_* table
      */
-    protected void unregisterOiTable(final OITable oiTable) {
+    private void unregisterOiTable(final OITable oiTable) {
         this.oiTables.remove(oiTable);
 
         if (oiTable instanceof OITarget) {
@@ -302,6 +302,46 @@ public final class OIFitsFile extends FitsImageFile {
         } else if (oiTable instanceof OIFlux) {
             this.oiDataTables.remove((OIFlux) oiTable);
             this.oiFluxTables.remove((OIFlux) oiTable);
+        }
+
+        if (oiTable instanceof OIWavelength) {
+            final OIWavelength o = (OIWavelength) oiTable;
+            final String insName = o.getInsName();
+
+            if (insName != null) {
+                final List<OIWavelength> v = this.insNameToOiWavelength.get(insName);
+                if (v != null) {
+                    v.remove(o);
+                }
+            } else {
+                logger.warning("INSNAME of OI_WAVELENGTH table is null in unregister()");
+            }
+            // reset cached wavelength range:
+            wavelengthRange = null;
+        } else if (oiTable instanceof OIArray) {
+            final OIArray o = (OIArray) oiTable;
+            final String arrName = o.getArrName();
+
+            if (arrName != null) {
+                final List<OIArray> v = this.arrNameToOiArray.get(arrName);
+                if (v != null) {
+                    v.remove(o);
+                }
+            } else {
+                logger.warning("ARRNAME of OI_ARRAY table is null in unregister()");
+            }
+        } else if (oiTable instanceof OICorr) {
+            final OICorr o = (OICorr) oiTable;
+            final String corrName = o.getCorrName();
+
+            if (corrName != null) {
+                final List<OICorr> v = this.corrNameToOiCorr.get(corrName);
+                if (v != null) {
+                    v.remove(o);
+                }
+            } else {
+                logger.warning("CORRNAME of OI_CORR table is null in unregister()");
+            }
         }
     }
 
