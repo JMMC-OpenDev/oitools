@@ -258,12 +258,8 @@ INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing File: A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits
 Analysing table [IMAGE-OI INPUT PARAM#-1]
 SEVERE	Missing keyword 'AUTO_WGT'
-SEVERE	Missing keyword 'CHISQ'
-SEVERE	Missing keyword 'FLUX'
 SEVERE	Missing keyword 'FLUX'
 SEVERE	Missing keyword 'FLUXERR'
-SEVERE	Missing keyword 'LAST_IMG'
-SEVERE	Missing keyword 'NITER'
 SEVERE	Missing keyword 'RGL_PRIO'
 Analysing table [OI_ARRAY#3]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
@@ -632,4 +628,4 @@ SEVERE	Can't check repeat for column 'JXY'
 SEVERE	Can't check repeat for column 'JYX'
 SEVERE	Can't check repeat for column 'JYY'
 
-166 warnings, 85 severe errors
+166 warnings, 81 severe errors
