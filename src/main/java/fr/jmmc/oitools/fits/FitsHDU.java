@@ -118,6 +118,17 @@ public abstract class FitsHDU extends ModelBase {
         // we copy the keyword metas and values, and the header cards.
         copyKeywordsDesc(source);
         copyKeywordsValues(source);
+
+        // copyKeywordsValues does not copy these two keywords, so we manually copy them
+        Object extName = source.getKeywordValue(FitsConstants.KEYWORD_EXT_NAME);
+        if (extName != null) {
+            setKeywordValue(FitsConstants.KEYWORD_EXT_NAME, extName);
+        }
+        Object oiRevn = source.getKeywordValue(OIFitsConstants.KEYWORD_OI_REVN);
+        if (oiRevn != null) {
+            setKeywordValue(OIFitsConstants.KEYWORD_OI_REVN, oiRevn);
+        }
+
         copyHeaderCards(source);
     }
 

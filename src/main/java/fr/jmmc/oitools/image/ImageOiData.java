@@ -31,11 +31,24 @@ public final class ImageOiData {
     public final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ImageOiData.class.getName());
 
     /* members */
-    private final ImageOiInputParam inputParam = new ImageOiInputParam();
+    private final ImageOiInputParam inputParam;
     private ImageOiOutputParam outputParam = null; // lazily created
 
     public ImageOiData() {
         super();
+        this.inputParam = new ImageOiInputParam();
+    }
+
+    /**
+     * copy-constructor. Paramemeters are deep-copied: you can modify the original without altering the copy.
+     *
+     * @param source ImageOiData to copy from (required).
+     */
+    public ImageOiData(final ImageOiData source) {
+        this.inputParam = new ImageOiInputParam(source.getInputParam());
+        if (source.getExistingOutputParam() != null) {
+            this.outputParam = new ImageOiOutputParam(source.getExistingOutputParam());
+        }
     }
 
     /**

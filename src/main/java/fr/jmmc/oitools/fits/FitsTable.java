@@ -101,6 +101,33 @@ public abstract class FitsTable extends FitsHDU {
     }
 
     /**
+     * copy-constructor. Caution: columnsValue references objects. references are copied, and not the objects. Same for
+     * columnsDerivedValue and columnsRangeValue.
+     *
+     * @param source FitsTable to copy from (required).
+     */
+    protected FitsTable(final FitsTable source) {
+        super(source);
+
+        this.columnsDesc.putAll(source.getColumnsDesc());
+
+        if (source.columnsDerivedDesc != null) {
+            this.getColumnsDerivedDesc().putAll(source.columnsDerivedDesc);
+        }
+
+        this.columnsAliases.putAll(source.getColumnsAliases());
+        this.columnsValue.putAll(source.getColumnsValue());
+
+        if (source.columnsDerivedValue != null) {
+            this.getColumnsDerivedValue().putAll(source.columnsDerivedValue);
+        }
+
+        if (source.columnsRangeValue != null) {
+            this.getColumnsRangeValue().putAll(source.columnsRangeValue);
+        }
+    }
+
+    /**
      * Initialize the table with minimal keywords and empty columns
      *
      * @param nbRows number of rows i.e. the Fits NAXIS2 keyword value

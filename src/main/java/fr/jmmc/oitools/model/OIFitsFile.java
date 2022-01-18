@@ -124,6 +124,38 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
+     * copy-constructor. Not all fields are copied.
+       *
+     * @param source the object to copy from (required).
+     */
+    public OIFitsFile(final OIFitsFile source) {
+        super(source);
+        this.version = source.getVersion();
+
+        this.sourceURI = source.getSourceURI();
+        this.fileSize = source.getSize();
+        this.md5sum = source.getMd5sum();
+
+        // this.arrNameToOiArray will be filled by registerOiTable during copying of OITables (see below)
+        // this.insNameToOiWavelength idem
+        // this.corrNameToOiCorr idem
+
+        if (source.getExistingImageOiData() != null) {
+            this.imageOiData = new ImageOiData(source.getExistingImageOiData());
+        }
+
+        // this line handles oiTables, oiTargets, oiTargets, oiWavelengths, oiCorrs, oiInspols,
+        // oiDataTables, oiVisTables, oiVis2Tables, oiT3Tables, oiFluxTables
+        source.getOITableList().forEach(sourceOiTable -> {
+            // add a copy of the OITable with this oiFitsFile as parent
+            addOiTable(copyTable(sourceOiTable));
+        });
+
+        /// distinctGranules, oiDataPerGranule, usedStaNamesMap are not copied
+        // visit the file if you need them
+    }
+
+    /**
      * Add the given OI_* tables to this OIFitsFile structure
      * @param oiTable new OI_* table
      */
@@ -193,7 +225,7 @@ public final class OIFitsFile extends FitsImageFile {
      * Register valid OI_* tables (keyword and column values must be defined).
      * @param oiTable reference on one OI_* table
      */
-    void registerOiTable(final OITable oiTable) {
+    protected void registerOiTable(final OITable oiTable) {
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "Registering object for {0}", oiTable.idToString());
         }

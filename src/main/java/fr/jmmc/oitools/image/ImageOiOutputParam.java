@@ -55,6 +55,10 @@ public final class ImageOiOutputParam extends ImageOiParam {
         super(IMAGE_OI_OUTPUT_STD_KEYWORDS, ImageOiConstants.EXTNAME_IMAGE_OI_OUTPUT_PARAM);
     }
 
+    public ImageOiOutputParam(final ImageOiOutputParam source) {
+        super(source);
+    }
+
     /*
      * --- Keywords ------------------------------------------------------------
      */

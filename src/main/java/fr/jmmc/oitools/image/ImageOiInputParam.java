@@ -99,6 +99,15 @@ public final class ImageOiInputParam extends ImageOiParam {
         defineDefaultKeywordValues();
     }
 
+    /**
+     * copy-constructor.
+     *
+     * @param source ImageOiInputParam to copy from (required).
+     */
+    public ImageOiInputParam(final ImageOiInputParam source) {
+        super(source);
+    }
+
     public final void defineDefaultKeywordValues() {
         setWaveMin(DEF_KEYWORD_WAVE_MIN);
         setWaveMax(DEF_KEYWORD_WAVE_MAX);
