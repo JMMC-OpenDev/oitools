@@ -102,10 +102,43 @@ public final class ImageOiInputParam extends ImageOiParam {
     /**
      * copy-constructor.
      *
+     * ImageOiParam fields:
+     * - isDefaultKeyword: correctly set to true in ImageOiParam.new.
+     * - parentKeywordMetas : correctly initialized in ImageOiParam.new, then unmodified.
+     * - defaultKeywords: idem as parentKeywordMetas.
+     * - specificKeywords: any specific keyword can have been added to source, so we copy them with addKeyword().
+     * - stdImgOIKeywords: idem as parentKeywordMetas.
+     *
+     * FitsTable fields:
+     * - columnsDesc: correctly initialized in ImageOiInputParam.new. There is none at time of writing.
+     * --- According to spec, `IMAGE-OI INPUT PARAM` hdus could have data in the future.
+     * - columnsDerivedDesc: idem as columnsDesc.
+     * - columnsAliases: idem as columnsDesc.
+     * - columnsValue: copied by copyTable(). Caution: values are Object and thus only references are copied.
+     * - columnsDerivedValue: lazy so uncopied.
+     * - columnsRangeValue: lazy so uncopied.
+     *
+     * FitsHDU fields:
+     * - applyRules: useless to copy. will be created on demand by inspectRules().
+     * - extNb: idem as parentKeywordMetas.
+     * - keywordsDesc: idem as specificKeywords.
+     * - keywordsValue: copied by copyTable().
+     * --- Note: this is intentionally done at last, so that we correctly get
+     * --- all keywords that are set during the chain of construction. Note that ImageOiInputParam is final.
+     * - headerCards: idem as keywordsValue.
+     *
      * @param source ImageOiInputParam to copy from (required).
      */
     public ImageOiInputParam(final ImageOiInputParam source) {
-        super(source);
+        this();
+
+        // copy specific keywords
+        source.getSpecificKeywords().forEach((String specificKeyword) -> {
+            addKeyword(source.getKeywordsDesc(specificKeyword));
+        });
+
+        // copy keywords and columns
+        copyTable(source);
     }
 
     public final void defineDefaultKeywordValues() {

@@ -66,19 +66,6 @@ public abstract class ImageOiParam extends FitsTable {
     }
 
     /**
-     * copy-constructor.
-     *
-     * @param source ImageOiParam to copy from (required).
-     */
-    protected ImageOiParam(final ImageOiParam source) {
-        super(source);
-        this.parentKeywordMetas.addAll(source.parentKeywordMetas);
-        this.defaultKeywords.addAll(source.getDefaultKeywords());
-        this.specificKeywords.addAll(source.getSpecificKeywords());
-        this.stdImgOIKeywords = source.stdImgOIKeywords;
-    }
-
-    /**
      * Register all default keywords
      */
     public final void resetDefaultKeywords() {
