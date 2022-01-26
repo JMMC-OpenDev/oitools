@@ -124,35 +124,68 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * copy-constructor. Not all fields are copied.
-       *
-     * @param source the object to copy from (required).
+     * Public OIFitsFile class constructor to copy the given file (structure only).
+     * @param src file to copy
      */
-    public OIFitsFile(final OIFitsFile source) {
-        super(source);
-        this.version = source.getVersion();
+    public OIFitsFile(final OIFitsFile src) {
+        this(src.getVersion(), new FileRef(src.getAbsoluteFilePath()));
 
-        this.sourceURI = source.getSourceURI();
-        this.fileSize = source.getSize();
-        this.md5sum = source.getMd5sum();
+        this.copyFile(src);
+    }
 
-        // this.arrNameToOiArray will be filled by registerOiTable during copying of OITables (see below)
-        // this.insNameToOiWavelength idem
-        // this.corrNameToOiCorr idem
+    /**
+     * Explicit copy method to clone the structure but shallow-copy the image hdus
+     * @param src FitsImageFile to copy
+     */
+    public void copyFile(final OIFitsFile src) {
+        // Copy all FitsImageHDUs:
+        super.copyFile(src);
 
-        if (source.getExistingImageOiData() != null) {
-            this.imageOiData = new ImageOiData(source.getExistingImageOiData());
-        }
+        // TODO: should reset or copy these optional fields ?
+        this.setSourceURI(src.getSourceURI());
+        this.setSize(src.getSize());
+        this.setMd5sum(src.getMd5sum());
 
-        // this line handles oiTables, oiTargets, oiTargets, oiWavelengths, oiCorrs, oiInspols,
-        // oiDataTables, oiVisTables, oiVis2Tables, oiT3Tables, oiFluxTables
-        source.getOITableList().forEach(sourceOiTable -> {
+        // copy OITables:
+        src.getOITableList().forEach(sourceOiTable -> {
             // add a copy of the OITable with this oiFitsFile as parent
-            addOiTable(copyTable(sourceOiTable));
+            addOiTable(this.copyTable(sourceOiTable));
         });
 
-        /// distinctGranules, oiDataPerGranule, usedStaNamesMap are not copied
-        // visit the file if you need them
+        // Copy IMAGE-OI tables:
+        if (src.getExistingImageOiData() != null) {
+            this.imageOiData = new ImageOiData(src.getExistingImageOiData());
+        }
+
+        // ignore cached data: use analyze() if needed
+    }
+
+    /**
+     * Copy the given OITable (shallow-copy) with this oiFitsFile as parent
+     * @param oiTable table to copy
+     * @return copied OITable instance
+     */
+    public OITable copyTable(final OITable oiTable) {
+        if (oiTable instanceof OITarget) {
+            return new OITarget(this, (OITarget) oiTable);
+        } else if (oiTable instanceof OIWavelength) {
+            return new OIWavelength(this, (OIWavelength) oiTable);
+        } else if (oiTable instanceof OIArray) {
+            return new OIArray(this, (OIArray) oiTable);
+        } else if (oiTable instanceof OICorr) {
+            return new OICorr(this, (OICorr) oiTable);
+        } else if (oiTable instanceof OIInspol) {
+            return new OIInspol(this, (OIInspol) oiTable);
+        } else if (oiTable instanceof OIVis) {
+            return new OIVis(this, (OIVis) oiTable);
+        } else if (oiTable instanceof OIVis2) {
+            return new OIVis2(this, (OIVis2) oiTable);
+        } else if (oiTable instanceof OIT3) {
+            return new OIT3(this, (OIT3) oiTable);
+        } else if (oiTable instanceof OIFlux) {
+            return new OIFlux(this, (OIFlux) oiTable);
+        }
+        return null;
     }
 
     /**
@@ -225,7 +258,7 @@ public final class OIFitsFile extends FitsImageFile {
      * Register valid OI_* tables (keyword and column values must be defined).
      * @param oiTable reference on one OI_* table
      */
-    protected void registerOiTable(final OITable oiTable) {
+    void registerOiTable(final OITable oiTable) {
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "Registering object for {0}", oiTable.idToString());
         }
@@ -375,29 +408,6 @@ public final class OIFitsFile extends FitsImageFile {
                 logger.warning("CORRNAME of OI_CORR table is null in unregister()");
             }
         }
-    }
-
-    public OITable copyTable(OITable oiTable) {
-        if (oiTable instanceof OITarget) {
-            return new OITarget(this, (OITarget) oiTable);
-        } else if (oiTable instanceof OIWavelength) {
-            return new OIWavelength(this, (OIWavelength) oiTable);
-        } else if (oiTable instanceof OIArray) {
-            return new OIArray(this, (OIArray) oiTable);
-        } else if (oiTable instanceof OICorr) {
-            return new OICorr(this, (OICorr) oiTable);
-        } else if (oiTable instanceof OIInspol) {
-            return new OIInspol(this, (OIInspol) oiTable);
-        } else if (oiTable instanceof OIVis) {
-            return new OIVis(this, (OIVis) oiTable);
-        } else if (oiTable instanceof OIVis2) {
-            return new OIVis2(this, (OIVis2) oiTable);
-        } else if (oiTable instanceof OIT3) {
-            return new OIT3(this, (OIT3) oiTable);
-        } else if (oiTable instanceof OIFlux) {
-            return new OIFlux(this, (OIFlux) oiTable);
-        }
-        return null;
     }
 
     /**
@@ -933,7 +943,7 @@ public final class OIFitsFile extends FitsImageFile {
      * Get the OIPrimaryHDU if defined.
      * @return OIPrimaryHDU or null
      */
-    public final OIPrimaryHDU getOIPrimaryHDU() {
+    public OIPrimaryHDU getOIPrimaryHDU() {
         final FitsImageHDU hdu = getPrimaryImageHDU();
         return (hdu instanceof OIPrimaryHDU) ? ((OIPrimaryHDU) hdu) : null;
     }
@@ -1363,16 +1373,6 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Define the (optional) ImageOi data.
-     * If set, imageOidata are serialized in the oifits generated by OiFitsWriter.
-     *
-     * @param imageOiData
-     */
-    public void setImageOiData(final ImageOiData imageOiData) {
-        this.imageOiData = imageOiData;
-    }
-
-    /**
      * Get the IMAGE-OI data if defined.
      * @return the IMAGE-OI data if defined else null.
      */
@@ -1389,5 +1389,13 @@ public final class OIFitsFile extends FitsImageFile {
             imageOiData = new ImageOiData();
         }
         return imageOiData;
+    }
+
+    /**
+     * Define the (optional) IMAGE-OI data.
+     * @param imageOiData
+     */
+    public void setImageOiData(final ImageOiData imageOiData) {
+        this.imageOiData = imageOiData;
     }
 }

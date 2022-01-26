@@ -100,48 +100,16 @@ public final class ImageOiInputParam extends ImageOiParam {
     }
 
     /**
-     * copy-constructor.
-     *
-     * ImageOiParam fields:
-     * - isDefaultKeyword: correctly set to true in ImageOiParam.new.
-     * - parentKeywordMetas : correctly initialized in ImageOiParam.new, then unmodified.
-     * - defaultKeywords: idem as parentKeywordMetas.
-     * - specificKeywords: any specific keyword can have been added to source, so we copy them with addKeyword().
-     * - stdImgOIKeywords: idem as parentKeywordMetas.
-     *
-     * FitsTable fields:
-     * - columnsDesc: correctly initialized in ImageOiInputParam.new. There is none at time of writing.
-     * --- According to spec, `IMAGE-OI INPUT PARAM` hdus could have data in the future.
-     * - columnsDerivedDesc: idem as columnsDesc.
-     * - columnsAliases: idem as columnsDesc.
-     * - columnsValue: copied by copyTable(). Caution: values are Object and thus only references are copied.
-     * - columnsDerivedValue: lazy so uncopied.
-     * - columnsRangeValue: lazy so uncopied.
-     *
-     * FitsHDU fields:
-     * - applyRules: useless to copy. will be created on demand by inspectRules().
-     * - extNb: idem as parentKeywordMetas.
-     * - keywordsDesc: idem as specificKeywords.
-     * - keywordsValue: copied by copyTable().
-     * --- Note: this is intentionally done at last, so that we correctly get
-     * --- all keywords that are set during the chain of construction. Note that ImageOiInputParam is final.
-     * - headerCards: idem as keywordsValue.
-     *
-     * @param source ImageOiInputParam to copy from (required).
+     * Public ImageOiInputParam class constructor to copy the given table (structure only)
+     * @param src table to copy
      */
-    public ImageOiInputParam(final ImageOiInputParam source) {
+    public ImageOiInputParam(final ImageOiInputParam src) {
         this();
 
-        // copy specific keywords
-        source.getSpecificKeywords().forEach((String specificKeyword) -> {
-            addKeyword(source.getKeywordsDesc(specificKeyword));
-        });
-
-        // copy keywords and columns
-        copyTable(source);
+        this.copyTable(src);
     }
 
-    public final void defineDefaultKeywordValues() {
+    public void defineDefaultKeywordValues() {
         setWaveMin(DEF_KEYWORD_WAVE_MIN);
         setWaveMax(DEF_KEYWORD_WAVE_MAX);
         setMaxiter(DEF_KEYWORD_MAXITER);

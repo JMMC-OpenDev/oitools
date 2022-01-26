@@ -107,59 +107,36 @@ public abstract class FitsHDU extends ModelBase {
         addKeywordMeta(KEYWORD_EXTNAME);
     }
 
-    /** 
-     * Copy-constructor
-     * @param source HDU to copy from (required)
+    /**
+     * Copy constructor to copy the given hdu (structure only)
+     * @param src hdu to copy
      */
-    protected FitsHDU(final FitsHDU source) {
-        this();
-        // ignore applyRules
-        this.extNb = source.getExtNb();
-        // we copy the keyword metas and values, and the header cards.
-        copyKeywordsDesc(source);
-        copyKeywordsValues(source);
-
-        // copyKeywordsValues does not copy these two keywords, so we manually copy them
-        Object extName = source.getKeywordValue(FitsConstants.KEYWORD_EXT_NAME);
-        if (extName != null) {
-            setKeywordValue(FitsConstants.KEYWORD_EXT_NAME, extName);
-        }
-        Object oiRevn = source.getKeywordValue(OIFitsConstants.KEYWORD_OI_REVN);
-        if (oiRevn != null) {
-            setKeywordValue(OIFitsConstants.KEYWORD_OI_REVN, oiRevn);
-        }
-
-        copyHeaderCards(source);
-    }
-
-    /** 
-     * Copy-method for keywords metas.
-     * copy the KeywordMetas from the source to this object.
-     * @param source HDU to copy from (required)
-     */
-    protected final void copyKeywordsDesc(final FitsHDU source) {
-        this.keywordsDesc.putAll(source.getKeywordsDesc());
+    protected void copyHdu(final FitsHDU src) throws IllegalArgumentException {
+        // Copy keyword values
+        copyKeywordsValues(src);
+        // copy header cards
+        copyHeaderCards(src);
     }
 
     /** 
      * Copy-method for keywords values.
-     * copy the keywords from the source to this object.
-     * Only the keywords described in this.getKeywordDescCollection().
-     * @param source HDU to copy from (required)
+     * Only the keywords described in keywordDescCollection.
+     * @param src hdu to copy
      */
-    protected final void copyKeywordsValues(final FitsHDU source) {
+    protected final void copyKeywordsValues(final FitsHDU src) {
         for (KeywordMeta keyword : getKeywordDescCollection()) {
             final String keywordName = keyword.getName();
 
             // Ignore FitsTable keywords defined by constructors:
-            if (FitsConstants.KEYWORD_EXT_NAME.equals(keywordName)
-                    || OIFitsConstants.KEYWORD_OI_REVN.equals(keywordName)) {
+            if ((src instanceof FitsTable)
+                    && (FitsConstants.KEYWORD_EXT_NAME.equals(keywordName)
+                    || OIFitsConstants.KEYWORD_OI_REVN.equals(keywordName))) {
                 // Ignore ExtName / OiRevn (v1/2) defined in previous constructor
                 continue;
             }
 
             // get keyword value:
-            final Object keywordValue = source.getKeywordValue(keywordName);
+            final Object keywordValue = src.getKeywordValue(keywordName);
 
             // potentially missing values
             if (keywordValue != null) {
@@ -577,7 +554,7 @@ public abstract class FitsHDU extends ModelBase {
      */
     public final void trimHeaderCards() {
         if (this.headerCards != null) {
-            if (this.headerCards.size() > 0) {
+            if (!this.headerCards.isEmpty()) {
                 this.headerCards.trimToSize();
             } else {
                 this.headerCards = null;

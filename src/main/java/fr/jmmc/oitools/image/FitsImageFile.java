@@ -60,15 +60,24 @@ public class FitsImageFile extends ModelBase {
     }
 
     /**
-     * copy-constructor. Note that FitsImageHDU copy-constructor shallow-copies the data.
-     *
-     * @param source FitsImageFile to copy from (required)
+     * Public FitsImageFile class constructor to copy the given file (structure only).
+     * @param src file to copy
      */
-    public FitsImageFile(final FitsImageFile source) {
-        super(); // no need for source because ModelBase has no instance fields
-        this.fileRef = new FileRef(source.getAbsoluteFilePath());
-        source.getFitsImageHDUs().forEach(fitsImageHDU -> {
-            this.fitsImageHDUs.add(new FitsImageHDU(fitsImageHDU));
+    public FitsImageFile(final FitsImageFile src) {
+        this(new FileRef(src.getAbsoluteFilePath()));
+
+        this.copyFile(src);
+    }
+
+    /**
+     * Explicit copy method to clone the structure but shallow-copy the image hdus
+     * @param src FitsImageFile to copy
+     */
+    public final void copyFile(final FitsImageFile src) {
+        // Copy all FitsImageHDUs:
+        src.getFitsImageHDUs().forEach(hdu -> {
+            // use factory to copy image HDUs:
+            getFitsImageHDUs().add(FitsImageHDU.copyImageHDU(hdu));
         });
     }
 

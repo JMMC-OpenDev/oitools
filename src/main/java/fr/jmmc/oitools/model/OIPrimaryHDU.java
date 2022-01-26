@@ -213,7 +213,7 @@ public final class OIPrimaryHDU extends FitsImageHDU {
             "Representative Closure Phase error (deg)", Types.TYPE_DBL, true, NO_STR_VALUES);
 
     /**
-     * Protected class constructor
+     * Public class constructor
      */
     public OIPrimaryHDU() {
         super();
@@ -318,6 +318,17 @@ public final class OIPrimaryHDU extends FitsImageHDU {
 
         // T3PHIERR keyword definition (optional)
         addKeywordMeta(KEYWORD_T3PHIERR);
+    }
+
+    /**
+     * Internal OIPrimaryHDU class constructor to copy the given hdu (structure only).
+     * Use FitsImageHDU.copyImageHDU(src) instead.
+     * @param src hdu to copy
+     */
+    public OIPrimaryHDU(final OIPrimaryHDU src) {
+        this();
+
+        this.copyHdu(src);
     }
 
     /* --- keywords --- */

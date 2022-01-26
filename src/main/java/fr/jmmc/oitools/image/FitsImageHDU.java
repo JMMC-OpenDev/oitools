@@ -26,6 +26,7 @@ import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.ModelVisitor;
+import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.nom.tam.fits.BasicHDU;
 import fr.nom.tam.fits.FitsException;
 import java.util.LinkedList;
@@ -59,25 +60,47 @@ public class FitsImageHDU extends FitsHDU {
         addKeywordMeta(KEYWORD_HDUNAME);
     }
 
-    /** 
-     * Copy-constructor calls super copy-constructor.
-     * each FitsImage is copied: their data is shallow-copied, and their FitsImageHDU is updated.
-     * @param source HDU to copy from (required)
+    /**
+     * Factory method to copy the given FitsImageHDU instance 
+     * @param hdu hdu to copy
+     * @return copied instance
      */
-    public FitsImageHDU(final FitsImageHDU source) {
-        // calling copy of FitsHDU
-        super(source);
+    public static FitsImageHDU copyImageHDU(final FitsImageHDU hdu) {
+        if (hdu instanceof OIPrimaryHDU) {
+            return new OIPrimaryHDU((OIPrimaryHDU) hdu);
+        } else if (hdu instanceof FitsImageHDU) {
+            return new FitsImageHDU(hdu);
+        }
+        return null;
+    }
 
-        // HDUNAME keyword definition (optional)
-        addKeywordMeta(KEYWORD_HDUNAME);
+    /**
+     * Internal FitsImageHDU class constructor to copy the given hdu (structure only).
+     * Use FitsImageHDU.copyImageHDU(src) instead.
+     * each FitsImage is copied: their data is shallow-copied, and their FitsImageHDU is updated.
+     * @param src hdu to copy
+     */
+    private FitsImageHDU(final FitsImageHDU src) {
+        this();
 
-        // set checksum to undefined:
-        setChecksum(0l);
+        this.copyHdu(src);
+    }
 
-        // copy fitsImages (the data is shallow-copied)
-        source.getFitsImages().forEach(
-                fitsImageSource -> this.fitsImages.add(new FitsImage(this, fitsImageSource))
-        );
+    /**
+     * Copy constructor to copy the given hdu (structure only)
+     * @param src hdu to copy
+     */
+    protected final void copyHdu(final FitsImageHDU src) throws IllegalArgumentException {
+        // Copy keyword values and header cards:
+        super.copyHdu(src);
+
+        if (src.hasImages()) {
+            // copy fitsImages (the data is shallow-copied)
+            src.getFitsImages().forEach(
+                    fitsImageSrc -> getFitsImages().add(new FitsImage(this, fitsImageSrc))
+            );
+        }
+        // checksum is undefined
     }
 
     /**

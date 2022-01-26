@@ -40,14 +40,15 @@ public final class ImageOiData {
     }
 
     /**
-     * copy-constructor. Paramemeters are deep-copied: you can modify the original without altering the copy.
-     *
-     * @param source ImageOiData to copy from (required).
+     * Public ImageOiData class constructor to copy the given container (structure only):
+     * ImageOiParam tables are copied: you can modify the original without altering the copy.
+     * @param src container to copy
      */
-    public ImageOiData(final ImageOiData source) {
-        this.inputParam = new ImageOiInputParam(source.getInputParam());
-        if (source.getExistingOutputParam() != null) {
-            this.outputParam = new ImageOiOutputParam(source.getExistingOutputParam());
+    public ImageOiData(final ImageOiData src) {
+        this.inputParam = new ImageOiInputParam(src.getInputParam());
+
+        if (src.getExistingOutputParam() != null) {
+            this.outputParam = new ImageOiOutputParam(src.getExistingOutputParam());
         }
     }
 

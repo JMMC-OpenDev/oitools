@@ -40,11 +40,12 @@ public final class ImageOiOutputParam extends ImageOiParam {
     private final static KeywordMeta KEYWORD_CHISQ = new KeywordMeta(ImageOiConstants.KEYWORD_CHISQ, "Reduced chi-squared", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_FLUX = new KeywordMeta(ImageOiConstants.KEYWORD_FLUX, "Total image flux", Types.TYPE_DBL);
 
-    private final static Map<String,KeywordMeta> IMAGE_OI_OUTPUT_STD_KEYWORDS;
+    private final static Map<String, KeywordMeta> IMAGE_OI_OUTPUT_STD_KEYWORDS;
+
     static {
         IMAGE_OI_OUTPUT_STD_KEYWORDS = new LinkedHashMap<>();
         Arrays.asList(
-            KEYWORD_LAST_IMG, KEYWORD_NITER, KEYWORD_CHISQ, KEYWORD_FLUX
+                KEYWORD_LAST_IMG, KEYWORD_NITER, KEYWORD_CHISQ, KEYWORD_FLUX
         ).forEach(keywordMeta -> {
             IMAGE_OI_OUTPUT_STD_KEYWORDS.put(keywordMeta.getName(), keywordMeta);
         });
@@ -56,45 +57,13 @@ public final class ImageOiOutputParam extends ImageOiParam {
     }
 
     /**
-     * copy-constructor.
-     *
-     * ImageOiParam fields:
-     * - isDefaultKeyword: correctly set to true in ImageOiParam.new.
-     * - parentKeywordMetas : correctly initialized in ImageOiParam.new, then unmodified.
-     * - defaultKeywords: idem as parentKeywordMetas.
-     * - specificKeywords: any specific keyword can have been added to source, so we copy them with addKeyword().
-     * - stdImgOIKeywords: idem as parentKeywordMetas.
-     *
-     * FitsTable fields:
-     * - columnsDesc: correctly initialized in ImageOiOutputParam.new. There is none at time of writing.
-     * --- According to spec, `IMAGE-OI OUTPUT PARAM` hdus could have data in the future.
-     * - columnsDerivedDesc: idem as columnsDesc.
-     * - columnsAliases: idem as columnsDesc.
-     * - columnsValue: copied by copyTable(). Caution: values are Object and thus only references are copied.
-     * - columnsDerivedValue: lazy so uncopied.
-     * - columnsRangeValue: lazy so uncopied.
-     *
-     * FitsHDU fields:
-     * - applyRules: useless to copy. will be created on demand by inspectRules().
-     * - extNb: idem as parentKeywordMetas.
-     * - keywordsDesc: idem as specificKeywords.
-     * - keywordsValue: copied by copyTable().
-     * --- Note: this is intentionally done at last, so that we correctly get
-     * --- all keywords that are set during the chain of construction. Note that ImageOiOutputParam is final.
-     * - headerCards: idem as keywordsValue.
-     *
-     * @param source ImageOiOutputParam to copy from (required).
+     * Public ImageOiOutputParam class constructor to copy the given table (structure only)
+     * @param src table to copy
      */
-    public ImageOiOutputParam(final ImageOiOutputParam source) {
+    public ImageOiOutputParam(final ImageOiOutputParam src) {
         this();
 
-        // copy specific keywords
-        source.getSpecificKeywords().forEach((String specificKeyword) -> {
-            addKeyword(source.getKeywordsDesc(specificKeyword));
-        });
-
-        // copy keywords and columns
-        copyTable(source);
+        this.copyTable(src);
     }
 
     /*
