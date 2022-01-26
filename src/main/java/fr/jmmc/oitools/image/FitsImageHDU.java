@@ -79,8 +79,9 @@ public class FitsImageHDU extends FitsHDU {
      * Use FitsImageHDU.copyImageHDU(src) instead.
      * each FitsImage is copied: their data is shallow-copied, and their FitsImageHDU is updated.
      * @param src hdu to copy
+     * @deprecated use FitsImageHDU.copyImageHDU(src) instead
      */
-    private FitsImageHDU(final FitsImageHDU src) {
+    public FitsImageHDU(final FitsImageHDU src) {
         this();
 
         this.copyHdu(src);
