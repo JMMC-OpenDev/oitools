@@ -60,6 +60,28 @@ public class FitsImageFile extends ModelBase {
     }
 
     /**
+     * Public FitsImageFile class constructor to copy the given file (structure only).
+     * @param src file to copy
+     */
+    public FitsImageFile(final FitsImageFile src) {
+        this(new FileRef(src.getAbsoluteFilePath()));
+
+        this.copyFile(src);
+    }
+
+    /**
+     * Copy method for the given file, shallow copy image hdus
+     * @param src FitsImageFile to copy
+     */
+    public final void copyFile(final FitsImageFile src) {
+        // Copy all FitsImageHDUs:
+        src.getFitsImageHDUs().forEach(hdu -> {
+            // use factory to copy image HDUs:
+            getFitsImageHDUs().add(FitsImageHDU.copyImageHDU(hdu));
+        });
+    }
+
+    /**
      * Implements the Visitor pattern
      * @param visitor visitor implementation
      */

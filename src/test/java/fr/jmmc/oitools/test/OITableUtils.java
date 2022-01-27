@@ -19,7 +19,12 @@
  ******************************************************************************/
 package fr.jmmc.oitools.test;
 
+import fr.jmmc.oitools.fits.FitsHDU;
+import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.fits.FitsUtils;
+import fr.jmmc.oitools.image.FitsImage;
+import fr.jmmc.oitools.image.FitsImageHDU;
+import fr.jmmc.oitools.image.ImageOiData;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.model.OIFitsFile;
@@ -50,54 +55,181 @@ public final class OITableUtils implements TestEnv {
         super();
     }
 
-    public static boolean compareOIFitsFile(final OIFitsFile srcOIFitsFile, final OIFitsFile destOIFitsFile) {
+    public static boolean compareOIFitsFile(final OIFitsFile srcOIFitsFile, final OIFitsFile dstOIFitsFile) {
+        return compareOIFitsFile(srcOIFitsFile, dstOIFitsFile, false);
+    }
+
+    public static boolean compareOIFitsFile(final OIFitsFile srcOIFitsFile, final OIFitsFile dstOIFitsFile, final boolean compareImages) {
         boolean res = true;
 
         try {
-            logger.log(Level.INFO, "Comparing files : {0}, {1}", new Object[]{srcOIFitsFile.getAbsoluteFilePath(), destOIFitsFile.getAbsoluteFilePath()});
+            logger.log(Level.INFO, "Comparing files : {0}, {1}", new Object[]{srcOIFitsFile.getAbsoluteFilePath(), dstOIFitsFile.getAbsoluteFilePath()});
 
-            if (srcOIFitsFile.getNbOiTables() != destOIFitsFile.getNbOiTables()) {
-                logger.log(Level.INFO, "ERROR:  different number of hdu {0} <> {1}", new Object[]{srcOIFitsFile.getNbOiTables(), destOIFitsFile.getNbOiTables()});
+            if (compareImages) {
+                if (srcOIFitsFile.getImageHDUCount() != dstOIFitsFile.getImageHDUCount()) {
+                    logger.log(Level.INFO, "ERROR:  different number of Image hdu {0} <> {1}", new Object[]{srcOIFitsFile.getImageHDUCount(), dstOIFitsFile.getImageHDUCount()});
+                } else {
+                    final int len = srcOIFitsFile.getImageHDUCount();
+                    logger.log(Level.INFO, "ImageHDUs = {0}", len);
+
+                    FitsImageHDU srcImage, dstImage;
+                    for (int i = 0; i < len; i++) {
+                        srcImage = srcOIFitsFile.getFitsImageHDUs().get(i);
+                        dstImage = dstOIFitsFile.getFitsImageHDUs().get(i);
+
+                        if (srcImage.getClass() != dstImage.getClass()) {
+                            logger.log(Level.INFO, "ERROR:  different type of FitsImageHDU {0} <> {1}", new Object[]{srcImage.getClass(), dstImage.getClass()});
+                        } else {
+                            res &= compareImage(srcImage, dstImage);
+                        }
+                    }
+                }
+            }
+
+            if (srcOIFitsFile.getNbOiTables() != dstOIFitsFile.getNbOiTables()) {
+                logger.log(Level.INFO, "ERROR:  different number of hdu {0} <> {1}", new Object[]{srcOIFitsFile.getNbOiTables(), dstOIFitsFile.getNbOiTables()});
             } else {
                 final int len = srcOIFitsFile.getNbOiTables();
-                logger.log(Level.INFO, "HDUs = {0}", len);
+                logger.log(Level.INFO, "OITables = {0}", len);
 
-                OITable srcTable, destTable;
+                OITable srcTable, dstTable;
                 for (int i = 0; i < len; i++) {
                     srcTable = srcOIFitsFile.getOiTable(i);
-                    destTable = destOIFitsFile.getOiTable(i);
+                    dstTable = dstOIFitsFile.getOiTable(i);
 
-                    if (srcTable.getClass() != destTable.getClass()) {
-                        logger.log(Level.INFO, "ERROR:  different type of OI_Table {0} <> {1}", new Object[]{srcTable.getClass(), destTable.getClass()});
+                    if (srcTable.getClass() != dstTable.getClass()) {
+                        logger.log(Level.INFO, "ERROR:  different type of OI_Table {0} <> {1}", new Object[]{srcTable.getClass(), dstTable.getClass()});
                     } else {
-                        res &= compareTable(srcTable, destTable);
+                        res &= compareTable(srcTable, dstTable);
+                    }
+                }
+            }
+
+            // Compare IMAGE-OI tables:
+            if (srcOIFitsFile.getExistingImageOiData() != null) {
+                final ImageOiData srcImageOiData = srcOIFitsFile.getImageOiData();
+                final ImageOiData dstImageOiData = dstOIFitsFile.getImageOiData();
+
+                FitsTable srcTable, dstTable;
+
+                srcTable = srcImageOiData.getInputParam();
+                dstTable = dstImageOiData.getInputParam();
+
+                res &= compareTable(srcTable, dstTable);
+
+                srcTable = srcImageOiData.getExistingOutputParam();
+                dstTable = dstImageOiData.getExistingOutputParam();
+
+                if (srcTable != null) {
+                    if (dstTable == null) {
+                        logger.log(Level.INFO, "ERROR:  missing OutputParam table {0} <> {1}", new Object[]{srcTable, dstTable});
+                        res = false;
+                    } else {
+                        res &= compareTable(srcTable, dstTable);
                     }
                 }
             }
 
         } catch (Throwable th) {
-            logger.log(Level.SEVERE, "compareFile : failure occured while comparing files : " + srcOIFitsFile.getAbsoluteFilePath() + ", " + destOIFitsFile.getAbsoluteFilePath(), th);
+            logger.log(Level.SEVERE, "compareFile : failure occured while comparing files : " + srcOIFitsFile.getAbsoluteFilePath() + ", " + dstOIFitsFile.getAbsoluteFilePath(), th);
             res = false;
         }
 
         return res;
     }
 
-    public static boolean compareTable(final OITable srcTable, final OITable destTable) {
+    public static boolean compareImage(final FitsImageHDU srcImageHdu, final FitsImageHDU dstImageHdu) {
 
         // Headers :
-        boolean res = compareHeader(srcTable, destTable);
+        boolean res = compareHeader(srcImageHdu, dstImageHdu);
 
-        res &= compareData(srcTable, destTable);
+        final String srcHeader = srcImageHdu.getHeaderAsString("\n");
+        final String dstHeader = srcImageHdu.getHeaderAsString("\n");
+
+        logger.log(Level.INFO, "Image header src:\n---\n{0}---", srcHeader);
+
+        if (isChanged(srcHeader, dstHeader)) {
+            logger.log(Level.INFO, "ERROR:  different value of headers \n---\n{0}--- <=> ---\n{1}---", new Object[]{srcHeader, dstHeader});
+            res = false;
+        }
+
+        // compare all FitsImage data
+        res &= compareData(srcImageHdu, dstImageHdu);
 
         return res;
     }
 
-    private static boolean compareHeader(final OITable srcTable, final OITable destTable) {
+    private static boolean compareData(final FitsImageHDU srcImageHdu, final FitsImageHDU dstImageHdu) {
         boolean res = true;
 
-        final String sExtName = srcTable.getExtName();
-        final String dExtName = destTable.getExtName();
+        final int sImg = srcImageHdu.getImageCount();
+        final int dImg = dstImageHdu.getImageCount();
+
+        if (sImg != dImg) {
+            logger.log(Level.INFO, "ERROR:  different number of images {0} <> {1}", new Object[]{sImg, dImg});
+            res = false;
+        } else {
+            logger.info("--------------------------------------------------------------------------------");
+            logger.log(Level.INFO, "ImageCount = {0}", sImg);
+
+            final DoubleWrapper maxAbsErrWrapper = new DoubleWrapper();
+            final DoubleWrapper maxRelErrWrapper = new DoubleWrapper();
+
+            Object sArray, dArray;
+
+            for (int i = 0; i < sImg; i++) {
+                final FitsImage srcFitsImage = srcImageHdu.getFitsImages().get(i);
+                final FitsImage dstFitsImage = dstImageHdu.getFitsImages().get(i);
+
+                logger.log(Level.INFO, "Image dims = {0}", sImg);
+
+                sArray = srcFitsImage.getData();
+                dArray = dstFitsImage.getData();
+
+                if (PRINT_COL) {
+                    logger.log(Level.INFO, "IMAGE {0}\t{1}\n{2}",
+                            new Object[]{i, ArrayFuncs.arrayDescription(sArray), FitsUtils.arrayToString(sArray)});
+                } else {
+                    logger.log(Level.INFO, "IMAGE {0}\t{1}",
+                            new Object[]{i, ArrayFuncs.arrayDescription(sArray)});
+                }
+
+                if (sArray == dArray) {
+                    logger.log(Level.INFO, "IMAGE {0} data (sArray == dArray)", i);
+                } else {
+                    if (!arrayEquals(sArray, dArray, USE_TOLERANCE, TOLERANCE_FLOAT, TOLERANCE_DOUBLE, maxAbsErrWrapper, maxRelErrWrapper)) {
+                        logger.log(Level.INFO, "ERROR:  different values for column[{0}]\nSRC={1}\nDST={2}",
+                                new Object[]{i, FitsUtils.arrayToString(sArray), FitsUtils.arrayToString(dArray)});
+                        res = false;
+                    }
+                    if (maxAbsErrWrapper.value > 0d || maxRelErrWrapper.value > 0d) {
+                        logger.log(Level.WARNING, "WARN:  Column[{0}]\tMax Absolute Error={1}\tMax Relative Error={2}",
+                                new Object[]{i, maxAbsErrWrapper.value, maxRelErrWrapper.value});
+                        // reset:
+                        maxAbsErrWrapper.value = 0d;
+                        maxRelErrWrapper.value = 0d;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+    public static boolean compareTable(final FitsTable srcTable, final FitsTable dstTable) {
+
+        // Headers :
+        boolean res = compareHeader(srcTable, dstTable);
+
+        res &= compareData(srcTable, dstTable);
+
+        return res;
+    }
+
+    private static boolean compareHeader(final FitsHDU srcHdu, final FitsHDU dstHdu) {
+        boolean res = true;
+
+        final String sExtName = srcHdu.getExtName();
+        final String dExtName = dstHdu.getExtName();
 
         if (sExtName != null && !sExtName.equals(dExtName)) {
             logger.log(Level.INFO, "ERROR:  different extension name {0} <> {1}", new Object[]{sExtName, dExtName});
@@ -106,8 +238,8 @@ public final class OITableUtils implements TestEnv {
             logger.info("--------------------------------------------------------------------------------");
             logger.log(Level.INFO, "EXTNAME = {0}", sExtName);
 
-            final int sCard = srcTable.getKeywordsValue().size();
-            final int dCard = destTable.getKeywordsValue().size();
+            final int sCard = srcHdu.getKeywordsValue().size();
+            final int dCard = dstHdu.getKeywordsValue().size();
 
             if (sCard != dCard) {
                 logger.log(Level.INFO, "ERROR:  different number of header card {0} <> {1}", new Object[]{sCard, dCard});
@@ -115,23 +247,22 @@ public final class OITableUtils implements TestEnv {
             }
             logger.log(Level.INFO, "KEYWORDS = {0}", sCard);
 
-            Object srcVal, destVal;
+            Object srcVal, dstVal;
             String key;
-            for (KeywordMeta keyword : srcTable.getKeywordDescCollection()) {
+            for (KeywordMeta keyword : srcHdu.getKeywordDescCollection()) {
                 key = keyword.getName();
 
-                srcVal = srcTable.getKeywordValue(key);
-                destVal = destTable.getKeywordValue(key);
+                srcVal = srcHdu.getKeywordValue(key);
+                dstVal = dstHdu.getKeywordValue(key);
 
                 logger.log(Level.INFO, "KEYWORD {0} = {1}\t// {2}", new Object[]{key, srcVal, keyword.getDescription()});
 
-                if (isChanged(srcVal, destVal)) {
-                    logger.log(Level.INFO, "ERROR:  different value   of header card[{0}] ''{1}'' <> ''{2}''", new Object[]{key, srcVal, destVal});
+                if (isChanged(srcVal, dstVal)) {
+                    logger.log(Level.INFO, "ERROR:  different value   of header card[{0}] ''{1}'' <> ''{2}''", new Object[]{key, srcVal, dstVal});
                     res = false;
                 }
             }
         }
-
         return res;
     }
 
@@ -139,11 +270,11 @@ public final class OITableUtils implements TestEnv {
         return (value1 == null && value2 != null) || (value1 != null && value2 == null) || (value1 != null && value2 != null && !value1.equals(value2));
     }
 
-    private static boolean compareData(final OITable srcTable, final OITable destTable) {
+    private static boolean compareData(final FitsTable srcTable, final FitsTable dstTable) {
         boolean res = true;
 
         final int sCol = srcTable.getColumnsValue().size();
-        final int dCol = destTable.getColumnsValue().size();
+        final int dCol = dstTable.getColumnsValue().size();
 
         if (sCol != dCol) {
             logger.log(Level.INFO, "ERROR:  different number of columns {0} <> {1}", new Object[]{sCol, dCol});
@@ -153,7 +284,7 @@ public final class OITableUtils implements TestEnv {
             logger.log(Level.INFO, "NCOLS = {0}", sCol);
 
             final int sRow = srcTable.getNbRows();
-            final int dRow = destTable.getNbRows();
+            final int dRow = dstTable.getNbRows();
 
             if (sCol != dCol) {
                 logger.log(Level.INFO, "ERROR:  different number of rows {0} <> {1}", new Object[]{sRow, dRow});
@@ -170,28 +301,35 @@ public final class OITableUtils implements TestEnv {
                     key = column.getName();
 
                     sArray = srcTable.getColumnValue(key);
-                    dArray = destTable.getColumnValue(key);
+                    dArray = dstTable.getColumnValue(key);
 
                     if (PRINT_COL) {
-                        logger.log(Level.INFO, "COLUMN {0}\t{1}\n{2}", new Object[]{key, ArrayFuncs.arrayDescription(sArray), FitsUtils.arrayToString(sArray)});
+                        logger.log(Level.INFO, "COLUMN {0}\t{1}\n{2}",
+                                new Object[]{key, ArrayFuncs.arrayDescription(sArray), FitsUtils.arrayToString(sArray)});
                     } else {
-                        logger.log(Level.INFO, "COLUMN {0}\t{1}", new Object[]{key, ArrayFuncs.arrayDescription(sArray)});
+                        logger.log(Level.INFO, "COLUMN {0}\t{1}",
+                                new Object[]{key, ArrayFuncs.arrayDescription(sArray)});
                     }
 
-                    if (!arrayEquals(sArray, dArray, USE_TOLERANCE, TOLERANCE_FLOAT, TOLERANCE_DOUBLE, maxAbsErrWrapper, maxRelErrWrapper)) {
-                        logger.log(Level.INFO, "ERROR:  different values for column[{0}]\nSRC={1}\nDST={2}", new Object[]{key, FitsUtils.arrayToString(sArray), FitsUtils.arrayToString(dArray)});
-                        res = false;
-                    }
-                    if (maxAbsErrWrapper.value > 0d || maxRelErrWrapper.value > 0d) {
-                        logger.log(Level.WARNING, "WARN:  Column[{0}]\tMax Absolute Error={1}\tMax Relative Error={2}", new Object[]{key, maxAbsErrWrapper.value, maxRelErrWrapper.value});
-                        // reset:
-                        maxAbsErrWrapper.value = 0d;
-                        maxRelErrWrapper.value = 0d;
+                    if (sArray == dArray) {
+                        logger.log(Level.INFO, "COLUMN {0} data (sArray == dArray)", key);
+                    } else {
+                        if (!arrayEquals(sArray, dArray, USE_TOLERANCE, TOLERANCE_FLOAT, TOLERANCE_DOUBLE, maxAbsErrWrapper, maxRelErrWrapper)) {
+                            logger.log(Level.INFO, "ERROR:  different values for column[{0}]\nSRC={1}\nDST={2}",
+                                    new Object[]{key, FitsUtils.arrayToString(sArray), FitsUtils.arrayToString(dArray)});
+                            res = false;
+                        }
+                        if (maxAbsErrWrapper.value > 0d || maxRelErrWrapper.value > 0d) {
+                            logger.log(Level.WARNING, "WARN:  Column[{0}]\tMax Absolute Error={1}\tMax Relative Error={2}",
+                                    new Object[]{key, maxAbsErrWrapper.value, maxRelErrWrapper.value});
+                            // reset:
+                            maxAbsErrWrapper.value = 0d;
+                            maxRelErrWrapper.value = 0d;
+                        }
                     }
                 }
             }
         }
-
         return res;
     }
 

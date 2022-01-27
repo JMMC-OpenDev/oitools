@@ -28,7 +28,9 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-/** Common behaviour between ImageOIIntputParam & ImageOIOutputParam. */
+/** 
+ * Common behaviour between ImageOIInputParam & ImageOIOutputParam.
+ */
 public abstract class ImageOiParam extends FitsTable {
 
     /* members */
@@ -42,14 +44,14 @@ public abstract class ImageOiParam extends FitsTable {
     private final Set<String> specificKeywords = new LinkedHashSet<>();
 
     /** standard keywords defined in the two subclasses Input and Output. */
-    private final Map<String,KeywordMeta> stdImgOIKeywords;
+    private final Map<String, KeywordMeta> stdImgOIKeywords;
 
     /**
      * Public constructor
      * @param stdImgOIKeywords required.
      * @param extName required.
      */
-    public ImageOiParam (final Map<String,KeywordMeta> stdImgOIKeywords, final String extName) {
+    public ImageOiParam(final Map<String, KeywordMeta> stdImgOIKeywords, final String extName) {
         super();
 
         // preserve keywords defined in parents:
@@ -63,6 +65,22 @@ public abstract class ImageOiParam extends FitsTable {
         setNbRows(0);
         setExtVer(1);
         setExtName(extName);
+    }
+
+    /**
+     * Copy method for the given ImageOiParam table (structure only):
+     * any specific keyword in the given ImageOiParam table is copied too
+     * @param src table to copy
+     */
+    protected void copyTable(final ImageOiParam src) throws IllegalArgumentException {
+
+        // first copy specific keyword descriptors from the source table:
+        src.getSpecificKeywords().forEach((String specificKeyword) -> {
+            addKeyword(src.getKeywordsDesc(specificKeyword));
+        });
+
+        // copy keywords and columns
+        super.copyTable(src);
     }
 
     /**

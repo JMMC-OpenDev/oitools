@@ -99,7 +99,17 @@ public final class ImageOiInputParam extends ImageOiParam {
         defineDefaultKeywordValues();
     }
 
-    public final void defineDefaultKeywordValues() {
+    /**
+     * Public ImageOiInputParam class constructor to copy the given table (structure only)
+     * @param src table to copy
+     */
+    public ImageOiInputParam(final ImageOiInputParam src) {
+        this();
+
+        this.copyTable(src);
+    }
+
+    public void defineDefaultKeywordValues() {
         setWaveMin(DEF_KEYWORD_WAVE_MIN);
         setWaveMax(DEF_KEYWORD_WAVE_MAX);
         setMaxiter(DEF_KEYWORD_MAXITER);

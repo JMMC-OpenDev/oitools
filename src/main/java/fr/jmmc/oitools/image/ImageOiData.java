@@ -31,11 +31,25 @@ public final class ImageOiData {
     public final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ImageOiData.class.getName());
 
     /* members */
-    private final ImageOiInputParam inputParam = new ImageOiInputParam();
+    private final ImageOiInputParam inputParam;
     private ImageOiOutputParam outputParam = null; // lazily created
 
     public ImageOiData() {
         super();
+        this.inputParam = new ImageOiInputParam();
+    }
+
+    /**
+     * Public ImageOiData class constructor to copy the given container (structure only):
+     * ImageOiParam tables are copied: you can modify the original without altering the copy
+     * @param src container to copy
+     */
+    public ImageOiData(final ImageOiData src) {
+        this.inputParam = new ImageOiInputParam(src.getInputParam());
+
+        if (src.getExistingOutputParam() != null) {
+            this.outputParam = new ImageOiOutputParam(src.getExistingOutputParam());
+        }
     }
 
     /**

@@ -119,24 +119,19 @@ public abstract class FitsTable extends FitsHDU {
     }
 
     /**
-     * Copy the table into this instance
-     *
+     * Copy method for the given table (keyword values, header cards and column values)
      * @param src table to copy
      */
-    protected final void copyTable(final FitsTable src) throws IllegalArgumentException {
-        // Copy keyword values
-        copyKeywordsValues(src);
-        // copy header cards
-        copyHeaderCards(src);
+    protected void copyTable(final FitsTable src) throws IllegalArgumentException {
+        // Copy keyword values and header cards:
+        super.copyHdu(src);
 
         // Copy column values:
         final int nRows = getNbRows();
-        String columnName;
-        Object columnValue;
 
         for (ColumnMeta column : getColumnDescCollection()) {
-            columnName = column.getName();
-            columnValue = src.getColumnValue(columnName);
+            final String columnName = column.getName();
+            Object columnValue = src.getColumnValue(columnName);
 
             if (columnValue == null && !column.isOptional()) {
                 columnValue = createColumnArray(column, nRows);
@@ -155,6 +150,8 @@ public abstract class FitsTable extends FitsHDU {
             }
             setColumnValue(columnName, columnValue);
         }
+        // ignore derived columns (defined by constructor)
+        // ignore cached data
     }
 
     /**
