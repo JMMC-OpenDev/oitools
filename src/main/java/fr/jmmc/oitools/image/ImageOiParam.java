@@ -68,13 +68,13 @@ public abstract class ImageOiParam extends FitsTable {
     }
 
     /**
-     * Copy constructor to copy the given table (structure only):
-     * any specific keyword can have been added to source, so we copy them with addKeyword()
+     * Copy method for the given ImageOiParam table (structure only):
+     * any specific keyword in the given ImageOiParam table is copied too
      * @param src table to copy
      */
     protected void copyTable(final ImageOiParam src) throws IllegalArgumentException {
 
-        // first copy specific keywords from source table:
+        // first copy specific keyword descriptors from the source table:
         src.getSpecificKeywords().forEach((String specificKeyword) -> {
             addKeyword(src.getKeywordsDesc(specificKeyword));
         });

@@ -119,7 +119,7 @@ public abstract class FitsTable extends FitsHDU {
     }
 
     /**
-     * Copy constructor to copy the given table (structure only)
+     * Copy method for the given table (keyword values, header cards and column values)
      * @param src table to copy
      */
     protected void copyTable(final FitsTable src) throws IllegalArgumentException {

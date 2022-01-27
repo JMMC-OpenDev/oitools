@@ -134,8 +134,8 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Explicit copy method to clone the structure but shallow-copy the image hdus
-     * @param src FitsImageFile to copy
+     * Copy method for the given file, shallow copy image hdus and tables
+     * @param src OIFitsFile to copy
      */
     public void copyFile(final OIFitsFile src) {
         // Copy all FitsImageHDUs:
@@ -161,7 +161,7 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Copy the given OITable (shallow-copy) with this oiFitsFile as parent
+     * Copy the given OITable (shallow copy) with this oiFitsFile as parent
      * @param oiTable table to copy
      * @return copied OITable instance
      */

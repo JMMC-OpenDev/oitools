@@ -108,7 +108,7 @@ public final class FitsImage {
     }
 
     /** 
-     * Copy-constructor to copy the image, shallow-copy the data.
+     * Copy constructor for the image, shallow copy the image data
      * @param fitsImageHDU parent HDU
      * @param source Image to copy from (required)
      */

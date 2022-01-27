@@ -108,7 +108,7 @@ public abstract class FitsHDU extends ModelBase {
     }
 
     /**
-     * Copy constructor to copy the given hdu (structure only)
+     * Copy method for the given hdu (keyword values and header cards)
      * @param src hdu to copy
      */
     protected void copyHdu(final FitsHDU src) throws IllegalArgumentException {
@@ -119,8 +119,8 @@ public abstract class FitsHDU extends ModelBase {
     }
 
     /** 
-     * Copy-method for keywords values.
-     * Only the keywords described in keywordDescCollection.
+     * Copy method for keywords values
+     * Only the keywords described in keywordDescCollection
      * @param src hdu to copy
      */
     protected final void copyKeywordsValues(final FitsHDU src) {
@@ -149,7 +149,7 @@ public abstract class FitsHDU extends ModelBase {
     }
 
     /** 
-     * Copy-method for header cards.
+     * Copy method for header cards
      * @param source HDU to copy from (required)
      */
     protected final void copyHeaderCards(final FitsHDU source) {

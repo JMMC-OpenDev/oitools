@@ -41,7 +41,7 @@ public final class ImageOiData {
 
     /**
      * Public ImageOiData class constructor to copy the given container (structure only):
-     * ImageOiParam tables are copied: you can modify the original without altering the copy.
+     * ImageOiParam tables are copied: you can modify the original without altering the copy
      * @param src container to copy
      */
     public ImageOiData(final ImageOiData src) {

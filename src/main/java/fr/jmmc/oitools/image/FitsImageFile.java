@@ -70,7 +70,7 @@ public class FitsImageFile extends ModelBase {
     }
 
     /**
-     * Explicit copy method to clone the structure but shallow-copy the image hdus
+     * Copy method for the given file, shallow copy image hdus
      * @param src FitsImageFile to copy
      */
     public final void copyFile(final FitsImageFile src) {

@@ -88,7 +88,7 @@ public class FitsImageHDU extends FitsHDU {
     }
 
     /**
-     * Copy constructor to copy the given hdu (structure only)
+     * Copy method for the given hdu (keyword values, header cards and images)
      * @param src hdu to copy
      */
     protected final void copyHdu(final FitsImageHDU src) throws IllegalArgumentException {
