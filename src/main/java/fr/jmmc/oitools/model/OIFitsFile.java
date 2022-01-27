@@ -141,11 +141,6 @@ public final class OIFitsFile extends FitsImageFile {
         // Copy all FitsImageHDUs:
         super.copyFile(src);
 
-        // TODO: should reset or copy these optional fields ?
-        this.setSourceURI(src.getSourceURI());
-        this.setSize(src.getSize());
-        this.setMd5sum(src.getMd5sum());
-
         // copy OITables:
         src.getOITableList().forEach(sourceOiTable -> {
             // add a copy of the OITable with this oiFitsFile as parent
