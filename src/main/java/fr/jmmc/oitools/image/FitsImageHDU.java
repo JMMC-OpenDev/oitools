@@ -25,6 +25,7 @@ import fr.jmmc.oitools.fits.FitsHeaderCard;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
+import fr.jmmc.oitools.model.Matcher;
 import fr.jmmc.oitools.model.ModelVisitor;
 import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.nom.tam.fits.BasicHDU;
@@ -44,6 +45,109 @@ public class FitsImageHDU extends FitsHDU {
      */
     private final static KeywordMeta KEYWORD_HDUNAME = new KeywordMeta(ImageOiConstants.KEYWORD_HDUNAME,
             "Unique name for the image within the FITS file", Types.TYPE_CHAR, true, NO_STR_VALUES);
+
+    /**
+     * decide double equivalence (absolute difference inferior to epsilon).
+     * @param a double to compare
+     * @param b double to compare
+     * @param epsilon epsilon
+     * @return (abs(a - b) inferior to epsilon), but also return true when both are NaN.
+     * Also return true when comparing -0 with +0, whereas Double.compare(-0, +0) != 0
+     */
+    private static boolean myDoubleEquiv(double a, double b, double epsilon) {
+        return Math.abs(a - b) <= epsilon || (Double.isNaN(a) && Double.isNaN(b));
+    }
+
+    /**
+     * decide float equivalence (absolute difference inferior to epsilon).
+     * @param a float to compare
+     * @param b float to compare
+     * @param epsilon epsilon
+     * @return (abs(a - b) inferior to epsilon), but also return true when both are NaN.
+     * Also return true when comparing -0 with +0, whereas Float.compare(-0, +0) != 0
+     */
+    private static boolean myFloatEquiv(float a, float b, float epsilon) {
+        return Math.abs(a - b) <= epsilon || (Float.isNaN(a) && Double.isNaN(b));
+    }
+
+    /**
+     * Equivalence between two FitsImageHDU.
+     * memory address, nullity, number of images, image dimensions, increments, 
+     * reference pixels, rotation angle, pixels values.
+     */
+    public final static Matcher<FitsImageHDU> MATCHER = new Matcher<FitsImageHDU>() {
+        
+        /**
+         * decide equivalence between two FitsImageHDU
+         * @param src FitsImageHDU to compare with other (optional)
+         * @param other FitsImageHDU to compare with src (optional)
+         * @return true when they are equivalent, false otherwise
+         */
+        @Override
+        public boolean match(FitsImageHDU src, FitsImageHDU other) {
+
+            // equivalent when same objects (also handle both null)
+            if (src == other) {
+                return true;
+            } else if (src == null || other == null) {
+                // non equivalent when only one is null
+                return false;
+            }
+
+            // non equivalent when they have different number of images
+            if (src.getImageCount() != other.getImageCount()) {
+                return false;
+            }
+
+            // foreach image
+            for (int i = 0, len = src.getImageCount(); i < len; i++) {
+                FitsImage srcImg = src.getFitsImages().get(i);
+                FitsImage otherImg = other.getFitsImages().get(i);
+
+                // non equivalent when the two images dimensions are different
+                if ((srcImg.getNbCols() != otherImg.getNbCols()) || (srcImg.getNbRows() != otherImg.getNbRows())) {
+                    return false;
+                }
+
+                // non equivalent when images increments are different (with epsilon)
+                // the sign of the increment is not used, so mirror images are equivalent
+                if (!myDoubleEquiv(srcImg.getIncCol(), otherImg.getIncCol(), 1.0E-10)
+                        || !myDoubleEquiv(srcImg.getIncRow(), otherImg.getIncRow(), 1.0E-10)) {
+                    return false;
+                }
+
+                // non equivalent when images pixels references are different (with epsilon)
+                // epsilon is 0.5 to correct some softwares modifying it by 0.5
+                if (!myDoubleEquiv(srcImg.getPixRefCol(), otherImg.getPixRefCol(), 0.5)
+                        || !myDoubleEquiv(srcImg.getPixRefRow(), otherImg.getPixRefRow(), 0.5)) {
+                    return false;
+                }
+
+                // non equivalent when rotation angle is different (with epsilon)
+                if (!myDoubleEquiv(srcImg.getRotAngle(), otherImg.getRotAngle(), 1.0E-10)) {
+                    return false;
+                }
+
+                // foreach data (pixel)
+                float[][] srcData = srcImg.getData(), otherData = otherImg.getData();
+                // epsilon based on the size of the matrix (the larger the normalized matrix, the smaller the values)
+                float epsilonData = 1.0f / (srcImg.getNbCols() * srcImg.getNbRows() * 1000);
+                for (int j = 0, maxj = srcImg.getNbCols(); j < maxj; j++) {
+                    for (int k = 0, maxk = srcImg.getNbRows(); k < maxk; k++) {
+
+                        // non equivalent when pixels are differents (with epsilon)
+                        if (!myFloatEquiv(srcData[j][k], otherData[j][k], epsilonData)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            // all tests passed: `src` is equivalent to `other`
+            return true;
+        }
+    };
+
     /* members */
     /** CRC checksum of the complete HDU */
     private long checksum = 0l;
