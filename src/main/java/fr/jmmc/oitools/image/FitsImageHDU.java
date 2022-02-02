@@ -19,12 +19,14 @@
  ******************************************************************************/
 package fr.jmmc.oitools.image;
 
+import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.fits.ChecksumHelper;
 import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
+import fr.jmmc.oitools.model.Matcher;
 import fr.jmmc.oitools.model.ModelVisitor;
 import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.nom.tam.fits.BasicHDU;
@@ -44,6 +46,87 @@ public class FitsImageHDU extends FitsHDU {
      */
     private final static KeywordMeta KEYWORD_HDUNAME = new KeywordMeta(ImageOiConstants.KEYWORD_HDUNAME,
             "Unique name for the image within the FITS file", Types.TYPE_CHAR, true, NO_STR_VALUES);
+
+    private static final double EPSILON_MATCHER = 1.0E-10;
+
+    /**
+     * Equivalence between two FitsImageHDU.
+     * memory address, nullity, number of images, image dimensions, increments, 
+     * reference pixels, rotation angle, pixels values.
+     */
+    public final static Matcher<FitsImageHDU> MATCHER = new Matcher<FitsImageHDU>() {
+        
+        /**
+         * decide equivalence between two FitsImageHDU
+         * @param src FitsImageHDU to compare with other (optional)
+         * @param other FitsImageHDU to compare with src (optional)
+         * @return true when they are equivalent, false otherwise
+         */
+        @Override
+        public boolean match(FitsImageHDU src, FitsImageHDU other) {
+
+            // equivalent when same objects (also handle both null)
+            if (src == other) {
+                return true;
+            } else if (src == null || other == null) {
+                // non equivalent when only one is null
+                return false;
+            }
+
+            // non equivalent when they have different number of images
+            if (src.getImageCount() != other.getImageCount()) {
+                return false;
+            }
+
+            // foreach image
+            for (int i = 0, len = src.getImageCount(); i < len; i++) {
+                FitsImage srcImg = src.getFitsImages().get(i);
+                FitsImage otherImg = other.getFitsImages().get(i);
+
+                // non equivalent when the two images dimensions are different
+                if ((srcImg.getNbCols() != otherImg.getNbCols()) || (srcImg.getNbRows() != otherImg.getNbRows())) {
+                    return false;
+                }
+
+                // non equivalent when images increments are different (with epsilon)
+                // the sign of the increment is not used, so mirror images are equivalent
+                if (!NumberUtils.equals(srcImg.getIncCol(), otherImg.getIncCol(), EPSILON_MATCHER)
+                        || !NumberUtils.equals(srcImg.getIncRow(), otherImg.getIncRow(), EPSILON_MATCHER)) {
+                    return false;
+                }
+
+                // non equivalent when images pixels references are different (with epsilon)
+                // epsilon is 0.5 to correct some softwares modifying it by 0.5
+                if (!NumberUtils.equals(srcImg.getPixRefCol(), otherImg.getPixRefCol(), 0.5)
+                        || !NumberUtils.equals(srcImg.getPixRefRow(), otherImg.getPixRefRow(), 0.5)) {
+                    return false;
+                }
+
+                // non equivalent when rotation angle is different (with epsilon)
+                if (!NumberUtils.equals(srcImg.getRotAngle(), otherImg.getRotAngle(), EPSILON_MATCHER)) {
+                    return false;
+                }
+
+                // foreach data (pixel)
+                float[][] srcData = srcImg.getData(), otherData = otherImg.getData();
+                // epsilon based on the size of the matrix (the larger the normalized matrix, the smaller the values)
+                float epsilonData = 1.0f / (srcImg.getNbCols() * srcImg.getNbRows() * 1000);
+                for (int j = 0, maxj = srcImg.getNbCols(); j < maxj; j++) {
+                    for (int k = 0, maxk = srcImg.getNbRows(); k < maxk; k++) {
+
+                        // non equivalent when pixels are differents (with epsilon)
+                        if (!NumberUtils.equals(srcData[j][k], otherData[j][k], epsilonData)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            // all tests passed: `src` is equivalent to `other`
+            return true;
+        }
+    };
+
     /* members */
     /** CRC checksum of the complete HDU */
     private long checksum = 0l;
