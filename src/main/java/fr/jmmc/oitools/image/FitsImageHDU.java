@@ -19,6 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.image;
 
+import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.fits.ChecksumHelper;
 import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.fits.FitsHeaderCard;
@@ -46,29 +47,7 @@ public class FitsImageHDU extends FitsHDU {
     private final static KeywordMeta KEYWORD_HDUNAME = new KeywordMeta(ImageOiConstants.KEYWORD_HDUNAME,
             "Unique name for the image within the FITS file", Types.TYPE_CHAR, true, NO_STR_VALUES);
 
-    /**
-     * decide double equivalence (absolute difference inferior to epsilon).
-     * @param a double to compare
-     * @param b double to compare
-     * @param epsilon epsilon
-     * @return (abs(a - b) inferior to epsilon), but also return true when both are NaN.
-     * Also return true when comparing -0 with +0, whereas Double.compare(-0, +0) != 0
-     */
-    private static boolean myDoubleEquiv(double a, double b, double epsilon) {
-        return Math.abs(a - b) <= epsilon || (Double.isNaN(a) && Double.isNaN(b));
-    }
-
-    /**
-     * decide float equivalence (absolute difference inferior to epsilon).
-     * @param a float to compare
-     * @param b float to compare
-     * @param epsilon epsilon
-     * @return (abs(a - b) inferior to epsilon), but also return true when both are NaN.
-     * Also return true when comparing -0 with +0, whereas Float.compare(-0, +0) != 0
-     */
-    private static boolean myFloatEquiv(float a, float b, float epsilon) {
-        return Math.abs(a - b) <= epsilon || (Float.isNaN(a) && Double.isNaN(b));
-    }
+    private static final double EPSILON_MATCHER = 1.0E-10;
 
     /**
      * Equivalence between two FitsImageHDU.
@@ -111,20 +90,20 @@ public class FitsImageHDU extends FitsHDU {
 
                 // non equivalent when images increments are different (with epsilon)
                 // the sign of the increment is not used, so mirror images are equivalent
-                if (!myDoubleEquiv(srcImg.getIncCol(), otherImg.getIncCol(), 1.0E-10)
-                        || !myDoubleEquiv(srcImg.getIncRow(), otherImg.getIncRow(), 1.0E-10)) {
+                if (!NumberUtils.equals(srcImg.getIncCol(), otherImg.getIncCol(), EPSILON_MATCHER)
+                        || !NumberUtils.equals(srcImg.getIncRow(), otherImg.getIncRow(), EPSILON_MATCHER)) {
                     return false;
                 }
 
                 // non equivalent when images pixels references are different (with epsilon)
                 // epsilon is 0.5 to correct some softwares modifying it by 0.5
-                if (!myDoubleEquiv(srcImg.getPixRefCol(), otherImg.getPixRefCol(), 0.5)
-                        || !myDoubleEquiv(srcImg.getPixRefRow(), otherImg.getPixRefRow(), 0.5)) {
+                if (!NumberUtils.equals(srcImg.getPixRefCol(), otherImg.getPixRefCol(), 0.5)
+                        || !NumberUtils.equals(srcImg.getPixRefRow(), otherImg.getPixRefRow(), 0.5)) {
                     return false;
                 }
 
                 // non equivalent when rotation angle is different (with epsilon)
-                if (!myDoubleEquiv(srcImg.getRotAngle(), otherImg.getRotAngle(), 1.0E-10)) {
+                if (!NumberUtils.equals(srcImg.getRotAngle(), otherImg.getRotAngle(), EPSILON_MATCHER)) {
                     return false;
                 }
 
@@ -136,7 +115,7 @@ public class FitsImageHDU extends FitsHDU {
                     for (int k = 0, maxk = srcImg.getNbRows(); k < maxk; k++) {
 
                         // non equivalent when pixels are differents (with epsilon)
-                        if (!myFloatEquiv(srcData[j][k], otherData[j][k], epsilonData)) {
+                        if (!NumberUtils.equals(srcData[j][k], otherData[j][k], epsilonData)) {
                             return false;
                         }
                     }
