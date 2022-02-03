@@ -96,9 +96,9 @@ public class FitsImageHDU extends FitsHDU {
                 }
 
                 // non equivalent when images pixels references are different (with epsilon)
-                // epsilon is 0.5 to correct some softwares modifying it by 0.5
-                if (!NumberUtils.equals(srcImg.getPixRefCol(), otherImg.getPixRefCol(), 0.5)
-                        || !NumberUtils.equals(srcImg.getPixRefRow(), otherImg.getPixRefRow(), 0.5)) {
+                // epsilon is 0.6 to correct some softwares modifying it by 0.5
+                if (!NumberUtils.equals(srcImg.getPixRefCol(), otherImg.getPixRefCol(), 0.6)
+                        || !NumberUtils.equals(srcImg.getPixRefRow(), otherImg.getPixRefRow(), 0.6)) {
                     return false;
                 }
 
