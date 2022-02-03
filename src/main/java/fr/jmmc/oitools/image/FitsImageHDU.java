@@ -47,7 +47,20 @@ public class FitsImageHDU extends FitsHDU {
     private final static KeywordMeta KEYWORD_HDUNAME = new KeywordMeta(ImageOiConstants.KEYWORD_HDUNAME,
             "Unique name for the image within the FITS file", Types.TYPE_CHAR, true, NO_STR_VALUES);
 
+    /**
+     * epsilon for some double keywords values comparison
+     */
     private static final double EPSILON_MATCHER = 1.0E-10;
+
+    /**
+     * epsilon for double value pixel ref coords comparison
+     */
+    private static final double EPSILON_MATCHER_PIXREF = 0.501;
+
+    /**
+     * factor for the epsilon for pixel values comparison
+     */
+    private static final float FACTOR_MATCHER_DATA = 1000;
 
     /**
      * Equivalence between two FitsImageHDU.
@@ -96,9 +109,10 @@ public class FitsImageHDU extends FitsHDU {
                 }
 
                 // non equivalent when images pixels references are different (with epsilon)
-                // epsilon is 0.6 to correct some softwares modifying it by 0.5
-                if (!NumberUtils.equals(srcImg.getPixRefCol(), otherImg.getPixRefCol(), 0.6)
-                        || !NumberUtils.equals(srcImg.getPixRefRow(), otherImg.getPixRefRow(), 0.6)) {
+                // epsilon is EPSILON_MATCHER_PIXREF to correct some softwares modifying it by 0.5
+                if ((!NumberUtils.equals(srcImg.getPixRefCol(), otherImg.getPixRefCol(), EPSILON_MATCHER_PIXREF))
+                        || (!NumberUtils.equals(
+                                srcImg.getPixRefRow(), otherImg.getPixRefRow(), EPSILON_MATCHER_PIXREF))) {
                     return false;
                 }
 
@@ -110,7 +124,7 @@ public class FitsImageHDU extends FitsHDU {
                 // foreach data (pixel)
                 float[][] srcData = srcImg.getData(), otherData = otherImg.getData();
                 // epsilon based on the size of the matrix (the larger the normalized matrix, the smaller the values)
-                float epsilonData = 1.0f / (srcImg.getNbCols() * srcImg.getNbRows() * 1000);
+                float epsilonData = 1.0f / (srcImg.getNbCols() * srcImg.getNbRows() * FACTOR_MATCHER_DATA);
                 for (int j = 0, maxj = srcImg.getNbCols(); j < maxj; j++) {
                     for (int k = 0, maxk = srcImg.getNbRows(); k < maxk; k++) {
 
