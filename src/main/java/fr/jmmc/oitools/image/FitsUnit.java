@@ -83,20 +83,33 @@ public enum FitsUnit {
             return FitsUnit.ANGLE_RAD;
         }
         double tmp = Math.toDegrees(angle);
-        if (tmp > 1e-1d) {
+        return getAngleDegUnit(tmp);
+    }
+
+    /**
+     * Return the appropriate FitsUnit to convert the given angle in degrees
+     * @param angle angle in degrees
+     * @return a FitsUnit for angles
+     */
+    public static FitsUnit getAngleDegUnit(final double angle) {
+        if (Double.isNaN(angle)) {
+            return FitsUnit.ANGLE_DEG;
+        }
+        double tmp = angle;
+        if (tmp > 0.25) {
             return FitsUnit.ANGLE_DEG;
         }
         tmp *= 60d;
-        if (tmp > 1e-1d) {
+        if (tmp > 0.25) {
             return FitsUnit.ANGLE_ARCMIN;
         }
         tmp *= 60d;
-        if (tmp > 1e-1d) {
+        if (tmp > 0.25) {
             return FitsUnit.ANGLE_ARCSEC;
         }
         return FitsUnit.ANGLE_MILLI_ARCSEC;
     }
-
+    
     /* members */
     /** string representation separated by '|' */
     private final String representation;
