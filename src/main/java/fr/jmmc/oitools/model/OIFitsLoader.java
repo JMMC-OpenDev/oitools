@@ -827,44 +827,4 @@ public class OIFitsLoader {
         return oiFitsFile;
     }
 
-    /**
-     * Fix the given OIFitsFile: correct errors now fixed but still present in lots of old files.
-     * For example, the input param USE_VIS was erroneously typed Logical before. Now it has been
-     * changed to type Char, but a lot of old files needs to be changed to be correctly understood by the tools.
-     *
-     * @param oiFitsFile the OIFitsFile to fix
-     * @return true if changed something. false if nothing was changed.
-     */
-    public static boolean fixOIFitsFile(final OIFitsFile oiFitsFile) {
-
-        boolean changedSomething = false;
-
-        // change USE_VIS and USE_T3 from old erroneous logical type to char type
-        // "T" becomes "ALL" and "F" becomes "NONE"
-
-        final ImageOiInputParam inputParams = oiFitsFile.getImageOiData().getInputParam();
-
-        String useVIS = inputParams.getKeyword(ImageOiConstants.KEYWORD_USE_VIS);
-        if (useVIS != null) {
-            if ("T".equals(useVIS)) {
-                inputParams.setKeyword(ImageOiConstants.KEYWORD_USE_VIS, ImageOiInputParam.VIS2_T3_ALL);
-                changedSomething = true;
-            } else if ("F".equals(useVIS)) {
-                inputParams.setKeyword(ImageOiConstants.KEYWORD_USE_VIS, ImageOiInputParam.VIS2_T3_NONE);
-                changedSomething = true;
-            }
-        }
-        String useT3 = inputParams.getKeyword(ImageOiConstants.KEYWORD_USE_T3);
-        if (useT3 != null) {
-            if ("T".equals(useT3)) {
-                inputParams.setKeyword(ImageOiConstants.KEYWORD_USE_T3, ImageOiInputParam.VIS2_T3_ALL);
-                changedSomething = true;
-            } else if ("F".equals(useT3)) {
-                inputParams.setKeyword(ImageOiConstants.KEYWORD_USE_T3, ImageOiInputParam.VIS2_T3_NONE);
-                changedSomething = true;
-            }
-        }
-
-        return changedSomething;
-    }
 }

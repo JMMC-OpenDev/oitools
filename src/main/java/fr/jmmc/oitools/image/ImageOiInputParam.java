@@ -21,9 +21,12 @@ package fr.jmmc.oitools.image;
 
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
+import fr.jmmc.oitools.model.OIFitsChecker;
+import fr.jmmc.oitools.model.OIFitsFile;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 /**
  * This class is a container for IMAGE-OI INPUT PARAM.
@@ -34,23 +37,25 @@ import java.util.Map;
  */
 public final class ImageOiInputParam extends ImageOiParam {
 
+    // Possible values for USE_VIS and USE_T3:
+    public final static String USE_NONE = "NONE";
+    public final static String USE_ALL = "ALL";
+    public final static String USE_AMP = "AMP";
+    public final static String USE_PHI = "PHI";
+    public final static String[] USE_VALUES = new String[]{USE_NONE, USE_ALL, USE_AMP, USE_PHI};
+
     // Define Data selection keywords
     private final static KeywordMeta KEYWORD_TARGET = new KeywordMeta(ImageOiConstants.KEYWORD_TARGET, "Identifier of the target object to reconstruct", Types.TYPE_CHAR);
     private final static KeywordMeta KEYWORD_WAVE_MIN = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MIN, "Minimum wavelength to select (in meters)", Types.TYPE_DBL);
     private final static KeywordMeta KEYWORD_WAVE_MAX = new KeywordMeta(ImageOiConstants.KEYWORD_WAVE_MAX, "Maximum wavelength to select (in meters)", Types.TYPE_DBL);
+
     // value can be: ’NONE’, ’ALL’, ’AMP’ or ’PHI’ (string)
     private final static KeywordMeta KEYWORD_USE_VIS = new KeywordMeta(
-            ImageOiConstants.KEYWORD_USE_VIS, "Use complex visibility data if any", Types.TYPE_CHAR);
+            ImageOiConstants.KEYWORD_USE_VIS, "Use complex visibility data if any", Types.TYPE_CHAR, USE_VALUES);
     private final static KeywordMeta KEYWORD_USE_VIS2 = new KeywordMeta(ImageOiConstants.KEYWORD_USE_VIS2, "Use squared visibility data if any", Types.TYPE_LOGICAL);
     // value can be: ’NONE’, ’ALL’, ’AMP’ or ’PHI’ (string)
     private final static KeywordMeta KEYWORD_USE_T3 = new KeywordMeta(
-            ImageOiConstants.KEYWORD_USE_T3, "Use triple product data if any", Types.TYPE_CHAR);
-
-    public final static String VIS2_T3_NONE = "NONE";
-    public final static String VIS2_T3_ALL = "ALL";
-    public final static String VIS2_T3_AMP = "AMP";
-    public final static String VIS2_T3_PHI = "PHI";
-    public final static String[] VIS2_T3_VALUES = new String[]{VIS2_T3_NONE, VIS2_T3_ALL, VIS2_T3_AMP, VIS2_T3_PHI};
+            ImageOiConstants.KEYWORD_USE_T3, "Use triple product data if any", Types.TYPE_CHAR, USE_VALUES);
 
     // Define Algorithm settings keywords
     // TODO init-img keyword could be checked like OIDATA.INSNAME or OIDATA.ARRNAME to be sure that one or more HDUs are present with this name.
@@ -130,8 +135,6 @@ public final class ImageOiInputParam extends ImageOiParam {
         // note: setRglName() not used as it is set by Service later
     }
 
-//TODO: check if this values are the Table defaults => change such defaults by software defaults.
-
     /*
      * --- Keywords ------------------------------------------------------------
      */
@@ -159,27 +162,27 @@ public final class ImageOiInputParam extends ImageOiParam {
         setKeywordDouble(ImageOiConstants.KEYWORD_WAVE_MAX, wave_max);
     }
 
-    public String useVis() {
+    public String getUseVis() {
         return getKeyword(ImageOiConstants.KEYWORD_USE_VIS);
     }
 
-    public void useVis(String use_vis) {
+    public void setUseVis(String use_vis) {
         setKeyword(ImageOiConstants.KEYWORD_USE_VIS, use_vis);
     }
 
-    public boolean useVis2() {
+    public boolean isUseVis2() {
         return getKeywordLogical(ImageOiConstants.KEYWORD_USE_VIS2);
     }
 
-    public void useVis2(boolean use_vis2) {
+    public void setUseVis2(boolean use_vis2) {
         setKeywordLogical(ImageOiConstants.KEYWORD_USE_VIS2, use_vis2);
     }
 
-    public String useT3() {
+    public String getUseT3() {
         return getKeyword(ImageOiConstants.KEYWORD_USE_T3);
     }
 
-    public void useT3(String use_t3) {
+    public void setUseT3(String use_t3) {
         setKeyword(ImageOiConstants.KEYWORD_USE_T3, use_t3);
     }
 
@@ -247,4 +250,30 @@ public final class ImageOiInputParam extends ImageOiParam {
         setKeyword(ImageOiConstants.KEYWORD_RGL_PRIO, rgl_prio);
     }
 
+    /* --- Other methods --- */
+    /**
+     * Do syntactical analysis.
+     * @param checker checker component
+     */
+    @Override
+    public void checkSyntax(final OIFitsChecker checker) {
+        // change USE_VIS and USE_T3 from old erroneous logical type to char type
+        // "T" becomes "ALL" and "F" becomes "NONE"
+
+        String useVIS = getUseVis();
+        if ((useVIS != null) && (useVIS.length() == 1)) {
+            setUseVis("T".equals(useVIS) ? ImageOiInputParam.USE_ALL : ImageOiInputParam.USE_NONE);
+            logger.log(Level.INFO, "Fixed {0} = ''{1}''", 
+                    new Object[]{ImageOiConstants.KEYWORD_USE_VIS, getUseVis()});
+        }
+        String useT3 = getUseT3();
+        if ((useT3 != null) && (useT3.length() == 1)) {
+            setUseT3("T".equals(useT3) ? ImageOiInputParam.USE_ALL : ImageOiInputParam.USE_NONE);
+            logger.log(Level.INFO, "Fixed {0} = ''{1}''", 
+                    new Object[]{ImageOiConstants.KEYWORD_USE_T3, getUseT3()});
+        }
+
+        // perform validation:
+        super.checkSyntax(checker);
+    }
 }
