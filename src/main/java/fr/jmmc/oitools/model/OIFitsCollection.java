@@ -168,24 +168,19 @@ public final class OIFitsCollection implements ToStringable {
     }
 
     /**
-     * Add the given OIFits file to this collection
+     * Add or replace the given OIFits file to this collection given its file path
      * @param oifitsFile OIFits file
      * @return previous OIFits file or null if not present
      */
     public OIFitsFile addOIFitsFile(final OIFitsFile oifitsFile) {
         if (oifitsFile != null) {
-            final String key = getFilePath(oifitsFile);
-
-            final OIFitsFile previous = getOIFitsFile(key);
-
-            if (previous != null) {
-                logger.log(Level.WARNING, "TODO: handle overwriting OIFitsFile : {0}", key);
-                removeOIFitsFile(previous);
-            }
-
             // analyze the given file:
             oifitsFile.analyze();
 
+            final String key = getFilePath(oifitsFile);
+            final OIFitsFile previous = getOIFitsFile(key);
+
+            // update loaded OIFitsFile (in memory):
             oiFitsPerPath.put(key, oifitsFile);
 
             logger.log(Level.FINE, "addOIFitsFile: {0}", oifitsFile);
@@ -212,7 +207,7 @@ public final class OIFitsCollection implements ToStringable {
         return null;
     }
 
-    private String getFilePath(final OIFitsFile oifitsFile) {
+    public static String getFilePath(final OIFitsFile oifitsFile) {
         if (oifitsFile.getAbsoluteFilePath() == null) {
             // TODO: remove asap
             throw new IllegalStateException("Undefined OIFitsFile.absoluteFilePath !");
