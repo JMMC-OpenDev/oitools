@@ -20,6 +20,7 @@ import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.jmcs.util.ToStringable;
 import fr.jmmc.oitools.model.Granule.GranuleField;
+import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.processing.Selector;
 import fr.jmmc.oitools.processing.SelectorResult;
 import fr.jmmc.oitools.util.GranuleComparator;
@@ -32,6 +33,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -436,6 +438,66 @@ public final class OIFitsCollection implements ToStringable {
         logger.log(Level.FINE, "findOIData: {0}", result);
 
         return result;
+    }
+
+    private void computeOIDataWavelengthMask(
+            final OIData oiData, final Collection<Range> ranges, final SelectorResult selectorResult) {
+
+        final Map<OIWavelength, IndexMask> wvMasks = new HashMap<>(oiDatas.size());
+        final Map<OIData, IndexMask> oiDatasMasks = new HashMap<>(oiDatas.size());
+
+        OIWavelength oiWavelength = oiData.getOiWavelength();
+
+        if (oiWavelength == null) {
+            logger.log(Level.SEVERE, "No OIWavelength for this OIData");
+            continue;
+        }
+
+        if (wvMasks.containsKey(oiWavelength)) { // if a mask has already been computed for this OIWavelength
+            oiDatasMasks.put(oiData, wvMasks.get(oiWavelength)); // use it
+        }
+        else {
+            IndexMask rowMask = computeWavelengthMask(oiWavelength, ranges);
+            // convert mask [nb rows, 1] to mask [1, nb rows],
+            // because the wavelengths of oiData is on the column axis, not the row axis
+            IndexMask colMask = new IndexMask(rowMask.getBitSet(), 1, rowMask.getNbRows());
+            wvMasks.put(oiWavelength, colMask);
+            oiDatasMasks.put(oiData, colMask);
+        }
+
+        return oiDatasMasks;
+    }
+
+    private IndexMask computeWavelengthMask(final OIWavelength oiWavelength, final Collection<Range> targetRanges) {
+
+        final Range wavelengthRange = oiWavelength.getInstrumentMode().getWavelengthRange();
+
+        final Set<Range> overlapingTargetRanges = new HashSet<>(targetRanges.size());
+
+        // computes all the overlaping targetRanges
+        Range.getMatchingSelected(targetRanges, wavelengthRange, overlapingTargetRanges);
+
+        if (overlapingTargetRanges.isEmpty()) {
+            return null;
+        }
+
+        // a whole zero mask of the size [wavelength nb rows, 1]
+        final IndexMask mask = new IndexMask(oiWavelength.getNbRows(), 1);
+
+        if (Range.matchFully(overlapingTargetRanges, wavelengthRange)) {
+            mask.setCol(1, true); // if target ranges overlap the whole of oiWavelength, set whole mask to true
+        }
+        else {
+            // computes for each row of the OIWavelength, if it is contained in one of the target ranges
+            final float[] effWaves = oiWavelength.getEffWave();
+            for (int i = 0; i < effWaves.length; i++) {
+                if (Range.contains(overlapingTargetRanges, effWaves[i])) {
+                    mask.setRow(i, true);
+                }
+            }
+        }
+
+        return mask;
     }
 
     private List<Granule> findGranules(final Selector selector) {
