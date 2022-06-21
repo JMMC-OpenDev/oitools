@@ -423,7 +423,7 @@ public final class Merger {
 
             final Selector selector = ctx.selectorResult.getSelector();
 
-            // MJD ranges criteria:
+            // Wavelength ranges criteria:
             final List<Range> gWlRanges;
             final Set<Range> wlRangeMatchings;
 

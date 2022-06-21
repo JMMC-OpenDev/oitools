@@ -1,7 +1,6 @@
 /** *****************************************************************************
  * JMMC project ( http://www.jmmc.fr ) - Copyright (C) CNRS.
  ******************************************************************************/
-
 package fr.jmmc.oitools.model;
 
 import java.util.BitSet;
@@ -12,6 +11,8 @@ import java.util.BitSet;
  * @author antoine
  */
 public class IndexMask {
+    /** FULL mask instance */
+    public static final IndexMask FULL = new IndexMask(null, 0, 0);
 
     /**
      * the number of bits is (nbRows * nbCols). the order of cells is [row 0, col 0], then [row 0, col 1], etc. A bit
@@ -23,13 +24,21 @@ public class IndexMask {
      * the number of rows in the BitSet. Must be > 0. If you strictly only need to mask rows in your OITable, think
      * about setting nbCols to 1.
      */
-
     private final int nbRows;
     /**
      * the number of columns in the BitSet. Must be > 0. If you strictly only need to mask columns in your OITable,
      * think about setting nbRows to 1.
      */
     private final int nbCols;
+
+    /**
+     * Builds a 1D BitSet with every cell unmasked.
+     *
+     * @param nbRows Must be > 0
+     */
+    public IndexMask(int nbRows) {
+        this(new BitSet(nbRows), nbRows, 1);
+    }
 
     /**
      * Builds a 2D BitSet with every cell unmasked.
@@ -132,13 +141,6 @@ public class IndexMask {
     }
 
     /**
-     * @return the bitSet
-     */
-    public BitSet getBitSet() {
-        return bitSet;
-    }
-
-    /**
      * @return the nbRows
      */
     public int getNbRows() {
@@ -151,4 +153,15 @@ public class IndexMask {
     public int getNbCols() {
         return nbCols;
     }
+
+    public int getCardinality() {
+        return this.bitSet.cardinality();
+    }
+
+    @Override
+    public String toString() {
+        return "IndexMask{" +  "nbRows=" + nbRows + ", nbCols=" + nbCols + ", bitSet=" + bitSet + '}';
+    }
+    
+    
 }

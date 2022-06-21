@@ -18,19 +18,23 @@ package fr.jmmc.oitools.processing;
 
 import fr.jmmc.oitools.model.Granule;
 import fr.jmmc.oitools.model.Granule.GranuleField;
+import fr.jmmc.oitools.model.IndexMask;
 import fr.jmmc.oitools.model.InstrumentMode;
 import fr.jmmc.oitools.model.NightId;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
+import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.util.OIFitsFileComparator;
 import fr.jmmc.oitools.util.OITableByFileComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -47,6 +51,9 @@ public final class SelectorResult {
     private final Set<Granule> granules = new HashSet<Granule>();
     /* preserve order in selected data (per file) */
     private final Set<OIData> oiDatas = new LinkedHashSet<OIData>();
+    /* masks */
+    /** Map between OIWavelength table to BitSet (mask) for OIWavelength */
+    private final Map<OIWavelength, IndexMask> maskOIWavelengths = new IdentityHashMap<OIWavelength, IndexMask>();
     /** cached values */
     private List<Target> sortedTargets = null;
     private List<InstrumentMode> sortedInstrumentModes = null;
@@ -62,6 +69,7 @@ public final class SelectorResult {
         selector = null;
         granules.clear();
         oiDatas.clear();
+        maskOIWavelengths.clear();
         sortedTargets = null;
         sortedInstrumentModes = null;
         sortedNightIds = null;
@@ -133,8 +141,18 @@ public final class SelectorResult {
         return sorted;
     }
 
+    public IndexMask getMask(final OIWavelength oiWavelength) {
+        return this.maskOIWavelengths.get(oiWavelength);
+    }
+
+    public void putMask(final OIWavelength oiWavelength, final IndexMask mask) {
+        this.maskOIWavelengths.put(oiWavelength, mask);
+    }
+
     @Override
     public String toString() {
-        return "SelectorResult{" + "granules=" + granules + ", oiDatas=" + oiDatas + '}';
+        return "SelectorResult{" + "granules=" + granules
+                + ", oiDatas=" + oiDatas
+                + ", maskOIWavelengths=" + maskOIWavelengths + '}';
     }
 }

@@ -379,12 +379,35 @@ public final class OIFitsCollection implements ToStringable {
         return granules;
     }
 
+    /**
+     * Query this collection with the given query criteria:
+     * - find Granules (target UID, insmode UID, night ID)
+     * - use selector to perform advanced filters (tables ...)
+     * - compute index masks to easily identify matching table data (rows, cols)
+     * The returned SelectorResult instance contains matching granules and OIData (on all criteria)
+     * 
+     * @param selector query criteria
+     * @return SelectorResult instance
+     */
     public SelectorResult findOIData(final Selector selector) {
         return findOIData(selector, null);
     }
 
+    /**
+     * Query this collection with the given query criteria:
+     * - find Granules (target UID, insmode UID, night ID)
+     * - use selector to perform advanced filters (tables ...)
+     * - compute index masks to easily identify matching table data (rows, cols)
+     * The returned SelectorResult instance contains matching granules and OIData (on all criteria)
+     * 
+     * @param selector query criteria
+     * @param inputResult optional SelectorResult instance to store query results
+     * @return SelectorResult instance
+     */
     public SelectorResult findOIData(final Selector selector, final SelectorResult inputResult) {
         SelectorResult result = inputResult;
+
+        logger.log(Level.INFO, "findOIData: selector = {0}", selector);
 
         if (!this.isEmpty()) {
             // Find matching Granules:
@@ -401,7 +424,7 @@ public final class OIFitsCollection implements ToStringable {
                         if ((selector == null) || !selector.hasTable()) {
                             // add all tables:
                             for (OIData oiData : oiDatas) {
-                                result.addOIData(g, oiData);
+                                filterOIData(selector, result, g, oiData);
                             }
                         } else {
                             // test all data tables:
@@ -414,7 +437,7 @@ public final class OIFitsCollection implements ToStringable {
                                     if (extNbs != null) {
                                         // extNb is null means add all tables from file
                                         if (extNbs.isEmpty() || extNbs.contains(NumberUtils.valueOf(oiData.getExtNb()))) {
-                                            result.addOIData(g, oiData);
+                                            filterOIData(selector, result, g, oiData);
                                         }
                                     }
                                 }
@@ -435,69 +458,92 @@ public final class OIFitsCollection implements ToStringable {
         if (result != null) {
             result.setSelector(selector);
         }
-        logger.log(Level.FINE, "findOIData: {0}", result);
+        logger.log(Level.INFO, "findOIData: {0}", result);
 
         return result;
     }
 
-    private void computeOIDataWavelengthMask(
-            final OIData oiData, final Collection<Range> ranges, final SelectorResult selectorResult) {
+    private void filterOIData(final Selector selector, final SelectorResult result, final Granule g, final OIData oiData) {
+        logger.log(Level.INFO, "filterOIData: oiData = {0}", oiData);
 
-        final Map<OIWavelength, IndexMask> wvMasks = new HashMap<>(oiDatas.size());
-        final Map<OIData, IndexMask> oiDatasMasks = new HashMap<>(oiDatas.size());
+        // apply filter on OIData:
+        // Wavelength ranges criteria:
+        if ((selector != null) && selector.hasWavelengthRanges()) {
+            final List<Range> gWlRanges = selector.getWavelengthRanges();
+            final Set<Range> wlRangeMatchings = new HashSet<Range>();
 
-        OIWavelength oiWavelength = oiData.getOiWavelength();
+            logger.log(Level.INFO, "filterOIData: gWlRanges = {0}", gWlRanges);
 
-        if (oiWavelength == null) {
-            logger.log(Level.SEVERE, "No OIWavelength for this OIData");
-            continue;
-        }
+            // check wavelength ranges:
+            final OIWavelength oiWavelength = oiData.getOiWavelength();
 
-        if (wvMasks.containsKey(oiWavelength)) { // if a mask has already been computed for this OIWavelength
-            oiDatasMasks.put(oiData, wvMasks.get(oiWavelength)); // use it
-        }
-        else {
-            IndexMask rowMask = computeWavelengthMask(oiWavelength, ranges);
-            // convert mask [nb rows, 1] to mask [1, nb rows],
-            // because the wavelengths of oiData is on the column axis, not the row axis
-            IndexMask colMask = new IndexMask(rowMask.getBitSet(), 1, rowMask.getNbRows());
-            wvMasks.put(oiWavelength, colMask);
-            oiDatasMasks.put(oiData, colMask);
-        }
+            if (oiWavelength == null) {
+                // no related OIWavelength table: 
+                logger.log(Level.FINE, "No OIWavelength for table {0}", oiData);
+                // skip OIData (no match):
+                return;
+            }
 
-        return oiDatasMasks;
-    }
+            // already processed (TODO check reentrance ?)
+            if (result.getMask(oiWavelength) == null) {
 
-    private IndexMask computeWavelengthMask(final OIWavelength oiWavelength, final Collection<Range> targetRanges) {
+                final Range wavelengthRange = oiWavelength.getInstrumentMode().getWavelengthRange();
 
-        final Range wavelengthRange = oiWavelength.getInstrumentMode().getWavelengthRange();
+                logger.log(Level.FINE, "wavelength ranges: {0}", wavelengthRange);
 
-        final Set<Range> overlapingTargetRanges = new HashSet<>(targetRanges.size());
+                // get matching wavelength ranges:
+                Range.getMatchingSelected(gWlRanges, wavelengthRange, wlRangeMatchings);
 
-        // computes all the overlaping targetRanges
-        Range.getMatchingSelected(targetRanges, wavelengthRange, overlapingTargetRanges);
-
-        if (overlapingTargetRanges.isEmpty()) {
-            return null;
-        }
-
-        // a whole zero mask of the size [wavelength nb rows, 1]
-        final IndexMask mask = new IndexMask(oiWavelength.getNbRows(), 1);
-
-        if (Range.matchFully(overlapingTargetRanges, wavelengthRange)) {
-            mask.setCol(1, true); // if target ranges overlap the whole of oiWavelength, set whole mask to true
-        }
-        else {
-            // computes for each row of the OIWavelength, if it is contained in one of the target ranges
-            final float[] effWaves = oiWavelength.getEffWave();
-            for (int i = 0; i < effWaves.length; i++) {
-                if (Range.contains(overlapingTargetRanges, effWaves[i])) {
-                    mask.setRow(i, true);
+                if (wlRangeMatchings.isEmpty()) {
+                    logger.log(Level.FINE, "Skip {0}, no matching wavelength range", oiWavelength);
+                    // skip OIData (no match):
+                    return;
                 }
+                logger.log(Level.INFO, "matching wavelength ranges: {0}", wlRangeMatchings);
+
+                final boolean checkWlRanges = !Range.matchFully(wlRangeMatchings, wavelengthRange);
+
+                IndexMask maskRows = null;
+                boolean filterRows = false;
+
+                if (checkWlRanges) {
+                    final int nRows = oiWavelength.getNbRows();
+
+                    // prepare mask to indicate rows to keep in output table:
+                    maskRows = new IndexMask(nRows); // bits set to false by default
+
+                    final float[] effWaves = (checkWlRanges) ? oiWavelength.getEffWave() : null;
+
+                    // Iterate on table rows (i):
+                    for (int i = 0; i < nRows; i++) {
+                        // update mask:
+                        if (Range.contains(wlRangeMatchings, effWaves[i])) {
+                            maskRows.setRow(i, true);
+                        } else {
+                            // data row does not correspond to selected wavelength ranges 
+                            filterRows = true;
+                        }
+                    }
+                    if (filterRows) {
+                        final int nKeepRows = maskRows.getCardinality();
+
+                        logger.log(Level.INFO, "nKeepRows: {0} / {1}", new Object[]{nKeepRows, nRows});
+
+                        if (nKeepRows <= 0) {
+                            // skip OIData (no remaining row):
+                            return;
+                        } else if (nKeepRows == nRows) {
+                            // skip filter later in OIData:
+                            maskRows = null;
+                        }
+                    }
+                }
+
+                result.putMask(oiWavelength, (maskRows != null) ? maskRows : IndexMask.FULL);
             }
         }
 
-        return mask;
+        result.addOIData(g, oiData);
     }
 
     private List<Granule> findGranules(final Selector selector) {
