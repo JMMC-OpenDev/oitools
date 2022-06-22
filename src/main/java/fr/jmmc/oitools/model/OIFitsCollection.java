@@ -436,7 +436,8 @@ public final class OIFitsCollection implements ToStringable {
                                     // null means the path does not match:
                                     if (extNbs != null) {
                                         // extNb is null means add all tables from file
-                                        if (extNbs.isEmpty() || extNbs.contains(NumberUtils.valueOf(oiData.getExtNb()))) {
+                                        if (extNbs.isEmpty()
+                                                || extNbs.contains(NumberUtils.valueOf(oiData.getExtNb()))) {
                                             filterOIData(selector, result, g, oiData);
                                         }
                                     }
@@ -463,7 +464,8 @@ public final class OIFitsCollection implements ToStringable {
         return result;
     }
 
-    private void filterOIData(final Selector selector, final SelectorResult result, final Granule g, final OIData oiData) {
+    private void filterOIData(
+            final Selector selector, final SelectorResult result, final Granule g, final OIData oiData) {
         logger.log(Level.INFO, "filterOIData: oiData = {0}", oiData);
 
         // apply filter on OIData:
@@ -525,7 +527,7 @@ public final class OIFitsCollection implements ToStringable {
                         }
                     }
                     if (filterRows) {
-                        final int nKeepRows = maskRows.getCardinality();
+                        final int nKeepRows = maskRows.getBitSet().cardinality();
 
                         logger.log(Level.INFO, "nKeepRows: {0} / {1}", new Object[]{nKeepRows, nRows});
 
