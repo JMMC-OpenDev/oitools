@@ -141,10 +141,21 @@ public final class SelectorResult {
         return sorted;
     }
 
+    /**
+     * Retrieves the IndexMask for the given OIWavelength.
+     * @param oiWavelength Must not be null.
+     * @return the IndexMask, or null if it was unset for the OIWavelength, or null if the null mask was registered for
+     * this OIWavelength.
+     */
     public IndexMask getMask(final OIWavelength oiWavelength) {
         return this.maskOIWavelengths.get(oiWavelength);
     }
 
+    /**
+     * Registers the IndexMask for the given OIWavelength.
+     * @param oiWavelength Must not be null.
+     * @param mask Can be null, it means the mask hides everything.
+     */
     public void putMask(final OIWavelength oiWavelength, final IndexMask mask) {
         this.maskOIWavelengths.put(oiWavelength, mask);
     }

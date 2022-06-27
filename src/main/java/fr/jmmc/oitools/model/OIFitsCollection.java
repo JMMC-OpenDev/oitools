@@ -464,6 +464,22 @@ public final class OIFitsCollection implements ToStringable {
         return result;
     }
 
+    /**
+     * Adds the OIData and the Granule to the SelectorResults, and computes eventual Wavelength IndexMask from the
+     * Selector.
+     * The wavelength ranges in the Selector is what we want to include, and we want to exclude other wavelengths.
+     * We compare them with the wavelength range of the OIData.
+     * If all wavelength of the OIData are taken, then the mask is IndexMask.FULL.
+     * If no wavelength of the OIData is taken, then the mask is null.
+     * If the OIWavelength of OIData is null, this function does nothing.
+     * If an IndexMask is already stored in SelectorResult for the OIWavelength of the OIData, it is not recomputed.
+     * If Selector is null, or if it has no wavelength ranges, the FULL mask is registered.
+     *
+     * @param selector from where the wavelength ranges will be read
+     * @param result to the OIData, Granule and IndexMask will be written
+     * @param g the granule to add
+     * @param oiData the oiData to add, and to read its OIWavelength to compute the IndexMask
+     */
     private void filterOIData(
             final Selector selector, final SelectorResult result, final Granule g, final OIData oiData) {
         logger.log(Level.INFO, "filterOIData: oiData = {0}", oiData);

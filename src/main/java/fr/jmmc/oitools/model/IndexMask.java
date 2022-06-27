@@ -66,18 +66,18 @@ public class IndexMask {
     }
 
     /**
-     * @param rowIndex
-     * @param colIndex
-     * @return the bitSet index for [rowIndex,colIndex]
+     * @param rowIndex Must be >= 0 and < nbRows.
+     * @param colIndex Must be >= 0 and < nbCols.
+     * @return the bitSet index for cell [rowIndex,colIndex]
      */
     public int getCellIndex(final int rowIndex, final int colIndex) {
         return (rowIndex * nbCols) + colIndex;
     }
 
     /**
-     * @param rowIndex
-     * @param colIndex
-     * @param value
+     * @param rowIndex Must be >= 0 and < nbRows.
+     * @param colIndex Must be >= 0 and < nbCols.
+     * @param value false means masked
      * @return true if cell equals @param value. cell [rowIndex, colIndex]
      */
     public boolean isCell(final int rowIndex, final int colIndex, final boolean value) {
@@ -85,8 +85,8 @@ public class IndexMask {
     }
 
     /**
-     * @param rowIndex
-     * @param value
+     * @param rowIndex Must be >= 0 and < nbRows.
+     * @param value false means masked
      * @return true if every cell in the row equals @param value. cells [rowIndex,*]
      */
     public boolean isRow(final int rowIndex, final boolean value) {
@@ -104,8 +104,8 @@ public class IndexMask {
     }
 
     /**
-     * @param colIndex
-     * @param value
+     * @param colIndex Must be >= 0 and < nbCols.
+     * @param value false means masked
      * @return true if every cell in the column equals @param value. cells [*,colIndex]
      */
     public boolean isCol(final int colIndex, final boolean value) {
@@ -125,8 +125,8 @@ public class IndexMask {
     /**
      * Sets value of the cell [rowIndex,colIndex].
      *
-     * @param rowIndex
-     * @param colIndex
+     * @param rowIndex Must be >= 0 and < nbRows.
+     * @param colIndex Must be >= 0 and < nbCols.
      * @param value false to mask
      */
     public void setCell(final int rowIndex, final int colIndex, final boolean value) {
@@ -136,7 +136,7 @@ public class IndexMask {
     /**
      * Sets value of every cell of the row. cells [rowIndex,*].
      *
-     * @param rowIndex
+     * @param rowIndex Must be >= 0 and < nbRows.
      * @param value false to mask
      */
     public void setRow(final int rowIndex, final boolean value) {
@@ -152,7 +152,7 @@ public class IndexMask {
     /**
      * Sets value of every cell of the column. cells [*,colIndex].
      *
-     * @param colIndex
+     * @param colIndex Must be >= 0 and < nbCols.
      * @param value false to mask
      */
     public void setCol(final int colIndex, final boolean value) {
