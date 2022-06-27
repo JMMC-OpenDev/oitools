@@ -544,6 +544,10 @@ public final class OIFitsCollection implements ToStringable {
                 result.putMask(oiWavelength, (maskRows != null) ? maskRows : IndexMask.FULL);
             }
         }
+        // if selector is null or have not set wavelength ranges, use FULL mask
+        else if (oiData.getOiWavelength() != null) {
+            result.putMask(oiData.getOiWavelength(), IndexMask.FULL);
+        }
 
         result.addOIData(g, oiData);
     }
