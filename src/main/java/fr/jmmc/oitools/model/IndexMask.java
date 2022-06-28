@@ -6,18 +6,19 @@ package fr.jmmc.oitools.model;
 import java.util.BitSet;
 
 /**
- * A two-dimension interface for a BitSet. Used to mask some rows, cols or cells on an OITable. Also supports 1D masks,
- * vertical [N,1] and horizontal [1,N].
+ * A two-dimensions wrapper to BitSet. 
+ * Used to mask some values (rows, cols) on an OITable. Also supports 1D masks (rows).
  */
-public class IndexMask {
+public final class IndexMask {
+
     /**
      * FULL mask instance. Do not try to access its content !
      */
     public static final IndexMask FULL = new IndexMask(null, 0, 0);
 
     /**
-     * the number of bits is (nbRows * nbCols). the order of cells is [row 0, col 0], then [row 0, col 1], etc. A bit
-     * set to false means the cell is masked.
+     * the number of bits is (nbRows * nbCols). the order of elements is [row 0, col 0], then [row 0, col 1], etc. 
+     * A bit set to false means the element is masked.
      */
     private final BitSet bitSet;
 
@@ -28,144 +29,115 @@ public class IndexMask {
     private final int nbRows;
 
     /**
-     * the number of columns in the BitSet. Must be > 0. If you strictly only need to mask columns in your OITable,
-     * think about setting nbRows to 1.
+     * the number of columns in the BitSet. Must be > 0.
      */
     private final int nbCols;
 
+    /** flag indicating if this mask is 1D */
+    private final boolean vect1D;
+
     /**
-     * Builds a 1D BitSet with every cell masked.
-       *
+     * Builds a 1D BitSet with every element masked
+     *
      * @param nbRows number of rows. Must be > 0. the number of columns will be 1.
      */
-    public IndexMask(int nbRows) {
+    public IndexMask(final int nbRows) {
         this(nbRows, 1);
     }
 
     /**
-     * Builds a 2D BitSet with every cell masked.
+     * Builds a 2D BitSet with every element masked
      *
      * @param nbRows Must be > 0
      * @param nbCols Must be > 0
      */
-    public IndexMask(int nbRows, int nbCols) {
+    public IndexMask(final int nbRows, final int nbCols) {
         this(new BitSet(nbRows * nbCols), nbRows, nbCols);
     }
 
     /**
-     * Builds a 2D BitSet interface from an existing BitSet.
+     * Builds a 2D BitSet interface from an existing BitSet
      *
-     * @param bitSet Must have nb of cells = nbRows * nbCols
+     * @param bitSet Must have nb of elements = nbRows * nbCols
      * @param nbRows Must be > 0
      * @param nbCols Must be > 0
      */
-    public IndexMask(BitSet bitSet, int nbRows, int nbCols) {
+    private IndexMask(final BitSet bitSet, final int nbRows, final int nbCols) {
         this.bitSet = bitSet;
         this.nbRows = nbRows;
         this.nbCols = nbCols;
+        this.vect1D = (nbCols <= 1);
     }
 
     /**
-     * @param rowIndex Must be >= 0 and < nbRows.
-     * @param colIndex Must be >= 0 and < nbCols.
-     * @return the bitSet index for cell [rowIndex,colIndex]
+     * Is the given row accepted for 1D mask ?
+     * @param rowIndex Must be >= 0 and < nbRows
+     * @return true to accept; false to reject
      */
-    public int getCellIndex(final int rowIndex, final int colIndex) {
-        return (rowIndex * nbCols) + colIndex;
+    public boolean isRow(final int rowIndex) {
+        if (vect1D) {
+            return bitSet.get(rowIndex);
+        }
+        throw new IllegalArgumentException("Incompatible mask dimensions (2D) !");
     }
 
     /**
-     * @param rowIndex Must be >= 0 and < nbRows.
-     * @param colIndex Must be >= 0 and < nbCols.
-     * @param value false means masked
-     * @return true if cell equals @param value. cell [rowIndex, colIndex]
-     */
-    public boolean isCell(final int rowIndex, final int colIndex, final boolean value) {
-        return bitSet.get(getCellIndex(rowIndex, colIndex)) == value;
-    }
-
-    /**
-     * @param rowIndex Must be >= 0 and < nbRows.
-     * @param value false means masked
-     * @return true if every cell in the row equals @param value. cells [rowIndex,*]
-     */
-    public boolean isRow(final int rowIndex, final boolean value) {
-        // shortcut for 1D masks
-        if (nbCols == 1) {
-            return bitSet.get(rowIndex) == value;
-        }
-        // check each cell in the row
-        for (int i = getCellIndex(rowIndex, 0); i < getCellIndex(rowIndex, nbCols); i++) {
-            if (bitSet.get(i) != value) {
-                return false; // some cell is wrong
-            }
-        }
-        return true; // all cells are good
-    }
-
-    /**
-     * @param colIndex Must be >= 0 and < nbCols.
-     * @param value false means masked
-     * @return true if every cell in the column equals @param value. cells [*,colIndex]
-     */
-    public boolean isCol(final int colIndex, final boolean value) {
-        // shortCut for 1D masks
-        if (nbRows == 1) {
-            return bitSet.get(colIndex) == value;
-        }
-        // check each cell in the column
-        for (int i = colIndex; i < nbRows * nbCols; i += nbCols) {
-            if (bitSet.get(i) != value) {
-                return false; // some cell is wrong
-            }
-        }
-        return true; // all cells are good
-    }
-
-    /**
-     * Sets value of the cell [rowIndex,colIndex].
+     * Set the accepted flag(s) at the given row for 1D and 2D masks
      *
-     * @param rowIndex Must be >= 0 and < nbRows.
-     * @param colIndex Must be >= 0 and < nbCols.
-     * @param value false to mask
-     */
-    public void setCell(final int rowIndex, final int colIndex, final boolean value) {
-        bitSet.set(getCellIndex(rowIndex, colIndex), value);
-    }
-
-    /**
-     * Sets value of every cell of the row. cells [rowIndex,*].
-     *
-     * @param rowIndex Must be >= 0 and < nbRows.
-     * @param value false to mask
+     * @param rowIndex Must be >= 0 and < nbRows
+     * @param value true to accept; false to reject
      */
     public void setRow(final int rowIndex, final boolean value) {
         // shortcut for 1D masks
-        if (nbCols == 1) {
+        if (vect1D) {
             bitSet.set(rowIndex, value);
-        }
-        else { // for each cell in the row
-            bitSet.set(getCellIndex(rowIndex, 0), getCellIndex(rowIndex, nbCols), value);
+        } else {
+            // for each cell in the row
+            bitSet.set(getBitIndex(rowIndex, 0), getBitIndex(rowIndex, nbCols), value);
         }
     }
 
     /**
-     * Sets value of every cell of the column. cells [*,colIndex].
+     * Is the given element accepted for 2D mask ?
+     * @param rowIndex Must be >= 0 and < nbRows
+     * @param colIndex Must be >= 0 and < nbCols
+     * @return true if cell equals @param value. cell [rowIndex, colIndex]
+     */
+    public boolean isCell(final int rowIndex, final int colIndex) {
+        if (!vect1D) {
+            return bitSet.get(getBitIndex(rowIndex, colIndex));
+        }
+        throw new IllegalArgumentException("Incompatible mask dimensions (1D) !");
+    }
+
+    /**
+     * Set the accepted flag at the given row and column.
      *
-     * @param colIndex Must be >= 0 and < nbCols.
+     * @param rowIndex Must be >= 0 and < nbRows
+     * @param colIndex Must be >= 0 and < nbCols
      * @param value false to mask
      */
-    public void setCol(final int colIndex, final boolean value) {
-        // shortcut for 1D masks
-        if (nbRows == 1) {
-            bitSet.set(colIndex, value);
+    public void setCell(final int rowIndex, final int colIndex, final boolean value) {
+        if (!vect1D) {
+            bitSet.set(getBitIndex(rowIndex, colIndex), value);
         }
-        else {
-            // for each cell in the column
-            for (int i = colIndex; i < nbRows * nbCols; i += nbCols) {
-                bitSet.set(i, value);
-            }
-        }
+        throw new IllegalArgumentException("Incompatible mask dimensions (2D) !");
+    }
+
+    private int getBitIndex(final int rowIndex, final int colIndex) {
+        return (rowIndex * nbCols) + colIndex;
+    }
+
+    public int cardinality() {
+        return this.bitSet.cardinality();
+    }
+
+    public boolean isEmpty() {
+        return cardinality() == 0;
+    }
+
+    public boolean isFull() {
+        return (this == FULL) || cardinality() == (nbRows * nbCols);
     }
 
     @Override
@@ -187,13 +159,8 @@ public class IndexMask {
         return nbCols;
     }
 
-    /**
-     * Get the BitSet. Use it to call some functions on the BitSet, avoid keeping a reference to the BitSet.
-     *
-     * @return the bitSet.
-     */
-    public BitSet getBitSet() {
-        return bitSet;
+    public boolean is1D() {
+        return vect1D;
     }
 
 }

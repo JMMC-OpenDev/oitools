@@ -407,7 +407,7 @@ public final class OIFitsCollection implements ToStringable {
     public SelectorResult findOIData(final Selector selector, final SelectorResult inputResult) {
         SelectorResult result = inputResult;
 
-        logger.log(Level.INFO, "findOIData: selector = {0}", selector);
+        logger.log(Level.FINE, "findOIData: selector = {0}", selector);
 
         if (!this.isEmpty()) {
             // Find matching Granules:
@@ -450,16 +450,14 @@ public final class OIFitsCollection implements ToStringable {
                     result = null;
                 }
             }
-
             if (result == null) {
                 logger.log(Level.WARNING, "findOIData: no result matching {0}", selector);
             }
         }
-
         if (result != null) {
             result.setSelector(selector);
         }
-        logger.log(Level.INFO, "findOIData: {0}", result);
+        logger.log(Level.FINE, "findOIData: {0}", result);
 
         return result;
     }
@@ -480,9 +478,10 @@ public final class OIFitsCollection implements ToStringable {
      * @param g the granule to add
      * @param oiData the oiData to add, and to read its OIWavelength to compute the IndexMask
      */
-    private void filterOIData(
-            final Selector selector, final SelectorResult result, final Granule g, final OIData oiData) {
-        logger.log(Level.INFO, "filterOIData: oiData = {0}", oiData);
+    private void filterOIData(final Selector selector, final SelectorResult result,
+                              final Granule g, final OIData oiData) {
+
+        logger.log(Level.FINE, "filterOIData: oiData = {0}", oiData);
 
         // apply filter on OIData:
         // Wavelength ranges criteria:
@@ -490,7 +489,7 @@ public final class OIFitsCollection implements ToStringable {
             final List<Range> gWlRanges = selector.getWavelengthRanges();
             final Set<Range> wlRangeMatchings = new HashSet<Range>();
 
-            logger.log(Level.INFO, "filterOIData: gWlRanges = {0}", gWlRanges);
+            logger.log(Level.FINE, "filterOIData: gWlRanges = {0}", gWlRanges);
 
             // check wavelength ranges:
             final OIWavelength oiWavelength = oiData.getOiWavelength();
@@ -502,7 +501,7 @@ public final class OIFitsCollection implements ToStringable {
                 return;
             }
 
-            // already processed (TODO check reentrance ?)
+            // oiWavelength already processed ?
             if (result.getMask(oiWavelength) == null) {
 
                 final Range wavelengthRange = oiWavelength.getInstrumentMode().getWavelengthRange();
@@ -517,20 +516,20 @@ public final class OIFitsCollection implements ToStringable {
                     // skip OIData (no match):
                     return;
                 }
-                logger.log(Level.INFO, "matching wavelength ranges: {0}", wlRangeMatchings);
+                logger.log(Level.FINE, "matching wavelength ranges: {0}", wlRangeMatchings);
 
                 final boolean checkWlRanges = !Range.matchFully(wlRangeMatchings, wavelengthRange);
 
                 IndexMask maskRows = null;
-                boolean filterRows = false;
 
                 if (checkWlRanges) {
                     final int nRows = oiWavelength.getNbRows();
 
-                    // prepare mask to indicate rows to keep in output table:
+                    // prepare 1D mask to indicate rows to keep in wavelength table:
                     maskRows = new IndexMask(nRows); // bits set to false by default
 
-                    final float[] effWaves = (checkWlRanges) ? oiWavelength.getEffWave() : null;
+                    boolean filterRows = false;
+                    final float[] effWaves = oiWavelength.getEffWave();
 
                     // Iterate on table rows (i):
                     for (int i = 0; i < nRows; i++) {
@@ -543,9 +542,12 @@ public final class OIFitsCollection implements ToStringable {
                         }
                     }
                     if (filterRows) {
-                        final int nKeepRows = maskRows.getBitSet().cardinality();
+                        final int nKeepRows = maskRows.cardinality();
 
-                        logger.log(Level.INFO, "nKeepRows: {0} / {1}", new Object[]{nKeepRows, nRows});
+                        if (logger.isLoggable(Level.FINE)) {
+                            logger.log(Level.FINE, "nKeepRows: {0} / {1}",
+                                    new Object[]{nKeepRows, nRows});
+                        }
 
                         if (nKeepRows <= 0) {
                             // skip OIData (no remaining row):
@@ -556,15 +558,12 @@ public final class OIFitsCollection implements ToStringable {
                         }
                     }
                 }
-
                 result.putMask(oiWavelength, (maskRows != null) ? maskRows : IndexMask.FULL);
             }
-        }
-        // if selector is null or have not set wavelength ranges, use FULL mask
-        else if (oiData.getOiWavelength() != null) {
+        } else if (oiData.getOiWavelength() != null) {
+            // if selector has no wavelength ranges, use FULL mask
             result.putMask(oiData.getOiWavelength(), IndexMask.FULL);
         }
-
         result.addOIData(g, oiData);
     }
 
