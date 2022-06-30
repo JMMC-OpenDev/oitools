@@ -67,6 +67,30 @@ public class SelectorFilterTest extends JUnitBaseTest {
     }
 
     @Test
+    public void testFindOIData2WavelengthRanges() {
+        final Selector selector = new Selector();
+        selector.setTargetUID(TARGET_NAME);
+        selector.setWavelengthRanges(Arrays.asList(new Range(2.38E-6, 2.42E-6), new Range(2.45E-6, 2.6E-6)));
+
+        final SelectorResult selectorResult = oiFitsCollection.findOIData(selector);
+        // logger.info("testFindOIData: \n" + selectorResult);
+
+        Assert.assertEquals(1, selectorResult.getDistinctInstrumentModes().size());
+
+        final List<OIData> oiDatas = selectorResult.getSortedOIDatas();
+        logger.log(Level.INFO, "oiDatas: {0}", oiDatas.size());
+        Assert.assertEquals(4, oiDatas.size());
+
+        final OIWavelength oiWaveLength = oiDatas.get(0).getOiWavelength();
+
+        final IndexMask mask = selectorResult.getMask(oiWaveLength);
+        // logger.info("mask: " + mask);
+
+        logger.log(Level.INFO, "mask bits: {0}", mask.cardinality());
+        Assert.assertEquals(42, mask.cardinality());
+    }
+
+    @Test
     public void testFindOIDataEmpty() {
         final Selector selector = new Selector();
         selector.setTargetUID(TARGET_NAME);
