@@ -137,7 +137,7 @@ public final class Range implements Comparable<Range> {
      * @return true if this range contains the given value
      */
     public boolean contains(final double value) {
-        return value >= this.min && value <= this.max;
+        return (Double.isNaN(this.min) || value >= this.min) && (Double.isNaN(this.max) || value <= this.max);
     }
 
     /**
@@ -151,11 +151,11 @@ public final class Range implements Comparable<Range> {
     }
 
     public boolean overlap(final Range other) {
-        return (getMin() <= other.getMax()) && (getMax() >= other.getMin());
+        return (Double.isNaN(this.min) || this.min <= other.getMax()) && (Double.isNaN(this.max) || this.max >= other.getMin());
     }
 
     public boolean overlapFully(final Range other) {
-        return (getMin() <= other.getMin()) && (getMax() >= other.getMax());
+        return (Double.isNaN(this.min) || this.min <= other.getMin()) && (Double.isNaN(this.max) || this.max >= other.getMax());
     }
 
     public static boolean matchRange(final Collection<Range> selected, final Range candidate) {
