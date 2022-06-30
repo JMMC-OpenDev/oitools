@@ -25,6 +25,7 @@ import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIWavelength;
+import fr.jmmc.oitools.model.StaNamesDir;
 import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.util.OIFitsFileComparator;
 import fr.jmmc.oitools.util.OITableByFileComparator;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +61,8 @@ public final class SelectorResult {
     private List<InstrumentMode> sortedInstrumentModes = null;
     private List<NightId> sortedNightIds = null;
     private List<OIData> sortedOIDatas = null;
+    /** Map of used staNames to StaNamesDir (reference StaNames / orientation) */
+    private Map<String, StaNamesDir> usedStaNamesMap = null;
 
     public SelectorResult(final OIFitsCollection oiFitsCollection) {
         this.oiFitsCollection = oiFitsCollection;
@@ -74,6 +78,7 @@ public final class SelectorResult {
         sortedInstrumentModes = null;
         sortedNightIds = null;
         sortedOIDatas = null;
+        usedStaNamesMap = null;
     }
 
     public boolean hasSelector() {
@@ -158,6 +163,18 @@ public final class SelectorResult {
      */
     public void putMask(final OIWavelength oiWavelength, final IndexMask mask) {
         this.maskOIWavelengths.put(oiWavelength, mask);
+    }
+
+    /**
+     * Return the Map of sorted staNames to StaNamesDir
+     * @return Map of sorted staNames to StaNamesDir
+     */
+    public Map<String, StaNamesDir> getUsedStaNamesMap() {
+        return usedStaNamesMap;
+    }
+
+    public void setUsedStaNamesMap(final Map<String, StaNamesDir> usedStaNamesMap) {
+        this.usedStaNamesMap = usedStaNamesMap;
     }
 
     @Override
