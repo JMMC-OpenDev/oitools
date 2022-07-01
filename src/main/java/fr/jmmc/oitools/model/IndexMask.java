@@ -132,12 +132,16 @@ public final class IndexMask {
         return this.bitSet.cardinality();
     }
 
-    public boolean isEmpty() {
+    public boolean isMaskEmpty() {
         return cardinality() == 0;
     }
 
+    public boolean isMaskFull() {
+        return cardinality() == (nbRows * nbCols);
+    }
+
     public boolean isFull() {
-        return (this == FULL) || cardinality() == (nbRows * nbCols);
+        return (this == FULL);
     }
 
     @Override
@@ -159,8 +163,15 @@ public final class IndexMask {
         return nbCols;
     }
 
+    /**
+     * @return flag indicating if this mask is 1D
+     */
     public boolean is1D() {
         return vect1D;
+    }
+
+    public BitSet getBitSet() {
+        return bitSet;
     }
 
 }
