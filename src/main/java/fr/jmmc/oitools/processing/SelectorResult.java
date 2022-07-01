@@ -18,19 +18,24 @@ package fr.jmmc.oitools.processing;
 
 import fr.jmmc.oitools.model.Granule;
 import fr.jmmc.oitools.model.Granule.GranuleField;
+import fr.jmmc.oitools.model.IndexMask;
 import fr.jmmc.oitools.model.InstrumentMode;
 import fr.jmmc.oitools.model.NightId;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
+import fr.jmmc.oitools.model.OIWavelength;
+import fr.jmmc.oitools.model.StaNamesDir;
 import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.util.OIFitsFileComparator;
 import fr.jmmc.oitools.util.OITableByFileComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -47,11 +52,16 @@ public final class SelectorResult {
     private final Set<Granule> granules = new HashSet<Granule>();
     /* preserve order in selected data (per file) */
     private final Set<OIData> oiDatas = new LinkedHashSet<OIData>();
+    /* masks */
+    /** Map between OIWavelength table to BitSet (mask) for OIWavelength */
+    private final Map<OIWavelength, IndexMask> maskOIWavelengths = new IdentityHashMap<OIWavelength, IndexMask>();
     /** cached values */
     private List<Target> sortedTargets = null;
     private List<InstrumentMode> sortedInstrumentModes = null;
     private List<NightId> sortedNightIds = null;
     private List<OIData> sortedOIDatas = null;
+    /** Map of used staNames to StaNamesDir (reference StaNames / orientation) */
+    private Map<String, StaNamesDir> usedStaNamesMap = null;
 
     public SelectorResult(final OIFitsCollection oiFitsCollection) {
         this.oiFitsCollection = oiFitsCollection;
@@ -62,10 +72,12 @@ public final class SelectorResult {
         selector = null;
         granules.clear();
         oiDatas.clear();
+        maskOIWavelengths.clear();
         sortedTargets = null;
         sortedInstrumentModes = null;
         sortedNightIds = null;
         sortedOIDatas = null;
+        usedStaNamesMap = null;
     }
 
     public boolean hasSelector() {
@@ -133,8 +145,41 @@ public final class SelectorResult {
         return sorted;
     }
 
+    /**
+     * Retrieves the IndexMask for the given OIWavelength.
+     * @param oiWavelength Must not be null.
+     * @return the IndexMask, or null if it was unset for the OIWavelength, or null if the null mask was registered for
+     * this OIWavelength.
+     */
+    public IndexMask getMask(final OIWavelength oiWavelength) {
+        return this.maskOIWavelengths.get(oiWavelength);
+    }
+
+    /**
+     * Registers the IndexMask for the given OIWavelength.
+     * @param oiWavelength Must not be null.
+     * @param mask Can be null, it means the mask hides everything.
+     */
+    public void putMask(final OIWavelength oiWavelength, final IndexMask mask) {
+        this.maskOIWavelengths.put(oiWavelength, mask);
+    }
+
+    /**
+     * Return the Map of sorted staNames to StaNamesDir
+     * @return Map of sorted staNames to StaNamesDir
+     */
+    public Map<String, StaNamesDir> getUsedStaNamesMap() {
+        return usedStaNamesMap;
+    }
+
+    public void setUsedStaNamesMap(final Map<String, StaNamesDir> usedStaNamesMap) {
+        this.usedStaNamesMap = usedStaNamesMap;
+    }
+
     @Override
     public String toString() {
-        return "SelectorResult{" + "granules=" + granules + ", oiDatas=" + oiDatas + '}';
+        return "SelectorResult{" + "granules=" + granules
+                + ", oiDatas=" + oiDatas
+                + ", maskOIWavelengths=" + maskOIWavelengths + '}';
     }
 }
