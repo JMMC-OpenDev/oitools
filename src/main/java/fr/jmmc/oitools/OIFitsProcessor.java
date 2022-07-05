@@ -233,7 +233,7 @@ public class OIFitsProcessor extends OIFitsCommand {
             selector.setNightID(Integer.valueOf(night));
         }
         if (baselines != null) {
-            selector.setBaselines(parseBaselines(baselines));
+            selector.setBaselines(parseStrings(baselines));
         }
         if (mjds != null) {
             selector.setMJDRanges(parseRanges(mjds));
@@ -245,22 +245,7 @@ public class OIFitsProcessor extends OIFitsCommand {
         // Call merge
         final OIFitsFile result = Merger.process(oiFitsCollection, selector);
 
-        if (result.hasOiData()) {
-            // Add history:
-            for (OIFitsFile oiFitsFile : oiFitsCollection.getSortedOIFitsFiles()) {
-                result.getPrimaryImageHDU().addHeaderHistory("Input: " + oiFitsFile.getFileName());
-            }
-            if (!selector.isEmpty()) {
-                result.getPrimaryImageHDU().addHeaderHistory(
-                        "CLI args: "
-                        + ((targetUID != null) ? OPTION_TARGET + " " + targetUID : "")
-                        + ((insModeUID != null) ? OPTION_INSNAME + " " + insModeUID : "")
-                        + ((night != null) ? OPTION_NIGHT + " " + night : "")
-                        + ((baselines != null) ? OPTION_BASELINES + " " + baselines : "")
-                        + ((mjds != null) ? OPTION_MJD_RANGES + " " + mjds : "")
-                        + ((wavelengths != null) ? OPTION_WL_RANGES + " " + wavelengths : "")
-                );
-            }
+        if (result != null && result.hasOiData()) {
             // Store result
             write(outputFilePath, result, check);
         } else {
@@ -364,8 +349,8 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("--------------------------------------------------------------------------------------");
     }
 
-    public static List<String> parseBaselines(final String baselines) {
-        final String[] values = baselines.split(",");
+    public static List<String> parseStrings(final String input) {
+        final String[] values = input.split(",");
 
         final List<String> baselineList = new ArrayList<String>(values.length);
         for (String value : values) {
@@ -377,11 +362,23 @@ public class OIFitsProcessor extends OIFitsCommand {
         return baselineList;
     }
 
-    public static List<Range> parseRanges(final String mjds) {
-        final String[] values = mjds.split(",");
+    public static String dumpStrings(List<String> values) {
+        if (values == null || values.isEmpty()) {
+            return "";
+        }
+        final StringBuilder sb = new StringBuilder();
+        for (String v : values) {
+            sb.append(v).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+
+    public static List<Range> parseRanges(final String input) {
+        final String[] values = input.split(",");
 
         if ((values.length % 2) == 1) {
-            throw new IllegalStateException("Invalid ranges (" + values.length + " items): " + mjds);
+            throw new IllegalStateException("Invalid ranges (" + values.length + " items): " + input);
         }
         final List<Range> ranges = new ArrayList<Range>(values.length);
 
@@ -399,5 +396,29 @@ public class OIFitsProcessor extends OIFitsCommand {
             return null;
         }
         return ranges;
+    }
+
+    public static String dumpRanges(List<Range> values) {
+        if (values == null || values.isEmpty()) {
+            return "";
+        }
+        final StringBuilder sb = new StringBuilder();
+        for (Range r : values) {
+            sb.append(r.getMin()).append(",").append(r.getMax()).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+
+    public static String generateCLIargs(final Selector selector) {
+        if (selector != null) {
+            return ((selector.getTargetUID() != null) ? OIFitsProcessor.OPTION_TARGET + " " + selector.getTargetUID() + " " : "")
+                    + ((selector.getInsModeUID() != null) ? OIFitsProcessor.OPTION_INSNAME + " " + selector.getInsModeUID() + " " : "")
+                    + ((selector.getNightID() != null) ? OIFitsProcessor.OPTION_NIGHT + " " + selector.getNightID() + " " : "")
+                    + ((selector.getBaselines() != null) ? OIFitsProcessor.OPTION_BASELINES + " " + dumpStrings(selector.getBaselines()) + " " : "")
+                    + ((selector.getMJDRanges() != null) ? OIFitsProcessor.OPTION_MJD_RANGES + " " + dumpRanges(selector.getMJDRanges()) + " " : "")
+                    + ((selector.getWavelengthRanges() != null) ? OIFitsProcessor.OPTION_WL_RANGES + " " + dumpRanges(selector.getWavelengthRanges()) + " " : "");
+        }
+        return "";
     }
 }

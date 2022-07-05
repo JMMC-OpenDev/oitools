@@ -16,6 +16,8 @@
  */
 package fr.jmmc.oitools.processing;
 
+import fr.jmmc.oitools.OIFitsConstants;
+import fr.jmmc.oitools.OIFitsProcessor;
 import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.image.FitsImageHDU;
 import fr.jmmc.oitools.meta.KeywordMeta;
@@ -31,6 +33,7 @@ import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIPrimaryHDU;
+import fr.jmmc.oitools.model.OITable;
 import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
 import fr.jmmc.oitools.model.StaNamesDir;
@@ -39,11 +42,13 @@ import fr.jmmc.oitools.model.TargetManager;
 import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.util.OITableComparator;
 import fr.nom.tam.fits.FitsDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -132,10 +137,18 @@ public final class Merger {
     }
 
     public static OIFitsFile process(final SelectorResult result, final OIFitsStandard std) {
-        // 1. CreateOIFits anyway
-        final OIFitsFile resultFile = createOIFits(std, result);
+        final OIFitsFile resultFile;
+        if (result == null) {
+            logger.log(Level.INFO, "Merge: no matching data");
+            resultFile = null;
+        } else {
+            logger.log(Level.INFO, "selected targets:  {0}", result.getDistinctTargets());
+            logger.log(Level.INFO, "selected insModes: {0}", result.getDistinctInstrumentModes());
+            logger.log(Level.INFO, "selected nightIds: {0}", result.getDistinctNightIds());
 
-        if (result != null) {
+            // 1. CreateOIFits anyway
+            resultFile = createOIFits(std, result);
+
             final Context ctx = new Context(result, resultFile);
 
             // 2. Get all referenced OIPrimaryHDU, Target, OIWavelength, OIArray and OICorr in data tables
@@ -164,6 +177,18 @@ public final class Merger {
 
             // 4. process Data:
             processOIData(ctx);
+
+            // Update history:
+            final FitsImageHDU primaryHdu = ctx.resultFile.getPrimaryImageHDU();
+
+            // Add used oifits files:
+            for (OIFitsFile oiFitsFile : result.getSortedOIFitsFiles()) {
+                primaryHdu.addHeaderHistory("CLI Input: " + oiFitsFile.getFileName());
+            }
+
+            // Add CLI args:
+            final Selector selector = result.getSelector();
+            primaryHdu.addHeaderHistory("CLI args: " + OIFitsProcessor.generateCLIargs(selector));
         }
         return resultFile;
     }
@@ -189,7 +214,7 @@ public final class Merger {
             }
         }
 
-        logger.log(Level.INFO, "Using OIFITS {0}", version);
+        logger.log(Level.FINE, "Using OIFITS {0}", version);
 
         return new OIFitsFile(version);
     }
@@ -202,21 +227,12 @@ public final class Merger {
      * @return Selector result or null if no data match
      */
     private static SelectorResult filterData(final OIFitsCollection oiFitsCollection, final Selector selector) {
-        logger.log(Level.INFO, "Selector: {0}", selector);
+        logger.log(Level.FINE, "Selector: {0}", selector);
 
         // Query OIData matching criteria:
         final SelectorResult result = oiFitsCollection.findOIData(selector);
 
         logger.log(Level.FINE, "selectorResult: {0}", result);
-
-        if (result == null) {
-            logger.log(Level.INFO, "Merge: no matching data");
-            return null;
-        }
-
-        logger.log(Level.INFO, "selected targets:  {0}", result.getDistinctTargets());
-        logger.log(Level.INFO, "selected insModes: {0}", result.getDistinctInstrumentModes());
-        logger.log(Level.INFO, "selected nightIds: {0}", result.getDistinctNightIds());
 
         return result;
     }
@@ -262,6 +278,8 @@ public final class Merger {
      * @throws IllegalArgumentException
      */
     private static void processOIPrimaryHDU(final Context ctx) throws IllegalArgumentException {
+        final String date = FitsDate.getFitsDateString();
+
         final FitsImageHDU imageHdu;
 
         if (ctx.resultFile.getVersion() == OIFitsStandard.VERSION_2) {
@@ -342,18 +360,18 @@ public final class Merger {
             }
 
             // set date:
-            primaryHdu.setDate(FitsDate.getFitsDateString());
+            primaryHdu.setDate(date);
 
             imageHdu = primaryHdu;
         } else {
             imageHdu = new FitsImageHDU();
 
             // set date:
-            imageHdu.addHeaderCard(FitsConstants.KEYWORD_DATE, FitsDate.getFitsDateString(), "Date the HDU was written");
+            imageHdu.addHeaderCard(FitsConstants.KEYWORD_DATE, date, "Date the HDU was written");
         }
 
         // Update history:
-        imageHdu.addHeaderHistory("Written by JMMC OITools");
+        imageHdu.addHeaderHistory("Written by JMMC OITools Merger on " + date);
 
         ctx.resultFile.setPrimaryImageHdu(imageHdu);
     }
@@ -422,62 +440,72 @@ public final class Merger {
             final OIFitsFile resultFile = ctx.resultFile;
             final Map<OIWavelength, OIWavelength> mapOIWavelengths = ctx.mapOIWavelengths;
 
-            // TODO: use Instrument modes to reduce the output OIWavelength tables ? ie fuzzy comparison
-            // Browse all used OIWavelength tables:
-            for (OIWavelength oiWavelength : ctx.usedOIWavelengths) {
-                final String name = oiWavelength.getInsName();
+            // Reduce duplicated tables (distinct table to duplicates):
+            final IdentityHashMap<OIWavelength, ArrayList<OIWavelength>> dedupOIWavelengths = new IdentityHashMap<>();
+            // insname to tables:
+            final LinkedHashMap<String, ArrayList<OIWavelength>> nameToDistinctOIWavelengths = new LinkedHashMap<>();
 
-                // If name is already present in result, 
-                // change the name and memorise this change to update data information later
-                String newName = name;
-                int idx = 0;
-                OIWavelength prevOiWavelength = null;
+            deduplicateTables(OIFitsConstants.KEYWORD_INSNAME, ctx.usedOIWavelengths, dedupOIWavelengths, nameToDistinctOIWavelengths);
 
-                for (;;) {
-                    prevOiWavelength = resultFile.getOiWavelength(newName);
+            // Copy all distinct OIWavelength tables:
+            for (ArrayList<OIWavelength> listOIWavelengths : nameToDistinctOIWavelengths.values()) {
 
-                    if (prevOiWavelength == null) {
-                        // table is not present
-                        break;
-                    } else {
-                        // check if the existing table in resultFile is exactly the same ? (to remove duplicates)
-                        if (OITableComparator.STRICT_COMPARATOR.compareTable(oiWavelength, prevOiWavelength)) {
-                            logger.log(Level.INFO, "Same tables: {0} vs {1}", new Object[]{oiWavelength, prevOiWavelength});
-                            // table is the same
+                for (OIWavelength oiWavelength : listOIWavelengths) {
+                    final String name = oiWavelength.getInsName();
+
+                    // If name is already present in result, 
+                    // change the name and memorise this change to update data later
+                    String newName = name;
+                    int idx = 0;
+                    OIWavelength prevOiWavelength = null;
+
+                    for (;;) {
+                        prevOiWavelength = resultFile.getOiWavelength(newName);
+
+                        if (prevOiWavelength == null) {
+                            // table is not present
                             break;
                         }
+                        // use another suffix (_nn):
+                        idx++;
+                        newName = name + "_" + idx;
                     }
-                    // use another suffix (_nn):
-                    idx++;
-                    newName = name + "_" + idx;
-                }
 
-                final OIWavelength newOiWavelength;
+                    final OIWavelength newOiWavelength;
 
-                if (prevOiWavelength != null) {
-                    // use the previous table
-                    newOiWavelength = prevOiWavelength;
-                } else {
-                    // add the new table (copy):
-                    newOiWavelength = (OIWavelength) resultFile.copyTable(oiWavelength);
-                    newOiWavelength.setInsName(newName);
+                    if (prevOiWavelength != null) {
+                        // use the previous table
+                        newOiWavelength = prevOiWavelength;
+                    } else {
+                        // add the new table (copy):
+                        newOiWavelength = (OIWavelength) resultFile.copyTable(oiWavelength);
+                        newOiWavelength.setInsName(newName);
 
-                    // get the wavelength mask for this wavelength table:
-                    final IndexMask wavelengthMask = selectorResult.getMask(oiWavelength);
+                        // get the wavelength mask for this wavelength table:
+                        final IndexMask wavelengthMask = selectorResult.getMask(oiWavelength);
 
-                    if (wavelengthMask != null && !wavelengthMask.isFull()) {
-                        final int nKeepRows = wavelengthMask.cardinality();
-                        // redim the table to the correct row count to prune invalid rows:
-                        newOiWavelength.resizeTable(nKeepRows, wavelengthMask.getBitSet());
+                        if (wavelengthMask != null && !wavelengthMask.isFull()) {
+                            final int nKeepRows = wavelengthMask.cardinality();
+                            // redim the table to the correct row count to prune invalid rows:
+                            newOiWavelength.resizeTable(nKeepRows, wavelengthMask.getBitSet());
 
-                        logger.log(Level.INFO, "Table[{0}] filtered from Table[{1}]",
-                                new Object[]{newOiWavelength, oiWavelength});
+                            logger.log(Level.INFO, "Table[{0}] filtered from Table[{1}]",
+                                    new Object[]{newOiWavelength, oiWavelength});
+                        }
+                        resultFile.addOiTable(newOiWavelength);
                     }
-                    resultFile.addOiTable(newOiWavelength);
+                    mapOIWavelengths.put(oiWavelength, newOiWavelength);
+
+                    // handle duplicated tables:
+                    final ArrayList<OIWavelength> duplicatedOIWavelengths = dedupOIWavelengths.get(oiWavelength);
+                    if (duplicatedOIWavelengths != null) {
+                        for (OIWavelength duplicatedOIWavelength : duplicatedOIWavelengths) {
+                            mapOIWavelengths.put(duplicatedOIWavelength, newOiWavelength);
+                        }
+                    }
                 }
-                mapOIWavelengths.put(oiWavelength, newOiWavelength);
             }
-            logger.log(Level.INFO, "insNames: {0}", Arrays.toString(resultFile.getAcceptedInsNames()));
+            logger.log(Level.FINE, "insNames: {0}", Arrays.toString(resultFile.getAcceptedInsNames()));
             logger.log(Level.FINE, "mapOIWavelengths: {0}", mapOIWavelengths);
         }
     }
@@ -493,51 +521,61 @@ public final class Merger {
             final OIFitsFile resultFile = ctx.resultFile;
             final Map<OIArray, OIArray> mapOIArrays = ctx.mapOIArrays;
 
-            // Browse all used OIArray tables:
-            for (OIArray oiArray : ctx.usedOIArrays) {
-                final String name = oiArray.getArrName();
+            // Reduce duplicated tables (distinct table to duplicates):
+            final IdentityHashMap<OIArray, ArrayList<OIArray>> dedupOIArrays = new IdentityHashMap<>();
+            // insname to tables:
+            final LinkedHashMap<String, ArrayList<OIArray>> nameToDistinctOIArrays = new LinkedHashMap<>();
 
-                // If name is already present in result, 
-                // change the name and memorise this change to update data information later
-                String newName = name;
-                int idx = 0;
-                OIArray prevOiArray = null;
+            deduplicateTables(OIFitsConstants.KEYWORD_ARRNAME, ctx.usedOIArrays, dedupOIArrays, nameToDistinctOIArrays);
 
-                for (;;) {
-                    prevOiArray = resultFile.getOiArray(newName);
+            // Copy all distinct OIArray tables:
+            for (ArrayList<OIArray> listOIArrays : nameToDistinctOIArrays.values()) {
 
-                    if (prevOiArray == null) {
-                        // table is not present
-                        break;
-                    } else {
-                        // check if the existing table in resultFile is exactly the same ? (to remove duplicates)
-                        if (OITableComparator.STRICT_COMPARATOR.compareTable(oiArray, prevOiArray)) {
-                            logger.log(Level.INFO, "Same tables: {0} vs {1}", new Object[]{oiArray, prevOiArray});
-                            // table is the same
+                for (OIArray oiArray : listOIArrays) {
+                    final String name = oiArray.getArrName();
+
+                    // If name is already present in result, 
+                    // change the name and memorise this change to update data later
+                    String newName = name;
+                    int idx = 0;
+                    OIArray prevOiArray = null;
+
+                    for (;;) {
+                        prevOiArray = resultFile.getOiArray(newName);
+
+                        if (prevOiArray == null) {
+                            // table is not present
                             break;
                         }
-                        // TODO: try all other possibilities ie all OI_ARRAYs having the same same
-                        // Use hash or checksum to avoid costly raw table comparison ?
+                        // use another suffix (_nn):
+                        idx++;
+                        newName = name + "_" + idx;
                     }
-                    // use another suffix (_nn):
-                    idx++;
-                    newName = name + "_" + idx;
-                }
 
-                final OIArray newOiArray;
+                    final OIArray newOiArray;
 
-                if (prevOiArray != null) {
-                    // use the previous table
-                    newOiArray = prevOiArray;
-                } else {
-                    // add the new table (copy):
-                    newOiArray = (OIArray) resultFile.copyTable(oiArray);
-                    newOiArray.setArrName(newName);
-                    resultFile.addOiTable(newOiArray);
+                    if (prevOiArray != null) {
+                        // use the previous table
+                        newOiArray = prevOiArray;
+                    } else {
+                        // add the new table (copy):
+                        newOiArray = (OIArray) resultFile.copyTable(oiArray);
+                        newOiArray.setArrName(newName);
+
+                        resultFile.addOiTable(newOiArray);
+                    }
+                    mapOIArrays.put(oiArray, newOiArray);
+
+                    // handle duplicated tables:
+                    final ArrayList<OIArray> duplicatedOIArrays = dedupOIArrays.get(oiArray);
+                    if (duplicatedOIArrays != null) {
+                        for (OIArray duplicatedOIArray : duplicatedOIArrays) {
+                            mapOIArrays.put(duplicatedOIArray, newOiArray);
+                        }
+                    }
                 }
-                mapOIArrays.put(oiArray, newOiArray);
             }
-            logger.log(Level.INFO, "arrNames: {0}", Arrays.toString(resultFile.getAcceptedArrNames()));
+            logger.log(Level.FINE, "arrNames: {0}", Arrays.toString(resultFile.getAcceptedArrNames()));
             logger.log(Level.FINE, "mapOIArrays: {0}", mapOIArrays);
         }
     }
@@ -572,7 +610,7 @@ public final class Merger {
 
                 mapOICorrs.put(oiCorr, newOiCorr);
             }
-            logger.log(Level.INFO, "corrNames:  {0}", Arrays.toString(resultFile.getAcceptedCorrNames()));
+            logger.log(Level.FINE, "corrNames:  {0}", Arrays.toString(resultFile.getAcceptedCorrNames()));
             logger.log(Level.FINE, "mapOICorrs: {0}", mapOICorrs);
         }
     }
@@ -841,6 +879,50 @@ public final class Merger {
                 }
             }
         }
+    }
+
+    private static <K extends OITable> void deduplicateTables(final String keywordName, final Set<K> oiTables,
+                                                              final IdentityHashMap<K, ArrayList<K>> dedupOITables,
+                                                              final LinkedHashMap<String, ArrayList<K>> nameToDistinctOITables) {
+
+        for (K oiTable : oiTables) {
+            final String name = oiTable.getKeyword(keywordName);
+
+            ArrayList<K> listOITables = nameToDistinctOITables.get(name);
+            if (listOITables == null) {
+                listOITables = new ArrayList<>();
+                nameToDistinctOITables.put(name, listOITables);
+            }
+
+            K prevOiTable = null;
+
+            if (!listOITables.isEmpty()) {
+
+                for (K otherOiTable : listOITables) {
+                    // check if the previous table is exactly the same ? (to remove duplicates)
+                    if (OITableComparator.STRICT_COMPARATOR.compareTable(oiTable, otherOiTable)) {
+                        // table is the same
+                        prevOiTable = otherOiTable;
+                        logger.log(Level.FINE, "Same tables: {0} vs {1}", new Object[]{oiTable, prevOiTable});
+                        break;
+                    }
+                }
+            }
+            if (prevOiTable == null) {
+                logger.log(Level.FINE, "New distinct table: {0}", oiTable);
+                listOITables.add(oiTable);
+            } else {
+                // update table mapping:
+                ArrayList<K> duplicatedOITables = dedupOITables.get(prevOiTable);
+                if (duplicatedOITables == null) {
+                    duplicatedOITables = new ArrayList<>();
+                    dedupOITables.put(prevOiTable, duplicatedOITables);
+                }
+                duplicatedOITables.add(oiTable);
+            }
+        }
+        logger.log(Level.FINE, "nameToDistinctOITables: {0}", nameToDistinctOITables);
+        logger.log(Level.FINE, "dedupOITables: {0}", dedupOITables);
     }
 
     /**
