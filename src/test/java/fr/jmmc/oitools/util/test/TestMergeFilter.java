@@ -119,7 +119,7 @@ public class TestMergeFilter extends JUnitBaseTest {
             // Filter block data of the files
             selector.setInsModeUID("GRAV");
             mergeFilterInsModeBlockAll = Merger.process(oiColInput, selector);
-            Assert.assertNotNull("Merge return a null value", mergeFilterInsModeBlockAll);
+            Assert.assertNull("Merge return not a null value", mergeFilterInsModeBlockAll);
 
             // Filter let pass data of the files
             selector.setInsModeUID(INSNAME_FILTER_VALUE);
@@ -141,7 +141,7 @@ public class TestMergeFilter extends JUnitBaseTest {
             // Filter block data of the files
             selector.setTargetUID("MISSING_TARGET");
             mergeFilterTargetBlockAll = Merger.process(oiColTargets, selector);
-            Assert.assertNotNull("Merge return a null value", mergeFilterTargetBlockAll);
+            Assert.assertNull("Merge return not a null value", mergeFilterTargetBlockAll);
 
             // Filter let pass data of the files
             selector.setTargetUID(TARGET_FILTER_VALUE);
@@ -165,7 +165,7 @@ public class TestMergeFilter extends JUnitBaseTest {
             // Filter block data of the files
             selector.setNightID(Integer.valueOf(0));
             mergeFilterNightBlockAll = Merger.process(oiColNights, selector);
-            Assert.assertNotNull("Merge return a null value", mergeFilterNightBlockAll);
+            Assert.assertNull("Merge return not a null value", mergeFilterNightBlockAll);
 
             // Filter let pass data of the files
             selector.setNightID(NIGHT_FILTER_VALUE);
@@ -189,7 +189,7 @@ public class TestMergeFilter extends JUnitBaseTest {
             // Filter block data of the files
             selector.setBaselines(Arrays.asList("X1-Y1"));
             mergeFilterBaselinesBlockAll = Merger.process(oiColBaselines, selector);
-            Assert.assertNotNull("Merge return a null value", mergeFilterBaselinesBlockAll);
+            Assert.assertNull("Merge return not a null value", mergeFilterBaselinesBlockAll);
 
             // Filter let pass data of the files
             selector.setBaselines(BASELINES_FILTER_VALUE);
@@ -216,7 +216,7 @@ public class TestMergeFilter extends JUnitBaseTest {
             // Filter block data of the files
             selector.setMJDRanges(Arrays.asList(new Range(50000, 55000)));
             mergeFilterMjdsBlockAll = Merger.process(oiColMjds, selector);
-            Assert.assertNotNull("Merge return a null value", mergeFilterMjdsBlockAll);
+            Assert.assertNull("Merge return not a null value", mergeFilterMjdsBlockAll);
 
             // Filter let pass data of the files
             selector.setMJDRanges(MJDS_FILTER_VALUE);
@@ -240,7 +240,7 @@ public class TestMergeFilter extends JUnitBaseTest {
             // Filter block data of the files
             selector.setWavelengthRanges(Arrays.asList(new Range(0.5E-6, 1E-6)));
             mergeFilterWlsBlockAll = Merger.process(oiColMjds, selector);
-            Assert.assertNotNull("Merge return a null value", mergeFilterWlsBlockAll);
+            Assert.assertNull("Merge return not a null value", mergeFilterWlsBlockAll);
 
             // Filter let pass data of the files
             selector.setWavelengthRanges(WLS_FILTER_VALUE);
@@ -276,30 +276,6 @@ public class TestMergeFilter extends JUnitBaseTest {
         List<OITable> tableList = mergeFilterPassAll.getOITableList();
         Assert.assertEquals("Bad number of Data in merge result of blocking filter",
                 input.getOITableList().size(), (tableList != null) ? tableList.size() : 0);
-
-        tableList = mergeFilterInsModeBlockAll.getOITableList();
-        Assert.assertEquals("No table should be in merge result of blocking filter",
-                0, (tableList != null) ? tableList.size() : 0);
-
-        tableList = mergeFilterTargetBlockAll.getOITableList();
-        Assert.assertEquals("No table should be in merge result of blocking filter",
-                0, (tableList != null) ? tableList.size() : 0);
-
-        tableList = mergeFilterNightBlockAll.getOITableList();
-        Assert.assertEquals("No table should be in merge result of blocking filter",
-                0, (tableList != null) ? tableList.size() : 0);
-
-        tableList = mergeFilterBaselinesBlockAll.getOITableList();
-        Assert.assertEquals("No table should be in merge result of blocking filter",
-                0, (tableList != null) ? tableList.size() : 0);
-
-        tableList = mergeFilterMjdsBlockAll.getOITableList();
-        Assert.assertEquals("No table should be in merge result of blocking filter",
-                0, (tableList != null) ? tableList.size() : 0);
-
-        tableList = mergeFilterWlsBlockAll.getOITableList();
-        Assert.assertEquals("No table should be in merge result of blocking filter",
-                0, (tableList != null) ? tableList.size() : 0);
     }
 
     /**
@@ -316,17 +292,9 @@ public class TestMergeFilter extends JUnitBaseTest {
         Assert.assertEquals("Bad number of Data in merge result of blocking filter",
                 input.getOiDatas().length, (dataList != null) ? dataList.size() : 0);
 
-        dataList = mergeFilterInsModeBlockAll.getOiDataList();
-        Assert.assertEquals("No data should be in merge result of blocking filter",
-                0, (dataList != null) ? dataList.size() : 0);
-
         dataList = mergeFilterInsModePassSome.getOiDataList();
         Assert.assertEquals("4 Data tables should be in merge result of blocking filter",
                 4, (dataList != null) ? dataList.size() : 0);
-
-        dataList = mergeFilterTargetBlockAll.getOiDataList();
-        Assert.assertEquals("No data should be in merge result of blocking filter",
-                0, (dataList != null) ? dataList.size() : 0);
 
         dataList = mergeFilterTargetPassSome.getOiDataList();
         Assert.assertEquals("2 Data tables should be in merge result of blocking filter",
@@ -339,10 +307,6 @@ public class TestMergeFilter extends JUnitBaseTest {
             }
         }
 
-        dataList = mergeFilterNightBlockAll.getOiDataList();
-        Assert.assertEquals("No data should be in merge result of blocking filter",
-                0, (dataList != null) ? dataList.size() : 0);
-
         dataList = mergeFilterNightPassSome.getOiDataList();
         Assert.assertEquals("12 Data tables should be in merge result of blocking filter",
                 12, (dataList != null) ? dataList.size() : 0);
@@ -354,17 +318,9 @@ public class TestMergeFilter extends JUnitBaseTest {
             }
         }
 
-        dataList = mergeFilterBaselinesBlockAll.getOiDataList();
-        Assert.assertEquals("No data should be in merge result of blocking filter",
-                0, (dataList != null) ? dataList.size() : 0);
-
         dataList = mergeFilterBaselinesPassSome.getOiDataList();
         Assert.assertEquals("2 Data tables should be in merge result of blocking filter",
                 2, (dataList != null) ? dataList.size() : 0);
-
-        dataList = mergeFilterMjdsBlockAll.getOiDataList();
-        Assert.assertEquals("No data should be in merge result of blocking filter",
-                0, (dataList != null) ? dataList.size() : 0);
 
         dataList = mergeFilterMjdsPassSome.getOiDataList();
         Assert.assertEquals("6 Data tables should be in merge result of blocking filter",
@@ -378,10 +334,6 @@ public class TestMergeFilter extends JUnitBaseTest {
                         Range.matchRanges(MJDS_FILTER_VALUE, data.getDistinctMJDRanges().keySet()));
             }
         }
-
-        dataList = mergeFilterWlsBlockAll.getOiDataList();
-        Assert.assertEquals("No data should be in merge result of blocking filter",
-                0, (dataList != null) ? dataList.size() : 0);
 
         dataList = mergeFilterWlsPassSome.getOiDataList();
         Assert.assertEquals("8 Data tables should be in merge result of blocking filter",
@@ -408,10 +360,6 @@ public class TestMergeFilter extends JUnitBaseTest {
         OIWavelength[] insList = mergeFilterPassAll.getOiWavelengths();
         Assert.assertEquals("Bad number of Ins in merge result of passing filter",
                 input.getOiWavelengths().length, (insList != null) ? insList.length : 0);
-
-        insList = mergeFilterInsModeBlockAll.getOiWavelengths();
-        Assert.assertEquals("No ins should be in merge result of blocking filter",
-                0, (insList != null) ? insList.length : 0);
 
         insList = mergeFilterInsModePassSome.getOiWavelengths();
         Assert.assertEquals("1 Ins should be in merge result of blocking filter",
@@ -441,10 +389,6 @@ public class TestMergeFilter extends JUnitBaseTest {
         OIArray[] arrayList = mergeFilterPassAll.getOiArrays();
         Assert.assertEquals("Bad number of Ins in merge result of passing filter",
                 input.getOiArrays().length, (arrayList != null) ? arrayList.length : 0);
-
-        arrayList = mergeFilterInsModeBlockAll.getOiArrays();
-        Assert.assertEquals("No array should be in merge result of blocking filter",
-                0, (arrayList != null) ? arrayList.length : 0);
 
         arrayList = mergeFilterInsModePassSome.getOiArrays();
         Assert.assertEquals("1 array should be in merge result of blocking filter",
