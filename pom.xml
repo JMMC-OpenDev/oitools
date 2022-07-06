@@ -54,7 +54,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <dependency>
             <groupId>org.python</groupId>
             <artifactId>jython</artifactId>
-            <version>2.7.0</version>
+            <version>2.7.2</version>
             <!-- disabled (too large ~ 30Mb) -->
             <scope>provided</scope>
         </dependency>
