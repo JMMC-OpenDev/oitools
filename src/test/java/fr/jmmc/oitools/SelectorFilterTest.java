@@ -59,7 +59,7 @@ public class SelectorFilterTest extends JUnitBaseTest {
 
         final OIWavelength oiWaveLength = oiDatas.get(0).getOiWavelength();
 
-        final IndexMask mask = selectorResult.getMask(oiWaveLength);
+        final IndexMask mask = selectorResult.getWavelengthMask(oiWaveLength);
         // logger.info("mask: " + mask);
 
         logger.log(Level.INFO, "mask bits: {0}", mask.cardinality());
@@ -83,7 +83,7 @@ public class SelectorFilterTest extends JUnitBaseTest {
 
         final OIWavelength oiWaveLength = oiDatas.get(0).getOiWavelength();
 
-        final IndexMask mask = selectorResult.getMask(oiWaveLength);
+        final IndexMask mask = selectorResult.getWavelengthMask(oiWaveLength);
         // logger.info("mask: " + mask);
 
         logger.log(Level.INFO, "mask bits: {0}", mask.cardinality());
@@ -118,7 +118,7 @@ public class SelectorFilterTest extends JUnitBaseTest {
         Assert.assertEquals(8, oiDatas.size());
 
         for (OIData oiData : oiDatas) {
-            final IndexMask mask = selectorResult.getMask(oiData.getOiWavelength());
+            final IndexMask mask = selectorResult.getWavelengthMask(oiData.getOiWavelength());
             // logger.info("mask: \n" + mask);
 
             Assert.assertTrue(mask.isFull());

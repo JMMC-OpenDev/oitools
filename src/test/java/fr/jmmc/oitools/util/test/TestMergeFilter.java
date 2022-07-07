@@ -89,6 +89,7 @@ public class TestMergeFilter extends JUnitBaseTest {
 
     private static OIFitsFile mergeFilterWlsBlockAll = null;
     private static OIFitsFile mergeFilterWlsPassSome = null;
+    private static OIFitsFile mergeFilterWlsPassAll = null;
 
     /**
      * Filter OIFitsFiles
@@ -233,18 +234,18 @@ public class TestMergeFilter extends JUnitBaseTest {
         selector.reset();
         // Wavelengths:
         {
-            final OIFitsCollection oiColMjds = new OIFitsCollection();
-            oiColMjds.addOIFitsFile(input);
-            oiColMjds.analyzeCollection();
+            final OIFitsCollection oiColWls = new OIFitsCollection();
+            oiColWls.addOIFitsFile(input);
+            oiColWls.analyzeCollection();
 
             // Filter block data of the files
             selector.setWavelengthRanges(Arrays.asList(new Range(0.5E-6, 1E-6)));
-            mergeFilterWlsBlockAll = Merger.process(oiColMjds, selector);
+            mergeFilterWlsBlockAll = Merger.process(oiColWls, selector);
             Assert.assertNull("Merge return not a null value", mergeFilterWlsBlockAll);
 
             // Filter let pass data of the files
             selector.setWavelengthRanges(WLS_FILTER_VALUE);
-            mergeFilterWlsPassSome = Merger.process(oiColMjds, selector);
+            mergeFilterWlsPassSome = Merger.process(oiColWls, selector);
             Assert.assertNotNull("Merge return a null value", mergeFilterWlsPassSome);
 
             final OIFitsChecker checker = new OIFitsChecker();
@@ -252,6 +253,11 @@ public class TestMergeFilter extends JUnitBaseTest {
             logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
 
             mergeFilterWlsPassSome.analyze();
+
+            // Filter let pass data of the files
+            selector.setWavelengthRanges(Arrays.asList(new Range(0.1E-6, 1E-4)));
+            mergeFilterWlsPassAll = Merger.process(oiColWls, selector);
+            Assert.assertNotNull("Merge return a null value", mergeFilterWlsPassAll);
         }
         // testFile = mergeFilterWlsPassSome;
 

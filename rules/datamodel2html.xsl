@@ -302,6 +302,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 <th>(Unit)</th>
                                 <th>Description</th>
                                 <th>(Values)</th>
+                                <th>(Expr)</th>
                                 <th class="myhide">Rules</th>
                             </tr>
                         </thead>
@@ -415,6 +416,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 </li>
                             </xsl:for-each>
                         </ul>
+                    </xsl:if>
+                </td>
+                <td>
+                    <xsl:if test="expression">
+                        <xsl:value-of select="expression" />
                     </xsl:if>
                 </td>
                 <td class="myhide">

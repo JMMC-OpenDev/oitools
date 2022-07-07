@@ -203,13 +203,13 @@ public class DumpOIFitsTest extends AbstractFileBaseTest {
         for (ColumnMeta columnMeta : table.getAllColumnDescCollection()) {
             dumpColumnMeta(columnMeta);
 
-            if (table.getColumnDerivedDesc(columnMeta.getName()) != null) {
-                dumpColumnValues(table, columnMeta, prefixDC);
-                // No MinMax for derived columns
-                // dumpColunmMinMax(table, columnMeta, prefixMM);
-            } else {
+            // Test if column is standard or derived:
+            if (table.getColumnDesc(columnMeta.getName()) == columnMeta) {
                 dumpColumnValues(table, columnMeta, prefixC);
                 dumpColunmMinMax(table, columnMeta, prefixMM);
+            } else if (table.getColumnDerivedDesc(columnMeta.getName()) == columnMeta) {
+                dumpColumnValues(table, columnMeta, prefixDC);
+                // No MinMax for derived columns
             }
         }
     }
