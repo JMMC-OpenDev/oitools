@@ -12,6 +12,10 @@ See [Developers corner](doc/DevelopersCorner.md)
 * [OIFITS V1](https://jmmc-opendev.github.io/oitools/rules/DataModelV1_output.html)
 * [OIFITS V2](https://jmmc-opendev.github.io/oitools/rules/DataModelV2_output.html)
 
+More detailed data model including dynamic columns:
+* [OIFITS V1 - all](https://jmmc-opendev.github.io/oitools/rules/DataModelV1-all_output.html)
+* [OIFITS V2 - all](https://jmmc-opendev.github.io/oitools/rules/DataModelV2-all_output.html)
+
 
 ## Setup
 
