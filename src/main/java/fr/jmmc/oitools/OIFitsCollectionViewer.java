@@ -103,11 +103,15 @@ public final class OIFitsCollectionViewer {
             // night
             final int gNightId = granule.getNight().getNightId();
 
+            // mjd range:
+            final Range mjdRange = granule.getMjdRange();
+
             final Set<OIData> oiDatas = oiDataPerGranule.get(granule);
             if (oiDatas != null) {
+                final double tMin = mjdRange.getMin();
+                final double tMax = mjdRange.getMax();
                 // Statistics per granule:
                 int nbVis = 0, nbVis2 = 0, nbT3 = 0;
-                double tMin = Double.POSITIVE_INFINITY, tMax = Double.NEGATIVE_INFINITY;
                 double intTime = Double.POSITIVE_INFINITY;
                 String facilityName = "";
 
@@ -119,7 +123,6 @@ public final class OIFitsCollectionViewer {
                         final int nbRows = oiData.getNbRows();
                         final short[] targetIds = oiData.getTargetId();
                         final int[] nightIds = oiData.getNightId();
-                        final double[] mjds = oiData.getMJD();
                         final double[] intTimes = oiData.getIntTime();
 
                         boolean match = false;
@@ -138,16 +141,6 @@ public final class OIFitsCollectionViewer {
                                     nbT3 += 1;
                                 }
                                 // TODO: add OIFlux ?
-
-                                /* search for minimal and maximal MJD for target */
- /* TODO: make use of DATE-OBS+TIME[idx] if no MJD */
-                                final double mjd = mjds[i];
-                                if (mjd < tMin) {
-                                    tMin = mjd;
-                                }
-                                if (mjd > tMax) {
-                                    tMax = mjd;
-                                }
 
                                 /* search for minimal (?) INT_TIME for target */
                                 final double t = intTimes[i];
@@ -212,13 +205,13 @@ public final class OIFitsCollectionViewer {
             // night
             final int gNightId = granule.getNight().getNightId();
 
+            // MJD Range:
+            final Range mjdRange = granule.getMjdRange();
+
             // Sort StaNames by name:
             sortedStaNames.clear();
             sortedStaNames.addAll(granule.getDistinctStaNames());
             Collections.sort(sortedStaNames, StationNamesComparator.INSTANCE);
-
-            // MJD Range:
-            final Range mjdRange = granule.getMjdRange();
 
             out.append(insName).append(SEP)
                     .append(minWavelength).append(SEP)
@@ -233,10 +226,11 @@ public final class OIFitsCollectionViewer {
                     .append(df6.format(mjdRange.getMax())).append("] ").append(SEP);
 
             // distinct StaNames:
+            out.append('[');
             for (String staName : sortedStaNames) {
                 out.append(staName).append(' ');
             }
-            out.append('\n');
+            out.append("] ").append('\n');
         }
     }
 }
