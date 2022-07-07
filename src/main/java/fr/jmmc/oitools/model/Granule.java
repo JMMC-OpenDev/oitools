@@ -44,47 +44,6 @@ public final class Granule {
         TARGET, INS_MODE, NIGHT;
     }
 
-    public final static Matcher<Granule> MATCHER_LIKE = new Matcher<Granule>() {
-
-        @Override
-        public boolean match(final Granule pattern, final Granule candidate) {
-            if (pattern == candidate) {
-                return true;
-            }
-            if ((pattern.getTarget() != null) && (candidate.getTarget() != null)) {
-                if (!pattern.getTarget().equals(candidate.getTarget())) {
-                    return false;
-                }
-            }
-            if ((pattern.getInsMode() != null) && (candidate.getInsMode() != null)) {
-                if (!pattern.getInsMode().equals(candidate.getInsMode())) {
-                    return false;
-                }
-            }
-            if ((pattern.getNight() != null) && (candidate.getNight() != null)) {
-                if (!pattern.getNight().equals(candidate.getNight())) {
-                    return false;
-                }
-            }
-            if (pattern.hasDistinctStaNames() && candidate.hasDistinctStaNames()) {
-                if (!Granule.match(pattern.getDistinctStaNames(), candidate.getDistinctStaNames())) {
-                    return false;
-                }
-            }
-            if (pattern.hasDistinctMjdRanges() && candidate.hasDistinctMjdRanges()) {
-                if (!Range.matchRanges(pattern.getDistinctMjdRanges(), candidate.getDistinctMjdRanges())) {
-                    return false;
-                }
-            }
-            if (pattern.hasDistinctWavelengthRanges() && (candidate.getInsMode() != null)) {
-                if (!Range.matchRange(pattern.getDistinctWavelengthRanges(), candidate.getInsMode().getWavelengthRange())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    };
-
     /* members */
     private Target target;
     private InstrumentMode insMode;
@@ -94,8 +53,6 @@ public final class Granule {
     private Set<String> distinctStaNames = null;
     /** distinct MJD values */
     private Set<Range> distinctMjdRanges = null;
-    /** distinct Wavelength values */
-    private Set<Range> distinctWavelengthRanges = null;
 
     public Granule() {
         this(null, null, null);
@@ -171,7 +128,7 @@ public final class Granule {
 
     public boolean isEmpty() {
         return (this.target == null) && (this.insMode == null) && (this.night == null)
-                && !hasDistinctStaNames() && !hasDistinctMjdRanges() && !hasDistinctWavelengthRanges();
+                && !hasDistinctStaNames() && !hasDistinctMjdRanges();
     }
 
     /* extra information (filters) */
@@ -197,23 +154,11 @@ public final class Granule {
         return distinctMjdRanges;
     }
 
-    public boolean hasDistinctWavelengthRanges() {
-        return (distinctWavelengthRanges != null) && !distinctWavelengthRanges.isEmpty();
-    }
-
-    public Set<Range> getDistinctWavelengthRanges() {
-        if (distinctWavelengthRanges == null) {
-            distinctWavelengthRanges = new LinkedHashSet<Range>();
-        }
-        return distinctWavelengthRanges;
-    }
-
     @Override
     public String toString() {
         return "Granule{" + "target=" + target + ", insMode=" + insMode + ", night=" + night
                 + ", distinctStaNames=" + distinctStaNames
                 + ", distinctMjdRanges=" + distinctMjdRanges
-                + ", distinctWavelengthRanges=" + distinctWavelengthRanges
                 + '}';
     }
 
@@ -230,14 +175,5 @@ public final class Granule {
         final List<K> sorted = new ArrayList<K>(values);
         Collections.sort(sorted, GranuleComparator.getComparator(field));
         return sorted;
-    }
-
-    public static boolean match(final Set<String> selected, final Set<String> candidates) {
-        for (String sel : selected) {
-            if (candidates.contains(sel)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -52,6 +52,9 @@ public final class SelectorResult {
     private final Set<Granule> granules = new HashSet<Granule>();
     /* preserve order in selected data (per file) */
     private final Set<OIData> oiDatas = new LinkedHashSet<OIData>();
+    /* filters */
+    private final List<FitsTableFilter<?>> filtersUsed = new ArrayList<>();
+    private final List<FitsTableFilter<?>> filtersOIWavelength = new ArrayList<>();
     /* masks */
     /** Map between OIWavelength table to BitSet (mask) for OIWavelength */
     private final Map<OIWavelength, IndexMask> maskOIWavelengths = new IdentityHashMap<OIWavelength, IndexMask>();
@@ -72,12 +75,26 @@ public final class SelectorResult {
         selector = null;
         granules.clear();
         oiDatas.clear();
+        filtersUsed.clear();
+        filtersOIWavelength.clear();
         maskOIWavelengths.clear();
         sortedTargets = null;
         sortedInstrumentModes = null;
         sortedNightIds = null;
         sortedOIDatas = null;
         usedStaNamesMap = null;
+    }
+
+    public void resetFilters() {
+        filtersUsed.clear();
+
+        if (hasFiltersOIWavelength()) {
+            final List<FitsTableFilter<?>> filters = getFiltersOIWavelength();
+            for (int f = 0, len = filters.size(); f < len; f++) {
+                final FitsTableFilter<?> filter = filters.get(f);
+                filter.reset();
+            }
+        }
     }
 
     public boolean hasSelector() {
@@ -103,6 +120,18 @@ public final class SelectorResult {
     public void addOIData(final Granule g, final OIData oiData) {
         granules.add(g);
         oiDatas.add(oiData);
+    }
+
+    public List<FitsTableFilter<?>> getFiltersUsed() {
+        return filtersUsed;
+    }
+
+    public boolean hasFiltersOIWavelength() {
+        return !filtersOIWavelength.isEmpty();
+    }
+
+    public List<FitsTableFilter<?>> getFiltersOIWavelength() {
+        return filtersOIWavelength;
     }
 
     public List<Target> getDistinctTargets() {
@@ -151,8 +180,13 @@ public final class SelectorResult {
      * @return the IndexMask, or null if it was unset for the OIWavelength, or null if the null mask was registered for
      * this OIWavelength.
      */
-    public IndexMask getMask(final OIWavelength oiWavelength) {
+    public IndexMask getWavelengthMask(final OIWavelength oiWavelength) {
         return this.maskOIWavelengths.get(oiWavelength);
+    }
+
+    public IndexMask getWavelengthMaskNotFull(final OIWavelength oiWavelength) {
+        final IndexMask wavelengthMask = getWavelengthMask(oiWavelength);
+        return (wavelengthMask == null || wavelengthMask.isFull()) ? null : wavelengthMask;
     }
 
     /**
@@ -160,7 +194,7 @@ public final class SelectorResult {
      * @param oiWavelength Must not be null.
      * @param mask Can be null, it means the mask hides everything.
      */
-    public void putMask(final OIWavelength oiWavelength, final IndexMask mask) {
+    public void putWavelengthMask(final OIWavelength oiWavelength, final IndexMask mask) {
         this.maskOIWavelengths.put(oiWavelength, mask);
     }
 

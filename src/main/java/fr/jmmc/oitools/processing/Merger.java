@@ -482,7 +482,7 @@ public final class Merger {
                         newOiWavelength.setInsName(newName);
 
                         // get the wavelength mask for this wavelength table:
-                        final IndexMask wavelengthMask = selectorResult.getMask(oiWavelength);
+                        final IndexMask wavelengthMask = selectorResult.getWavelengthMask(oiWavelength);
 
                         if (wavelengthMask != null && !wavelengthMask.isFull()) {
                             final int nKeepRows = wavelengthMask.cardinality();
@@ -682,7 +682,7 @@ public final class Merger {
                 newInsName = newOiWavelength.getInsName();
 
                 // get the wavelength mask for the OIData's wavelength table:
-                final IndexMask wavelengthMask = selectorResult.getMask(oiData.getOiWavelength());
+                final IndexMask wavelengthMask = selectorResult.getWavelengthMask(oiData.getOiWavelength());
 
                 logger.log(Level.FINE, "Mask WL: {0}", wavelengthMask);
 
