@@ -153,7 +153,7 @@ public final class OICorr extends OITable {
      * @return the CORR column.
      */
     public double[] getCorr() {
-        return this.getColumnAsDouble(OIFitsConstants.COLUMN_CORR);
+        return this.getColumnDouble(OIFitsConstants.COLUMN_CORR);
     }
 
     /* --- Other methods --- */

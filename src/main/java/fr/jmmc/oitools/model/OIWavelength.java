@@ -27,19 +27,12 @@ import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
 import fr.jmmc.oitools.model.range.Range;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.logging.Level;
 
 /**
  * Class for OI_WAVELENGTH table.
  */
 public final class OIWavelength extends OITable {
-
-    /* constants */
-    /** WL_RANK_IDX derived OIWavelength column as int[] */
-    public final static String COLUMN_WLEN_RANK_IDX = "WL_RANK_IDX";
 
     /* static descriptors */
     /** INSNAME keyword descriptor */
@@ -51,6 +44,12 @@ public final class OIWavelength extends OITable {
     /** EFF_BAND column descriptor */
     private final static ColumnMeta COLUMN_EFF_BAND = new ColumnMeta(OIFitsConstants.COLUMN_EFF_BAND,
             "effective bandpass of channel", Types.TYPE_REAL, Units.UNIT_METER, DataRange.RANGE_POSITIVE_STRICT);
+    /** EFF_WAVE derived column descriptor (double) */
+    private final static ColumnMeta COLUMN_EFF_WAVE_DBL = new ColumnMeta(OIFitsConstants.COLUMN_EFF_WAVE,
+            "effective wavelength of channel (double)", Types.TYPE_DBL, Units.UNIT_METER, DataRange.RANGE_POSITIVE_STRICT);
+    /** EFF_BAND derived column descriptor (double) */
+    private final static ColumnMeta COLUMN_EFF_BAND_DBL = new ColumnMeta(OIFitsConstants.COLUMN_EFF_BAND,
+            "effective bandpass of channel (double)", Types.TYPE_DBL, Units.UNIT_METER, DataRange.RANGE_POSITIVE_STRICT);
     /* members */
  /* cached analyzed data */
     private InstrumentMode insMode = null;
@@ -70,6 +69,11 @@ public final class OIWavelength extends OITable {
 
         // EFF_BAND  column definition
         addColumnMeta(COLUMN_EFF_BAND);
+
+        // Derived EFF_WAVE column definition
+        addDerivedColumnMeta(COLUMN_EFF_WAVE_DBL);
+        // Derived EFF_BAND column definition
+        addDerivedColumnMeta(COLUMN_EFF_BAND_DBL);
     }
 
     /**
@@ -193,10 +197,31 @@ public final class OIWavelength extends OITable {
             for (int j = 0; j < nWaves; j++) {
                 effWaveDbls[j] = effWaves[j];
             }
-
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_EFF_WAVE, effWaveDbls);
         }
         return effWaveDbls;
+    }
+
+    /**
+     * Return the effective bandpass of channel as double array
+     * @return the effective bandpass of channel array as double array
+     */
+    public double[] getEffBandAsDouble() {
+        // lazy:
+        double[] effBandDbls = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_EFF_BAND);
+
+        if (effBandDbls == null) {
+            final int nWaves = getNWave();
+            effBandDbls = new double[nWaves];
+
+            final float[] effBands = getEffBand();
+
+            for (int j = 0; j < nWaves; j++) {
+                effBandDbls[j] = effBands[j];
+            }
+            this.setColumnDerivedValue(OIFitsConstants.COLUMN_EFF_BAND, effBandDbls);
+        }
+        return effBandDbls;
     }
 
     /**
@@ -215,40 +240,25 @@ public final class OIWavelength extends OITable {
         return getColumnRange(OIFitsConstants.COLUMN_EFF_BAND);
     }
 
-    /**
-     * Return the rank index for the effective wavelength of channel (UNUSED)
-     * @return rank index for the effective wavelength of channel
+    /*
+     * --- public data access ---------------------------------------------------------
      */
-    public int[] getEffWaveRankIndex() {
-        int[] ranks = (int[]) getColumnDerivedInt(COLUMN_WLEN_RANK_IDX);
-
-        /* compute rank index if not previously set */
-        if (ranks == null) {
-            final int nWaves = getNWave();
-            ranks = new int[nWaves];
-            final double[] effWaves = getEffWaveAsDouble();
-
-            final ArrayList<Integer> idxList = new ArrayList<Integer>(nWaves);
-            for (int i = 0; i < nWaves; i++) {
-                idxList.add(NumberUtils.valueOf(i));
-            }
-            // Sort index by wavelength:
-            Collections.sort(idxList, new Comparator<Integer>() {
-                @Override
-                public int compare(final Integer i1, final Integer i2) {
-                    // compare wavelengths:
-                    return Double.compare(effWaves[i1], effWaves[i2]);
-                }
-            });
-            // Store to rank index:
-            for (int i = 0, j; i < nWaves; i++) {
-                j = idxList.get(i);
-                ranks[i] = j;
-                // System.out.println("rank[" + i + " => " + j + "]: " + effWaves[j]);
-            }
-            setColumnDerivedValue(COLUMN_WLEN_RANK_IDX, ranks);
+    /**
+     * Return the derived column data as double array (1D) for the given column
+     * name To be overriden in child classes for lazy computed columns
+     *
+     * @param name any column name
+     * @return column data as double array (1D) or null if undefined or wrong
+     * type
+     */
+    protected double[] getDerivedColumnAsDouble(final String name) {
+        if (OIFitsConstants.COLUMN_EFF_WAVE.equals(name)) {
+            return getEffWaveAsDouble();
         }
-        return ranks;
+        if (OIFitsConstants.COLUMN_EFF_BAND.equals(name)) {
+            return getEffBandAsDouble();
+        }
+        return super.getDerivedColumnAsDouble(name);
     }
 
     /* --- Other methods --- */

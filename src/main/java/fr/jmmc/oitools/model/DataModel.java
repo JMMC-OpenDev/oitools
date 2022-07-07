@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -48,14 +49,14 @@ import java.util.logging.Level;
  * Create Xml File for all Failures, all informations on the failures
  * @author bourgesl, mellag, kempsc
  */
-public class DataModel {
+public final class DataModel {
 
-    /**
-     * Logger associated to test classes
-     */
-    public final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DataModel.class.getName());
+    private final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DataModel.class.getName());
 
-    // members:
+    // constants:
+    private final static int N_ROWS = 1;
+    private final static int N_WLEN = 1;
+
     private final static short MAGIC_TARGET_ID = -4;
     private final static short MAGIC_STA_INDEX = -6;
 
@@ -69,12 +70,21 @@ public class DataModel {
     /** flag to globally support OI_VIS2 extra columns (disabled by default) */
     private static boolean oiVis2ExtraSupport = false;
 
-
     /** list used for sorted rules */
     private static final ArrayList<Rule> SORTED_RULES = new ArrayList<Rule>(64);
 
     //resources directory
     private static final String TEST_DIR = "src/test/resources/";
+
+    /** lazy DataModel singleton */
+    private static DataModel INSTANCE = null;
+
+    public static synchronized DataModel getInstance(final OIFitsStandard version) {
+        if (INSTANCE == null) {
+            INSTANCE = new DataModel(version);
+        }
+        return INSTANCE;
+    }
 
     /**
      * Get support of additional columns for Image Reconstruction Imaging.
@@ -128,19 +138,17 @@ public class DataModel {
     /**
      * Dump a DataModel for OIFITS Version 1
      * @param checker OIFitsChecker same checker run for all versions
+     * @param all true to dump derived columns too (not in standard)
      * @throws IOException
      * @throws MalformedURLException
      * @throws FitsException
      */
-    public static void dumpDataModelV1(final OIFitsChecker checker) throws IOException, MalformedURLException, FitsException {
-        final int nRows = 1;
-        final int nWLen = 1;
-
-        //load file V1 (catch V1 failures)
+    public static void dumpDataModelV1(final OIFitsChecker checker, final boolean all) throws IOException, MalformedURLException, FitsException {
+        // load file V1 (catch V1 failures)
         String absFilePath = TEST_DIR + "oifits/TEST_CreateOIFileV1.fits";
         OIFitsLoader.loadOIFits(checker, absFilePath);
 
-        //load file V1 with V2 table (catch failures)
+        // load file V1 with V2 table (catch failures)
         OIFitsChecker.setInspectMode(InspectMode.CASE_V2_IN_V1);
         try {
             absFilePath = TEST_DIR + "corrupted/V1_with_V2_Tables.fits";
@@ -150,10 +158,36 @@ public class DataModel {
         }
 
         // fake data model (catch V1 structure failures):
+        final OIFitsFile oiFitsFile = createOIFitsFileV1();
+
+        //write DataModel V1
+        writeDataModel(checker, oiFitsFile, "rules/DataModelV1" + (all ? "-all" : "") + ".xml", all);
+    }
+
+    /**
+     * Dump a DataModel for OIFITS Version 2
+     * @param checker OIFitsChecker same checker run for all versions
+     * @param all true to dump derived columns too (not in standard)
+     * @throws IOException
+     * @throws FitsException
+     */
+    public static void dumpDataModelV2(final OIFitsChecker checker, final boolean all) throws IOException, FitsException {
+        // load file (catch V2 failures)
+        String absFilePath = TEST_DIR + "oifits/TEST_CreateOIFileV2.fits";
+        OIFitsLoader.loadOIFits(checker, absFilePath);
+
+        // fake data model (catch V2 structure failures):
+        final OIFitsFile oiFitsFile = createOIFitsFileV2();
+
+        //write DataModel V2
+        writeDataModel(checker, oiFitsFile, "rules/DataModelV2" + (all ? "-all" : "") + ".xml", all);
+    }
+
+    private static OIFitsFile createOIFitsFileV1() {
         final OIFitsFile oiFitsFile = new OIFitsFile(OIFitsStandard.VERSION_1);
 
         // OITarget:
-        final OITarget oiTarget = new OITarget(oiFitsFile, nRows);
+        final OITarget oiTarget = new OITarget(oiFitsFile, N_ROWS);
         oiTarget.getTargetId()[0] = MAGIC_TARGET_ID;
         oiFitsFile.addOiTable(oiTarget);
 
@@ -166,43 +200,28 @@ public class DataModel {
 
         // OIWavelength:
         final String insName = "[[INSNAME]]";
-        final OIWavelength oiWaveLength = new OIWavelength(oiFitsFile, nWLen);
+        final OIWavelength oiWaveLength = new OIWavelength(oiFitsFile, N_WLEN);
         oiWaveLength.setInsName(insName);
         oiFitsFile.addOiTable(oiWaveLength);
 
         // Data:
-        // OIVis:
-        final OIVis oiVis = new OIVis(oiFitsFile, insName, nRows);
-        oiVis.setArrName(arrName);
-        oiFitsFile.addOiTable(oiVis);
-
-        final OIVis2 oiVis2 = new OIVis2(oiFitsFile, insName, nRows);
+        final OIVis2 oiVis2 = new OIVis2(oiFitsFile, insName, N_ROWS);
         oiVis2.setArrName(arrName);
         oiFitsFile.addOiTable(oiVis2);
 
-        final OIT3 oit3 = new OIT3(oiFitsFile, insName, nRows);
-        oit3.setArrName(arrName);
-        oiFitsFile.addOiTable(oit3);
+        // OIVis:
+        final OIVis oiVis = new OIVis(oiFitsFile, insName, N_ROWS);
+        oiVis.setArrName(arrName);
+        oiFitsFile.addOiTable(oiVis);
 
-        //write DataModel V1
-        writeDataModel(checker, oiFitsFile, "rules/DataModelV1.xml");
+        final OIT3 oiT3 = new OIT3(oiFitsFile, insName, N_ROWS);
+        oiT3.setArrName(arrName);
+        oiFitsFile.addOiTable(oiT3);
+
+        return oiFitsFile;
     }
 
-    /**
-     * Dump a DataModel for OIFITS Version 2
-     * @param checker OIFitsChecker same checker run for all versions
-     * @throws IOException
-     * @throws FitsException
-     */
-    public static void dumpDataModelV2(final OIFitsChecker checker) throws IOException, FitsException {
-        final int nRows = 1;
-        final int nWLen = 1;
-
-        //load file (catch V2 failures)
-        String absFilePath = TEST_DIR + "oifits/TEST_CreateOIFileV2.fits";
-        OIFitsLoader.loadOIFits(checker, absFilePath);
-
-        // fake data model (catch V2 structure failures):
+    private static OIFitsFile createOIFitsFileV2() {
         final OIFitsFile oiFitsFile = new OIFitsFile(OIFitsStandard.VERSION_2);
 
         // PrimaryHDU:
@@ -212,7 +231,7 @@ public class DataModel {
         oiFitsFile.setPrimaryImageHdu(imageHDU);
 
         // OITarget:
-        final OITarget oiTarget = new OITarget(oiFitsFile, nRows);
+        final OITarget oiTarget = new OITarget(oiFitsFile, N_ROWS);
         oiTarget.getTargetId()[0] = MAGIC_TARGET_ID;
         oiFitsFile.addOiTable(oiTarget);
 
@@ -225,44 +244,43 @@ public class DataModel {
 
         // OIWavelength:
         final String insName = "[[INSNAME]]";
-        final OIWavelength oiWaveLength = new OIWavelength(oiFitsFile, nWLen);
+        final OIWavelength oiWaveLength = new OIWavelength(oiFitsFile, N_WLEN);
         oiWaveLength.setInsName(insName);
         oiFitsFile.addOiTable(oiWaveLength);
 
         // OICorr:
         final String corrname = "[[CORRNAME]]";
-        final OICorr oicorr = new OICorr(oiFitsFile, nRows);
+        final OICorr oicorr = new OICorr(oiFitsFile, N_ROWS);
         oicorr.setCorrName(corrname);
         oiFitsFile.addOiTable(oicorr);
 
         // OIInspol:
-        final OIInspol oiinspol = new OIInspol(oiFitsFile, nRows, nWLen);
+        final OIInspol oiinspol = new OIInspol(oiFitsFile, N_ROWS, N_WLEN);
         oiFitsFile.addOiTable(oiinspol);
 
         // Data:
-        // OIVis:
-        final OIVis oiVis = new OIVis(oiFitsFile, insName, nRows);
-        oiVis.setArrName(arrName);
-        oiVis.setCorrName(corrname);
-        oiFitsFile.addOiTable(oiVis);
-
-        final OIVis2 oiVis2 = new OIVis2(oiFitsFile, insName, nRows);
+        final OIVis2 oiVis2 = new OIVis2(oiFitsFile, insName, N_ROWS);
         oiVis2.setArrName(arrName);
         oiVis2.setCorrName(corrname);
         oiFitsFile.addOiTable(oiVis2);
 
-        final OIT3 oit3 = new OIT3(oiFitsFile, insName, nRows);
-        oit3.setArrName(arrName);
-        oit3.setCorrName(corrname);
-        oiFitsFile.addOiTable(oit3);
+        // OIVis:
+        final OIVis oiVis = new OIVis(oiFitsFile, insName, N_ROWS);
+        oiVis.setArrName(arrName);
+        oiVis.setCorrName(corrname);
+        oiFitsFile.addOiTable(oiVis);
 
-        final OIFlux oispect = new OIFlux(oiFitsFile, insName, nRows);
-        oispect.setArrName(arrName);
-        oispect.setCorrName(corrname);
-        oiFitsFile.addOiTable(oispect);
+        final OIT3 oiT3 = new OIT3(oiFitsFile, insName, N_ROWS);
+        oiT3.setArrName(arrName);
+        oiT3.setCorrName(corrname);
+        oiFitsFile.addOiTable(oiT3);
 
-        //write DataModel V2
-        writeDataModel(checker, oiFitsFile, "rules/DataModelV2.xml");
+        final OIFlux oiFlux = new OIFlux(oiFitsFile, insName, N_ROWS);
+        oiFlux.setArrName(arrName);
+        oiFlux.setCorrName(corrname);
+        oiFitsFile.addOiTable(oiFlux);
+
+        return oiFitsFile;
     }
 
     /**
@@ -272,7 +290,8 @@ public class DataModel {
      * @param file String name of the file that will be created
      * @throws java.io.IOException
      */
-    private static void writeDataModel(final OIFitsChecker checker, final OIFitsFile oiFitsFile, final String file) throws IOException {
+    private static void writeDataModel(final OIFitsChecker checker, final OIFitsFile oiFitsFile,
+                                       final String file, final boolean all) throws IOException {
 
         oiFitsFile.check(checker);
 
@@ -287,7 +306,7 @@ public class DataModel {
         writeRules(sb, oiFitsFile);
 
         dumpPrimaryHDU(oiFitsFile, sb);
-        dumpTables(oiFitsFile.getOITableList(), sb);
+        dumpTables(oiFitsFile.getOITableList(), sb, all);
 
         sb.append("</datamodel>\n");
 
@@ -333,7 +352,7 @@ public class DataModel {
         }
     }
 
-    private static void dumpTables(final List<OITable> tables, final StringBuilder sb) {
+    private static void dumpTables(final List<OITable> tables, final StringBuilder sb, final boolean all) {
         for (OITable table : tables) {
             sb.append("<table name=\"").append(table.getExtName()).append("\">\n");
 
@@ -356,7 +375,7 @@ public class DataModel {
                 dumpKeyword(keyword, sb);
             }
 
-            for (ColumnMeta column : table.getColumnDescCollection()) {
+            for (ColumnMeta column : (all ? table.getAllColumnDescCollection() : table.getColumnDescCollection())) {
                 dumpColumn(column, sb);
             }
 
@@ -507,14 +526,11 @@ public class DataModel {
         }
     }
 
-    /**
-     * Main function to create files.
-     * @param unused
-     */
-    public static void main(String[] unused) {
+    private static void dump(final boolean all) {
         // Only standard columns in datamodel xml files:
-        setOiModelColumnsSupport(false);
-        setOiVisComplexSupport(false);
+        setOiModelColumnsSupport(all);
+        setOiVisComplexSupport(all);
+        setOiVis2ExtraSupport(false); // ASPRO2 only
 
         OIFitsChecker.setInspectRules(true);
         try {
@@ -523,8 +539,8 @@ public class DataModel {
 
             dumpCorrupted(checker);
 
-            dumpDataModelV1(checker);
-            dumpDataModelV2(checker);
+            dumpDataModelV1(checker, all);
+            dumpDataModelV2(checker, all);
 
             writeFailures(checker);
         } catch (IOException ioe) {
@@ -534,6 +550,72 @@ public class DataModel {
         } finally {
             OIFitsChecker.setInspectRules(false);
         }
+    }
+
+    // members:
+    private final OIFitsFile oiFitsFile;
+
+    private Set<String> columnNames1D = null;
+    private Set<String> columnNames2D = null;
+
+    private DataModel(final OIFitsStandard version) {
+        this.oiFitsFile = (version == OIFitsStandard.VERSION_2) ? createOIFitsFileV2() : createOIFitsFileV1();
+    }
+
+    // public API:
+    public OIFitsFile getOiFitsFile() {
+        return oiFitsFile;
+    }
+
+    public Set<String> getNumericalColumnNames1D() {
+        if (columnNames1D == null) {
+            columnNames1D = getAllNumericalColumnNames(false);
+        }
+        return columnNames1D;
+    }
+
+    public Set<String> getNumericalColumnNames2D() {
+        if (columnNames2D == null) {
+            columnNames2D = getAllNumericalColumnNames(true);
+        }
+        return columnNames2D;
+    }
+
+    private Set<String> getAllNumericalColumnNames(final boolean is2D) {
+        final Set<String> columnNames = new LinkedHashSet<String>();
+
+        for (OIData oiData : oiFitsFile.getOiDataList()) {
+            final List<ColumnMeta> columnsDescCollection = oiData.getNumericalColumnsDescs();
+
+            for (ColumnMeta colMeta : columnsDescCollection) {
+                if (colMeta != null) {
+                    if (colMeta instanceof WaveColumnMeta) {
+                        if (is2D) {
+                            columnNames.add(colMeta.getName());
+                        }
+                    } else if (colMeta.is3D()) {
+                        // not supported in OIData:
+                    } else if (!is2D) {
+                        columnNames.add(colMeta.getName());
+                    }
+                }
+            }
+        }
+        return columnNames;
+    }
+
+    /**
+     * Main function to create files.
+     * @param unused
+     */
+    public static void main(String[] unused) {
+        dump(false);
+        dump(true);
+
+        final DataModel dm = getInstance(OIFitsStandard.VERSION_2);
+
+        logger.log(Level.WARNING, "columnNames1D: {0}", dm.getNumericalColumnNames1D());
+        logger.log(Level.WARNING, "columnNames2D: {0}", dm.getNumericalColumnNames2D());
     }
 
 }

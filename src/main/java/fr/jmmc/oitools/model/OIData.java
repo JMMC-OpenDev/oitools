@@ -160,9 +160,13 @@ public abstract class OIData extends OIAbstractData {
         // INT_TIME  column definition
         addColumnMeta(COLUMN_INT_TIME);
 
-        // Derived EFF_WAVE (double) column definition
+        // Derived EFF_WAVE column definition (double) 
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_EFF_WAVE,
-                "effective wavelength of channel", Types.TYPE_DBL, Units.UNIT_METER, this));
+                "effective wavelength of channel (double)", Types.TYPE_DBL, Units.UNIT_METER, this));
+
+        // Derived EFF_BAND column definition (double)
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_EFF_BAND,
+                "effective bandpass of channel (double)", Types.TYPE_DBL, Units.UNIT_METER, this));
 
         if (useCommonCols) {
             // Derived HOUR_ANGLE column definition
@@ -356,9 +360,12 @@ public abstract class OIData extends OIAbstractData {
         if (effWaveDbls == null) {
             final int nRows = getNbRows();
             final int nWaves = getNWave();
-            effWaveDbls = new double[nRows][nWaves];
 
-            if (nWaves != 0) {
+            if (nWaves == 0) {
+                effWaveDbls = new double[nRows][0];
+            } else {
+                effWaveDbls = new double[nRows][];
+
                 final double[] effWaves = getOiWavelength().getEffWaveAsDouble();
 
                 for (int i = 0; i < nRows; i++) {
@@ -368,6 +375,34 @@ public abstract class OIData extends OIAbstractData {
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_EFF_WAVE, effWaveDbls);
         }
         return effWaveDbls;
+    }
+
+    /**
+     * Return the effective bandpass of channel as double arrays (2D)
+     * @return the effective bandpass of channel array as double arrays (2D)
+     */
+    public final double[][] getEffBandAsDoubles() {
+        // lazy:
+        double[][] effBandDbls = this.getColumnDerivedDoubles(OIFitsConstants.COLUMN_EFF_BAND);
+
+        if (effBandDbls == null) {
+            final int nRows = getNbRows();
+            final int nWaves = getNWave();
+
+            if (nWaves == 0) {
+                effBandDbls = new double[nRows][0];
+            } else {
+                effBandDbls = new double[nRows][];
+
+                final double[] effBands = getOiWavelength().getEffBandAsDouble();
+
+                for (int i = 0; i < nRows; i++) {
+                    effBandDbls[i] = effBands;
+                }
+            }
+            this.setColumnDerivedValue(OIFitsConstants.COLUMN_EFF_BAND, effBandDbls);
+        }
+        return effBandDbls;
     }
 
     /**
@@ -937,6 +972,9 @@ public abstract class OIData extends OIAbstractData {
     protected double[][] getDerivedColumnAsDoubles(final String name) {
         if (OIFitsConstants.COLUMN_EFF_WAVE.equals(name)) {
             return getEffWaveAsDoubles();
+        }
+        if (OIFitsConstants.COLUMN_EFF_BAND.equals(name)) {
+            return getEffBandAsDoubles();
         }
         if (OIFitsConstants.COLUMN_SPATIAL_FREQ.equals(name)) {
             return getSpatialFreq();

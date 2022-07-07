@@ -82,6 +82,6 @@ public final class DataRange {
 
     @Override
     public String toString() {
-        return "DataRange{" + "name=" + name + "min=" + min + ", max=" + max + '}';
+        return "DataRange{name=" + name + ", min=" + min + ", max=" + max + '}';
     }
 }
