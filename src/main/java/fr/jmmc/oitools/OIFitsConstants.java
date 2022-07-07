@@ -422,10 +422,6 @@ public interface OIFitsConstants {
     public final static String COLUMN_SPATIAL_FREQ = "SPATIAL_FREQ";
     /** NIGHT_ID derived OiData column as double[] */
     public final static String COLUMN_NIGHT_ID = "NIGHT_ID";
-    /** MJD_START derived OiData column as double[] */
-    public final static String COLUMN_MJD_START_R = "MJD_START";
-    /** MJD_END derived OiData column as double[] */
-    public final static String COLUMN_MJD_END_R = "MJD_END";
     /** UCOORD_SPATIAL derived OIData column as double[][] */
     public final static String COLUMN_UCOORD_SPATIAL = "UCOORD_SPATIAL";
     /** VCOORD_SPATIAL derived OIData column as double[][] */

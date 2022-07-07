@@ -83,16 +83,10 @@ public abstract class OIData extends OIAbstractData {
     private final static ColumnMeta COLUMN_POS_ANGLE = new ColumnMeta(OIFitsConstants.COLUMN_POS_ANGLE,
             "position angle of the projected base line", Types.TYPE_DBL, Units.UNIT_DEGREE, DataRange.RANGE_ANGLE)
             .setOrientationDependent(true);
+
     /** NIGHT_ID column descriptor */
     private final static ColumnMeta COLUMN_NIGHT_ID = new ColumnMeta(OIFitsConstants.COLUMN_NIGHT_ID,
             "night identifier", Types.TYPE_INT);
-    /** MJD_START column descriptor */
-    private final static ColumnMeta COLUMN_MJD_START = new ColumnMeta(OIFitsConstants.COLUMN_MJD_START_R,
-            "Modified Julian Day (start date of observation)", Types.TYPE_DBL, Units.UNIT_DAYS, DataRange.RANGE_POSITIVE_STRICT);
-    /** MJD_END column descriptor */
-    private final static ColumnMeta COLUMN_MJD_END = new ColumnMeta(OIFitsConstants.COLUMN_MJD_END_R,
-            "Modified Julian Day (end date of observation)", Types.TYPE_DBL, Units.UNIT_DAYS, DataRange.RANGE_POSITIVE_STRICT);
-
     /** STA_CONF column descriptor */
     private final static ColumnMeta COLUMN_STA_CONF = new ColumnMeta(OIFitsConstants.COLUMN_STA_CONF,
             "station configuration", Types.TYPE_SHORT, 2); // Fake repeat to mimic 2D array
@@ -107,8 +101,6 @@ public abstract class OIData extends OIAbstractData {
     private int nFlagged = -1;
     /** distinct StaConf values present in this table (station configuration) (sorted) */
     private final Set<short[]> distinctStaConf = new LinkedHashSet<short[]>();
-    /** distinct MJD values present in this table */
-    private final Map<Range, Range> distinctMjdRanges = new LinkedHashMap<Range, Range>();
 
     /**
      * Protected OIData class constructor
@@ -182,11 +174,6 @@ public abstract class OIData extends OIAbstractData {
 
         // Derived NIGHT_ID column definition
         addDerivedColumnMeta(COLUMN_NIGHT_ID);
-        // Derived MJD_START column definition
-        addDerivedColumnMeta(COLUMN_MJD_START);
-        // Derived MJD_END column definition
-        addDerivedColumnMeta(COLUMN_MJD_END);
-
         // Derived STA_CONF column definition
         addDerivedColumnMeta(COLUMN_STA_CONF);
     }
@@ -684,84 +671,6 @@ public abstract class OIData extends OIAbstractData {
         return nightId;
     }
 
-    /**
-     * Return the mjd start column.
-     *
-     * @return the mjd start column
-     */
-    public double[] getMJDStart() {
-        // lazy:
-        double[] mjdStart = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_MJD_START_R);
-
-        if (mjdStart == null) {
-            final int nRows = getNbRows();
-            final double[] mjds = getMJD();
-
-            mjdStart = new double[nRows];
-
-            for (int i = 0; i < nRows; i++) {
-                final double mjd = mjds[i];
-
-                if (Double.isNaN(mjd)) {
-                    mjdStart[i] = UNDEFINED_DBL;
-                } else {
-                    // round down to 1s:
-                    mjdStart[i] = Math.floor(mjd * JD_TO_SECOND) * SECOND_TO_JD;
-
-                    if (logger.isLoggable(Level.FINE)) {
-                        logger.log(Level.FINE, "mjdStart: {0} => {1}", new Object[]{mjd, mjdStart[i]});
-                    }
-                }
-            }
-            this.setColumnDerivedValue(OIFitsConstants.COLUMN_MJD_START_R, mjdStart);
-        }
-        return mjdStart;
-    }
-
-    /**
-     * Return the mjd end column.
-     *
-     * @return the mjd end column
-     */
-    public double[] getMJDEnd() {
-        // lazy:
-        double[] mjdEnd = this.getColumnDerivedDouble(OIFitsConstants.COLUMN_MJD_END_R);
-
-        if (mjdEnd == null) {
-            final int nRows = getNbRows();
-            final double[] mjds = getMJD();
-            final double[] intTimes = getIntTime();
-
-            mjdEnd = new double[nRows];
-
-            for (int i = 0; i < nRows; i++) {
-                final double mjd = mjds[i];
-
-                if (Double.isNaN(mjd)) {
-                    mjdEnd[i] = UNDEFINED_DBL;
-                } else {
-                    final double intTime = intTimes[i];
-
-                    double sEnd = mjd * JD_TO_SECOND;
-
-                    if (Double.isNaN(intTime)) {
-                        sEnd += 1.0; // start = end + 1s ?
-                    } else {
-                        sEnd += intTime;
-                    }
-                    // round up to 1s:
-                    mjdEnd[i] = Math.ceil(sEnd) * SECOND_TO_JD;
-
-                    if (logger.isLoggable(Level.FINE)) {
-                        logger.log(Level.FINE, "mjdEnd: {0} => {1}", new Object[]{mjd + intTime, mjdEnd[i]});
-                    }
-                }
-            }
-            this.setColumnDerivedValue(OIFitsConstants.COLUMN_MJD_END_R, mjdEnd);
-        }
-        return mjdEnd;
-    }
-
     /* --- Utility methods for cross-referencing --- */
     /**
      * Return the number of distinct spectral channels (NWAVE) of the associated OI_WAVELENGTH table(s).
@@ -953,12 +862,6 @@ public abstract class OIData extends OIAbstractData {
         if (OIFitsConstants.COLUMN_POS_ANGLE.equals(name)) {
             return getPosAngle();
         }
-        if (OIFitsConstants.COLUMN_MJD_START_R.equals(name)) {
-            return getMJDStart();
-        }
-        if (OIFitsConstants.COLUMN_MJD_END_R.equals(name)) {
-            return getMJDEnd();
-        }
         return null;
     }
 
@@ -1003,7 +906,6 @@ public abstract class OIData extends OIAbstractData {
         super.setChanged();
         nFlagged = -1;
         distinctStaConf.clear();
-        distinctMjdRanges.clear();
     }
 
     /**
@@ -1039,22 +941,6 @@ public abstract class OIData extends OIAbstractData {
     }
 
     /**
-     * Get boolean for distinct mjd values
-     * @return true if size of distinctMjd == 1
-     */
-    public final boolean hasSingleMJDRange() {
-        return getDistinctMJDRanges().size() == 1;
-    }
-
-    /**
-     * Get distinct mjd ranges present in this table
-     * @return distinctTargetId
-     */
-    public final Map<Range, Range> getDistinctMJDRanges() {
-        return distinctMjdRanges;
-    }
-
-    /**
      * Return the wavelenth range
      * @return wavelenth range
      */
@@ -1064,6 +950,14 @@ public abstract class OIData extends OIAbstractData {
             return oiWavelength.getEffWaveRange();
         }
         return null;
+    }
+
+    /**
+     * Return the MJD range
+     * @return MJD range
+     */
+    public final Range getMjdRange() {
+        return getColumnRange(OIFitsConstants.COLUMN_MJD);
     }
 
     /**

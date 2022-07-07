@@ -334,10 +334,8 @@ public class TestMergeFilter extends JUnitBaseTest {
 
         if (dataList != null) {
             for (OIData data : dataList) {
-                Assert.assertEquals("1 mjd range in data tables should be in merge result of blocking filter",
-                        1, data.getDistinctMJDRanges().size());
                 Assert.assertTrue("mjd range in data tables should be within range in merge result of blocking filter",
-                        Range.matchRanges(MJDS_FILTER_VALUE, data.getDistinctMJDRanges().keySet()));
+                        Range.matchRange(MJDS_FILTER_VALUE, data.getMjdRange()));
             }
         }
 

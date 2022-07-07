@@ -2510,36 +2510,6 @@
     <array>false</array>
   </column>
   <column>
-    <name>MJD_START</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>Modified Julian Day (start date of observation)</description>
-    <optional>false</optional>
-    <unit>UNIT_DAYS</unit>
-    <rules>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
-  </column>
-  <column>
-    <name>MJD_END</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>Modified Julian Day (end date of observation)</description>
-    <optional>false</optional>
-    <unit>UNIT_DAYS</unit>
-    <rules>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
-  </column>
-  <column>
     <name>STA_CONF</name>
     <datatype>TYPE_SHORT</datatype>
     <description>station configuration</description>
@@ -3088,36 +3058,6 @@
     </rules>
     <repeat>1</repeat>
     <array>false</array>
-  </column>
-  <column>
-    <name>MJD_START</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>Modified Julian Day (start date of observation)</description>
-    <optional>false</optional>
-    <unit>UNIT_DAYS</unit>
-    <rules>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
-  </column>
-  <column>
-    <name>MJD_END</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>Modified Julian Day (end date of observation)</description>
-    <optional>false</optional>
-    <unit>UNIT_DAYS</unit>
-    <rules>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
   </column>
   <column>
     <name>STA_CONF</name>
@@ -3687,36 +3627,6 @@
     </rules>
     <repeat>1</repeat>
     <array>false</array>
-  </column>
-  <column>
-    <name>MJD_START</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>Modified Julian Day (start date of observation)</description>
-    <optional>false</optional>
-    <unit>UNIT_DAYS</unit>
-    <rules>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
-  </column>
-  <column>
-    <name>MJD_END</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>Modified Julian Day (end date of observation)</description>
-    <optional>false</optional>
-    <unit>UNIT_DAYS</unit>
-    <rules>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
   </column>
   <column>
     <name>STA_CONF</name>

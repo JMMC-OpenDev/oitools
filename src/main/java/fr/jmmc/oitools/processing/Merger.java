@@ -769,12 +769,12 @@ public final class Merger {
                 // check MJD ranges:
                 boolean checkMJDRanges = false;
                 if ((gMJDRanges != null) && (mjdRangeMatchings != null)) {
-                    final Set<Range> oiDataMJDRanges = oiData.getDistinctMJDRanges().keySet();
+                    final Range oiDataMJDRange = oiData.getMjdRange();
 
-                    logger.log(Level.FINE, "oiData distinct MJD ranges: {0}", oiDataMJDRanges);
+                    logger.log(Level.FINE, "oiData MJD range: {0}", oiDataMJDRange);
 
-                    // get matching wavelength ranges:
-                    Range.getMatchingSelected(gMJDRanges, oiDataMJDRanges, mjdRangeMatchings);
+                    // get matching MJD ranges:
+                    Range.getMatchingSelected(gMJDRanges, oiDataMJDRange, mjdRangeMatchings);
 
                     if (mjdRangeMatchings.isEmpty()) {
                         logger.log(Level.FINE, "Skip {0}, no matching MJD range", oiData);
@@ -782,7 +782,7 @@ public final class Merger {
                     }
                     logger.log(Level.FINE, "matching MJD ranges: {0}", mjdRangeMatchings);
 
-                    checkMJDRanges = !Range.matchFully(oiDataMJDRanges, mjdRangeMatchings);
+                    checkMJDRanges = !Range.matchFully(oiDataMJDRange, mjdRangeMatchings);
                 }
 
                 final OIData newOIData = (OIData) resultFile.copyTable(oiData);

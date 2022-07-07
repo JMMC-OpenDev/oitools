@@ -305,11 +305,11 @@ public final class OIFitsCollection implements ToStringable {
                     gg = new Granule();
                 }
 
-                // Update distinct MJD Ranges on shared granule:
-                globalGranule.getDistinctMjdRanges().addAll(g.getDistinctMjdRanges());
-
                 // Update distinct StaNames on shared granule:
                 globalGranule.getDistinctStaNames().addAll(g.getDistinctStaNames());
+
+                // Update MJD Range on shared granule:
+                globalGranule.updateMjdRange(g.getMjdRange());
 
                 // TODO: keep mapping between global granule and OIFits Granules ?
                 Set<OIData> oiDataTables = oiDataPerGranule.get(globalGranule);
@@ -341,7 +341,7 @@ public final class OIFitsCollection implements ToStringable {
                 + ", insMode=" + granule.getInsMode()
                 + " [aliases: " + imm.getSortedUniqueAliases(granule.getInsMode()) + "]"
                 + ", night=" + granule.getNight()
-                + ", distinctMjdRanges=" + granule.getDistinctMjdRanges()
+                + ", mjdRange=" + granule.getMjdRange()
                 + ", distinctStaNames=" + granule.getDistinctStaNames()
                 + '}';
     }
@@ -463,15 +463,16 @@ public final class OIFitsCollection implements ToStringable {
                 }
                 if (result.isEmpty()) {
                     result = null;
+                } else {
+                    // Cleanup result:
+                    result.resetFilters();
                 }
-                // Cleanup result:
-                result.resetFilters();
             }
             if (logger.isLoggable(Level.INFO)) {
                 logger.log(Level.INFO, "findOIData: duration = {0} ms.", 1e-6d * (System.nanoTime() - start));
             }
             if (result == null) {
-                logger.log(Level.WARNING, "findOIData: no result matching {0}", selector);
+                logger.log(Level.FINE, "findOIData: no result matching {0}", selector);
             }
         }
         if (result != null) {
@@ -664,13 +665,9 @@ public final class OIFitsCollection implements ToStringable {
                 pattern.getDistinctStaNames().addAll(selector.getBaselines());
             }
 
-            // MJD ranges criteria:
-            if (selector.hasMJDRanges()) {
-                pattern.getDistinctMjdRanges().addAll(selector.getMJDRanges());
-            }
-
-            // Wavelength ranges criteria:
+            // MJD & Wavelength ranges criteria:
             final GranuleMatcher granuleMatcher = GranuleMatcher.getInstance(
+                    (selector.hasMJDRanges()) ? new LinkedHashSet<Range>(selector.getMJDRanges()) : null,
                     (selector.hasWavelengthRanges()) ? new LinkedHashSet<Range>(selector.getWavelengthRanges()) : null
             );
 

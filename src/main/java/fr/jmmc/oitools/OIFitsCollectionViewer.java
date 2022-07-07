@@ -195,7 +195,6 @@ public final class OIFitsCollectionViewer {
         final List<Granule> granules = oiFitsCollection.getSortedGranules();
 
         final List<String> sortedStaNames = new ArrayList<String>(16);
-        final List<Range> sortedMJDRanges = new ArrayList<Range>(16);
 
         for (Granule granule : granules) {
             final Target gTarget = granule.getTarget();
@@ -218,10 +217,8 @@ public final class OIFitsCollectionViewer {
             sortedStaNames.addAll(granule.getDistinctStaNames());
             Collections.sort(sortedStaNames, StationNamesComparator.INSTANCE);
 
-            // Sort MJD Ranges:
-            sortedMJDRanges.clear();
-            sortedMJDRanges.addAll(granule.getDistinctMjdRanges());
-            Collections.sort(sortedMJDRanges);
+            // MJD Range:
+            final Range mjdRange = granule.getMjdRange();
 
             out.append(insName).append(SEP)
                     .append(minWavelength).append(SEP)
@@ -231,11 +228,9 @@ public final class OIFitsCollectionViewer {
                     .append(targetRa).append(SEP)
                     .append(targetDec).append(SEP);
 
-            // distinct MJD ranges:
-            for (Range r : sortedMJDRanges) {
-                out.append('[').append(df6.format(r.getMin())).append(',').append(df6.format(r.getMax())).append("] ");
-            }
-            out.append(SEP);
+            // MJD range:
+            out.append('[').append(df6.format(mjdRange.getMin())).append(',')
+                    .append(df6.format(mjdRange.getMax())).append("] ").append(SEP);
 
             // distinct StaNames:
             for (String staName : sortedStaNames) {

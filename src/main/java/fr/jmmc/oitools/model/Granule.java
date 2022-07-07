@@ -51,8 +51,8 @@ public final class Granule {
     /* extra information (filters) */
     /** Set of distinct staNames */
     private Set<String> distinctStaNames = null;
-    /** distinct MJD values */
-    private Set<Range> distinctMjdRanges = null;
+    /** MJD range */
+    private Range mjdRange = null;
 
     public Granule() {
         this(null, null, null);
@@ -127,8 +127,7 @@ public final class Granule {
     }
 
     public boolean isEmpty() {
-        return (this.target == null) && (this.insMode == null) && (this.night == null)
-                && !hasDistinctStaNames() && !hasDistinctMjdRanges();
+        return (this.target == null) && (this.insMode == null) && (this.night == null) && !hasDistinctStaNames();
     }
 
     /* extra information (filters) */
@@ -143,22 +142,37 @@ public final class Granule {
         return distinctStaNames;
     }
 
-    public boolean hasDistinctMjdRanges() {
-        return (distinctMjdRanges != null) && !distinctMjdRanges.isEmpty();
+    public boolean hasMjdRange() {
+        return (mjdRange != null) && mjdRange.isFinite();
     }
 
-    public Set<Range> getDistinctMjdRanges() {
-        if (distinctMjdRanges == null) {
-            distinctMjdRanges = new LinkedHashSet<Range>();
+    public Range getMjdRange() {
+        if (mjdRange == null) {
+            mjdRange = new Range(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
         }
-        return distinctMjdRanges;
+        return mjdRange;
+    }
+
+    public void updateMjdRange(final double mjd) {
+        final Range r = getMjdRange();
+        if (mjd < r.getMin()) {
+            r.setMin(mjd);
+        }
+        if (mjd > r.getMax()) {
+            r.setMax(mjd);
+        }
+    }
+
+    public void updateMjdRange(final Range other) {
+        updateMjdRange(other.getMin());
+        updateMjdRange(other.getMax());
     }
 
     @Override
     public String toString() {
-        return "Granule{" + "target=" + target + ", insMode=" + insMode + ", night=" + night
+        return "Granule{" + "target=" + target + ", insMode=" + insMode
+                + ", night=" + night + ", mjdRange=" + mjdRange
                 + ", distinctStaNames=" + distinctStaNames
-                + ", distinctMjdRanges=" + distinctMjdRanges
                 + '}';
     }
 

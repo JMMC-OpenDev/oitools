@@ -182,10 +182,8 @@ public final class Analyzer implements ModelVisitor {
         final int[] nightIds = oiData.getNightId();
         // StaIndex column:
         final short[][] staIndexes = oiData.getStaIndex();
-        // Get MJDStart column:
-        final double[] mjdStart = oiData.getMJDStart();
-        // Get MJDStart column:
-        final double[] mjdEnd = oiData.getMJDEnd();
+        // Get MJD column:
+        final double[] mjds = oiData.getMJD();
 
         // note: if no OITarget table then the target will be Target.UNDEFINED
         final Map<Short, Target> targetIdToTarget = (oiTarget != null) ? oiTarget.getTargetIdToTarget() : null;
@@ -199,8 +197,6 @@ public final class Analyzer implements ModelVisitor {
         final Set<Short> distinctTargetId = oiData.getDistinctTargetId();
         // Fill distinct Night Id:
         final Set<NightId> distinctNightId = oiData.getDistinctNightId();
-        // Fill distinct MJD ranges:
-        final Map<Range, Range> distinctMjdRanges = oiData.getDistinctMJDRanges();
         // Fill distinct Granule:
         final Map<Granule, Granule> distinctGranules = oiData.getOIFitsFile().getDistinctGranules();
         // Fill oidata tables per (distinct) Granule:
@@ -210,9 +206,6 @@ public final class Analyzer implements ModelVisitor {
 
         // reused NightId:
         NightId n = new NightId();
-
-        // reused Range:
-        Range r = new Range();
 
         // reused Granule:
         Granule g = new Granule();
@@ -239,16 +232,6 @@ public final class Analyzer implements ModelVisitor {
             }
             distinctNightId.add(night);
 
-            // Get MJD Range:
-            r.set(mjdStart[i], mjdEnd[i]);
-
-            Range mjdRange = distinctMjdRanges.get(r);
-            if (mjdRange == null) {
-                distinctMjdRanges.put(r, r);
-                mjdRange = r;
-                r = new Range();
-            }
-
             // Get corresponding StaName:
             String staNames = null;
             if (staIndexes != null) {
@@ -269,6 +252,9 @@ public final class Analyzer implements ModelVisitor {
                 }
             }
 
+            // Get MJD value:
+            final double mjd = mjds[i];
+
             // Update / Resolve Granule:
             g.set(target, insMode, night);
 
@@ -279,13 +265,13 @@ public final class Analyzer implements ModelVisitor {
                 g = new Granule();
             }
 
-            // Update distinct MJD Ranges on shared granule:
-            granule.getDistinctMjdRanges().add(mjdRange);
-
             // Update distinct StaNames on shared granule:
             if (staNames != null) {
                 granule.getDistinctStaNames().add(staNames);
             }
+
+            // Update MJD Ranges on shared granule:
+            granule.updateMjdRange(mjd);
 
             // Lookup pre-existing Granule (same granule fields):
             Set<OIData> oiDataTables = oiDataPerGranule.get(granule);
@@ -303,7 +289,6 @@ public final class Analyzer implements ModelVisitor {
             logger.log(Level.FINE, "process: OIData[{0}] nFlagged: {1}", new Object[]{oiData, nFlagged});
             logger.log(Level.FINE, "process: OIData[{0}] distinctTargetId {1}", new Object[]{oiData, distinctTargetId});
             logger.log(Level.FINE, "process: OIData[{0}] distinctNightId  {1}", new Object[]{oiData, distinctNightId});
-            logger.log(Level.FINE, "process: OIData[{0}] distinctMjdRanges {1}", new Object[]{oiData, distinctMjdRanges});
         }
     }
 

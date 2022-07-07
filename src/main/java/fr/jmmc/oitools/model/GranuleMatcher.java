@@ -7,28 +7,36 @@ import fr.jmmc.oitools.model.range.Range;
 import java.util.Set;
 
 /**
- *
+ * Specific Matcher for Granule instances
  */
 public final class GranuleMatcher implements Matcher<Granule> {
 
-    private final static GranuleMatcher MATCHER_LIKE = new GranuleMatcher(null);
+    private final static GranuleMatcher MATCHER_LIKE = new GranuleMatcher(null, null);
 
-    public static GranuleMatcher getInstance(final Set<Range> distinctWavelengthRanges) {
-        if (distinctWavelengthRanges == null || distinctWavelengthRanges.isEmpty()) {
+    public static GranuleMatcher getInstance(final Set<Range> distinctMjdRanges,
+                                             final Set<Range> distinctWavelengthRanges) {
+
+        if ((distinctMjdRanges == null || distinctMjdRanges.isEmpty())
+                && (distinctWavelengthRanges == null || distinctWavelengthRanges.isEmpty())) {
             return MATCHER_LIKE;
         }
-        return new GranuleMatcher(distinctWavelengthRanges);
+        return new GranuleMatcher(distinctMjdRanges, distinctWavelengthRanges);
     }
 
-    /** distinct Wavelength values */
+    // members:
+    /** distinct MJD ranges */
+    private final Set<Range> distinctMjdRanges;
+
+    /** distinct Wavelength ranges */
     private final Set<Range> distinctWavelengthRanges;
 
-    private GranuleMatcher(final Set<Range> distinctWavelengthRanges) {
+    private GranuleMatcher(final Set<Range> distinctMjdRanges, final Set<Range> distinctWavelengthRanges) {
+        this.distinctMjdRanges = distinctMjdRanges;
         this.distinctWavelengthRanges = distinctWavelengthRanges;
     }
 
     public boolean isEmpty() {
-        return !hasDistinctWavelengthRanges();
+        return !hasDistinctMjdRanges() && !hasDistinctWavelengthRanges();
     }
 
     @Override
@@ -56,8 +64,8 @@ public final class GranuleMatcher implements Matcher<Granule> {
                 return false;
             }
         }
-        if (pattern.hasDistinctMjdRanges() && candidate.hasDistinctMjdRanges()) {
-            if (!Range.matchRanges(pattern.getDistinctMjdRanges(), candidate.getDistinctMjdRanges())) {
+        if (hasDistinctMjdRanges() && candidate.hasMjdRange()) {
+            if (!Range.matchRange(getDistinctMjdRanges(), candidate.getMjdRange())) {
                 return false;
             }
         }
@@ -67,6 +75,14 @@ public final class GranuleMatcher implements Matcher<Granule> {
             }
         }
         return true;
+    }
+
+    public boolean hasDistinctMjdRanges() {
+        return (distinctMjdRanges != null) && !distinctMjdRanges.isEmpty();
+    }
+
+    public Set<Range> getDistinctMjdRanges() {
+        return distinctMjdRanges;
     }
 
     public boolean hasDistinctWavelengthRanges() {
@@ -80,6 +96,7 @@ public final class GranuleMatcher implements Matcher<Granule> {
     @Override
     public String toString() {
         return "GranuleMatcher{"
+                + ", distinctMjdRanges=" + distinctMjdRanges
                 + ", distinctWavelengthRanges=" + distinctWavelengthRanges
                 + '}';
     }
