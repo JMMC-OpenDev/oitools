@@ -554,7 +554,8 @@ public final class DataModel {
 
     // members:
     private final OIFitsFile oiFitsFile;
-
+    /* cached values */
+    private Set<String> columnNames = null;
     private Set<String> columnNames1D = null;
     private Set<String> columnNames2D = null;
 
@@ -565,6 +566,13 @@ public final class DataModel {
     // public API:
     public OIFitsFile getOiFitsFile() {
         return oiFitsFile;
+    }
+
+    public Set<String> getNumericalColumnNames() {
+        if (columnNames == null) {
+            columnNames = getAllNumericalColumnNames();
+        }
+        return columnNames;
     }
 
     public Set<String> getNumericalColumnNames1D() {
@@ -594,8 +602,29 @@ public final class DataModel {
                             columnNames.add(colMeta.getName());
                         }
                     } else if (colMeta.is3D()) {
-                        // not supported in OIData:
+                        // not possible in OIData:
                     } else if (!is2D) {
+                        columnNames.add(colMeta.getName());
+                    }
+                }
+            }
+        }
+        return columnNames;
+    }
+
+    private Set<String> getAllNumericalColumnNames() {
+        final Set<String> columnNames = new LinkedHashSet<String>();
+
+        for (OIData oiData : oiFitsFile.getOiDataList()) {
+            final List<ColumnMeta> columnsDescCollection = oiData.getNumericalColumnsDescs();
+
+            for (ColumnMeta colMeta : columnsDescCollection) {
+                if (colMeta != null) {
+                    if (colMeta instanceof WaveColumnMeta) {
+                        columnNames.add(colMeta.getName());
+                    } else if (colMeta.is3D()) {
+                        // not possible in OIData:
+                    } else {
                         columnNames.add(colMeta.getName());
                     }
                 }
@@ -613,6 +642,8 @@ public final class DataModel {
         dump(true);
 
         final DataModel dm = getInstance(OIFitsStandard.VERSION_2);
+
+        logger.log(Level.WARNING, "columnNames:   {0}", dm.getNumericalColumnNames());
 
         logger.log(Level.WARNING, "columnNames1D: {0}", dm.getNumericalColumnNames1D());
         logger.log(Level.WARNING, "columnNames2D: {0}", dm.getNumericalColumnNames2D());

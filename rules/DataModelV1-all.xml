@@ -2431,10 +2431,6 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
   </column>
   <column>
     <name>EFF_BAND</name>
@@ -2446,10 +2442,6 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
   </column>
   <column>
     <name>HOUR_ANGLE</name>
@@ -3019,10 +3011,6 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
   </column>
   <column>
     <name>EFF_BAND</name>
@@ -3034,10 +3022,6 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
   </column>
   <column>
     <name>HOUR_ANGLE</name>
@@ -3626,10 +3610,6 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
   </column>
   <column>
     <name>EFF_BAND</name>
@@ -3641,10 +3621,6 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
-    <datarange>
-      <name>RANGE_POSITIVE_STRICT</name>
-      <min>0.0</min>
-    </datarange>
   </column>
   <column>
     <name>HOUR_ANGLE</name>
