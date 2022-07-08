@@ -482,12 +482,12 @@ public final class Merger {
                         newOiWavelength.setInsName(newName);
 
                         // get the wavelength mask for this wavelength table:
-                        final IndexMask wavelengthMask = selectorResult.getWavelengthMask(oiWavelength);
+                        final IndexMask maskWavelength = selectorResult.getWavelengthMaskNotFull(oiWavelength);
 
-                        if (wavelengthMask != null && !wavelengthMask.isFull()) {
-                            final int nKeepRows = wavelengthMask.cardinality();
+                        if (maskWavelength != null) {
+                            final int nKeepRows = maskWavelength.cardinality();
                             // redim the table to the correct row count to prune invalid rows:
-                            newOiWavelength.resizeTable(nKeepRows, wavelengthMask.getBitSet());
+                            newOiWavelength.resizeTable(nKeepRows, maskWavelength.getBitSet());
 
                             logger.log(Level.INFO, "Table[{0}] filtered from Table[{1}]",
                                     new Object[]{newOiWavelength, oiWavelength});
@@ -639,8 +639,8 @@ public final class Merger {
             final List<Range> gMJDRanges;
             final Set<Range> mjdRangeMatchings;
 
-            if ((selector != null) && selector.hasMJDRanges()) {
-                gMJDRanges = selector.getMJDRanges();
+            if ((selector != null) && selector.hasFilter(Selector.FILTER_MJD)) {
+                gMJDRanges = selector.getFilter(Selector.FILTER_MJD);
                 mjdRangeMatchings = new HashSet<Range>();
             } else {
                 gMJDRanges = null;
@@ -652,8 +652,8 @@ public final class Merger {
             final Map<String, StaNamesDir> usedStaNamesMap;
             final Set<short[]> staIndexMatchings; // identity
 
-            if ((selector != null) && selector.hasBaselines()) {
-                gBaselines = selectorResult.getSelector().getBaselines();
+            if ((selector != null) && selector.hasFilter(Selector.FILTER_BASELINE)) {
+                gBaselines = selector.getFilter(Selector.FILTER_BASELINE);
                 usedStaNamesMap = selectorResult.getOiFitsCollection().getUsedStaNamesMap();
                 staIndexMatchings = new HashSet<short[]>();
             } else {
@@ -680,14 +680,6 @@ public final class Merger {
                     continue;
                 }
                 newInsName = newOiWavelength.getInsName();
-
-                // get the wavelength mask for the OIData's wavelength table:
-                final IndexMask wavelengthMask = selectorResult.getWavelengthMask(oiData.getOiWavelength());
-
-                logger.log(Level.FINE, "Mask WL: {0}", wavelengthMask);
-
-                // check wavelengths:
-                final boolean checkWavelengths = (wavelengthMask != null && !wavelengthMask.isFull());
 
                 // ARRNAME:
                 final OIArray newOiArray = mapOIArrays.get(oiData.getOiArray());
@@ -785,6 +777,10 @@ public final class Merger {
                     checkMJDRanges = !Range.matchFully(oiDataMJDRange, mjdRangeMatchings);
                 }
 
+                // get the wavelength mask for the OIData's wavelength table:
+                final IndexMask maskWavelength = selectorResult.getWavelengthMaskNotFull(oiData.getOiWavelength());
+
+                // Copy table and filter out useless rows:
                 final OIData newOIData = (OIData) resultFile.copyTable(oiData);
 
                 // Change INSNAME, ARRNAME & CORRNAME keywords:
@@ -795,7 +791,7 @@ public final class Merger {
                 boolean filterRows = false;
 
                 final BitSet maskRows;
-                if (checkTargetId || checkNightId || checkBaselines || checkMJDRanges || checkWavelengths) {
+                if (checkTargetId || checkNightId || checkBaselines || checkMJDRanges || (maskWavelength != null)) {
                     final int nRows = newOIData.getNbRows();
 
                     // prepare mask to indicate rows to keep in output table:
@@ -813,6 +809,7 @@ public final class Merger {
                     for (int i = 0; i < nRows; i++) {
                         boolean skip = false;
 
+                        // TODO: use masks HERE
                         if (checkTargetId) {
                             final Short oldTargetId = Short.valueOf(targetIds[i]);
                             Short newTargetId = mapTargetIds.get(oldTargetId);
@@ -858,7 +855,7 @@ public final class Merger {
                     // update targetId column before table filter:
                     newOIData.setTargetId(newTargetIds);
 
-                    if (filterRows || checkWavelengths) {
+                    if (filterRows || (maskWavelength != null)) {
                         final int nKeepRows = maskRows.cardinality();
 
                         if (nKeepRows <= 0) {
@@ -867,7 +864,7 @@ public final class Merger {
                         } else {
                             // redim the table to the correct row count to prune invalid rows:
                             newOIData.resizeTable(nKeepRows, maskRows,
-                                    (wavelengthMask != null) ? wavelengthMask.getBitSet() : null);
+                                    (maskWavelength != null) ? maskWavelength.getBitSet() : null);
                         }
                     }
                 }

@@ -16,9 +16,10 @@
  */
 package fr.jmmc.oitools.processing;
 
-import fr.jmmc.oitools.model.range.Range;
+import fr.jmmc.oitools.OIFitsConstants;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,17 +28,17 @@ import java.util.Map;
  */
 public final class Selector {
 
+    public final static String FILTER_WAVELENGTH = OIFitsConstants.COLUMN_EFF_WAVE;
+    public final static String FILTER_BASELINE = OIFitsConstants.COLUMN_STA_INDEX;
+    public final static String FILTER_MJD = OIFitsConstants.COLUMN_MJD;
+
     private String targetUID = null;
     private String insModeUID = null;
     private Integer nightID = null;
     // table selection filter expressed as extNb (integer) values + OIFits file (id)
     private final Map<String, List<Integer>> extNbsPerOiFitsPath = new HashMap<String, List<Integer>>();
-    // criteria on baselines (1, 2 or 3T)
-    private List<String> baselines = null;
-    // criteria on MJD ranges
-    private List<Range> mjdRanges = null;
-    // criteria on wavelength ranges
-    private List<Range> wavelengthRanges = null;
+    // Extra criteria:
+    private final Map<String, List<?>> filtersMap = new LinkedHashMap<>();
 
     public Selector() {
         reset();
@@ -48,9 +49,7 @@ public final class Selector {
         insModeUID = null;
         nightID = null;
         extNbsPerOiFitsPath.clear();
-        baselines = null;
-        mjdRanges = null;
-        wavelengthRanges = null;
+        filtersMap.clear();
     }
 
     public String getTargetUID() {
@@ -102,45 +101,29 @@ public final class Selector {
         }
     }
 
-    public boolean hasBaselines() {
-        return (baselines != null) && !baselines.isEmpty();
+    Map<String, List<?>> getFiltersMap() {
+        return filtersMap;
     }
 
-    public List<String> getBaselines() {
-        return baselines;
+    public boolean hasFilters() {
+        return !filtersMap.isEmpty();
     }
 
-    public void setBaselines(final List<String> baselines) {
-        this.baselines = baselines;
+    public boolean hasFilter(final String columnName) {
+        return filtersMap.containsKey(columnName);
     }
 
-    public boolean hasMJDRanges() {
-        return (mjdRanges != null) && !mjdRanges.isEmpty();
+    public <K> List<K> getFilter(final String columnName) {
+        return (List<K>) filtersMap.get(columnName);
     }
 
-    public List<Range> getMJDRanges() {
-        return mjdRanges;
-    }
-
-    public void setMJDRanges(final List<Range> mjdRanges) {
-        this.mjdRanges = mjdRanges;
-    }
-
-    public boolean hasWavelengthRanges() {
-        return (wavelengthRanges != null) && !wavelengthRanges.isEmpty();
-    }
-
-    public List<Range> getWavelengthRanges() {
-        return wavelengthRanges;
-    }
-
-    public void setWavelengthRanges(final List<Range> wavelengthRanges) {
-        this.wavelengthRanges = wavelengthRanges;
+    public void addFilter(final String columnName, final List<?> values) {
+        filtersMap.put(columnName, values);
     }
 
     public boolean isEmpty() {
         return (targetUID == null) && (insModeUID == null) && (nightID == null)
-                && !hasTable() && !hasBaselines() && !hasMJDRanges() && !hasWavelengthRanges();
+                && !hasTable() && !hasFilters();
     }
 
     @Override
@@ -150,9 +133,7 @@ public final class Selector {
                 + ((insModeUID != null) ? " insModeUID: " + insModeUID : "")
                 + ((nightID != null) ? " nightID: " + nightID : "")
                 + (hasTable() ? " extNbsPerOiFitsPath: " + extNbsPerOiFitsPath : "")
-                + (hasBaselines() ? " baselines: " + baselines : "")
-                + (hasMJDRanges() ? " mjdRanges: " + mjdRanges : "")
-                + (hasWavelengthRanges() ? " wavelengthRanges: " + wavelengthRanges : "")
+                + (hasFilters() ? " filters: " + filtersMap : "")
                 + ']';
     }
 

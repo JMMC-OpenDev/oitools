@@ -70,8 +70,7 @@ public class TestMergeFilter extends JUnitBaseTest {
 
     // Common data used by several tests
     private static OIFitsFile input = null;
-    private static OIFitsFile mergeFilterPassAll = null;
-
+    private static OIFitsFile mergeFilterInsModePassAll = null;
     private static OIFitsFile mergeFilterInsModeBlockAll = null;
     private static OIFitsFile mergeFilterInsModePassSome = null;
 
@@ -107,32 +106,6 @@ public class TestMergeFilter extends JUnitBaseTest {
         OIFitsFile testFile = null;
 
         final Selector selector = new Selector();
-        // INSMODE:
-        {
-            final OIFitsCollection oiColInput = new OIFitsCollection();
-            oiColInput.addOIFitsFile(input);
-            oiColInput.analyzeCollection();
-
-            // Filter don't block any
-            mergeFilterPassAll = Merger.process(oiColInput, null);
-            Assert.assertNotNull("Merge return a null value", mergeFilterPassAll);
-
-            // Filter block data of the files
-            selector.setInsModeUID("GRAV");
-            mergeFilterInsModeBlockAll = Merger.process(oiColInput, selector);
-            Assert.assertNull("Merge return not a null value", mergeFilterInsModeBlockAll);
-
-            // Filter let pass data of the files
-            selector.setInsModeUID(INSNAME_FILTER_VALUE);
-            mergeFilterInsModePassSome = Merger.process(oiColInput, selector);
-            Assert.assertNotNull("Merge return a null value", mergeFilterInsModePassSome);
-
-            final OIFitsChecker checker = new OIFitsChecker();
-            mergeFilterInsModePassSome.check(checker);
-            logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
-        }
-
-        selector.reset();
         // TARGET:
         {
             final OIFitsCollection oiColTargets = new OIFitsCollection();
@@ -154,6 +127,32 @@ public class TestMergeFilter extends JUnitBaseTest {
             logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
 
             mergeFilterTargetPassSome.analyze();
+        }
+
+        selector.reset();
+        // INSMODE:
+        {
+            final OIFitsCollection oiColInput = new OIFitsCollection();
+            oiColInput.addOIFitsFile(input);
+            oiColInput.analyzeCollection();
+
+            // Filter don't block any
+            mergeFilterInsModePassAll = Merger.process(oiColInput, null);
+            Assert.assertNotNull("Merge return a null value", mergeFilterInsModePassAll);
+
+            // Filter block data of the files
+            selector.setInsModeUID("GRAV");
+            mergeFilterInsModeBlockAll = Merger.process(oiColInput, selector);
+            Assert.assertNull("Merge return not a null value", mergeFilterInsModeBlockAll);
+
+            // Filter let pass data of the files
+            selector.setInsModeUID(INSNAME_FILTER_VALUE);
+            mergeFilterInsModePassSome = Merger.process(oiColInput, selector);
+            Assert.assertNotNull("Merge return a null value", mergeFilterInsModePassSome);
+
+            final OIFitsChecker checker = new OIFitsChecker();
+            mergeFilterInsModePassSome.check(checker);
+            logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
         }
 
         selector.reset();
@@ -188,12 +187,12 @@ public class TestMergeFilter extends JUnitBaseTest {
             oiColBaselines.analyzeCollection();
 
             // Filter block data of the files
-            selector.setBaselines(Arrays.asList("X1-Y1"));
+            selector.addFilter(Selector.FILTER_BASELINE, Arrays.asList("X1-Y1"));
             mergeFilterBaselinesBlockAll = Merger.process(oiColBaselines, selector);
             Assert.assertNull("Merge return not a null value", mergeFilterBaselinesBlockAll);
 
             // Filter let pass data of the files
-            selector.setBaselines(BASELINES_FILTER_VALUE);
+            selector.addFilter(Selector.FILTER_BASELINE, BASELINES_FILTER_VALUE);
             mergeFilterBaselinesPassSome = Merger.process(oiColBaselines, selector);
             Assert.assertNotNull("Merge return a null value", mergeFilterBaselinesPassSome);
 
@@ -215,12 +214,12 @@ public class TestMergeFilter extends JUnitBaseTest {
             oiColMjds.analyzeCollection();
 
             // Filter block data of the files
-            selector.setMJDRanges(Arrays.asList(new Range(50000, 55000)));
+            selector.addFilter(Selector.FILTER_MJD, Arrays.asList(new Range(50000, 55000)));
             mergeFilterMjdsBlockAll = Merger.process(oiColMjds, selector);
             Assert.assertNull("Merge return not a null value", mergeFilterMjdsBlockAll);
 
             // Filter let pass data of the files
-            selector.setMJDRanges(MJDS_FILTER_VALUE);
+            selector.addFilter(Selector.FILTER_MJD, MJDS_FILTER_VALUE);
             mergeFilterMjdsPassSome = Merger.process(oiColMjds, selector);
             Assert.assertNotNull("Merge return a null value", mergeFilterMjdsPassSome);
 
@@ -239,12 +238,12 @@ public class TestMergeFilter extends JUnitBaseTest {
             oiColWls.analyzeCollection();
 
             // Filter block data of the files
-            selector.setWavelengthRanges(Arrays.asList(new Range(0.5E-6, 1E-6)));
+            selector.addFilter(Selector.FILTER_WAVELENGTH, Arrays.asList(new Range(0.5E-6, 1E-6)));
             mergeFilterWlsBlockAll = Merger.process(oiColWls, selector);
             Assert.assertNull("Merge return not a null value", mergeFilterWlsBlockAll);
 
             // Filter let pass data of the files
-            selector.setWavelengthRanges(WLS_FILTER_VALUE);
+            selector.addFilter(Selector.FILTER_WAVELENGTH, WLS_FILTER_VALUE);
             mergeFilterWlsPassSome = Merger.process(oiColWls, selector);
             Assert.assertNotNull("Merge return a null value", mergeFilterWlsPassSome);
 
@@ -255,7 +254,7 @@ public class TestMergeFilter extends JUnitBaseTest {
             mergeFilterWlsPassSome.analyze();
 
             // Filter let pass data of the files
-            selector.setWavelengthRanges(Arrays.asList(new Range(0.1E-6, 1E-4)));
+            selector.addFilter(Selector.FILTER_WAVELENGTH, Arrays.asList(new Range(0.1E-6, 1E-4)));
             mergeFilterWlsPassAll = Merger.process(oiColWls, selector);
             Assert.assertNotNull("Merge return a null value", mergeFilterWlsPassAll);
         }
@@ -279,7 +278,7 @@ public class TestMergeFilter extends JUnitBaseTest {
     @Test // @Ignore
     public void testTables() throws IOException, MalformedURLException, FitsException {
 
-        List<OITable> tableList = mergeFilterPassAll.getOITableList();
+        List<OITable> tableList = mergeFilterInsModePassAll.getOITableList();
         Assert.assertEquals("Bad number of Data in merge result of blocking filter",
                 input.getOITableList().size(), (tableList != null) ? tableList.size() : 0);
     }
@@ -294,7 +293,7 @@ public class TestMergeFilter extends JUnitBaseTest {
     @Test // @Ignore
     public void testData() throws IOException, MalformedURLException, FitsException {
 
-        List<OIData> dataList = mergeFilterPassAll.getOiDataList();
+        List<OIData> dataList = mergeFilterInsModePassAll.getOiDataList();
         Assert.assertEquals("Bad number of Data in merge result of blocking filter",
                 input.getOiDatas().length, (dataList != null) ? dataList.size() : 0);
 
@@ -361,7 +360,7 @@ public class TestMergeFilter extends JUnitBaseTest {
     @Test // @Ignore
     public void testOiWavelengths() throws IOException, MalformedURLException, FitsException {
 
-        OIWavelength[] insList = mergeFilterPassAll.getOiWavelengths();
+        OIWavelength[] insList = mergeFilterInsModePassAll.getOiWavelengths();
         Assert.assertEquals("Bad number of Ins in merge result of passing filter",
                 input.getOiWavelengths().length, (insList != null) ? insList.length : 0);
 
@@ -390,7 +389,7 @@ public class TestMergeFilter extends JUnitBaseTest {
     @Test // @Ignore
     public void testOiArrays() throws IOException, MalformedURLException, FitsException {
 
-        OIArray[] arrayList = mergeFilterPassAll.getOiArrays();
+        OIArray[] arrayList = mergeFilterInsModePassAll.getOiArrays();
         Assert.assertEquals("Bad number of Ins in merge result of passing filter",
                 input.getOiArrays().length, (arrayList != null) ? arrayList.length : 0);
 

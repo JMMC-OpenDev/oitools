@@ -19,15 +19,16 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.jmcs.util.ToStringable;
-import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.model.Granule.GranuleField;
 import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.processing.Double1DFilter;
 import fr.jmmc.oitools.processing.FitsTableFilter;
 import fr.jmmc.oitools.processing.FitsTableFilter.FilterState;
+import fr.jmmc.oitools.processing.NightIdFilter;
 import fr.jmmc.oitools.processing.Selector;
 import fr.jmmc.oitools.processing.SelectorResult;
+import fr.jmmc.oitools.processing.TargetUIDFilter;
 import fr.jmmc.oitools.util.GranuleComparator;
 import fr.jmmc.oitools.util.OIFitsFileComparator;
 import fr.nom.tam.fits.FitsException;
@@ -423,12 +424,40 @@ public final class OIFitsCollection implements ToStringable {
                 result = (result != null) ? result : new SelectorResult(this);
 
                 // Prepare filters (once) in selectorResult:
-                if ((selector != null) && selector.hasWavelengthRanges()) {
-                    final List<FitsTableFilter<?>> wlFilters = result.getFiltersOIWavelength();
-                    wlFilters.clear();
-                    wlFilters.add(new Double1DFilter(
-                            OIFitsConstants.COLUMN_EFF_WAVE, selector.getWavelengthRanges())
-                    );
+                if (selector != null) {
+                    // Create the filter chain:
+                    {
+                        // OIData filters:
+                        final List<FitsTableFilter<?>> filtersData1D = result.getFiltersOIData();
+                        filtersData1D.clear();
+                        // subset filters:
+                        if (selector.getTargetUID() != null) {
+                            filtersData1D.add(new TargetUIDFilter(tm, selector.getTargetUID()));
+                        }
+                        // insModeUID: useless as granule already handled this criteria
+                        if (selector.getNightID() != null) {
+                            filtersData1D.add(new NightIdFilter(selector.getNightID()));
+                        }
+                        // table refs: see OIData filtering below
+
+                        // generic filters:
+                        if (selector.hasFilter(Selector.FILTER_MJD)) {
+                            filtersData1D.add(new Double1DFilter(Selector.FILTER_MJD,
+                                    selector.getFilter(Selector.FILTER_MJD)));
+                        }
+                        // TODO: copy generic filters from selector.filters (1D)
+                    }
+                    {
+                        // Wavelength filters:
+                        final List<FitsTableFilter<?>> filtersWL = result.getFiltersOIWavelength();
+                        filtersWL.clear();
+
+                        if (selector.hasFilter(Selector.FILTER_WAVELENGTH)) {
+                            filtersWL.add(new Double1DFilter(Selector.FILTER_WAVELENGTH,
+                                    selector.getFilter(Selector.FILTER_WAVELENGTH)));
+                        }
+                        // TODO: copy generic filters from selector.filters (WLEN only)
+                    }
                 }
 
                 for (Granule g : granules) {
@@ -492,11 +521,10 @@ public final class OIFitsCollection implements ToStringable {
      * @param oiData the oiData to add, and to read its OIWavelength to compute the IndexMask
      */
     private void filterOIData(final SelectorResult result, final Granule g, final OIData oiData) {
-
         logger.log(Level.FINE, "filterOIData: oiData = {0}", oiData);
 
         // apply filters on OIData:
-        // OIWavelength filters:
+        // 1. OIWavelength filters:
         final OIWavelength oiWavelength = oiData.getOiWavelength();
 
         if (result.hasFiltersOIWavelength()) {
@@ -508,14 +536,18 @@ public final class OIFitsCollection implements ToStringable {
             }
             // oiWavelength already processed ?
             if (result.getWavelengthMask(oiWavelength) == null) {
-                final IndexMask wavelengthMask = computeMask1D(
+                final IndexMask maskWavelength = computeMask1D(
                         result.getFiltersOIWavelength(), oiWavelength, result.getFiltersUsed()
                 );
-                if (wavelengthMask == null) {
+                if (maskWavelength == null) {
                     // skip OIData (no remaining row):
                     return;
                 }
-                result.putWavelengthMask(oiWavelength, wavelengthMask);
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "wlen filters: {0}", result.getFiltersOIWavelength());
+                    logger.log(Level.FINE, "wlenMask: {0}", maskWavelength);
+                }
+                result.putWavelengthMask(oiWavelength, maskWavelength);
             }
         } else if (oiWavelength != null) {
             // oiWavelength already processed ?
@@ -523,6 +555,22 @@ public final class OIFitsCollection implements ToStringable {
                 // if selector has no wavelength ranges, use FULL mask
                 result.putWavelengthMask(oiWavelength, IndexMask.FULL);
             }
+        }
+
+        // 2. OIData filters:
+        if (result.hasFiltersOIData()) {
+            final IndexMask maskRows = computeMask1D(
+                    result.getFiltersOIData(), oiData, result.getFiltersUsed()
+            );
+            if (maskRows == null) {
+                // skip OIData (no remaining row):
+                return;
+            }
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "oidata filters: {0}", result.getFiltersOIData());
+                logger.log(Level.FINE, "maskRows: {0}", maskRows);
+            }
+            result.putDataMask1D(oiData, maskRows);
         }
         result.addOIData(g, oiData);
     }
@@ -661,14 +709,16 @@ public final class OIFitsCollection implements ToStringable {
             final Granule pattern = new Granule(target, insMode, nightId);
 
             // Baselines criteria:
-            if (selector.hasBaselines()) {
-                pattern.getDistinctStaNames().addAll(selector.getBaselines());
+            if (selector.hasFilter(Selector.FILTER_BASELINE)) {
+                pattern.getDistinctStaNames().addAll(selector.getFilter(Selector.FILTER_BASELINE));
             }
 
             // MJD & Wavelength ranges criteria:
             final GranuleMatcher granuleMatcher = GranuleMatcher.getInstance(
-                    (selector.hasMJDRanges()) ? new LinkedHashSet<Range>(selector.getMJDRanges()) : null,
-                    (selector.hasWavelengthRanges()) ? new LinkedHashSet<Range>(selector.getWavelengthRanges()) : null
+                    (selector.hasFilter(Selector.FILTER_MJD))
+                    ? new LinkedHashSet<Range>(selector.getFilter(Selector.FILTER_MJD)) : null,
+                    (selector.hasFilter(Selector.FILTER_WAVELENGTH))
+                    ? new LinkedHashSet<Range>(selector.getFilter(Selector.FILTER_WAVELENGTH)) : null
             );
 
             if (!pattern.isEmpty() || !granuleMatcher.isEmpty()) {

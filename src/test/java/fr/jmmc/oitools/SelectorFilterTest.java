@@ -46,7 +46,7 @@ public class SelectorFilterTest extends JUnitBaseTest {
     public void testFindOIData() {
         final Selector selector = new Selector();
         selector.setTargetUID(TARGET_NAME);
-        selector.setWavelengthRanges(Arrays.asList(new Range(2.4E-6, 2.6E-6)));
+        selector.addFilter(Selector.FILTER_WAVELENGTH, Arrays.asList(new Range(2.4E-6, 2.6E-6)));
 
         final SelectorResult selectorResult = oiFitsCollection.findOIData(selector);
         // logger.info("testFindOIData: \n" + selectorResult);
@@ -70,7 +70,7 @@ public class SelectorFilterTest extends JUnitBaseTest {
     public void testFindOIData2WavelengthRanges() {
         final Selector selector = new Selector();
         selector.setTargetUID(TARGET_NAME);
-        selector.setWavelengthRanges(Arrays.asList(new Range(2.38E-6, 2.42E-6), new Range(2.45E-6, 2.6E-6)));
+        selector.addFilter(Selector.FILTER_WAVELENGTH, Arrays.asList(new Range(2.38E-6, 2.42E-6), new Range(2.45E-6, 2.6E-6)));
 
         final SelectorResult selectorResult = oiFitsCollection.findOIData(selector);
         // logger.info("testFindOIData: \n" + selectorResult);
@@ -94,7 +94,7 @@ public class SelectorFilterTest extends JUnitBaseTest {
     public void testFindOIDataEmpty() {
         final Selector selector = new Selector();
         selector.setTargetUID(TARGET_NAME);
-        selector.setWavelengthRanges(Arrays.asList(new Range(24E-6, 26E-6)));
+        selector.addFilter(Selector.FILTER_WAVELENGTH, Arrays.asList(new Range(24E-6, 26E-6)));
 
         SelectorResult selectorResult = oiFitsCollection.findOIData(selector);
         // logger.info("testFindOIDataEmpty: \n" + selectorResult);
@@ -106,7 +106,7 @@ public class SelectorFilterTest extends JUnitBaseTest {
     public void testFindOIDataFull() {
         final Selector selector = new Selector();
         selector.setTargetUID(TARGET_NAME);
-        selector.setWavelengthRanges(Arrays.asList(new Range(1E-6, 10E-6)));
+        selector.addFilter(Selector.FILTER_WAVELENGTH, Arrays.asList(new Range(1E-6, 10E-6)));
 
         SelectorResult selectorResult = oiFitsCollection.findOIData(selector);
         // logger.info("testFindOIDataFull: \n" + selectorResult);

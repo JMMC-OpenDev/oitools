@@ -4,6 +4,8 @@
 package fr.jmmc.oitools.processing;
 
 import fr.jmmc.oitools.fits.FitsTable;
+import fr.jmmc.oitools.model.range.Range;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -53,8 +55,22 @@ public abstract class FitsTableFilter<K> {
 
     @Override
     public String toString() {
-        return "FitsTableFilter{" + "columnName=" + columnName + ", acceptedValues=" + acceptedValues
-                + ", is2D= " + is2D() + '}';
+        return getClass().getSimpleName() + "{columnName=" + columnName + ", acceptedValues=" + acceptedValues
+                + ", is2D=" + is2D() + '}';
     }
 
+    // --- utility methods ---
+    public static List<String> asList(final String value) {
+        return Arrays.asList(new String[]{value});
+    }
+
+    public static List<Range> asList(final Range value) {
+        return Arrays.asList(new Range[]{value});
+    }
+
+    public static void resetFilters(final List<FitsTableFilter<?>> filters) {
+        for (int f = 0, len = filters.size(); f < len; f++) {
+            filters.get(f).reset();
+        }
+    }
 }

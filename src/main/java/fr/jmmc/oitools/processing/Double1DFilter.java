@@ -11,10 +11,10 @@ import java.util.Set;
 import java.util.logging.Level;
 
 /**
- *
+ * Generic numeric filter on double[] 1D arrays
  * @author bourgesl
  */
-public class Double1DFilter extends FitsTableFilter<Range> {
+public final class Double1DFilter extends FitsTableFilter<Range> {
 
     // members:
     private double[] tableColumn1D = null;

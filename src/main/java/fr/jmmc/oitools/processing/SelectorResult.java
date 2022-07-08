@@ -54,9 +54,12 @@ public final class SelectorResult {
     private final Set<OIData> oiDatas = new LinkedHashSet<OIData>();
     /* filters */
     private final List<FitsTableFilter<?>> filtersUsed = new ArrayList<>();
+    private final List<FitsTableFilter<?>> filtersOIData = new ArrayList<>();
     private final List<FitsTableFilter<?>> filtersOIWavelength = new ArrayList<>();
     /* masks */
-    /** Map between OIWavelength table to BitSet (mask) for OIWavelength */
+    /** Map between OIData table to BitSet (mask 1D) */
+    private final Map<OIData, IndexMask> maskOIDatas1D = new IdentityHashMap<OIData, IndexMask>();
+    /** Map between OIWavelength table to BitSet (mask 1D) */
     private final Map<OIWavelength, IndexMask> maskOIWavelengths = new IdentityHashMap<OIWavelength, IndexMask>();
     /** cached values */
     private List<Target> sortedTargets = null;
@@ -76,7 +79,9 @@ public final class SelectorResult {
         granules.clear();
         oiDatas.clear();
         filtersUsed.clear();
+        filtersOIData.clear();
         filtersOIWavelength.clear();
+        maskOIDatas1D.clear();
         maskOIWavelengths.clear();
         sortedTargets = null;
         sortedInstrumentModes = null;
@@ -88,13 +93,15 @@ public final class SelectorResult {
     public void resetFilters() {
         filtersUsed.clear();
 
-        if (hasFiltersOIWavelength()) {
-            final List<FitsTableFilter<?>> filters = getFiltersOIWavelength();
-            for (int f = 0, len = filters.size(); f < len; f++) {
-                final FitsTableFilter<?> filter = filters.get(f);
-                filter.reset();
-            }
+        if (hasFiltersOIData()) {
+            FitsTableFilter.resetFilters(getFiltersOIData());
         }
+
+        if (hasFiltersOIWavelength()) {
+            FitsTableFilter.resetFilters(getFiltersOIWavelength());
+        }
+        // TODO: use filters to build back the filter criteria (CLI)
+        // instead of selector ...
     }
 
     public boolean hasSelector() {
@@ -124,6 +131,14 @@ public final class SelectorResult {
 
     public List<FitsTableFilter<?>> getFiltersUsed() {
         return filtersUsed;
+    }
+
+    public boolean hasFiltersOIData() {
+        return !filtersOIData.isEmpty();
+    }
+
+    public List<FitsTableFilter<?>> getFiltersOIData() {
+        return filtersOIData;
     }
 
     public boolean hasFiltersOIWavelength() {
@@ -175,24 +190,46 @@ public final class SelectorResult {
     }
 
     /**
+     * Retrieves the IndexMask for the given OIData.
+     * @param oiData Must not be null.
+     * @return the IndexMask, or null or FULL
+     */
+    public IndexMask getDataMask1D(final OIData oiData) {
+        return this.maskOIDatas1D.get(oiData);
+    }
+
+    public IndexMask getDataMask1DNotFull(final OIData oiData) {
+        final IndexMask maskOIData1D = getDataMask1D(oiData);
+        return (maskOIData1D == null || maskOIData1D.isFull()) ? null : maskOIData1D;
+    }
+
+    /**
+     * Registers the IndexMask for the given OIData.
+     * @param oiData Must not be null.
+     * @param mask IndexMask or FULL
+     */
+    public void putDataMask1D(final OIData oiData, final IndexMask mask) {
+        this.maskOIDatas1D.put(oiData, mask);
+    }
+
+    /**
      * Retrieves the IndexMask for the given OIWavelength.
      * @param oiWavelength Must not be null.
-     * @return the IndexMask, or null if it was unset for the OIWavelength, or null if the null mask was registered for
-     * this OIWavelength.
+     * @return the IndexMask, or null or FULL
      */
     public IndexMask getWavelengthMask(final OIWavelength oiWavelength) {
         return this.maskOIWavelengths.get(oiWavelength);
     }
 
     public IndexMask getWavelengthMaskNotFull(final OIWavelength oiWavelength) {
-        final IndexMask wavelengthMask = getWavelengthMask(oiWavelength);
-        return (wavelengthMask == null || wavelengthMask.isFull()) ? null : wavelengthMask;
+        final IndexMask maskWavelength = getWavelengthMask(oiWavelength);
+        return (maskWavelength == null || maskWavelength.isFull()) ? null : maskWavelength;
     }
 
     /**
      * Registers the IndexMask for the given OIWavelength.
      * @param oiWavelength Must not be null.
-     * @param mask Can be null, it means the mask hides everything.
+     * @param mask IndexMask or FULL
      */
     public void putWavelengthMask(final OIWavelength oiWavelength, final IndexMask mask) {
         this.maskOIWavelengths.put(oiWavelength, mask);
