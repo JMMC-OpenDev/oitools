@@ -37,7 +37,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -77,13 +79,26 @@ public final class DataModel {
     private static final String TEST_DIR = "src/test/resources/";
 
     /** lazy DataModel singleton */
-    private static DataModel INSTANCE = null;
+    private static final EnumMap<OIFitsStandard, DataModel> INSTANCES = new EnumMap(OIFitsStandard.class);
+
+    public static synchronized DataModel getInstance() {
+        return getInstance(OIFitsStandard.VERSION_2);
+    }
 
     public static synchronized DataModel getInstance(final OIFitsStandard version) {
-        if (INSTANCE == null) {
-            INSTANCE = new DataModel(version);
+        DataModel dm = INSTANCES.get(version);
+        if (dm == null) {
+            dm = new DataModel(version);
+            INSTANCES.put(version, dm);
         }
-        return INSTANCE;
+        return dm;
+    }
+
+    public static DataModel getInstance(final Collection<OIData> oiDatas) {
+        if (oiDatas == null || oiDatas.isEmpty()) {
+            return getInstance();
+        }
+        return new DataModel(oiDatas, false);
     }
 
     /**
@@ -552,85 +567,107 @@ public final class DataModel {
         }
     }
 
-    // members:
-    private final OIFitsFile oiFitsFile;
-    /* cached values */
-    private Set<String> columnNames = null;
-    private Set<String> columnNames1D = null;
-    private Set<String> columnNames2D = null;
-
-    private DataModel(final OIFitsStandard version) {
-        this.oiFitsFile = (version == OIFitsStandard.VERSION_2) ? createOIFitsFileV2() : createOIFitsFileV1();
+    private static OIFitsFile createOIFitsFile(final OIFitsStandard version) {
+        switch (version) {
+            case VERSION_1:
+                return createOIFitsFileV1();
+            default:
+            case VERSION_2:
+                return createOIFitsFileV2();
+        }
     }
 
-    // public API:
-    public OIFitsFile getOiFitsFile() {
-        return oiFitsFile;
+    // members:
+    private final boolean shared;
+    private final Collection<OIData> oiDatas;
+    /* cached values */
+    private Set<String> allColumnNames = null;
+    private Set<String> allColumnNames1D = null;
+    private Set<String> allColumnNames2D = null;
+
+    private DataModel(final OIFitsStandard version) {
+        this(createOIFitsFile(version).getOiDataList(), true);
+    }
+
+    private DataModel(final Collection<OIData> oiDatas, final boolean shared) {
+        logger.log(Level.INFO, "new DataModel for {0}", oiDatas);
+        this.oiDatas = oiDatas;
+        this.shared = shared;
+    }
+
+    private void reset() {
+        allColumnNames = null;
+        allColumnNames1D = null;
+        allColumnNames2D = null;
+    }
+
+    public void refresh() {
+        if (!shared) {
+            reset();
+        }
+    }
+
+    // public API ?
+    private Collection<OIData> getOiDatas() {
+        return oiDatas;
     }
 
     public Set<String> getNumericalColumnNames() {
-        if (columnNames == null) {
-            columnNames = getAllNumericalColumnNames();
+        if (allColumnNames == null) {
+            allColumnNames = getAllNumericalColumnNames(getOiDatas(), true, false);
         }
-        return columnNames;
+        return allColumnNames;
     }
 
     public Set<String> getNumericalColumnNames1D() {
-        if (columnNames1D == null) {
-            columnNames1D = getAllNumericalColumnNames(false);
+        if (allColumnNames1D == null) {
+            allColumnNames1D = getAllNumericalColumnNames(getOiDatas(), false, false);
         }
-        return columnNames1D;
+        return allColumnNames1D;
     }
 
     public Set<String> getNumericalColumnNames2D() {
-        if (columnNames2D == null) {
-            columnNames2D = getAllNumericalColumnNames(true);
+        if (allColumnNames2D == null) {
+            allColumnNames2D = getAllNumericalColumnNames(getOiDatas(), false, true);
         }
-        return columnNames2D;
+        return allColumnNames2D;
     }
 
-    private Set<String> getAllNumericalColumnNames(final boolean is2D) {
+    private static Set<String> getAllNumericalColumnNames(final Collection<OIData> oiDatas,
+                                                          final boolean all, final boolean is2D) {
+
         final Set<String> columnNames = new LinkedHashSet<String>();
 
-        for (OIData oiData : oiFitsFile.getOiDataList()) {
-            final List<ColumnMeta> columnsDescCollection = oiData.getNumericalColumnsDescs();
+        getAllNumericalColumnNames(oiDatas, OIFitsConstants.TABLE_OI_VIS2, all, is2D, columnNames);
+        getAllNumericalColumnNames(oiDatas, OIFitsConstants.TABLE_OI_VIS, all, is2D, columnNames);
+        getAllNumericalColumnNames(oiDatas, OIFitsConstants.TABLE_OI_T3, all, is2D, columnNames);
+        getAllNumericalColumnNames(oiDatas, OIFitsConstants.TABLE_OI_FLUX, all, is2D, columnNames);
 
-            for (ColumnMeta colMeta : columnsDescCollection) {
-                if (colMeta != null) {
-                    if (colMeta instanceof WaveColumnMeta) {
-                        if (is2D) {
+        return columnNames;
+    }
+
+    private static void getAllNumericalColumnNames(final Collection<OIData> oiDatas, final String extName,
+                                                   final boolean all, final boolean is2D,
+                                                   final Set<String> columnNames) {
+        for (final OIData oiData : oiDatas) {
+            if (extName.equals(oiData.getExtName())) {
+                final List<ColumnMeta> columnsDescCollection = oiData.getNumericalColumnsDescs();
+
+                for (final ColumnMeta colMeta : columnsDescCollection) {
+                    if (colMeta != null) {
+                        if (colMeta instanceof WaveColumnMeta) {
+                            if (all || is2D) {
+                                columnNames.add(colMeta.getName());
+                            }
+                        } else if (colMeta.is3D()) {
+                            // not possible in OIData:
+                        } else if (all || !is2D) {
                             columnNames.add(colMeta.getName());
                         }
-                    } else if (colMeta.is3D()) {
-                        // not possible in OIData:
-                    } else if (!is2D) {
-                        columnNames.add(colMeta.getName());
                     }
                 }
             }
         }
-        return columnNames;
-    }
-
-    private Set<String> getAllNumericalColumnNames() {
-        final Set<String> columnNames = new LinkedHashSet<String>();
-
-        for (OIData oiData : oiFitsFile.getOiDataList()) {
-            final List<ColumnMeta> columnsDescCollection = oiData.getNumericalColumnsDescs();
-
-            for (ColumnMeta colMeta : columnsDescCollection) {
-                if (colMeta != null) {
-                    if (colMeta instanceof WaveColumnMeta) {
-                        columnNames.add(colMeta.getName());
-                    } else if (colMeta.is3D()) {
-                        // not possible in OIData:
-                    } else {
-                        columnNames.add(colMeta.getName());
-                    }
-                }
-            }
-        }
-        return columnNames;
     }
 
     /**
@@ -641,7 +678,7 @@ public final class DataModel {
         dump(false);
         dump(true);
 
-        final DataModel dm = getInstance(OIFitsStandard.VERSION_2);
+        final DataModel dm = getInstance();
 
         logger.log(Level.WARNING, "columnNames:   {0}", dm.getNumericalColumnNames());
 

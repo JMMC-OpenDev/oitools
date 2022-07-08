@@ -16,6 +16,7 @@
  */
 package fr.jmmc.oitools.processing;
 
+import fr.jmmc.oitools.model.DataModel;
 import fr.jmmc.oitools.model.Granule;
 import fr.jmmc.oitools.model.Granule.GranuleField;
 import fr.jmmc.oitools.model.IndexMask;
@@ -68,6 +69,8 @@ public final class SelectorResult {
     private List<OIData> sortedOIDatas = null;
     /** Map of used staNames to StaNamesDir (reference StaNames / orientation) */
     private Map<String, StaNamesDir> usedStaNamesMap = null;
+    /* data model on selected data */
+    private DataModel dataModel = null;
 
     public SelectorResult(final OIFitsCollection oiFitsCollection) {
         this.oiFitsCollection = oiFitsCollection;
@@ -88,6 +91,7 @@ public final class SelectorResult {
         sortedNightIds = null;
         sortedOIDatas = null;
         usedStaNamesMap = null;
+        dataModel = null;
     }
 
     public void resetFilters() {
@@ -245,6 +249,13 @@ public final class SelectorResult {
 
     public void setUsedStaNamesMap(final Map<String, StaNamesDir> usedStaNamesMap) {
         this.usedStaNamesMap = usedStaNamesMap;
+    }
+
+    public DataModel getDataModel() {
+        if (dataModel == null) {
+            dataModel = DataModel.getInstance(oiDatas);
+        }
+        return dataModel;
     }
 
     @Override
