@@ -238,12 +238,12 @@ public class TestMergeFilter extends JUnitBaseTest {
             oiColWls.analyzeCollection();
 
             // Filter block data of the files
-            selector.addFilter(Selector.FILTER_WAVELENGTH, Arrays.asList(new Range(0.5E-6, 1E-6)));
+            selector.addFilter(Selector.FILTER_EFFWAVE, Arrays.asList(new Range(0.5E-6, 1E-6)));
             mergeFilterWlsBlockAll = Merger.process(oiColWls, selector);
             Assert.assertNull("Merge return not a null value", mergeFilterWlsBlockAll);
 
             // Filter let pass data of the files
-            selector.addFilter(Selector.FILTER_WAVELENGTH, WLS_FILTER_VALUE);
+            selector.addFilter(Selector.FILTER_EFFWAVE, WLS_FILTER_VALUE);
             mergeFilterWlsPassSome = Merger.process(oiColWls, selector);
             Assert.assertNotNull("Merge return a null value", mergeFilterWlsPassSome);
 
@@ -254,7 +254,7 @@ public class TestMergeFilter extends JUnitBaseTest {
             mergeFilterWlsPassSome.analyze();
 
             // Filter let pass data of the files
-            selector.addFilter(Selector.FILTER_WAVELENGTH, Arrays.asList(new Range(0.1E-6, 1E-4)));
+            selector.addFilter(Selector.FILTER_EFFWAVE, Arrays.asList(new Range(0.1E-6, 1E-4)));
             mergeFilterWlsPassAll = Merger.process(oiColWls, selector);
             Assert.assertNotNull("Merge return a null value", mergeFilterWlsPassAll);
         }

@@ -28,7 +28,9 @@ import java.util.Map;
  */
 public final class Selector {
 
-    public final static String FILTER_WAVELENGTH = OIFitsConstants.COLUMN_EFF_WAVE;
+    public final static String FILTER_EFFWAVE = OIFitsConstants.COLUMN_EFF_WAVE;
+    public final static String FILTER_EFFBAND = OIFitsConstants.COLUMN_EFF_BAND;
+
     public final static String FILTER_BASELINE = OIFitsConstants.COLUMN_STA_INDEX;
     public final static String FILTER_MJD = OIFitsConstants.COLUMN_MJD;
 
@@ -101,7 +103,7 @@ public final class Selector {
         }
     }
 
-    Map<String, List<?>> getFiltersMap() {
+    public Map<String, List<?>> getFiltersMap() {
         return filtersMap;
     }
 

@@ -239,7 +239,7 @@ public class OIFitsProcessor extends OIFitsCommand {
             selector.addFilter(Selector.FILTER_MJD, parseRanges(mjds));
         }
         if (wavelengths != null) {
-            selector.addFilter(Selector.FILTER_WAVELENGTH, parseRanges(wavelengths));
+            selector.addFilter(Selector.FILTER_EFFWAVE, parseRanges(wavelengths));
         }
 
         // Call merge
@@ -418,7 +418,7 @@ public class OIFitsProcessor extends OIFitsCommand {
                     + ((selector.getNightID() != null) ? OIFitsProcessor.OPTION_NIGHT + " " + selector.getNightID() + " " : "")
                     + ((selector.hasFilter(Selector.FILTER_BASELINE)) ? OIFitsProcessor.OPTION_BASELINES + " " + dumpStrings(selector.getFilter(Selector.FILTER_BASELINE)) + " " : "")
                     + ((selector.hasFilter(Selector.FILTER_MJD)) ? OIFitsProcessor.OPTION_MJD_RANGES + " " + dumpRanges(selector.getFilter(Selector.FILTER_MJD)) + " " : "")
-                    + ((selector.hasFilter(Selector.FILTER_WAVELENGTH)) ? OIFitsProcessor.OPTION_WL_RANGES + " " + dumpRanges(selector.getFilter(Selector.FILTER_WAVELENGTH)) + " " : "");
+                    + ((selector.hasFilter(Selector.FILTER_EFFWAVE)) ? OIFitsProcessor.OPTION_WL_RANGES + " " + dumpRanges(selector.getFilter(Selector.FILTER_EFFWAVE)) + " " : "");
         }
         return "";
     }

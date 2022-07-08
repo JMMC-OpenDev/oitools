@@ -445,18 +445,28 @@ public final class OIFitsCollection implements ToStringable {
                             filtersData1D.add(new Double1DFilter(Selector.FILTER_MJD,
                                     selector.getFilter(Selector.FILTER_MJD)));
                         }
-                        // TODO: copy generic filters from selector.filters (1D)
+
+                        // convert generic filters from selector.filters (1D)
+                        for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
+                            if (!isCustomFilter(e.getKey())) {
+                                filtersData1D.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
+                            }
+                        }
+                        if (logger.isLoggable(Level.INFO)) {
+                            logger.log(Level.INFO, "filtersData1D: {0} ", filtersData1D);
+                        }
                     }
                     {
                         // Wavelength filters:
                         final List<FitsTableFilter<?>> filtersWL = result.getFiltersOIWavelength();
                         filtersWL.clear();
 
-                        if (selector.hasFilter(Selector.FILTER_WAVELENGTH)) {
-                            filtersWL.add(new Double1DFilter(Selector.FILTER_WAVELENGTH,
-                                    selector.getFilter(Selector.FILTER_WAVELENGTH)));
+                        // convert generic filters from selector.filters (WAVELENGTH)
+                        for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
+                            if (isFilterOnWavelengths(e.getKey())) {
+                                filtersWL.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
+                            }
                         }
-                        // TODO: copy generic filters from selector.filters (WLEN only)
                     }
                 }
 
@@ -717,8 +727,8 @@ public final class OIFitsCollection implements ToStringable {
             final GranuleMatcher granuleMatcher = GranuleMatcher.getInstance(
                     (selector.hasFilter(Selector.FILTER_MJD))
                     ? new LinkedHashSet<Range>(selector.getFilter(Selector.FILTER_MJD)) : null,
-                    (selector.hasFilter(Selector.FILTER_WAVELENGTH))
-                    ? new LinkedHashSet<Range>(selector.getFilter(Selector.FILTER_WAVELENGTH)) : null
+                    (selector.hasFilter(Selector.FILTER_EFFWAVE))
+                    ? new LinkedHashSet<Range>(selector.getFilter(Selector.FILTER_EFFWAVE)) : null
             );
 
             if (!pattern.isEmpty() || !granuleMatcher.isEmpty()) {
@@ -756,5 +766,25 @@ public final class OIFitsCollection implements ToStringable {
             }
         }
         return granules;
+    }
+
+    private static boolean isCustomFilter(final String name) {
+        switch (name) {
+            case Selector.FILTER_BASELINE:
+            case Selector.FILTER_MJD:
+                return true;
+            default:
+                return isFilterOnWavelengths(name);
+        }
+    }
+
+    private static boolean isFilterOnWavelengths(final String name) {
+        switch (name) {
+            case Selector.FILTER_EFFWAVE:
+            case Selector.FILTER_EFFBAND:
+                return true;
+            default:
+                return false;
+        }
     }
 }

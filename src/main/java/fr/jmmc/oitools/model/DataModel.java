@@ -590,7 +590,6 @@ public final class DataModel {
     }
 
     private DataModel(final Collection<OIData> oiDatas, final boolean shared) {
-        logger.log(Level.INFO, "new DataModel for {0}", oiDatas);
         this.oiDatas = oiDatas;
         this.shared = shared;
     }
