@@ -28,6 +28,8 @@ import fr.jmmc.oitools.processing.FitsTableFilter.FilterState;
 import fr.jmmc.oitools.processing.NightIdFilter;
 import fr.jmmc.oitools.processing.Selector;
 import fr.jmmc.oitools.processing.SelectorResult;
+import fr.jmmc.oitools.processing.StaConfFilter;
+import fr.jmmc.oitools.processing.StaIndexFilter;
 import fr.jmmc.oitools.processing.TargetUIDFilter;
 import fr.jmmc.oitools.util.GranuleComparator;
 import fr.jmmc.oitools.util.OIFitsFileComparator;
@@ -441,6 +443,14 @@ public final class OIFitsCollection implements ToStringable {
                         // table refs: see OIData filtering below
 
                         // generic filters:
+                        if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
+                            filtersData1D.add(new StaIndexFilter(getUsedStaNamesMap(),
+                                    selector.getFilter(Selector.FILTER_STAINDEX)));
+                        }
+                        if (selector.hasFilter(Selector.FILTER_STACONF)) {
+                            filtersData1D.add(new StaConfFilter(
+                                    selector.getFilter(Selector.FILTER_STACONF)));
+                        }
                         if (selector.hasFilter(Selector.FILTER_MJD)) {
                             filtersData1D.add(new Double1DFilter(Selector.FILTER_MJD,
                                     selector.getFilter(Selector.FILTER_MJD)));
@@ -554,7 +564,7 @@ public final class OIFitsCollection implements ToStringable {
                     return;
                 }
                 if (logger.isLoggable(Level.FINE)) {
-                    logger.log(Level.FINE, "wlen filters: {0}", result.getFiltersOIWavelength());
+                    logger.log(Level.FINE, "wlen filters: {0}", result.getFiltersUsed());
                     logger.log(Level.FINE, "wlenMask: {0}", maskWavelength);
                 }
                 result.putWavelengthMask(oiWavelength, maskWavelength);
@@ -577,7 +587,7 @@ public final class OIFitsCollection implements ToStringable {
                 return;
             }
             if (logger.isLoggable(Level.FINE)) {
-                logger.log(Level.FINE, "oidata filters: {0}", result.getFiltersOIData());
+                logger.log(Level.FINE, "oidata filters: {0}", result.getFiltersUsed());
                 logger.log(Level.FINE, "maskRows: {0}", maskRows);
             }
             result.putDataMask1D(oiData, maskRows);
@@ -643,7 +653,7 @@ public final class OIFitsCollection implements ToStringable {
             }
             // update mask:
             if (match) {
-                maskRows.setRow(i, true);
+                maskRows.setAccept(i, true);
             } else {
                 // data row does not correspond to selected wavelength ranges 
                 filterRows = true;
@@ -719,8 +729,8 @@ public final class OIFitsCollection implements ToStringable {
             final Granule pattern = new Granule(target, insMode, nightId);
 
             // Baselines criteria:
-            if (selector.hasFilter(Selector.FILTER_BASELINE)) {
-                pattern.getDistinctStaNames().addAll(selector.getFilter(Selector.FILTER_BASELINE));
+            if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
+                pattern.getDistinctStaNames().addAll(selector.getFilter(Selector.FILTER_STAINDEX));
             }
 
             // MJD & Wavelength ranges criteria:
@@ -770,7 +780,8 @@ public final class OIFitsCollection implements ToStringable {
 
     private static boolean isCustomFilter(final String name) {
         switch (name) {
-            case Selector.FILTER_BASELINE:
+            case Selector.FILTER_STAINDEX:
+            case Selector.FILTER_STACONF:
             case Selector.FILTER_MJD:
                 return true;
             default:

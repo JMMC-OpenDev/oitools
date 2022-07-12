@@ -187,12 +187,12 @@ public class TestMergeFilter extends JUnitBaseTest {
             oiColBaselines.analyzeCollection();
 
             // Filter block data of the files
-            selector.addFilter(Selector.FILTER_BASELINE, Arrays.asList("X1-Y1"));
+            selector.addFilter(Selector.FILTER_STAINDEX, Arrays.asList("X1-Y1"));
             mergeFilterBaselinesBlockAll = Merger.process(oiColBaselines, selector);
             Assert.assertNull("Merge return not a null value", mergeFilterBaselinesBlockAll);
 
             // Filter let pass data of the files
-            selector.addFilter(Selector.FILTER_BASELINE, BASELINES_FILTER_VALUE);
+            selector.addFilter(Selector.FILTER_STAINDEX, BASELINES_FILTER_VALUE);
             mergeFilterBaselinesPassSome = Merger.process(oiColBaselines, selector);
             Assert.assertNotNull("Merge return a null value", mergeFilterBaselinesPassSome);
 
@@ -201,6 +201,8 @@ public class TestMergeFilter extends JUnitBaseTest {
             logger.log(Level.INFO, "MERGE: validation results\n{0}", checker.getCheckReport());
 
             mergeFilterBaselinesPassSome.analyze();
+
+            logger.log(Level.INFO, "MERGE: UsedStaNamesMap: {0}", mergeFilterBaselinesPassSome.getUsedStaNamesMap());
 
             Assert.assertEquals("4 baselines should be in merge result of blocking filter",
                     4, mergeFilterBaselinesPassSome.getUsedStaNamesMap().size());

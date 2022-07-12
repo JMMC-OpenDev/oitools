@@ -74,7 +74,7 @@ public final class IndexMask {
      * @param rowIndex Must be >= 0 and < nbRows
      * @return true to accept; false to reject
      */
-    public boolean isRow(final int rowIndex) {
+    public boolean accept(final int rowIndex) {
         if (vect1D) {
             return bitSet.get(rowIndex);
         }
@@ -87,7 +87,7 @@ public final class IndexMask {
      * @param rowIndex Must be >= 0 and < nbRows
      * @param value true to accept; false to reject
      */
-    public void setRow(final int rowIndex, final boolean value) {
+    public void setAccept(final int rowIndex, final boolean value) {
         // shortcut for 1D masks
         if (vect1D) {
             bitSet.set(rowIndex, value);
@@ -103,7 +103,7 @@ public final class IndexMask {
      * @param colIndex Must be >= 0 and < nbCols
      * @return true if cell equals @param value. cell [rowIndex, colIndex]
      */
-    public boolean isCell(final int rowIndex, final int colIndex) {
+    public boolean accept(final int rowIndex, final int colIndex) {
         if (!vect1D) {
             return bitSet.get(getBitIndex(rowIndex, colIndex));
         }
@@ -117,7 +117,7 @@ public final class IndexMask {
      * @param colIndex Must be >= 0 and < nbCols
      * @param value false to mask
      */
-    public void setCell(final int rowIndex, final int colIndex, final boolean value) {
+    public void setAccept(final int rowIndex, final int colIndex, final boolean value) {
         if (!vect1D) {
             bitSet.set(getBitIndex(rowIndex, colIndex), value);
         }
@@ -130,14 +130,6 @@ public final class IndexMask {
 
     public int cardinality() {
         return this.bitSet.cardinality();
-    }
-
-    public boolean isMaskEmpty() {
-        return cardinality() == 0;
-    }
-
-    public boolean isMaskFull() {
-        return cardinality() == (nbRows * nbCols);
     }
 
     public boolean isFull() {

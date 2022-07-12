@@ -34,9 +34,8 @@ import static fr.jmmc.oitools.model.ModelBase.logger;
 import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.util.MathUtils;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -938,6 +937,24 @@ public abstract class OIData extends OIAbstractData {
      */
     public int getDistinctStaConfCount() {
         return distinctStaConf.size();
+    }
+
+    /**
+     * Find the StaConfs instances corresponding to the selected StaNames (using getRealStaNames)
+     * @param selectedStaNames selected StaNames to match
+     * @param staIndexMatching set to store StaIndexes instances
+     */
+    public void getMatchingStaConfs(final List<String> selectedStaNames,
+                                    final Set<short[]> staIndexMatching) {
+        staIndexMatching.clear();
+
+        for (final short[] staIndexes : getDistinctStaConf()) {
+            final String staNames = getStaNames(staIndexes); // cached
+
+            if (selectedStaNames.contains(staNames)) {
+                staIndexMatching.add(staIndexes);
+            }
+        }
     }
 
     /**

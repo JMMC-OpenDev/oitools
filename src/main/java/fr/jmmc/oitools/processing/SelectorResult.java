@@ -195,7 +195,7 @@ public final class SelectorResult {
 
     /**
      * Retrieves the IndexMask for the given OIData.
-     * @param oiData Must not be null.
+     * @param oiData May be null.
      * @return the IndexMask, or null or FULL
      */
     public IndexMask getDataMask1D(final OIData oiData) {
@@ -210,7 +210,7 @@ public final class SelectorResult {
     /**
      * Registers the IndexMask for the given OIData.
      * @param oiData Must not be null.
-     * @param mask IndexMask or FULL
+     * @param mask IndexMask not null or FULL
      */
     public void putDataMask1D(final OIData oiData, final IndexMask mask) {
         this.maskOIDatas1D.put(oiData, mask);
@@ -218,7 +218,7 @@ public final class SelectorResult {
 
     /**
      * Retrieves the IndexMask for the given OIWavelength.
-     * @param oiWavelength Must not be null.
+     * @param oiWavelength May be null.
      * @return the IndexMask, or null or FULL
      */
     public IndexMask getWavelengthMask(final OIWavelength oiWavelength) {
@@ -233,7 +233,7 @@ public final class SelectorResult {
     /**
      * Registers the IndexMask for the given OIWavelength.
      * @param oiWavelength Must not be null.
-     * @param mask IndexMask or FULL
+     * @param mask IndexMask not null or FULL
      */
     public void putWavelengthMask(final OIWavelength oiWavelength, final IndexMask mask) {
         this.maskOIWavelengths.put(oiWavelength, mask);

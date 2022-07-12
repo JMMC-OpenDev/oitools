@@ -25,8 +25,6 @@ import fr.jmmc.oitools.meta.OIFitsStandard;
 import fr.jmmc.oitools.model.IndexMask;
 import fr.jmmc.oitools.model.ModelBase;
 import static fr.jmmc.oitools.model.ModelBase.UNDEFINED;
-import fr.jmmc.oitools.model.NightId;
-import fr.jmmc.oitools.model.NightIdMatcher;
 import fr.jmmc.oitools.model.OIArray;
 import fr.jmmc.oitools.model.OICorr;
 import fr.jmmc.oitools.model.OIData;
@@ -36,17 +34,14 @@ import fr.jmmc.oitools.model.OIPrimaryHDU;
 import fr.jmmc.oitools.model.OITable;
 import fr.jmmc.oitools.model.OITarget;
 import fr.jmmc.oitools.model.OIWavelength;
-import fr.jmmc.oitools.model.StaNamesDir;
 import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.model.TargetManager;
-import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.util.OITableComparator;
 import fr.nom.tam.fits.FitsDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -628,46 +623,13 @@ public final class Merger {
 
             final OIFitsFile resultFile = ctx.resultFile;
 
-            // keep nightIds associated to selected Granules ONLY:
-            final List<NightId> gNightIds = selectorResult.getDistinctNightIds();
-            // prepare NightIds matcher (generic):
-            final NightIdMatcher nightIdMatcher = new NightIdMatcher(gNightIds);
-
-            final Selector selector = selectorResult.getSelector();
-
-            // MJD ranges criteria:
-            final List<Range> gMJDRanges;
-            final Set<Range> mjdRangeMatchings;
-
-            if ((selector != null) && selector.hasFilter(Selector.FILTER_MJD)) {
-                gMJDRanges = selector.getFilter(Selector.FILTER_MJD);
-                mjdRangeMatchings = new HashSet<Range>();
-            } else {
-                gMJDRanges = null;
-                mjdRangeMatchings = null;
-            }
-
-            // Baselines criteria:
-            final List<String> gBaselines;
-            final Map<String, StaNamesDir> usedStaNamesMap;
-            final Set<short[]> staIndexMatchings; // identity
-
-            if ((selector != null) && selector.hasFilter(Selector.FILTER_BASELINE)) {
-                gBaselines = selector.getFilter(Selector.FILTER_BASELINE);
-                usedStaNamesMap = selectorResult.getOiFitsCollection().getUsedStaNamesMap();
-                staIndexMatchings = new HashSet<short[]>();
-            } else {
-                gBaselines = null;
-                usedStaNamesMap = null;
-                staIndexMatchings = null;
-            }
-
             final Map<OIWavelength, OIWavelength> mapOIWavelengths = ctx.mapOIWavelengths;
             final Map<OIArray, OIArray> mapOIArrays = ctx.mapOIArrays;
             final Map<OICorr, OICorr> mapOICorrs = ctx.mapOICorrs;
 
             final Map<OITarget, Map<Short, Short>> mapOITargetIDs = ctx.mapOITargetIDs;
 
+            // Process selected OIData tables:
             for (OIData oiData : oiDatas) {
                 final String newInsName;
                 final String newArrName;
@@ -711,14 +673,8 @@ public final class Merger {
 
                 for (Short id : oiData.getDistinctTargetId()) {
                     final Short newId = mapTargetIds.get(id);
-                    if (newId == null) {
-                        checkTargetId = true;
-                        // mark this id as UNDEFINED to be filtered out:
-                        mapTargetIds.put(id, UNDEFINED_SHORT);
-
-                        logger.log(Level.INFO, "Filter TargetId = {0}.", id);
-                    } else {
-                        // targetId value are different between input table and output:
+                    if (newId != null) {
+                        // targetId value are different between input and output tables:
                         if (!id.equals(newId)) {
                             checkTargetId = true;
                         }
@@ -728,57 +684,13 @@ public final class Merger {
                 logger.log(Level.FINE, "checkTargetId: {0}", checkTargetId);
                 logger.log(Level.FINE, "mapIds:        {0}", mapTargetIds);
 
-                // check nightIds:
-                boolean checkNightId = false;
-                // Should filter nightId on each data row ?
-                if (!oiData.hasSingleNight()) {
-                    if (!nightIdMatcher.matchAll(oiData.getDistinctNightId())) {
-                        checkNightId = true;
-                    }
-                    logger.log(Level.FINE, "oidata nightIds: {0}", oiData.getDistinctNightId());
-                }
-
-                // check baselines:
-                boolean checkBaselines = false;
-                if ((gBaselines != null) && (staIndexMatchings != null)) {
-                    if (logger.isLoggable(Level.FINE)) {
-                        logger.log(Level.FINE, "oiData distinct StaIndexes: {0}", oiData.getDistinctStaIndex());
-                    }
-                    // collect matching baselines (as usual staIndex instances):
-                    oiData.getMatchingStaIndexes(usedStaNamesMap, gBaselines, staIndexMatchings);
-
-                    if (staIndexMatchings.isEmpty()) {
-                        logger.log(Level.FINE, "Skip {0}, no matching baseline", oiData);
-                        continue;
-                    }
-                    logger.log(Level.FINE, "staIndexMatching: {0}", staIndexMatchings);
-
-                    if (oiData.getDistinctStaIndex().size() > staIndexMatchings.size()) {
-                        checkBaselines = true;
-                    }
-                }
-
-                // check MJD ranges:
-                boolean checkMJDRanges = false;
-                if ((gMJDRanges != null) && (mjdRangeMatchings != null)) {
-                    final Range oiDataMJDRange = oiData.getMjdRange();
-
-                    logger.log(Level.FINE, "oiData MJD range: {0}", oiDataMJDRange);
-
-                    // get matching MJD ranges:
-                    Range.getMatchingSelected(gMJDRanges, oiDataMJDRange, mjdRangeMatchings);
-
-                    if (mjdRangeMatchings.isEmpty()) {
-                        logger.log(Level.FINE, "Skip {0}, no matching MJD range", oiData);
-                        continue;
-                    }
-                    logger.log(Level.FINE, "matching MJD ranges: {0}", mjdRangeMatchings);
-
-                    checkMJDRanges = !Range.matchFully(oiDataMJDRange, mjdRangeMatchings);
-                }
-
-                // get the wavelength mask for the OIData's wavelength table:
+                // get the optional wavelength mask for the OIData's wavelength table:
                 final IndexMask maskWavelength = selectorResult.getWavelengthMaskNotFull(oiData.getOiWavelength());
+                // get the optional masks for this OIData table:
+                final IndexMask maskOIData1D = selectorResult.getDataMask1DNotFull(oiData);
+
+                logger.log(Level.INFO, "maskOIData1D:   {0}", maskOIData1D);
+                logger.log(Level.INFO, "maskWavelength: {0}", maskWavelength);
 
                 // Copy table and filter out useless rows:
                 final OIData newOIData = (OIData) resultFile.copyTable(oiData);
@@ -790,26 +702,26 @@ public final class Merger {
 
                 boolean filterRows = false;
 
-                final BitSet maskRows;
-                if (checkTargetId || checkNightId || checkBaselines || checkMJDRanges || (maskWavelength != null)) {
+                if (checkTargetId || (maskWavelength != null) || (maskOIData1D != null)) {
                     final int nRows = newOIData.getNbRows();
 
                     // prepare mask to indicate rows to keep in output table:
-                    maskRows = new BitSet(nRows); // bits set to false by default
+                    final BitSet maskRows = (maskOIData1D != null) ? maskOIData1D.getBitSet() : new BitSet(nRows);
 
                     // Update targetId column:
                     final short[] targetIds = newOIData.getTargetId();
                     final short[] newTargetIds = new short[nRows];
 
-                    final int[] nightIds = (checkNightId) ? newOIData.getNightId() : null;
-                    final double[] mjds = (checkMJDRanges) ? newOIData.getMJD() : null;
-                    final short[][] staIndexes = (checkBaselines) ? newOIData.getStaIndex() : null;
-
                     // Iterate on table rows (i):
                     for (int i = 0; i < nRows; i++) {
+
+                        // check optional data mask 1D:
+                        if ((maskOIData1D != null) && !maskOIData1D.accept(i)) {
+                            // if bit is false for this row, we hide this row
+                            continue;
+                        }
                         boolean skip = false;
 
-                        // TODO: use masks HERE
                         if (checkTargetId) {
                             final Short oldTargetId = Short.valueOf(targetIds[i]);
                             Short newTargetId = mapTargetIds.get(oldTargetId);
@@ -825,37 +737,23 @@ public final class Merger {
                             skip = true;
                         }
 
-                        if (checkNightId && !skip) {
-                            if (!nightIdMatcher.match(nightIds[i])) {
-                                // data row does not correspond to current night
-                                skip = true;
-                            }
-                        }
-                        if (checkMJDRanges && !skip) {
-                            if ((mjdRangeMatchings != null) && !Range.contains(mjdRangeMatchings, mjds[i])) {
-                                // data row does not correspond to selected MJD ranges 
-                                skip = true;
-                            }
-                        }
-                        if (checkBaselines && !skip) {
-                            if ((staIndexMatchings != null) && !staIndexMatchings.contains(staIndexes[i])) {
-                                // data row does not correspond to selected baselines
-                                skip = true;
-                            }
-                        }
-
                         // update mask:
                         if (skip) {
                             filterRows = true;
+                            if (maskOIData1D != null) {
+                                maskRows.set(i, false); // to be sure
+                            }
                         } else {
-                            maskRows.set(i);
+                            if (maskOIData1D == null) {
+                                maskRows.set(i);
+                            }
                         }
                     }
 
                     // update targetId column before table filter:
                     newOIData.setTargetId(newTargetIds);
 
-                    if (filterRows || (maskWavelength != null)) {
+                    if (filterRows || (maskOIData1D != null) || (maskWavelength != null)) {
                         final int nKeepRows = maskRows.cardinality();
 
                         if (nKeepRows <= 0) {

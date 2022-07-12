@@ -233,7 +233,7 @@ public class OIFitsProcessor extends OIFitsCommand {
             selector.setNightID(Integer.valueOf(night));
         }
         if (baselines != null) {
-            selector.addFilter(Selector.FILTER_BASELINE, parseStrings(baselines));
+            selector.addFilter(Selector.FILTER_STAINDEX, parseStrings(baselines));
         }
         if (mjds != null) {
             selector.addFilter(Selector.FILTER_MJD, parseRanges(mjds));
@@ -416,7 +416,7 @@ public class OIFitsProcessor extends OIFitsCommand {
             return ((selector.getTargetUID() != null) ? OIFitsProcessor.OPTION_TARGET + " " + selector.getTargetUID() + " " : "")
                     + ((selector.getInsModeUID() != null) ? OIFitsProcessor.OPTION_INSNAME + " " + selector.getInsModeUID() + " " : "")
                     + ((selector.getNightID() != null) ? OIFitsProcessor.OPTION_NIGHT + " " + selector.getNightID() + " " : "")
-                    + ((selector.hasFilter(Selector.FILTER_BASELINE)) ? OIFitsProcessor.OPTION_BASELINES + " " + dumpStrings(selector.getFilter(Selector.FILTER_BASELINE)) + " " : "")
+                    + ((selector.hasFilter(Selector.FILTER_STAINDEX)) ? OIFitsProcessor.OPTION_BASELINES + " " + dumpStrings(selector.getFilter(Selector.FILTER_STAINDEX)) + " " : "")
                     + ((selector.hasFilter(Selector.FILTER_MJD)) ? OIFitsProcessor.OPTION_MJD_RANGES + " " + dumpRanges(selector.getFilter(Selector.FILTER_MJD)) + " " : "")
                     + ((selector.hasFilter(Selector.FILTER_EFFWAVE)) ? OIFitsProcessor.OPTION_WL_RANGES + " " + dumpRanges(selector.getFilter(Selector.FILTER_EFFWAVE)) + " " : "");
         }

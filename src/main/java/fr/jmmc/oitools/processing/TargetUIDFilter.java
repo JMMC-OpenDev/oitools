@@ -53,9 +53,7 @@ public final class TargetUIDFilter extends FitsTableFilter<String> {
             return FilterState.INVALID;
         }
 
-        final boolean checkRows = !targetIdMatcher.matchAll(oiData.getDistinctTargetId());
-
-        if (checkRows) {
+        if (!targetIdMatcher.matchAll(oiData.getDistinctTargetId())) {
             // resolve column once
             targetIds = fitsTable.getColumnShort(columnName);
 

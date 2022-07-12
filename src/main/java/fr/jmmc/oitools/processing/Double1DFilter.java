@@ -45,9 +45,7 @@ public final class Double1DFilter extends FitsTableFilter<Range> {
         }
         logger.log(Level.FINE, "prepare: matching ranges: {0}", rangeMatchings);
 
-        final boolean checkRows = !Range.matchFully(rangeMatchings, tableRange);
-
-        if (checkRows) {
+        if (!Range.matchFully(rangeMatchings, tableRange)) {
             // resolve column once
             tableColumn1D = fitsTable.getColumnAsDouble(columnName);
 

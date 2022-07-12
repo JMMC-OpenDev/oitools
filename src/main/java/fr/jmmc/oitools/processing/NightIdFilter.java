@@ -53,9 +53,7 @@ public final class NightIdFilter extends FitsTableFilter<NightId> {
             return FilterState.INVALID;
         }
 
-        final boolean checkRows = !nightIdMatcher.matchAll(oiData.getDistinctNightId());
-
-        if (checkRows) {
+        if (!nightIdMatcher.matchAll(oiData.getDistinctNightId())) {
             // resolve column once
             nightIds = oiData.getNightId();
 
