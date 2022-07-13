@@ -35,6 +35,11 @@ public final class Double1DFilter extends FitsTableFilter<Range> {
         final Range tableRange = fitsTable.getColumnRange(columnName);
         logger.log(Level.FINE, "prepare: table range: {0}", tableRange);
 
+        if (!tableRange.isFinite()) {
+            // missing column or no data, ignore filter:
+            return FilterState.FULL;
+        }
+
         // get only matching ranges:
         Range.getMatchingSelected(getAcceptedValues(), tableRange, rangeMatchings);
 
