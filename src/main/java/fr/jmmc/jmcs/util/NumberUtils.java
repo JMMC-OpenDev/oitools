@@ -36,6 +36,8 @@ import java.util.logging.Logger;
  * This class is copied from Jmcs (same package) in order to let OITools compile properly 
  * but at runtime only one implementation will be loaded (by class loader)
  * 
+ * Note: Jmcs Changes must be reported here to avoid runtime issues !
+ * 
  * Handles double number comparisons with absolute error and number helper methods
  * http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm
  * 

@@ -33,6 +33,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * This class is copied from Jmcs (same package) in order to let OITools compile properly 
+ * but at runtime only one implementation will be loaded (by class loader)
+ * 
+ * Note: Jmcs Changes must be reported here to avoid runtime issues !
+ *
  * The fr.jmmc.jmcs.util.ObjectUtils class is related to Object handling (equals, clone, copy, toString variants)
  * 
  * @author Laurent BOURGES.

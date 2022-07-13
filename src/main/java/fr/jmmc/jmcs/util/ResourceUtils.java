@@ -38,8 +38,7 @@ import java.util.logging.Level;
  * but at runtime only one implementation will be loaded (by class loader)
  * 
  * Note: Jmcs Changes must be reported here to avoid runtime issues !
- * 
- * 
+ *
  * Class used to get resources from inside JAR files.
  * 
  * @author Guillaume MELLA, Sylvain LAFRASSE, Laurent BOURGES.

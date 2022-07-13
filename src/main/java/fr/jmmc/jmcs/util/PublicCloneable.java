@@ -28,6 +28,11 @@
 package fr.jmmc.jmcs.util;
 
 /**
+ * This class is copied from Jmcs (same package) in order to let OITools compile properly 
+ * but at runtime only one implementation will be loaded (by class loader)
+ * 
+ * Note: Jmcs Changes must be reported here to avoid runtime issues !
+ *
  * This interface declares a public Object.clone() method
  * @author Laurent BOURGES.
  */
