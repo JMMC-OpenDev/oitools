@@ -979,14 +979,14 @@ public abstract class OIData extends OIAbstractData {
      * Return the column range given its name
      *
      * @param name column name
-     * @return Range instance
+     * @return Range instance or Range.UNDEFINED_RANGE if no data
      */
     public final Range getColumnRange(final String name) {
         // Intercept EFF_WAVE and EFF_BAND to use OI_WAVELENGTH:
         if (OIFitsConstants.COLUMN_EFF_WAVE.equals(name)
                 || OIFitsConstants.COLUMN_EFF_BAND.equals(name)) {
             final OIWavelength oiWavelength = getOiWavelength();
-            return (oiWavelength != null) ? oiWavelength.getColumnRange(name) : null;
+            return (oiWavelength != null) ? oiWavelength.getColumnRange(name) : Range.UNDEFINED_RANGE;
         }
         return super.getColumnRange(name);
     }

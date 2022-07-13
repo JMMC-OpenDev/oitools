@@ -449,7 +449,7 @@ public final class OIFitsCollection implements ToStringable {
     /**
      * Return the global column range from all OIData tables
      * @param name column name to extract values
-     * @return global column range or Range.UNDEFINED_RANGE when nothing found
+     * @return global column range or Range.UNDEFINED_RANGE if no data
      */
     public Range getColumnRange(final String name) {
         Range r = columnRanges.get(name);
@@ -537,9 +537,7 @@ public final class OIFitsCollection implements ToStringable {
                                 filtersData1D.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
                             }
                         }
-                        if (logger.isLoggable(Level.INFO)) {
-                            logger.log(Level.INFO, "filtersData1D: {0} ", filtersData1D);
-                        }
+                        logger.log(Level.FINE, "filtersData1D: {0} ", filtersData1D);
                     }
                     {
                         // Wavelength filters:
@@ -552,6 +550,7 @@ public final class OIFitsCollection implements ToStringable {
                                 filtersWL.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
                             }
                         }
+                        logger.log(Level.FINE, "filtersWL:     {0} ", filtersWL);
                     }
                 }
 
@@ -673,9 +672,8 @@ public final class OIFitsCollection implements ToStringable {
     private IndexMask computeMask1D(final List<FitsTableFilter<?>> filters,
                                     final FitsTable fitsTable,
                                     final List<FitsTableFilter<?>> usedFilters) {
-        if (logger.isLoggable(Level.FINE)) {
-            logger.log(Level.FINE, "computeMask1D: filters = {0}", filters);
-        }
+
+        logger.log(Level.FINE, "computeMask1D: filters = {0}", filters);
 
         FilterState chainState = FilterState.FULL;
         usedFilters.clear();
@@ -685,6 +683,10 @@ public final class OIFitsCollection implements ToStringable {
             final FitsTableFilter<?> filter = filters.get(f);
             // Prepare filter:
             final FilterState state = filter.prepare(fitsTable);
+
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "{0} => {1}", new Object[]{filter, state});
+            }
 
             if (state.ordinal() < chainState.ordinal()) {
                 // min:

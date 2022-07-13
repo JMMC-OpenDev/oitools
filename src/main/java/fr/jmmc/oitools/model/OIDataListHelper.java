@@ -162,7 +162,7 @@ public final class OIDataListHelper {
      * Return the global column range from given OIData tables
      * @param oiDataList OIData tables
      * @param name column name to extract values
-     * @return global column range or Range.UNDEFINED_RANGE when nothing found
+     * @return Range instance or Range.UNDEFINED_RANGE if no data
      */
     public static Range getColumnRange(final Collection<OIData> oiDataList, final String name) {
         double min = Double.POSITIVE_INFINITY;
@@ -180,11 +180,8 @@ public final class OIDataListHelper {
                 }
             }
         }
-
         final Range range = (min < max) ? new Range(min, max) : Range.UNDEFINED_RANGE;
-
-        logger.log(Level.WARNING, "getColumnRange : {0}", range);
-
+        logger.log(Level.FINE, "getColumnRange : {0}", range);
         return range;
     }
 

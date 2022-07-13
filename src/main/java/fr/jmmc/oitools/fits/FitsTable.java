@@ -1042,7 +1042,7 @@ public abstract class FitsTable extends FitsHDU {
      * Return the column range given its name
      *
      * @param name column name
-     * @return Range instance
+     * @return Range instance or Range.UNDEFINED_RANGE if no data
      */
     public Range getColumnRange(final String name) {
         final String key = name + "_RANGE";
