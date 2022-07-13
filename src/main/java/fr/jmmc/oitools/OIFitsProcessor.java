@@ -51,8 +51,8 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static final String OPTION_TARGET = "-target";
     private static final String OPTION_INSNAME = "-insname";
     private static final String OPTION_NIGHT = "-night";
-    private static final String OPTION_BASELINES = "-baselines";
     private static final String OPTION_MJD_RANGES = "-mjds";
+    private static final String OPTION_BASELINES = "-baselines";
     private static final String OPTION_WL_RANGES = "-wavelengths";
 
     /**
@@ -213,36 +213,67 @@ public class OIFitsProcessor extends OIFitsCommand {
 
         handleArgSeparation(args);
 
-        // Optional filters:
-        final String targetUID = getOptionArgValue(args, OPTION_TARGET);
-        final String insModeUID = getOptionArgValue(args, OPTION_INSNAME);
-        final String night = getOptionArgValue(args, OPTION_NIGHT);
-        final String mjds = getOptionArgValue(args, OPTION_MJD_RANGES);
-        final String baselines = getOptionArgValue(args, OPTION_BASELINES);
-        final String wavelengths = getOptionArgValue(args, OPTION_WL_RANGES);
-
         final OIFitsCollection oiFitsCollection = OIFitsCollection.create(null, fileLocations);
 
         final Selector selector = new Selector();
-        if (targetUID != null) {
-            selector.setTargetUID(targetUID);
+
+        if (hasOptionArg(args, OPTION_TARGET)) {
+            selector.setTargetUID(getOptionArgValue(args, OPTION_TARGET));
+        } else {
+            final String arg = "-" + Selector.FILTER_TARGET_ID.toLowerCase();
+            if (hasOptionArg(args, arg)) {
+                selector.setTargetUID(getOptionArgValue(args, arg));
+            }
         }
-        if (insModeUID != null) {
-            selector.setInsModeUID(insModeUID);
+        if (hasOptionArg(args, OPTION_INSNAME)) {
+            selector.setInsModeUID(getOptionArgValue(args, OPTION_INSNAME));
         }
-        if (night != null) {
-            selector.setNightID(Integer.valueOf(night));
+        if (hasOptionArg(args, OPTION_NIGHT)) {
+            selector.setNightID(Integer.valueOf(getOptionArgValue(args, OPTION_NIGHT)));
+        } else {
+            final String arg = "-" + Selector.FILTER_NIGHT_ID.toLowerCase();
+            if (hasOptionArg(args, arg)) {
+                selector.setNightID(Integer.valueOf(getOptionArgValue(args, arg)));
+            }
         }
-        if (baselines != null) {
-            selector.addFilter(Selector.FILTER_STAINDEX, parseStrings(baselines));
+        if (hasOptionArg(args, OPTION_MJD_RANGES)) {
+            selector.addFilter(Selector.FILTER_MJD, parseRanges(getOptionArgValue(args, OPTION_MJD_RANGES)));
+        } else {
+            final String arg = "-" + Selector.FILTER_MJD.toLowerCase();
+            if (hasOptionArg(args, arg)) {
+                selector.addFilter(Selector.FILTER_MJD, parseRanges(arg));
+            }
         }
-        if (mjds != null) {
-            selector.addFilter(Selector.FILTER_MJD, parseRanges(mjds));
+        if (hasOptionArg(args, OPTION_BASELINES)) {
+            selector.addFilter(Selector.FILTER_STAINDEX, parseStrings(getOptionArgValue(args, OPTION_BASELINES)));
+        } else {
+            final String arg = "-" + Selector.FILTER_STAINDEX.toLowerCase();
+            if (hasOptionArg(args, arg)) {
+                selector.addFilter(Selector.FILTER_STAINDEX, parseStrings(getOptionArgValue(args, arg)));
+            }
         }
-        if (wavelengths != null) {
-            selector.addFilter(Selector.FILTER_EFFWAVE, parseRanges(wavelengths));
+        {
+            final String arg = "-" + Selector.FILTER_STACONF.toLowerCase();
+            if (hasOptionArg(args, arg)) {
+                selector.addFilter(Selector.FILTER_STACONF, parseStrings(getOptionArgValue(args, arg)));
+            }
+        }
+        if (hasOptionArg(args, OPTION_WL_RANGES)) {
+            selector.addFilter(Selector.FILTER_EFFWAVE, parseRanges(getOptionArgValue(args, OPTION_WL_RANGES)));
+        } else {
+            final String arg = "-" + Selector.FILTER_EFFWAVE.toLowerCase();
+            if (hasOptionArg(args, arg)) {
+                selector.addFilter(Selector.FILTER_EFFWAVE, parseRanges(getOptionArgValue(args, arg)));
+            }
+        }
+        {
+            final String arg = "-" + Selector.FILTER_EFFBAND.toLowerCase();
+            if (hasOptionArg(args, arg)) {
+                selector.addFilter(Selector.FILTER_EFFBAND, parseRanges(getOptionArgValue(args, arg)));
+            }
         }
 
+        // TODO: handle extra arguments from OIFITS2 data model
         // Call merge
         final OIFitsFile result = Merger.process(oiFitsCollection, selector);
 
@@ -347,6 +378,8 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("| [-baselines] <values>       Filter result on given Baselines or Triplets (comma-separated) |");
         info("| [-mjds] <values>            Filter result on given MJD ranges (comma-separated pairs) |");
         info("| [-wavelengths] <values>     Filter result on given wavelength ranges (comma-separated pairs) |");
+
+        // TODO: dump extra arguments from OIFITS2 data model
         info("--------------------------------------------------------------------------------------");
     }
 
@@ -414,42 +447,43 @@ public class OIFitsProcessor extends OIFitsCommand {
             final StringBuilder sb = new StringBuilder(128);
 
             if (selector.getTargetUID() != null) {
-                sb.append(OIFitsProcessor.OPTION_TARGET).append("|").append(Selector.FILTER_TARGET_ID).append(" ").append(selector.getTargetUID()).append(" ");
+                sb.append("-").append(Selector.FILTER_TARGET_ID.toLowerCase()).append(" ").append(selector.getTargetUID()).append(" ");
             }
             if (selector.getInsModeUID() != null) {
                 sb.append(OIFitsProcessor.OPTION_INSNAME).append(" ").append(selector.getInsModeUID()).append(" ");
             }
             if (selector.getNightID() != null) {
-                sb.append(OIFitsProcessor.OPTION_NIGHT).append("|").append(Selector.FILTER_NIGHT_ID).append(" ").append(selector.getNightID()).append(" ");
+                sb.append("-").append(Selector.FILTER_NIGHT_ID.toLowerCase()).append(" ").append(selector.getNightID()).append(" ");
             }
             /* no way to define selector.tables via CLI */
-            if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
-                sb.append(OIFitsProcessor.OPTION_BASELINES).append("|").append(Selector.FILTER_STAINDEX).append(" ");
-                dumpStrings(selector.getFilter(Selector.FILTER_STAINDEX), sb).append(" ");
-            }
-            if (selector.hasFilter(Selector.FILTER_STACONF)) {
-                sb.append("-").append(Selector.FILTER_STACONF).append(" ");
-                dumpStrings(selector.getFilter(Selector.FILTER_STACONF), sb).append(" ");
-            }
 
             if (selector.hasFilter(Selector.FILTER_MJD)) {
-                sb.append(OIFitsProcessor.OPTION_MJD_RANGES).append("|").append(Selector.FILTER_MJD).append(" ");
+                sb.append("-").append(Selector.FILTER_MJD.toLowerCase()).append(" ");
                 dumpRanges(selector.getFilter(Selector.FILTER_MJD), sb).append(" ");
             }
 
+            if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
+                sb.append("-").append(Selector.FILTER_STAINDEX.toLowerCase()).append(" ");
+                dumpStrings(selector.getFilter(Selector.FILTER_STAINDEX), sb).append(" ");
+            }
+            if (selector.hasFilter(Selector.FILTER_STACONF)) {
+                sb.append("-").append(Selector.FILTER_STACONF.toLowerCase()).append(" ");
+                dumpStrings(selector.getFilter(Selector.FILTER_STACONF), sb).append(" ");
+            }
+
             if (selector.hasFilter(Selector.FILTER_EFFWAVE)) {
-                sb.append(OIFitsProcessor.OPTION_WL_RANGES).append("|").append(Selector.FILTER_EFFWAVE).append(" ");
+                sb.append("-").append(Selector.FILTER_EFFWAVE.toLowerCase()).append(" ");
                 dumpRanges(selector.getFilter(Selector.FILTER_EFFWAVE), sb).append(" ");
             }
             if (selector.hasFilter(Selector.FILTER_EFFBAND)) {
-                sb.append("-").append(Selector.FILTER_EFFBAND).append(" ");
+                sb.append("-").append(Selector.FILTER_EFFBAND.toLowerCase()).append(" ");
                 dumpRanges(selector.getFilter(Selector.FILTER_EFFBAND), sb).append(" ");
             }
 
             // convert generic filters from selector.filters (1D)
             for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
                 if (!Selector.isCustomFilter(e.getKey())) {
-                    sb.append("-").append(e.getKey()).append(" ");
+                    sb.append("-").append(e.getKey().toLowerCase()).append(" ");
                     dumpRanges((List<Range>) e.getValue(), sb).append(" ");
                 }
             }

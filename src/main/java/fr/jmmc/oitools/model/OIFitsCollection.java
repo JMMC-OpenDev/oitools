@@ -515,7 +515,7 @@ public final class OIFitsCollection implements ToStringable {
                         if (selector.getNightID() != null) {
                             filtersData1D.add(new NightIdFilter(selector.getNightID()));
                         }
-                        // table refs: see OIData filtering below
+                        // selector.tables: see OIData filtering below
 
                         // generic filters:
                         if (selector.hasFilter(Selector.FILTER_STAINDEX)) {

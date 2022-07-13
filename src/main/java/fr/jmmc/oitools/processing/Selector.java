@@ -144,7 +144,19 @@ public final class Selector {
                 + (hasFilters() ? " filters: " + filtersMap : "")
                 + ']';
     }
-
+    
+    public static boolean isRangeFilter(final String name) {
+        switch (name) {
+            case Selector.FILTER_TARGET_ID:
+            case Selector.FILTER_NIGHT_ID:
+            case Selector.FILTER_STAINDEX:
+            case Selector.FILTER_STACONF:
+                return false;
+            default:
+                return true;
+        }
+    }
+    
     public static boolean isCustomFilter(final String name) {
         switch (name) {
             case Selector.FILTER_TARGET_ID:
