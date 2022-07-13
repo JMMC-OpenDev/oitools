@@ -180,7 +180,7 @@ public final class OIDataListHelper {
                 }
             }
         }
-        final Range range = (min < max) ? new Range(min, max) : Range.UNDEFINED_RANGE;
+        final Range range = Range.isFinite(min, max) ? new Range(min, max) : Range.UNDEFINED_RANGE;
         logger.log(Level.FINE, "getColumnRange : {0}", range);
         return range;
     }

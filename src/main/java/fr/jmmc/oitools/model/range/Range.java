@@ -70,7 +70,7 @@ public final class Range implements Comparable<Range> {
     }
 
     public boolean isFinite() {
-        return Double.isFinite(min) && Double.isFinite(max) && (min <= max);
+        return isFinite(min, max);
     }
 
     /**
@@ -288,6 +288,10 @@ public final class Range implements Comparable<Range> {
     }
 
     /* --- Utility methods ---------------------------------------------------- */
+    public static boolean isFinite(final double min, final double max) {
+        return Double.isFinite(min) && Double.isFinite(max) && (min <= max);
+    }
+
     /**
      * Return true if both range list are equals
      * @param ranges list of ranges
