@@ -533,7 +533,7 @@ public final class OIFitsCollection implements ToStringable {
 
                         // convert generic filters from selector.filters (1D)
                         for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
-                            if (!isCustomFilter(e.getKey())) {
+                            if (!Selector.isCustomFilter(e.getKey())) {
                                 filtersData1D.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
                             }
                         }
@@ -546,7 +546,7 @@ public final class OIFitsCollection implements ToStringable {
 
                         // convert generic filters from selector.filters (WAVELENGTH)
                         for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
-                            if (isFilterOnWavelengths(e.getKey())) {
+                            if (Selector.isCustomFilterOnWavelengths(e.getKey())) {
                                 filtersWL.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
                             }
                         }
@@ -853,26 +853,5 @@ public final class OIFitsCollection implements ToStringable {
             }
         }
         return granules;
-    }
-
-    private static boolean isCustomFilter(final String name) {
-        switch (name) {
-            case Selector.FILTER_STAINDEX:
-            case Selector.FILTER_STACONF:
-            case Selector.FILTER_MJD:
-                return true;
-            default:
-                return isFilterOnWavelengths(name);
-        }
-    }
-
-    private static boolean isFilterOnWavelengths(final String name) {
-        switch (name) {
-            case Selector.FILTER_EFFWAVE:
-            case Selector.FILTER_EFFBAND:
-                return true;
-            default:
-                return false;
-        }
     }
 }

@@ -30,6 +30,7 @@ import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -362,16 +363,15 @@ public class OIFitsProcessor extends OIFitsCommand {
         return baselineList;
     }
 
-    public static String dumpStrings(List<String> values) {
+    public static StringBuilder dumpStrings(final List<String> values, final StringBuilder sb) {
         if (values == null || values.isEmpty()) {
-            return "";
+            return sb;
         }
-        final StringBuilder sb = new StringBuilder();
         for (String v : values) {
             sb.append(v).append(",");
         }
         sb.deleteCharAt(sb.length() - 1);
-        return sb.toString();
+        return sb;
     }
 
     public static List<Range> parseRanges(final String input) {
@@ -398,27 +398,62 @@ public class OIFitsProcessor extends OIFitsCommand {
         return ranges;
     }
 
-    public static String dumpRanges(List<Range> values) {
+    public static StringBuilder dumpRanges(final List<Range> values, final StringBuilder sb) {
         if (values == null || values.isEmpty()) {
-            return "";
+            return sb;
         }
-        final StringBuilder sb = new StringBuilder();
         for (Range r : values) {
             sb.append(r.getMin()).append(",").append(r.getMax()).append(",");
         }
         sb.deleteCharAt(sb.length() - 1);
-        return sb.toString();
+        return sb;
     }
 
     public static String generateCLIargs(final Selector selector) {
         if (selector != null) {
-            // TODO: make it generic !
-            return ((selector.getTargetUID() != null) ? OIFitsProcessor.OPTION_TARGET + " " + selector.getTargetUID() + " " : "")
-                    + ((selector.getInsModeUID() != null) ? OIFitsProcessor.OPTION_INSNAME + " " + selector.getInsModeUID() + " " : "")
-                    + ((selector.getNightID() != null) ? OIFitsProcessor.OPTION_NIGHT + " " + selector.getNightID() + " " : "")
-                    + ((selector.hasFilter(Selector.FILTER_STAINDEX)) ? OIFitsProcessor.OPTION_BASELINES + " " + dumpStrings(selector.getFilter(Selector.FILTER_STAINDEX)) + " " : "")
-                    + ((selector.hasFilter(Selector.FILTER_MJD)) ? OIFitsProcessor.OPTION_MJD_RANGES + " " + dumpRanges(selector.getFilter(Selector.FILTER_MJD)) + " " : "")
-                    + ((selector.hasFilter(Selector.FILTER_EFFWAVE)) ? OIFitsProcessor.OPTION_WL_RANGES + " " + dumpRanges(selector.getFilter(Selector.FILTER_EFFWAVE)) + " " : "");
+            final StringBuilder sb = new StringBuilder(128);
+
+            if (selector.getTargetUID() != null) {
+                sb.append(OIFitsProcessor.OPTION_TARGET).append("|").append(Selector.FILTER_TARGET_ID).append(" ").append(selector.getTargetUID()).append(" ");
+            }
+            if (selector.getInsModeUID() != null) {
+                sb.append(OIFitsProcessor.OPTION_INSNAME).append(" ").append(selector.getInsModeUID()).append(" ");
+            }
+            if (selector.getNightID() != null) {
+                sb.append(OIFitsProcessor.OPTION_NIGHT).append("|").append(Selector.FILTER_NIGHT_ID).append(" ").append(selector.getNightID()).append(" ");
+            }
+            /* no way to define selector.tables via CLI */
+            if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
+                sb.append(OIFitsProcessor.OPTION_BASELINES).append("|").append(Selector.FILTER_STAINDEX).append(" ");
+                dumpStrings(selector.getFilter(Selector.FILTER_STAINDEX), sb).append(" ");
+            }
+            if (selector.hasFilter(Selector.FILTER_STACONF)) {
+                sb.append("-").append(Selector.FILTER_STACONF).append(" ");
+                dumpStrings(selector.getFilter(Selector.FILTER_STACONF), sb).append(" ");
+            }
+
+            if (selector.hasFilter(Selector.FILTER_MJD)) {
+                sb.append(OIFitsProcessor.OPTION_MJD_RANGES).append("|").append(Selector.FILTER_MJD).append(" ");
+                dumpRanges(selector.getFilter(Selector.FILTER_MJD), sb).append(" ");
+            }
+
+            if (selector.hasFilter(Selector.FILTER_EFFWAVE)) {
+                sb.append(OIFitsProcessor.OPTION_WL_RANGES).append("|").append(Selector.FILTER_EFFWAVE).append(" ");
+                dumpRanges(selector.getFilter(Selector.FILTER_EFFWAVE), sb).append(" ");
+            }
+            if (selector.hasFilter(Selector.FILTER_EFFBAND)) {
+                sb.append("-").append(Selector.FILTER_EFFBAND).append(" ");
+                dumpRanges(selector.getFilter(Selector.FILTER_EFFBAND), sb).append(" ");
+            }
+
+            // convert generic filters from selector.filters (1D)
+            for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
+                if (!Selector.isCustomFilter(e.getKey())) {
+                    sb.append("-").append(e.getKey()).append(" ");
+                    dumpRanges((List<Range>) e.getValue(), sb).append(" ");
+                }
+            }
+            return sb.toString();
         }
         return "";
     }

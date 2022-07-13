@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.fits;
 
 import fr.jmmc.jmcs.util.NumberUtils;
+import fr.jmmc.jmcs.util.StringUtils;
 import fr.jmmc.oitools.OIFitsConstants;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.KeywordMeta;
@@ -27,6 +28,7 @@ import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.ModelBase;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.Rule;
+import fr.nom.tam.fits.HeaderCard;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -612,10 +614,34 @@ public abstract class FitsHDU extends ModelBase {
 
     /**
      * Add a new extra HISTORY keyword (header card)
-     * @param comment header card comment
+     * @param value value for HISTORY
      */
-    public final void addHeaderHistory(final String comment) {
-        addHeaderCard(FitsConstants.KEYWORD_HISTORY, null, comment);
+    public final void addHeaderHistory(final String value) {
+        final String altValue = StringUtils.cleanWhiteSpaces(value);
+
+        if (!StringUtils.isEmpty(altValue)) {
+            final int maxLen = HeaderCard.MAX_VALUE_LENGTH;
+            if (altValue.length() <= maxLen) {
+                addHeaderCard(FitsConstants.KEYWORD_HISTORY, null, altValue);
+            } else {
+                // use multiple keywords:
+                String remain = altValue;
+                int len = remain.length();
+                do {
+                    final String current;
+                    if (len > maxLen) {
+                        current = remain.substring(0, maxLen);
+                        remain = remain.substring(maxLen);
+                        len -= maxLen;
+                    } else {
+                        current = remain;
+                        remain = "";
+                        len = 0;
+                    }
+                    addHeaderCard(FitsConstants.KEYWORD_HISTORY, null, current);
+                } while (len > 0);
+            }
+        }
     }
 
     /**

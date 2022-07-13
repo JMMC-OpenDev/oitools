@@ -28,6 +28,9 @@ import java.util.Map;
  */
 public final class Selector {
 
+    public final static String FILTER_TARGET_ID = OIFitsConstants.COLUMN_TARGET_ID;
+    public final static String FILTER_NIGHT_ID = OIFitsConstants.COLUMN_NIGHT_ID;
+
     public final static String FILTER_EFFWAVE = OIFitsConstants.COLUMN_EFF_WAVE;
     public final static String FILTER_EFFBAND = OIFitsConstants.COLUMN_EFF_BAND;
 
@@ -140,6 +143,29 @@ public final class Selector {
                 + (hasTable() ? " extNbsPerOiFitsPath: " + extNbsPerOiFitsPath : "")
                 + (hasFilters() ? " filters: " + filtersMap : "")
                 + ']';
+    }
+
+    public static boolean isCustomFilter(final String name) {
+        switch (name) {
+            case Selector.FILTER_TARGET_ID:
+            case Selector.FILTER_NIGHT_ID:
+            case Selector.FILTER_STAINDEX:
+            case Selector.FILTER_STACONF:
+            case Selector.FILTER_MJD:
+                return true;
+            default:
+                return isCustomFilterOnWavelengths(name);
+        }
+    }
+
+    public static boolean isCustomFilterOnWavelengths(final String name) {
+        switch (name) {
+            case Selector.FILTER_EFFWAVE:
+            case Selector.FILTER_EFFBAND:
+                return true;
+            default:
+                return false;
+        }
     }
 
 }
