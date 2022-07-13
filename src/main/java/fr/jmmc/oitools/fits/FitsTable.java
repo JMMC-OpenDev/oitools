@@ -1044,7 +1044,7 @@ public abstract class FitsTable extends FitsHDU {
      * @param name column name
      * @return Range instance
      */
-    public final Range getColumnRange(final String name) {
+    public Range getColumnRange(final String name) {
         final String key = name + "_RANGE";
 
         /* retrieve value in columnsRangeValue map of associated column */
@@ -1245,9 +1245,11 @@ public abstract class FitsTable extends FitsHDU {
                     default:
                     // do nothing
                 }
+                if (range != null) {
+                    /* store in associated column range value */
+                    getColumnsRangeValue().put(name, range);
+                }
             }
-            /* store in associated column range value */
-            getColumnsRangeValue().put(name, range);
         }
         return range;
     }

@@ -697,7 +697,8 @@ public abstract class OIData extends OIAbstractData {
         }
         final String insName = getInsName();
         if (insName != null) {
-            final OIWavelength oiWavelength = getOIFitsFile().getOiWavelength(insName);
+            final OIFitsFile oiFitsFile = getOIFitsFile();
+            final OIWavelength oiWavelength = oiFitsFile.getOiWavelength(insName);
 
             if (oiWavelength != null) {
                 if (logger.isLoggable(Level.FINE)) {
@@ -705,8 +706,8 @@ public abstract class OIData extends OIAbstractData {
                             new Object[]{oiWavelength.getExtNb(), oiWavelength.getNWave(), super.toString()});
                 }
                 this.oiWavelengthRef = oiWavelength;
-            } else if (!getOIFitsFile().hasMissingTableName(insName) && logger.isLoggable(Level.WARNING)) {
-                getOIFitsFile().addMissingTableName(insName);
+            } else if (!oiFitsFile.hasMissingTableName(insName) && logger.isLoggable(Level.WARNING)) {
+                oiFitsFile.addMissingTableName(insName);
                 logger.log(Level.WARNING, "Missing OI_WAVELENGTH table identified by INSNAME=''{0}''", insName);
             }
             return oiWavelength;
@@ -725,15 +726,16 @@ public abstract class OIData extends OIAbstractData {
         }
         final String corrName = getCorrName();
         if (corrName != null) {
-            final OICorr oiCorr = getOIFitsFile().getOiCorr(corrName);
+            final OIFitsFile oiFitsFile = getOIFitsFile();
+            final OICorr oiCorr = oiFitsFile.getOiCorr(corrName);
 
             if (oiCorr != null) {
                 if (logger.isLoggable(Level.FINE)) {
                     logger.log(Level.FINE, "Resolved OI_Corr reference [{0}] to {1}", new Object[]{oiCorr.getExtNb(), super.toString()});
                 }
                 this.oiCorrRef = oiCorr;
-            } else if (!getOIFitsFile().hasMissingTableName(corrName) && logger.isLoggable(Level.WARNING)) {
-                getOIFitsFile().addMissingTableName(corrName);
+            } else if (!oiFitsFile.hasMissingTableName(corrName) && logger.isLoggable(Level.WARNING)) {
+                oiFitsFile.addMissingTableName(corrName);
                 logger.log(Level.WARNING, "Missing OI_Corr table identified by CORRNAME=''{0}''", corrName);
             }
             return oiCorr;
@@ -962,11 +964,7 @@ public abstract class OIData extends OIAbstractData {
      * @return wavelenth range
      */
     public final Range getEffWaveRange() {
-        final OIWavelength oiWavelength = getOiWavelength();
-        if (oiWavelength != null) {
-            return oiWavelength.getEffWaveRange();
-        }
-        return null;
+        return getColumnRange(OIFitsConstants.COLUMN_EFF_WAVE);
     }
 
     /**
@@ -975,6 +973,22 @@ public abstract class OIData extends OIAbstractData {
      */
     public final Range getMjdRange() {
         return getColumnRange(OIFitsConstants.COLUMN_MJD);
+    }
+
+    /**
+     * Return the column range given its name
+     *
+     * @param name column name
+     * @return Range instance
+     */
+    public final Range getColumnRange(final String name) {
+        // Intercept EFF_WAVE and EFF_BAND to use OI_WAVELENGTH:
+        if (OIFitsConstants.COLUMN_EFF_WAVE.equals(name)
+                || OIFitsConstants.COLUMN_EFF_BAND.equals(name)) {
+            final OIWavelength oiWavelength = getOiWavelength();
+            return (oiWavelength != null) ? oiWavelength.getColumnRange(name) : null;
+        }
+        return super.getColumnRange(name);
     }
 
     /**

@@ -198,11 +198,12 @@ public final class Analyzer implements ModelVisitor {
         // Fill distinct Night Id:
         final Set<NightId> distinctNightId = oiData.getDistinctNightId();
         // Fill distinct Granule:
-        final Map<Granule, Granule> distinctGranules = oiData.getOIFitsFile().getDistinctGranules();
+        final OIFitsFile oiFitsFile = oiData.getOIFitsFile();
+        final Map<Granule, Granule> distinctGranules = oiFitsFile.getDistinctGranules();
         // Fill oidata tables per (distinct) Granule:
-        final Map<Granule, Set<OIData>> oiDataPerGranule = oiData.getOIFitsFile().getOiDataPerGranule();
+        final Map<Granule, Set<OIData>> oiDataPerGranule = oiFitsFile.getOiDataPerGranule();
         // Fill used staNames to StaNamesDir (reference StaNames / orientation):
-        final Map<String, StaNamesDir> usedStaNamesMap = oiData.getOIFitsFile().getUsedStaNamesMap();
+        final Map<String, StaNamesDir> usedStaNamesMap = oiFitsFile.getUsedStaNamesMap();
 
         // reused NightId:
         NightId n = new NightId();
@@ -281,8 +282,6 @@ public final class Analyzer implements ModelVisitor {
             }
             // update tables associated to the current granule:
             oiDataTables.add(oiData);
-
-            // TODO: generate mask(rows = i indices) (BitSet ?) for every table corresponding to the granule ?
         }
 
         if (isLogDebug) {

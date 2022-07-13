@@ -19,6 +19,7 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.jmcs.util.ToStringable;
+import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.model.Granule.GranuleField;
 import fr.jmmc.oitools.model.range.Range;
@@ -75,12 +76,18 @@ public final class OIFitsCollection implements ToStringable {
     private final TargetManager tm;
     /** OIFits file collection keyed by absolute file path (unordered) */
     private final Map<String, OIFitsFile> oiFitsPerPath = new HashMap<String, OIFitsFile>();
+    /** Set of all OIData tables */
+    private final Set<OIData> allOiDatas = new LinkedHashSet<OIData>();
     /** Distinct Granules */
     private final Map<Granule, Granule> distinctGranules = new HashMap<Granule, Granule>();
     /** Set of OIData tables keyed by Granule */
     private final Map<Granule, Set<OIData>> oiDataPerGranule = new HashMap<Granule, Set<OIData>>();
     /** Map of used staNames to StaNamesDir (reference StaNames / orientation) */
     private final Map<String, StaNamesDir> usedStaNamesMap = new LinkedHashMap<String, StaNamesDir>();
+    /** cached values */
+    private List<String> distinctStaNames = null;
+    private List<String> distinctStaConfs = null;
+    private final Map<String, Range> columnRanges = new HashMap<>(32);
 
     public static OIFitsCollection create(final OIFitsChecker checker, final List<String> fileLocations) throws IOException, MalformedURLException, FitsException {
         final OIFitsCollection oiFitsCollection = new OIFitsCollection();
@@ -149,9 +156,14 @@ public final class OIFitsCollection implements ToStringable {
         // clear Target mappings:
         tm.clear();
         // clear granules:
+        allOiDatas.clear();
         distinctGranules.clear();
         oiDataPerGranule.clear();
         usedStaNamesMap.clear();
+
+        distinctStaNames = null;
+        distinctStaConfs = null;
+        columnRanges.clear();
     }
 
     public boolean isEmpty() {
@@ -314,7 +326,7 @@ public final class OIFitsCollection implements ToStringable {
                 // Update MJD Range on shared granule:
                 globalGranule.updateMjdRange(g.getMjdRange());
 
-                // TODO: keep mapping between global granule and OIFits Granules ?
+                // keep mapping between global granule and OIData tables:
                 Set<OIData> oiDataTables = oiDataPerGranule.get(globalGranule);
                 if (oiDataTables == null) {
                     oiDataTables = new LinkedHashSet<OIData>();
@@ -322,12 +334,14 @@ public final class OIFitsCollection implements ToStringable {
                 }
 
                 for (OIData data : entry.getValue()) {
+                    allOiDatas.add(data);
                     oiDataTables.add(data);
                 }
             }
         }
 
         if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "analyzeCollection: allOiDatas: {0}", allOiDatas);
             logger.log(Level.FINE, "analyzeCollection: usedStaNamesMap: {0}", usedStaNamesMap);
             logger.log(Level.FINE, "analyzeCollection: Granule / OIData tables: {0}", distinctGranules.keySet());
             logger.log(Level.FINE, "analyzeCollection: Sorted Granules:");
@@ -347,6 +361,14 @@ public final class OIFitsCollection implements ToStringable {
                 + ", mjdRange=" + granule.getMjdRange()
                 + ", distinctStaNames=" + granule.getDistinctStaNames()
                 + '}';
+    }
+
+    /**
+     * Return all OIData tables
+     * @return all OIData tables
+     */
+    public Set<OIData> getAllOiDatas() {
+        return allOiDatas;
     }
 
     /**
@@ -386,6 +408,59 @@ public final class OIFitsCollection implements ToStringable {
         return granules;
     }
 
+    // --- statistics on all OIFITS collection ---
+    /**
+     * Return the unique staNames values (sorted by name) from all OIData tables
+     * @return unique staNames values (sorted by name)
+     */
+    public List<String> getDistinctStaNames() {
+        if (this.distinctStaNames == null) {
+            OIDataListHelper.getDistinctStaNames(getAllOiDatas(), getUsedStaNamesMap());
+        }
+        return this.distinctStaNames;
+    }
+
+    /**
+     * Return the unique staConfs values (sorted by name) from all OIData tables
+     * @return unique staConfs values (sorted by name)
+     */
+    public List<String> getDistinctStaConfs() {
+        if (this.distinctStaConfs == null) {
+            OIDataListHelper.getDistinctStaConfs(getAllOiDatas());
+        }
+        return this.distinctStaConfs;
+    }
+
+    /**
+     * Return the unique values (sorted) from all OIData tables
+     * @param name column name to extract values
+     * @return unique values (sorted)
+     */
+    public List<String> getDistinctValues(final String name) {
+        if (OIFitsConstants.COLUMN_STA_INDEX.equals(name)) {
+            return getDistinctStaNames();
+        }
+        if (OIFitsConstants.COLUMN_STA_CONF.equals(name)) {
+            return getDistinctStaConfs();
+        }
+        return null;
+    }
+
+    /**
+     * Return the global column range from all OIData tables
+     * @param name column name to extract values
+     * @return global column range or Range.UNDEFINED_RANGE when nothing found
+     */
+    public Range getColumnRange(final String name) {
+        Range r = columnRanges.get(name);
+        if (r == null) {
+            r = OIDataListHelper.getColumnRange(getAllOiDatas(), name);
+            columnRanges.put(name, r);
+        }
+        return r;
+    }
+
+    // --- Query API ---
     /**
      * Query this collection with the given query criteria:
      * - find Granules (target UID, insmode UID, night ID)

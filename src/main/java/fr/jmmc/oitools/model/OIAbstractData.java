@@ -177,7 +177,8 @@ public abstract class OIAbstractData extends OITable {
 
         final String arrName = getArrName();
         if (arrName != null) {
-            final OIArray oiArray = getOIFitsFile().getOiArray(arrName);
+            final OIFitsFile oiFitsFile = getOIFitsFile();
+            final OIArray oiArray = oiFitsFile.getOiArray(arrName);
 
             if (oiArray != null) {
                 if (logger.isLoggable(Level.FINE)) {
@@ -185,8 +186,8 @@ public abstract class OIAbstractData extends OITable {
                             new Object[]{oiArray.getExtNb(), super.toString()});
                 }
                 this.oiArrayRef = oiArray;
-            } else if (!getOIFitsFile().hasMissingTableName(arrName) && logger.isLoggable(Level.WARNING)) {
-                getOIFitsFile().addMissingTableName(arrName);
+            } else if (!oiFitsFile.hasMissingTableName(arrName) && logger.isLoggable(Level.WARNING)) {
+                oiFitsFile.addMissingTableName(arrName);
                 logger.log(Level.WARNING, "Missing OI_Array table identified by ARRNAME=''{0}''", arrName);
             }
             return oiArray;

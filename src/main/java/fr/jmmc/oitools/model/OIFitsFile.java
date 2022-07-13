@@ -517,8 +517,8 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Get the wavelength range found on any of the OI_WAVELENGTH tables.
-     * @return the wavelength range found on any of the OI_WAVELENGTH tables
+     * Get the wavelength range used by OIDATA tables.
+     * @return the wavelength range used by OIDATA tables.
      */
     public Range getWavelengthRange() {
         // lazy computation:
@@ -529,42 +529,11 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Compute min and max wavelength that could be present.
-     * This reflects the min and max values of every OI_WAVELENGTH tables.
-     * TODO : make it more generic
+     * Compute the wavelength range used by OIDATA tables.
      */
     private void computeWavelengthBounds() {
-        // Set wavelength bounds
-        double min = Double.POSITIVE_INFINITY;
-        double max = Double.NEGATIVE_INFINITY;
-
-        if (hasOiWavelengths()) {
-            for (OIWavelength oiWavelength : getOiWavelengths()) {
-                final Range effWaveRange = oiWavelength.getEffWaveRange();
-                if (effWaveRange.getMin() < min) {
-                    min = effWaveRange.getMin();
-                }
-                if (effWaveRange.getMax() > max) {
-                    max = effWaveRange.getMax();
-                }
-            }
-        } else {
-            // no OI_WAVELENGTH (OIFITS containing only data files (oifits explorer):
-            // Traverse all OIDATA:
-            for (OIData oiData : getOiDataList()) {
-                final OIWavelength oiWavelength = oiData.getOiWavelength();
-                if (oiWavelength != null) {
-                    final Range effWaveRange = oiWavelength.getEffWaveRange();
-                    if (effWaveRange.getMin() < min) {
-                        min = effWaveRange.getMin();
-                    }
-                    if (effWaveRange.getMax() > max) {
-                        max = effWaveRange.getMax();
-                    }
-                }
-            }
-        }
-        this.wavelengthRange = new Range(min, max);
+        // Traverse all OIDATA to get OI_WAVELENGTH ranges:
+        this.wavelengthRange = OIDataListHelper.getWaveLengthRange(getOiDataList());
     }
 
     /**
