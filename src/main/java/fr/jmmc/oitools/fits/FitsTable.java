@@ -19,6 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.fits;
 
+import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
@@ -563,10 +564,9 @@ public abstract class FitsTable extends FitsHDU {
      * @param columnNames set to be filled with numerical column names
      */
     public final void getNumericalColumnsNames(final Set<String> columnNames) {
-        ColumnMeta meta;
         // Standard columns:
         for (Map.Entry<String, ColumnMeta> entry : getColumnsDesc().entrySet()) {
-            meta = entry.getValue();
+            final ColumnMeta meta = entry.getValue();
             switch (meta.getDataType()) {
                 case TYPE_DBL:
                     columnNames.add(entry.getKey());
@@ -576,7 +576,7 @@ public abstract class FitsTable extends FitsHDU {
         }
         // Derived columns:
         for (Map.Entry<String, ColumnMeta> entry : getColumnsDerivedDesc().entrySet()) {
-            meta = entry.getValue();
+            final ColumnMeta meta = entry.getValue();
             switch (meta.getDataType()) {
                 case TYPE_DBL:
                     columnNames.add(entry.getKey());
@@ -594,25 +594,63 @@ public abstract class FitsTable extends FitsHDU {
      */
     public final List<ColumnMeta> getNumericalColumnsDescs() {
         final ArrayList<ColumnMeta> columnDescList = new ArrayList<ColumnMeta>();
-        ColumnMeta meta;
         // Standard columns:
         for (Map.Entry<String, ColumnMeta> entry : getColumnsDesc().entrySet()) {
-            meta = entry.getValue();
+            final ColumnMeta meta = entry.getValue();
             switch (meta.getDataType()) {
                 case TYPE_DBL:
-                    columnDescList.add(entry.getValue());
+                    columnDescList.add(meta);
                     break;
                 default:
             }
         }
         // Derived columns:
         for (Map.Entry<String, ColumnMeta> entry : getColumnsDerivedDesc().entrySet()) {
-            meta = entry.getValue();
+            final ColumnMeta meta = entry.getValue();
             switch (meta.getDataType()) {
                 case TYPE_DBL:
-                    columnDescList.add(entry.getValue());
+                    columnDescList.add(meta);
                     break;
                 default:
+            }
+        }
+        return columnDescList;
+    }
+
+    /**
+     * Return the column descriptors (standard then derived) representing
+     * CHAR/SHORT/INT values (arrays) except "CORRINDX_..." columns
+     *
+     * @return list of other column descriptors
+     */
+    public final List<ColumnMeta> getOtherColumnsDescs() {
+        final ArrayList<ColumnMeta> columnDescList = new ArrayList<ColumnMeta>();
+        // Standard columns:
+        for (Map.Entry<String, ColumnMeta> entry : getColumnsDesc().entrySet()) {
+            final ColumnMeta meta = entry.getValue();
+            if (!meta.getName().startsWith(OIFitsConstants.PREFIX_CORRINDX)) {
+                switch (meta.getDataType()) {
+                    case TYPE_CHAR:
+                    case TYPE_SHORT:
+                    case TYPE_INT:
+                        columnDescList.add(meta);
+                        break;
+                    default:
+                }
+            }
+        }
+        // Derived columns:
+        for (Map.Entry<String, ColumnMeta> entry : getColumnsDerivedDesc().entrySet()) {
+            final ColumnMeta meta = entry.getValue();
+            if (!meta.getName().startsWith(OIFitsConstants.PREFIX_CORRINDX)) {
+                switch (meta.getDataType()) {
+                    case TYPE_CHAR:
+                    case TYPE_SHORT:
+                    case TYPE_INT:
+                        columnDescList.add(meta);
+                        break;
+                    default:
+                }
             }
         }
         return columnDescList;

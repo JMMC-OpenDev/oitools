@@ -340,7 +340,7 @@ public final class DataModel {
         final Set<Rule> usedRules = checker.getRulesUsedByFailures();
 
         if (Rule.values().length != usedRules.size()) {
-            final Set<Rule> missing = new HashSet<Rule>();
+            final Set<Rule> missing = new HashSet<Rule>(16);
             missing.addAll(Arrays.asList(Rule.values()));
             missing.removeAll(usedRules);
 
@@ -582,8 +582,10 @@ public final class DataModel {
     private final Collection<OIData> oiDatas;
     /* cached values */
     private Set<String> allColumnNames = null;
-    private Set<String> allColumnNames1D = null;
-    private Set<String> allColumnNames2D = null;
+    private Set<String> allNumColumnNames = null;
+    private Set<String> allNumColumnNames1D = null;
+    private Set<String> allNumColumnNames2D = null;
+    private Set<String> allOtherColumnNames = null;
 
     private DataModel(final OIFitsStandard version) {
         this(createOIFitsFile(version).getOiDataList(), true);
@@ -595,9 +597,9 @@ public final class DataModel {
     }
 
     private void reset() {
-        allColumnNames = null;
-        allColumnNames1D = null;
-        allColumnNames2D = null;
+        allNumColumnNames = null;
+        allNumColumnNames1D = null;
+        allNumColumnNames2D = null;
     }
 
     public void refresh() {
@@ -611,30 +613,81 @@ public final class DataModel {
         return oiDatas;
     }
 
-    public Set<String> getNumericalColumnNames() {
+    public boolean isColumn(final String name) {
+        return getNumericalColumnNames().contains(name);
+    }
+
+    public Set<String> getAllColumnNames() {
         if (allColumnNames == null) {
-            allColumnNames = getAllNumericalColumnNames(getOiDatas(), true, false);
+            allColumnNames = getAllColumnNames(getOiDatas());
         }
         return allColumnNames;
     }
 
-    public Set<String> getNumericalColumnNames1D() {
-        if (allColumnNames1D == null) {
-            allColumnNames1D = getAllNumericalColumnNames(getOiDatas(), false, false);
+    public boolean isNumericalColumn(final String name) {
+        return getNumericalColumnNames().contains(name);
+    }
+
+    public Set<String> getNumericalColumnNames() {
+        if (allNumColumnNames == null) {
+            allNumColumnNames = getAllNumericalColumnNames(getOiDatas(), true, false);
         }
-        return allColumnNames1D;
+        return allNumColumnNames;
+    }
+
+    public boolean isNumericalColumn1D(final String name) {
+        return getNumericalColumnNames1D().contains(name);
+    }
+
+    public Set<String> getNumericalColumnNames1D() {
+        if (allNumColumnNames1D == null) {
+            allNumColumnNames1D = getAllNumericalColumnNames(getOiDatas(), false, false);
+        }
+        return allNumColumnNames1D;
+    }
+
+    public boolean isNumericalColumn2D(final String name) {
+        return getNumericalColumnNames2D().contains(name);
     }
 
     public Set<String> getNumericalColumnNames2D() {
-        if (allColumnNames2D == null) {
-            allColumnNames2D = getAllNumericalColumnNames(getOiDatas(), false, true);
+        if (allNumColumnNames2D == null) {
+            allNumColumnNames2D = getAllNumericalColumnNames(getOiDatas(), false, true);
         }
-        return allColumnNames2D;
+        return allNumColumnNames2D;
+    }
+
+    public boolean isOtherColumn(final String name) {
+        return getOtherColumnNames().contains(name);
+    }
+
+    public Set<String> getOtherColumnNames() {
+        if (allOtherColumnNames == null) {
+            allOtherColumnNames = getOtherColumnNames(getOiDatas());
+        }
+        return allOtherColumnNames;
+    }
+
+    private static Set<String> getAllColumnNames(final Collection<OIData> oiDatas) {
+        final Set<String> columnNames = new LinkedHashSet<String>();
+
+        getAllNumericalColumnNames(oiDatas, OIFitsConstants.TABLE_OI_VIS2, true, false, columnNames);
+        getOtherColumnNames(oiDatas, OIFitsConstants.TABLE_OI_VIS2, columnNames);
+
+        getAllNumericalColumnNames(oiDatas, OIFitsConstants.TABLE_OI_VIS, true, false, columnNames);
+        getOtherColumnNames(oiDatas, OIFitsConstants.TABLE_OI_VIS, columnNames);
+
+        getAllNumericalColumnNames(oiDatas, OIFitsConstants.TABLE_OI_T3, true, false, columnNames);
+        getOtherColumnNames(oiDatas, OIFitsConstants.TABLE_OI_T3, columnNames);
+
+        getAllNumericalColumnNames(oiDatas, OIFitsConstants.TABLE_OI_FLUX, true, false, columnNames);
+        getOtherColumnNames(oiDatas, OIFitsConstants.TABLE_OI_FLUX, columnNames);
+
+        return columnNames;
     }
 
     private static Set<String> getAllNumericalColumnNames(final Collection<OIData> oiDatas,
                                                           final boolean all, final boolean is2D) {
-
         final Set<String> columnNames = new LinkedHashSet<String>();
 
         getAllNumericalColumnNames(oiDatas, OIFitsConstants.TABLE_OI_VIS2, all, is2D, columnNames);
@@ -645,14 +698,23 @@ public final class DataModel {
         return columnNames;
     }
 
+    private static Set<String> getOtherColumnNames(final Collection<OIData> oiDatas) {
+        final Set<String> columnNames = new LinkedHashSet<String>();
+
+        getOtherColumnNames(oiDatas, OIFitsConstants.TABLE_OI_VIS2, columnNames);
+        getOtherColumnNames(oiDatas, OIFitsConstants.TABLE_OI_VIS, columnNames);
+        getOtherColumnNames(oiDatas, OIFitsConstants.TABLE_OI_T3, columnNames);
+        getOtherColumnNames(oiDatas, OIFitsConstants.TABLE_OI_FLUX, columnNames);
+
+        return columnNames;
+    }
+
     private static void getAllNumericalColumnNames(final Collection<OIData> oiDatas, final String extName,
                                                    final boolean all, final boolean is2D,
                                                    final Set<String> columnNames) {
         for (final OIData oiData : oiDatas) {
             if (extName.equals(oiData.getExtName())) {
-                final List<ColumnMeta> columnsDescCollection = oiData.getNumericalColumnsDescs();
-
-                for (final ColumnMeta colMeta : columnsDescCollection) {
+                for (final ColumnMeta colMeta : oiData.getNumericalColumnsDescs()) {
                     if (colMeta != null) {
                         if (colMeta instanceof WaveColumnMeta) {
                             if (all || is2D) {
@@ -669,6 +731,23 @@ public final class DataModel {
         }
     }
 
+    private static void getOtherColumnNames(final Collection<OIData> oiDatas, final String extName,
+                                            final Set<String> columnNames) {
+        for (final OIData oiData : oiDatas) {
+            if (extName.equals(oiData.getExtName())) {
+                for (final ColumnMeta meta : oiData.getOtherColumnsDescs()) {
+                    if (meta != null) {
+                        if (logger.isLoggable(Level.FINE)) {
+                            logger.log(Level.FINE, "Column[{0}] type = {1}",
+                                    new Object[]{meta.getName(), meta.getDataType()});
+                        }
+                        columnNames.add(meta.getName());
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Main function to create files.
      * @param unused
@@ -677,12 +756,25 @@ public final class DataModel {
         dump(false);
         dump(true);
 
-        final DataModel dm = getInstance();
+        final DataModel dm = getInstance(OIFitsStandard.VERSION_2);
 
-        logger.log(Level.WARNING, "columnNames:   {0}", dm.getNumericalColumnNames());
+        logger.log(Level.WARNING, "allColumnNames:      {0}", dm.getAllColumnNames());
 
-        logger.log(Level.WARNING, "columnNames1D: {0}", dm.getNumericalColumnNames1D());
-        logger.log(Level.WARNING, "columnNames2D: {0}", dm.getNumericalColumnNames2D());
+        logger.log(Level.WARNING, "allNumColumnNames:      {0}", dm.getNumericalColumnNames());
+        logger.log(Level.WARNING, "allNumColumnNames1D:    {0}", dm.getNumericalColumnNames1D());
+        logger.log(Level.WARNING, "allNumColumnNames2D:    {0}", dm.getNumericalColumnNames2D());
+
+        logger.log(Level.WARNING, "allOtherColumnNames: {0}", dm.getOtherColumnNames());
+
+        for (String name : dm.getAllColumnNames()) {
+            final boolean isNumeric = dm.isNumericalColumn(name);
+            final boolean isNumeric1D = dm.isNumericalColumn1D(name);
+            final boolean isNumeric2D = dm.isNumericalColumn2D(name);
+            final boolean isOther = dm.isOtherColumn(name);
+
+            logger.log(Level.WARNING, "column[{0}] : isNumeric={1} isNumeric1D={2} isNumeric2D={3} isOther={4}",
+                    new Object[]{name, isNumeric, isNumeric1D, isNumeric2D, isOther});
+        }
     }
 
 }

@@ -54,6 +54,9 @@ public interface OIFitsConstants {
     /** Table OI_INSPOL */
     public final static String TABLE_OI_INSPOL = "OI_INSPOL";
 
+    /** Column CORRINDX_... prefix */
+    public final static String PREFIX_CORRINDX = "CORRINDX_";
+
     /* Main header keyword */
     /** PROG_ID = Program ID */
     public final static String KEYWORD_PROG_ID = "PROG_ID";
@@ -278,9 +281,9 @@ public interface OIFitsConstants {
     public final static String COLUMN_VISPHIERR = "VISPHIERR";
     /* OIFits standard 2.0 */
     /** CORRINDX_VISAMP column */
-    public final static String COLUMN_CORRINDX_VISAMP = "CORRINDX_VISAMP";
+    public final static String COLUMN_CORRINDX_VISAMP = PREFIX_CORRINDX + "VISAMP";
     /** CORRINDX_VISPHI column */
-    public final static String COLUMN_CORRINDX_VISPHI = "CORRINDX_VISPHI";
+    public final static String COLUMN_CORRINDX_VISPHI = PREFIX_CORRINDX + "VISPHI";
     /** VISREFMAP column */
     public final static String COLUMN_VISREFMAP = "VISREFMAP";
     /** RVIS column */
@@ -288,13 +291,13 @@ public interface OIFitsConstants {
     /** RVISERR column */
     public final static String COLUMN_RVISERR = "RVISERR";
     /** CORRINDX_RVIS column */
-    public final static String COLUMN_CORRINDX_RVIS = "CORRINDX_RVIS";
+    public final static String COLUMN_CORRINDX_RVIS = PREFIX_CORRINDX + "RVIS";
     /** IVIS column */
     public final static String COLUMN_IVIS = "IVIS";
     /** IVISERR column */
     public final static String COLUMN_IVISERR = "IVISERR";
     /** CORRINDX_IVIS column */
-    public final static String COLUMN_CORRINDX_IVIS = "CORRINDX_IVIS";
+    public final static String COLUMN_CORRINDX_IVIS = PREFIX_CORRINDX + "IVIS";
 
     /* Aspro Extension with complex visibilities (like AMBER OIFits) */
     /** VISDATA column */
@@ -315,7 +318,7 @@ public interface OIFitsConstants {
     public final static String COLUMN_NS_MODEL_VIS2ERR = COLUMN_PREFIX_NS_MODEL + COLUMN_VIS2ERR;
     /* OIFits standard 2.0 */
     /** CORRINDX_VIS2DATA column */
-    public final static String COLUMN_CORRINDX_VIS2DATA = "CORRINDX_VIS2DATA";
+    public final static String COLUMN_CORRINDX_VIS2DATA = PREFIX_CORRINDX + "VIS2DATA";
 
     /* Aspro Extension with square correlated flux and photometry */
     /** NS_CORRSQ column */
@@ -350,9 +353,9 @@ public interface OIFitsConstants {
     public final static String COLUMN_V2COORD = "V2COORD";
     /* OIFits standard 2.0 */
     /** CORRINDX_T3AMP column */
-    public final static String COLUMN_CORRINDX_T3AMP = "CORRINDX_T3AMP";
+    public final static String COLUMN_CORRINDX_T3AMP = PREFIX_CORRINDX + "T3AMP";
     /** CORRINDX_T3PHI column */
-    public final static String COLUMN_CORRINDX_T3PHI = "CORRINDX_T3PHI";
+    public final static String COLUMN_CORRINDX_T3PHI = PREFIX_CORRINDX + "T3PHI";
 
     /* OI_FLUX table */
     /** FOV keyword */
@@ -370,7 +373,7 @@ public interface OIFitsConstants {
     /** FLUXERR column */
     public final static String COLUMN_FLUXERR = "FLUXERR";
     /** CORRINDX_FLUXDATA column */
-    public final static String COLUMN_CORRINDX_FLUXDATA = "CORRINDX_FLUXDATA";
+    public final static String COLUMN_CORRINDX_FLUXDATA = PREFIX_CORRINDX + "FLUXDATA";
     /* OI_FLUX table */
     /** FLUX column */
     public final static String COLUMN_FLUX = "FLUX";
