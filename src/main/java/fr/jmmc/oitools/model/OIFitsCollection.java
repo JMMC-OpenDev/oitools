@@ -415,7 +415,7 @@ public final class OIFitsCollection implements ToStringable {
      */
     public List<String> getDistinctStaNames() {
         if (this.distinctStaNames == null) {
-            OIDataListHelper.getDistinctStaNames(getAllOiDatas(), getUsedStaNamesMap());
+            this.distinctStaNames = OIDataListHelper.getDistinctStaNames(getAllOiDatas(), getUsedStaNamesMap());
         }
         return this.distinctStaNames;
     }
@@ -426,7 +426,7 @@ public final class OIFitsCollection implements ToStringable {
      */
     public List<String> getDistinctStaConfs() {
         if (this.distinctStaConfs == null) {
-            OIDataListHelper.getDistinctStaConfs(getAllOiDatas());
+            this.distinctStaConfs = OIDataListHelper.getDistinctStaConfs(getAllOiDatas());
         }
         return this.distinctStaConfs;
     }
