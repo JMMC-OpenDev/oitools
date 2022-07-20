@@ -35,6 +35,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <name>OITools</name>
 
     <properties>
+        <!-- do make assembly and copy dependencies -->
+        <assembly.skipAssembly>false</assembly.skipAssembly>
+        <mdep.skip>false</mdep.skip>
+
         <!-- OITools is an open source project ASAP -->
         <maven.javadoc.skip>false</maven.javadoc.skip>
         <source.skip>false</source.skip>

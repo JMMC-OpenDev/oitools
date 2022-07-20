@@ -3350,6 +3350,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <datacolumn>VIS2DATA</datacolumn>
     <datarange>
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
@@ -3719,6 +3720,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <datacolumn>VISAMP</datacolumn>
     <datarange>
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
@@ -3760,6 +3762,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <datacolumn>VISPHI</datacolumn>
     <datarange>
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
@@ -3912,6 +3915,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <datacolumn>RVIS</datacolumn>
     <datarange>
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
@@ -3946,6 +3950,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <datacolumn>IVIS</datacolumn>
     <datarange>
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
@@ -4219,6 +4224,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <datacolumn>T3AMP</datacolumn>
     <datarange>
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
@@ -4260,6 +4266,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <datacolumn>T3PHI</datacolumn>
     <datarange>
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
@@ -4655,6 +4662,7 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
+    <datacolumn>FLUXDATA</datacolumn>
     <datarange>
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
