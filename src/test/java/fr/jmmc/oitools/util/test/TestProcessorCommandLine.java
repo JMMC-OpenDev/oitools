@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
+import java.util.Arrays;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -42,7 +43,7 @@ public class TestProcessorCommandLine {
     @Test
     public void testNoInputFile() {
         String[] result = callProcessor(new String[]{"merge"});
-        Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
+        Assert.assertTrue("Bad return message: \n" + Arrays.toString(result),
                 getError(result).startsWith("No file location given in arguments."));
     }
 
@@ -51,7 +52,7 @@ public class TestProcessorCommandLine {
         String[] result = callProcessor(new String[]{"merge",
                                                      TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
                                                      "-o"});
-        Assert.assertTrue("Bad return message: " + result[ERR_INDEX],
+        Assert.assertTrue("Bad return message: \n" + Arrays.toString(result),
                 getError(result).startsWith("No output file"));
     }
 
@@ -63,7 +64,7 @@ public class TestProcessorCommandLine {
                                                      TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits",
                                                      TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.oifits"
         });
-        Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
+        Assert.assertTrue("Bad return message: \n" + Arrays.toString(result),
                 getOut(result).startsWith("Writing"));
         Assert.assertTrue("No result file created", output.exists());
     }
@@ -73,7 +74,7 @@ public class TestProcessorCommandLine {
         String[] result = callProcessor(new String[]{"list",
                                                      TEST_DIR_OIFITS + "A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits"
         });
-        Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
+        Assert.assertTrue("Bad return message: \n" + Arrays.toString(result),
                 getOut(result).startsWith("target_name"));
     }
 
@@ -98,8 +99,8 @@ public class TestProcessorCommandLine {
                                                      "-o", output.getAbsolutePath(), "-insname", "SPECTRO_SC",
                                                      TEST_DIR_OIFITS + "NGC5128_2005.oifits"
         });
-        Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
-                getOut(result).startsWith("Result is empty, no file created."));
+        Assert.assertTrue("Bad return message: [" + getError(result) + "] \n" + Arrays.toString(result),
+                getOut(result).contains("Result is empty"));
         Assert.assertTrue("No result file should be created", !output.exists());
 
         // Filter pass
@@ -107,8 +108,8 @@ public class TestProcessorCommandLine {
                                             "-o", output.getAbsolutePath(), "-insname", "MIDI/PRISM",
                                             TEST_DIR_OIFITS + "NGC5128_2005.oifits"
         });
-        Assert.assertTrue("Bad return message: " + result[OUT_INDEX],
-                getOut(result).startsWith("Writing"));
+        Assert.assertTrue("Bad return message: \n" + Arrays.toString(result),
+                getOut(result).contains("Writing"));
         OIFitsFile mergedFile = OIFitsLoader.loadOIFits(output.getAbsolutePath());
         Assert.assertEquals("Bad number of Ins in merged file", 1, mergedFile.getOiWavelengths().length);
     }

@@ -44,6 +44,8 @@ public class ColumnMeta extends CellMeta {
     private final int repeat;
     /** optional column name storing error values (may be null) */
     private final String errName;
+    /** optional column name storing data values (may be null) for the error column */
+    private String dataName = null;
     /** optional data range (may be null) */
     private final DataRange dataRange;
     /** optional column alias ie alternate name (may be null) */
@@ -226,11 +228,25 @@ public class ColumnMeta extends CellMeta {
 
     /* ---  Error relationships --- */
     /**
-     * Return the optional column name storing error values (may be null)
      * @return optional column name storing error values (may be null)
      */
     public final String getErrorColumnName() {
         return errName;
+    }
+
+    /**
+     * @return optional column name storing error values (may be null)
+     */
+    public String getDataColumnName() {
+        return dataName;
+    }
+
+    /**
+     * Define the optional column name storing data values (may be null) for the error column
+     * @param dataName optional column name storing data values (may be null) for the error column
+     */
+    public void setDataColumnName(final String dataName) {
+        this.dataName = dataName;
     }
 
     /* ---  Data range --- */

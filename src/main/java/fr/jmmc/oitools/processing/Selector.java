@@ -18,6 +18,7 @@ package fr.jmmc.oitools.processing;
 
 import fr.jmmc.oitools.OIFitsConstants;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,6 +40,15 @@ public final class Selector {
     public final static String FILTER_STAINDEX = OIFitsConstants.COLUMN_STA_INDEX;
     public final static String FILTER_STACONF = OIFitsConstants.COLUMN_STA_CONF;
 
+    public static final List<String> SPECIAL_COLUMN_NAMES = Arrays.asList(new String[]{
+        Selector.FILTER_EFFWAVE,
+        Selector.FILTER_EFFBAND,
+        // uncomment once supported (String values)
+        // Selector.FILTER_NIGHT_ID,
+        Selector.FILTER_STAINDEX,
+        Selector.FILTER_STACONF
+    });
+    
     // members:
     private String targetUID = null;
     private String insModeUID = null;

@@ -38,6 +38,7 @@ import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.model.TargetManager;
 import fr.jmmc.oitools.util.OITableComparator;
 import fr.nom.tam.fits.FitsDate;
+import fr.nom.tam.util.ArrayFuncs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -177,15 +178,23 @@ public final class Merger {
             final FitsImageHDU primaryHdu = ctx.resultFile.getPrimaryImageHDU();
 
             // Add used oifits files:
-            for (OIFitsFile oiFitsFile : result.getSortedOIFitsFiles()) {
-                primaryHdu.addHeaderHistory("CLI Input: " + oiFitsFile.getFileName());
-            }
+            primaryHdu.addHeaderHistory(generateCLIInputs(result.getSortedOIFitsFiles()));
 
             // Add CLI args:
             final Selector selector = result.getSelector();
-            primaryHdu.addHeaderHistory("CLI args: " + OIFitsProcessor.generateCLIargs(selector));
+            primaryHdu.addHeaderHistory(OIFitsProcessor.generateCLIargs(selector));
         }
         return resultFile;
+    }
+
+    private static String generateCLIInputs(final List<OIFitsFile> oiFitsFiles) {
+        final StringBuilder sb = new StringBuilder(1024);
+        sb.append("CLI Inputs: ");
+
+        for (OIFitsFile oiFitsFile : oiFitsFiles) {
+            sb.append(oiFitsFile.getFileName()).append(" ");
+        }
+        return sb.toString();
     }
 
     private static OIFitsFile createOIFits(final OIFitsStandard std, final SelectorResult result) {
@@ -321,9 +330,7 @@ public final class Merger {
                     }
                 }
                 // fill OIFITS2 Mandatory keywords:
-                if (logger.isLoggable(Level.FINE)) {
-                    logger.log(Level.FINE, "keyValues: {0}", keyValues);
-                }
+                logger.log(Level.FINE, "keyValues: {0}", keyValues);
 
                 // note: not really correct as filters can reduce the number of valid entries (TARGET ...)
                 for (KeywordMeta keyword : primaryHdu.getKeywordDescCollection()) {
@@ -484,7 +491,7 @@ public final class Merger {
                             // redim the table to the correct row count to prune invalid rows:
                             newOiWavelength.resizeTable(nKeepRows, maskWavelength.getBitSet());
 
-                            logger.log(Level.INFO, "Table[{0}] filtered from Table[{1}]",
+                            logger.log(Level.FINE, "Table[{0}] filtered from Table[{1}]",
                                     new Object[]{newOiWavelength, oiWavelength});
                         }
                         resultFile.addOiTable(newOiWavelength);
@@ -688,9 +695,17 @@ public final class Merger {
                 final IndexMask maskWavelength = selectorResult.getWavelengthMaskNotFull(oiData.getOiWavelength());
                 // get the optional masks for this OIData table:
                 final IndexMask maskOIData1D = selectorResult.getDataMask1DNotFull(oiData);
+                final IndexMask maskOIData2D = selectorResult.getDataMask2DNotFull(oiData);
 
-                logger.log(Level.INFO, "maskOIData1D:   {0}", maskOIData1D);
-                logger.log(Level.INFO, "maskWavelength: {0}", maskWavelength);
+                logger.log(Level.FINE, "maskOIData1D:   {0}", maskOIData1D);
+                logger.log(Level.FINE, "maskOIData2D:   {0}", maskOIData2D);
+                logger.log(Level.FINE, "maskWavelength: {0}", maskWavelength);
+
+                final int idxNone = (maskOIData2D != null) ? maskOIData2D.getIndexNone() : -1;
+                final int idxFull = (maskOIData2D != null) ? maskOIData2D.getIndexFull() : -1;
+
+                final Set<String> relatedColumnsFiltersOIData2D = selectorResult.getRelatedColumnsFiltersOIData2D();
+                logger.log(Level.FINE, "relatedColumnsFiltersOIData2D: {0}", relatedColumnsFiltersOIData2D);
 
                 // Copy table and filter out useless rows:
                 final OIData newOIData = (OIData) resultFile.copyTable(oiData);
@@ -702,8 +717,9 @@ public final class Merger {
 
                 boolean filterRows = false;
 
-                if (checkTargetId || (maskWavelength != null) || (maskOIData1D != null)) {
+                if (checkTargetId || (maskOIData1D != null) || (maskOIData2D != null) || (maskWavelength != null)) {
                     final int nRows = newOIData.getNbRows();
+                    final int nWaves = newOIData.getNWave();
 
                     // prepare mask to indicate rows to keep in output table:
                     final BitSet maskRows = (maskOIData1D != null) ? maskOIData1D.getBitSet() : new BitSet(nRows);
@@ -711,6 +727,28 @@ public final class Merger {
                     // Update targetId column:
                     final short[] targetIds = newOIData.getTargetId();
                     final short[] newTargetIds = new short[nRows];
+
+                    // Update filtered columns 2D:
+                    final Map<String, double[][]> newColumns2D = new LinkedHashMap<String, double[][]>();
+
+                    // get all related standard columns:
+                    for (String columnName : relatedColumnsFiltersOIData2D) {
+                        // clone standard 2D columns present in this table to set values to NaN (filtered out) below:
+                        if (newOIData.getColumnDesc(columnName) != null) {
+                            final double[][] prevColumnValue = newOIData.getColumnDoubles(columnName);
+                            if (prevColumnValue != null) {
+                                // TODO: check dims !
+                                newColumns2D.put(columnName, (double[][]) ArrayFuncs.deepClone(prevColumnValue));
+                            }
+                        }
+                    }
+
+                    final String[] newColumns2DKeys = newColumns2D.keySet().toArray(new String[newColumns2D.size()]);
+                    if (logger.isLoggable(Level.FINE)) {
+                        logger.log(Level.FINE, "newColumns2DKeys: {0}", Arrays.toString(newColumns2DKeys));
+                    }
+
+                    final double[][] newColumns2DRows = new double[newColumns2DKeys.length][];
 
                     // Iterate on table rows (i):
                     for (int i = 0; i < nRows; i++) {
@@ -720,7 +758,20 @@ public final class Merger {
                             // if bit is false for this row, we hide this row
                             continue;
                         }
+
                         boolean skip = false;
+
+                        // check mask 2D for row None flag:
+                        IndexMask maskOIData2DRow = null;
+
+                        if (maskOIData2D != null) {
+                            if (maskOIData2D.accept(i, idxNone)) {
+                                // row flagged as None:
+                                skip = true;
+                            }
+                            // check row flagged as Full:
+                            maskOIData2DRow = (skip || maskOIData2D.accept(i, idxFull)) ? null : maskOIData2D;
+                        }
 
                         if (checkTargetId) {
                             final Short oldTargetId = Short.valueOf(targetIds[i]);
@@ -733,7 +784,7 @@ public final class Merger {
                             // preserve id:
                             newTargetIds[i] = targetIds[i];
                         }
-                        if (newTargetIds[i] == ModelBase.UNDEFINED_SHORT) {
+                        if (!skip && (newTargetIds[i] == ModelBase.UNDEFINED_SHORT)) {
                             skip = true;
                         }
 
@@ -743,17 +794,54 @@ public final class Merger {
                             if (maskOIData1D != null) {
                                 maskRows.set(i, false); // to be sure
                             }
-                        } else {
-                            if (maskOIData1D == null) {
-                                maskRows.set(i);
-                            }
+                        } else if (maskOIData1D == null) {
+                            maskRows.set(i);
                         }
-                    }
+
+                        if (!skip && (maskOIData2DRow != null)) {
+                            for (int k = 0; k < newColumns2DKeys.length; k++) {
+                                newColumns2DRows[k] = newColumns2D.get(newColumns2DKeys[k])[i];
+                            }
+
+                            // Iterate on wave channels (l):
+                            for (int l = 0; l < nWaves; l++) {
+
+                                // check optional wavelength mask:
+                                if ((maskWavelength != null) && !maskWavelength.accept(l)) {
+                                    // if bit is false for this row, we hide this row
+                                    continue;
+                                }
+
+                                // check optional data mask 2D (and its Full flag):
+                                if (!maskOIData2DRow.accept(i, l)) {
+                                    // if bit is false for this row, we hide this row
+
+                                    // set column value to NaN:
+                                    for (int k = 0; k < newColumns2DRows.length; k++) {
+                                        newColumns2DRows[k][l] = Double.NaN;
+                                    }
+                                }
+                            } // wave channels
+                        }
+                    } // rows
 
                     // update targetId column before table filter:
                     newOIData.setTargetId(newTargetIds);
 
-                    if (filterRows || (maskOIData1D != null) || (maskWavelength != null)) {
+                    // Update filtered columns 2D before table filter:
+                    for (int k = 0; k < newColumns2DKeys.length; k++) {
+                        final String columnName = newColumns2DKeys[k];
+
+                        if (logger.isLoggable(Level.FINE)) {
+                            logger.log(Level.FINE, "Column[{0}] filtered: {1}",
+                                    new Object[]{columnName,
+                                                 Arrays.deepToString(newColumns2D.get(columnName))
+                                    });
+                        }
+                        newOIData.setColumnValue(columnName, newColumns2D.get(columnName));
+                    }
+
+                    if (filterRows || (maskOIData1D != null) || (maskOIData2D != null) || (maskWavelength != null)) {
                         final int nKeepRows = maskRows.cardinality();
 
                         if (nKeepRows <= 0) {
@@ -769,7 +857,7 @@ public final class Merger {
                 resultFile.addOiTable(newOIData);
 
                 if (filterRows) {
-                    logger.log(Level.INFO, "Table[{0}] filtered from Table[{1}]",
+                    logger.log(Level.FINE, "Table[{0}] filtered from Table[{1}]",
                             new Object[]{newOIData, oiData});
                 }
             }

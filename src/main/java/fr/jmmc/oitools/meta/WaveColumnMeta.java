@@ -20,6 +20,8 @@
 package fr.jmmc.oitools.meta;
 
 import fr.jmmc.oitools.model.OIAbstractData;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * This specific ColumnMeta overrides the getRepeat() method to use the OIWaveLength.getNWave() method
@@ -33,6 +35,8 @@ public final class WaveColumnMeta extends ArrayColumnMeta {
     private final OIAbstractData oiAbsData;
     /** optional expression to compute derived columns */
     private String expression;
+    /** JEL resolved used variables by the optional expression */
+    private Set<String> relatedColumnNames = null;
 
     /**
      * ColumnMeta class constructor
@@ -216,4 +220,16 @@ public final class WaveColumnMeta extends ArrayColumnMeta {
     public String getExpression() {
         return expression;
     }
+
+    public boolean hasRelatedColumnNames() {
+        return (this.relatedColumnNames != null) && !this.relatedColumnNames.isEmpty();
+    }
+
+    public Set<String> getRelatedColumnNames() {
+        if (this.relatedColumnNames == null) {
+            this.relatedColumnNames = new LinkedHashSet<>(8);
+        }
+        return relatedColumnNames;
+    }
+
 }

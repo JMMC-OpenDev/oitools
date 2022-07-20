@@ -27,7 +27,7 @@ public final class NightIdFilter extends FitsTableFilter<NightId> {
     }
 
     @Override
-    void reset() {
+    protected void reset() {
         this.nightIdMatcher = null;
         this.nightIds = null;
     }

@@ -38,7 +38,6 @@ import java.util.BitSet;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -590,10 +589,10 @@ public abstract class FitsTable extends FitsHDU {
      * Return the column descriptors (standard then derived) representing
      * numerical values (double arrays)
      *
-     * @return list of numerical column descriptors
+     * @param columnDescList list to store numerical column descriptors
+     * @return given columnDescList reference
      */
-    public final List<ColumnMeta> getNumericalColumnsDescs() {
-        final ArrayList<ColumnMeta> columnDescList = new ArrayList<ColumnMeta>();
+    public final ArrayList<ColumnMeta> getNumericalColumnsDescs(final ArrayList<ColumnMeta> columnDescList) {
         // Standard columns:
         for (Map.Entry<String, ColumnMeta> entry : getColumnsDesc().entrySet()) {
             final ColumnMeta meta = entry.getValue();
@@ -621,10 +620,10 @@ public abstract class FitsTable extends FitsHDU {
      * Return the column descriptors (standard then derived) representing
      * CHAR/SHORT/INT values (arrays) except "CORRINDX_..." columns
      *
-     * @return list of other column descriptors
+     * @param columnDescList list to store other column descriptors
+     * @return given columnDescList reference
      */
-    public final List<ColumnMeta> getOtherColumnsDescs() {
-        final ArrayList<ColumnMeta> columnDescList = new ArrayList<ColumnMeta>();
+    public final ArrayList<ColumnMeta> getOtherColumnsDescs(final ArrayList<ColumnMeta> columnDescList) {
         // Standard columns:
         for (Map.Entry<String, ColumnMeta> entry : getColumnsDesc().entrySet()) {
             final ColumnMeta meta = entry.getValue();

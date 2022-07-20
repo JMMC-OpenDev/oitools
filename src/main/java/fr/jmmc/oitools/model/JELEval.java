@@ -20,15 +20,16 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.meta.ColumnMeta;
+import fr.jmmc.oitools.meta.WaveColumnMeta;
 import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_DBL;
 import gnu.jel.CompilationException;
 import gnu.jel.CompiledExpression;
 import gnu.jel.DVMap;
 import gnu.jel.Evaluator;
 import gnu.jel.Library;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +38,7 @@ import java.util.logging.Logger;
  * ExpressionEvaluator implementation based on gnu JEL
  * @author grosje
  */
-public class JELEval extends ExpressionEvaluator {
+public final class JELEval extends ExpressionEvaluator {
 
     /** logger */
     private final static Logger _logger = Logger.getLogger(JELEval.class.getName());
@@ -56,8 +57,7 @@ public class JELEval extends ExpressionEvaluator {
      */
     @Override
     public double[][] eval(final OIData oiData, final String colNameEval,
-                           final String expression, final boolean testOnly)
-            throws RuntimeException {
+                           final String expression, final boolean testOnly) throws RuntimeException {
 
         if (_logger.isLoggable(Level.FINE)) {
             _logger.log(Level.FINE, "eval: column= {0} expression= {1}", new Object[]{colNameEval, expression});
@@ -73,7 +73,7 @@ public class JELEval extends ExpressionEvaluator {
 
         // Prepare inputs:
         // all numerical names (original + derived):
-        final List<ColumnMeta> columnsDescCollection = oiData.getNumericalColumnsDescs();
+        final ArrayList<ColumnMeta> columnsDescCollection = oiData.getNumericalColumnsDescs(new ArrayList<ColumnMeta>());
 
         // Create input column names:
         int n = 0;
@@ -111,11 +111,13 @@ public class JELEval extends ExpressionEvaluator {
             final Library lib = new Library(staticLib, dynamicLib, null, resolver, null);
 
             // Math.random():
+            // may throw CompilationException or Throwable:
             lib.markStateDependent("random", null);
 
             // Compile expression
-            _logger.fine("Compilation ...");
+            _logger.fine("Compiling expression ...");
 
+            // may throw CompilationException or Throwable:
             final CompiledExpression expr_c = Evaluator.compile(expression, lib);
 
             // Retrieve values:
@@ -124,6 +126,22 @@ public class JELEval extends ExpressionEvaluator {
 
             if (_logger.isLoggable(Level.FINE)) {
                 _logger.log(Level.FINE, "usedNames: {0}", usedNames);
+            }
+
+            // Update related column names for the dynamic column:
+            final ColumnMeta colMetaExpr = oiData.getColumnDerivedDesc(colNameEval);
+
+            if (colMetaExpr instanceof WaveColumnMeta) {
+                if (_logger.isLoggable(Level.FINE)) {
+                    _logger.log(Level.FINE, "colMetaExpr: {0}", colMetaExpr);
+                }
+                final Set<String> relatedColumnNames = ((WaveColumnMeta) colMetaExpr).getRelatedColumnNames();
+                relatedColumnNames.clear();
+                relatedColumnNames.addAll(usedNames);
+
+                if (_logger.isLoggable(Level.FINE)) {
+                    _logger.log(Level.FINE, "relatedColumnNames: {0}", relatedColumnNames);
+                }
             }
 
             // Create the input column array:
@@ -181,6 +199,7 @@ public class JELEval extends ExpressionEvaluator {
                 for (int j = 0; j < nWaves; j++) {
                     varProvider.j = j;
 
+                    // may throw Throwable:
                     row[j] = expr_c.evaluate_double(context);
                 }
             }

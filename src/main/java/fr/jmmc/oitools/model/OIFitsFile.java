@@ -26,6 +26,7 @@ import fr.jmmc.oitools.image.FileRef;
 import fr.jmmc.oitools.image.FitsImageFile;
 import fr.jmmc.oitools.image.FitsImageHDU;
 import fr.jmmc.oitools.image.ImageOiData;
+import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.OIFitsStandard;
 import static fr.jmmc.oitools.model.OIFitsChecker.isInspectRules;
 import fr.jmmc.oitools.model.range.Range;
@@ -257,6 +258,9 @@ public final class OIFitsFile extends FitsImageFile {
         if (logger.isLoggable(Level.FINE)) {
             logger.log(Level.FINE, "Registering object for {0}", oiTable.idToString());
         }
+        // resolve cross-reference between ColumnMeta (err <-> data):
+        resolveColumnMeta(oiTable);
+
         this.oiTables.add(oiTable);
 
         if (oiTable instanceof OITarget) {
@@ -329,6 +333,26 @@ public final class OIFitsFile extends FitsImageFile {
                 v.add(o);
             } else {
                 logger.warning("CORRNAME of OI_CORR table is null in register()");
+            }
+        }
+    }
+
+    void resolveColumnMeta(final OITable oiTable) {
+        for (final ColumnMeta colMeta : oiTable.getColumnDescCollection()) {
+            final String errColName = colMeta.getErrorColumnName();
+
+            if (errColName != null) {
+                final String dataColName = colMeta.getName();
+                final ColumnMeta colMetaErr = oiTable.getColumnMeta(errColName);
+
+                if (colMetaErr != null) {
+                    colMetaErr.setDataColumnName(dataColName);
+
+                    if (logger.isLoggable(Level.FINE)) {
+                        logger.log(Level.FINE, "Column[{0}] has data column = {1}",
+                                new Object[]{errColName, dataColName});
+                    }
+                }
             }
         }
     }

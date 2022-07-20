@@ -55,11 +55,18 @@ public final class SelectorResult {
     private final Set<OIData> oiDatas = new LinkedHashSet<OIData>();
     /* filters */
     private final List<FitsTableFilter<?>> filtersUsed = new ArrayList<>();
-    private final List<FitsTableFilter<?>> filtersOIData = new ArrayList<>();
+    private final List<FitsTableFilter<?>> filtersOIData1D = new ArrayList<>();
+    private final List<FitsTableFilter<?>> filtersOIData2D = new ArrayList<>();
     private final List<FitsTableFilter<?>> filtersOIWavelength = new ArrayList<>();
+    /* applied filters */
+    private final Set<String> usedColumnsFiltersOIData2D = new LinkedHashSet<>();
+    private final Set<String> relatedColumnsFiltersOIData2D = new LinkedHashSet<>();
+
     /* masks */
     /** Map between OIData table to BitSet (mask 1D) */
     private final Map<OIData, IndexMask> maskOIDatas1D = new IdentityHashMap<OIData, IndexMask>();
+    /** Map between OIData table to BitSet (mask 2D) */
+    private final Map<OIData, IndexMask> maskOIDatas2D = new IdentityHashMap<OIData, IndexMask>();
     /** Map between OIWavelength table to BitSet (mask 1D) */
     private final Map<OIWavelength, IndexMask> maskOIWavelengths = new IdentityHashMap<OIWavelength, IndexMask>();
     /** cached values */
@@ -82,9 +89,13 @@ public final class SelectorResult {
         granules.clear();
         oiDatas.clear();
         filtersUsed.clear();
-        filtersOIData.clear();
+        filtersOIData1D.clear();
+        filtersOIData2D.clear();
         filtersOIWavelength.clear();
+        usedColumnsFiltersOIData2D.clear();
+        relatedColumnsFiltersOIData2D.clear();
         maskOIDatas1D.clear();
+        maskOIDatas2D.clear();
         maskOIWavelengths.clear();
         sortedTargets = null;
         sortedInstrumentModes = null;
@@ -97,8 +108,8 @@ public final class SelectorResult {
     public void resetFilters() {
         filtersUsed.clear();
 
-        if (hasFiltersOIData()) {
-            FitsTableFilter.resetFilters(getFiltersOIData());
+        if (hasFiltersOIData1D()) {
+            FitsTableFilter.resetFilters(getFiltersOIData1D());
         }
 
         if (hasFiltersOIWavelength()) {
@@ -137,12 +148,20 @@ public final class SelectorResult {
         return filtersUsed;
     }
 
-    public boolean hasFiltersOIData() {
-        return !filtersOIData.isEmpty();
+    public boolean hasFiltersOIData1D() {
+        return !filtersOIData1D.isEmpty();
     }
 
-    public List<FitsTableFilter<?>> getFiltersOIData() {
-        return filtersOIData;
+    public List<FitsTableFilter<?>> getFiltersOIData1D() {
+        return filtersOIData1D;
+    }
+
+    public boolean hasFiltersOIData2D() {
+        return !filtersOIData2D.isEmpty();
+    }
+
+    public List<FitsTableFilter<?>> getFiltersOIData2D() {
+        return filtersOIData2D;
     }
 
     public boolean hasFiltersOIWavelength() {
@@ -193,6 +212,7 @@ public final class SelectorResult {
         return sorted;
     }
 
+    // --- masks ---
     /**
      * Retrieves the IndexMask for the given OIData.
      * @param oiData May be null.
@@ -204,7 +224,7 @@ public final class SelectorResult {
 
     public IndexMask getDataMask1DNotFull(final OIData oiData) {
         final IndexMask maskOIData1D = getDataMask1D(oiData);
-        return (maskOIData1D == null || maskOIData1D.isFull()) ? null : maskOIData1D;
+        return (IndexMask.isNotFull(maskOIData1D)) ? maskOIData1D : null;
     }
 
     /**
@@ -214,6 +234,37 @@ public final class SelectorResult {
      */
     public void putDataMask1D(final OIData oiData, final IndexMask mask) {
         this.maskOIDatas1D.put(oiData, mask);
+    }
+
+    /**
+     * Retrieves the IndexMask for the given OIData.
+     * @param oiData May be null.
+     * @return the IndexMask, or null or FULL
+     */
+    public IndexMask getDataMask2D(final OIData oiData) {
+        return this.maskOIDatas2D.get(oiData);
+    }
+
+    public IndexMask getDataMask2DNotFull(final OIData oiData) {
+        final IndexMask maskOIData2D = getDataMask2D(oiData);
+        return (IndexMask.isNotFull(maskOIData2D)) ? maskOIData2D : null;
+    }
+
+    /**
+     * Registers the IndexMask for the given OIData.
+     * @param oiData Must not be null.
+     * @param mask IndexMask not null or FULL
+     */
+    public void putDataMask2D(final OIData oiData, final IndexMask mask) {
+        this.maskOIDatas2D.put(oiData, mask);
+    }
+
+    public Set<String> getUsedColumnsFiltersOIData2D() {
+        return usedColumnsFiltersOIData2D;
+    }
+
+    public Set<String> getRelatedColumnsFiltersOIData2D() {
+        return relatedColumnsFiltersOIData2D;
     }
 
     /**
@@ -227,7 +278,7 @@ public final class SelectorResult {
 
     public IndexMask getWavelengthMaskNotFull(final OIWavelength oiWavelength) {
         final IndexMask maskWavelength = getWavelengthMask(oiWavelength);
-        return (maskWavelength == null || maskWavelength.isFull()) ? null : maskWavelength;
+        return (IndexMask.isNotFull(maskWavelength)) ? maskWavelength : null;
     }
 
     /**
@@ -260,8 +311,15 @@ public final class SelectorResult {
 
     @Override
     public String toString() {
-        return "SelectorResult{" + "granules=" + granules
-                + ", oiDatas=" + oiDatas
-                + ", maskOIWavelengths=" + maskOIWavelengths + '}';
+        return "SelectorResult{" + "granules=" + granules + ", oiDatas=" + oiDatas
+                + ", filtersOIData1D=" + filtersOIData1D + ", maskOIDatas1D=" + maskOIDatas1D
+                + ", filtersOIData2D=" + filtersOIData2D + ", maskOIDatas2D=" + maskOIDatas2D
+                + ", usedColumnsFiltersOIData2D=" + usedColumnsFiltersOIData2D
+                + ", filtersOIWavelength=" + filtersOIWavelength + ", maskOIWavelengths=" + maskOIWavelengths
+                + '}';
+    }
+
+    public static DataModel getDataModel(final SelectorResult selectorResult) {
+        return (selectorResult == null) ? DataModel.getInstance() : selectorResult.getDataModel();
     }
 }

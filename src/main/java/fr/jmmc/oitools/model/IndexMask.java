@@ -120,8 +120,9 @@ public final class IndexMask {
     public void setAccept(final int rowIndex, final int colIndex, final boolean value) {
         if (!vect1D) {
             bitSet.set(getBitIndex(rowIndex, colIndex), value);
+        } else {
+            throw new IllegalArgumentException("Incompatible mask dimensions (2D) !");
         }
-        throw new IllegalArgumentException("Incompatible mask dimensions (2D) !");
     }
 
     private int getBitIndex(final int rowIndex, final int colIndex) {
@@ -132,8 +133,12 @@ public final class IndexMask {
         return this.bitSet.cardinality();
     }
 
-    public boolean isFull() {
-        return (this == FULL);
+    public static boolean isFull(final IndexMask mask) {
+        return (mask == FULL);
+    }
+
+    public static boolean isNotFull(final IndexMask mask) {
+        return (mask != null) && (mask != FULL);
     }
 
     @Override
@@ -166,4 +171,17 @@ public final class IndexMask {
         return bitSet;
     }
 
+    public int getIndexNone() {
+        if (!vect1D) {
+            return nbCols - 2;
+        }
+        return -1;
+    }
+
+    public int getIndexFull() {
+        if (!vect1D) {
+            return nbCols - 1;
+        }
+        return -1;
+    }
 }

@@ -21,9 +21,12 @@ import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.jmcs.util.ToStringable;
 import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.fits.FitsTable;
+import fr.jmmc.oitools.meta.ColumnMeta;
+import fr.jmmc.oitools.meta.WaveColumnMeta;
 import fr.jmmc.oitools.model.Granule.GranuleField;
 import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.processing.Double1DFilter;
+import fr.jmmc.oitools.processing.Double2DFilter;
 import fr.jmmc.oitools.processing.FitsTableFilter;
 import fr.jmmc.oitools.processing.FitsTableFilter.FilterState;
 import fr.jmmc.oitools.processing.NightIdFilter;
@@ -505,7 +508,7 @@ public final class OIFitsCollection implements ToStringable {
                     // Create the filter chain:
                     {
                         // OIData filters:
-                        final List<FitsTableFilter<?>> filtersData1D = result.getFiltersOIData();
+                        final List<FitsTableFilter<?>> filtersData1D = result.getFiltersOIData1D();
                         filtersData1D.clear();
                         // subset filters:
                         if (selector.getTargetUID() != null) {
@@ -531,13 +534,25 @@ public final class OIFitsCollection implements ToStringable {
                                     selector.getFilter(Selector.FILTER_MJD)));
                         }
 
-                        // convert generic filters from selector.filters (1D)
+                        // convert generic filters from selector.filters (1D or 2D):
+                        final List<FitsTableFilter<?>> filtersData2D = result.getFiltersOIData2D();
+                        filtersData2D.clear();
+
+                        // Use shared data model (OIFITS2):
+                        // chicken & egg problem to use custom expression columns (how to get them):
+                        final DataModel dataModel = DataModel.getInstance();
+
                         for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
                             if (!Selector.isCustomFilter(e.getKey())) {
-                                filtersData1D.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
+                                if (dataModel.isNumericalColumn1D(e.getKey())) {
+                                    filtersData1D.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
+                                } else {
+                                    filtersData2D.add(new Double2DFilter(e.getKey(), (List<Range>) e.getValue()));
+                                }
                             }
                         }
                         logger.log(Level.FINE, "filtersData1D: {0} ", filtersData1D);
+                        logger.log(Level.FINE, "filtersData2D: {0} ", filtersData2D);
                     }
                     {
                         // Wavelength filters:
@@ -607,12 +622,12 @@ public final class OIFitsCollection implements ToStringable {
     }
 
     /**
-     * Adds the OIData and the Granule to the SelectorResults, and computes eventual Wavelength IndexMask from the
-     * Selector.
+     * Adds the OIData and the Granule to the SelectorResults once filtered:
+     * computes eventual masks (IndexMask) from the given SelectorResult
      *
-     * @param result to the OIData, Granule and IndexMask will be written
+     * @param result SelectorResult to store OIData, Granule and IndexMask instances
      * @param g the granule to add
-     * @param oiData the oiData to add, and to read its OIWavelength to compute the IndexMask
+     * @param oiData the oiData table to filter
      */
     private void filterOIData(final SelectorResult result, final Granule g, final OIData oiData) {
         logger.log(Level.FINE, "filterOIData: oiData = {0}", oiData);
@@ -620,6 +635,7 @@ public final class OIFitsCollection implements ToStringable {
         // apply filters on OIData:
         // 1. OIWavelength filters:
         final OIWavelength oiWavelength = oiData.getOiWavelength();
+        IndexMask maskWavelength;
 
         if (result.hasFiltersOIWavelength()) {
             if (oiWavelength == null) {
@@ -629,9 +645,10 @@ public final class OIFitsCollection implements ToStringable {
                 return;
             }
             // oiWavelength already processed ?
-            if (result.getWavelengthMask(oiWavelength) == null) {
-                final IndexMask maskWavelength = computeMask1D(
-                        result.getFiltersOIWavelength(), oiWavelength, result.getFiltersUsed()
+            maskWavelength = result.getWavelengthMask(oiWavelength);
+            if (maskWavelength == null) {
+                maskWavelength = computeMask1D(oiWavelength,
+                        result.getFiltersOIWavelength(), result.getFiltersUsed()
                 );
                 if (maskWavelength == null) {
                     // skip OIData (no remaining row):
@@ -643,18 +660,26 @@ public final class OIFitsCollection implements ToStringable {
                 }
                 result.putWavelengthMask(oiWavelength, maskWavelength);
             }
-        } else if (oiWavelength != null) {
-            // oiWavelength already processed ?
-            if (result.getWavelengthMask(oiWavelength) == null) {
-                // if selector has no wavelength ranges, use FULL mask
-                result.putWavelengthMask(oiWavelength, IndexMask.FULL);
+        } else {
+            // if selector has no wavelength ranges, use FULL mask
+            if (oiWavelength == null) {
+                maskWavelength = IndexMask.FULL;
+            } else {
+                // oiWavelength already processed ?
+                maskWavelength = result.getWavelengthMask(oiWavelength);
+                if (maskWavelength == null) {
+                    maskWavelength = IndexMask.FULL;
+                    result.putWavelengthMask(oiWavelength, maskWavelength);
+                }
             }
         }
 
         // 2. OIData filters:
-        if (result.hasFiltersOIData()) {
-            final IndexMask maskRows = computeMask1D(
-                    result.getFiltersOIData(), oiData, result.getFiltersUsed()
+        IndexMask maskRows = null;
+
+        if (result.hasFiltersOIData1D()) {
+            maskRows = computeMask1D(oiData,
+                    result.getFiltersOIData1D(), result.getFiltersUsed()
             );
             if (maskRows == null) {
                 // skip OIData (no remaining row):
@@ -666,11 +691,81 @@ public final class OIFitsCollection implements ToStringable {
             }
             result.putDataMask1D(oiData, maskRows);
         }
+        if (result.hasFiltersOIData2D()) {
+            final IndexMask mask2D = computeMask2D(oiData,
+                    IndexMask.isNotFull(maskRows) ? maskRows : null,
+                    IndexMask.isNotFull(maskWavelength) ? maskWavelength : null,
+                    result.getFiltersOIData2D(), result.getFiltersUsed()
+            );
+            if (mask2D == null) {
+                // skip OIData (no remaining row):
+                return;
+            }
+
+            // Get column dependency (expression dynamic columns):
+            final Set<String> usedColumnsFiltersOIData2D = result.getUsedColumnsFiltersOIData2D();
+            final Set<String> relatedColumnsFiltersOIData2D = result.getRelatedColumnsFiltersOIData2D();
+
+            boolean changed = false;
+
+            for (FitsTableFilter<?> usedFilter : result.getFiltersUsed()) {
+                final String colName = usedFilter.getColumnName();
+
+                if (usedColumnsFiltersOIData2D.add(colName)) {
+                    changed = true;
+
+                    ColumnMeta colMeta = oiData.getColumnDesc(colName);
+                    if (logger.isLoggable(Level.FINE)) {
+                        logger.log(Level.FINE, "colMeta: {0}", colMeta);
+                    }
+
+                    if (colMeta != null) {
+                        relatedColumnsFiltersOIData2D.add(colMeta.getName());
+                        if (colMeta.getDataColumnName() != null) {
+                            relatedColumnsFiltersOIData2D.add(colMeta.getDataColumnName());
+                        }
+                    } else {
+                        colMeta = oiData.getColumnDerivedDesc(usedFilter.getColumnName());
+                        if (logger.isLoggable(Level.FINE)) {
+                            logger.log(Level.FINE, "derived colMeta: {0}", colMeta);
+                        }
+
+                        if (colMeta instanceof WaveColumnMeta) {
+                            final WaveColumnMeta colMetaExpr = ((WaveColumnMeta) colMeta);
+
+                            if (colMetaExpr.hasRelatedColumnNames()) {
+                                final Set<String> relatedColumnNames = ((WaveColumnMeta) colMeta).getRelatedColumnNames();
+                                if (logger.isLoggable(Level.FINE)) {
+                                    logger.log(Level.FINE, "relatedColumnNames: {0}", relatedColumnNames);
+                                }
+
+                                for (String relatedColName : relatedColumnNames) {
+                                    // resolve column:
+                                    ColumnMeta colMetaRel = oiData.getColumnDesc(relatedColName);
+                                    if (colMetaRel != null) {
+                                        relatedColumnsFiltersOIData2D.add(colMetaRel.getName());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (logger.isLoggable(Level.FINE)) {
+                if (changed) {
+                    logger.log(Level.FINE, "usedColumnsFiltersOIData2D: {0}", usedColumnsFiltersOIData2D);
+                    logger.log(Level.FINE, "relatedColumnsFiltersOIData2D: {0}", relatedColumnsFiltersOIData2D);
+                }
+                logger.log(Level.FINE, "oidata filters: {0}", result.getFiltersUsed());
+                logger.log(Level.FINE, "mask2D: {0}", mask2D);
+            }
+            result.putDataMask2D(oiData, mask2D);
+        }
         result.addOIData(g, oiData);
     }
 
-    private IndexMask computeMask1D(final List<FitsTableFilter<?>> filters,
-                                    final FitsTable fitsTable,
+    private IndexMask computeMask1D(final FitsTable fitsTable,
+                                    final List<FitsTableFilter<?>> filters,
                                     final List<FitsTableFilter<?>> usedFilters) {
 
         logger.log(Level.FINE, "computeMask1D: filters = {0}", filters);
@@ -713,9 +808,9 @@ public final class OIFitsCollection implements ToStringable {
         final int nFilters = usedFilters.size();
         final int nRows = fitsTable.getNbRows();
 
-        // prepare 1D mask to indicate rows to keep in wavelength table:
+        // prepare 1D mask to indicate rows to keep in the table:
         final IndexMask maskRows = new IndexMask(nRows); // bits set to false by default
-        boolean filterRows = false;
+        boolean doFilter = false;
 
         // Iterate on table rows (i):
         for (int i = 0; i < nRows; i++) {
@@ -732,11 +827,11 @@ public final class OIFitsCollection implements ToStringable {
             if (match) {
                 maskRows.setAccept(i, true);
             } else {
-                // data row does not correspond to selected wavelength ranges 
-                filterRows = true;
+                // data (row) does not correspond to selected ranges: 
+                doFilter = true;
             }
         }
-        if (filterRows) {
+        if (doFilter) {
             final int nKeepRows = maskRows.cardinality();
 
             if (logger.isLoggable(Level.FINE)) {
@@ -751,8 +846,158 @@ public final class OIFitsCollection implements ToStringable {
                 // skip filter later in OIData:
                 return IndexMask.FULL;
             }
+            return maskRows;
         }
-        return maskRows;
+        // skip filter later in OIData:
+        return IndexMask.FULL;
+    }
+
+    private IndexMask computeMask2D(final OIData oiData,
+                                    final IndexMask maskRows, final IndexMask maskWavelength,
+                                    final List<FitsTableFilter<?>> filters,
+                                    final List<FitsTableFilter<?>> usedFilters) {
+
+        logger.log(Level.FINE, "computeMask2D: filters = {0}", filters);
+
+        FilterState chainState = FilterState.FULL;
+        usedFilters.clear();
+
+        // optimized loop:
+        for (int f = 0, len = filters.size(); f < len; f++) {
+            final FitsTableFilter<?> filter = filters.get(f);
+            // Prepare filter:
+            final FilterState state = filter.prepare(oiData);
+
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "{0} => {1}", new Object[]{filter, state});
+            }
+
+            if (state.ordinal() < chainState.ordinal()) {
+                // min:
+                chainState = state;
+
+                // shortcut if invalid found:
+                if (chainState == FilterState.INVALID) {
+                    logger.log(Level.FINE, "Skip {0}, not matching filters", oiData);
+                    // skip OIData (no match):
+                    return null;
+                }
+            }
+            if (state == FilterState.MASK) {
+                usedFilters.add(filter);
+            }
+        }
+
+        final int nWaves = oiData.getNWave();
+
+        if ((chainState == FilterState.FULL) || (nWaves == 0)) {
+            // missing column or no data, ignore filter:
+            return IndexMask.FULL;
+        }
+
+        // chainState is MASK:
+        final int nFilters = usedFilters.size();
+        final int nRows = oiData.getNbRows();
+
+        final int acceptedRows = (maskRows != null) ? maskRows.cardinality() : nRows;
+        final int acceptedWaves = (maskWavelength != null) ? maskWavelength.cardinality() : nWaves;
+
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "computeMask2D: acceptedRows = {0}", acceptedRows);
+            logger.log(Level.FINE, "computeMask2D: acceptedWaves = {0}", acceptedWaves);
+        }
+
+        // prepare 2D mask to indicate rows to keep in the table:
+        // each mask row has 2 more bits to encode NONE/FULL row:
+        final int nCols = nWaves + 2;
+        final IndexMask mask2D = new IndexMask(nRows, nCols); // bits set to false by default
+
+        final int idxNone = mask2D.getIndexNone();
+        final int idxFull = mask2D.getIndexFull();
+
+        boolean doFilter = false;
+        int nKeepCells = 0;
+
+        // Iterate on table rows (i):
+        for (int i = 0; i < nRows; i++) {
+
+            // check optional data mask 1D:
+            if ((maskRows != null) && !maskRows.accept(i)) {
+                // if bit is false for this row, we hide this row
+                continue;
+            }
+
+            int nKeepWaves = 0;
+
+            // Iterate on wave channels (l):
+            for (int l = 0; l < nWaves; l++) {
+
+                // check optional wavelength mask:
+                if ((maskWavelength != null) && !maskWavelength.accept(l)) {
+                    // if bit is false for this row, we hide this row
+                    continue;
+                }
+
+                boolean match = true;
+
+                for (int f = 0; f < nFilters; f++) {
+                    // Process filter:
+                    if (!usedFilters.get(f).accept(i, l)) {
+                        match = false;
+                        break;
+                    }
+                }
+                // update mask:
+                if (match) {
+                    nKeepWaves++;
+                    mask2D.setAccept(i, l, true);
+                } else {
+                    // data (row, col) does not correspond to selected ranges:
+                    doFilter = true;
+                }
+            } // wave channels
+
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "computeMask2D: nKeepWaves row[{0}] = {1}",
+                        new Object[]{i, nKeepWaves});
+            }
+
+            // set global flag on row:
+            if (nKeepWaves <= 0) {
+                // skip all Row (no remaining col):
+                mask2D.setAccept(i, idxNone, true);
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "computeMask2D: row[{0}] = NONE", i);
+                }
+            } else if (nKeepWaves == acceptedWaves) {
+                // keep all Row (all remaining col):
+                mask2D.setAccept(i, idxFull, true);
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.log(Level.FINE, "computeMask2D: row[{0}] = FULL", i);
+                }
+            }
+            nKeepCells += nKeepWaves;
+        } // rows
+
+        if (doFilter) {
+            final int allCells = acceptedRows * acceptedWaves;
+
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "computeMask2D: nKeepCells: {0} / {1}",
+                        new Object[]{nKeepCells, allCells});
+            }
+
+            if (nKeepCells <= 0) {
+                // skip OIData (no remaining row):
+                return null;
+            } else if (nKeepCells == allCells) {
+                // skip filter later in OIData:
+                return IndexMask.FULL;
+            }
+            return mask2D;
+        }
+        // skip filter later in OIData:
+        return IndexMask.FULL;
     }
 
     private List<Granule> findGranules(final Selector selector) {

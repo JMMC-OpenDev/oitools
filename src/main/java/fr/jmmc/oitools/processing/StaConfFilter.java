@@ -6,10 +6,8 @@ package fr.jmmc.oitools.processing;
 import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.model.OIData;
-import fr.jmmc.oitools.model.StaNamesDir;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -28,7 +26,7 @@ public final class StaConfFilter extends FitsTableFilter<String> {
     }
 
     @Override
-    void reset() {
+    protected void reset() {
         this.staIndexMatchings.clear();
         this.staConf = null;
     }

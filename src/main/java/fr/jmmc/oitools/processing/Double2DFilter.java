@@ -11,23 +11,28 @@ import java.util.Set;
 import java.util.logging.Level;
 
 /**
- * Generic numeric filter on double[] 1D arrays
+ * Generic numeric filter on double[][] 2D arrays
  * @author bourgesl
  */
-public final class Double1DFilter extends FitsTableFilter<Range> {
+public final class Double2DFilter extends FitsTableFilter<Range> {
 
     // members:
-    private double[] tableColumn1D = null;
+    private double[][] tableColumn2D = null;
     private final Set<Range> rangeMatchings = new HashSet<Range>();
 
-    public Double1DFilter(final String columnName, final List<Range> acceptedValues) {
+    public Double2DFilter(final String columnName, final List<Range> acceptedValues) {
         super(columnName, acceptedValues);
     }
 
     @Override
     protected void reset() {
-        this.tableColumn1D = null;
+        this.tableColumn2D = null;
         rangeMatchings.clear();
+    }
+
+    @Override
+    public boolean is2D() {
+        return true;
     }
 
     @Override
@@ -52,9 +57,9 @@ public final class Double1DFilter extends FitsTableFilter<Range> {
 
         if (!Range.matchFully(rangeMatchings, tableRange)) {
             // resolve column once
-            tableColumn1D = fitsTable.getColumnAsDouble(columnName);
+            tableColumn2D = fitsTable.getColumnAsDoubles(columnName);
 
-            if (tableColumn1D == null) {
+            if (tableColumn2D == null) {
                 // missing column, ignore filter:
                 return FilterState.FULL;
             }
@@ -64,7 +69,7 @@ public final class Double1DFilter extends FitsTableFilter<Range> {
     }
 
     public boolean accept(final int row, final int col) {
-        return Range.contains(rangeMatchings, tableColumn1D[row]);
+        return Range.contains(rangeMatchings, tableColumn2D[row][col]);
     }
 
 }

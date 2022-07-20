@@ -33,7 +33,7 @@ public abstract class FitsTableFilter<K> {
         this.acceptedValues = acceptedValues;
     }
 
-    void reset() {
+    protected void reset() {
         // no-op by default
     }
 

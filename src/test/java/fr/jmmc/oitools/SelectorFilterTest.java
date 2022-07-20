@@ -121,7 +121,7 @@ public class SelectorFilterTest extends JUnitBaseTest {
             final IndexMask mask = selectorResult.getWavelengthMask(oiData.getOiWavelength());
             // logger.info("mask: \n" + mask);
 
-            Assert.assertTrue(mask.isFull());
+            Assert.assertTrue(IndexMask.isFull(mask));
         }
     }
 }

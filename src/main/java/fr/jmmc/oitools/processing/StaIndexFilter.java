@@ -30,7 +30,7 @@ public final class StaIndexFilter extends FitsTableFilter<String> {
     }
 
     @Override
-    void reset() {
+    protected void reset() {
         this.staIndexMatchings.clear();
         this.staIndexes = null;
     }

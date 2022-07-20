@@ -27,7 +27,7 @@ public final class TargetUIDFilter extends FitsTableFilter<String> {
     }
 
     @Override
-    void reset() {
+    protected void reset() {
         this.tm = null;
         this.targetIdMatcher = null;
         this.targetIds = null;

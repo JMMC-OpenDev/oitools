@@ -96,6 +96,7 @@ public final class DataModel {
 
     public static DataModel getInstance(final Collection<OIData> oiDatas) {
         if (oiDatas == null || oiDatas.isEmpty()) {
+            // logger.log(Level.SEVERE, "getInstance: using default :", new Throwable());
             return getInstance();
         }
         return new DataModel(oiDatas, false);
@@ -429,6 +430,9 @@ public final class DataModel {
         if (column.getErrorColumnName() != null) {
             sb.append("    <errorcolumn>").append(column.getErrorColumnName()).append("</errorcolumn>\n");
         }
+        if (column.getDataColumnName() != null) {
+            sb.append("    <datacolumn>").append(column.getDataColumnName()).append("</datacolumn>\n");
+        }
         if (column.getDataRange() != null) {
             sb.append("    <datarange>\n");
             final DataRange range = column.getDataRange();
@@ -597,9 +601,11 @@ public final class DataModel {
     }
 
     private void reset() {
+        allColumnNames = null;
         allNumColumnNames = null;
         allNumColumnNames1D = null;
         allNumColumnNames2D = null;
+        allOtherColumnNames = null;
     }
 
     public void refresh() {
@@ -712,9 +718,14 @@ public final class DataModel {
     private static void getAllNumericalColumnNames(final Collection<OIData> oiDatas, final String extName,
                                                    final boolean all, final boolean is2D,
                                                    final Set<String> columnNames) {
+
+        final ArrayList<ColumnMeta> columnsDescCollection = new ArrayList<ColumnMeta>();
+
         for (final OIData oiData : oiDatas) {
             if (extName.equals(oiData.getExtName())) {
-                for (final ColumnMeta colMeta : oiData.getNumericalColumnsDescs()) {
+                columnsDescCollection.clear();
+
+                for (final ColumnMeta colMeta : oiData.getNumericalColumnsDescs(columnsDescCollection)) {
                     if (colMeta != null) {
                         if (colMeta instanceof WaveColumnMeta) {
                             if (all || is2D) {
@@ -733,9 +744,14 @@ public final class DataModel {
 
     private static void getOtherColumnNames(final Collection<OIData> oiDatas, final String extName,
                                             final Set<String> columnNames) {
+
+        final ArrayList<ColumnMeta> columnsDescCollection = new ArrayList<ColumnMeta>();
+
         for (final OIData oiData : oiDatas) {
             if (extName.equals(oiData.getExtName())) {
-                for (final ColumnMeta meta : oiData.getOtherColumnsDescs()) {
+                columnsDescCollection.clear();
+
+                for (final ColumnMeta meta : oiData.getOtherColumnsDescs(columnsDescCollection)) {
                     if (meta != null) {
                         if (logger.isLoggable(Level.FINE)) {
                             logger.log(Level.FINE, "Column[{0}] type = {1}",
@@ -772,7 +788,7 @@ public final class DataModel {
             final boolean isNumeric2D = dm.isNumericalColumn2D(name);
             final boolean isOther = dm.isOtherColumn(name);
 
-            logger.log(Level.WARNING, "column[{0}] : isNumeric={1} isNumeric1D={2} isNumeric2D={3} isOther={4}",
+            logger.log(Level.WARNING, "column[{0}]:\tisNumeric={1}\tisNumeric1D={2}\tisNumeric2D={3}\tisOther={4}",
                     new Object[]{name, isNumeric, isNumeric1D, isNumeric2D, isOther});
         }
     }

@@ -17,6 +17,7 @@
 package fr.jmmc.oitools;
 
 import fr.jmmc.oitools.fits.FitsUtils;
+import fr.jmmc.oitools.model.DataModel;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIFitsFile;
@@ -29,14 +30,18 @@ import fr.jmmc.oitools.processing.Selector;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
  * @author jammetv
  */
 public class OIFitsProcessor extends OIFitsCommand {
+
+    private static final StringBuilder sbTmp = new StringBuilder(32);
 
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_LIST = "list";
@@ -47,13 +52,21 @@ public class OIFitsProcessor extends OIFitsCommand {
 
     private static final String OPTION_MATCH_SEP = "-separation";
     private static final String OPTION_OUTPUT = "-output";
-    /* filter options */
+    /* filter options (former arguments) */
     private static final String OPTION_TARGET = "-target";
     private static final String OPTION_INSNAME = "-insname";
     private static final String OPTION_NIGHT = "-night";
     private static final String OPTION_MJD_RANGES = "-mjds";
     private static final String OPTION_BASELINES = "-baselines";
     private static final String OPTION_WL_RANGES = "-wavelengths";
+    /* filter options (new arguments 22.07) */
+    private static final String OPTION_TARGET_ID = appendColumnArg(Selector.FILTER_TARGET_ID);
+    private static final String OPTION_NIGHT_ID = appendColumnArg(Selector.FILTER_NIGHT_ID);
+    private static final String OPTION_MJD = appendColumnArg(Selector.FILTER_MJD);
+    private static final String OPTION_STAINDEX = appendColumnArg(Selector.FILTER_STAINDEX);
+    private static final String OPTION_STACONF = appendColumnArg(Selector.FILTER_STACONF);
+    private static final String OPTION_EFFWAVE = appendColumnArg(Selector.FILTER_EFFWAVE);
+    private static final String OPTION_EFFBAND = appendColumnArg(Selector.FILTER_EFFBAND);
 
     /**
      * Main entry point.
@@ -67,7 +80,7 @@ public class OIFitsProcessor extends OIFitsCommand {
                 return;
             }
 
-            final boolean quiet = !hasOptionArg(args, "-l", "-log");
+            final boolean quiet = !hasOptionArg(args, "-l", "-log") && !hasOptionArg(args, "-v", "-verbose");;
             bootstrap(quiet);
 
             final String command = args[0];
@@ -208,21 +221,22 @@ public class OIFitsProcessor extends OIFitsCommand {
      */
     private static void merge(final String[] args) throws FitsException, IOException {
         final List<String> fileLocations = getInputFiles(args);
+        // info("fileLocations: " + fileLocations);
+
         final String outputFilePath = getOutputFilepath(args);
+        // info("outputFilePath: " + outputFilePath);
+
         final boolean check = hasOptionArg(args, "-c", "-check");
 
         handleArgSeparation(args);
-
-        final OIFitsCollection oiFitsCollection = OIFitsCollection.create(null, fileLocations);
 
         final Selector selector = new Selector();
 
         if (hasOptionArg(args, OPTION_TARGET)) {
             selector.setTargetUID(getOptionArgValue(args, OPTION_TARGET));
         } else {
-            final String arg = "-" + Selector.FILTER_TARGET_ID.toLowerCase();
-            if (hasOptionArg(args, arg)) {
-                selector.setTargetUID(getOptionArgValue(args, arg));
+            if (hasOptionArg(args, OPTION_TARGET_ID)) {
+                selector.setTargetUID(getOptionArgValue(args, OPTION_TARGET_ID));
             }
         }
         if (hasOptionArg(args, OPTION_INSNAME)) {
@@ -231,49 +245,60 @@ public class OIFitsProcessor extends OIFitsCommand {
         if (hasOptionArg(args, OPTION_NIGHT)) {
             selector.setNightID(Integer.valueOf(getOptionArgValue(args, OPTION_NIGHT)));
         } else {
-            final String arg = "-" + Selector.FILTER_NIGHT_ID.toLowerCase();
-            if (hasOptionArg(args, arg)) {
-                selector.setNightID(Integer.valueOf(getOptionArgValue(args, arg)));
+            if (hasOptionArg(args, OPTION_NIGHT_ID)) {
+                selector.setNightID(Integer.valueOf(getOptionArgValue(args, OPTION_NIGHT_ID)));
             }
         }
         if (hasOptionArg(args, OPTION_MJD_RANGES)) {
-            selector.addFilter(Selector.FILTER_MJD, parseRanges(getOptionArgValue(args, OPTION_MJD_RANGES)));
+            addFilter(selector, Selector.FILTER_MJD, parseRanges(getOptionArgValue(args, OPTION_MJD_RANGES)));
         } else {
-            final String arg = "-" + Selector.FILTER_MJD.toLowerCase();
-            if (hasOptionArg(args, arg)) {
-                selector.addFilter(Selector.FILTER_MJD, parseRanges(arg));
+            if (hasOptionArg(args, OPTION_MJD)) {
+                addFilter(selector, Selector.FILTER_MJD, parseRanges(getOptionArgValue(args, OPTION_MJD)));
             }
         }
         if (hasOptionArg(args, OPTION_BASELINES)) {
-            selector.addFilter(Selector.FILTER_STAINDEX, parseStrings(getOptionArgValue(args, OPTION_BASELINES)));
+            addFilter(selector, Selector.FILTER_STAINDEX, parseStrings(getOptionArgValue(args, OPTION_BASELINES)));
         } else {
-            final String arg = "-" + Selector.FILTER_STAINDEX.toLowerCase();
-            if (hasOptionArg(args, arg)) {
-                selector.addFilter(Selector.FILTER_STAINDEX, parseStrings(getOptionArgValue(args, arg)));
+            if (hasOptionArg(args, OPTION_STAINDEX)) {
+                addFilter(selector, Selector.FILTER_STAINDEX, parseStrings(getOptionArgValue(args, OPTION_STAINDEX)));
             }
         }
         {
-            final String arg = "-" + Selector.FILTER_STACONF.toLowerCase();
-            if (hasOptionArg(args, arg)) {
-                selector.addFilter(Selector.FILTER_STACONF, parseStrings(getOptionArgValue(args, arg)));
+            if (hasOptionArg(args, OPTION_STACONF)) {
+                addFilter(selector, Selector.FILTER_STACONF, parseStrings(getOptionArgValue(args, OPTION_STACONF)));
             }
         }
         if (hasOptionArg(args, OPTION_WL_RANGES)) {
-            selector.addFilter(Selector.FILTER_EFFWAVE, parseRanges(getOptionArgValue(args, OPTION_WL_RANGES)));
+            addFilter(selector, Selector.FILTER_EFFWAVE, parseRanges(getOptionArgValue(args, OPTION_WL_RANGES)));
         } else {
-            final String arg = "-" + Selector.FILTER_EFFWAVE.toLowerCase();
-            if (hasOptionArg(args, arg)) {
-                selector.addFilter(Selector.FILTER_EFFWAVE, parseRanges(getOptionArgValue(args, arg)));
+            if (hasOptionArg(args, OPTION_EFFWAVE)) {
+                addFilter(selector, Selector.FILTER_EFFWAVE, parseRanges(getOptionArgValue(args, OPTION_EFFWAVE)));
             }
         }
         {
-            final String arg = "-" + Selector.FILTER_EFFBAND.toLowerCase();
-            if (hasOptionArg(args, arg)) {
-                selector.addFilter(Selector.FILTER_EFFBAND, parseRanges(getOptionArgValue(args, arg)));
+            if (hasOptionArg(args, OPTION_EFFBAND)) {
+                addFilter(selector, Selector.FILTER_EFFBAND, parseRanges(getOptionArgValue(args, OPTION_EFFBAND)));
             }
         }
 
-        // TODO: handle extra arguments from OIFITS2 data model
+        // collect extra arguments from OIFITS2 data model:
+        for (String colName : DataModel.getInstance().getNumericalColumnNames()) {
+            if (!Selector.isCustomFilter(colName)) {
+
+                final String arg = appendColumnArg(colName);
+                if (hasOptionArg(args, arg)) {
+                    addFilter(selector, colName, parseRanges(getOptionArgValue(args, arg)));
+                }
+            }
+        }
+
+        if (!selector.isEmpty()) {
+            info("Filters: " + selector);
+        }
+
+        // Load files:
+        final OIFitsCollection oiFitsCollection = OIFitsCollection.create(null, fileLocations);
+
         // Call merge
         final OIFitsFile result = Merger.process(oiFitsCollection, selector);
 
@@ -307,7 +332,8 @@ public class OIFitsProcessor extends OIFitsCommand {
         String outputFilePath = null;
 
         for (int i = 1; i < args.length; i++) {
-            if (OPTION_OUTPUT.substring(0, 2).equals(args[i]) || OPTION_OUTPUT.equals(args[i])) {
+            if (OPTION_OUTPUT.substring(0, 2).equals(args[i])
+                    || OPTION_OUTPUT.equals(args[i])) {
                 outputFilePath = (++i < args.length) ? args[i] : null;
                 break;
             }
@@ -327,23 +353,50 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static List<String> getInputFiles(String[] args) {
         final List<String> fileLocations = new ArrayList<String>();
 
+        // collect extra arguments from OIFITS2 data model:
+        final Set<String> columnArgs = new HashSet<>(64);
+
+        for (final String colName : DataModel.getInstance().getNumericalColumnNames()) {
+            if (!Selector.isCustomFilter(colName)) {
+                columnArgs.add(appendColumnArg(colName));
+            }
+        }
+
         for (int i = 1; i < args.length; i++) {
             // note: should be generalized to any argument having value(s):
-            if (OPTION_OUTPUT.substring(0, 2).equals(args[i])
-                    || OPTION_MATCH_SEP.equals(args[i])
+            if (OPTION_MATCH_SEP.equals(args[i])
+                    || OPTION_OUTPUT.substring(0, 2).equals(args[i])
                     || OPTION_OUTPUT.equals(args[i])
                     || OPTION_TARGET.equals(args[i])
+                    || OPTION_TARGET_ID.equals(args[i])
                     || OPTION_INSNAME.equals(args[i])
                     || OPTION_NIGHT.equals(args[i])
+                    || OPTION_NIGHT_ID.equals(args[i])
                     || OPTION_BASELINES.equals(args[i])
+                    || OPTION_STAINDEX.equals(args[i])
+                    || OPTION_STACONF.equals(args[i])
                     || OPTION_MJD_RANGES.equals(args[i])
-                    || OPTION_WL_RANGES.equals(args[i])) {
-                i++;  // skip next parameter which is the output file
-            } else if (args[i].startsWith("-")) {
-                // ignore short options
-            } else {
-                fileLocations.add(args[i]);
+                    || OPTION_WL_RANGES.equals(args[i])
+                    || OPTION_EFFWAVE.equals(args[i])
+                    || OPTION_EFFBAND.equals(args[i])) {
+                // System.out.println("skip: [" + args[i] + "]");
+                i++;  // skip this and next parameter which is the argument value
+                // System.out.println("skip too: [" + args[i] + "]");
+                continue;
             }
+            if (columnArgs.contains(args[i])) {
+                // System.out.println("skip col: [" + args[i] + "]");
+                i++;  // skip this and next parameter which is the argument value
+                // System.out.println("skip too: [" + args[i] + "]");
+                continue;
+            }
+            if (args[i].startsWith("-")) {
+                // ignore short options (no argument value)
+                // System.out.println("ignore: '" + args[i] + "'");
+                continue;
+            }
+
+            fileLocations.add(args[i]);
         }
 
         if (fileLocations.isEmpty()) {
@@ -369,21 +422,37 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("| command      " + COMMAND_MERGE + "          Merge several oifits files                             |");
         info("|------------------------------------------------------------------------------------|");
         info("| [-l] or [-log]              Enable logging (quiet by default)                      |");
+        info("| [-v] or [-verbose]          Enable logging (quiet by default)                      |");
         info("| [-c] or [-check]            Check output file before writing                       |");
         info("| [-separation] <value>       Separation in arcsec for the target matcher            |");
         info("| [-o] or [-output] <file_path> Complete path, absolute or relative, for output file |");
+        info("--------------------------------------------------------------------------------------");
+        info("| Filter options available to the command " + COMMAND_MERGE + ":                     |");
         info("| [-target] <value>           Filter result on given Target                          |");
         info("| [-insname] <value>          Filter result on given InsName                         |");
         info("| [-night] <value>            Filter result on given Night (integer)                 |");
         info("| [-baselines] <values>       Filter result on given Baselines or Triplets (comma-separated) |");
         info("| [-mjds] <values>            Filter result on given MJD ranges (comma-separated pairs) |");
         info("| [-wavelengths] <values>     Filter result on given wavelength ranges (comma-separated pairs) |");
+        info("|                                                                                    |");
+        info("| Following columns may be available (OIFITS2 standard):                             |");
 
-        // TODO: dump extra arguments from OIFITS2 data model
+        // dump extra arguments from OIFITS2 data model:
+        for (String specialName : Selector.SPECIAL_COLUMN_NAMES) {
+            info("| [" + appendColumnArg(specialName) + "] <values>     Filter result on given column values (comma-separated) |");
+        }
+
+        for (String colName : DataModel.getInstance().getNumericalColumnNames()) {
+            info("| [" + appendColumnArg(colName) + "] <values>     Filter result on given column ranges (comma-separated pairs) |");
+        }
+
         info("--------------------------------------------------------------------------------------");
     }
 
     public static List<String> parseStrings(final String input) {
+        if (input == null) {
+            return null;
+        }
         final String[] values = input.split(",");
 
         final List<String> baselineList = new ArrayList<String>(values.length);
@@ -408,6 +477,9 @@ public class OIFitsProcessor extends OIFitsCommand {
     }
 
     public static List<Range> parseRanges(final String input) {
+        if (input == null) {
+            return null;
+        }
         final String[] values = input.split(",");
 
         if ((values.length % 2) == 1) {
@@ -445,50 +517,67 @@ public class OIFitsProcessor extends OIFitsCommand {
     public static String generateCLIargs(final Selector selector) {
         if (selector != null) {
             final StringBuilder sb = new StringBuilder(128);
+            sb.append("CLI args: ");
 
             if (selector.getTargetUID() != null) {
-                sb.append("-").append(Selector.FILTER_TARGET_ID.toLowerCase()).append(" ").append(selector.getTargetUID()).append(" ");
+                appendColumnArg(sb, Selector.FILTER_TARGET_ID).append(" ").append(selector.getTargetUID()).append(" ");
             }
             if (selector.getInsModeUID() != null) {
                 sb.append(OIFitsProcessor.OPTION_INSNAME).append(" ").append(selector.getInsModeUID()).append(" ");
             }
             if (selector.getNightID() != null) {
-                sb.append("-").append(Selector.FILTER_NIGHT_ID.toLowerCase()).append(" ").append(selector.getNightID()).append(" ");
+                appendColumnArg(sb, Selector.FILTER_NIGHT_ID).append(" ").append(selector.getNightID()).append(" ");
             }
             /* no way to define selector.tables via CLI */
 
             if (selector.hasFilter(Selector.FILTER_MJD)) {
-                sb.append("-").append(Selector.FILTER_MJD.toLowerCase()).append(" ");
+                appendColumnArg(sb, Selector.FILTER_MJD).append(" ");
                 dumpRanges(selector.getFilter(Selector.FILTER_MJD), sb).append(" ");
             }
 
             if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
-                sb.append("-").append(Selector.FILTER_STAINDEX.toLowerCase()).append(" ");
+                appendColumnArg(sb, Selector.FILTER_STAINDEX).append(" ");
                 dumpStrings(selector.getFilter(Selector.FILTER_STAINDEX), sb).append(" ");
             }
             if (selector.hasFilter(Selector.FILTER_STACONF)) {
-                sb.append("-").append(Selector.FILTER_STACONF.toLowerCase()).append(" ");
+                appendColumnArg(sb, Selector.FILTER_STACONF).append(" ");
                 dumpStrings(selector.getFilter(Selector.FILTER_STACONF), sb).append(" ");
             }
 
             if (selector.hasFilter(Selector.FILTER_EFFWAVE)) {
-                sb.append("-").append(Selector.FILTER_EFFWAVE.toLowerCase()).append(" ");
+                appendColumnArg(sb, Selector.FILTER_EFFWAVE).append(" ");
                 dumpRanges(selector.getFilter(Selector.FILTER_EFFWAVE), sb).append(" ");
             }
             if (selector.hasFilter(Selector.FILTER_EFFBAND)) {
-                sb.append("-").append(Selector.FILTER_EFFBAND.toLowerCase()).append(" ");
+                appendColumnArg(sb, Selector.FILTER_EFFBAND).append(" ");
                 dumpRanges(selector.getFilter(Selector.FILTER_EFFBAND), sb).append(" ");
             }
 
-            // convert generic filters from selector.filters (1D)
+            // convert generic filters from selector.filters:
             for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
                 if (!Selector.isCustomFilter(e.getKey())) {
-                    sb.append("-").append(e.getKey().toLowerCase()).append(" ");
+                    appendColumnArg(sb, e.getKey()).append(" ");
                     dumpRanges((List<Range>) e.getValue(), sb).append(" ");
                 }
             }
             return sb.toString();
         }
         return "";
+    }
+
+    private static String appendColumnArg(final String colName) {
+        sbTmp.setLength(0);
+        return appendColumnArg(sbTmp, colName).toString();
+    }
+
+    private static StringBuilder appendColumnArg(final StringBuilder sb, final String colName) {
+        sb.append('-').append(colName.toLowerCase());
+        return sb; // fluent API
+    }
+
+    private static void addFilter(final Selector selector, final String colName, final List<?> values) {
+        if (values != null) {
+            selector.addFilter(colName, values);
+        }
     }
 }
