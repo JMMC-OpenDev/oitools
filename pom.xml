@@ -52,14 +52,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </dependency>
 
         <dependency>
-            <groupId>org.python</groupId>
-            <artifactId>jython</artifactId>
-            <version>2.7.0</version>
-            <!-- disabled (too large ~ 30Mb) -->
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.gnu.jel</groupId>
             <artifactId>JEL</artifactId>
             <version>2.1.2</version>

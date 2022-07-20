@@ -30,8 +30,6 @@ public abstract class ExpressionEvaluator {
 
     /** logger */
     private final static Logger _logger = Logger.getLogger(ExpressionEvaluator.class.getName());
-    /** flag enabling Jython 2.7 support (false by default as this library is too heavy)  */
-    private final static boolean ENABLE_JYTHON_SUPPORT = false;
 
     /** Factory instance */
     private static ExpressionEvaluator instance = null;
@@ -46,29 +44,15 @@ public abstract class ExpressionEvaluator {
         if (instance == null) {
             // create an ExpressionEvaluator instance:
             ExpressionEvaluator eval = null;
-            if (ENABLE_JYTHON_SUPPORT) {
-                try {
-                    _logger.fine("new JythonEval");
-                    eval = new JythonEval();
-                } catch (NoClassDefFoundError cnfe) {
-                    _logger.info("JythonEval can not load Jython library.");
-                } catch (Throwable th) {
-                    _logger.log(Level.SEVERE, "JythonEval creation failure:", th);
-                }
+            try {
+                _logger.fine("new JELEval");
+                eval = new JELEval();
+            } catch (Throwable th) {
+                _logger.log(Level.SEVERE, "JELEval creation failure:", th);
             }
-            if (eval == null) {
-                try {
-                    _logger.fine("new JELEval");
-                    eval = new JELEval();
-                } catch (Throwable th) {
-                    _logger.log(Level.SEVERE, "JELEval creation failure:", th);
-                }
-            }
-
             if (eval == null) {
                 throw new IllegalStateException("unable to create an ExpressionEvaluator !");
             }
-
             instance = eval;
         }
         return instance;
