@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.util;
 
 import fr.jmmc.jmcs.network.NetworkSettings;
+import fr.jmmc.jmcs.util.StringUtils;
 import fr.nom.tam.fits.FitsUtil;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -87,7 +88,7 @@ public final class FileUtils {
         final InputStream in = FitsUtil.getURLStream(url, 0);
 
         /* Generating temporary file relative to input parameter */
-        final File outFile = File.createTempFile(new File(url.getFile()).getName(), null);
+        final File outFile = File.createTempFile(cleanupFileName(new File(url.getFile()).getName()), null);
 
         final String absFilePath = outFile.getCanonicalPath();
 
@@ -260,5 +261,25 @@ public final class FileUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * Remove accents from characters and replace wild chars with '_'.
+     * @param fileName the string to clean up
+     * @return cleaned up file name
+     */
+    public static String cleanupFileName(final String fileName) {
+        // Remove accent from characters (if any) (Java 1.6)
+        final String removed = StringUtils.removeAccents(fileName);
+
+        // Replace wild characters with '_'
+        final String cleaned = StringUtils.replaceNonFileNameCharsByUnderscore(removed);
+
+        if (logger.isLoggable(Level.FINE) && !cleaned.equals(fileName)) {
+            logger.log(Level.FINE, "Had to clean up file name (was '{0}', became '{1}').",
+                    new Object[]{fileName, cleaned});
+        }
+
+        return cleaned;
     }
 }
