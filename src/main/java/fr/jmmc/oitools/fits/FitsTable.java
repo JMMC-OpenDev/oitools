@@ -26,6 +26,7 @@ import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
 import fr.jmmc.oitools.meta.WaveColumnMeta;
 import fr.jmmc.oitools.model.ModelVisitor;
+import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsChecker;
 import fr.jmmc.oitools.model.OITable;
 import fr.jmmc.oitools.model.Rule;
@@ -1144,9 +1145,8 @@ public abstract class FitsTable extends FitsHDU {
                             if (sValues == null) {
                                 break;
                             }
-                            short[] sRowValues;
                             for (int i = 0, len = sValues.length; i < len; i++) {
-                                sRowValues = sValues[i];
+                                final short[] sRowValues = sValues[i];
                                 for (int j = 0, jlen = sRowValues.length; j < jlen; j++) {
                                     if (sRowValues[j] < sMin) {
                                         sMin = sRowValues[j];
@@ -1182,9 +1182,8 @@ public abstract class FitsTable extends FitsHDU {
                             if (iValues == null) {
                                 break;
                             }
-                            int[] iRowValues;
                             for (int i = 0, len = iValues.length; i < len; i++) {
-                                iRowValues = iValues[i];
+                                final int[] iRowValues = iValues[i];
                                 for (int j = 0, jlen = iRowValues.length; j < jlen; j++) {
                                     if (iRowValues[j] < iMin) {
                                         iMin = iRowValues[j];
@@ -1220,15 +1219,21 @@ public abstract class FitsTable extends FitsHDU {
                             if (dValues == null) {
                                 break;
                             }
-                            double[] dRowValues;
+                            // use column flag if present (OIData tables):
+                            final boolean[][] flags = (this instanceof OIData) ? ((OIData)this).getFlag(): null;
+                            
                             for (int i = 0, len = dValues.length; i < len; i++) {
-                                dRowValues = dValues[i];
+                                final double[] dRowValues = dValues[i];
+                                final boolean[] rowFlags = (flags != null) ? flags[i] : null;
+                                
                                 for (int j = 0, jlen = dRowValues.length; j < jlen; j++) {
-                                    if (dRowValues[j] < dMin) {
-                                        dMin = dRowValues[j];
-                                    }
-                                    if (dRowValues[j] > dMax) {
-                                        dMax = dRowValues[j];
+                                    if ((rowFlags == null) || !rowFlags[j]) {
+                                        if (dRowValues[j] < dMin) {
+                                            dMin = dRowValues[j];
+                                        }
+                                        if (dRowValues[j] > dMax) {
+                                            dMax = dRowValues[j];
+                                        }
                                     }
                                 }
                             }
@@ -1371,7 +1376,9 @@ public abstract class FitsTable extends FitsHDU {
                 if (!column.isOptional()) {
                     /* No column with columnName name */
                     // rule [GENERIC_COL_MANDATORY] check if the required column is present
-                    checker.ruleFailed(Rule.GENERIC_COL_MANDATORY, this, columnName);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.GENERIC_COL_MANDATORY, this, columnName);
+                    }
                 }
             }
             if ((value == null) && OIFitsChecker.isInspectRules()) {
