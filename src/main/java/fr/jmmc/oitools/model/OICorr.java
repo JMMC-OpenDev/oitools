@@ -176,7 +176,9 @@ public final class OICorr extends OITable {
 
         // rule [OI_CORR_CORRNAME] check the CORRNAME keyword has a not null or empty value
         if (((getCorrName() != null) && (getCorrName().length() == 0)) || OIFitsChecker.isInspectRules()) {
-            checker.ruleFailed(Rule.OI_CORR_CORRNAME, this, OIFitsConstants.KEYWORD_CORRNAME);
+            if (checker != null) {
+                checker.ruleFailed(Rule.OI_CORR_CORRNAME, this, OIFitsConstants.KEYWORD_CORRNAME);
+            }
         }
         final int nRows = getNbRows();
 
@@ -192,18 +194,26 @@ public final class OICorr extends OITable {
 
             // rule [OI_CORR_IINDEX_MIN] check if the IINDEX values >= 1 (JINDEX >= 2)
             if ((idxI < 1) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.OI_CORR_IINDEX_MIN, this, OIFitsConstants.COLUMN_IINDX).addValueAt(idxI, i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_CORR_IINDEX_MIN, this, OIFitsConstants.COLUMN_IINDX).addValueAt(idxI, i);
+                }
             }
             // rule [OI_CORR_JINDEX_SUP] check if the JINDEX values > IINDEX values
             if ((idxJ <= idxI) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.OI_CORR_JINDEX_SUP, this, OIFitsConstants.COLUMN_JINDX).addValuesAt(idxJ, idxI, i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_CORR_JINDEX_SUP, this, OIFitsConstants.COLUMN_JINDX).addValuesAt(idxJ, idxI, i);
+                }
             }
             // rule [OI_CORR_IJINDEX_MAX] check if the IINDEX values <= NDATA and JINDEX values <= NDATA
             if ((idxI > ndata) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.OI_CORR_IJINDEX_MAX, this, OIFitsConstants.COLUMN_IINDX).addValuesAt(idxI, ndata, i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_CORR_IJINDEX_MAX, this, OIFitsConstants.COLUMN_IINDX).addValuesAt(idxI, ndata, i);
+                }
             }
             if ((idxJ > ndata) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.OI_CORR_IJINDEX_MAX, this, OIFitsConstants.COLUMN_JINDX).addValuesAt(idxJ, ndata, i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_CORR_IJINDEX_MAX, this, OIFitsConstants.COLUMN_JINDX).addValuesAt(idxJ, ndata, i);
+                }
             }
         }
 

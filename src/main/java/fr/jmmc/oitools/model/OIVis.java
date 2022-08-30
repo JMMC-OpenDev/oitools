@@ -621,16 +621,24 @@ public final class OIVis extends OIData {
 
                 // column is defined
                 if (corrindx_visAmp != null) {
-                    checker.ruleFailed(Rule.OI_VIS_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_VISAMP);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OI_VIS_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_VISAMP);
+                    }
                 }
                 if (corrindx_visPhi != null) {
-                    checker.ruleFailed(Rule.OI_VIS_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_VISPHI);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OI_VIS_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_VISPHI);
+                    }
                 }
                 if (corrindx_visRvis != null) {
-                    checker.ruleFailed(Rule.OI_VIS_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_RVIS);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OI_VIS_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_RVIS);
+                    }
                 }
                 if (corrindx_visIvis != null) {
-                    checker.ruleFailed(Rule.OI_VIS_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_IVIS);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OI_VIS_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_IVIS);
+                    }
                 }
             }
             if ((oiCorr != null) || OIFitsChecker.isInspectRules()) {

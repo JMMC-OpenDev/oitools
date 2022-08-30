@@ -742,7 +742,9 @@ public abstract class FitsHDU extends ModelBase {
             if ((value == null) || OIFitsChecker.isInspectRules()) {
                 if (!keyword.isOptional()) {
                     // rule [GENERIC_KEYWORD_MANDATORY]
-                    checker.ruleFailed(Rule.GENERIC_KEYWORD_MANDATORY, this, keywordName);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.GENERIC_KEYWORD_MANDATORY, this, keywordName);
+                    }
                 }
             }
             if ((value != null) || OIFitsChecker.isInspectRules()) {
@@ -768,7 +770,9 @@ public abstract class FitsHDU extends ModelBase {
     public void checkKeywordFormat(final OIFitsChecker checker, final FitsHDU hduFits, final KeywordMeta keyword, final Types kDataType) {
         if ((kDataType != keyword.getDataType()) || OIFitsChecker.isInspectRules()) {
             // rule [GENERIC_KEYWORD_FORMAT] check if the keyword format matches the expected format (data type)
-            checker.ruleFailed(Rule.GENERIC_KEYWORD_FORMAT, hduFits, keyword.getName()).addKeywordValue(kDataType.getRepresentation(), keyword.getType());
+            if (checker != null) {
+                checker.ruleFailed(Rule.GENERIC_KEYWORD_FORMAT, hduFits, keyword.getName()).addKeywordValue(kDataType.getRepresentation(), keyword.getType());
+            }
         }
     }
 
@@ -782,7 +786,9 @@ public abstract class FitsHDU extends ModelBase {
         // rule [GENERIC_MJD_RANGE] check if the MJD value is within 'normal' range (1933 - 2150)
         // mjd can be NaN and then is not checked:
         if (((mjd < MJD_1933) || (mjd > MJD_2150)) || OIFitsChecker.isInspectRules()) {
-            checker.ruleFailed(Rule.GENERIC_MJD_RANGE, this, name).addKeywordValue(mjd, MJD_1933 + " - " + MJD_2150);
+            if (checker != null) {
+                checker.ruleFailed(Rule.GENERIC_MJD_RANGE, this, name).addKeywordValue(mjd, MJD_1933 + " - " + MJD_2150);
+            }
         }
     }
 
@@ -817,7 +823,9 @@ public abstract class FitsHDU extends ModelBase {
 
             if (!valid || OIFitsChecker.isInspectRules()) {
                 // rule [GENERIC_DATE_OBS_STANDARD] check if the DATE_OBS keyword is in the format 'YYYY-MM-DD'
-                checker.ruleFailed(Rule.GENERIC_DATE_OBS_STANDARD, hdu, OIFitsConstants.KEYWORD_DATE_OBS).addKeywordValue(dateObs);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.GENERIC_DATE_OBS_STANDARD, hdu, OIFitsConstants.KEYWORD_DATE_OBS).addKeywordValue(dateObs);
+                }
             }
             if (valid || OIFitsChecker.isInspectRules()) {
                 final Calendar cal = sdf.getCalendar();
@@ -825,7 +833,9 @@ public abstract class FitsHDU extends ModelBase {
 
                 if (((year < YEAR_MIN) || (year > YEAR_MAX)) || OIFitsChecker.isInspectRules()) {
                     // rule [GENERIC_DATE_OBS_RANGE] check if the DATE_OBS value is within 'normal' range (1933 - 2150)
-                    checker.ruleFailed(Rule.GENERIC_DATE_OBS_RANGE, hdu, OIFitsConstants.KEYWORD_DATE_OBS).addKeywordValue(dateObs, ("" + YEAR_MIN + " - " + YEAR_MAX));
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.GENERIC_DATE_OBS_RANGE, hdu, OIFitsConstants.KEYWORD_DATE_OBS).addKeywordValue(dateObs, ("" + YEAR_MIN + " - " + YEAR_MAX));
+                    }
                 }
             }
         }

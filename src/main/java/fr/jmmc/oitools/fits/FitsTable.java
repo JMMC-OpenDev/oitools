@@ -1220,12 +1220,12 @@ public abstract class FitsTable extends FitsHDU {
                                 break;
                             }
                             // use column flag if present (OIData tables):
-                            final boolean[][] flags = (this instanceof OIData) ? ((OIData)this).getFlag(): null;
-                            
+                            final boolean[][] flags = (this instanceof OIData) ? ((OIData) this).getFlag() : null;
+
                             for (int i = 0, len = dValues.length; i < len; i++) {
                                 final double[] dRowValues = dValues[i];
                                 final boolean[] rowFlags = (flags != null) ? flags[i] : null;
-                                
+
                                 for (int j = 0, jlen = dRowValues.length; j < jlen; j++) {
                                     if ((rowFlags == null) || !rowFlags[j]) {
                                         if (dRowValues[j] < dMin) {
@@ -1402,13 +1402,15 @@ public abstract class FitsTable extends FitsHDU {
      * @return column definition or null if undefined
      */
     public final ColumnMeta getColumnMeta(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null) {
-            return meta;
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null) {
-            return meta;
+        if (name != null) {
+            ColumnMeta meta = getColumnDesc(name);
+            if (meta != null) {
+                return meta;
+            }
+            meta = getColumnDerivedDesc(name);
+            if (meta != null) {
+                return meta;
+            }
         }
         return null;
     }
@@ -1425,17 +1427,19 @@ public abstract class FitsTable extends FitsHDU {
      * type
      */
     public final String[] getColumnAsString(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_CHAR
-                && !meta.isArray()) {
-            return getColumnString(name);
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_CHAR
-                && !meta.isArray()) {
-            return getColumnDerivedString(name);
+        if (name != null) {
+            ColumnMeta meta = getColumnDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_CHAR
+                    && !meta.isArray()) {
+                return getColumnString(name);
+            }
+            meta = getColumnDerivedDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_CHAR
+                    && !meta.isArray()) {
+                return getColumnDerivedString(name);
+            }
         }
         return null;
     }
@@ -1449,17 +1453,19 @@ public abstract class FitsTable extends FitsHDU {
      * type
      */
     public final int[] getColumnAsInt(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_INT
-                && !meta.isArray()) {
-            return getColumnInt(name);
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_INT
-                && !meta.isArray()) {
-            return getColumnDerivedInt(name);
+        if (name != null) {
+            ColumnMeta meta = getColumnDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_INT
+                    && !meta.isArray()) {
+                return getColumnInt(name);
+            }
+            meta = getColumnDerivedDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_INT
+                    && !meta.isArray()) {
+                return getColumnDerivedInt(name);
+            }
         }
         return null;
     }
@@ -1473,17 +1479,19 @@ public abstract class FitsTable extends FitsHDU {
      * type
      */
     public final int[][] getColumnAsInts(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_INT
-                && meta.isArray()) {
-            return getColumnInts(name);
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_INT
-                && meta.isArray()) {
-            return getColumnDerivedInts(name);
+        if (name != null) {
+            ColumnMeta meta = getColumnDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_INT
+                    && meta.isArray()) {
+                return getColumnInts(name);
+            }
+            meta = getColumnDerivedDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_INT
+                    && meta.isArray()) {
+                return getColumnDerivedInts(name);
+            }
         }
         return null;
     }
@@ -1497,17 +1505,19 @@ public abstract class FitsTable extends FitsHDU {
      * type
      */
     public final short[] getColumnAsShort(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_SHORT
-                && !meta.isArray()) {
-            return getColumnShort(name);
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_SHORT
-                && !meta.isArray()) {
-            return getColumnDerivedShort(name);
+        if (name != null) {
+            ColumnMeta meta = getColumnDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_SHORT
+                    && !meta.isArray()) {
+                return getColumnShort(name);
+            }
+            meta = getColumnDerivedDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_SHORT
+                    && !meta.isArray()) {
+                return getColumnDerivedShort(name);
+            }
         }
         return null;
     }
@@ -1521,17 +1531,19 @@ public abstract class FitsTable extends FitsHDU {
      * type
      */
     public final short[][] getColumnAsShorts(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_SHORT
-                && meta.isArray()) {
-            return getColumnShorts(name);
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_SHORT
-                && meta.isArray()) {
-            return getColumnDerivedShorts(name);
+        if (name != null) {
+            ColumnMeta meta = getColumnDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_SHORT
+                    && meta.isArray()) {
+                return getColumnShorts(name);
+            }
+            meta = getColumnDerivedDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_SHORT
+                    && meta.isArray()) {
+                return getColumnDerivedShorts(name);
+            }
         }
         return null;
     }
@@ -1545,17 +1557,19 @@ public abstract class FitsTable extends FitsHDU {
      * type
      */
     public final float[] getColumnAsFloat(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_REAL
-                && !meta.isArray()) {
-            return getColumnFloat(name);
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_REAL
-                && !meta.isArray()) {
-            return getColumnDerivedFloat(name);
+        if (name != null) {
+            ColumnMeta meta = getColumnDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_REAL
+                    && !meta.isArray()) {
+                return getColumnFloat(name);
+            }
+            meta = getColumnDerivedDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_REAL
+                    && !meta.isArray()) {
+                return getColumnDerivedFloat(name);
+            }
         }
         return null;
     }
@@ -1570,17 +1584,19 @@ public abstract class FitsTable extends FitsHDU {
      * type
      */
     public final double[] getColumnAsDouble(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_DBL
-                && !meta.isArray()) {
-            return getColumnDouble(name);
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_DBL
-                && !meta.isArray()) {
-            return getDerivedColumnAsDouble(name);
+        if (name != null) {
+            ColumnMeta meta = getColumnDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_DBL
+                    && !meta.isArray()) {
+                return getColumnDouble(name);
+            }
+            meta = getColumnDerivedDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_DBL
+                    && !meta.isArray()) {
+                return getDerivedColumnAsDouble(name);
+            }
         }
         return null;
     }
@@ -1607,17 +1623,19 @@ public abstract class FitsTable extends FitsHDU {
      * type
      */
     public final double[][] getColumnAsDoubles(final String name) {
-        ColumnMeta meta = getColumnDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_DBL
-                && meta.isArray()) {
-            return getColumnDoubles(name);
-        }
-        meta = getColumnDerivedDesc(name);
-        if (meta != null
-                && meta.getDataType() == Types.TYPE_DBL
-                && meta.isArray()) {
-            return getDerivedColumnAsDoubles(name);
+        if (name != null) {
+            ColumnMeta meta = getColumnDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_DBL
+                    && meta.isArray()) {
+                return getColumnDoubles(name);
+            }
+            meta = getColumnDerivedDesc(name);
+            if (meta != null
+                    && meta.getDataType() == Types.TYPE_DBL
+                    && meta.isArray()) {
+                return getDerivedColumnAsDoubles(name);
+            }
         }
         return null;
     }

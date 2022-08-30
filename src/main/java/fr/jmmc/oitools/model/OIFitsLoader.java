@@ -30,7 +30,6 @@ import fr.jmmc.oitools.image.FitsImageHDUFactory;
 import fr.jmmc.oitools.image.FitsImageLoader;
 import fr.jmmc.oitools.image.ImageOiConstants;
 import fr.jmmc.oitools.image.ImageOiData;
-import fr.jmmc.oitools.image.ImageOiInputParam;
 import fr.jmmc.oitools.meta.ArrayColumnMeta;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.OIFitsStandard;
@@ -210,8 +209,8 @@ public class OIFitsLoader {
             this.checker = checker;
             this.logCheckerReport = false;
         } else {
-            this.checker = new OIFitsChecker();
-            this.logCheckerReport = true;
+            this.checker = OIFitsChecker.newInstance();
+            this.logCheckerReport = (this.checker != null);
         }
         this.doChecksum = doChecksum;
     }
@@ -242,7 +241,9 @@ public class OIFitsLoader {
         try {
             final FileRef fileRef = new FileRef(absFilePath);
             // Initialize FileRef in OIFitsChecker
-            checker.setFileRef(fileRef, null);
+            if (checker != null) {
+                checker.setFileRef(fileRef, null);
+            }
 
             // Check if the given file exists:
             final File file = new File(absFilePath);
@@ -250,7 +251,9 @@ public class OIFitsLoader {
 
             if (missing || OIFitsChecker.isInspectRules()) {
                 // rule [FILE_EXIST] check if the file exist
-                checker.ruleFailed(Rule.FILE_EXIST);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.FILE_EXIST);
+                }
 
                 if (missing) {
                     throw new IOException("File not found: " + absFilePath);
@@ -285,7 +288,9 @@ public class OIFitsLoader {
             } catch (FitsException fe) {
                 logger.log(Level.SEVERE, "Unable to load the file: " + absFilePath, fe);
                 // rule [FILE_LOAD] check if the OIFITS file is loaded properly (IO error)
-                checker.ruleFailed(Rule.FILE_LOAD);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.FILE_LOAD);
+                }
                 throw fe;
             } finally {
                 if (fitsFile != null && fitsFile.getStream() != null) {
@@ -315,16 +320,20 @@ public class OIFitsLoader {
 
             // Always perform validation:
             // ENABLE before second OIFits validation
-            this.checker.setSkipFormat(true);
+            if (checker != null) {
+                checker.setSkipFormat(true);
+            }
 
             this.oiFitsFile.check(this.checker);
 
-            // show validation results
             if (this.logCheckerReport && logger.isLoggable(Level.INFO)) {
+                // log validation results
                 logger.log(Level.INFO, "validation results\n{0}", this.checker.getCheckReport());
             }
         } finally {
-            this.checker.cleanup();
+            if (checker != null) {
+                checker.cleanup();
+            }
         }
     }
 
@@ -442,8 +451,12 @@ public class OIFitsLoader {
                             // rule [OIFITS_TABLE_NOT_V2] check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in an OIFITS 1 file
                             // TODO: how to ensure this rule is listed in applyTo()
                             if (oiTable instanceof OICorr || oiTable instanceof OIInspol) {
-                                checker.inspectRuleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable.getExtName(), OIFitsStandard.VERSION_1);
-                                checker.ruleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable);
+                                if (checker != null) {
+                                    checker.inspectRuleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable.getExtName(), OIFitsStandard.VERSION_1);
+                                }
+                                if (checker != null) {
+                                    checker.ruleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable);
+                                }
                             }
                         }
 
@@ -494,8 +507,12 @@ public class OIFitsLoader {
                         // rule [OIFITS_TABLE_NOT_V2] check if any OIFITS 2 specific table (OI_CORR, OI_INSPOL or OI_FLUX) is present in an OIFITS 1 file
                         // TODO: how to ensure this rule is listed in applyTo()
                         if (oiTable instanceof OIFlux) {
-                            checker.inspectRuleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable.getExtName(), OIFitsStandard.VERSION_1);
-                            checker.ruleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable);
+                            if (checker != null) {
+                                checker.inspectRuleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable.getExtName(), OIFitsStandard.VERSION_1);
+                            }
+                            if (checker != null) {
+                                checker.ruleFailed(Rule.OIFITS_TABLE_NOT_V2, oiTable);
+                            }
 
                         }
                     }
@@ -545,11 +562,15 @@ public class OIFitsLoader {
 
                 if (!processed[i] || OIFitsChecker.isInspectRules()) {
                     // rule [UNKNOWN_TABLE] check if the table belongs to the OIFITS standard and version
-                    checker.inspectRuleFailed(Rule.UNKNOWN_TABLE, OIFitsChecker.FILE_RULE, oiFitsFile.getVersion());
+                    if (checker != null) {
+                        checker.inspectRuleFailed(Rule.UNKNOWN_TABLE, OIFitsChecker.FILE_RULE, oiFitsFile.getVersion());
+                    }
 
                     // TODO: other header-data units may appear in the file, provided their EXTNAMEs do not begin with “OI_”.
                     // TODO: special case:
-                    checker.ruleFailed(Rule.UNKNOWN_TABLE, extName, i);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.UNKNOWN_TABLE, extName, i);
+                    }
 
                     // TODO load and handle any other FITS binary table or HDU...
                     if (logger.isLoggable(Level.INFO)) {
@@ -563,7 +584,9 @@ public class OIFitsLoader {
         // Add a severe error without any OI_ table
         if (!hasDataHdu || OIFitsChecker.isInspectRules()) {
             // rule [OIFITS_OIDATA] check if at least one data table exists in the OIFITS file
-            checker.ruleFailed(Rule.OIFITS_OIDATA);
+            if (checker != null) {
+                checker.ruleFailed(Rule.OIFITS_OIDATA);
+            }
         }
     }
 
@@ -622,7 +645,9 @@ public class OIFitsLoader {
                 if (!column.isOptional()) {
                     /* No column with columnName name */
                     // rule [GENERIC_COL_MANDATORY] check if the required column is present
-                    checker.ruleFailed(Rule.GENERIC_COL_MANDATORY, table, name);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.GENERIC_COL_MANDATORY, table, name);
+                    }
                 }
             }
 
@@ -693,7 +718,9 @@ public class OIFitsLoader {
             }
             if (!columnsDesc.containsKey(name) && !columnsAliases.containsKey(name)) {
                 // rule [UNKNOWN_COLUMN] check if the column belongs to the OIFITS standard and version
-                checker.ruleFailed(Rule.UNKNOWN_COLUMN, table, name).addKeywordValue(hdu.getColumnLength(i) + "" + hdu.getColumnType(i));
+                if (checker != null) {
+                    checker.ruleFailed(Rule.UNKNOWN_COLUMN, table, name).addKeywordValue(hdu.getColumnLength(i) + "" + hdu.getColumnType(i));
+                }
             }
         }
     }
@@ -731,7 +758,9 @@ public class OIFitsLoader {
         if (column.getUnits() != parsedUnit || OIFitsChecker.isInspectRules()) {
             if (((parsedUnit == Units.NO_UNIT) && (!column.isCustomUnits() || column.getCustomUnits().isRequired())) || OIFitsChecker.isInspectRules()) {
                 // rule [GENERIC_COL_UNIT_EXIST] check if the column unit exist
-                checker.ruleFailed(Rule.GENERIC_COL_UNIT_EXIST, table, column.getName()).addKeywordValue(column.getUnit());
+                if (checker != null) {
+                    checker.ruleFailed(Rule.GENERIC_COL_UNIT_EXIST, table, column.getName()).addKeywordValue(column.getUnit());
+                }
             }
             if ((parsedUnit != Units.NO_UNIT) || OIFitsChecker.isInspectRules()) {
                 // Parse the user unit into CustomUnits
@@ -740,7 +769,9 @@ public class OIFitsLoader {
                 }
                 if (!column.isCustomUnits() || OIFitsChecker.isInspectRules()) {
                     // rule [GENERIC_COL_UNIT] check if the column unit matches the expected unit
-                    checker.ruleFailed(Rule.GENERIC_COL_UNIT, table, column.getName()).addKeywordValue(columnUnit, column.getUnit());
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.GENERIC_COL_UNIT, table, column.getName()).addKeywordValue(columnUnit, column.getUnit());
+                    }
                 }
             }
         }

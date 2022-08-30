@@ -257,7 +257,9 @@ public final class OIFlux extends OIData {
         if (corrindx_data != null) {
             // rule [OI_FLUX_CORRINDX] check if the referenced OI_CORR table exists when the column CORRINDX_FLUXDATA is present
             if ((oiCorr == null) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.OI_FLUX_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_FLUXDATA);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_FLUX_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_FLUXDATA);
+                }
             }
             if (oiCorr != null) {
                 // column is defined

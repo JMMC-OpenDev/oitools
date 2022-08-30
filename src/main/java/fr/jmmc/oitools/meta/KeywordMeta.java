@@ -122,7 +122,7 @@ public class KeywordMeta extends CellMeta {
         // Check type
         final Types kDataType = Types.getDataType(value.getClass());
 
-        if (!checker.isSkipFormat()) {
+        if (checker != null && !checker.isSkipFormat()) {
             hdu.checkKeywordFormat(checker, hdu, this, kDataType);
         }
 
@@ -153,7 +153,9 @@ public class KeywordMeta extends CellMeta {
                 }
             }
             // rule [GENERIC_KEYWORD_VAL_ACCEPTED_INT] check if the keyword value matches the 'accepted' values (integer)
-            checker.ruleFailed(Rule.GENERIC_KEYWORD_VAL_ACCEPTED_INT, hdu, this.getName()).addKeywordValue(val, getIntAcceptedValuesAsString());
+            if (checker != null) {
+                checker.ruleFailed(Rule.GENERIC_KEYWORD_VAL_ACCEPTED_INT, hdu, this.getName()).addKeywordValue(val, getIntAcceptedValuesAsString());
+            }
         }
         if (stringAcceptedValues.length != 0) {
             final String val = (String) value;
@@ -166,7 +168,9 @@ public class KeywordMeta extends CellMeta {
                 }
             }
             // rule [GENERIC_KEYWORD_VAL_ACCEPTED_STR] check if the keyword value matches the 'accepted' values (string)
-            checker.ruleFailed(Rule.GENERIC_KEYWORD_VAL_ACCEPTED_STR, hdu, this.getName()).addKeywordValue(val, getStringAcceptedValuesAsString());
+            if (checker != null) {
+                checker.ruleFailed(Rule.GENERIC_KEYWORD_VAL_ACCEPTED_STR, hdu, this.getName()).addKeywordValue(val, getStringAcceptedValuesAsString());
+            }
         }
     }
 }

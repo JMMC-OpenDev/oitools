@@ -508,10 +508,14 @@ public final class OIT3 extends OIData {
             // rule [OI_T3_CORRINDX] check if the referenced OI_CORR exists when the column CORRINDX_T3AMP or CORRINDX_T3PHI is present
             if ((oiCorr == null) || OIFitsChecker.isInspectRules()) {
                 if (corrindx_T3amp != null) {
-                    checker.ruleFailed(Rule.OI_T3_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_T3AMP);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OI_T3_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_T3AMP);
+                    }
                 }
                 if (corrindx_T3phi != null) {
-                    checker.ruleFailed(Rule.OI_T3_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_T3PHI);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OI_T3_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_T3PHI);
+                    }
                 }
             }
             if ((oiCorr != null) || OIFitsChecker.isInspectRules()) {

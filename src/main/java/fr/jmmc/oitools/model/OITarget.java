@@ -410,37 +410,53 @@ public final class OITarget extends OITable {
 
             if ((Double.isNaN(coorRa[i]) || Double.isNaN(coorDec[i])) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_TARGET_COORD_EXIST] check if the TARGET RA or DEC value is not undefined
-                checker.ruleFailed(Rule.OI_TARGET_COORD_EXIST, this, OIFitsConstants.COLUMN_DECEP0).addValueAt(coorDec[i], i);
-                checker.ruleFailed(Rule.OI_TARGET_COORD_EXIST, this, OIFitsConstants.COLUMN_RAEP0).addValueAt(coorRa[i], i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_TARGET_COORD_EXIST, this, OIFitsConstants.COLUMN_DECEP0).addValueAt(coorDec[i], i);
+                }
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_TARGET_COORD_EXIST, this, OIFitsConstants.COLUMN_RAEP0).addValueAt(coorRa[i], i);
+                }
             }
             if ((NumberUtils.equals(coorRa[i], 0.0, COORD_ZERO_EPSILON)
                     && NumberUtils.equals(coorDec[i], 0.0, COORD_ZERO_EPSILON)) || OIFitsChecker.isInspectRules()) {
                 // note: testing 0.0 here means 0.0 exactly (not a floating-point equality)
                 // rule [OI_TARGET_COORD] check if the TARGET RA and DEC values are not 0.0
-                checker.ruleFailed(Rule.OI_TARGET_COORD, this, OIFitsConstants.COLUMN_RAEP0).addValueAt(coorRa[i], i);
-                checker.ruleFailed(Rule.OI_TARGET_COORD, this, OIFitsConstants.COLUMN_DECEP0).addValueAt(coorDec[i], i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_TARGET_COORD, this, OIFitsConstants.COLUMN_RAEP0).addValueAt(coorRa[i], i);
+                }
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_TARGET_COORD, this, OIFitsConstants.COLUMN_DECEP0).addValueAt(coorDec[i], i);
+                }
             }
 
             if ((targetNames[i] == null) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_TARGET_TARGET] check if the TARGET column values have a not null or empty value
-                checker.ruleFailed(Rule.OI_TARGET_TARGET, this, OIFitsConstants.COLUMN_TARGET).addValueAt(targetNames[i], i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_TARGET_TARGET, this, OIFitsConstants.COLUMN_TARGET).addValueAt(targetNames[i], i);
+                }
             }
             if ((targetNames[i] != null) || OIFitsChecker.isInspectRules()) {
                 final short refId = targetIds[i];
                 if ((refId < 1) || OIFitsChecker.isInspectRules()) {
                     // rule [OI_TARGET_TARGETID_MIN] check if the TARGET_ID values >= 1
-                    checker.ruleFailed(Rule.OI_TARGET_TARGETID_MIN, this, OIFitsConstants.COLUMN_TARGET).addValueAt(refId, i);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OI_TARGET_TARGETID_MIN, this, OIFitsConstants.COLUMN_TARGET).addValueAt(refId, i);
+                    }
                 }
                 final String refName = targetNames[i];
 
                 for (int j = i + 1; j < len; j++) {
                     if ((refId == targetIds[j]) || OIFitsChecker.isInspectRules()) {
                         // rule [OI_TARGET_TARGETID_UNIQ] check duplicated indexes in the TARGET_ID column of the OI_TARGET table
-                        checker.ruleFailed(Rule.OI_TARGET_TARGETID_UNIQ, this, OIFitsConstants.COLUMN_TARGET_ID).addValueAtRows(refId, i, j);
+                        if (checker != null) {
+                            checker.ruleFailed(Rule.OI_TARGET_TARGETID_UNIQ, this, OIFitsConstants.COLUMN_TARGET_ID).addValueAtRows(refId, i, j);
+                        }
                     }
                     if (refName.equals(targetNames[j]) || OIFitsChecker.isInspectRules()) {
                         // rule [OI_TARGET_TARGET_UNIQ] check duplicated values in the TARGET column of the OI_TARGET table
-                        checker.ruleFailed(Rule.OI_TARGET_TARGET_UNIQ, this, OIFitsConstants.COLUMN_TARGET).addValueAtRows(refName, i, j);
+                        if (checker != null) {
+                            checker.ruleFailed(Rule.OI_TARGET_TARGET_UNIQ, this, OIFitsConstants.COLUMN_TARGET).addValueAtRows(refName, i, j);
+                        }
                     }
                 }
             }

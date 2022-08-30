@@ -420,7 +420,9 @@ public final class OIVis2 extends OIData {
         if (corrindx_vis2data != null) {
             if ((oiCorr == null) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_VIS2_CORRINDX] check if the referenced OI_CORR table exists when the column CORRINDX_VIS2DATA is present
-                checker.ruleFailed(Rule.OI_VIS2_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_VIS2DATA);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_VIS2_CORRINDX, this, OIFitsConstants.COLUMN_CORRINDX_VIS2DATA);
+                }
             }
             if ((oiCorr != null) || OIFitsChecker.isInspectRules()) {
                 // column is defined

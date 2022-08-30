@@ -287,13 +287,19 @@ public final class OIInspol extends OIAbstractData {
             if ((mjdObs[i] < 0) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_INSPOL_MJD_RANGE] check if MJD values in data tables are within MJD intervals (MJD_OBS and MJD_END columns) of the referenced OI_INSPOL table [!! TBD in data tables !!]
                 // WARNING: MJD_OBS can be begin a 0, there are no expected bounds
-                checker.ruleFailed(Rule.OI_INSPOL_MJD_RANGE, this, OIFitsConstants.COLUMN_MJD_OBS).addValueAt(mjdObs[i], i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_INSPOL_MJD_RANGE, this, OIFitsConstants.COLUMN_MJD_OBS).addValueAt(mjdObs[i], i);
+                }
             }
             if ((mjdEnd[i] < 0) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.OI_INSPOL_MJD_RANGE, this, OIFitsConstants.COLUMN_MJD_END).addValueAt(mjdEnd[i], i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_INSPOL_MJD_RANGE, this, OIFitsConstants.COLUMN_MJD_END).addValueAt(mjdEnd[i], i);
+                }
             }
             if ((mjdObs[i] > mjdEnd[i]) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.OI_INSPOL_MJD_DIFF, this, OIFitsConstants.COLUMN_MJD_OBS).addValuesAt(mjdObs[i], mjdEnd[i], i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_INSPOL_MJD_DIFF, this, OIFitsConstants.COLUMN_MJD_OBS).addValuesAt(mjdObs[i], mjdEnd[i], i);
+                }
             }
         }
     }

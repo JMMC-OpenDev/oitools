@@ -580,7 +580,9 @@ public final class OIFitsFile extends FitsImageFile {
     public void check(final OIFitsChecker checker) {
         try {
             // Initialize FileRef in OIFitsChecker
-            checker.setFileRef(getFileRef(), getVersion());
+            if (checker != null) {
+                checker.setFileRef(getFileRef(), getVersion());
+            }
 
             final long start = System.nanoTime();
 
@@ -590,7 +592,9 @@ public final class OIFitsFile extends FitsImageFile {
             if (isOIFits2()) {
                 if ((getPrimaryImageHDU() == null) || OIFitsChecker.isInspectRules()) {
                     // rule [OIFITS_MAIN_HEADER_EXIST_V2] check if the main header (PRIMARY HDU) exists in the OIFITS 2 file
-                    checker.ruleFailed(Rule.OIFITS_MAIN_HEADER_EXIST_V2);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OIFITS_MAIN_HEADER_EXIST_V2);
+                    }
                 }
             }
 
@@ -599,13 +603,17 @@ public final class OIFitsFile extends FitsImageFile {
             /* Checking presence of one and only one OI_TARGET table */
             if (!hasOiTarget() || OIFitsChecker.isInspectRules()) {
                 // rule [OIFITS_OI_TARGET_EXIST] check if only one OI_TARGET table exists in the OIFITS file
-                checker.ruleFailed(Rule.OIFITS_OI_TARGET_EXIST);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OIFITS_OI_TARGET_EXIST);
+                }
             }
 
             /* Checking presence of at least one OI_WAVELENGTH table */
             if (this.insNameToOiWavelength.isEmpty() || OIFitsChecker.isInspectRules()) {
                 // rule [OIFITS_OI_WAVELENGTH_EXIST] check if at least one OI_WAVELENGTH table exists in the OIFITS file
-                checker.ruleFailed(Rule.OIFITS_OI_WAVELENGTH_EXIST);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OIFITS_OI_WAVELENGTH_EXIST);
+                }
             }
 
             if (isOIFits2()) {
@@ -638,7 +646,9 @@ public final class OIFitsFile extends FitsImageFile {
                 /* Checking presence of at least one OI_ARRAY table in OIFITS V2 */
                 if (this.arrNameToOiArray.isEmpty() || OIFitsChecker.isInspectRules()) {
                     // rule [OIFITS_OI_ARRAY_EXIST_V2] check if at least one OI_ARRAY table exists in the OIFITS 2 file
-                    checker.ruleFailed(Rule.OIFITS_OI_ARRAY_EXIST_V2);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OIFITS_OI_ARRAY_EXIST_V2);
+                    }
                 }
 
                 checkOIInspols(checker);
@@ -676,14 +686,18 @@ public final class OIFitsFile extends FitsImageFile {
             }
 
             // Define Severity:
-            checker.defineSeverity(SeverityProfileFactory.getInstance().getProfile(SeverityProfileFactory.PROFILE_JMMC));
+            if (checker != null) {
+                checker.defineSeverity(SeverityProfileFactory.getInstance().getProfile(SeverityProfileFactory.PROFILE_JMMC));
+            }
 
             if (logger.isLoggable(Level.FINE)) {
                 logger.log(Level.FINE, "OIFitsFile.check: duration = {0} ms.", 1e-6d * (System.nanoTime() - start));
             }
         } finally {
             // cleanup temporary variables
-            checker.cleanup();
+            if (checker != null) {
+                checker.cleanup();
+            }
         }
     }
 
@@ -701,7 +715,9 @@ public final class OIFitsFile extends FitsImageFile {
 
             if (oitarget.getNbTargets() < 1 || OIFitsChecker.isInspectRules()) {
                 // rule [OI_TARGET_TARGET_EXIST] check if the OI_TARGET table have at least one target
-                checker.ruleFailed(Rule.OI_TARGET_TARGET_EXIST, oitarget);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_TARGET_TARGET_EXIST, oitarget);
+                }
             }
         } else if (oiTable instanceof OIWavelength) {
             final OIWavelength oiWavelength = (OIWavelength) oiTable;
@@ -716,7 +732,9 @@ public final class OIFitsFile extends FitsImageFile {
                      * building step, that should be impossible */
                     // Problem: OI_WAVELENGTH.INSNAME can be modified without fixing cross-references 
                     // rule [INSNAME_REF] check if an OI_WAVELENGTH table matches the INSNAME keyword
-                    checker.ruleFailed(Rule.INSNAME_REF, oiWavelength, OIFitsConstants.KEYWORD_INSNAME).addKeywordValue(insName);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.INSNAME_REF, oiWavelength, OIFitsConstants.KEYWORD_INSNAME).addKeywordValue(insName);
+                    }
                 }
                 if (((oiWlTables != null) && (oiWlTables.size() > 1)) || isInspectRules()) {
                     /* Problem: more that one OiWavelength table associated to INSNAME value, that is strictly forbidden */
@@ -729,7 +747,9 @@ public final class OIFitsFile extends FitsImageFile {
                         sb.deleteCharAt(0);
                     }
                     // rule [INSNAME_UNIQ] check if a single OI_WAVELENGTH table corresponds to the INSNAME keyword
-                    checker.ruleFailed(Rule.INSNAME_UNIQ, oiWavelength, OIFitsConstants.KEYWORD_INSNAME).addKeywordValue(oiWavelength.getInsName(), sb.toString());
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.INSNAME_UNIQ, oiWavelength, OIFitsConstants.KEYWORD_INSNAME).addKeywordValue(oiWavelength.getInsName(), sb.toString());
+                    }
                 }
             } else {
                 // already checked
@@ -745,7 +765,9 @@ public final class OIFitsFile extends FitsImageFile {
                 if ((oiArrTables == null) || isInspectRules()) {
                     /* Problem: OI_ARRAY.ARRNAME can be modified without fixing cross-references */
                     // rule [ARRNAME_REF] check if an OI_ARRAY table matches the ARRNAME keyword
-                    checker.ruleFailed(Rule.ARRNAME_REF, oiArray, OIFitsConstants.KEYWORD_ARRNAME).addKeywordValue(arrName);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.ARRNAME_REF, oiArray, OIFitsConstants.KEYWORD_ARRNAME).addKeywordValue(arrName);
+                    }
                 }
                 if (((oiArrTables != null) && (oiArrTables.size() > 1)) || isInspectRules()) {
                     /* Problem: more that one OiArray table associated to ARRNAME value, that is strictly forbiden */
@@ -758,7 +780,9 @@ public final class OIFitsFile extends FitsImageFile {
                         sb.deleteCharAt(0);
                     }
                     // rule [ARRNAME_UNIQ] check if a single OI_ARRAY table corresponds to the ARRNAME keyword
-                    checker.ruleFailed(Rule.ARRNAME_UNIQ, oiArray, OIFitsConstants.KEYWORD_ARRNAME).addKeywordValue(oiArray.getArrName(), sb.toString());
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.ARRNAME_UNIQ, oiArray, OIFitsConstants.KEYWORD_ARRNAME).addKeywordValue(oiArray.getArrName(), sb.toString());
+                    }
                 }
             } else {
                 // already checked by rule [OI_ARRAY_ARRNAME]
@@ -776,7 +800,9 @@ public final class OIFitsFile extends FitsImageFile {
                      * building step, that should be impossible */
                     // Problem: OI_CORR.CORRNAME can be modified without fixing cross-references 
                     // rule [CORRNAME_REF] check if an OI_CORR table matches the CORRNAME keyword
-                    checker.ruleFailed(Rule.CORRNAME_REF, oiCorr, OIFitsConstants.KEYWORD_CORRNAME).addKeywordValue(corrName);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.CORRNAME_REF, oiCorr, OIFitsConstants.KEYWORD_CORRNAME).addKeywordValue(corrName);
+                    }
                 }
                 if (((oiCorrTables != null) && (oiCorrTables.size() > 1)) || isInspectRules()) {
                     /* Problem: more that one OICorr table associated to CORRNAME value, that is strictly forbiden */
@@ -789,7 +815,9 @@ public final class OIFitsFile extends FitsImageFile {
                         sb.deleteCharAt(0);
                     }
                     // rule [CORRNAME_UNIQ] check if a single OI_CORR table corresponds to the CORRNAME keyword
-                    checker.ruleFailed(Rule.CORRNAME_UNIQ, oiCorr, OIFitsConstants.KEYWORD_CORRNAME).addKeywordValue(oiCorr.getCorrName(), sb.toString());
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.CORRNAME_UNIQ, oiCorr, OIFitsConstants.KEYWORD_CORRNAME).addKeywordValue(oiCorr.getCorrName(), sb.toString());
+                    }
                 }
             } else {
                 // already checked
@@ -832,7 +860,9 @@ public final class OIFitsFile extends FitsImageFile {
                         sb.deleteCharAt(0);
                     }
                     // rule [OI_INSPOL_INSNAME_UNIQ] check if the INSNAME column values are only present in a single OI_INSPOL table (compare multi OI_INSPOL table)
-                    checker.ruleFailed(Rule.OI_INSPOL_INSNAME_UNIQ, oiInspol, OIFitsConstants.KEYWORD_INSNAME).addKeywordValue(insName, sb.toString());
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OI_INSPOL_INSNAME_UNIQ, oiInspol, OIFitsConstants.KEYWORD_INSNAME).addKeywordValue(insName, sb.toString());
+                    }
                 }
             }
         }

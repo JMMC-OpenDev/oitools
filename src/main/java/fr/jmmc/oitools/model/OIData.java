@@ -792,7 +792,9 @@ public abstract class OIData extends OIAbstractData {
                 for (int j = k + 1; j < indexes.length; j++) {
                     // rule [GENERIC_STA_INDEX_UNIQ] check duplicated indexes inside each STA_INDEX column values (data table)
                     if ((refId == indexes[j]) || OIFitsChecker.isInspectRules()) {
-                        checker.ruleFailed(Rule.GENERIC_STA_INDEX_UNIQ, oiData, OIFitsConstants.COLUMN_STA_INDEX).addValueAtCols(refId, i, k, j);
+                        if (checker != null) {
+                            checker.ruleFailed(Rule.GENERIC_STA_INDEX_UNIQ, oiData, OIFitsConstants.COLUMN_STA_INDEX).addValueAtCols(refId, i, k, j);
+                        }
                     }
                 }
             }
@@ -811,7 +813,11 @@ public abstract class OIData extends OIAbstractData {
                                          final OIData oidata, final String colName, final int[] corrindx) {
 
         // get OIFitsCorrChecker
-        final OIFitsCorrChecker corrChecker = checker.getCorrChecker(oiCorr.getCorrName());
+        final OIFitsCorrChecker corrChecker = (checker != null) ? checker.getCorrChecker(oiCorr.getCorrName()) : null;
+
+        if (corrChecker == null) {
+            return;
+        }
 
         final int nWaves = oidata.getNWave();
 
@@ -823,11 +829,15 @@ public abstract class OIData extends OIAbstractData {
 
             // rule [GENERIC_CORRINDX_MIN] check if the CORRINDX values >= 1
             if ((idxI < 1) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.GENERIC_CORRINDX_MIN, oidata, colName).addValueAt(idxI, row);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.GENERIC_CORRINDX_MIN, oidata, colName).addValueAt(idxI, row);
+                }
             }
             // rule [GENERIC_CORRINDX_MAX] check if the CORRINDX values <= NDATA
             if ((idxI > ndata) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.GENERIC_CORRINDX_MAX, oidata, colName).addValuesAt(idxI, ndata, row);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.GENERIC_CORRINDX_MAX, oidata, colName).addValuesAt(idxI, ndata, row);
+                }
             }
 
             for (int l = 0; l < nWaves; l++) {
@@ -835,7 +845,9 @@ public abstract class OIData extends OIAbstractData {
 
                 // rule [GENERIC_CORRINDX_UNIQ] check duplicates or overlaps within correlation indexes (CORRINDX)
                 if (corrChecker.contains(index) || OIFitsChecker.isInspectRules()) {
-                    checker.ruleFailed(Rule.GENERIC_CORRINDX_UNIQ, oidata, colName).addColValueAt(index, row, l, ((OIFitsChecker.isInspectRules()) ? "[[ORIGIN]]" : corrChecker.getOriginAsString(index)));
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.GENERIC_CORRINDX_UNIQ, oidata, colName).addColValueAt(index, row, l, ((OIFitsChecker.isInspectRules()) ? "[[ORIGIN]]" : corrChecker.getOriginAsString(index)));
+                    }
                 } else {
                     corrChecker.put(index, oidata.getExtName(), oidata.getExtNb(), colName, row, l);
                 }
@@ -1019,7 +1031,9 @@ public abstract class OIData extends OIAbstractData {
                 // Not flagged ?
                 if ((!rowFlag[j] && fixed) || OIFitsChecker.isInspectRules()) {
                     // rule [GENERIC_COL_ERR] check if the UNFLAGGED *ERR column values are valid (positive or NULL)
-                    checker.ruleFailed(Rule.GENERIC_COL_ERR_FIX, oidata, colName).addColValueAt(err, i, j);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.GENERIC_COL_ERR_FIX, oidata, colName).addColValueAt(err, i, j);
+                    }
                 }
             }
         }

@@ -145,7 +145,9 @@ public abstract class OITable extends FitsTable {
         final int revision = computeOiRevn();
         if (revision != getOiRevn() || OIFitsChecker.isInspectRules()) {
             // rule [GENERIC_OIREV_FIX] Fix the OI_REV keyword when the table is not in the proper OIFITS version
-            checker.ruleFailed(Rule.GENERIC_OIREV_FIX, this).addFixedValue(revision);
+            if (checker != null) {
+                checker.ruleFailed(Rule.GENERIC_OIREV_FIX, this).addFixedValue(revision);
+            }
             setOiRevn(computeOiRevn());
         }
     }

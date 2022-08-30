@@ -217,7 +217,9 @@ public abstract class OIAbstractData extends OITable {
 
         if (OIFitsChecker.isInspectRules() || ((getArrName() != null) && (getOiArray() == null))) {
             // rule [ARRNAME_REF] check if an OI_ARRAY table matches the ARRNAME keyword
-            checker.ruleFailed(Rule.ARRNAME_REF, this, OIFitsConstants.KEYWORD_ARRNAME).addKeywordValue(getArrName());
+            if (checker != null) {
+                checker.ruleFailed(Rule.ARRNAME_REF, this, OIFitsConstants.KEYWORD_ARRNAME).addKeywordValue(getArrName());
+            }
         }
     }
 

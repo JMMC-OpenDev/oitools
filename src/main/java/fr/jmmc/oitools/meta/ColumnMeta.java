@@ -313,7 +313,9 @@ public class ColumnMeta extends CellMeta {
         final int columnRows = dims[0];
         if ((columnRows != nbRows) || OIFitsChecker.isInspectRules()) {
             // rule [GENERIC_COL_NBROWS] check if the column length matches the expected number of rows
-            checker.ruleFailed(Rule.GENERIC_COL_NBROWS, table, colName).addKeywordValue(columnRows, nbRows);
+            if (checker != null) {
+                checker.ruleFailed(Rule.GENERIC_COL_NBROWS, table, colName).addKeywordValue(columnRows, nbRows);
+            }
         }
 
         int columnRepeat;
@@ -359,7 +361,7 @@ public class ColumnMeta extends CellMeta {
         }
 
         // Check type and cardinality
-        if (!checker.isSkipFormat()) {
+        if (checker != null && !checker.isSkipFormat()) {
             checkColumnFormat(checker, table, columnType, columnRepeat);
         }
 
@@ -389,11 +391,15 @@ public class ColumnMeta extends CellMeta {
         if ((descRepeat == 0) || OIFitsChecker.isInspectRules()) {
             // May happen if bad reference (wavelength table):
             // rule [GENERIC_COL_DIM] check if the dimension of column values >= 1
-            checker.ruleFailed(Rule.GENERIC_COL_DIM, table, colName);
+            if (checker != null) {
+                checker.ruleFailed(Rule.GENERIC_COL_DIM, table, colName);
+            }
 
             if (columnType != descType) {
                 // rule [GENERIC_COL_FORMAT] check if the column format matches the expected format (data type & dimensions)
-                checker.ruleFailed(Rule.GENERIC_COL_FORMAT, table, colName).addKeywordValue(columnType, descType);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.GENERIC_COL_FORMAT, table, colName).addKeywordValue(columnType, descType);
+                }
             }
         }
         if ((descRepeat != 0) || OIFitsChecker.isInspectRules()) {
@@ -424,7 +430,9 @@ public class ColumnMeta extends CellMeta {
             }
 
             if (severe || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.GENERIC_COL_FORMAT, table, colName).addKeywordValue(columnRepeat + "" + columnType, descRepeat + "" + descType);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.GENERIC_COL_FORMAT, table, colName).addKeywordValue(columnRepeat + "" + columnType, descRepeat + "" + descType);
+                }
             }
         }
         return ignore;
@@ -449,7 +457,7 @@ public class ColumnMeta extends CellMeta {
             // OIData: STA_INDEX (2D but nCols=[1,2 or 3]) or TARGET_ID (1D)
 
             // Skip checks if the column is missing (from file):
-            if (!checker.hasRule(Rule.GENERIC_COL_MANDATORY, table, colName) || OIFitsChecker.isInspectRules()) {
+            if (checker != null && !checker.hasRule(Rule.GENERIC_COL_MANDATORY, table, colName) || OIFitsChecker.isInspectRules()) {
                 final boolean isArray = isArray();
 
                 if (!isArray) {
@@ -472,7 +480,9 @@ public class ColumnMeta extends CellMeta {
 
                             if (error || OIFitsChecker.isInspectRules()) {
                                 // rule [GENERIC_COL_VAL_ACCEPTED_INT] check if column values match the 'accepted' values (integer)
-                                checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addValueAt(val, getIntAcceptedValuesAsString(), r);
+                                if (checker != null) {
+                                    checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addValueAt(val, getIntAcceptedValuesAsString(), r);
+                                }
                             }
                         }
                     }
@@ -500,7 +510,9 @@ public class ColumnMeta extends CellMeta {
 
                                 if (error || OIFitsChecker.isInspectRules()) {
                                     // rule [GENERIC_COL_VAL_ACCEPTED_INT] check if column values match the 'accepted' values (integer)
-                                    checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addColValueAt(val, getIntAcceptedValuesAsString(), r, c);
+                                    if (checker != null) {
+                                        checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addColValueAt(val, getIntAcceptedValuesAsString(), r, c);
+                                    }
                                 }
                             }
                         }
@@ -517,7 +529,7 @@ public class ColumnMeta extends CellMeta {
             // OIInspol: INSNAME ...
 
             // Skip checks if the column is missing (from file):
-            if (!checker.hasRule(Rule.GENERIC_COL_MANDATORY, table, colName) || OIFitsChecker.isInspectRules()) {
+            if (checker != null && !checker.hasRule(Rule.GENERIC_COL_MANDATORY, table, colName) || OIFitsChecker.isInspectRules()) {
                 final String[] sValues = (String[]) value;
 
                 String val;
@@ -539,7 +551,9 @@ public class ColumnMeta extends CellMeta {
 
                     if (error || OIFitsChecker.isInspectRules()) {
                         // rule [GENERIC_COL_VAL_ACCEPTED_STR] check if column values match the 'accepted' values (string)
-                        checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_STR, table, colName).addValueAt(val, getStringAcceptedValuesAsString(), rowNb);
+                        if (checker != null) {
+                            checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_STR, table, colName).addValueAt(val, getStringAcceptedValuesAsString(), rowNb);
+                        }
                     }
                 }
             }
@@ -561,7 +575,9 @@ public class ColumnMeta extends CellMeta {
 
                         if (error || OIFitsChecker.isInspectRules()) {
                             // rule [GENERIC_COL_VAL_POSITIVE] check if column values are finite and positive
-                            checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addValueAt(val, r);
+                            if (checker != null) {
+                                checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addValueAt(val, r);
+                            }
                         }
                         return;
                     }
@@ -580,7 +596,9 @@ public class ColumnMeta extends CellMeta {
 
                             if (error || OIFitsChecker.isInspectRules()) {
                                 // rule [GENERIC_COL_VAL_POSITIVE] check if column values are finite and positive
-                                checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addColValueAt(val, r, c);
+                                if (checker != null) {
+                                    checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addColValueAt(val, r, c);
+                                }
                             }
                         }
                         return;
@@ -600,7 +618,9 @@ public class ColumnMeta extends CellMeta {
 
                         if (error || OIFitsChecker.isInspectRules()) {
                             // rule [GENERIC_COL_VAL_POSITIVE] check if column values are finite and positive
-                            checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addValueAt(val, r);
+                            if (checker != null) {
+                                checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addValueAt(val, r);
+                            }
                         }
                         return;
                     }
@@ -619,7 +639,9 @@ public class ColumnMeta extends CellMeta {
 
                             if (error || OIFitsChecker.isInspectRules()) {
                                 // rule [GENERIC_COL_VAL_POSITIVE] check if column values are finite and positive
-                                checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addColValueAt(val, r, c);
+                                if (checker != null) {
+                                    checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addColValueAt(val, r, c);
+                                }
                             }
                         }
                         return;

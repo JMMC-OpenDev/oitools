@@ -57,13 +57,9 @@ public final class NumberUtils {
     /** shared Double = 1 instance */
     public final static Double DBL_ONE = Double.valueOf(1d);
     /** default formatter */
-    private final static NumberFormat _fmtDef;
+    private final static NumberFormat _fmtDef = new DecimalFormat("0.0##");
     /** scientific formatter */
-    private final static NumberFormat _fmtScience = new DecimalFormat("0.000E0");
-
-    static {
-        _fmtDef = new DecimalFormat("0.000");
-    }
+    private final static NumberFormat _fmtScience = new DecimalFormat("0.0##E0");
 
     /**
      * Private constructor
@@ -204,9 +200,8 @@ public final class NumberUtils {
 
     /**
      * Format the given double value using custom formaters:
-     * - '0'     if abs(val) &lt; 1e-9
-     * - 0.000   if 1e-3 &lt; abs(val) &lt; 1e6
-     * - 0.0##E0 else
+     * - 0.0##   if 1e-3 &lt; abs(val) &lt; 1e4
+     * - 0.0##E0 otherwise
      * 
      * Note: this method is not thread safe (synchronization must be performed by callers)
      * 
@@ -219,12 +214,7 @@ public final class NumberUtils {
         }
         final double abs = Math.abs(val);
 
-        if (abs < 1e-9d) {
-            // means zero:
-            return "0";
-        }
-
-        if ((abs < 1e-3d) || (abs > 1e6d)) {
+        if ((abs > 0.0) && ((abs < 1e-3) || (abs > 1e4))) {
             return FormatterUtils.format(_fmtScience, val);
         }
         return FormatterUtils.format(_fmtDef, val);

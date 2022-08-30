@@ -896,7 +896,9 @@ public final class OIPrimaryHDU extends FitsImageHDU {
         final String value = getKeyword(keywordName);
         if ((value != null) || OIFitsChecker.isInspectRules()) {
             if (((value != null) && !value.startsWith(VALUE_MULTI)) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.MAIN_HEADER_TYPE_MULTI, this, keywordName).addKeywordValue(value, VALUE_MULTI);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.MAIN_HEADER_TYPE_MULTI, this, keywordName).addKeywordValue(value, VALUE_MULTI);
+                }
             }
         }
     }

@@ -391,7 +391,9 @@ public final class OIArray extends OITable {
 
         // rule [OI_ARRAY_ARRNAME] check the ARRNAME keyword has a not null or empty value
         if (((getArrName() != null) && (getArrName().length() == 0)) || OIFitsChecker.isInspectRules()) {
-            checker.ruleFailed(Rule.OI_ARRAY_ARRNAME, this, OIFitsConstants.KEYWORD_ARRNAME);
+            if (checker != null) {
+                checker.ruleFailed(Rule.OI_ARRAY_ARRNAME, this, OIFitsConstants.KEYWORD_ARRNAME);
+            }
         }
 
         if (OIFitsConstants.KEYWORD_FRAME_GEOCENTRIC.equalsIgnoreCase(getFrame()) || OIFitsChecker.isInspectRules()) {
@@ -401,9 +403,15 @@ public final class OIArray extends OITable {
             final double norm = MathUtils.carthesianNorm(arrayXYZ[0], arrayXYZ[1], arrayXYZ[2]);
             // rule [OI_ARRAY_XYZ] check if the ARRAY_XYZ keyword values corresponds to a proper coordinate on earth
             if ((Double.isNaN(norm) || (norm <= MIN_EARTH_RADIUS)) || OIFitsChecker.isInspectRules()) {
-                checker.ruleFailed(Rule.OI_ARRAY_XYZ, this, OIFitsConstants.KEYWORD_ARRAY_X).addKeywordValue(arrayXYZ[0]);
-                checker.ruleFailed(Rule.OI_ARRAY_XYZ, this, OIFitsConstants.KEYWORD_ARRAY_Y).addKeywordValue(arrayXYZ[1]);
-                checker.ruleFailed(Rule.OI_ARRAY_XYZ, this, OIFitsConstants.KEYWORD_ARRAY_Z).addKeywordValue(arrayXYZ[2]);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_ARRAY_XYZ, this, OIFitsConstants.KEYWORD_ARRAY_X).addKeywordValue(arrayXYZ[0]);
+                }
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_ARRAY_XYZ, this, OIFitsConstants.KEYWORD_ARRAY_Y).addKeywordValue(arrayXYZ[1]);
+                }
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_ARRAY_XYZ, this, OIFitsConstants.KEYWORD_ARRAY_Z).addKeywordValue(arrayXYZ[2]);
+                }
 
                 // Fix known interferometer (from ASPRO2 conf 2017.7):
                 final String arrName = getArrName();
@@ -421,7 +429,9 @@ public final class OIArray extends OITable {
                         fixed = null;
                     }
                     if ((fixed != null) || OIFitsChecker.isInspectRules()) {
-                        checker.ruleFailed(Rule.OI_ARRAY_XYZ_FIX, this).addFixedValue(fixed);
+                        if (checker != null) {
+                            checker.ruleFailed(Rule.OI_ARRAY_XYZ_FIX, this).addFixedValue(fixed);
+                        }
                     }
                 }
             }
@@ -433,23 +443,31 @@ public final class OIArray extends OITable {
         for (int i = 0; i < staIndexes.length; i++) {
             if ((staNames[i] == null) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_ARRAY_STA_NAME] check if the STA_NAME column values have a not null or empty value
-                checker.ruleFailed(Rule.OI_ARRAY_STA_NAME, this, OIFitsConstants.COLUMN_STA_NAME).addValueAt(staNames[i], i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_ARRAY_STA_NAME, this, OIFitsConstants.COLUMN_STA_NAME).addValueAt(staNames[i], i);
+                }
             }
             if ((staNames[i] != null) || OIFitsChecker.isInspectRules()) {
                 final short refId = staIndexes[i];
                 final String refName = staNames[i];
                 // rule [OI_ARRAY_STA_INDEX_MIN] check if the STA_INDEX values >= 1
                 if ((refId < 1) || OIFitsChecker.isInspectRules()) {
-                    checker.ruleFailed(Rule.OI_ARRAY_STA_INDEX_MIN, this, OIFitsConstants.COLUMN_STA_INDEX).addValueAt(refId, i);
+                    if (checker != null) {
+                        checker.ruleFailed(Rule.OI_ARRAY_STA_INDEX_MIN, this, OIFitsConstants.COLUMN_STA_INDEX).addValueAt(refId, i);
+                    }
                 }
                 for (int j = i + 1; j < staIndexes.length; j++) {
                     // rule [OI_ARRAY_STA_INDEX_UNIQ] check duplicated indexes in the STA_INDEX column of the OI_ARRAY table
                     if ((refId == staIndexes[j]) || OIFitsChecker.isInspectRules()) {
-                        checker.ruleFailed(Rule.OI_ARRAY_STA_INDEX_UNIQ, this, OIFitsConstants.COLUMN_STA_INDEX).addValueAtRows(refId, i, j);
+                        if (checker != null) {
+                            checker.ruleFailed(Rule.OI_ARRAY_STA_INDEX_UNIQ, this, OIFitsConstants.COLUMN_STA_INDEX).addValueAtRows(refId, i, j);
+                        }
                     }
                     // rule [OI_ARRAY_STA_NAME_UNIQ] check duplicated values in the STA_NAME column of the OI_ARRAY table
                     if (refName.equals(staNames[j]) || OIFitsChecker.isInspectRules()) {
-                        checker.ruleFailed(Rule.OI_ARRAY_STA_NAME_UNIQ, this, OIFitsConstants.COLUMN_STA_NAME).addValueAtRows(refName, i, j);
+                        if (checker != null) {
+                            checker.ruleFailed(Rule.OI_ARRAY_STA_NAME_UNIQ, this, OIFitsConstants.COLUMN_STA_NAME).addValueAtRows(refName, i, j);
+                        }
                     }
                 }
             }

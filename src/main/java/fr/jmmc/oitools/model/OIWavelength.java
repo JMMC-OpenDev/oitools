@@ -283,7 +283,9 @@ public final class OIWavelength extends OITable {
             /* Problem: INSNAME keyword has value "", that should not be
              * possible. */
             // rule [OI_WAVELENGTH_INSNAME] check the INSNAME keyword has a not null or empty value
-            checker.ruleFailed(Rule.OI_WAVELENGTH_INSNAME, this, OIFitsConstants.KEYWORD_INSNAME);
+            if (checker != null) {
+                checker.ruleFailed(Rule.OI_WAVELENGTH_INSNAME, this, OIFitsConstants.KEYWORD_INSNAME);
+            }
         }
 
         final int nWaves = getNWave();
@@ -293,7 +295,9 @@ public final class OIWavelength extends OITable {
             final float effWave = effWaves[i];
             if (((effWave < 0.1E-6f) || (effWave > 20.0E-6f)) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_WAVELENGTH_EFFWAVE] check if the EFF_WAVE column values are within range [0.1x10^-6 - 20x10^-6]
-                checker.ruleFailed(Rule.OI_WAVELENGTH_EFF_WAVE, this, OIFitsConstants.COLUMN_EFF_WAVE).addValueAt(effWave, i);
+                if (checker != null) {
+                    checker.ruleFailed(Rule.OI_WAVELENGTH_EFF_WAVE, this, OIFitsConstants.COLUMN_EFF_WAVE).addValueAt(effWave, i);
+                }
             }
         }
 

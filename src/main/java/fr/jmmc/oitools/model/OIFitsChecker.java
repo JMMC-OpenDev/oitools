@@ -44,6 +44,33 @@ import java.util.logging.Logger;
  */
 public final class OIFitsChecker {
 
+    /** logger */
+    private final static Logger logger = Logger.getLogger(OIFitsChecker.class.getName());
+
+    public final static int COMPACT_MAX_VALUES = 10;
+
+    /** enable checker flag */
+    private static boolean ENABLE_CHECKER = "true".equalsIgnoreCase(System.getProperty("oitools.checker", "true"));
+
+    public static boolean isEnableChecker() {
+        return ENABLE_CHECKER;
+    }
+
+    public static void setEnableChecker(boolean flag) {
+        ENABLE_CHECKER = flag;
+    }
+
+    /**
+     * @return new OIFitsChecker instance if checker is enabled; null otherwise
+     */
+    public static OIFitsChecker newInstance() {
+        if (ENABLE_CHECKER) {
+            return new OIFitsChecker();
+        }
+        logger.info("disabled OIFITS validator ...");
+        return null;
+    }
+
     /** 'FILE' rules = applyTo & Rule name matcher */
     public final static String FILE_RULE = "FILE";
 
@@ -104,9 +131,6 @@ public final class OIFitsChecker {
         }
     }
 
-    /** logger */
-    private final static Logger logger = Logger.getLogger(OIFitsChecker.class.getName());
-
     /* members */
     /** current FileRef */
     private FileRef fileRef = null;
@@ -139,9 +163,12 @@ public final class OIFitsChecker {
 
         // first check rule is complete:
         for (Map.Entry<RuleFailure, DataLocation> entry : failures.entrySet()) {
-            if (entry.getValue().isEmpty()) {
+            final RuleFailure failure = entry.getKey();
+            final DataLocation datas = entry.getValue();
+
+            if (datas.isEmpty()) {
                 // ensure data is non empty:
-                entry.getKey().getRule().checkDataType(RuleDataType.NONE);
+                failure.getRule().checkDataType(RuleDataType.NONE);
             }
         }
 
@@ -328,7 +355,8 @@ public final class OIFitsChecker {
 
     private RuleFailure createFailure(final Rule rule, final FitsHDU hdu, final String member) {
         return new RuleFailure(rule, fileRef, ((hdu == null) ? null : hdu.getExtName()),
-                ((hdu == null) ? UNDEFINED_EXT_NB : hdu.getExtNb()), member);
+                ((hdu == null) ? UNDEFINED_EXT_NB : hdu.getExtNb()),
+                member);
     }
 
     private static CellMeta getMeta(final FitsHDU hdu, final String member) {
@@ -351,6 +379,10 @@ public final class OIFitsChecker {
         }
         // For HDU:
         return null;
+    }
+    
+    public boolean isEmpty() {
+        return this.failures.isEmpty();
     }
 
     /**
@@ -436,25 +468,36 @@ public final class OIFitsChecker {
     }
 
     /**
-     * Get the failures report sorted by the default comparator
+     * Get the failures report sorted by the default comparator in FULL mode
      * @return string containing the analysis report
      */
     public String getCheckReport() {
-        return appendFailuresReport(new StringBuilder(failures.size() * 80), RuleFailureComparator.DEFAULT).toString();
+        return getCheckReport(false);
+    }
+
+    /**
+     * Get the failures report sorted by the default comparator
+     * @param compact flag to use COMPACT mode (true) or FULL mode (false)
+     * @return string containing the analysis report
+     */
+    public String getCheckReport(final boolean compact) {
+        return appendFailuresReport(compact, new StringBuilder(failures.size() * 80), RuleFailureComparator.DEFAULT).toString();
     }
 
     /**
      * Append the failures report sorted by the given comparator into the given buffer.
+     * @param compact flag to use COMPACT mode (true) or FULL mode (false)
      * @param sb buffer to append into
      * @param comparator RuleFailureComparator instance
      * @return a string containing the analysis report
      */
-    public StringBuilder appendFailuresReport(final StringBuilder sb, final RuleFailureComparator comparator) {
+    public StringBuilder appendFailuresReport(final boolean compact, final StringBuilder sb, final RuleFailureComparator comparator) {
         FileRef last = null;
         int lastExtNb = -1;
 
         for (Map.Entry<RuleFailure, DataLocation> entry : getSortedFailures(comparator).entrySet()) {
             final RuleFailure failure = entry.getKey();
+            final DataLocation datas = entry.getValue();
 
             if (last != failure.getFileRef()) {
                 last = failure.getFileRef();
@@ -467,20 +510,32 @@ public final class OIFitsChecker {
                 ModelBase.getHDUId(sb, failure.getExtName(), failure.getExtNb()).append("]\n");
             }
 
+            if (compact && !failure.getSeverity().isHigher(Severity.Information)) {
+                // in compact mode, skip failures whose severity is lower or equal to INFO:
+                continue;
+            }
+
             final String ruleMessage = failure.formatMessage();
 
-            if (entry.getValue().isEmpty()) {
+            if (datas.isEmpty()) {
                 sb.append(failure.getSeverity()).append('\t');
                 sb.append(ruleMessage).append('\n');
             } else {
-                for (int i = 0, len = entry.getValue().getValues().size(); i < len; i++) {
+                final int len = datas.getValues().size();
+                int outLen = len;
+                if (compact || !failure.getSeverity().isHigher(Severity.Information)) {
+                    outLen = Math.min(COMPACT_MAX_VALUES, len);
+                }
+                for (int i = 0; i < outLen; i++) {
                     sb.append(failure.getSeverity()).append('\t');
-                    sb.append(entry.getValue().formatMessage(ruleMessage, i)).append('\n');
+                    sb.append(datas.formatMessage(ruleMessage, i)).append('\n');
+                }
+                if (outLen < len) {
+                    sb.append("... (").append(len).append(" occurences)\n");
                 }
             }
         }
         sb.append('\n').append(getCheckStatus()).append('\n');
-
         return sb;
     }
 
@@ -513,17 +568,20 @@ public final class OIFitsChecker {
 
         // Dump failures:
         for (Map.Entry<RuleFailure, DataLocation> entry : getSortedFailures(comparator).entrySet()) {
+            final RuleFailure failure = entry.getKey();
+            final DataLocation datas = entry.getValue();
+
             sb.append("  <failure>\n");
-            entry.getKey().toXML(sb);
+            failure.toXML(sb);
 
             final String ruleMessage = entry.getKey().formatMessage();
 
-            if (entry.getValue().isEmpty()) {
+            if (datas.isEmpty()) {
                 sb.append("    <message>");
                 sb.append(encodeTagContent(ruleMessage));
                 sb.append("</message>\n");
             } else {
-                entry.getValue().toXML(sb, ruleMessage, entry.getValue());
+                datas.toXML(sb, ruleMessage, datas);
             }
 
             sb.append("  </failure>\n");
