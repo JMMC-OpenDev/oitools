@@ -87,7 +87,7 @@ public enum Rule {
             "fix the UNFLAGGED *ERR column invalid values (negative values set to NaN)",
             Const.JMMC,
             RuleDataType.VALUE_ROW_COL,
-            "Fixed value at index {{COL}} for column '{{MEMBER}}' line {{ROW}}, found '{{VALUE}} set to NaN (should be > 0 or NaN or flagged out)"
+            "Fixed value at index {{COL}} for column '{{MEMBER}}' line {{ROW}}, found '{{VALUE}}' set to NaN (should be > 0 or NaN or flagged out)"
     ),
     GENERIC_COL_FORMAT("check if the column format matches the expected format (data type and dimensions)",
             "V2.4§1",

@@ -249,10 +249,10 @@
 <column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>500.0</min><max>500.0</max></column>
 <column><name>VISDATA</name><description>raw complex visibilities</description><type>C</type><unit>e</unit></column>
 <column><name>VISERR</name><description>error in raw complex visibilities</description><type>C</type><unit>e</unit></column>
-<column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>83.3383560180664</min><max>901.0382690429688</max></column>
-<column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>2.6534483432769775</min><max>989.8961181640625</max></column>
-<column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>69.18519592285156</min><max>303.0170593261719</max></column>
-<column><name>VISPHIERR</name><description>error in visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>0.9151170253753662</min><max>9.974919319152832</max></column>
+<column><name>VISAMP</name><description>visibility amplitude</description><type>D</type><unit></unit><min>342.0932312011719</min><max>417.6902770996094</max></column>
+<column><name>VISAMPERR</name><description>error in visibility amplitude</description><type>D</type><unit></unit><min>2.6534483432769775</min><max>280.4273681640625</max></column>
+<column><name>VISPHI</name><description>visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>161.05734252929688</min><max>189.7363739013672</max></column>
+<column><name>VISPHIERR</name><description>error in visibility phase</description><type>D</type><unit>deg|degree|degrees</unit><min>7.788662433624268</min><max>8.056986808776855</max></column>
 <column><name>UCOORD</name><description>U coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>202.9073028564453</min><max>202.9073028564453</max></column>
 <column><name>VCOORD</name><description>V coordinate of the data</description><type>D</type><unit>m|meter|meters</unit><min>114.07418823242188</min><max>114.07418823242188</max></column>
 <column><name>STA_INDEX</name><description>station numbers contributing to the data</description><type>I</type><unit></unit><min>4</min><max>7</max></column>
@@ -260,10 +260,10 @@
 <column><name>CORRINDX_VISAMP</name><description>Index into correlation matrix for 1st VISAMP element</description><type>J</type><unit></unit><min>1</min><max>1</max></column>
 <column><name>CORRINDX_VISPHI</name><description>Index into correlation matrix for 1st VISPHI element</description><type>J</type><unit></unit><min>8</min><max>8</max></column>
 <column><name>VISREFMAP</name><description>Matrix of indexes for establishing the reference channels</description><type>L</type><unit></unit></column>
-<column><name>RVIS</name><description>Complex coherent flux (Real) in units of TUNITn</description><type>D</type><unit>e</unit><min>41.53015899658203</min><max>513.582763671875</max></column>
-<column><name>RVISERR</name><description>Error RVIS</description><type>D</type><unit>e</unit><min>0.271169513463974</min><max>8.582881927490234</max></column>
-<column><name>IVIS</name><description>Complex coherent flux (Imaginary) in units of TUNITn</description><type>D</type><unit>e</unit><min>28.01517677307129</min><max>186.0774688720703</max></column>
-<column><name>IVISERR</name><description>Error IVIS</description><type>D</type><unit>e</unit><min>2.815943479537964</min><max>27.842470169067383</max></column>
+<column><name>RVIS</name><description>Complex coherent flux (Real) in units of TUNITn</description><type>D</type><unit>e</unit><min>41.53015899658203</min><max>476.00177001953125</max></column>
+<column><name>RVISERR</name><description>Error RVIS</description><type>D</type><unit>e</unit><min>1.2428522109985352</min><max>2.347341537475586</max></column>
+<column><name>IVIS</name><description>Complex coherent flux (Imaginary) in units of TUNITn</description><type>D</type><unit>e</unit><min>179.40870666503906</min><max>186.0774688720703</max></column>
+<column><name>IVISERR</name><description>Error IVIS</description><type>D</type><unit>e</unit><min>27.31938362121582</min><max>27.596738815307617</max></column>
 <column><name>CORRINDX_RVIS</name><description>Index into correlation matrix for 1st RVIS element</description><type>J</type><unit></unit><min>15</min><max>15</max></column>
 <column><name>CORRINDX_IVIS</name><description>Index into correlation matrix for 1st IVIS element</description><type>J</type><unit></unit><min>22</min><max>22</max></column>
 </columns>
@@ -320,10 +320,10 @@
 <column><name>TIME</name><description>UTC start time of observation</description><type>D</type><unit>s|sec|second|seconds</unit><min>0.0</min><max>0.0</max></column>
 <column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>57940.0</min><max>57940.0</max></column>
 <column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>500.0</min><max>500.0</max></column>
-<column><name>T3AMP</name><description>triple product amplitude</description><type>D</type><unit></unit><min>16.127220153808594</min><max>4743.111328125</max></column>
-<column><name>T3AMPERR</name><description>error in triple product amplitude</description><type>D</type><unit></unit><min>0.332174152135849</min><max>19.637706756591797</max></column>
-<column><name>T3PHI</name><description>triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>35.289852142333984</min><max>4451.21337890625</max></column>
-<column><name>T3PHIERR</name><description>error in triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>1.427118182182312</min><max>19.915802001953125</max></column>
+<column><name>T3AMP</name><description>triple product amplitude</description><type>D</type><unit></unit><min>118.78874969482422</min><max>4743.111328125</max></column>
+<column><name>T3AMPERR</name><description>error in triple product amplitude</description><type>D</type><unit></unit><min>0.332174152135849</min><max>16.899168014526367</max></column>
+<column><name>T3PHI</name><description>triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>72.02389526367188</min><max>3821.942138671875</max></column>
+<column><name>T3PHIERR</name><description>error in triple product phase</description><type>D</type><unit>deg|degree|degrees</unit><min>2.4976372718811035</min><max>18.29046058654785</max></column>
 <column><name>U1COORD</name><description>U coordinate of baseline AB of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>145.47213745117188</min><max>298.72442626953125</max></column>
 <column><name>V1COORD</name><description>V coordinate of baseline AB of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>94.4581298828125</min><max>221.0161895751953</max></column>
 <column><name>U2COORD</name><description>U coordinate of baseline BC of the triangle</description><type>D</type><unit>m|meter|meters</unit><min>10.330877304077148</min><max>264.4062194824219</max></column>
@@ -359,8 +359,8 @@
 <column><name>TARGET_ID</name><description>target number as index into OI_TARGET table</description><type>I</type><unit></unit><min>1</min><max>1</max></column>
 <column><name>MJD</name><description>Modified Julian Day (start date of observation)</description><type>D</type><unit>d|day|days</unit><min>57940.0</min><max>57940.0</max></column>
 <column><name>INT_TIME</name><description>Integration time</description><type>D</type><unit>s|sec|second|seconds</unit><min>500.0</min><max>500.0</max></column>
-<column><name>FLUXDATA</name><description>flux per telescope</description><type>D</type><unit>Jy</unit><min>14.129551887512207</min><max>293.58209228515625</max></column>
-<column><name>FLUXERR</name><description>error in flux</description><type>D</type><unit>Jy</unit><min>6.086489200592041</min><max>19.562820434570312</max></column>
+<column><name>FLUXDATA</name><description>flux per telescope</description><type>D</type><unit>Jy</unit><min>17.963422775268555</min><max>293.58209228515625</max></column>
+<column><name>FLUXERR</name><description>error in flux</description><type>D</type><unit>Jy</unit><min>6.086489200592041</min><max>19.265819549560547</max></column>
 <column><name>STA_INDEX</name><description>station number contributing to the data</description><type>I</type><unit></unit><min>3</min><max>7</max></column>
 <column><name>FLAG</name><description>flag</description><type>L</type><unit></unit></column>
 <column><name>CORRINDX_FLUXDATA</name><description>Index into correlation matrix for 1st FLUXDATA element</description><type>J</type><unit></unit><min>85</min><max>113</max></column>

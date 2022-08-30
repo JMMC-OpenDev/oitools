@@ -581,22 +581,17 @@ INFO	Skipping non-standard OIFITS column 'OI_VIS#4.VISCOVRI' with format [16D]
 Analysing table [OI_VIS2#5]
 INFO	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
 Analysing table [OI_T3#6]
-INFO	Fixed value at index 0 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 1 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 2 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 3 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 4 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 5 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 6 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 7 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 8 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 9 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 10 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 11 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 12 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 13 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 14 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
-INFO	Fixed value at index 15 for column 'T3AMPERR' line 0, found '0.0 set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 0 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 1 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 2 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 3 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 4 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 5 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 6 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 7 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 8 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+INFO	Fixed value at index 9 for column 'T3AMPERR' line 0, found '0.0' set to NaN (should be > 0 or NaN or flagged out)
+... (16 occurences)
 INFO	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
 Analysing File: T_PYX_oiDataCalib.fits
 Analysing table [OI_ARRAY#4]

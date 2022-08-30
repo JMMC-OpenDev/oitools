@@ -137,7 +137,6 @@ public final class RuleFailure {
 
     /* --- KEY --- */
     /**
-     * Return the validation rule
      * @return validation rule
      */
     public Rule getRule() {
@@ -145,7 +144,6 @@ public final class RuleFailure {
     }
 
     /**
-     * Return the FileRef
      * @return FileRef
      */
     public FileRef getFileRef() {
@@ -153,7 +151,6 @@ public final class RuleFailure {
     }
 
     /**
-     * Return the extName
      * @return extName
      */
     public String getExtName() {
@@ -161,7 +158,6 @@ public final class RuleFailure {
     }
 
     /**
-     * Return the extNb
      * @return extNb
      */
     public int getExtNb() {
@@ -169,7 +165,6 @@ public final class RuleFailure {
     }
 
     /**
-     * Return the member
      * @return member
      */
     public String getMember() {
@@ -178,7 +173,6 @@ public final class RuleFailure {
 
     /* --- SEVERITY --- */
     /**
-     * Return the message severity
      * @return message severity
      */
     public Severity getSeverity() {
@@ -243,11 +237,8 @@ public final class RuleFailure {
             sb.append(getFileRef().getAbsoluteFilePath());
         }
         sb.append('\t');
-        if (getExtNb() >= 0 && getExtName() == null) {
-            sb.append("HDU").append('\t');
-            sb.append(getExtNb()).append('\t');
-        } else if (getExtNb() >= 0) {
-            sb.append(getExtName()).append('\t');
+        if (getExtNb() >= 0) {
+            sb.append((getExtName() == null) ? "HDU" : getExtName()).append('\t');
             sb.append(getExtNb()).append('\t');
         }
 
@@ -255,8 +246,6 @@ public final class RuleFailure {
             sb.append(getMember());
         }
         sb.append('\t');
-
-//        sb.append(formatMessage()).append('\t');
         return sb;
     }
 
@@ -266,7 +255,6 @@ public final class RuleFailure {
      * @return a XML representation of this class
      */
     public StringBuilder toXML(StringBuilder sb) {
-
         sb.append("    <severity>").append(getSeverity()).append("</severity>\n");
 
         if (getRule() != null) {
@@ -289,7 +277,6 @@ public final class RuleFailure {
         if (getMember() != null) {
             sb.append("    <member>").append(getMember()).append("</member>\n");
         }
-
         return sb;
     }
 }

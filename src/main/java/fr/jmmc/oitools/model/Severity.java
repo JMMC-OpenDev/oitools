@@ -54,6 +54,10 @@ public enum Severity {
         return label;
     }
 
+    public boolean isHigher(final Severity other) {
+        return this.ordinal() > other.ordinal();
+    }
+
     /**
      * Method to sort on this Enum
      * @return Const.CMP_NAME
