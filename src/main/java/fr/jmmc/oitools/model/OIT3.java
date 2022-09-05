@@ -135,11 +135,14 @@ public final class OIT3 extends OIData {
         // Derived SPATIAL_V2_FREQ column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V2COORD_SPATIAL, "spatial V2 frequency", Types.TYPE_DBL, this));
 
-        // Derived SNR column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_T3AMP, "SNR on " + OIFitsConstants.COLUMN_T3AMP,
-                Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_T3AMP + " / " + OIFitsConstants.COLUMN_T3AMPERR + ")"));
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_T3PHI, "SNR on " + OIFitsConstants.COLUMN_T3PHI,
-                Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_T3PHI + " / " + OIFitsConstants.COLUMN_T3PHIERR + ")"));
+        if (false) {
+            // invalid SNR definition => disabled
+            // Derived SNR column definition
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_T3AMP, "SNR on " + OIFitsConstants.COLUMN_T3AMP,
+                    Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_T3AMP + " / " + OIFitsConstants.COLUMN_T3AMPERR + ")"));
+            addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SNR_T3PHI, "SNR on " + OIFitsConstants.COLUMN_T3PHI,
+                    Types.TYPE_DBL, this, "abs(" + OIFitsConstants.COLUMN_T3PHI + " / " + OIFitsConstants.COLUMN_T3PHIERR + ")"));
+        }
 
         // if IMAGE_OI support is enabled
         if (DataModel.hasOiModelColumnsSupport()) {

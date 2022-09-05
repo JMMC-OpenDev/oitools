@@ -574,6 +574,7 @@ public class OIFitsLoader {
 
                     // TODO load and handle any other FITS binary table or HDU...
                     if (logger.isLoggable(Level.INFO)) {
+                        // Dump HDU header and table columns:
                         logger.log(Level.INFO, "Skipping non-standard OIFITS {0}:\n{1}",
                                 new Object[]{FitsHDU.getHDUId(extName, i), FitsUtils.dumpHDU(hdu, false)});
                     }

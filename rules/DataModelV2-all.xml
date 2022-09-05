@@ -4442,28 +4442,6 @@
     <array>true</array>
   </column>
   <column>
-    <name>SNR_VISAMP</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>SNR on VISAMP</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>[[NWAVE]]</repeat>
-    <array>true</array>
-    <expression>abs(VISAMP / VISAMPERR)</expression>
-  </column>
-  <column>
-    <name>SNR_VISPHI</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>SNR on VISPHI</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>[[NWAVE]]</repeat>
-    <array>true</array>
-    <expression>abs(VISPHI / VISPHIERR)</expression>
-  </column>
-  <column>
     <name>RES_VISAMP_MODEL</name>
     <datatype>TYPE_DBL</datatype>
     <description>Residual between on VISAMP vs NS_MODEL_VISAMP (sigma)</description>
@@ -5085,28 +5063,6 @@
     </rules>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
-  </column>
-  <column>
-    <name>SNR_T3AMP</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>SNR on T3AMP</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>[[NWAVE]]</repeat>
-    <array>true</array>
-    <expression>abs(T3AMP / T3AMPERR)</expression>
-  </column>
-  <column>
-    <name>SNR_T3PHI</name>
-    <datatype>TYPE_DBL</datatype>
-    <description>SNR on T3PHI</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>[[NWAVE]]</repeat>
-    <array>true</array>
-    <expression>abs(T3PHI / T3PHIERR)</expression>
   </column>
   <column>
     <name>RES_T3AMP_MODEL</name>
