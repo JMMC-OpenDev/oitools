@@ -376,6 +376,7 @@ public class OIFitsProcessor extends OIFitsCommand {
                     || OPTION_STAINDEX.equals(args[i])
                     || OPTION_STACONF.equals(args[i])
                     || OPTION_MJD_RANGES.equals(args[i])
+                    || OPTION_MJD.equals(args[i])
                     || OPTION_WL_RANGES.equals(args[i])
                     || OPTION_EFFWAVE.equals(args[i])
                     || OPTION_EFFBAND.equals(args[i])) {
