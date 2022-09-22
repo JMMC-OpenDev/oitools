@@ -10,29 +10,28 @@ import fr.jmmc.oitools.model.StaNamesDir;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
- *
+ * Specific filter on StaIndexes
  * @author bourgesl
  */
 public final class StaIndexFilter extends FitsTableFilter<String> {
 
     // members:
     private final Map<String, StaNamesDir> usedStaNamesMap;
-    private final Set<short[]> staIndexMatchings = new HashSet<short[]>(); // identity
+    private final HashSet<short[]> staIndexMatchings = new HashSet<short[]>(); // identity
     private short[][] staIndexes = null;
 
-    public StaIndexFilter(final Map<String, StaNamesDir> usedStaNamesMap, final List<String> baselines) {
-        super(OIFitsConstants.COLUMN_STA_INDEX, baselines);
+    public StaIndexFilter(final Map<String, StaNamesDir> usedStaNamesMap, final List<String> baselines, final boolean include) {
+        super(OIFitsConstants.COLUMN_STA_INDEX, baselines, include);
         this.usedStaNamesMap = usedStaNamesMap;
     }
 
     @Override
     protected void reset() {
-        this.staIndexMatchings.clear();
-        this.staIndexes = null;
+        staIndexMatchings.clear();
+        staIndexes = null;
     }
 
     @Override
@@ -47,26 +46,26 @@ public final class StaIndexFilter extends FitsTableFilter<String> {
 
         if (staIndexMatchings.isEmpty()) {
             logger.log(Level.FINE, "Skip {0}, no matching baseline", fitsTable);
-            // skip OIData (no match):
-            return FilterState.INVALID;
+            // skip OIData (no match) if include or keep OIData (full) if exclude:
+            return (include) ? FilterState.INVALID : FilterState.FULL;
         }
         logger.log(Level.FINE, "staIndexMatching: {0}", staIndexMatchings);
 
-        if (oiData.getDistinctStaIndex().size() > staIndexMatchings.size()) {
-            // resolve column once
-            staIndexes = fitsTable.getColumnShorts(columnName);
-
-            if (staIndexes == null) {
-                // missing column, ignore filter:
-                return FilterState.FULL;
-            }
-            return FilterState.MASK;
+        if (oiData.getDistinctStaIndex().size() == staIndexMatchings.size()) {
+            // keep OIData (full) if include or skip OIData (no match) if exclude:
+            return (include) ? FilterState.FULL : FilterState.INVALID;
         }
-        return FilterState.FULL;
+        // resolve column once
+        staIndexes = fitsTable.getColumnShorts(columnName);
+
+        if (staIndexes == null) {
+            // missing column, ignore filter:
+            return FilterState.FULL;
+        }
+        return FilterState.MASK;
     }
 
     public boolean accept(final int row, final int col) {
-        return staIndexMatchings.contains(staIndexes[row]);
+        return staIndexMatchings.contains(staIndexes[row]) == include;
     }
-
 }

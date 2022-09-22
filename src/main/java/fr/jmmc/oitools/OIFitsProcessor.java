@@ -27,6 +27,7 @@ import fr.jmmc.oitools.model.Target;
 import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.processing.Merger;
 import fr.jmmc.oitools.processing.Selector;
+import fr.jmmc.oitools.processing.Selector.FilterValues;
 import fr.nom.tam.fits.FitsException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +68,8 @@ public class OIFitsProcessor extends OIFitsCommand {
     private static final String OPTION_STACONF = appendColumnArg(Selector.FILTER_STACONF);
     private static final String OPTION_EFFWAVE = appendColumnArg(Selector.FILTER_EFFWAVE);
     private static final String OPTION_EFFBAND = appendColumnArg(Selector.FILTER_EFFBAND);
+    /* prefix for filter values indicating EXCLUDE ('not:') */
+    private static final String OPTION_PREFIX_EXCLUDE = "not:";
 
     /**
      * Main entry point.
@@ -80,7 +83,7 @@ public class OIFitsProcessor extends OIFitsCommand {
                 return;
             }
 
-            final boolean quiet = !hasOptionArg(args, "-l", "-log") && !hasOptionArg(args, "-v", "-verbose");;
+            final boolean quiet = !hasOptionArg(args, "-l", "-log") && !hasOptionArg(args, "-v", "-verbose");
             bootstrap(quiet);
 
             final String command = args[0];
@@ -234,64 +237,37 @@ public class OIFitsProcessor extends OIFitsCommand {
 
         if (hasOptionArg(args, OPTION_TARGET)) {
             selector.setTargetUID(getOptionArgValue(args, OPTION_TARGET));
-        } else {
-            if (hasOptionArg(args, OPTION_TARGET_ID)) {
-                selector.setTargetUID(getOptionArgValue(args, OPTION_TARGET_ID));
-            }
+        } else if (hasOptionArg(args, OPTION_TARGET_ID)) {
+            selector.setTargetUID(getOptionArgValue(args, OPTION_TARGET_ID));
         }
         if (hasOptionArg(args, OPTION_INSNAME)) {
             selector.setInsModeUID(getOptionArgValue(args, OPTION_INSNAME));
         }
         if (hasOptionArg(args, OPTION_NIGHT)) {
             selector.setNightID(Integer.valueOf(getOptionArgValue(args, OPTION_NIGHT)));
-        } else {
-            if (hasOptionArg(args, OPTION_NIGHT_ID)) {
-                selector.setNightID(Integer.valueOf(getOptionArgValue(args, OPTION_NIGHT_ID)));
-            }
+        } else if (hasOptionArg(args, OPTION_NIGHT_ID)) {
+            selector.setNightID(Integer.valueOf(getOptionArgValue(args, OPTION_NIGHT_ID)));
         }
-        if (hasOptionArg(args, OPTION_MJD_RANGES)) {
-            addFilter(selector, Selector.FILTER_MJD, parseRanges(getOptionArgValue(args, OPTION_MJD_RANGES)));
-        } else {
-            if (hasOptionArg(args, OPTION_MJD)) {
-                addFilter(selector, Selector.FILTER_MJD, parseRanges(getOptionArgValue(args, OPTION_MJD)));
-            }
+
+        if (!addRangeFilter(selector, Selector.FILTER_MJD, args, OPTION_MJD_RANGES)) {
+            addRangeFilter(selector, Selector.FILTER_MJD, args, OPTION_MJD);
         }
-        if (hasOptionArg(args, OPTION_BASELINES)) {
-            addFilter(selector, Selector.FILTER_STAINDEX, parseStrings(getOptionArgValue(args, OPTION_BASELINES)));
-        } else {
-            if (hasOptionArg(args, OPTION_STAINDEX)) {
-                addFilter(selector, Selector.FILTER_STAINDEX, parseStrings(getOptionArgValue(args, OPTION_STAINDEX)));
-            }
+        if (!addStringFilter(selector, Selector.FILTER_STAINDEX, args, OPTION_BASELINES)) {
+            addStringFilter(selector, Selector.FILTER_STAINDEX, args, OPTION_STAINDEX);
         }
-        {
-            if (hasOptionArg(args, OPTION_STACONF)) {
-                addFilter(selector, Selector.FILTER_STACONF, parseStrings(getOptionArgValue(args, OPTION_STACONF)));
-            }
+        addStringFilter(selector, Selector.FILTER_STACONF, args, OPTION_STACONF);
+
+        if (!addRangeFilter(selector, Selector.FILTER_EFFWAVE, args, OPTION_WL_RANGES)) {
+            addRangeFilter(selector, Selector.FILTER_EFFWAVE, args, OPTION_EFFWAVE);
         }
-        if (hasOptionArg(args, OPTION_WL_RANGES)) {
-            addFilter(selector, Selector.FILTER_EFFWAVE, parseRanges(getOptionArgValue(args, OPTION_WL_RANGES)));
-        } else {
-            if (hasOptionArg(args, OPTION_EFFWAVE)) {
-                addFilter(selector, Selector.FILTER_EFFWAVE, parseRanges(getOptionArgValue(args, OPTION_EFFWAVE)));
-            }
-        }
-        {
-            if (hasOptionArg(args, OPTION_EFFBAND)) {
-                addFilter(selector, Selector.FILTER_EFFBAND, parseRanges(getOptionArgValue(args, OPTION_EFFBAND)));
-            }
-        }
+        addRangeFilter(selector, Selector.FILTER_EFFBAND, args, OPTION_EFFBAND);
 
         // collect extra arguments from OIFITS2 data model:
-        for (String colName : DataModel.getInstance().getNumericalColumnNames()) {
-            if (!Selector.isCustomFilter(colName)) {
-
-                final String arg = appendColumnArg(colName);
-                if (hasOptionArg(args, arg)) {
-                    addFilter(selector, colName, parseRanges(getOptionArgValue(args, arg)));
-                }
+        for (String columnName : DataModel.getInstance().getNumericalColumnNames()) {
+            if (!Selector.isCustomFilter(columnName)) {
+                addRangeFilter(selector, columnName, args);
             }
         }
-
         if (!selector.isEmpty()) {
             info("Filters: " + selector);
         }
@@ -450,23 +426,15 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("--------------------------------------------------------------------------------------");
     }
 
-    public static List<String> parseStrings(final String input) {
-        if (input == null) {
-            return null;
+    private static void parseStrings(final List<String> values, final String input) {
+        if (input != null) {
+            for (String value : input.split(",")) {
+                values.add(value.trim());
+            }
         }
-        final String[] values = input.split(",");
-
-        final List<String> baselineList = new ArrayList<String>(values.length);
-        for (String value : values) {
-            baselineList.add(value.trim());
-        }
-        if (baselineList.isEmpty()) {
-            return null;
-        }
-        return baselineList;
     }
 
-    public static StringBuilder dumpStrings(final List<String> values, final StringBuilder sb) {
+    private static StringBuilder dumpStrings(final List<String> values, final StringBuilder sb) {
         if (values == null || values.isEmpty()) {
             return sb;
         }
@@ -477,34 +445,28 @@ public class OIFitsProcessor extends OIFitsCommand {
         return sb;
     }
 
-    public static List<Range> parseRanges(final String input) {
-        if (input == null) {
-            return null;
-        }
-        final String[] values = input.split(",");
+    private static void parseRanges(final List<Range> ranges, final String input) {
+        if (input != null) {
+            final String[] values = input.split(",");
 
-        if ((values.length % 2) == 1) {
-            throw new IllegalStateException("Invalid ranges (" + values.length + " items): " + input);
-        }
-        final List<Range> ranges = new ArrayList<Range>(values.length);
-
-        for (int i = 0; i < values.length; i += 2) {
-            final double min = Double.valueOf(values[i]);
-            final double max = Double.valueOf(values[i + 1]);
-
-            if (min > max) {
-                throw new IllegalStateException("Invalid range [" + min + "," + max + "]");
+            if ((values.length % 2) == 1) {
+                throw new IllegalStateException("Invalid ranges (" + values.length + " items): " + input);
             }
 
-            ranges.add(new Range(min, max));
+            for (int i = 0; i < values.length; i += 2) {
+                final double min = Double.parseDouble(values[i]);
+                final double max = Double.parseDouble(values[i + 1]);
+
+                if (min > max) {
+                    throw new IllegalStateException("Invalid range [" + min + "," + max + "]");
+                }
+
+                ranges.add(new Range(min, max));
+            }
         }
-        if (ranges.isEmpty()) {
-            return null;
-        }
-        return ranges;
     }
 
-    public static StringBuilder dumpRanges(final List<Range> values, final StringBuilder sb) {
+    private static StringBuilder dumpRanges(final List<Range> values, final StringBuilder sb) {
         if (values == null || values.isEmpty()) {
             return sb;
         }
@@ -532,38 +494,58 @@ public class OIFitsProcessor extends OIFitsCommand {
             /* no way to define selector.tables via CLI */
 
             if (selector.hasFilter(Selector.FILTER_MJD)) {
-                appendColumnArg(sb, Selector.FILTER_MJD).append(" ");
-                dumpRanges(selector.getFilter(Selector.FILTER_MJD), sb).append(" ");
+                dumpRangeFilter(sb, selector.getFilterValues(Selector.FILTER_MJD));
             }
 
             if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
-                appendColumnArg(sb, Selector.FILTER_STAINDEX).append(" ");
-                dumpStrings(selector.getFilter(Selector.FILTER_STAINDEX), sb).append(" ");
+                dumpStringFilter(sb, selector.getFilterValues(Selector.FILTER_STAINDEX));
             }
             if (selector.hasFilter(Selector.FILTER_STACONF)) {
-                appendColumnArg(sb, Selector.FILTER_STACONF).append(" ");
-                dumpStrings(selector.getFilter(Selector.FILTER_STACONF), sb).append(" ");
+                dumpStringFilter(sb, selector.getFilterValues(Selector.FILTER_STACONF));
             }
 
             if (selector.hasFilter(Selector.FILTER_EFFWAVE)) {
-                appendColumnArg(sb, Selector.FILTER_EFFWAVE).append(" ");
-                dumpRanges(selector.getFilter(Selector.FILTER_EFFWAVE), sb).append(" ");
+                dumpRangeFilter(sb, selector.getFilterValues(Selector.FILTER_EFFWAVE));
             }
             if (selector.hasFilter(Selector.FILTER_EFFBAND)) {
-                appendColumnArg(sb, Selector.FILTER_EFFBAND).append(" ");
-                dumpRanges(selector.getFilter(Selector.FILTER_EFFBAND), sb).append(" ");
+                dumpRangeFilter(sb, selector.getFilterValues(Selector.FILTER_EFFBAND));
             }
 
             // convert generic filters from selector.filters:
-            for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
+            for (Map.Entry<String, FilterValues<?>> e : selector.getFiltersMap().entrySet()) {
                 if (!Selector.isCustomFilter(e.getKey())) {
-                    appendColumnArg(sb, e.getKey()).append(" ");
-                    dumpRanges((List<Range>) e.getValue(), sb).append(" ");
+                    dumpRangeFilter(sb, e.getValue());
                 }
             }
             return sb.toString();
         }
         return "";
+    }
+
+    private static void dumpStringFilter(final StringBuilder sb, final FilterValues filterValues) {
+        if (filterValues != null) {
+            if (filterValues.getIncludeValues() != null) {
+                appendColumnArg(sb, filterValues.getColumnName()).append(" ");
+                dumpStrings(filterValues.getIncludeValues(), sb).append(" ");
+            }
+            if (filterValues.getExcludeValues() != null) {
+                appendColumnArg(sb, filterValues.getColumnName()).append(" ").append(OPTION_PREFIX_EXCLUDE);
+                dumpStrings(filterValues.getExcludeValues(), sb).append(" ");
+            }
+        }
+    }
+
+    private static void dumpRangeFilter(final StringBuilder sb, final FilterValues filterValues) {
+        if (filterValues != null) {
+            if (filterValues.getIncludeValues() != null) {
+                appendColumnArg(sb, filterValues.getColumnName()).append(" ");
+                dumpRanges(filterValues.getIncludeValues(), sb).append(" ");
+            }
+            if (filterValues.getExcludeValues() != null) {
+                appendColumnArg(sb, filterValues.getColumnName()).append(" ").append(OPTION_PREFIX_EXCLUDE);
+                dumpRanges(filterValues.getExcludeValues(), sb).append(" ");
+            }
+        }
     }
 
     private static String appendColumnArg(final String colName) {
@@ -576,9 +558,57 @@ public class OIFitsProcessor extends OIFitsCommand {
         return sb; // fluent API
     }
 
-    private static void addFilter(final Selector selector, final String colName, final List<?> values) {
-        if (values != null) {
-            selector.addFilter(colName, values);
-        }
+    private static boolean addRangeFilter(final Selector selector, final String columnName,
+                                          final String[] args) {
+        return addRangeFilter(selector, columnName, args, appendColumnArg(columnName));
     }
+
+    private static boolean addRangeFilter(final Selector selector, final String columnName,
+                                          final String[] args, final String optionArg) {
+        if (hasOptionArg(args, optionArg)) {
+            final List<String> argValues = getOptionArgValues(args, optionArg);
+            if (argValues != null) {
+                FilterValues<Range> filterValues = null;
+
+                for (String arg : argValues) {
+                    if ((arg != null) && !arg.isEmpty()) {
+                        if (filterValues == null) {
+                            filterValues = new FilterValues<Range>(columnName);
+                        }
+                        if (arg.startsWith(OPTION_PREFIX_EXCLUDE)) {
+                            parseRanges(filterValues.getOrCreateExcludeValues(), arg.substring(OPTION_PREFIX_EXCLUDE.length()));
+                        } else {
+                            parseRanges(filterValues.getOrCreateIncludeValues(), arg);
+                        }
+                    }
+                }
+                return selector.addFilter(columnName, filterValues);
+            }
+        }
+        return false;
+    }
+
+    private static boolean addStringFilter(final Selector selector, final String columnName,
+                                           final String[] args, final String optionArg) {
+        if (hasOptionArg(args, optionArg)) {
+            final List<String> argValues = getOptionArgValues(args, optionArg);
+            FilterValues<String> filterValues = null;
+
+            for (String arg : argValues) {
+                if ((arg != null) && !arg.isEmpty()) {
+                    if (filterValues == null) {
+                        filterValues = new FilterValues<String>(columnName);
+                    }
+                    if (arg.startsWith(OPTION_PREFIX_EXCLUDE)) {
+                        parseStrings(filterValues.getOrCreateExcludeValues(), arg.substring(OPTION_PREFIX_EXCLUDE.length()));
+                    } else {
+                        parseStrings(filterValues.getOrCreateIncludeValues(), arg);
+                    }
+                }
+            }
+            return selector.addFilter(columnName, filterValues);
+        }
+        return false;
+    }
+
 }

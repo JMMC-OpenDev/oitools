@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2018 CNRS - JMMC project ( http://www.jmmc.fr )
+ * Copyright (C) 2022 CNRS - JMMC project ( http://www.jmmc.fr )
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,93 +16,41 @@
  */
 package fr.jmmc.oitools.processing;
 
-import fr.jmmc.oitools.model.DataModel;
-import fr.jmmc.oitools.model.Granule;
-import fr.jmmc.oitools.model.Granule.GranuleField;
 import fr.jmmc.oitools.model.IndexMask;
-import fr.jmmc.oitools.model.InstrumentMode;
-import fr.jmmc.oitools.model.NightId;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsCollection;
-import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIWavelength;
-import fr.jmmc.oitools.model.StaNamesDir;
-import fr.jmmc.oitools.model.Target;
-import fr.jmmc.oitools.util.OIFitsFileComparator;
-import fr.jmmc.oitools.util.OITableByFileComparator;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * Basic selector result (OIData and Granule sets)
  */
-public final class SelectorResult {
+public final class SelectorResult extends BaseSelectorResult {
 
     /** members */
-    /** selector to get criterias */
-    private Selector selector = null;
-    /** OIFits collection (data source) */
-    private final OIFitsCollection oiFitsCollection;
-    /** granule set (insertion ordered) */
-    private final Set<Granule> granules = new HashSet<Granule>();
-    /* preserve order in selected data (per file) */
-    private final Set<OIData> oiDatas = new LinkedHashSet<OIData>();
-    /* filters */
-    private final List<FitsTableFilter<?>> filtersUsed = new ArrayList<>();
-    private final List<FitsTableFilter<?>> filtersOIData1D = new ArrayList<>();
-    private final List<FitsTableFilter<?>> filtersOIData2D = new ArrayList<>();
-    private final List<FitsTableFilter<?>> filtersOIWavelength = new ArrayList<>();
+    /* filters: use ArrayList for performance */
+    private final ArrayList<FitsTableFilter<?>> filtersOIWavelength = new ArrayList<>();
+    private final ArrayList<FitsTableFilter<?>> filtersOIData1D = new ArrayList<>();
+    private final ArrayList<FitsTableFilter<?>> filtersOIData2D = new ArrayList<>();
+    private final ArrayList<FitsTableFilter<?>> filtersUsed = new ArrayList<>();
     /* applied filters */
     private final Set<String> usedColumnsFiltersOIData2D = new LinkedHashSet<>();
     private final Set<String> relatedColumnsFiltersOIData2D = new LinkedHashSet<>();
 
     /* masks */
+    /** Map between OIWavelength table to BitSet (mask 1D) */
+    private final Map<OIWavelength, IndexMask> maskOIWavelengths = new IdentityHashMap<OIWavelength, IndexMask>();
     /** Map between OIData table to BitSet (mask 1D) */
     private final Map<OIData, IndexMask> maskOIDatas1D = new IdentityHashMap<OIData, IndexMask>();
     /** Map between OIData table to BitSet (mask 2D) */
     private final Map<OIData, IndexMask> maskOIDatas2D = new IdentityHashMap<OIData, IndexMask>();
-    /** Map between OIWavelength table to BitSet (mask 1D) */
-    private final Map<OIWavelength, IndexMask> maskOIWavelengths = new IdentityHashMap<OIWavelength, IndexMask>();
-    /** cached values */
-    private List<Target> sortedTargets = null;
-    private List<InstrumentMode> sortedInstrumentModes = null;
-    private List<NightId> sortedNightIds = null;
-    private List<OIData> sortedOIDatas = null;
-    /** Map of used staNames to StaNamesDir (reference StaNames / orientation) */
-    private Map<String, StaNamesDir> usedStaNamesMap = null;
-    /* data model on selected data */
-    private DataModel dataModel = null;
 
     public SelectorResult(final OIFitsCollection oiFitsCollection) {
-        this.oiFitsCollection = oiFitsCollection;
-        reset();
-    }
-
-    public void reset() {
-        selector = null;
-        granules.clear();
-        oiDatas.clear();
-        filtersUsed.clear();
-        filtersOIData1D.clear();
-        filtersOIData2D.clear();
-        filtersOIWavelength.clear();
-        usedColumnsFiltersOIData2D.clear();
-        relatedColumnsFiltersOIData2D.clear();
-        maskOIDatas1D.clear();
-        maskOIDatas2D.clear();
-        maskOIWavelengths.clear();
-        sortedTargets = null;
-        sortedInstrumentModes = null;
-        sortedNightIds = null;
-        sortedOIDatas = null;
-        usedStaNamesMap = null;
-        dataModel = null;
+        super(oiFitsCollection);
     }
 
     public void resetFilters() {
@@ -119,40 +67,19 @@ public final class SelectorResult {
         // instead of selector ...
     }
 
-    public boolean hasSelector() {
-        return (selector != null);
+    public boolean hasFiltersOIWavelength() {
+        return !filtersOIWavelength.isEmpty();
     }
 
-    public Selector getSelector() {
-        return selector;
-    }
-
-    public void setSelector(final Selector selector) {
-        this.selector = selector;
-    }
-
-    public OIFitsCollection getOiFitsCollection() {
-        return oiFitsCollection;
-    }
-
-    public boolean isEmpty() {
-        return granules.isEmpty();
-    }
-
-    public void addOIData(final Granule g, final OIData oiData) {
-        granules.add(g);
-        oiDatas.add(oiData);
-    }
-
-    public List<FitsTableFilter<?>> getFiltersUsed() {
-        return filtersUsed;
+    public ArrayList<FitsTableFilter<?>> getFiltersOIWavelength() {
+        return filtersOIWavelength;
     }
 
     public boolean hasFiltersOIData1D() {
         return !filtersOIData1D.isEmpty();
     }
 
-    public List<FitsTableFilter<?>> getFiltersOIData1D() {
+    public ArrayList<FitsTableFilter<?>> getFiltersOIData1D() {
         return filtersOIData1D;
     }
 
@@ -160,59 +87,38 @@ public final class SelectorResult {
         return !filtersOIData2D.isEmpty();
     }
 
-    public List<FitsTableFilter<?>> getFiltersOIData2D() {
+    public ArrayList<FitsTableFilter<?>> getFiltersOIData2D() {
         return filtersOIData2D;
     }
 
-    public boolean hasFiltersOIWavelength() {
-        return !filtersOIWavelength.isEmpty();
-    }
-
-    public List<FitsTableFilter<?>> getFiltersOIWavelength() {
-        return filtersOIWavelength;
-    }
-
-    public List<Target> getDistinctTargets() {
-        if (sortedTargets == null) {
-            sortedTargets = Granule.getSortedDistinctGranuleField(granules, GranuleField.TARGET);
-        }
-        return sortedTargets;
-    }
-
-    public List<InstrumentMode> getDistinctInstrumentModes() {
-        if (sortedInstrumentModes == null) {
-            sortedInstrumentModes = Granule.getSortedDistinctGranuleField(granules, GranuleField.INS_MODE);
-        }
-        return sortedInstrumentModes;
-    }
-
-    public List<NightId> getDistinctNightIds() {
-        if (sortedNightIds == null) {
-            sortedNightIds = Granule.getSortedDistinctGranuleField(granules, GranuleField.NIGHT);
-        }
-        return sortedNightIds;
-    }
-
-    public List<OIData> getSortedOIDatas() {
-        if (sortedOIDatas == null) {
-            final List<OIData> sorted = new ArrayList<OIData>(oiDatas);
-            Collections.sort(sorted, OITableByFileComparator.INSTANCE);
-            sortedOIDatas = sorted;
-        }
-        return sortedOIDatas;
-    }
-
-    public List<OIFitsFile> getSortedOIFitsFiles() {
-        final Set<OIFitsFile> oiFitsFiles = new HashSet<OIFitsFile>();
-        for (OIData oiData : oiDatas) {
-            oiFitsFiles.add(oiData.getOIFitsFile());
-        }
-        final List<OIFitsFile> sorted = new ArrayList<OIFitsFile>(oiFitsFiles);
-        Collections.sort(sorted, OIFitsFileComparator.INSTANCE);
-        return sorted;
+    public ArrayList<FitsTableFilter<?>> getFiltersUsed() {
+        return filtersUsed;
     }
 
     // --- masks ---
+    /**
+     * Retrieves the IndexMask for the given OIWavelength.
+     * @param oiWavelength May be null.
+     * @return the IndexMask, or null or FULL
+     */
+    public IndexMask getWavelengthMask(final OIWavelength oiWavelength) {
+        return this.maskOIWavelengths.get(oiWavelength);
+    }
+
+    public IndexMask getWavelengthMaskNotFull(final OIWavelength oiWavelength) {
+        final IndexMask maskWavelength = getWavelengthMask(oiWavelength);
+        return (IndexMask.isNotFull(maskWavelength)) ? maskWavelength : null;
+    }
+
+    /**
+     * Registers the IndexMask for the given OIWavelength.
+     * @param oiWavelength Must not be null.
+     * @param mask IndexMask not null or FULL
+     */
+    public void putWavelengthMask(final OIWavelength oiWavelength, final IndexMask mask) {
+        this.maskOIWavelengths.put(oiWavelength, mask);
+    }
+
     /**
      * Retrieves the IndexMask for the given OIData.
      * @param oiData May be null.
@@ -267,59 +173,15 @@ public final class SelectorResult {
         return relatedColumnsFiltersOIData2D;
     }
 
-    /**
-     * Retrieves the IndexMask for the given OIWavelength.
-     * @param oiWavelength May be null.
-     * @return the IndexMask, or null or FULL
-     */
-    public IndexMask getWavelengthMask(final OIWavelength oiWavelength) {
-        return this.maskOIWavelengths.get(oiWavelength);
-    }
-
-    public IndexMask getWavelengthMaskNotFull(final OIWavelength oiWavelength) {
-        final IndexMask maskWavelength = getWavelengthMask(oiWavelength);
-        return (IndexMask.isNotFull(maskWavelength)) ? maskWavelength : null;
-    }
-
-    /**
-     * Registers the IndexMask for the given OIWavelength.
-     * @param oiWavelength Must not be null.
-     * @param mask IndexMask not null or FULL
-     */
-    public void putWavelengthMask(final OIWavelength oiWavelength, final IndexMask mask) {
-        this.maskOIWavelengths.put(oiWavelength, mask);
-    }
-
-    /**
-     * Return the Map of sorted staNames to StaNamesDir
-     * @return Map of sorted staNames to StaNamesDir
-     */
-    public Map<String, StaNamesDir> getUsedStaNamesMap() {
-        return usedStaNamesMap;
-    }
-
-    public void setUsedStaNamesMap(final Map<String, StaNamesDir> usedStaNamesMap) {
-        this.usedStaNamesMap = usedStaNamesMap;
-    }
-
-    public DataModel getDataModel() {
-        if (dataModel == null) {
-            dataModel = DataModel.getInstance(oiDatas);
-        }
-        return dataModel;
-    }
-
     @Override
     public String toString() {
-        return "SelectorResult{" + "granules=" + granules + ", oiDatas=" + oiDatas
+        return "SelectorResult{" + super.toString()
+                + ", filtersOIWavelength=" + filtersOIWavelength + ", maskOIWavelengths=" + maskOIWavelengths
                 + ", filtersOIData1D=" + filtersOIData1D + ", maskOIDatas1D=" + maskOIDatas1D
                 + ", filtersOIData2D=" + filtersOIData2D + ", maskOIDatas2D=" + maskOIDatas2D
                 + ", usedColumnsFiltersOIData2D=" + usedColumnsFiltersOIData2D
-                + ", filtersOIWavelength=" + filtersOIWavelength + ", maskOIWavelengths=" + maskOIWavelengths
+                + ", relatedColumnsFiltersOIData2D=" + relatedColumnsFiltersOIData2D
                 + '}';
     }
 
-    public static DataModel getDataModel(final SelectorResult selectorResult) {
-        return (selectorResult == null) ? DataModel.getInstance() : selectorResult.getDataModel();
-    }
 }

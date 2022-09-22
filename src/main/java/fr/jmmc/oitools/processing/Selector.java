@@ -48,7 +48,7 @@ public final class Selector {
         Selector.FILTER_STAINDEX,
         Selector.FILTER_STACONF
     });
-    
+
     // members:
     private String targetUID = null;
     private String insModeUID = null;
@@ -56,7 +56,7 @@ public final class Selector {
     // table selection filter expressed as extNb (integer) values + OIFits file (id)
     private final Map<String, List<Integer>> extNbsPerOiFitsPath = new HashMap<String, List<Integer>>();
     // Extra criteria:
-    private final Map<String, List<?>> filtersMap = new LinkedHashMap<>();
+    private final Map<String, FilterValues<?>> filtersMap = new LinkedHashMap<>();
 
     public Selector() {
         reset();
@@ -119,7 +119,7 @@ public final class Selector {
         }
     }
 
-    public Map<String, List<?>> getFiltersMap() {
+    public Map<String, FilterValues<?>> getFiltersMap() {
         return filtersMap;
     }
 
@@ -131,12 +131,65 @@ public final class Selector {
         return filtersMap.containsKey(columnName);
     }
 
-    public <K> List<K> getFilter(final String columnName) {
-        return (List<K>) filtersMap.get(columnName);
+    public List getFilterIncludeValues(final String columnName) {
+        FilterValues filterValues = getFilterValues(columnName);
+        return (filterValues != null) ? filterValues.getIncludeValues() : null;
     }
 
-    public void addFilter(final String columnName, final List<?> values) {
-        filtersMap.put(columnName, values);
+    public List getFilterExcludeValues(final String columnName) {
+        FilterValues filterValues = getFilterValues(columnName);
+        return (filterValues != null) ? filterValues.getExcludeValues() : null;
+    }
+
+    public <K> FilterValues<K> getFilterValues(final String columnName) {
+        return (FilterValues<K>) filtersMap.get(columnName);
+    }
+
+    public <K> FilterValues<K> removeFilterValues(final String columnName) {
+        return (FilterValues<K>) filtersMap.remove(columnName);
+    }
+
+    private <K> FilterValues<K> getOrCreateFilterValues(final String columnName) {
+        FilterValues<K> filterValues = getFilterValues(columnName);
+        if (filterValues == null) {
+            filterValues = new FilterValues<>(columnName);
+            filtersMap.put(columnName, filterValues);
+        }
+        return filterValues;
+    }
+
+    public boolean addFilter(final String columnName, final FilterValues<?> filterValues) {
+        if ((filterValues != null) && !filterValues.isEmpty()) {
+            filtersMap.put(columnName, filterValues);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addFilter(final String columnName, final List<?> includeValues) {
+        return addIncludingFilter(columnName, includeValues);
+    }
+
+    public boolean addIncludingFilter(final String columnName, final List<?> includeValues) {
+        if ((includeValues != null) && !includeValues.isEmpty()) {
+            final FilterValues filterValues = getOrCreateFilterValues(columnName);
+            filterValues.setIncludeValues(includeValues);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addExcludingFilter(final String columnName, final List<?> excludeValues) {
+        if ((excludeValues != null) && !excludeValues.isEmpty()) {
+            final FilterValues filterValues = getOrCreateFilterValues(columnName);
+            filterValues.setExcludeValues(excludeValues);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeFilter(final String columnName) {
+        return (removeFilterValues(columnName) != null);
     }
 
     public boolean isEmpty() {
@@ -154,7 +207,7 @@ public final class Selector {
                 + (hasFilters() ? " filters: " + filtersMap : "")
                 + ']';
     }
-    
+
     public static boolean isRangeFilter(final String name) {
         switch (name) {
             case Selector.FILTER_TARGET_ID:
@@ -166,7 +219,7 @@ public final class Selector {
                 return true;
         }
     }
-    
+
     public static boolean isCustomFilter(final String name) {
         switch (name) {
             case Selector.FILTER_TARGET_ID:
@@ -190,4 +243,60 @@ public final class Selector {
         }
     }
 
+    public final static class FilterValues<K> {
+
+        /** column name (debugging) */
+        private final String columnName;
+        /** filter values (string or range) to include matching values */
+        private List<K> includeValues = null;
+        /** filter values (string or range) to exclude matching values */
+        private List<K> excludeValues = null;
+
+        public FilterValues(final String columnName) {
+            this.columnName = columnName;
+        }
+
+        public String getColumnName() {
+            return columnName;
+        }
+
+        public boolean isEmpty() {
+            return (includeValues == null) && (excludeValues == null);
+        }
+
+        public List<K> getIncludeValues() {
+            return includeValues;
+        }
+
+        public List<K> getOrCreateIncludeValues() {
+            if (includeValues == null) {
+                includeValues = new ArrayList<>(4);
+            }
+            return includeValues;
+        }
+
+        public void setIncludeValues(final List<K> includeValues) {
+            this.includeValues = includeValues;
+        }
+
+        public List<K> getExcludeValues() {
+            return excludeValues;
+        }
+
+        public List<K> getOrCreateExcludeValues() {
+            if (excludeValues == null) {
+                excludeValues = new ArrayList<>(2);
+            }
+            return excludeValues;
+        }
+
+        public void setExcludeValues(final List<K> excludeValues) {
+            this.excludeValues = excludeValues;
+        }
+
+        @Override
+        public String toString() {
+            return "FilterValues{" + "columnName=" + columnName + ", includeValues=" + includeValues + ", excludeValues=" + excludeValues + '}';
+        }
+    }
 }

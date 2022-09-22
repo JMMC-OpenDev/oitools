@@ -22,15 +22,15 @@ public final class TargetUIDFilter extends FitsTableFilter<String> {
     private short[] targetIds = null;
 
     public TargetUIDFilter(final TargetManager tm, final String targetUID) {
-        super(OIFitsConstants.COLUMN_TARGET_ID, FitsTableFilter.asList(targetUID));
+        super(OIFitsConstants.COLUMN_TARGET_ID, FitsTableFilter.asList(targetUID), true); // always inclusive
         this.tm = tm;
     }
 
     @Override
     protected void reset() {
-        this.tm = null;
-        this.targetIdMatcher = null;
-        this.targetIds = null;
+        tm = null;
+        targetIdMatcher = null;
+        targetIds = null;
     }
 
     @Override
@@ -45,7 +45,7 @@ public final class TargetUIDFilter extends FitsTableFilter<String> {
         final String targetUID = getAcceptedValues().get(0);
 
         // targetID can not be null as the OIData table is supposed to have the target:
-        this.targetIdMatcher = oiData.getTargetIdMatcher(this.tm, targetUID);
+        targetIdMatcher = oiData.getTargetIdMatcher(this.tm, targetUID);
 
         if (targetIdMatcher == null) {
             logger.log(Level.FINE, "Skip {0}, no matching range", fitsTable);

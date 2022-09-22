@@ -181,8 +181,10 @@ public final class Merger {
             primaryHdu.addHeaderHistory(generateCLIInputs(result.getSortedOIFitsFiles()));
 
             // Add CLI args:
-            final Selector selector = result.getSelector();
-            primaryHdu.addHeaderHistory(OIFitsProcessor.generateCLIargs(selector));
+            if (result.hasSelector()) {
+                final Selector selector = result.getSelector();
+                primaryHdu.addHeaderHistory(OIFitsProcessor.generateCLIargs(selector));
+            }
         }
         return resultFile;
     }

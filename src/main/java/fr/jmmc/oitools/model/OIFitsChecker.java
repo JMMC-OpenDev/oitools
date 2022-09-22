@@ -185,6 +185,14 @@ public final class OIFitsChecker {
     }
 
     /**
+     * Reset
+     */
+    public void reset() {
+        cleanup();
+        clearCheckReport();
+    }
+
+    /**
      * Clear the failures
      */
     public void clearCheckReport() {
@@ -380,7 +388,7 @@ public final class OIFitsChecker {
         // For HDU:
         return null;
     }
-    
+
     public boolean isEmpty() {
         return this.failures.isEmpty();
     }

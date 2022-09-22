@@ -93,11 +93,19 @@ public abstract class OIAbstractData extends OITable {
     }
 
     /**
-     * Return the number of measurements in this table.
+     * Return the number of measurements in this table (= number of rows)
      * @return the number of measurements.
      */
     public final int getNbMeasurements() {
         return getNbRows();
+    }
+
+    /**
+     * Return the number of data points in this table (= number of rows * number of wavelengths)
+     * @return the number of data points.
+     */
+    public final int getNbDataPoints() {
+        return getNbRows() * getNWave();
     }
 
     /*

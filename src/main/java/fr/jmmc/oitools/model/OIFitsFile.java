@@ -547,17 +547,9 @@ public final class OIFitsFile extends FitsImageFile {
     public Range getWavelengthRange() {
         // lazy computation:
         if (wavelengthRange == null) {
-            computeWavelengthBounds();
+            this.wavelengthRange = OIDataListHelper.getWaveLengthRange(getOiDataList());
         }
         return wavelengthRange;
-    }
-
-    /**
-     * Compute the wavelength range used by OIDATA tables.
-     */
-    private void computeWavelengthBounds() {
-        // Traverse all OIDATA to get OI_WAVELENGTH ranges:
-        this.wavelengthRange = OIDataListHelper.getWaveLengthRange(getOiDataList());
     }
 
     /**
@@ -931,6 +923,27 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
+     * @return total number of measurements in all oidata tables
+     */
+    public int getNbMeasurements() {
+        return OIDataListHelper.getNbMeasurements(getOiDataList());
+    }
+
+    /**
+     * @return total number of data points in all oidata tables
+     */
+    public int getNbDataPoints() {
+        return OIDataListHelper.getNbDataPoints(getOiDataList());
+    }
+
+    /**
+     * @return total number of non-flagged data points in all oidata tables
+     */
+    public int getNbDataPointsNotFlagged() {
+        return OIDataListHelper.getNbDataPointsNotFlagged(getOiDataList());
+    }
+
+    /**
      * Return the Distinct Granules
      * @return Distinct Granules
      */
@@ -1205,6 +1218,16 @@ public final class OIFitsFile extends FitsImageFile {
      */
     public List<OIData> getOiDataList() {
         return this.oiDataTables;
+    }
+
+    /**
+     * Return the (internal) list of OI data tables of the given extName
+     *
+     * @param extName extName to look for
+     * @return (internal) list of OI data tables of the given extName
+     */
+    public List<OIData> getOIDataList(final String extName) {
+        return OIDataListHelper.getOIDataList(getOiDataList(), extName);
     }
 
     /**

@@ -23,13 +23,13 @@ public final class NightIdFilter extends FitsTableFilter<NightId> {
 
     public NightIdFilter(final Integer nightID) {
         super(OIFitsConstants.COLUMN_NIGHT_ID,
-                Arrays.asList(new NightId[]{NightId.getCachedInstance(nightID)}));
+                Arrays.asList(new NightId[]{NightId.getCachedInstance(nightID)}), true); // always inclusive
     }
 
     @Override
     protected void reset() {
-        this.nightIdMatcher = null;
-        this.nightIds = null;
+        nightIdMatcher = null;
+        nightIds = null;
     }
 
     @Override
@@ -44,7 +44,7 @@ public final class NightIdFilter extends FitsTableFilter<NightId> {
         final NightId nightId = getAcceptedValues().get(0);
 
         if (nightId != null) {
-            this.nightIdMatcher = new NightIdMatcher(nightId);
+            nightIdMatcher = new NightIdMatcher(nightId);
         }
 
         if (nightIdMatcher == null) {

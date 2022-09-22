@@ -31,6 +31,7 @@ import fr.jmmc.oitools.processing.FitsTableFilter;
 import fr.jmmc.oitools.processing.FitsTableFilter.FilterState;
 import fr.jmmc.oitools.processing.NightIdFilter;
 import fr.jmmc.oitools.processing.Selector;
+import fr.jmmc.oitools.processing.Selector.FilterValues;
 import fr.jmmc.oitools.processing.SelectorResult;
 import fr.jmmc.oitools.processing.StaConfFilter;
 import fr.jmmc.oitools.processing.StaIndexFilter;
@@ -88,6 +89,7 @@ public final class OIFitsCollection implements ToStringable {
     /** Map of used staNames to StaNamesDir (reference StaNames / orientation) */
     private final Map<String, StaNamesDir> usedStaNamesMap = new LinkedHashMap<String, StaNamesDir>();
     /** cached values */
+    private ArrayList<Granule> sortedGranules = null;
     private List<String> distinctStaNames = null;
     private List<String> distinctStaConfs = null;
     private final Map<String, Range> columnRanges = new HashMap<>(32);
@@ -164,6 +166,7 @@ public final class OIFitsCollection implements ToStringable {
         oiDataPerGranule.clear();
         usedStaNamesMap.clear();
 
+        sortedGranules = null;
         distinctStaNames = null;
         distinctStaConfs = null;
         columnRanges.clear();
@@ -182,12 +185,8 @@ public final class OIFitsCollection implements ToStringable {
     }
 
     public List<OIFitsFile> getSortedOIFitsFiles() {
-        return getSortedOIFitsFiles(OIFitsFileComparator.INSTANCE);
-    }
-
-    public List<OIFitsFile> getSortedOIFitsFiles(final Comparator<OIFitsFile> comparator) {
         final List<OIFitsFile> oiFitsFiles = new ArrayList<OIFitsFile>(getOIFitsFiles());
-        Collections.sort(oiFitsFiles, comparator);
+        Collections.sort(oiFitsFiles, OIFitsFileComparator.INSTANCE);
         return oiFitsFiles;
     }
 
@@ -279,7 +278,7 @@ public final class OIFitsCollection implements ToStringable {
     public void analyzeCollection() {
         clearCache();
 
-        final List<OIFitsFile> oiFitsFiles = getSortedOIFitsFiles();
+        final Collection<OIFitsFile> oiFitsFiles = getOIFitsFiles();
 
         // analyze instrument modes & targets & StaNames:
         for (OIFitsFile oiFitsFile : oiFitsFiles) {
@@ -375,6 +374,16 @@ public final class OIFitsCollection implements ToStringable {
     }
 
     /**
+     * Return the (internal) list of OI data tables of the given extName
+     *
+     * @param extName extName to look for
+     * @return (internal) list of OI data tables of the given extName
+     */
+    public List<OIData> getOIDataList(final String extName) {
+        return OIDataListHelper.getOIDataList(getAllOiDatas(), extName);
+    }
+
+    /**
      * Return the Distinct Granules
      * @return Distinct Granules
      */
@@ -398,20 +407,49 @@ public final class OIFitsCollection implements ToStringable {
         return usedStaNamesMap;
     }
 
-    public List<Granule> getSortedGranules() {
-        return getSortedGranules(GranuleComparator.DEFAULT);
+    /**
+     * @return (cached) sorted list of granules (must not be modified)
+     */
+    public ArrayList<Granule> getSortedGranules() {
+        if (this.sortedGranules == null) {
+            this.sortedGranules = getSortedGranules(GranuleComparator.DEFAULT);
+        }
+        return this.sortedGranules;
     }
 
-    public List<Granule> getSortedGranules(final Comparator<Granule> comparator) {
-        final List<Granule> granules = new ArrayList<Granule>(distinctGranules.keySet());
+    public ArrayList<Granule> getSortedGranules(final Comparator<Granule> comparator) {
+        if ((comparator == GranuleComparator.DEFAULT) && (this.sortedGranules != null)) {
+            return this.sortedGranules;
+        }
+        final ArrayList<Granule> granules = new ArrayList<Granule>(distinctGranules.keySet());
         Collections.sort(granules, comparator);
 
         logger.log(Level.FINE, "granules sorted: {0}", granules);
-
         return granules;
     }
 
     // --- statistics on all OIFITS collection ---
+    /**
+     * @return total number of measurements in all oidata tables
+     */
+    public int getNbMeasurements() {
+        return OIDataListHelper.getNbMeasurements(getAllOiDatas());
+    }
+
+    /**
+     * @return total number of data points in all oidata tables
+     */
+    public int getNbDataPoints() {
+        return OIDataListHelper.getNbDataPoints(getAllOiDatas());
+    }
+
+    /**
+     * @return total number of non-flagged data points in all oidata tables
+     */
+    public int getNbDataPointsNotFlagged() {
+        return OIDataListHelper.getNbDataPointsNotFlagged(getAllOiDatas());
+    }
+
     /**
      * Return the unique staNames values (sorted by name) from all OIData tables
      * @return unique staNames values (sorted by name)
@@ -498,7 +536,7 @@ public final class OIFitsCollection implements ToStringable {
             final long start = System.nanoTime();
 
             // Find matching Granules:
-            final List<Granule> granules = findGranules(selector);
+            final ArrayList<Granule> granules = findGranules(selector);
 
             if (granules != null && !granules.isEmpty()) {
                 result = (result != null) ? result : new SelectorResult(this);
@@ -506,67 +544,63 @@ public final class OIFitsCollection implements ToStringable {
                 // Prepare filters (once) in selectorResult:
                 if (selector != null) {
                     // Create the filter chain:
-                    {
-                        // OIData filters:
-                        final List<FitsTableFilter<?>> filtersData1D = result.getFiltersOIData1D();
-                        filtersData1D.clear();
-                        // subset filters:
-                        if (selector.getTargetUID() != null) {
-                            filtersData1D.add(new TargetUIDFilter(tm, selector.getTargetUID()));
-                        }
-                        // insModeUID: useless as granule already handled this criteria
-                        if (selector.getNightID() != null) {
-                            filtersData1D.add(new NightIdFilter(selector.getNightID()));
-                        }
-                        // selector.tables: see OIData filtering below
 
-                        // generic filters:
-                        if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
-                            filtersData1D.add(new StaIndexFilter(getUsedStaNamesMap(),
-                                    selector.getFilter(Selector.FILTER_STAINDEX)));
-                        }
-                        if (selector.hasFilter(Selector.FILTER_STACONF)) {
-                            filtersData1D.add(new StaConfFilter(
-                                    selector.getFilter(Selector.FILTER_STACONF)));
-                        }
-                        if (selector.hasFilter(Selector.FILTER_MJD)) {
-                            filtersData1D.add(new Double1DFilter(Selector.FILTER_MJD,
-                                    selector.getFilter(Selector.FILTER_MJD)));
-                        }
+                    // OIData filters:
+                    final ArrayList<FitsTableFilter<?>> filtersData1D = result.getFiltersOIData1D();
+                    filtersData1D.clear();
 
-                        // convert generic filters from selector.filters (1D or 2D):
-                        final List<FitsTableFilter<?>> filtersData2D = result.getFiltersOIData2D();
-                        filtersData2D.clear();
+                    // subset filters:
+                    if (selector.getTargetUID() != null) {
+                        filtersData1D.add(new TargetUIDFilter(tm, selector.getTargetUID())); // inclusive
+                    }
+                    // insModeUID: useless as granule already handled this criteria
+                    if (selector.getNightID() != null) {
+                        filtersData1D.add(new NightIdFilter(selector.getNightID())); // inclusive
+                    }
+                    // selector.tables: see OIData filtering below
 
-                        // Use shared data model (OIFITS2):
-                        // chicken & egg problem to use custom expression columns (how to get them):
-                        final DataModel dataModel = DataModel.getInstance();
+                    // generic filters:
+                    if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
+                        addStaIndexFilters(filtersData1D, selector.getFilterValues(Selector.FILTER_STAINDEX));
+                    }
+                    if (selector.hasFilter(Selector.FILTER_STACONF)) {
+                        addStaConfFilters(filtersData1D, selector.getFilterValues(Selector.FILTER_STACONF));
+                    }
+                    if (selector.hasFilter(Selector.FILTER_MJD)) {
+                        addDouble1DFilters(filtersData1D, selector.getFilterValues(Selector.FILTER_MJD));
+                    }
 
-                        for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
-                            if (!Selector.isCustomFilter(e.getKey())) {
-                                if (dataModel.isNumericalColumn1D(e.getKey())) {
-                                    filtersData1D.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
-                                } else {
-                                    filtersData2D.add(new Double2DFilter(e.getKey(), (List<Range>) e.getValue()));
-                                }
+                    // convert generic filters from selector.filters (1D or 2D):
+                    final ArrayList<FitsTableFilter<?>> filtersData2D = result.getFiltersOIData2D();
+                    filtersData2D.clear();
+
+                    // Use shared data model (OIFITS2):
+                    // chicken & egg problem to use custom expression columns (how to get them):
+                    final DataModel dataModel = DataModel.getInstance();
+
+                    for (Map.Entry<String, FilterValues<?>> e : selector.getFiltersMap().entrySet()) {
+                        if (!Selector.isCustomFilter(e.getKey())) {
+                            if (dataModel.isNumericalColumn1D(e.getKey())) {
+                                addDouble1DFilters(filtersData1D, (FilterValues<Range>) e.getValue());
+                            } else {
+                                addDouble2DFilters(filtersData2D, (FilterValues<Range>) e.getValue());
                             }
                         }
-                        logger.log(Level.FINE, "filtersData1D: {0} ", filtersData1D);
-                        logger.log(Level.FINE, "filtersData2D: {0} ", filtersData2D);
                     }
-                    {
-                        // Wavelength filters:
-                        final List<FitsTableFilter<?>> filtersWL = result.getFiltersOIWavelength();
-                        filtersWL.clear();
+                    logger.log(Level.FINE, "filtersData1D: {0} ", filtersData1D);
+                    logger.log(Level.FINE, "filtersData2D: {0} ", filtersData2D);
 
-                        // convert generic filters from selector.filters (WAVELENGTH)
-                        for (Map.Entry<String, List<?>> e : selector.getFiltersMap().entrySet()) {
-                            if (Selector.isCustomFilterOnWavelengths(e.getKey())) {
-                                filtersWL.add(new Double1DFilter(e.getKey(), (List<Range>) e.getValue()));
-                            }
+                    // Wavelength filters:
+                    final ArrayList<FitsTableFilter<?>> filtersWL = result.getFiltersOIWavelength();
+                    filtersWL.clear();
+
+                    // convert generic filters from selector.filters (WAVELENGTH)
+                    for (Map.Entry<String, FilterValues<?>> e : selector.getFiltersMap().entrySet()) {
+                        if (Selector.isCustomFilterOnWavelengths(e.getKey())) {
+                            addDouble1DFilters(filtersWL, (FilterValues<Range>) e.getValue());
                         }
-                        logger.log(Level.FINE, "filtersWL:     {0} ", filtersWL);
                     }
+                    logger.log(Level.FINE, "filtersWL:     {0} ", filtersWL);
                 }
 
                 for (Granule g : granules) {
@@ -619,6 +653,42 @@ public final class OIFitsCollection implements ToStringable {
         logger.log(Level.FINE, "findOIData: {0}", result);
 
         return result;
+    }
+
+    private void addStaIndexFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<String> filterValues) {
+        if (filterValues.getIncludeValues() != null) {
+            filters.add(new StaIndexFilter(getUsedStaNamesMap(), filterValues.getIncludeValues(), true));
+        }
+        if (filterValues.getExcludeValues() != null) {
+            filters.add(new StaIndexFilter(getUsedStaNamesMap(), filterValues.getExcludeValues(), false));
+        }
+    }
+
+    private void addStaConfFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<String> filterValues) {
+        if (filterValues.getIncludeValues() != null) {
+            filters.add(new StaConfFilter(filterValues.getIncludeValues(), true));
+        }
+        if (filterValues.getExcludeValues() != null) {
+            filters.add(new StaConfFilter(filterValues.getExcludeValues(), false));
+        }
+    }
+
+    private void addDouble1DFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<Range> filterValues) {
+        if (filterValues.getIncludeValues() != null) {
+            filters.add(new Double1DFilter(filterValues.getColumnName(), filterValues.getIncludeValues(), true));
+        }
+        if (filterValues.getExcludeValues() != null) {
+            filters.add(new Double1DFilter(filterValues.getColumnName(), filterValues.getExcludeValues(), false));
+        }
+    }
+
+    private void addDouble2DFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<Range> filterValues) {
+        if (filterValues.getIncludeValues() != null) {
+            filters.add(new Double2DFilter(filterValues.getColumnName(), filterValues.getIncludeValues(), true));
+        }
+        if (filterValues.getExcludeValues() != null) {
+            filters.add(new Double2DFilter(filterValues.getColumnName(), filterValues.getExcludeValues(), false));
+        }
     }
 
     /**
@@ -765,8 +835,8 @@ public final class OIFitsCollection implements ToStringable {
     }
 
     private IndexMask computeMask1D(final FitsTable fitsTable,
-                                    final List<FitsTableFilter<?>> filters,
-                                    final List<FitsTableFilter<?>> usedFilters) {
+                                    final ArrayList<FitsTableFilter<?>> filters,
+                                    final ArrayList<FitsTableFilter<?>> usedFilters) {
 
         logger.log(Level.FINE, "computeMask1D: filters = {0}", filters);
 
@@ -854,8 +924,8 @@ public final class OIFitsCollection implements ToStringable {
 
     private IndexMask computeMask2D(final OIData oiData,
                                     final IndexMask maskRows, final IndexMask maskWavelength,
-                                    final List<FitsTableFilter<?>> filters,
-                                    final List<FitsTableFilter<?>> usedFilters) {
+                                    final ArrayList<FitsTableFilter<?>> filters,
+                                    final ArrayList<FitsTableFilter<?>> usedFilters) {
 
         logger.log(Level.FINE, "computeMask2D: filters = {0}", filters);
 
@@ -919,7 +989,7 @@ public final class OIFitsCollection implements ToStringable {
         int nKeepCells = 0;
 
         // Iterate on table rows (i):
-        for (int i = 0; i < nRows; i++) {
+        for (int i = 0, nKeepWaves; i < nRows; i++) {
 
             // check optional data mask 1D:
             if ((maskRows != null) && !maskRows.accept(i)) {
@@ -927,7 +997,7 @@ public final class OIFitsCollection implements ToStringable {
                 continue;
             }
 
-            int nKeepWaves = 0;
+            nKeepWaves = 0;
 
             // Iterate on wave channels (l):
             for (int l = 0; l < nWaves; l++) {
@@ -1000,8 +1070,9 @@ public final class OIFitsCollection implements ToStringable {
         return IndexMask.FULL;
     }
 
-    private List<Granule> findGranules(final Selector selector) {
-        final List<Granule> granules = getSortedGranules();
+    private ArrayList<Granule> findGranules(final Selector selector) {
+        // make a copy (modified below):
+        final ArrayList<Granule> granules = new ArrayList<>(getSortedGranules());
 
         if (selector != null && !selector.isEmpty()) {
             boolean badTargetUID = false;
@@ -1050,21 +1121,11 @@ public final class OIFitsCollection implements ToStringable {
 
             final Granule pattern = new Granule(target, insMode, nightId);
 
-            // Baselines criteria:
-            if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
-                pattern.getDistinctStaNames().addAll(selector.getFilter(Selector.FILTER_STAINDEX));
-            }
-
-            // MJD & Wavelength ranges criteria:
-            final GranuleMatcher granuleMatcher = GranuleMatcher.getInstance(
-                    (selector.hasFilter(Selector.FILTER_MJD))
-                    ? new LinkedHashSet<Range>(selector.getFilter(Selector.FILTER_MJD)) : null,
-                    (selector.hasFilter(Selector.FILTER_EFFWAVE))
-                    ? new LinkedHashSet<Range>(selector.getFilter(Selector.FILTER_EFFWAVE)) : null
-            );
+            // Baselines & MJD & Wavelength ranges criteria:
+            final GranuleMatcher granuleMatcher = GranuleMatcher.getInstance(selector);
 
             if (!pattern.isEmpty() || !granuleMatcher.isEmpty()) {
-                // Match Granules:
+                // Match and updates Granules:
                 for (Iterator<Granule> it = granules.iterator(); it.hasNext();) {
                     final Granule candidate = it.next();
 

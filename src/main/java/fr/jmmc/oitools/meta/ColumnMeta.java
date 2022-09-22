@@ -235,7 +235,7 @@ public class ColumnMeta extends CellMeta {
     }
 
     /**
-     * @return optional column name storing error values (may be null)
+     * @return optional column name storing data values (may be null)
      */
     public String getDataColumnName() {
         return dataName;

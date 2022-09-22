@@ -16,6 +16,8 @@
  */
 package fr.jmmc.oitools;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
@@ -133,6 +135,35 @@ public abstract class OIFitsCommand {
             return args[pos + 1];
         }
         return null;
+    }
+
+    /**
+     * Get all values of an option in given args. 
+     * @param args
+     * @param opt
+     * @return all values of the option in args if found, null otherwise.
+     */
+    static List<String> getOptionArgValues(final String[] args, final String opt) {
+        List<String> values = null;
+
+        for (int i = 0; i < args.length; i++) {
+            int pos = -1;
+            for (; i < args.length; i++) {
+                if (args[i].equals(opt)) {
+                    pos = i;
+                    break;
+                }
+            }
+            if ((pos != -1) && (pos + 1) < args.length) {
+                // add value:
+                if (values == null) {
+                    values = new ArrayList<>();
+                }
+                values.add(args[pos + 1]);
+                i++; // skip
+            }
+        }
+        return values;
     }
 
 }

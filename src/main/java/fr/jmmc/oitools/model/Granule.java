@@ -127,10 +127,10 @@ public final class Granule {
     }
 
     public boolean isEmpty() {
-        return (this.target == null) && (this.insMode == null) && (this.night == null) && !hasDistinctStaNames();
+        return (this.target == null) && (this.insMode == null) && (this.night == null);
     }
 
-    /* extra information (filters) */
+    /* extra information for specific filters (distinct staNames, mjd range) */
     public boolean hasDistinctStaNames() {
         return (distinctStaNames != null) && !distinctStaNames.isEmpty();
     }
@@ -177,7 +177,7 @@ public final class Granule {
     }
 
     public static <K> Set<K> getDistinctGranuleField(final Collection<Granule> granules, final GranuleField field) {
-        final Set<K> values = new HashSet<K>();
+        final HashSet<K> values = new HashSet<K>();
         for (Granule g : granules) {
             values.add((K) g.getField(field));
         }
@@ -186,7 +186,7 @@ public final class Granule {
 
     public static <K> List<K> getSortedDistinctGranuleField(final Collection<Granule> granules, final GranuleField field) {
         final Set<K> values = getDistinctGranuleField(granules, field);
-        final List<K> sorted = new ArrayList<K>(values);
+        final ArrayList<K> sorted = new ArrayList<K>(values);
         Collections.sort(sorted, GranuleComparator.getComparator(field));
         return sorted;
     }

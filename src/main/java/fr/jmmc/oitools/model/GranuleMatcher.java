@@ -4,39 +4,55 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.model.range.Range;
-import java.util.Set;
+import fr.jmmc.oitools.processing.Selector;
+import fr.jmmc.oitools.processing.Selector.FilterValues;
+import java.util.Collection;
 
 /**
- * Specific Matcher for Granule instances
+ * Specific Matcher for Granule instances (staNames, wavelength, mjd ranges)
  */
 public final class GranuleMatcher implements Matcher<Granule> {
 
-    private final static GranuleMatcher MATCHER_LIKE = new GranuleMatcher(null, null);
+    private final static GranuleMatcher MATCHER_LIKE = new GranuleMatcher(null, null, null);
 
-    public static GranuleMatcher getInstance(final Set<Range> distinctMjdRanges,
-                                             final Set<Range> distinctWavelengthRanges) {
+    public static GranuleMatcher getInstance(final Selector selector) {
 
-        if ((distinctMjdRanges == null || distinctMjdRanges.isEmpty())
-                && (distinctWavelengthRanges == null || distinctWavelengthRanges.isEmpty())) {
+        // Baselines criteria:
+        final FilterValues<String> filterValuesStaIndex = selector.getFilterValues(Selector.FILTER_STAINDEX);
+        // MJD ranges:
+        final FilterValues<Range> filterValuesMjd = selector.getFilterValues(Selector.FILTER_MJD);
+        // Wavelength ranges:
+        final FilterValues<Range> filterValuesEffWave = selector.getFilterValues(Selector.FILTER_EFFWAVE);
+
+        if (isEmpty(filterValuesStaIndex)
+                && isEmpty(filterValuesMjd)
+                && isEmpty(filterValuesEffWave)) {
             return MATCHER_LIKE;
         }
-        return new GranuleMatcher(distinctMjdRanges, distinctWavelengthRanges);
+        return new GranuleMatcher(filterValuesStaIndex, filterValuesMjd, filterValuesEffWave);
     }
 
     // members:
-    /** distinct MJD ranges */
-    private final Set<Range> distinctMjdRanges;
+    /** StaIndex  filter values */
+    private final FilterValues<String> filterValuesStaIndex;
+    /** MJD filter values */
+    private final FilterValues<Range> filterValuesMjd;
+    /** Wavelength filter values */
+    private final FilterValues<Range> filterValuesEffWave;
 
-    /** distinct Wavelength ranges */
-    private final Set<Range> distinctWavelengthRanges;
+    private GranuleMatcher(final FilterValues<String> filterValuesStaIndex,
+                           final FilterValues<Range> filterValuesMjd,
+                           final FilterValues<Range> filterValuesEffWave) {
 
-    private GranuleMatcher(final Set<Range> distinctMjdRanges, final Set<Range> distinctWavelengthRanges) {
-        this.distinctMjdRanges = distinctMjdRanges;
-        this.distinctWavelengthRanges = distinctWavelengthRanges;
+        this.filterValuesStaIndex = isEmpty(filterValuesStaIndex) ? null : filterValuesStaIndex;
+        this.filterValuesMjd = isEmpty(filterValuesMjd) ? null : filterValuesMjd;
+        this.filterValuesEffWave = isEmpty(filterValuesEffWave) ? null : filterValuesEffWave;
     }
 
     public boolean isEmpty() {
-        return !hasDistinctMjdRanges() && !hasDistinctWavelengthRanges();
+        return (filterValuesStaIndex != null)
+                && (filterValuesMjd != null)
+                && (filterValuesEffWave != null);
     }
 
     @Override
@@ -59,49 +75,48 @@ public final class GranuleMatcher implements Matcher<Granule> {
                 return false;
             }
         }
-        if (pattern.hasDistinctStaNames() && candidate.hasDistinctStaNames()) {
-            if (!match(pattern.getDistinctStaNames(), candidate.getDistinctStaNames())) {
+        // use matcher:
+        if ((filterValuesStaIndex != null) && candidate.hasDistinctStaNames()) {
+            if ((filterValuesStaIndex.getIncludeValues() != null)
+                    && !match(filterValuesStaIndex.getIncludeValues(), candidate.getDistinctStaNames())) {
+                return false;
+            }
+            if ((filterValuesStaIndex.getExcludeValues() != null)
+                    && matchAll(filterValuesStaIndex.getExcludeValues(), candidate.getDistinctStaNames())) {
                 return false;
             }
         }
-        if (hasDistinctMjdRanges() && candidate.hasMjdRange()) {
-            if (!Range.matchRange(getDistinctMjdRanges(), candidate.getMjdRange())) {
+        if ((filterValuesMjd != null) && candidate.hasMjdRange()) {
+            if ((filterValuesMjd.getIncludeValues() != null)
+                    && !Range.matchRange(filterValuesMjd.getIncludeValues(), candidate.getMjdRange())) {
+                return false;
+            }
+            if ((filterValuesMjd.getExcludeValues() != null)
+                    && Range.matchFully(filterValuesMjd.getExcludeValues(), candidate.getMjdRange())) {
                 return false;
             }
         }
-        if (hasDistinctWavelengthRanges() && (candidate.getInsMode() != null)) {
-            if (!Range.matchRange(getDistinctWavelengthRanges(), candidate.getInsMode().getWavelengthRange())) {
+        if ((filterValuesEffWave != null) && (candidate.getInsMode() != null)) {
+            if ((filterValuesEffWave.getIncludeValues() != null)
+                    && !Range.matchRange(filterValuesEffWave.getIncludeValues(), candidate.getInsMode().getWavelengthRange())) {
+                return false;
+            }
+            if ((filterValuesEffWave.getExcludeValues() != null)
+                    && Range.matchFully(filterValuesEffWave.getExcludeValues(), candidate.getInsMode().getWavelengthRange())) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean hasDistinctMjdRanges() {
-        return (distinctMjdRanges != null) && !distinctMjdRanges.isEmpty();
-    }
-
-    public Set<Range> getDistinctMjdRanges() {
-        return distinctMjdRanges;
-    }
-
-    public boolean hasDistinctWavelengthRanges() {
-        return (distinctWavelengthRanges != null) && !distinctWavelengthRanges.isEmpty();
-    }
-
-    public Set<Range> getDistinctWavelengthRanges() {
-        return distinctWavelengthRanges;
-    }
-
     @Override
     public String toString() {
-        return "GranuleMatcher{"
-                + ", distinctMjdRanges=" + distinctMjdRanges
-                + ", distinctWavelengthRanges=" + distinctWavelengthRanges
-                + '}';
+        return "GranuleMatcher{" + "filterValuesStaIndex=" + filterValuesStaIndex
+                + ", filterValuesMjd=" + filterValuesMjd
+                + ", filterValuesEffWave=" + filterValuesEffWave + '}';
     }
 
-    public static boolean match(final Set<String> selected, final Set<String> candidates) {
+    private static boolean match(final Collection<String> selected, final Collection<String> candidates) {
         for (String sel : selected) {
             if (candidates.contains(sel)) {
                 return true;
@@ -110,4 +125,17 @@ public final class GranuleMatcher implements Matcher<Granule> {
         return false;
     }
 
+    private static boolean matchAll(final Collection<String> selected, final Collection<String> candidates) {
+        for (String cand : candidates) {
+            if (!selected.contains(cand)) {
+                // 1 candidate value not present in selected
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isEmpty(final FilterValues fv) {
+        return (fv == null) || fv.isEmpty();
+    }
 }

@@ -3,9 +3,11 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.jmcs.util.StringUtils;
 import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.model.range.Range;
+import fr.jmmc.oitools.util.OIFitsFileComparator;
 import fr.jmmc.oitools.util.StationNamesComparator;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,6 +52,24 @@ public final class OIDataListHelper {
 
     private OIDataListHelper() {
         super();
+    }
+
+    /**
+     * Return the list of OI data tables of the given extName in the given OIData list
+     *
+     * @param oiDataList OIData list to process
+     * @param extName extName to look for
+     * @return list of OI data tables of the given extName
+     */
+    public static List<OIData> getOIDataList(final Collection<OIData> oiDataList, final String extName) {
+        final ArrayList<OIData> selectedOiDataList = new ArrayList<>();
+
+        for (OIData oiData : oiDataList) {
+            if (extName.equals(oiData.getExtName())) {
+                selectedOiDataList.add(oiData);
+            }
+        }
+        return selectedOiDataList;
     }
 
     /**
@@ -121,18 +141,18 @@ public final class OIDataListHelper {
     public static List<String> getDistinctStaNames(final Collection<OIData> oiDataList,
                                                    final Map<String, StaNamesDir> usedStaNamesMap) {
 
-        final Set<String> set = new HashSet<String>(32);
+        final HashSet<String> set = new HashSet<String>(32);
 
         for (final OIData oiData : oiDataList) {
             for (final short[] staIndexes : oiData.getDistinctStaIndex()) {
-                final String staNames = oiData.getRealStaNames(usedStaNamesMap, staIndexes);
-                set.add(staNames);
+                set.add(oiData.getRealStaNames(usedStaNamesMap, staIndexes));
             }
         }
         // Sort by name (consistent naming & colors):
-        final List<String> sortedList = new ArrayList<String>(set);
+        final ArrayList<String> sortedList = new ArrayList<String>(set);
         Collections.sort(sortedList, StationNamesComparator.INSTANCE);
 
+        logger.log(Level.FINE, "getDistinctStaNames : {0}", sortedList);
         return sortedList;
     }
 
@@ -142,19 +162,30 @@ public final class OIDataListHelper {
      * @return given set instance
      */
     public static List<String> getDistinctStaConfs(final Collection<OIData> oiDataList) {
-        final Set<String> set = new HashSet<String>(32);
+        final HashSet<String> set = new HashSet<String>(32);
 
         for (OIData oiData : oiDataList) {
             for (short[] staConf : oiData.getDistinctStaConf()) {
-                final String staNames = oiData.getStaNames(staConf);
-                set.add(staNames);
+                set.add(oiData.getStaNames(staConf));
             }
         }
         // Sort by name (consistent naming & colors):
-        final List<String> sortedList = new ArrayList<String>(set);
+        final ArrayList<String> sortedList = new ArrayList<String>(set);
         Collections.sort(sortedList, StationNamesComparator.INSTANCE);
 
         logger.log(Level.FINE, "getDistinctStaConfs : {0}", sortedList);
+        return sortedList;
+    }
+
+    public static List<OIFitsFile> getSortedOIFitsFiles(final Collection<OIData> oiDataList) {
+        final HashSet<OIFitsFile> oiFitsFiles = new HashSet<OIFitsFile>();
+        for (OIData oiData : oiDataList) {
+            oiFitsFiles.add(oiData.getOIFitsFile());
+        }
+        final ArrayList<OIFitsFile> sortedList = new ArrayList<OIFitsFile>(oiFitsFiles);
+        Collections.sort(sortedList, OIFitsFileComparator.INSTANCE);
+
+        logger.log(Level.FINE, "getSortedOIFitsFiles : {0}", sortedList);
         return sortedList;
     }
 
@@ -181,12 +212,104 @@ public final class OIDataListHelper {
             }
         }
         final Range range = Range.isFinite(min, max) ? new Range(min, max) : Range.UNDEFINED_RANGE;
-        logger.log(Level.FINE, "getColumnRange : {0}", range);
+
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "getColumnRange{0}: {1}", new Object[]{name, range});
+        }
         return range;
     }
 
     public static Range getWaveLengthRange(final Collection<OIData> oiDataList) {
         return getColumnRange(oiDataList, OIFitsConstants.COLUMN_EFF_WAVE);
+    }
+
+    /**
+     * @param oiDataList list of oidata tables
+     * @return total number of measurements in the given oidata list
+     */
+    public static int getNbMeasurements(final Collection<OIData> oiDataList) {
+        int count = 0;
+
+        for (OIData oidata : oiDataList) {
+            count += oidata.getNbMeasurements();
+        }
+        return count;
+    }
+
+    /**
+     * @param oiDataList list of oidata tables
+     * @return total number of data points in the given oidata list
+     */
+    public static int getNbDataPoints(final Collection<OIData> oiDataList) {
+        int count = 0;
+
+        for (OIData oidata : oiDataList) {
+            count += oidata.getNbDataPoints();
+        }
+        return count;
+    }
+
+    /**
+     * @param oiDataList list of oidata tables
+     * @return total number of non-flagged data points in the given oidata list
+     */
+    public static int getNbDataPointsNotFlagged(final Collection<OIData> oiDataList) {
+        int count = 0;
+
+        for (OIData oidata : oiDataList) {
+            count += oidata.getNbDataPointsNotFlagged();
+        }
+        return count;
+    }
+
+    /**
+     * @param oiDataList list of oidata tables
+     * @param columnName any column name
+     * @return total number of finite data points in the column for the given oidata list
+     */
+    public static int getNbFiniteDataPoints(final Collection<OIData> oiDataList, final String columnName) {
+        int count = 0;
+
+        // Use shared data model (OIFITS2):
+        // chicken & egg problem to use custom expression columns (how to get them):
+        final DataModel dataModel = DataModel.getInstance();
+
+        final boolean is1d = dataModel.isNumericalColumn1D(columnName);
+
+        for (OIData oiData : oiDataList) {
+            if (is1d) {
+                final double[] tableColumn1D = oiData.getColumnAsDouble(columnName);
+
+                if (tableColumn1D != null) {
+                    final int nRows = oiData.getNbRows();
+
+                    for (int i = 0; i < nRows; i++) {
+                        if (NumberUtils.isFinite(tableColumn1D[i])) {
+                            count++;
+                        }
+                    }
+                }
+            } else {
+                final double[][] tableColumn2D = oiData.getColumnAsDoubles(columnName);
+
+                if (tableColumn2D != null) {
+                    final int nRows = oiData.getNbRows();
+                    final int nWaves = oiData.getNWave();
+                    double[] row;
+
+                    for (int i = 0, j; i < nRows; i++) {
+                        row = tableColumn2D[i];
+
+                        for (j = 0; j < nWaves; j++) {
+                            if (NumberUtils.isFinite(row[j])) {
+                                count++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return count;
     }
 
     public static void toString(final Set<String> set, final StringBuilder sb, final String internalSeparator, final String separator) {

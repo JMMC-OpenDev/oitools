@@ -17,17 +17,17 @@ import java.util.logging.Level;
 public final class Double2DFilter extends FitsTableFilter<Range> {
 
     // members:
-    private double[][] tableColumn2D = null;
     private final Set<Range> rangeMatchings = new HashSet<Range>();
+    private double[][] tableColumn2D = null;
 
-    public Double2DFilter(final String columnName, final List<Range> acceptedValues) {
-        super(columnName, acceptedValues);
+    public Double2DFilter(final String columnName, final List<Range> acceptedValues, final boolean include) {
+        super(columnName, acceptedValues, include);
     }
 
     @Override
     protected void reset() {
-        this.tableColumn2D = null;
         rangeMatchings.clear();
+        tableColumn2D = null;
     }
 
     @Override
@@ -50,26 +50,26 @@ public final class Double2DFilter extends FitsTableFilter<Range> {
 
         if (rangeMatchings.isEmpty()) {
             logger.log(Level.FINE, "Skip {0}, no matching range", fitsTable);
-            // skip OIData (no match):
-            return FilterState.INVALID;
+            // skip OIData (no match) if include or keep OIData (full) if exclude:
+            return (include) ? FilterState.INVALID : FilterState.FULL;
         }
         logger.log(Level.FINE, "prepare: matching ranges: {0}", rangeMatchings);
 
-        if (!Range.matchFully(rangeMatchings, tableRange)) {
-            // resolve column once
-            tableColumn2D = fitsTable.getColumnAsDoubles(columnName);
-
-            if (tableColumn2D == null) {
-                // missing column, ignore filter:
-                return FilterState.FULL;
-            }
-            return FilterState.MASK;
+        if (Range.matchFully(rangeMatchings, tableRange)) {
+            // keep OIData (full) if include or skip OIData (no match) if exclude:
+            return (include) ? FilterState.FULL : FilterState.INVALID;
         }
-        return FilterState.FULL;
+        // resolve column once
+        tableColumn2D = fitsTable.getColumnAsDoubles(columnName);
+
+        if (tableColumn2D == null) {
+            // missing column, ignore filter:
+            return FilterState.FULL;
+        }
+        return FilterState.MASK;
     }
 
     public boolean accept(final int row, final int col) {
-        return Range.contains(rangeMatchings, tableColumn2D[row][col]);
+        return Range.contains(rangeMatchings, tableColumn2D[row][col]) == include;
     }
-
 }

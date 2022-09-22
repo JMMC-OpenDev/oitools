@@ -25,10 +25,12 @@ public abstract class FitsTableFilter<K> {
     }
 
     // members:
+    protected final boolean include;
     protected final String columnName;
     protected final List<K> acceptedValues;
 
-    FitsTableFilter(final String columnName, final List<K> acceptedValues) {
+    FitsTableFilter(final String columnName, final List<K> acceptedValues, final boolean include) {
+        this.include = include;
         this.columnName = columnName;
         this.acceptedValues = acceptedValues;
     }
@@ -38,8 +40,12 @@ public abstract class FitsTableFilter<K> {
     }
 
     public abstract FilterState prepare(final FitsTable fitsTable);
-
+    
     public abstract boolean accept(final int row, final int col);
+
+    public boolean isInclude() {
+        return include;
+    }
 
     public String getColumnName() {
         return columnName;
@@ -55,7 +61,9 @@ public abstract class FitsTableFilter<K> {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{columnName=" + columnName + ", acceptedValues=" + acceptedValues
+        return getClass().getSimpleName() + "{include=" + include
+                + ", columnName=" + columnName
+                + ", acceptedValues=" + acceptedValues
                 + ", is2D=" + is2D() + '}';
     }
 

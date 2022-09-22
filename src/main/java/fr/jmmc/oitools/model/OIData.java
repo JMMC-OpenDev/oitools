@@ -181,6 +181,18 @@ public abstract class OIData extends OIAbstractData {
      * --- Keywords ------------------------------------------------------------
      */
     /**
+     * Return the number of non-flagged data points in this table (= number of rows * number of wavelengths - nb flagged)
+     * @return the number of data points.
+     */
+    public final int getNbDataPointsNotFlagged() {
+        int n = getNbDataPoints();
+        if (getNFlagged() > 0) {
+            n -= getNFlagged();
+        }
+        return n;
+    }
+
+    /**
      * Get the DATE-OBS keyword value.
      * @return the value of DATE-OBS keyword
      */
@@ -757,7 +769,7 @@ public abstract class OIData extends OIAbstractData {
 
         if (nFlagged > 0) {
             sb.append(" (").append(nFlagged).append(" data flagged out - ");
-            sb.append(getNbRows() * getNWave() - nFlagged).append(" data ok )");
+            sb.append(getNbDataPointsNotFlagged()).append(" data ok )");
         }
         sb.append(" ]");
         return sb.toString();
