@@ -393,7 +393,7 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("|------------------------------------------------------------------------------------|");
         info("| command      " + COMMAND_HELP + "           Show this help                                         |");
         info("| command      " + COMMAND_LIST + "           List content of several oifits files                   |");
-        info("| command      " + COMMAND_LIST_BL + " List baselines and triplets used by several oifits files      |");
+        info("| command      " + COMMAND_LIST_BL + " List baselines and triplets used by several oifits files |");
         info("| command      " + COMMAND_DUMP + "           Dump the given oifits files                            |");
         info("| command      " + COMMAND_CONVERT + "        Convert the given input file                           |");
         info("| command      " + COMMAND_MERGE + "          Merge several oifits files                             |");
@@ -408,9 +408,13 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("| [-target] <value>           Filter result on given Target                          |");
         info("| [-insname] <value>          Filter result on given InsName                         |");
         info("| [-night] <value>            Filter result on given Night (integer)                 |");
+        info("|                                                                                    |");
         info("| [-baselines] <values>       Filter result on given Baselines or Triplets (comma-separated) |");
         info("| [-mjds] <values>            Filter result on given MJD ranges (comma-separated pairs) |");
         info("| [-wavelengths] <values>     Filter result on given wavelength ranges (comma-separated pairs) |");
+        info("|                                                                                    |");
+        info("| <values> can be String or Range values (like 1e-6,2e-6) (comma-separated);         |");
+        info("|          use the prefix '" + OPTION_PREFIX_EXCLUDE + "' to have an exclusive filter                         |");
         info("|                                                                                    |");
         info("| Following columns may be available (OIFITS2 standard):                             |");
 
