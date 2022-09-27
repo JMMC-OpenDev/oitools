@@ -31,11 +31,6 @@ public final class Double2DFilter extends FitsTableFilter<Range> {
     }
 
     @Override
-    public boolean is2D() {
-        return true;
-    }
-
-    @Override
     public FilterState prepare(final FitsTable fitsTable) {
         final Range tableRange = fitsTable.getColumnRange(columnName);
         logger.log(Level.FINE, "prepare: table range: {0}", tableRange);

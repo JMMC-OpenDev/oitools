@@ -104,6 +104,8 @@ public final class OIFitsFile extends FitsImageFile {
     private final Map<Granule, Set<OIData>> oiDataPerGranule = new HashMap<Granule, Set<OIData>>();
     /** Map of used staNames to StaNamesDir (reference StaNames / orientation) */
     private final Map<String, StaNamesDir> usedStaNamesMap = new LinkedHashMap<String, StaNamesDir>();
+    /** Map of used staNames to sorted StaNames (consistent) */
+    private final Map<String, String> sortedStaNamesMap = new LinkedHashMap<String, String>();
 
     /**
      * Public constructor
@@ -920,6 +922,7 @@ public final class OIFitsFile extends FitsImageFile {
         distinctGranules.clear();
         oiDataPerGranule.clear();
         usedStaNamesMap.clear();
+        sortedStaNamesMap.clear();
     }
 
     /**
@@ -944,7 +947,6 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Return the Distinct Granules
      * @return Distinct Granules
      */
     public Map<Granule, Granule> getDistinctGranules() {
@@ -952,7 +954,6 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Return the Set of OIData tables keyed by Granule
      * @return Set of OIData tables keyed by Granule
      */
     public Map<Granule, Set<OIData>> getOiDataPerGranule() {
@@ -960,11 +961,17 @@ public final class OIFitsFile extends FitsImageFile {
     }
 
     /**
-     * Return the Map of sorted staNames to StaNamesDir
      * @return Map of sorted staNames to StaNamesDir
      */
     public Map<String, StaNamesDir> getUsedStaNamesMap() {
         return usedStaNamesMap;
+    }
+
+    /**
+     * @return Map of used staNames to sorted StaNames (consistent)
+     */
+    public Map<String, String> getSortedStaNamesMap() {
+        return sortedStaNamesMap;
     }
 
     /*

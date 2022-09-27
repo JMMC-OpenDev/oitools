@@ -221,7 +221,7 @@ public class CellMeta {
     public final Class<?> getBaseClass() {
         return Types.getBaseClass(getDataType());
     }
-    
+
     /**
      * Get type.
      *

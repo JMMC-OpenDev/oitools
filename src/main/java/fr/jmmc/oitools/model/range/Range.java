@@ -226,6 +226,10 @@ public final class Range implements Comparable<Range> {
         return "[" + this.min + ", " + this.max + "]";
     }
 
+    public void toString(final StringBuilder sb) {
+        sb.append('[').append(this.min).append(",").append(this.max).append(']');
+    }
+
     /* --- Utility methods ---------------------------------------------------- */
     public static boolean isFinite(final double min, final double max) {
         return Double.isFinite(min) && Double.isFinite(max) && (min <= max);

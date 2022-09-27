@@ -123,7 +123,6 @@ public final class StringUtils {
     }
 
     /* --- common white space helper methods -------------------------------- */
-
     /**
      * Trim and remove redundant white space characters
      * @param value input value
@@ -150,7 +149,7 @@ public final class StringUtils {
     public static String removeUnderscores(final String value) {
         return PATTERN_UNDERSCORE.matcher(value).replaceAll(STRING_EMPTY);
     }
-    
+
     /**
      * Remove redundant white space characters
      * @param value input value

@@ -20,8 +20,8 @@ public final class StaConfFilter extends FitsTableFilter<String> {
     private final HashSet<short[]> staIndexMatchings = new HashSet<short[]>(); // identity
     private short[][] staConf = null;
 
-    public StaConfFilter(final List<String> confs, final boolean include) {
-        super(OIFitsConstants.COLUMN_STA_CONF, confs, include);
+    public StaConfFilter(final List<String> staConfs, final boolean include) {
+        super(OIFitsConstants.COLUMN_STA_CONF, staConfs, include);
     }
 
     @Override

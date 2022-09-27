@@ -54,9 +54,9 @@ public final class Selector {
     private String insModeUID = null;
     private Integer nightID = null;
     // table selection filter expressed as extNb (integer) values + OIFits file (id)
-    private final Map<String, List<Integer>> extNbsPerOiFitsPath = new HashMap<String, List<Integer>>();
+    private Map<String, List<Integer>> extNbsPerOiFitsPath = null;
     // Extra criteria:
-    private final Map<String, FilterValues<?>> filtersMap = new LinkedHashMap<>();
+    private Map<String, FilterValues<?>> filtersMap = null;
 
     public Selector() {
         reset();
@@ -66,8 +66,12 @@ public final class Selector {
         targetUID = null;
         insModeUID = null;
         nightID = null;
-        extNbsPerOiFitsPath.clear();
-        filtersMap.clear();
+        if (extNbsPerOiFitsPath != null) {
+            extNbsPerOiFitsPath.clear();
+        }
+        if (filtersMap != null) {
+            filtersMap.clear();
+        }
     }
 
     public String getTargetUID() {
@@ -101,14 +105,17 @@ public final class Selector {
     }
 
     public boolean hasTable() {
-        return !extNbsPerOiFitsPath.isEmpty();
+        return (extNbsPerOiFitsPath != null) && !extNbsPerOiFitsPath.isEmpty();
     }
 
     public List<Integer> getTables(final String oiFitsPath) {
-        return extNbsPerOiFitsPath.get(oiFitsPath);
+        return (extNbsPerOiFitsPath != null) ? extNbsPerOiFitsPath.get(oiFitsPath) : null;
     }
 
     public void addTable(final String oiFitsPath, final Integer extNb) {
+        if (extNbsPerOiFitsPath == null) {
+            extNbsPerOiFitsPath = new HashMap<String, List<Integer>>();
+        }
         List<Integer> extNbs = extNbsPerOiFitsPath.get(oiFitsPath);
         if (extNbs == null) {
             extNbs = new ArrayList<Integer>(1);
@@ -119,16 +126,24 @@ public final class Selector {
         }
     }
 
+    // --- filters ---
     public Map<String, FilterValues<?>> getFiltersMap() {
         return filtersMap;
     }
 
+    private Map<String, FilterValues<?>> getOrCreateFiltersMap() {
+        if (filtersMap == null) {
+            filtersMap = new LinkedHashMap<>();
+        }
+        return filtersMap;
+    }
+
     public boolean hasFilters() {
-        return !filtersMap.isEmpty();
+        return (filtersMap != null) && !filtersMap.isEmpty();
     }
 
     public boolean hasFilter(final String columnName) {
-        return filtersMap.containsKey(columnName);
+        return (filtersMap != null) && filtersMap.containsKey(columnName);
     }
 
     public List getFilterIncludeValues(final String columnName) {
@@ -142,25 +157,25 @@ public final class Selector {
     }
 
     public <K> FilterValues<K> getFilterValues(final String columnName) {
-        return (FilterValues<K>) filtersMap.get(columnName);
+        return (filtersMap != null) ? (FilterValues<K>) filtersMap.get(columnName) : null;
     }
 
     public <K> FilterValues<K> removeFilterValues(final String columnName) {
-        return (FilterValues<K>) filtersMap.remove(columnName);
+        return (filtersMap != null) ? (FilterValues<K>) filtersMap.remove(columnName) : null;
     }
 
     private <K> FilterValues<K> getOrCreateFilterValues(final String columnName) {
         FilterValues<K> filterValues = getFilterValues(columnName);
         if (filterValues == null) {
             filterValues = new FilterValues<>(columnName);
-            filtersMap.put(columnName, filterValues);
+            getOrCreateFiltersMap().put(columnName, filterValues);
         }
         return filterValues;
     }
 
     public boolean addFilter(final String columnName, final FilterValues<?> filterValues) {
         if ((filterValues != null) && !filterValues.isEmpty()) {
-            filtersMap.put(columnName, filterValues);
+            getOrCreateFiltersMap().put(columnName, filterValues);
             return true;
         }
         return false;

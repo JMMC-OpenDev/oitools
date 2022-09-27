@@ -68,7 +68,7 @@ public class FitsImageHDU extends FitsHDU {
      * reference pixels, rotation angle, pixels values.
      */
     public final static Matcher<FitsImageHDU> MATCHER = new Matcher<FitsImageHDU>() {
-        
+
         /**
          * decide equivalence between two FitsImageHDU
          * @param src FitsImageHDU to compare with other (optional)

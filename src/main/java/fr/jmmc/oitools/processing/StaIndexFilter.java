@@ -23,8 +23,8 @@ public final class StaIndexFilter extends FitsTableFilter<String> {
     private final HashSet<short[]> staIndexMatchings = new HashSet<short[]>(); // identity
     private short[][] staIndexes = null;
 
-    public StaIndexFilter(final Map<String, StaNamesDir> usedStaNamesMap, final List<String> baselines, final boolean include) {
-        super(OIFitsConstants.COLUMN_STA_INDEX, baselines, include);
+    public StaIndexFilter(final Map<String, StaNamesDir> usedStaNamesMap, final List<String> realStaNames, final boolean include) {
+        super(OIFitsConstants.COLUMN_STA_INDEX, realStaNames, include);
         this.usedStaNamesMap = usedStaNamesMap;
     }
 

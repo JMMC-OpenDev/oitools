@@ -472,4 +472,7 @@ public interface OIFitsConstants {
 
     /** Resolution value */
     public final static String VALUE_RESOLUTION = "RESOLUTION";
+
+    /** StaNames separator '-' */
+    public final static char STA_NAME_SEPARATOR = '-';
 }

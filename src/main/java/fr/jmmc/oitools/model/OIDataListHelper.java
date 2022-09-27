@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -61,7 +60,7 @@ public final class OIDataListHelper {
      * @param extName extName to look for
      * @return list of OI data tables of the given extName
      */
-    public static List<OIData> getOIDataList(final Collection<OIData> oiDataList, final String extName) {
+    public static ArrayList<OIData> getOIDataList(final Collection<OIData> oiDataList, final String extName) {
         final ArrayList<OIData> selectedOiDataList = new ArrayList<>();
 
         for (OIData oiData : oiDataList) {
@@ -138,8 +137,8 @@ public final class OIDataListHelper {
      * @param usedStaNamesMap Map of used staNames to StaNamesDir (reference StaNames / orientation)
      * @return given set instance
      */
-    public static List<String> getDistinctStaNames(final Collection<OIData> oiDataList,
-                                                   final Map<String, StaNamesDir> usedStaNamesMap) {
+    public static ArrayList<String> getDistinctStaNames(final Collection<OIData> oiDataList,
+                                                        final Map<String, StaNamesDir> usedStaNamesMap) {
 
         final HashSet<String> set = new HashSet<String>(32);
 
@@ -161,7 +160,7 @@ public final class OIDataListHelper {
      * @param oiDataList OIData tables
      * @return given set instance
      */
-    public static List<String> getDistinctStaConfs(final Collection<OIData> oiDataList) {
+    public static ArrayList<String> getDistinctStaConfs(final Collection<OIData> oiDataList) {
         final HashSet<String> set = new HashSet<String>(32);
 
         for (OIData oiData : oiDataList) {
@@ -177,7 +176,7 @@ public final class OIDataListHelper {
         return sortedList;
     }
 
-    public static List<OIFitsFile> getSortedOIFitsFiles(final Collection<OIData> oiDataList) {
+    public static ArrayList<OIFitsFile> getSortedOIFitsFiles(final Collection<OIData> oiDataList) {
         final HashSet<OIFitsFile> oiFitsFiles = new HashSet<OIFitsFile>();
         for (OIData oiData : oiDataList) {
             oiFitsFiles.add(oiData.getOIFitsFile());

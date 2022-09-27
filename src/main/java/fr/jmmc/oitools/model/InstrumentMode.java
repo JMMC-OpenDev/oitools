@@ -23,6 +23,7 @@ import fr.jmmc.jmcs.util.NumberUtils;
 import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_DBL;
 import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_INT;
 import fr.jmmc.oitools.model.range.Range;
+import java.util.Collection;
 import java.util.Comparator;
 
 /**
@@ -221,6 +222,30 @@ public final class InstrumentMode {
     public String toString() {
         return "InstrumentMode{" + "insName=" + insName + ", nbChannels=" + nbChannels + ", lambdaMin=" + getLambdaMin() + ", lambdaMax=" + getLambdaMax()
                 + ", resPower=" + resPower + ", bandMin=" + bandMin + '}';
+    }
+
+    /**
+     * Return the global wavelength range from given instrument modes
+     * @param insModes instrument modes
+     * @return Range instance or Range.UNDEFINED_RANGE if no data
+     */
+    public static Range getWavelengthRange(final Collection<InstrumentMode> insModes) {
+        double min = Double.POSITIVE_INFINITY;
+        double max = Double.NEGATIVE_INFINITY;
+
+        for (InstrumentMode insMode : insModes) {
+            final Range range = insMode.getWavelengthRange();
+
+            if (range.isFinite()) {
+                if (range.getMin() < min) {
+                    min = range.getMin();
+                }
+                if (range.getMax() > max) {
+                    max = range.getMax();
+                }
+            }
+        }
+        return Range.isFinite(min, max) ? new Range(min, max) : Range.UNDEFINED_RANGE;
     }
 
 }

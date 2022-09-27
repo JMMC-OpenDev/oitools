@@ -114,4 +114,7 @@ public final class NightId {
         return "NightId{" + nightId + '}';
     }
 
+    public void toString(final StringBuilder sb) {
+        sb.append(nightId);
+    }
 }

@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsConstants;
+import static fr.jmmc.oitools.OIFitsConstants.STA_NAME_SEPARATOR;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.DataRange;
 import fr.jmmc.oitools.meta.KeywordMeta;
@@ -546,7 +547,7 @@ public final class OIArray extends OITable {
                 } else {
                     sb.append(staNames[i]);
                 }
-                sb.append('-');
+                sb.append(STA_NAME_SEPARATOR);
             }
             sb.setLength(sb.length() - 1);
 

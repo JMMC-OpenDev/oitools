@@ -263,13 +263,13 @@ public final class ImageOiInputParam extends ImageOiParam {
         String useVIS = getUseVis();
         if ((useVIS != null) && (useVIS.length() == 1)) {
             setUseVis("T".equals(useVIS) ? ImageOiInputParam.USE_ALL : ImageOiInputParam.USE_NONE);
-            logger.log(Level.INFO, "Fixed {0} = ''{1}''", 
+            logger.log(Level.INFO, "Fixed {0} = ''{1}''",
                     new Object[]{ImageOiConstants.KEYWORD_USE_VIS, getUseVis()});
         }
         String useT3 = getUseT3();
         if ((useT3 != null) && (useT3.length() == 1)) {
             setUseT3("T".equals(useT3) ? ImageOiInputParam.USE_ALL : ImageOiInputParam.USE_NONE);
-            logger.log(Level.INFO, "Fixed {0} = ''{1}''", 
+            logger.log(Level.INFO, "Fixed {0} = ''{1}''",
                     new Object[]{ImageOiConstants.KEYWORD_USE_T3, getUseT3()});
         }
 

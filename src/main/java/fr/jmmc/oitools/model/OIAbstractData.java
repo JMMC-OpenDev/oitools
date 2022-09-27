@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsConstants;
+import static fr.jmmc.oitools.OIFitsConstants.STA_NAME_SEPARATOR;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
@@ -382,7 +383,7 @@ public abstract class OIAbstractData extends OITable {
             final StringBuilder sb = new StringBuilder(32);
 
             for (short staIndex : staIndexes) {
-                sb.append(staIndex).append('-');
+                sb.append(staIndex).append(STA_NAME_SEPARATOR);
             }
             sb.setLength(sb.length() - 1);
 
@@ -425,16 +426,32 @@ public abstract class OIAbstractData extends OITable {
                 logger.log(Level.WARNING, "getRealStaNames: bad staIndexesToSortedStaNamesDir: missing {0}", Arrays.toString(staIndexes));
             } else {
                 // find the previous (real) baseline corresponding to the sorted StaNames (stable):
-                final StaNamesDir refStaNamesDir = usedStaNamesMap.get(sortedStaNamesDir.getStaNames());
-
-                if (refStaNamesDir == null) {
-                    logger.log(Level.WARNING, "getRealStaNames: bad usedStaNamesMap: missing {0}", sortedStaNamesDir.getStaNames());
-                } else {
-                    return refStaNamesDir.getStaNames();
-                }
+                return getRealStaNames(usedStaNamesMap, sortedStaNamesDir.getStaNames(), UNDEFINED_STRING);
             }
         }
         return UNDEFINED_STRING;
+    }
+
+    /**
+     * Return the real (used) staNames values
+     * @param usedStaNamesMap Map of used staNames to StaNamesDir (reference StaNames / orientation)
+     * @param staNames any previous StaNames value
+     * @param defValue default value if missing
+     * @return real (used) staNames values
+     */
+    public static String getRealStaNames(final Map<String, StaNamesDir> usedStaNamesMap,
+                                         final String staNames, final String defValue) {
+        if (staNames != null) {
+            // find the previous (real) baseline corresponding to the sorted StaNames (stable):
+            final StaNamesDir refStaNamesDir = usedStaNamesMap.get(staNames);
+
+            if (refStaNamesDir == null) {
+                logger.log(Level.WARNING, "getRealStaNames: bad usedStaNamesMap: missing {0}", staNames);
+            } else {
+                return refStaNamesDir.getStaNames();
+            }
+        }
+        return defValue;
     }
 
     /**

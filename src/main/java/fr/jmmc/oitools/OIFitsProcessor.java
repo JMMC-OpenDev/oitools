@@ -493,28 +493,30 @@ public class OIFitsProcessor extends OIFitsCommand {
             }
             /* no way to define selector.tables via CLI */
 
-            if (selector.hasFilter(Selector.FILTER_MJD)) {
-                dumpRangeFilter(sb, selector.getFilterValues(Selector.FILTER_MJD));
-            }
+            if (selector.hasFilters()) {
+                if (selector.hasFilter(Selector.FILTER_MJD)) {
+                    dumpRangeFilter(sb, selector.getFilterValues(Selector.FILTER_MJD));
+                }
 
-            if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
-                dumpStringFilter(sb, selector.getFilterValues(Selector.FILTER_STAINDEX));
-            }
-            if (selector.hasFilter(Selector.FILTER_STACONF)) {
-                dumpStringFilter(sb, selector.getFilterValues(Selector.FILTER_STACONF));
-            }
+                if (selector.hasFilter(Selector.FILTER_STAINDEX)) {
+                    dumpStringFilter(sb, selector.getFilterValues(Selector.FILTER_STAINDEX));
+                }
+                if (selector.hasFilter(Selector.FILTER_STACONF)) {
+                    dumpStringFilter(sb, selector.getFilterValues(Selector.FILTER_STACONF));
+                }
 
-            if (selector.hasFilter(Selector.FILTER_EFFWAVE)) {
-                dumpRangeFilter(sb, selector.getFilterValues(Selector.FILTER_EFFWAVE));
-            }
-            if (selector.hasFilter(Selector.FILTER_EFFBAND)) {
-                dumpRangeFilter(sb, selector.getFilterValues(Selector.FILTER_EFFBAND));
-            }
+                if (selector.hasFilter(Selector.FILTER_EFFWAVE)) {
+                    dumpRangeFilter(sb, selector.getFilterValues(Selector.FILTER_EFFWAVE));
+                }
+                if (selector.hasFilter(Selector.FILTER_EFFBAND)) {
+                    dumpRangeFilter(sb, selector.getFilterValues(Selector.FILTER_EFFBAND));
+                }
 
-            // convert generic filters from selector.filters:
-            for (Map.Entry<String, FilterValues<?>> e : selector.getFiltersMap().entrySet()) {
-                if (!Selector.isCustomFilter(e.getKey())) {
-                    dumpRangeFilter(sb, e.getValue());
+                // convert generic filters from selector.filters:
+                for (Map.Entry<String, FilterValues<?>> e : selector.getFiltersMap().entrySet()) {
+                    if (!Selector.isCustomFilter(e.getKey())) {
+                        dumpRangeFilter(sb, e.getValue());
+                    }
                 }
             }
             return sb.toString();

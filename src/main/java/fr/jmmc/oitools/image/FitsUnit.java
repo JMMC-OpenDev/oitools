@@ -109,7 +109,7 @@ public enum FitsUnit {
         }
         return FitsUnit.ANGLE_MILLI_ARCSEC;
     }
-    
+
     /* members */
     /** string representation separated by '|' */
     private final String representation;

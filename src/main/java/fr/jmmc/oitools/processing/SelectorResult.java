@@ -17,9 +17,11 @@
 package fr.jmmc.oitools.processing;
 
 import fr.jmmc.oitools.model.IndexMask;
+import fr.jmmc.oitools.model.NightId;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsCollection;
 import fr.jmmc.oitools.model.OIWavelength;
+import fr.jmmc.oitools.model.range.Range;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
@@ -32,6 +34,7 @@ import java.util.Set;
 public final class SelectorResult extends BaseSelectorResult {
 
     /** members */
+    private final BaseSelectorResult targetResult;
     /* filters: use ArrayList for performance */
     private final ArrayList<FitsTableFilter<?>> filtersOIWavelength = new ArrayList<>();
     private final ArrayList<FitsTableFilter<?>> filtersOIData1D = new ArrayList<>();
@@ -49,22 +52,37 @@ public final class SelectorResult extends BaseSelectorResult {
     /** Map between OIData table to BitSet (mask 2D) */
     private final Map<OIData, IndexMask> maskOIDatas2D = new IdentityHashMap<OIData, IndexMask>();
 
-    public SelectorResult(final OIFitsCollection oiFitsCollection) {
+    public SelectorResult(final OIFitsCollection oiFitsCollection, final BaseSelectorResult targetResult) {
         super(oiFitsCollection);
+        this.targetResult = targetResult;
+    }
+
+    public boolean hasTargetResult() {
+        return (targetResult != null);
+    }
+
+    public BaseSelectorResult getTargetResult() {
+        return targetResult;
     }
 
     public void resetFilters() {
         filtersUsed.clear();
 
-        if (hasFiltersOIData1D()) {
-            FitsTableFilter.resetFilters(getFiltersOIData1D());
-        }
-
         if (hasFiltersOIWavelength()) {
             FitsTableFilter.resetFilters(getFiltersOIWavelength());
         }
+        if (hasFiltersOIData1D()) {
+            FitsTableFilter.resetFilters(getFiltersOIData1D());
+        }
+        if (hasFiltersOIData2D()) {
+            FitsTableFilter.resetFilters(getFiltersOIData2D());
+        }
         // TODO: use filters to build back the filter criteria (CLI)
         // instead of selector ...
+    }
+
+    public boolean hasFilters() {
+        return hasFiltersOIWavelength() || hasFiltersOIData1D() || hasFiltersOIData2D();
     }
 
     public boolean hasFiltersOIWavelength() {
@@ -173,9 +191,121 @@ public final class SelectorResult extends BaseSelectorResult {
         return relatedColumnsFiltersOIData2D;
     }
 
+    // --- statistics on masked OIData ---
+    private final static int COUNT_NB_ROWS = 0;
+    private final static int COUNT_POINTS = 1;
+    private final static int COUNT_POINTS_NOT_FLAGGED = 2;
+
+    /**
+     * @return total number of measurements in oidata tables (masked)
+     */
+    @Override
+    public int getNbMeasurements() {
+        return getCount(COUNT_NB_ROWS);
+    }
+
+    /**
+     * @return total number of data points in all oidata tables
+     */
+    @Override
+    public int getNbDataPoints() {
+        return getCount(COUNT_POINTS);
+    }
+
+    /**
+     * @return total number of non-flagged data points in all oidata tables
+     */
+    @Override
+    public int getNbDataPointsNotFlagged() {
+        return getCount(COUNT_POINTS_NOT_FLAGGED);
+    }
+
+    private int getCount(final int type) {
+        int count = 0;
+
+        // Process selected OIData tables:
+        for (OIData oiData : getOIDatas()) {
+            // get the optional masks for this OIData table:
+            final IndexMask maskOIData1D = getDataMask1DNotFull(oiData);
+            final IndexMask maskOIData2D = getDataMask2DNotFull(oiData);
+            // get the optional wavelength mask for the OIData's wavelength table:
+            final IndexMask maskWavelength = (type >= COUNT_POINTS) ? getWavelengthMaskNotFull(oiData.getOiWavelength()) : null;
+
+            final int idxNone = (maskOIData2D != null) ? maskOIData2D.getIndexNone() : -1;
+            final int idxFull = (maskOIData2D != null) ? maskOIData2D.getIndexFull() : -1;
+
+            final int nRows = oiData.getNbRows();
+            final int nWaves = oiData.getNWave();
+
+            final boolean[][] flags = (type == COUNT_POINTS_NOT_FLAGGED) ? oiData.getFlag() : null;
+
+            IndexMask maskOIData2DRow = null;
+
+            // Iterate on table rows (i):
+            for (int i = 0; i < nRows; i++) {
+
+                // check optional data mask 1D:
+                if ((maskOIData1D != null) && !maskOIData1D.accept(i)) {
+                    // if bit is false for this row, we hide this row
+                    continue;
+                }
+
+                // check mask 2D for row None flag:
+                if (maskOIData2D != null) {
+                    if (maskOIData2D.accept(i, idxNone)) {
+                        // row flagged as None:
+                        continue;
+                    }
+                    // check row flagged as Full:
+                    maskOIData2DRow = (maskOIData2D.accept(i, idxFull)) ? null : maskOIData2D;
+                }
+
+                if (type == COUNT_NB_ROWS) {
+                    if (maskOIData2DRow != null) {
+                        count++; // row is valid
+                    }
+                    continue;
+                }
+
+                // Iterate on wave channels (l):
+                for (int l = 0; l < nWaves; l++) {
+
+                    // check optional wavelength mask:
+                    if ((maskWavelength != null) && !maskWavelength.accept(l)) {
+                        // if bit is false for this row, we hide this row
+                        continue;
+                    }
+
+                    // check optional data mask 2D (and its Full flag):
+                    if ((maskOIData2DRow != null) && !maskOIData2DRow.accept(i, l)) {
+                        // if bit is false for this row, we hide this row
+                        continue;
+                    }
+
+                    // data point is valid:
+                    if (type == COUNT_POINTS) {
+                        count++;
+                        continue;
+                    }
+
+                    if (flags[i][l]) {
+                        // data point is flagged so skip it:
+                        continue;
+                    }
+
+                    // data point is valid and not flagged:
+                    /* if (type == COUNT_POINTS_NOT_FLAGGED) is always true */
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     @Override
     public String toString() {
         return "SelectorResult{" + super.toString()
+                + ", targetResult=" + targetResult
                 + ", filtersOIWavelength=" + filtersOIWavelength + ", maskOIWavelengths=" + maskOIWavelengths
                 + ", filtersOIData1D=" + filtersOIData1D + ", maskOIDatas1D=" + maskOIDatas1D
                 + ", filtersOIData2D=" + filtersOIData2D + ", maskOIDatas2D=" + maskOIDatas2D
@@ -184,4 +314,53 @@ public final class SelectorResult extends BaseSelectorResult {
                 + '}';
     }
 
+    public String dumpFiltersAsString() {
+        if (hasFilters()) {
+            final StringBuilder sb = new StringBuilder(256);
+            sb.append('[');
+            if (hasFiltersOIWavelength()) {
+                SelectorResult.toString(getFiltersOIWavelength(), sb);
+            }
+            if (hasFiltersOIData1D()) {
+                SelectorResult.toString(getFiltersOIData1D(), sb);
+            }
+            if (hasFiltersOIData2D()) {
+                SelectorResult.toString(getFiltersOIData2D(), sb);
+            }
+            sb.append(']');
+            return sb.toString();
+        }
+        return "[]";
+    }
+
+    public static void toString(final ArrayList<FitsTableFilter<?>> filters, final StringBuilder sb) {
+        if ((filters != null) && !filters.isEmpty()) {
+            if (sb.length() > 1) {
+                sb.append("), ");
+            }
+            for (FitsTableFilter<?> filter : filters) {
+                sb.append(filter.getColumnName());
+                if (!filter.isInclude()) {
+                    sb.append(" NOT");
+                }
+                sb.append(" IN (");
+
+                for (Object value : filter.getAcceptedValues()) {
+                    if (value instanceof Range) {
+                        ((Range) value).toString(sb);
+                    } else if (value instanceof String) {
+                        sb.append("'").append(value).append("'");
+                    } else if (value instanceof NightId) {
+                        ((NightId) value).toString(sb);
+                    } else {
+                        sb.append(value);
+                    }
+                    sb.append(",");
+                }
+                sb.delete(sb.length() - 1, sb.length());
+                sb.append("), ");
+            }
+            sb.delete(sb.length() - 2, sb.length());
+        }
+    }
 }

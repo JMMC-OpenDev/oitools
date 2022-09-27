@@ -104,6 +104,8 @@ public final class Analyzer implements ModelVisitor {
         if (isLogDebug) {
             logger.log(Level.FINE, "process: OIFitsFile[{0}] usedStaNamesMap: {1}",
                     new Object[]{oiFitsFile.getAbsoluteFilePath(), oiFitsFile.getUsedStaNamesMap().entrySet()});
+            logger.log(Level.FINE, "process: OIFitsFile[{0}] sortedStaNamesMap: {1}",
+                    new Object[]{oiFitsFile.getAbsoluteFilePath(), oiFitsFile.getSortedStaNamesMap()});
             logger.log(Level.FINE, "process: OIFitsFile[{0}] granules: {1}",
                     new Object[]{oiFitsFile.getAbsoluteFilePath(), oiFitsFile.getDistinctGranules().keySet()});
         }
@@ -184,6 +186,8 @@ public final class Analyzer implements ModelVisitor {
         final short[][] staIndexes = oiData.getStaIndex();
         // Get MJD column:
         final double[] mjds = oiData.getMJD();
+        // Derived StaConf column:
+        final short[][] staConfs = (oiData.getDistinctStaConfCount()) != 0 ? oiData.getStaConf() : null;
 
         // note: if no OITarget table then the target will be Target.UNDEFINED
         final Map<Short, Target> targetIdToTarget = (oiTarget != null) ? oiTarget.getTargetIdToTarget() : null;
@@ -236,21 +240,18 @@ public final class Analyzer implements ModelVisitor {
             // Get corresponding StaName:
             String staNames = null;
             if (staIndexes != null) {
-                final short[] staIndex = staIndexes[i];
-
                 // resolve sorted StaNames (reference) to get its orientation:
-                final StaNamesDir sortedStaNamesDir = oiData.getSortedStaNamesDir(staIndex);
+                final StaNamesDir sortedStaNamesDir = oiData.getSortedStaNamesDir(staIndexes[i]);
 
                 if (sortedStaNamesDir != null) {
                     // find the previous (real) baseline corresponding to the sorted StaNames (stable):
-                    final StaNamesDir refStaNamesDir = usedStaNamesMap.get(sortedStaNamesDir.getStaNames());
-
-                    if (refStaNamesDir == null) {
-                        logger.log(Level.WARNING, "bad usedStaNamesMap: missing {0}", sortedStaNamesDir.getStaNames());
-                    } else {
-                        staNames = refStaNamesDir.getStaNames();
-                    }
+                    staNames = OIAbstractData.getRealStaNames(usedStaNamesMap, sortedStaNamesDir.getStaNames(), null);
                 }
+            }
+            // Get corresponding StaConf:
+            String staConf = null;
+            if (staConfs != null) {
+                staConf = oiData.getStaNames(staConfs[i]); // staConf computed before
             }
 
             // Get MJD value:
@@ -268,7 +269,11 @@ public final class Analyzer implements ModelVisitor {
 
             // Update distinct StaNames on shared granule:
             if (staNames != null) {
-                granule.getDistinctStaNames().add(staNames);
+                granule.getDistinctStaNames().add(staNames); // real staNames present in OIFitsFile
+            }
+            // Update distinct StaConfs on shared granule:
+            if (staConf != null) {
+                granule.getDistinctStaConfs().add(staConf);
             }
 
             // Update MJD Ranges on shared granule:
@@ -461,6 +466,7 @@ public final class Analyzer implements ModelVisitor {
 
             // Fill used staNames to StaNamesDir (reference StaNames / orientation):
             final Map<String, StaNamesDir> usedStaNamesMap = oiData.getOIFitsFile().getUsedStaNamesMap();
+            final Map<String, String> sortedStaNamesMap = oiData.getOIFitsFile().getSortedStaNamesMap();
 
             // 2nd step: fill mapping:
             if (staLen >= 2) {
@@ -499,7 +505,6 @@ public final class Analyzer implements ModelVisitor {
                     }
 
                     final StaNamesDir sortedStaNamesDir = new StaNamesDir(sortedStaNames, orientation);
-
                     staIndexesToSortedStaNamesDir.put(staIndex, sortedStaNamesDir);
 
                     // global level (OIFits):
@@ -509,6 +514,7 @@ public final class Analyzer implements ModelVisitor {
                         // store this (real) baseline corresponding to the sorted StaNames (stable) with the reference orientation flag:
                         usedStaNamesMap.put(sortedStaNames, new StaNamesDir(staNames, sortedStaNamesDir.isOrientation()));
                     }
+                    sortedStaNamesMap.put(staNames, sortedStaNames);
                 }
             } else {
                 // 1T (OI_FLUX):
@@ -518,6 +524,7 @@ public final class Analyzer implements ModelVisitor {
 
                     staIndexesToSortedStaNamesDir.put(staIndex, sortedStaNamesDir);
                     usedStaNamesMap.put(staNames, sortedStaNamesDir);
+                    sortedStaNamesMap.put(staNames, staNames);
                 }
             }
         }

@@ -21,12 +21,12 @@ package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.util.GranuleComparator;
+import fr.jmmc.oitools.util.StationNamesComparator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -44,15 +44,21 @@ public final class Granule {
         TARGET, INS_MODE, NIGHT;
     }
 
+    public enum GranuleExtraField {
+        DISTINCT_STA_NAMES, DISTINCT_STA_CONFS;
+    }
+
     /* members */
     private Target target;
     private InstrumentMode insMode;
     private NightId night;
     /* extra information (filters) */
-    /** Set of distinct staNames */
-    private Set<String> distinctStaNames = null;
     /** MJD range */
     private Range mjdRange = null;
+    /** Set of distinct staNames */
+    private Set<String> distinctStaNames = null;
+    /** Set of distinct staConfs */
+    private Set<String> distinctStaConfs = null;
 
     public Granule() {
         this(null, null, null);
@@ -80,7 +86,7 @@ public final class Granule {
         return night;
     }
 
-    public Object getField(GranuleField field) {
+    public Object getField(final GranuleField field) {
         switch (field) {
             case TARGET:
                 return getTarget();
@@ -88,6 +94,17 @@ public final class Granule {
                 return getInsMode();
             case NIGHT:
                 return getNight();
+            default:
+                return null;
+        }
+    }
+
+    public Set<String> getField(final GranuleExtraField field) {
+        switch (field) {
+            case DISTINCT_STA_NAMES:
+                return getDistinctStaNames();
+            case DISTINCT_STA_CONFS:
+                return getDistinctStaConfs();
             default:
                 return null;
         }
@@ -131,15 +148,8 @@ public final class Granule {
     }
 
     /* extra information for specific filters (distinct staNames, mjd range) */
-    public boolean hasDistinctStaNames() {
-        return (distinctStaNames != null) && !distinctStaNames.isEmpty();
-    }
-
-    public Set<String> getDistinctStaNames() {
-        if (distinctStaNames == null) {
-            distinctStaNames = new LinkedHashSet<String>();
-        }
-        return distinctStaNames;
+    public Range getWavelengthRange() {
+        return (getInsMode() != null) ? getInsMode().getWavelengthRange() : null;
     }
 
     public boolean hasMjdRange() {
@@ -153,7 +163,7 @@ public final class Granule {
         return mjdRange;
     }
 
-    public void updateMjdRange(final double mjd) {
+    void updateMjdRange(final double mjd) {
         final Range r = getMjdRange();
         if (mjd < r.getMin()) {
             r.setMin(mjd);
@@ -163,9 +173,31 @@ public final class Granule {
         }
     }
 
-    public void updateMjdRange(final Range other) {
+    void updateMjdRange(final Range other) {
         updateMjdRange(other.getMin());
         updateMjdRange(other.getMax());
+    }
+
+    public boolean hasDistinctStaNames() {
+        return (distinctStaNames != null) && !distinctStaNames.isEmpty();
+    }
+
+    public Set<String> getDistinctStaNames() {
+        if (distinctStaNames == null) {
+            distinctStaNames = new LinkedHashSet<String>();
+        }
+        return distinctStaNames;
+    }
+
+    public boolean hasDistinctStaConfs() {
+        return (distinctStaConfs != null) && !distinctStaConfs.isEmpty();
+    }
+
+    public Set<String> getDistinctStaConfs() {
+        if (distinctStaConfs == null) {
+            distinctStaConfs = new LinkedHashSet<String>();
+        }
+        return distinctStaConfs;
     }
 
     @Override
@@ -173,10 +205,11 @@ public final class Granule {
         return "Granule{" + "target=" + target + ", insMode=" + insMode
                 + ", night=" + night + ", mjdRange=" + mjdRange
                 + ", distinctStaNames=" + distinctStaNames
+                + ", distinctStaConfs=" + distinctStaConfs
                 + '}';
     }
 
-    public static <K> Set<K> getDistinctGranuleField(final Collection<Granule> granules, final GranuleField field) {
+    public static <K> HashSet<K> getDistinctGranuleField(final Collection<Granule> granules, final GranuleField field) {
         final HashSet<K> values = new HashSet<K>();
         for (Granule g : granules) {
             values.add((K) g.getField(field));
@@ -184,10 +217,27 @@ public final class Granule {
         return values;
     }
 
-    public static <K> List<K> getSortedDistinctGranuleField(final Collection<Granule> granules, final GranuleField field) {
-        final Set<K> values = getDistinctGranuleField(granules, field);
-        final ArrayList<K> sorted = new ArrayList<K>(values);
-        Collections.sort(sorted, GranuleComparator.getComparator(field));
-        return sorted;
+    public static <K> ArrayList<K> getSortedDistinctGranuleField(final Collection<Granule> granules, final GranuleField field) {
+        final HashSet<K> values = getDistinctGranuleField(granules, field);
+        final ArrayList<K> sortedList = new ArrayList<K>(values);
+        Collections.sort(sortedList, GranuleComparator.getComparator(field));
+        return sortedList;
     }
+
+    public static HashSet<String> getDistinctGranuleField(final Collection<Granule> granules, final GranuleExtraField field) {
+        final HashSet<String> values = new HashSet<String>();
+        for (Granule g : granules) {
+            final Set<String> set = g.getField(field);
+            values.addAll(g.getField(field));
+        }
+        return values;
+    }
+
+    public static ArrayList<String> getSortedDistinctGranuleField(final Collection<Granule> granules, final GranuleExtraField field) {
+        final HashSet<String> values = getDistinctGranuleField(granules, field);
+        final ArrayList<String> sortedList = new ArrayList<String>(values);
+        Collections.sort(sortedList, StationNamesComparator.INSTANCE);
+        return sortedList;
+    }
+
 }

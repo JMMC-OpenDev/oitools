@@ -18,6 +18,7 @@ package fr.jmmc.oitools.processing;
 
 import fr.jmmc.oitools.model.DataModel;
 import fr.jmmc.oitools.model.Granule;
+import fr.jmmc.oitools.model.Granule.GranuleExtraField;
 import fr.jmmc.oitools.model.Granule.GranuleField;
 import fr.jmmc.oitools.model.InstrumentMode;
 import fr.jmmc.oitools.model.NightId;
@@ -33,33 +34,36 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Basic selector result (OIData and Granule sets)
  */
 public class BaseSelectorResult {
 
+    /** logger */
+    protected final static Logger logger = Logger.getLogger(BaseSelectorResult.class.getName());
+
     /** members */
     /** OIFits collection (data source) */
     private final OIFitsCollection oiFitsCollection;
     /** granule set (insertion ordered) */
-    private final Set<Granule> granules = new HashSet<Granule>();
+    private final HashSet<Granule> granules = new HashSet<Granule>();
     /* preserve order in selected data (per file) */
-    private final Set<OIData> oiDatas = new LinkedHashSet<OIData>();
+    private final LinkedHashSet<OIData> oiDatas = new LinkedHashSet<OIData>();
     /** selector to get criterias */
     private Selector selector = null;
 
     /** cached values */
-    private List<OIData> sortedOIDatas = null;
-    private List<OIFitsFile> sortedOIFitsFiles = null;
-    private List<Target> sortedTargets = null;
-    private List<InstrumentMode> sortedInstrumentModes = null;
-    private List<NightId> sortedNightIds = null;
-    private List<String> distinctStaNames = null;
-    private List<String> distinctStaConfs = null;
+    private ArrayList<OIData> sortedOIDatas = null;
+    private ArrayList<OIFitsFile> sortedOIFitsFiles = null;
+    private ArrayList<Target> sortedTargets = null;
+    private ArrayList<InstrumentMode> sortedInstrumentModes = null;
+    private ArrayList<NightId> sortedNightIds = null;
+    private ArrayList<String> distinctStaNames = null;
+    private ArrayList<String> distinctStaConfs = null;
     private Range wavelengthRange = null;
     /** Map of used staNames to StaNamesDir (reference StaNames / orientation) */
     private Map<String, StaNamesDir> usedStaNamesMap = null;
@@ -90,42 +94,26 @@ public class BaseSelectorResult {
         return granules.isEmpty();
     }
 
-    public final void addOIData(final Granule g, final OIData oiData) {
-        granules.add(g);
-        oiDatas.add(oiData);
+    // --- granules ---
+    public final Set<Granule> getGranules() {
+        return granules;
     }
 
-    public final List<OIData> getSortedOIDatas() {
-        if (sortedOIDatas == null) {
-            final ArrayList<OIData> sorted = new ArrayList<OIData>(oiDatas);
-            Collections.sort(sorted, OITableByFileComparator.INSTANCE);
-            sortedOIDatas = sorted;
-        }
-        return sortedOIDatas;
-    }
-
-    public final List<OIFitsFile> getSortedOIFitsFiles() {
-        if (sortedOIFitsFiles == null) {
-            sortedOIFitsFiles = OIDataListHelper.getSortedOIFitsFiles(oiDatas);
-        }
-        return sortedOIFitsFiles;
-    }
-
-    public final List<Target> getDistinctTargets() {
+    public final ArrayList<Target> getDistinctTargets() {
         if (sortedTargets == null) {
             sortedTargets = Granule.getSortedDistinctGranuleField(granules, GranuleField.TARGET);
         }
         return sortedTargets;
     }
 
-    public final List<InstrumentMode> getDistinctInstrumentModes() {
+    public final ArrayList<InstrumentMode> getDistinctInstrumentModes() {
         if (sortedInstrumentModes == null) {
             sortedInstrumentModes = Granule.getSortedDistinctGranuleField(granules, GranuleField.INS_MODE);
         }
         return sortedInstrumentModes;
     }
 
-    public final List<NightId> getDistinctNightIds() {
+    public final ArrayList<NightId> getDistinctNightIds() {
         if (sortedNightIds == null) {
             sortedNightIds = Granule.getSortedDistinctGranuleField(granules, GranuleField.NIGHT);
         }
@@ -133,47 +121,101 @@ public class BaseSelectorResult {
     }
 
     /**
-     * Return the unique staNames values (sorted by name) from OIData tables
+     * Return the unique staNames values (sorted by name) from Granules
      * @return unique staNames values (sorted by name)
      */
-    public List<String> getDistinctStaNames() {
+    public final ArrayList<String> getDistinctStaNames() {
         if (this.distinctStaNames == null) {
-            this.distinctStaNames = OIDataListHelper.getDistinctStaNames(oiDatas, getUsedStaNamesMap());
+            this.distinctStaNames = Granule.getSortedDistinctGranuleField(granules, GranuleExtraField.DISTINCT_STA_NAMES);
         }
         return this.distinctStaNames;
     }
 
     /**
-     * Return the unique staConfs values (sorted by name) from OIData tables
+     * Return the unique staConfs values (sorted by name) from Granules
      * @return unique staConfs values (sorted by name)
      */
-    public List<String> getDistinctStaConfs() {
+    public final ArrayList<String> getDistinctStaConfs() {
         if (this.distinctStaConfs == null) {
-            this.distinctStaConfs = OIDataListHelper.getDistinctStaConfs(oiDatas);
+            this.distinctStaConfs = Granule.getSortedDistinctGranuleField(granules, GranuleExtraField.DISTINCT_STA_CONFS);
         }
         return this.distinctStaConfs;
     }
 
     /**
-     * Get the wavelength range used by OIData tables
-     * @return the wavelength range used by OIData tables
+     * Get the wavelength range from Granules
+     * @return the wavelength range from Granules
      */
-    public Range getWavelengthRange() {
+    public final Range getWavelengthRange() {
         // lazy computation:
         if (wavelengthRange == null) {
-            this.wavelengthRange = OIDataListHelper.getWaveLengthRange(oiDatas);
+            final Set<InstrumentMode> insModes = Granule.getDistinctGranuleField(granules, GranuleField.INS_MODE);
+
+            this.wavelengthRange = InstrumentMode.getWavelengthRange(insModes);
         }
         return wavelengthRange;
     }
 
+    // --- oidatas ---
+    protected final LinkedHashSet<OIData> getOIDatas() {
+        return oiDatas;
+    }
+
+    public final void addOIData(final Granule g, final OIData oiData) {
+        granules.add(g);
+        oiDatas.add(oiData);
+    }
+
+    public final ArrayList<OIData> getSortedOIDatas() {
+        if (sortedOIDatas == null) {
+            final ArrayList<OIData> sortedList = new ArrayList<OIData>(oiDatas);
+            Collections.sort(sortedList, OITableByFileComparator.INSTANCE);
+            sortedOIDatas = sortedList;
+        }
+        return sortedOIDatas;
+    }
+
+    public final ArrayList<OIFitsFile> getSortedOIFitsFiles() {
+        if (sortedOIFitsFiles == null) {
+            sortedOIFitsFiles = OIDataListHelper.getSortedOIFitsFiles(oiDatas);
+        }
+        return sortedOIFitsFiles;
+    }
+
+    // --- statistics on oidata tables ---
     /**
-     * Return the Map of sorted staNames to StaNamesDir
-     * @return Map of sorted staNames to StaNamesDir
+     * @return total number of measurements in oidata tables
+     */
+    public int getNbMeasurements() {
+        return OIDataListHelper.getNbMeasurements(oiDatas);
+    }
+
+    /**
+     * @return total number of data points in oidata tables
+     */
+    public int getNbDataPoints() {
+        return OIDataListHelper.getNbDataPoints(oiDatas);
+    }
+
+    /**
+     * @return total number of non-flagged data points in oidata tables
+     */
+    public int getNbDataPointsNotFlagged() {
+        return OIDataListHelper.getNbDataPointsNotFlagged(oiDatas);
+    }
+
+    // --- global state ---
+    /**
+     * Return the Map of sorted staNames to StaNamesDir (from OIFitsCollection)
+     * @return Map of sorted staNames to StaNamesDir (from OIFitsCollection)
      */
     public final Map<String, StaNamesDir> getUsedStaNamesMap() {
         return usedStaNamesMap;
     }
 
+    /**
+     * @param usedStaNamesMap Map of sorted staNames to StaNamesDir (from OIFitsCollection)
+     */
     public final void setUsedStaNamesMap(final Map<String, StaNamesDir> usedStaNamesMap) {
         this.usedStaNamesMap = usedStaNamesMap;
     }
