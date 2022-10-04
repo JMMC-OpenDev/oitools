@@ -311,7 +311,7 @@ public final class Analyzer implements ModelVisitor {
             logger.log(Level.FINE, "postProcess: OIData[{0}]", oiData);
         }
 
-        processStaIndexAndStaConfNames(oiData);
+        processStaIndexNames(oiData);
     }
 
     /**
@@ -434,15 +434,15 @@ public final class Analyzer implements ModelVisitor {
 
     // --- baseline / configuration processing
     /**
-     * Computes station index and conf names on the given OIData table
+     * Computes station index names on the given OIData table
      * @param oiData OIData table to process
      */
-    private void processStaIndexAndStaConfNames(final OIData oiData) {
+    private void processStaIndexNames(final OIData oiData) {
         final OIFitsFile oiFitsFile = oiData.getOIFitsFile();
         final Map<String, StaNamesDir> usedStaNamesMap = oiFitsFile.getUsedStaNamesMap();
 
         if (isLogDebug) {
-            logger.log(Level.FINE, "processStaIndexAndStaConfNames: OIData[{0}] usedStaNamesMap: {1}",
+            logger.log(Level.FINE, "processStaIndexNames: OIData[{0}] usedStaNamesMap: {1}",
                     new Object[]{oiData.idToString(), usedStaNamesMap.entrySet()});
         }
 
@@ -451,16 +451,18 @@ public final class Analyzer implements ModelVisitor {
         if (nRows != 0) {
             // StaIndex column:
             final short[][] staIndexes = oiData.getStaIndex();
+            
+            if (staIndexes != null) {
+                // Derived StaIndexName column:
+                final String[] staIndexNames = oiData.getStaIndexName();
 
-            // Derived StaIndexName column:
-            final String[] staIndexNames = oiData.getStaIndexName();
+                for (int i = 0; i < nRows; i++) {
+                    staIndexNames[i] = oiData.getRealStaNames(usedStaNamesMap, staIndexes[i]);
+                }
 
-            for (int i = 0; i < nRows; i++) {
-                staIndexNames[i] = oiData.getRealStaNames(usedStaNamesMap, staIndexes[i]);
-            }
-
-            if (isLogDebug) {
-                logger.log(Level.FINE, "processStaIndexAndStaConfNames: OIData[{0}] done", oiData.idToString());
+                if (isLogDebug) {
+                    logger.log(Level.FINE, "processStaIndexNames: OIData[{0}] done", oiData.idToString());
+                }
             }
         }
     }
