@@ -327,6 +327,36 @@ public final class SelectorResult extends BaseSelectorResult {
             if (hasFiltersOIData2D()) {
                 SelectorResult.toString(getFiltersOIData2D(), sb);
             }
+            if (getSelector() != null) {
+                boolean strip = false;
+                if (getSelector().getInsModeUIDs() != null) {
+                    if (sb.length() > 1) {
+                        sb.append("), ");
+                    }
+                    sb.append("InsModeUID IN (");
+                    for (String value : getSelector().getInsModeUIDs()) {
+                        sb.append("'").append(value).append("'").append(",");
+                    }
+                    sb.delete(sb.length() - 1, sb.length());
+                    sb.append("), ");
+                    strip = true;
+                }
+                if (getSelector().getNightIDs() != null) {
+                    if (sb.length() > 1) {
+                        sb.append("), ");
+                    }
+                    sb.append("NightID IN (");
+                    for (Integer value : getSelector().getNightIDs()) {
+                        sb.append("'").append(value).append("'").append(",");
+                    }
+                    sb.delete(sb.length() - 1, sb.length());
+                    sb.append("), ");
+                    strip = true;
+                }
+                if (strip) {
+                    sb.delete(sb.length() - 2, sb.length());
+                }
+            }
             sb.append(']');
             return sb.toString();
         }

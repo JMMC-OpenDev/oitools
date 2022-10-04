@@ -548,14 +548,14 @@ public final class OIFitsCollection implements ToStringable {
      * - find Granules (target UID)
      * The returned BaseSelectorResult instance contains matching granules and OIData
      * 
-     * @param targetUID target UID
+     * @param targetUIDs target UIDs
      * @return BaseSelectorResult instance
      */
-    public BaseSelectorResult findTargetOIData(final String targetUID) {
+    public BaseSelectorResult findTargetOIData(final List<String> targetUIDs) {
         BaseSelectorResult result = null;
 
         final Selector selector = new Selector();
-        selector.setTargetUID(targetUID);
+        selector.setTargetUIDs(targetUIDs);
 
         logger.log(Level.FINE, "findTargetOIData: selector = {0}", selector);
 
@@ -568,13 +568,13 @@ public final class OIFitsCollection implements ToStringable {
             if (granules != null && !granules.isEmpty()) {
                 result = new BaseSelectorResult(this);
 
-                for (Granule g : granules) {
+                for (final Granule g : granules) {
                     final Set<OIData> oiDatas = oiDataPerGranule.get(g);
 
                     if (oiDatas != null) {
                         // add all tables:
-                        for (OIData oiData : oiDatas) {
-                            result.addOIData(g, oiData);
+                        for (final OIData oiData : oiDatas) {
+                            result.addSelectedOIData(g, oiData);
                         }
                     }
                 }
@@ -587,7 +587,7 @@ public final class OIFitsCollection implements ToStringable {
             }
             if (result != null) {
                 if (logger.isLoggable(Level.INFO)) {
-                    logger.log(Level.INFO, "findTargetOIData: targetUID = {0}", selector.getTargetUID());
+                    logger.log(Level.INFO, "findTargetOIData: targetUID = {0}", selector.getTargetUIDs());
                     logger.log(Level.INFO, "findTargetOIData: {0} granules {1} files, {2} oidata",
                             new Object[]{result.getGranules().size(), result.getSortedOIFitsFiles().size(), result.getSortedOIDatas().size()});
                     logger.log(Level.INFO, "findTargetOIData: {0} not flagged / {1} data points",
@@ -639,8 +639,8 @@ public final class OIFitsCollection implements ToStringable {
             final BaseSelectorResult targetResult;
 
             // Pre-query on TargetUID only:
-            if ((selector != null) && selector.getTargetUID() != null) {
-                targetResult = findTargetOIData(selector.getTargetUID());
+            if ((selector != null) && selector.getTargetUIDs() != null) {
+                targetResult = findTargetOIData(selector.getTargetUIDs());
 
                 logger.log(Level.FINE, "findOIData: target result = {0}", targetResult);
             } else {
@@ -674,12 +674,12 @@ public final class OIFitsCollection implements ToStringable {
                         filtersWL.clear();
 
                         // subset filters:
-                        if (selector.getTargetUID() != null) {
-                            filtersData1D.add(new TargetUIDFilter(tm, selector.getTargetUID())); // inclusive
+                        if (selector.getTargetUIDs() != null) {
+                            filtersData1D.add(new TargetUIDFilter(tm, selector.getTargetUIDs())); // inclusive
                         }
                         // insModeUID: useless as granule already handled this criteria
-                        if (selector.getNightID() != null) {
-                            filtersData1D.add(new NightIdFilter(selector.getNightID())); // inclusive
+                        if (selector.getNightIDs() != null) {
+                            filtersData1D.add(new NightIdFilter(selector.getNightIDs(), true)); // inclusive
                         }
                         // selector.tables: see OIData filtering below
 
@@ -723,19 +723,23 @@ public final class OIFitsCollection implements ToStringable {
                         }
                     }
 
-                    for (Granule g : granules) {
+                    for (final Granule g : granules) {
                         final Set<OIData> oiDatas = oiDataPerGranule.get(g);
 
                         if (oiDatas != null) {
                             // Apply table selection:
                             if ((selector == null) || !selector.hasTable()) {
                                 // add all tables:
-                                for (OIData oiData : oiDatas) {
-                                    filterOIData(result, g, oiData);
+                                for (final OIData oiData : oiDatas) {
+                                    if (filterOIData(result, oiData)) {
+                                        result.addSelectedOIData(g, oiData);
+                                    } else {
+                                        result.addDiscardedOIData(oiData);
+                                    }
                                 }
                             } else {
                                 // test all data tables:
-                                for (OIData oiData : oiDatas) {
+                                for (final OIData oiData : oiDatas) {
                                     // file path comparison:
                                     final String oiFitsPath = oiData.getOIFitsFile().getAbsoluteFilePath();
                                     if (oiFitsPath != null) {
@@ -745,7 +749,11 @@ public final class OIFitsCollection implements ToStringable {
                                             // extNb is null means add all tables from file
                                             if (extNbs.isEmpty()
                                                     || extNbs.contains(NumberUtils.valueOf(oiData.getExtNb()))) {
-                                                filterOIData(result, g, oiData);
+                                                if (filterOIData(result, oiData)) {
+                                                    result.addSelectedOIData(g, oiData);
+                                                } else {
+                                                    result.addDiscardedOIData(oiData);
+                                                }
                                             }
                                         }
                                     }
@@ -764,19 +772,22 @@ public final class OIFitsCollection implements ToStringable {
                     logger.log(Level.INFO, "findOIData: duration = {0} ms.", 1e-6d * (System.nanoTime() - start));
                 }
                 if (result != null) {
+                    result.setSelector(selector); // to get base filter information
+
                     if (logger.isLoggable(Level.INFO)) {
                         logger.log(Level.INFO, "findOIData: filters: {0}", result.dumpFiltersAsString());
                         logger.log(Level.INFO, "findOIData: {0} granules {1} files, {2} oidata",
-                                new Object[]{result.getGranules().size(), result.getSortedOIFitsFiles().size(), result.getSortedOIDatas().size()});
+                                new Object[]{result.getGranules().size(), result.getSortedOIFitsFiles().size(), result.getOIDatas().size()});
+                        if (!result.isOIDatasDiscardedEmpty()) {
+                            logger.log(Level.INFO, "findOIData: {0} discarded oidata", result.getOIDatasDiscarded().size());
+                        }
                         logger.log(Level.INFO, "findOIData: {0} not flagged / {1} data points",
                                 new Object[]{result.getNbDataPointsNotFlagged(), result.getNbDataPoints()});
                     }
                 }
             }
         }
-        if (result != null) {
-            result.setSelector(selector);
-        } else {
+        if (result == null) {
             logger.log(Level.FINE, "findOIData: no result matching {0}", selector);
         }
         logger.log(Level.FINE, "findOIData: {0}", result);
@@ -824,10 +835,10 @@ public final class OIFitsCollection implements ToStringable {
      * computes eventual masks (IndexMask) from the given SelectorResult
      *
      * @param result SelectorResult to store OIData, Granule and IndexMask instances
-     * @param g the granule to add
      * @param oiData the oiData table to filter
+     * @return true if the OIData table matches criteria; false otherwise
      */
-    private void filterOIData(final SelectorResult result, final Granule g, final OIData oiData) {
+    private boolean filterOIData(final SelectorResult result, final OIData oiData) {
         logger.log(Level.FINE, "filterOIData: oiData = {0}", oiData);
 
         // apply filters on OIData:
@@ -840,7 +851,7 @@ public final class OIFitsCollection implements ToStringable {
                 // no related OIWavelength table: 
                 logger.log(Level.FINE, "No OIWavelength for table {0}", oiData);
                 // skip OIData (no match):
-                return;
+                return false;
             }
             // oiWavelength already processed ?
             maskWavelength = result.getWavelengthMask(oiWavelength);
@@ -850,7 +861,7 @@ public final class OIFitsCollection implements ToStringable {
                 );
                 if (maskWavelength == null) {
                     // skip OIData (no remaining row):
-                    return;
+                    return false;
                 }
                 if (logger.isLoggable(Level.FINE)) {
                     logger.log(Level.FINE, "wlen filters: {0}", result.getFiltersUsed());
@@ -881,7 +892,7 @@ public final class OIFitsCollection implements ToStringable {
             );
             if (maskRows == null) {
                 // skip OIData (no remaining row):
-                return;
+                return false;
             }
             if (logger.isLoggable(Level.FINE)) {
                 logger.log(Level.FINE, "oidata filters: {0}", result.getFiltersUsed());
@@ -897,7 +908,7 @@ public final class OIFitsCollection implements ToStringable {
             );
             if (mask2D == null) {
                 // skip OIData (no remaining row):
-                return;
+                return false;
             }
 
             // Get column dependency (expression dynamic columns):
@@ -959,7 +970,7 @@ public final class OIFitsCollection implements ToStringable {
             }
             result.putDataMask2D(oiData, mask2D);
         }
-        result.addOIData(g, oiData);
+        return true;
     }
 
     private IndexMask computeMask1D(final FitsTable fitsTable,
@@ -1211,57 +1222,57 @@ public final class OIFitsCollection implements ToStringable {
             boolean badInsModeUID = false;
 
             // null if no match or targetUID / insModeUID is undefined :
-            final Target target;
-            if (selector.getTargetUID() != null) {
-                target = tm.getGlobalByUID(selector.getTargetUID());
+            final List<Target> targets;
+            if (selector.getTargetUIDs() != null) {
+                targets = tm.getGlobalsByUID(selector.getTargetUIDs());
 
-                if (target == null) {
+                if (targets == null) {
                     if (FIX_BAD_UID_FOR_SINGLE_MATCH) {
                         badTargetUID = true;
-                        logger.log(Level.WARNING, "Bad UID, discarding targetUID: [{0}]", selector.getTargetUID());
+                        logger.log(Level.WARNING, "Bad UIDs, discarding targetUIDs: {0}", selector.getTargetUIDs());
                     } else {
                         // no match means no granule matching
                         return null;
                     }
                 }
             } else {
-                target = null;
+                targets = null;
             }
-            final InstrumentMode insMode;
-            if (selector.getInsModeUID() != null) {
-                insMode = imm.getGlobalByUID(selector.getInsModeUID());
+            final List<InstrumentMode> insModes;
+            if (selector.getInsModeUIDs() != null) {
+                insModes = imm.getGlobalsByUID(selector.getInsModeUIDs());
 
-                if (insMode == null) {
+                if (insModes == null) {
                     if (FIX_BAD_UID_FOR_SINGLE_MATCH) {
                         badInsModeUID = true;
-                        logger.log(Level.WARNING, "Bad UID, discarding insModeUID: [{0}]", selector.getInsModeUID());
+                        logger.log(Level.WARNING, "Bad UID(s), discarding insModeUIDs: {0}", selector.getInsModeUIDs());
                     } else {
                         // no match means no granule matching
                         return null;
                     }
                 }
             } else {
-                insMode = null;
+                insModes = null;
             }
 
-            final NightId nightId;
-            if (selector.getNightID() != null) {
-                nightId = NightId.getCachedInstance(selector.getNightID());
+            final List<NightId> nightIds;
+            if (selector.getNightIDs() != null) {
+                nightIds = NightId.getCachedInstances(selector.getNightIDs());
             } else {
-                nightId = null;
+                nightIds = null;
             }
 
-            final Granule pattern = new Granule(target, insMode, nightId);
+            // Create matcher to handle all selector criteria:
+            final GranuleMatcher granuleMatcher = GranuleMatcher.getInstance(targets, insModes, nightIds, selector);
 
-            // Baselines & MJD & Wavelength ranges criteria:
-            final GranuleMatcher granuleMatcher = GranuleMatcher.getInstance(selector);
+            logger.log(Level.FINE, "granuleMatcher: {0}", granuleMatcher);
 
-            if (!pattern.isEmpty() || !granuleMatcher.isEmpty()) {
+            if (!granuleMatcher.isEmpty()) {
                 // Match and updates Granules:
                 for (Iterator<Granule> it = granules.iterator(); it.hasNext();) {
                     final Granule candidate = it.next();
 
-                    if (!granuleMatcher.match(pattern, candidate)) {
+                    if (!granuleMatcher.match(candidate)) {
                         it.remove();
                     }
                 }
@@ -1270,20 +1281,20 @@ public final class OIFitsCollection implements ToStringable {
             if (!granules.isEmpty()) {
                 if (badTargetUID) {
                     // check if selected Granules only have 1 target:
-                    final Set<Target> targets = Granule.getDistinctGranuleField(granules, GranuleField.TARGET);
-                    if (targets.size() != 1) {
-                        logger.log(Level.WARNING, "Multiple target match (incompatible with targetUID: {0}): {1}",
-                                new Object[]{selector.getTargetUID(), targets});
+                    final Set<Target> gTargets = Granule.getDistinctGranuleField(granules, GranuleField.TARGET);
+                    if (gTargets.size() != 1) {
+                        logger.log(Level.WARNING, "Multiple target match (incompatible with targetUIDs: {0}): {1}",
+                                new Object[]{selector.getTargetUIDs(), gTargets});
                         // ambiguous match => no granule matching
                         return null;
                     }
                 }
                 if (badInsModeUID) {
                     // check if selected Granules only have 1 instrument mode:
-                    final Set<InstrumentMode> insModes = Granule.getDistinctGranuleField(granules, GranuleField.INS_MODE);
-                    if (insModes.size() != 1) {
-                        logger.log(Level.WARNING, "Multiple instrument mode match (incompatible with insModeUID: {0}): {1}",
-                                new Object[]{selector.getInsModeUID(), insModes});
+                    final Set<InstrumentMode> gInsModes = Granule.getDistinctGranuleField(granules, GranuleField.INS_MODE);
+                    if (gInsModes.size() != 1) {
+                        logger.log(Level.WARNING, "Multiple instrument mode match (incompatible with insModeUIDs: {0}): {1}",
+                                new Object[]{selector.getInsModeUIDs(), gInsModes});
                         // ambiguous match => no granule matching
                         return null;
                     }

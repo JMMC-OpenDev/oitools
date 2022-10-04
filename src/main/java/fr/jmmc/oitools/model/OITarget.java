@@ -587,15 +587,15 @@ public final class OITarget extends OITable {
     }
 
     /**
-     * Return the targetId Matcher corresponding to the given Target UID (global) or null if missing
+     * Return the targetId Matcher corresponding to the given Target UIDs (global) or null if missing
      * @param tm TargetManager instance
-     * @param targetUID target UID (global)
-     * @return targetId Matcher corresponding to the given Target UID (global) or null if missing
+     * @param targetUIDs target UIDs (global)
+     * @return targetId Matcher corresponding to the given Target UIDs (global) or null if missing
      */
-    public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final String targetUID) {
-        final Target globalTarget = tm.getGlobalByUID(targetUID);
-        if (globalTarget != null) {
-            return getTargetIdMatcher(tm, globalTarget);
+    public final TargetIdMatcher getTargetIdMatcherByUIDs(final TargetManager tm, final List<String> targetUIDs) {
+        final List<Target> globalTargets = tm.getGlobalsByUID(targetUIDs);
+        if (globalTargets != null) {
+            return getTargetIdMatcher(tm, globalTargets);
         }
         return null;
     }
@@ -615,10 +615,10 @@ public final class OITarget extends OITable {
     }
 
     /**
-     * Return the target ids corresponding to the given Target (global) or null if missing
+     * Return the target ids corresponding to the given Targets (global) or null if all missing
      * @param tm TargetManager instance
      * @param globalTarget target (global)
-     * @return target ids corresponding to the given Target (global) or null if missing
+     * @return target ids corresponding to the given Targets (global) or null if all missing
      */
     public final Set<Short> getTargetIds(final TargetManager tm, final Target globalTarget) {
         Set<Short> matchs = null;
@@ -631,6 +631,45 @@ public final class OITarget extends OITable {
                         matchs = new HashSet<Short>();
                     }
                     matchs.add(id);
+                }
+            }
+        }
+        return matchs;
+    }
+
+    /**
+     * Return the targetId Matcher corresponding to the given Targets (global) or null if missing
+     * @param tm TargetManager instance
+     * @param globalTargets targets (global)
+     * @return targetId Matcher corresponding to the given Targets (global) or null if missing
+     */
+    public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final List<Target> globalTargets) {
+        final Set<Short> matchs = getTargetIds(tm, globalTargets);
+        if (matchs != null) {
+            return new TargetIdMatcher(matchs);
+        }
+        return null;
+    }
+
+    /**
+     * Return the target ids corresponding to the given Targets (global) or null if all missing
+     * @param tm TargetManager instance
+     * @param globalTargets targets (global)
+     * @return target ids corresponding to the given Targets (global) or null if all missing
+     */
+    public final Set<Short> getTargetIds(final TargetManager tm, final List<Target> globalTargets) {
+        Set<Short> matchs = null;
+        for (Target globalTarget : globalTargets) {
+            final List<Target> localTargets = tm.getLocals(globalTarget);
+            if (localTargets != null) {
+                for (Target local : localTargets) {
+                    final Short id = targetObjToTargetId.get(local);
+                    if (id != null) {
+                        if (matchs == null) {
+                            matchs = new HashSet<Short>();
+                        }
+                        matchs.add(id);
+                    }
                 }
             }
         }

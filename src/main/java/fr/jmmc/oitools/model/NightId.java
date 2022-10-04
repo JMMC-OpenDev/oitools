@@ -20,8 +20,10 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.NumberUtils;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,8 +31,6 @@ import java.util.Map;
  * @author bourgesl
  */
 public final class NightId {
-
-    public final static NightId UNDEFINED = new NightId();
 
     public static final Comparator<NightId> CMP_NIGHT = new Comparator<NightId>() {
         @Override
@@ -41,6 +41,17 @@ public final class NightId {
 
     /** cached NightId instances */
     private final static Map<NightId, NightId> CACHE = new HashMap<NightId, NightId>(64);
+
+    public static List<NightId> getCachedInstances(final List<Integer> nightIds) {
+        final List<NightId> result = new ArrayList<NightId>(nightIds.size());
+
+        for (Integer nightId : nightIds) {
+            if (nightId != null) {
+                result.add(NightId.getCachedInstance(nightId));
+            }
+        }
+        return result;
+    }
 
     public static NightId getCachedInstance(final int nightId) {
         NightId n = new NightId(nightId);

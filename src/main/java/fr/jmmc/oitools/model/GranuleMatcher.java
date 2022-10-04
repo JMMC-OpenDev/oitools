@@ -7,13 +7,17 @@ import fr.jmmc.oitools.model.range.Range;
 import fr.jmmc.oitools.processing.Selector;
 import fr.jmmc.oitools.processing.Selector.FilterValues;
 import java.util.Collection;
+import java.util.List;
 
 /**
- * Specific Matcher for Granule instances (staNames, wavelength, mjd ranges)
+ * Specific Matcher for Granule instances
  */
-public final class GranuleMatcher implements Matcher<Granule> {
+public final class GranuleMatcher {
 
-    public static GranuleMatcher getInstance(final Selector selector) {
+    public static GranuleMatcher getInstance(final List<Target> targets,
+                                             final List<InstrumentMode> insModes,
+                                             final List<NightId> nightIds,
+                                             final Selector selector) {
         // StaIndex criteria:
         final FilterValues<String> filterValuesStaIndex = selector.getFilterValues(Selector.FILTER_STAINDEX);
         // StaConf criteria:
@@ -23,10 +27,14 @@ public final class GranuleMatcher implements Matcher<Granule> {
         // Wavelength ranges:
         final FilterValues<Range> filterValuesEffWave = selector.getFilterValues(Selector.FILTER_EFFWAVE);
 
-        return new GranuleMatcher(filterValuesStaIndex, filterValuesStaConf, filterValuesMjd, filterValuesEffWave);
+        return new GranuleMatcher(targets, insModes, nightIds,
+                filterValuesStaIndex, filterValuesStaConf, filterValuesMjd, filterValuesEffWave);
     }
 
     // members:
+    private final List<Target> targets;
+    private final List<InstrumentMode> insModes;
+    private final List<NightId> nightIds;
     /** StaIndex filter values */
     private final FilterValues<String> filterValuesStaIndex;
     /** StaConf filter values */
@@ -36,11 +44,17 @@ public final class GranuleMatcher implements Matcher<Granule> {
     /** Wavelength filter values */
     private final FilterValues<Range> filterValuesEffWave;
 
-    private GranuleMatcher(final FilterValues<String> filterValuesStaIndex,
+    private GranuleMatcher(final List<Target> targets,
+                           final List<InstrumentMode> insModes,
+                           final List<NightId> nightIds,
+                           final FilterValues<String> filterValuesStaIndex,
                            final FilterValues<String> filterValuesStaConf,
                            final FilterValues<Range> filterValuesMjd,
                            final FilterValues<Range> filterValuesEffWave) {
 
+        this.targets = isEmpty(targets) ? null : targets;
+        this.insModes = isEmpty(insModes) ? null : insModes;
+        this.nightIds = isEmpty(nightIds) ? null : nightIds;
         this.filterValuesStaIndex = isEmpty(filterValuesStaIndex) ? null : filterValuesStaIndex;
         this.filterValuesStaConf = isEmpty(filterValuesStaConf) ? null : filterValuesStaConf;
         this.filterValuesMjd = isEmpty(filterValuesMjd) ? null : filterValuesMjd;
@@ -48,30 +62,28 @@ public final class GranuleMatcher implements Matcher<Granule> {
     }
 
     public boolean isEmpty() {
-        return (filterValuesStaIndex != null)
-                && (filterValuesStaConf != null)
-                && (filterValuesMjd != null)
-                && (filterValuesEffWave != null);
+        return (targets == null)
+                && (insModes == null)
+                && (nightIds == null)
+                && (filterValuesStaIndex == null)
+                && (filterValuesStaConf == null)
+                && (filterValuesMjd == null)
+                && (filterValuesEffWave == null);
     }
 
-    @Override
-    public boolean match(final Granule pattern, final Granule candidate) {
-        if (pattern == candidate) {
-            return true;
-        }
-        // TODO: use matcher on all criteria (all list choices : 0..n)
-        if ((pattern.getTarget() != null) && (candidate.getTarget() != null)) {
-            if (!pattern.getTarget().equals(candidate.getTarget())) {
+    public boolean match(final Granule candidate) {
+        if ((targets != null) && (candidate.getTarget() != null)) {
+            if (!targets.contains(candidate.getTarget())) {
                 return false;
             }
         }
-        if ((pattern.getInsMode() != null) && (candidate.getInsMode() != null)) {
-            if (!pattern.getInsMode().equals(candidate.getInsMode())) {
+        if ((insModes != null) && (candidate.getInsMode() != null)) {
+            if (!insModes.contains(candidate.getInsMode())) {
                 return false;
             }
         }
-        if ((pattern.getNight() != null) && (candidate.getNight() != null)) {
-            if (!pattern.getNight().equals(candidate.getNight())) {
+        if ((nightIds != null) && (candidate.getNight() != null)) {
+            if (!nightIds.contains(candidate.getNight())) {
                 return false;
             }
         }
@@ -121,7 +133,10 @@ public final class GranuleMatcher implements Matcher<Granule> {
     @Override
     public String toString() {
         return "GranuleMatcher{"
-                + "filterValuesStaIndex=" + filterValuesStaIndex
+                + "targets=" + targets
+                + ", insModes=" + insModes
+                + ", nightIds=" + nightIds
+                + ", filterValuesStaIndex=" + filterValuesStaIndex
                 + ", filterValuesStaConf=" + filterValuesStaConf
                 + ", filterValuesMjd=" + filterValuesMjd
                 + ", filterValuesEffWave=" + filterValuesEffWave + '}';
@@ -144,6 +159,10 @@ public final class GranuleMatcher implements Matcher<Granule> {
             }
         }
         return true;
+    }
+
+    private static boolean isEmpty(final List l) {
+        return (l == null) || l.isEmpty();
     }
 
     private static boolean isEmpty(final FilterValues fv) {

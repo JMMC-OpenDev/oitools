@@ -51,7 +51,7 @@ public abstract class AbstractMapper<K> {
     /** global item keyed by local item */
     protected final Map<K, K> globalPerLocal = new IdentityHashMap<K, K>();
     /** local items keyed by global item */
-    protected final Map<K, List<K>> localsPerGlobal = new IdentityHashMap<K, List<K>>();
+    protected final Map<K, ArrayList<K>> localsPerGlobal = new IdentityHashMap<K, ArrayList<K>>();
     /** sorted unique aliases by global item */
     private final Map<K, List<String>> sortedAliasesPerGlobal = new HashMap<K, List<String>>();
 
@@ -91,7 +91,7 @@ public abstract class AbstractMapper<K> {
                 }
             }
 
-            final List<K> locals;
+            final ArrayList<K> locals;
             if (match == null) {
                 // Generate UID:
                 final String uid = generateUid(getName(local));
@@ -136,9 +136,23 @@ public abstract class AbstractMapper<K> {
         return globalPerLocal.size();
     }
 
-    public final List<K> getGlobals(Comparator<K> comparator) {
-        final List<K> globals = new ArrayList<K>(localsPerGlobal.keySet());
+    public final ArrayList<K> getGlobals(Comparator<K> comparator) {
+        final ArrayList<K> globals = new ArrayList<K>(localsPerGlobal.keySet());
         Collections.sort(globals, comparator);
+        return globals;
+    }
+
+    public final ArrayList<K> getGlobalsByUID(final List<String> uids) {
+        ArrayList<K> globals = null;
+        for (String uid : uids) {
+            final K global = getGlobalByUID(uid);
+            if (global != null) {
+                if (globals == null) {
+                    globals = new ArrayList<K>(uids.size());
+                }
+                globals.add(global);
+            }
+        }
         return globals;
     }
 
@@ -154,7 +168,7 @@ public abstract class AbstractMapper<K> {
         return getLocals(global) != null;
     }
 
-    public final List<K> getLocals(final K global) {
+    public final ArrayList<K> getLocals(final K global) {
         return localsPerGlobal.get(global);
     }
 
@@ -210,7 +224,7 @@ public abstract class AbstractMapper<K> {
 
     protected abstract List<K> getGlobals();
 
-    private static <K> boolean containsInstance(final List<K> list, final K value) {
+    private static <K> boolean containsInstance(final ArrayList<K> list, final K value) {
         final int len = list.size();
         for (int i = 0; i < len; i++) {
             // identity comparison:

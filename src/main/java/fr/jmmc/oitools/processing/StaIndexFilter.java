@@ -45,7 +45,7 @@ public final class StaIndexFilter extends FitsTableFilter<String> {
         oiData.getMatchingStaIndexes(usedStaNamesMap, getAcceptedValues(), staIndexMatchings);
 
         if (staIndexMatchings.isEmpty()) {
-            logger.log(Level.FINE, "Skip {0}, no matching baseline", fitsTable);
+            logger.log(Level.FINE, "Skip {0}, no matching StaIndex", fitsTable);
             // skip OIData (no match) if include or keep OIData (full) if exclude:
             return (include) ? FilterState.INVALID : FilterState.FULL;
         }
@@ -65,6 +65,7 @@ public final class StaIndexFilter extends FitsTableFilter<String> {
         return FilterState.MASK;
     }
 
+    @Override
     public boolean accept(final int row, final int col) {
         return staIndexMatchings.contains(staIndexes[row]) == include;
     }

@@ -8,6 +8,7 @@ import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.TargetIdMatcher;
 import fr.jmmc.oitools.model.TargetManager;
+import java.util.List;
 import java.util.logging.Level;
 
 /**
@@ -21,8 +22,8 @@ public final class TargetUIDFilter extends FitsTableFilter<String> {
     private TargetIdMatcher targetIdMatcher = null;
     private short[] targetIds = null;
 
-    public TargetUIDFilter(final TargetManager tm, final String targetUID) {
-        super(OIFitsConstants.COLUMN_TARGET_ID, FitsTableFilter.asList(targetUID), true); // always inclusive
+    public TargetUIDFilter(final TargetManager tm, final List<String> targetUIDs) {
+        super(OIFitsConstants.COLUMN_TARGET_ID, targetUIDs, true); // always inclusive
         this.tm = tm;
     }
 
@@ -42,30 +43,30 @@ public final class TargetUIDFilter extends FitsTableFilter<String> {
             return FilterState.FULL;
         }
 
-        final String targetUID = getAcceptedValues().get(0);
-
-        // targetID can not be null as the OIData table is supposed to have the target:
-        targetIdMatcher = oiData.getTargetIdMatcher(this.tm, targetUID);
+        // targetIDs can not be null as the OIData table is supposed to have the target:
+        targetIdMatcher = oiData.getTargetIdMatcherByUIDs(this.tm, getAcceptedValues());
 
         if (targetIdMatcher == null) {
-            logger.log(Level.FINE, "Skip {0}, no matching range", fitsTable);
-            // skip OIData (no match):
-            return FilterState.INVALID;
+            logger.log(Level.FINE, "Skip {0}, no matching targetUID", fitsTable);
+            // skip OIData (no match) if include or keep OIData (full) if exclude:
+            return (include) ? FilterState.INVALID : FilterState.FULL;
         }
 
-        if (!targetIdMatcher.matchAll(oiData.getDistinctTargetId())) {
-            // resolve column once
-            targetIds = fitsTable.getColumnShort(columnName);
-
-            if (targetIds == null) {
-                // missing column, ignore filter:
-                return FilterState.FULL;
-            }
-            return FilterState.MASK;
+        if (targetIdMatcher.matchAll(oiData.getDistinctTargetId())) {
+            // keep OIData (full) if include or skip OIData (no match) if exclude:
+            return (include) ? FilterState.FULL : FilterState.INVALID;
         }
-        return FilterState.FULL;
+        // resolve column once
+        targetIds = fitsTable.getColumnShort(columnName);
+
+        if (targetIds == null) {
+            // missing column, ignore filter:
+            return FilterState.FULL;
+        }
+        return FilterState.MASK;
     }
 
+    @Override
     public boolean accept(final int row, final int col) {
         return targetIdMatcher.match(targetIds[row]);
     }

@@ -16,9 +16,11 @@
  */
 package fr.jmmc.oitools.processing;
 
+import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.OIFitsConstants;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -50,9 +52,9 @@ public final class Selector {
     });
 
     // members:
-    private String targetUID = null;
-    private String insModeUID = null;
-    private Integer nightID = null;
+    private List<String> targetUIDs = null;
+    private List<String> insModeUIDs = null;
+    private List<Integer> nightIDs = null;
     // table selection filter expressed as extNb (integer) values + OIFits file (id)
     private Map<String, List<Integer>> extNbsPerOiFitsPath = null;
     // Extra criteria:
@@ -63,9 +65,10 @@ public final class Selector {
     }
 
     public void reset() {
-        targetUID = null;
-        insModeUID = null;
-        nightID = null;
+        targetUIDs = null;
+        insModeUIDs = null;
+        nightIDs = null;
+
         if (extNbsPerOiFitsPath != null) {
             extNbsPerOiFitsPath.clear();
         }
@@ -74,36 +77,123 @@ public final class Selector {
         }
     }
 
-    public String getTargetUID() {
-        return targetUID;
+    public boolean isEmpty() {
+        return (targetUIDs == null) && (insModeUIDs == null) && (nightIDs == null)
+                && !hasTable() && !hasFilters();
     }
 
-    public void setTargetUID(String targetUID) {
+    @Override
+    public String toString() {
+        return "Selector["
+                + ((targetUIDs != null) ? " targetUIDs: " + targetUIDs : "")
+                + ((insModeUIDs != null) ? " insModeUIDs: " + insModeUIDs : "")
+                + ((nightIDs != null) ? " nightIDs: " + nightIDs : "")
+                + (hasTable() ? " extNbsPerOiFitsPath: " + extNbsPerOiFitsPath : "")
+                + (hasFilters() ? " filters: " + filtersMap : "")
+                + ']';
+    }
+
+    // --- targetUIDs ---
+    public List<String> getTargetUIDs() {
+        return targetUIDs;
+    }
+
+    private List<String> getOrCreateTargetUIDs() {
+        if (this.targetUIDs == null) {
+            this.targetUIDs = new ArrayList<>();
+        }
+        return this.targetUIDs;
+    }
+
+    public void setTargetUIDs(final Collection<String> targetUIDs) {
+        if ((targetUIDs != null) && !targetUIDs.isEmpty()) {
+            final List<String> ids = getOrCreateTargetUIDs();
+            copy(ids, targetUIDs);
+            if (ids.isEmpty()) {
+                this.targetUIDs = null;
+            }
+        }
+    }
+
+    public void setTargetUID(final String targetUID) {
         if ((targetUID != null) && targetUID.trim().isEmpty()) {
-            targetUID = null;
+            this.targetUIDs = null;
+        } else {
+            setTargetUIDs(Arrays.asList(new String[]{targetUID}));
         }
-        this.targetUID = targetUID;
     }
 
-    public String getInsModeUID() {
-        return insModeUID;
+    // --- insModeUIDs ---
+    public List<String> getInsModeUIDs() {
+        return insModeUIDs;
     }
 
-    public void setInsModeUID(String insModeUID) {
+    private List<String> getOrCreateInsModeUIDs() {
+        if (this.insModeUIDs == null) {
+            this.insModeUIDs = new ArrayList<>();
+        }
+        return this.insModeUIDs;
+    }
+
+    public void setInsModeUIDs(final Collection<String> insModeUIDs) {
+        if ((insModeUIDs != null) && !insModeUIDs.isEmpty()) {
+            final List<String> ids = getOrCreateInsModeUIDs();
+            copy(ids, insModeUIDs);
+            if (ids.isEmpty()) {
+                this.insModeUIDs = null;
+            }
+        }
+    }
+
+    public void setInsModeUID(final String insModeUID) {
         if ((insModeUID != null) && insModeUID.trim().isEmpty()) {
-            insModeUID = null;
+            this.insModeUIDs = null;
+        } else {
+            setInsModeUIDs(Arrays.asList(new String[]{insModeUID}));
         }
-        this.insModeUID = insModeUID;
     }
 
-    public Integer getNightID() {
-        return nightID;
+    // --- nightIDs ---
+    public List<Integer> getNightIDs() {
+        return nightIDs;
+    }
+
+    private List<Integer> getOrCreateNightIDs() {
+        if (this.nightIDs == null) {
+            this.nightIDs = new ArrayList<>();
+        }
+        return this.nightIDs;
+    }
+
+    public void setNightIDs(final Collection<Integer> nightIDs) {
+        if ((nightIDs != null) && !nightIDs.isEmpty()) {
+            final List<Integer> ids = getOrCreateNightIDs();
+            copyInts(ids, nightIDs);
+            if (ids.isEmpty()) {
+                this.nightIDs = null;
+            }
+        }
+    }
+
+    public void parseNightIDs(final Collection<String> nightIDs) {
+        if ((nightIDs != null) && !nightIDs.isEmpty()) {
+            final List<Integer> ids = getOrCreateNightIDs();
+            convertInts(ids, nightIDs);
+            if (ids.isEmpty()) {
+                this.nightIDs = null;
+            }
+        }
     }
 
     public void setNightID(final Integer nightID) {
-        this.nightID = nightID;
+        if (nightID == null) {
+            this.nightIDs = null;
+        } else {
+            setNightIDs(Arrays.asList(new Integer[]{nightID}));
+        }
     }
 
+    // --- extNbsPerOiFitsPath ---
     public boolean hasTable() {
         return (extNbsPerOiFitsPath != null) && !extNbsPerOiFitsPath.isEmpty();
     }
@@ -207,22 +297,6 @@ public final class Selector {
         return (removeFilterValues(columnName) != null);
     }
 
-    public boolean isEmpty() {
-        return (targetUID == null) && (insModeUID == null) && (nightID == null)
-                && !hasTable() && !hasFilters();
-    }
-
-    @Override
-    public String toString() {
-        return "Selector["
-                + ((targetUID != null) ? " targetUID: " + targetUID : "")
-                + ((insModeUID != null) ? " insModeUID: " + insModeUID : "")
-                + ((nightID != null) ? " nightID: " + nightID : "")
-                + (hasTable() ? " extNbsPerOiFitsPath: " + extNbsPerOiFitsPath : "")
-                + (hasFilters() ? " filters: " + filtersMap : "")
-                + ']';
-    }
-
     public static boolean isRangeFilter(final String name) {
         switch (name) {
             case Selector.FILTER_TARGET_ID:
@@ -312,6 +386,39 @@ public final class Selector {
         @Override
         public String toString() {
             return "FilterValues{" + "columnName=" + columnName + ", includeValues=" + includeValues + ", excludeValues=" + excludeValues + '}';
+        }
+    }
+
+    private static void copy(final List<String> ids, final Collection<String> input) {
+        ids.clear();
+
+        for (String id : input) {
+            if ((id != null) && id.trim().isEmpty()) {
+                id = null;
+            }
+            if (id != null) {
+                ids.add(id);
+            }
+        }
+    }
+
+    private static void copyInts(final List<Integer> ids, final Collection<Integer> input) {
+        ids.clear();
+
+        for (Integer id : input) {
+            if (id != null) {
+                ids.add(id);
+            }
+        }
+    }
+
+    private static void convertInts(final List<Integer> ids, final Collection<String> input) {
+        ids.clear();
+
+        for (String id : input) {
+            if (id != null) {
+                ids.add(NumberUtils.valueOf(id));
+            }
         }
     }
 }

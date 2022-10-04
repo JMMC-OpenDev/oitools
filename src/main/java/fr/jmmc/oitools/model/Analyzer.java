@@ -96,9 +96,15 @@ public final class Analyzer implements ModelVisitor {
             process(oiArray);
         }
 
-        // finally: process OIData tables:
+        // process OIData tables:
         for (final OIData oiData : oiFitsFile.getOiDataList()) {
             process(oiData);
+        }
+
+        // post-process OIData tables to compute derived columns
+        // STA_INDEX_NAME using oiFitsFile.getUsedStaNamesMap()
+        for (final OIData oiData : oiFitsFile.getOiDataList()) {
+            postProcess(oiData);
         }
 
         if (isLogDebug) {
@@ -297,6 +303,18 @@ public final class Analyzer implements ModelVisitor {
     }
 
     /**
+     * Process the given OIData table to compute derived columns
+     * @param oiData OIData table to process
+     */
+    private void postProcess(final OIData oiData) {
+        if (isLogDebug) {
+            logger.log(Level.FINE, "postProcess: OIData[{0}]", oiData);
+        }
+
+        processStaIndexAndStaConfNames(oiData);
+    }
+
+    /**
      * Process the given OIArray table
      * @param oiArray OIArray table to process
      */
@@ -415,6 +433,38 @@ public final class Analyzer implements ModelVisitor {
     }
 
     // --- baseline / configuration processing
+    /**
+     * Computes station index and conf names on the given OIData table
+     * @param oiData OIData table to process
+     */
+    private void processStaIndexAndStaConfNames(final OIData oiData) {
+        final OIFitsFile oiFitsFile = oiData.getOIFitsFile();
+        final Map<String, StaNamesDir> usedStaNamesMap = oiFitsFile.getUsedStaNamesMap();
+
+        if (isLogDebug) {
+            logger.log(Level.FINE, "processStaIndexAndStaConfNames: OIData[{0}] usedStaNamesMap: {1}",
+                    new Object[]{oiData.idToString(), usedStaNamesMap.entrySet()});
+        }
+
+        final int nRows = oiData.getNbRows();
+
+        if (nRows != 0) {
+            // StaIndex column:
+            final short[][] staIndexes = oiData.getStaIndex();
+
+            // Derived StaIndexName column:
+            final String[] staIndexNames = oiData.getStaIndexName();
+
+            for (int i = 0; i < nRows; i++) {
+                staIndexNames[i] = oiData.getRealStaNames(usedStaNamesMap, staIndexes[i]);
+            }
+
+            if (isLogDebug) {
+                logger.log(Level.FINE, "processStaIndexAndStaConfNames: OIData[{0}] done", oiData.idToString());
+            }
+        }
+    }
+
     /**
      * Process station indexes on the given OIData table
      * @param oiData OIData table to process
@@ -1048,9 +1098,12 @@ public final class Analyzer implements ModelVisitor {
                 }
             }
 
-            // FINALLY: Fill StaConf derived column:
+            // FINALLY: Fill StaConf and StaConfName derived column:
             // StaIndex column:
             final short[][] staIndexes = oiData.getStaIndex();
+
+            // Derived StaConfName column:
+            final String[] staConfNames = oiData.getStaConfName();
 
             short[] staIndex;
             for (int i = 0; i < nRows; i++) {
@@ -1061,8 +1114,9 @@ public final class Analyzer implements ModelVisitor {
 
                 if (staConfs[i] == null) {
                     logger.log(Level.WARNING, "MISSING station configuration for station index:{0} !", oiData.getStaNames(staIndex));
-
                 }
+                // store as String (stable):
+                staConfNames[i] = oiData.getStaNames(staConfs[i]);
             }
         }
 

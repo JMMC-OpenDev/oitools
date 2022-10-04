@@ -63,6 +63,7 @@ public final class Double1DFilter extends FitsTableFilter<Range> {
         return FilterState.MASK;
     }
 
+    @Override
     public boolean accept(final int row, final int col) {
         return Range.contains(rangeMatchings, tableColumn1D[row]) == include;
     }

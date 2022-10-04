@@ -274,15 +274,15 @@ public abstract class OIAbstractData extends OITable {
     }
 
     /**
-     * Return the targetId Matcher corresponding to the given Target UID (global) or null if missing
+     * Return the targetId Matcher corresponding to the given Target UIDs (global) or null if missing
      * @param tm TargetManager instance
-     * @param targetUID target UID (global)
-     * @return targetId Matcher corresponding to the given Target UID (global) or null if missing
+     * @param targetUIDs target UIDs (global)
+     * @return targetId Matcher corresponding to the given Target UIDs (global) or null if missing
      */
-    public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final String targetUID) {
+    public final TargetIdMatcher getTargetIdMatcherByUIDs(final TargetManager tm, final List<String> targetUIDs) {
         final OITarget oiTarget = getOiTarget();
         if (oiTarget != null) {
-            return oiTarget.getTargetIdMatcher(tm, targetUID);
+            return oiTarget.getTargetIdMatcherByUIDs(tm, targetUIDs);
         }
         return null;
     }
@@ -290,13 +290,27 @@ public abstract class OIAbstractData extends OITable {
     /**
      * Return the targetId Matcher corresponding to the given Target (global) or null if missing
      * @param tm TargetManager instance
-     * @param globalTarget target (global)
+     * @param globalTargets target (global)
      * @return targetId Matcher corresponding to the given Target (global) or null if missing
      */
     public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final Target globalTarget) {
         final OITarget oiTarget = getOiTarget();
         if (oiTarget != null) {
             return oiTarget.getTargetIdMatcher(tm, globalTarget);
+        }
+        return null;
+    }
+
+    /**
+     * Return the targetId Matcher corresponding to the given Targets (global) or null if missing
+     * @param tm TargetManager instance
+     * @param globalTargets targets (global)
+     * @return targetId Matcher corresponding to the given Targets (global) or null if missing
+     */
+    public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final List<Target> globalTargets) {
+        final OITarget oiTarget = getOiTarget();
+        if (oiTarget != null) {
+            return oiTarget.getTargetIdMatcher(tm, globalTargets);
         }
         return null;
     }

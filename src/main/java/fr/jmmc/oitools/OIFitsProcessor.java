@@ -236,17 +236,17 @@ public class OIFitsProcessor extends OIFitsCommand {
         final Selector selector = new Selector();
 
         if (hasOptionArg(args, OPTION_TARGET)) {
-            selector.setTargetUID(getOptionArgValue(args, OPTION_TARGET));
+            selector.setTargetUIDs(parseStrings(getOptionArgValues(args, OPTION_TARGET)));
         } else if (hasOptionArg(args, OPTION_TARGET_ID)) {
-            selector.setTargetUID(getOptionArgValue(args, OPTION_TARGET_ID));
+            selector.setTargetUIDs(parseStrings(getOptionArgValues(args, OPTION_TARGET_ID)));
         }
         if (hasOptionArg(args, OPTION_INSNAME)) {
-            selector.setInsModeUID(getOptionArgValue(args, OPTION_INSNAME));
+            selector.setInsModeUIDs(parseStrings(getOptionArgValues(args, OPTION_INSNAME)));
         }
         if (hasOptionArg(args, OPTION_NIGHT)) {
-            selector.setNightID(Integer.valueOf(getOptionArgValue(args, OPTION_NIGHT)));
+            selector.parseNightIDs(parseStrings(getOptionArgValues(args, OPTION_NIGHT)));
         } else if (hasOptionArg(args, OPTION_NIGHT_ID)) {
-            selector.setNightID(Integer.valueOf(getOptionArgValue(args, OPTION_NIGHT_ID)));
+            selector.parseNightIDs(parseStrings(getOptionArgValues(args, OPTION_NIGHT_ID)));
         }
 
         if (!addRangeFilter(selector, Selector.FILTER_MJD, args, OPTION_MJD_RANGES)) {
@@ -405,9 +405,9 @@ public class OIFitsProcessor extends OIFitsCommand {
         info("| [-o] or [-output] <file_path> Complete path, absolute or relative, for output file |");
         info("--------------------------------------------------------------------------------------");
         info("| Filter options available to the command " + COMMAND_MERGE + ":                     |");
-        info("| [-target] <value>           Filter result on given Target                          |");
-        info("| [-insname] <value>          Filter result on given InsName                         |");
-        info("| [-night] <value>            Filter result on given Night (integer)                 |");
+        info("| [-target] <value>           Filter result on given Targets (comma-separated)       |");
+        info("| [-insname] <value>          Filter result on given InsNames (comma-separated)      |");
+        info("| [-night] <value>            Filter result on given Nights (integer, comma-separated) |");
         info("|                                                                                    |");
         info("| [-baselines] <values>       Filter result on given Baselines or Triplets (comma-separated) |");
         info("| [-mjds] <values>            Filter result on given MJD ranges (comma-separated pairs) |");
@@ -438,12 +438,30 @@ public class OIFitsProcessor extends OIFitsCommand {
         }
     }
 
-    private static StringBuilder dumpStrings(final List<String> values, final StringBuilder sb) {
+    private static List<String> parseStrings(final List<String> inputs) {
+        List<String> values = null;
+
+        if ((inputs != null) && !inputs.isEmpty()) {
+            for (String input : inputs) {
+                if ((input != null) && !input.isEmpty()) {
+                    for (String value : input.split(",")) {
+                        if (values == null) {
+                            values = new ArrayList<>();
+                        }
+                        values.add(value.trim());
+                    }
+                }
+            }
+        }
+        return values;
+    }
+
+    private static StringBuilder dumpStrings(final List<?> values, final StringBuilder sb) {
         if (values == null || values.isEmpty()) {
             return sb;
         }
-        for (String v : values) {
-            sb.append(v).append(",");
+        for (Object o : values) {
+            sb.append(o).append(",");
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb;
@@ -486,14 +504,17 @@ public class OIFitsProcessor extends OIFitsCommand {
             final StringBuilder sb = new StringBuilder(128);
             sb.append("CLI args: ");
 
-            if (selector.getTargetUID() != null) {
-                appendColumnArg(sb, Selector.FILTER_TARGET_ID).append(" ").append(selector.getTargetUID()).append(" ");
+            if (selector.getTargetUIDs() != null) {
+                appendColumnArg(sb, Selector.FILTER_TARGET_ID).append(" ");
+                dumpStrings(selector.getTargetUIDs(), sb).append(" ");
             }
-            if (selector.getInsModeUID() != null) {
-                sb.append(OIFitsProcessor.OPTION_INSNAME).append(" ").append(selector.getInsModeUID()).append(" ");
+            if (selector.getInsModeUIDs() != null) {
+                sb.append(OIFitsProcessor.OPTION_INSNAME).append(" ");
+                dumpStrings(selector.getInsModeUIDs(), sb).append(" ");
             }
-            if (selector.getNightID() != null) {
-                appendColumnArg(sb, Selector.FILTER_NIGHT_ID).append(" ").append(selector.getNightID()).append(" ");
+            if (selector.getNightIDs() != null) {
+                appendColumnArg(sb, Selector.FILTER_NIGHT_ID).append(" ");
+                dumpStrings(selector.getNightIDs(), sb).append(" ");
             }
             /* no way to define selector.tables via CLI */
 

@@ -49,9 +49,9 @@ public final class Granule {
     }
 
     /* members */
-    private Target target;
-    private InstrumentMode insMode;
-    private NightId night;
+    private Target target = null;
+    private InstrumentMode insMode = null;
+    private NightId night = null;
     /* extra information (filters) */
     /** MJD range */
     private Range mjdRange = null;
@@ -61,11 +61,7 @@ public final class Granule {
     private Set<String> distinctStaConfs = null;
 
     public Granule() {
-        this(null, null, null);
-    }
-
-    public Granule(final Target target, final InstrumentMode insMode, final NightId night) {
-        set(target, insMode, night);
+        super();
     }
 
     public void set(final Target target, final InstrumentMode insMode, final NightId night) {

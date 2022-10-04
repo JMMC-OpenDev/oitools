@@ -64,6 +64,7 @@ public final class Double2DFilter extends FitsTableFilter<Range> {
         return FilterState.MASK;
     }
 
+    @Override
     public boolean accept(final int row, final int col) {
         return Range.contains(rangeMatchings, tableColumn2D[row][col]) == include;
     }

@@ -415,6 +415,10 @@ public interface OIFitsConstants {
     /* derived columns */
     /** STA_CONF derived OIData column as short[] */
     public final static String COLUMN_STA_CONF = "STA_CONF";
+    /** STA_INDEX_NAME derived OIData column as String[] */
+    public final static String COLUMN_STA_INDEX_NAME = "STA_INDEX_NAME";
+    /** STA_CONF_NAME derived OIData column as String[] */
+    public final static String COLUMN_STA_CONF_NAME = "STA_CONF_NAME";
     /** HOUR_ANGLE derived OIData column as double[] */
     public final static String COLUMN_HOUR_ANGLE = "HOUR_ANGLE";
     /** RADIUS derived OIData column as double[] */

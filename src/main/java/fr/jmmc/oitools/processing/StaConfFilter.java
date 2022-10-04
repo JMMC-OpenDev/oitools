@@ -41,7 +41,7 @@ public final class StaConfFilter extends FitsTableFilter<String> {
         oiData.getMatchingStaConfs(getAcceptedValues(), staIndexMatchings);
 
         if (staIndexMatchings.isEmpty()) {
-            logger.log(Level.FINE, "Skip {0}, no matching conf", fitsTable);
+            logger.log(Level.FINE, "Skip {0}, no matching StaConf", fitsTable);
             // skip OIData (no match) if include or keep OIData (full) if exclude:
             return (include) ? FilterState.INVALID : FilterState.FULL;
         }
@@ -61,6 +61,7 @@ public final class StaConfFilter extends FitsTableFilter<String> {
         return FilterState.MASK;
     }
 
+    @Override
     public boolean accept(final int row, final int col) {
         return staIndexMatchings.contains(staConf[row]) == include;
     }

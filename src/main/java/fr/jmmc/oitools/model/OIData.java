@@ -89,6 +89,12 @@ public abstract class OIData extends OIAbstractData {
     /** STA_CONF column descriptor */
     private final static ColumnMeta COLUMN_STA_CONF = new ColumnMeta(OIFitsConstants.COLUMN_STA_CONF,
             "station configuration", Types.TYPE_SHORT, 2); // Fake repeat to mimic 2D array
+    /** STA_INDEX_NAME column descriptor */
+    private final static ColumnMeta COLUMN_STA_INDEX_NAME = new ColumnMeta(OIFitsConstants.COLUMN_STA_INDEX_NAME,
+            "station names contributing to the data", Types.TYPE_CHAR);
+    /** STA_CONF_NAME column descriptor */
+    private final static ColumnMeta COLUMN_STA_CONF_NAME = new ColumnMeta(OIFitsConstants.COLUMN_STA_CONF_NAME,
+            "station configuration name", Types.TYPE_CHAR);
 
     /** members */
     /** cached reference on OI_WAVELENGTH table associated to this OIData table */
@@ -159,6 +165,18 @@ public abstract class OIData extends OIAbstractData {
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_EFF_BAND,
                 "effective bandpass of channel (double)", Types.TYPE_DBL, Units.UNIT_METER, this));
 
+        // Derived STA_CONF column definition
+        addDerivedColumnMeta(COLUMN_STA_CONF);
+
+        // Derived COLUMN_STA_INDEX_NAME column definition
+        addDerivedColumnMeta(COLUMN_STA_INDEX_NAME);
+
+        // Derived COLUMN_STA_CONF_NAME column definition
+        addDerivedColumnMeta(COLUMN_STA_CONF_NAME);
+
+        // Derived NIGHT_ID column definition
+        addDerivedColumnMeta(COLUMN_NIGHT_ID);
+
         if (useCommonCols) {
             // Derived HOUR_ANGLE column definition
             addDerivedColumnMeta(COLUMN_HOUR_ANGLE);
@@ -170,11 +188,6 @@ public abstract class OIData extends OIAbstractData {
             addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_SPATIAL_FREQ,
                     "spatial frequencies", Types.TYPE_DBL, DataRange.RANGE_POSITIVE, this));
         }
-
-        // Derived NIGHT_ID column definition
-        addDerivedColumnMeta(COLUMN_NIGHT_ID);
-        // Derived STA_CONF column definition
-        addDerivedColumnMeta(COLUMN_STA_CONF);
     }
 
     /*
@@ -348,6 +361,60 @@ public abstract class OIData extends OIAbstractData {
 
     /* --- Alternate data representation methods --- */
     /**
+     * Return the station configuration name as String (1D)
+     * @see Analyzer which fills that column
+     * @return the station configuration name as String (1D)
+     */
+    public String[] getStaIndexName() {
+        // lazy:
+        String[] staIndexNames = this.getColumnDerivedString(OIFitsConstants.COLUMN_STA_INDEX_NAME);
+
+        if (staIndexNames == null) {
+            staIndexNames = new String[getNbRows()];
+
+            // not filled here: see Analyzer
+            this.setColumnDerivedValue(OIFitsConstants.COLUMN_STA_INDEX_NAME, staIndexNames);
+        }
+        return staIndexNames;
+    }
+
+    /**
+     * Return the station configuration as short arrays (2D)
+     * @see Analyzer#processStaConf(fr.jmmc.oitools.model.OIData) which fills that column
+     * @return the station configuration as short arrays (2D)
+     */
+    public short[][] getStaConf() {
+        // lazy:
+        short[][] staConfs = this.getColumnDerivedShorts(OIFitsConstants.COLUMN_STA_CONF);
+
+        if (staConfs == null) {
+            staConfs = new short[getNbRows()][];
+
+            // not filled here: see Analyzer
+            this.setColumnDerivedValue(OIFitsConstants.COLUMN_STA_CONF, staConfs);
+        }
+        return staConfs;
+    }
+
+    /**
+     * Return the station configuration name as String (1D)
+     * @see Analyzer which fills that column
+     * @return the station configuration name as String (1D)
+     */
+    public String[] getStaConfName() {
+        // lazy:
+        String[] staConfNames = this.getColumnDerivedString(OIFitsConstants.COLUMN_STA_CONF_NAME);
+
+        if (staConfNames == null) {
+            staConfNames = new String[getNbRows()];
+
+            // not filled here: see Analyzer
+            this.setColumnDerivedValue(OIFitsConstants.COLUMN_STA_CONF_NAME, staConfNames);
+        }
+        return staConfNames;
+    }
+
+    /**
      * Return the effective wavelength of channel as double arrays (2D)
      * @return the wavelength of channel array as double arrays (2D)
      */
@@ -401,24 +468,6 @@ public abstract class OIData extends OIAbstractData {
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_EFF_BAND, effBandDbls);
         }
         return effBandDbls;
-    }
-
-    /**
-     * Return the station configuration as short arrays (2D)
-     * @see Analyzer#processStaConf(fr.jmmc.oitools.model.OIData) which fills that column
-     * @return the station configuration as short arrays (2D)
-     */
-    public short[][] getStaConf() {
-        // lazy:
-        short[][] staConfs = this.getColumnDerivedShorts(OIFitsConstants.COLUMN_STA_CONF);
-
-        if (staConfs == null) {
-            staConfs = new short[getNbRows()][];
-
-            // not filled here: see Analyzer
-            this.setColumnDerivedValue(OIFitsConstants.COLUMN_STA_CONF, staConfs);
-        }
-        return staConfs;
     }
 
     /**
@@ -1005,6 +1054,7 @@ public abstract class OIData extends OIAbstractData {
      * @param name column name
      * @return Range instance or Range.UNDEFINED_RANGE if no data
      */
+    @Override
     public final Range getColumnRange(final String name) {
         // Intercept EFF_WAVE and EFF_BAND to use OI_WAVELENGTH:
         if (OIFitsConstants.COLUMN_EFF_WAVE.equals(name)

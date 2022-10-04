@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -53,11 +54,14 @@ public class BaseSelectorResult {
     private final HashSet<Granule> granules = new HashSet<Granule>();
     /* preserve order in selected data (per file) */
     private final LinkedHashSet<OIData> oiDatas = new LinkedHashSet<OIData>();
+    /* preserve order in discarded (i.e. not selected) data (per file) */
+    private LinkedHashSet<OIData> oiDatasDiscarded = null;
     /** selector to get criterias */
     private Selector selector = null;
 
     /** cached values */
     private ArrayList<OIData> sortedOIDatas = null;
+    private List<OIData> sortedOIDatasDiscarded = null;
     private ArrayList<OIFitsFile> sortedOIFitsFiles = null;
     private ArrayList<Target> sortedTargets = null;
     private ArrayList<InstrumentMode> sortedInstrumentModes = null;
@@ -156,12 +160,12 @@ public class BaseSelectorResult {
         return wavelengthRange;
     }
 
-    // --- oidatas ---
-    protected final LinkedHashSet<OIData> getOIDatas() {
+    // --- selected oidatas ---
+    public final LinkedHashSet<OIData> getOIDatas() {
         return oiDatas;
     }
 
-    public final void addOIData(final Granule g, final OIData oiData) {
+    public final void addSelectedOIData(final Granule g, final OIData oiData) {
         granules.add(g);
         oiDatas.add(oiData);
     }
@@ -180,6 +184,41 @@ public class BaseSelectorResult {
             sortedOIFitsFiles = OIDataListHelper.getSortedOIFitsFiles(oiDatas);
         }
         return sortedOIFitsFiles;
+    }
+
+    // --- discarded oidatas ---
+    public final boolean isOIDatasDiscardedEmpty() {
+        return (oiDatasDiscarded == null);
+    }
+
+    public final LinkedHashSet<OIData> getOIDatasDiscarded() {
+        return oiDatasDiscarded;
+    }
+
+    public final void addDiscardedOIData(final OIData oiData) {
+        if (isOIDatasDiscardedEmpty()) {
+            oiDatasDiscarded = new LinkedHashSet<OIData>();
+        }
+        oiDatasDiscarded.add(oiData);
+    }
+
+    public final boolean isOIDataDiscarded(final OIData oiData) {
+        return (oiDatasDiscarded == null) ? false : oiDatasDiscarded.contains(oiData);
+    }
+
+    /* all = selected + discarded */
+    public final List<OIData> getSortedOIDatasDiscarded() {
+        if (sortedOIDatasDiscarded == null) {
+            final List<OIData> sortedList;
+            if (isOIDatasDiscardedEmpty()) {
+                sortedList = Collections.emptyList();
+            } else {
+                sortedList = new ArrayList<OIData>(oiDatasDiscarded);
+                Collections.sort(sortedList, OITableByFileComparator.INSTANCE);
+            }
+            sortedOIDatasDiscarded = sortedList;
+        }
+        return sortedOIDatasDiscarded;
     }
 
     // --- statistics on oidata tables ---
