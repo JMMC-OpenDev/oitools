@@ -2445,6 +2445,46 @@
     <array>true</array>
   </column>
   <column>
+    <name>STA_CONF</name>
+    <datatype>TYPE_SHORT</datatype>
+    <description>station configuration</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>2</repeat>
+    <array>true</array>
+  </column>
+  <column>
+    <name>STA_INDEX_NAME</name>
+    <datatype>TYPE_CHAR</datatype>
+    <description>station names contributing to the data</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
+  </column>
+  <column>
+    <name>STA_CONF_NAME</name>
+    <datatype>TYPE_CHAR</datatype>
+    <description>station configuration name</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
+  </column>
+  <column>
+    <name>NIGHT_ID</name>
+    <datatype>TYPE_INT</datatype>
+    <description>night identifier</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
+  </column>
+  <column>
     <name>HOUR_ANGLE</name>
     <datatype>TYPE_DBL</datatype>
     <description>hour angle</description>
@@ -2499,26 +2539,6 @@
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
     </datarange>
-  </column>
-  <column>
-    <name>NIGHT_ID</name>
-    <datatype>TYPE_INT</datatype>
-    <description>night identifier</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
-  </column>
-  <column>
-    <name>STA_CONF</name>
-    <datatype>TYPE_SHORT</datatype>
-    <description>station configuration</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>2</repeat>
-    <array>true</array>
   </column>
   <column>
     <name>UCOORD_SPATIAL</name>
@@ -2998,6 +3018,46 @@
     <array>true</array>
   </column>
   <column>
+    <name>STA_CONF</name>
+    <datatype>TYPE_SHORT</datatype>
+    <description>station configuration</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>2</repeat>
+    <array>true</array>
+  </column>
+  <column>
+    <name>STA_INDEX_NAME</name>
+    <datatype>TYPE_CHAR</datatype>
+    <description>station names contributing to the data</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
+  </column>
+  <column>
+    <name>STA_CONF_NAME</name>
+    <datatype>TYPE_CHAR</datatype>
+    <description>station configuration name</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
+  </column>
+  <column>
+    <name>NIGHT_ID</name>
+    <datatype>TYPE_INT</datatype>
+    <description>night identifier</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
+  </column>
+  <column>
     <name>HOUR_ANGLE</name>
     <datatype>TYPE_DBL</datatype>
     <description>hour angle</description>
@@ -3052,26 +3112,6 @@
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
     </datarange>
-  </column>
-  <column>
-    <name>NIGHT_ID</name>
-    <datatype>TYPE_INT</datatype>
-    <description>night identifier</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
-  </column>
-  <column>
-    <name>STA_CONF</name>
-    <datatype>TYPE_SHORT</datatype>
-    <description>station configuration</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>2</repeat>
-    <array>true</array>
   </column>
   <column>
     <name>UCOORD_SPATIAL</name>
@@ -3547,6 +3587,46 @@
     <array>true</array>
   </column>
   <column>
+    <name>STA_CONF</name>
+    <datatype>TYPE_SHORT</datatype>
+    <description>station configuration</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>2</repeat>
+    <array>true</array>
+  </column>
+  <column>
+    <name>STA_INDEX_NAME</name>
+    <datatype>TYPE_CHAR</datatype>
+    <description>station names contributing to the data</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
+  </column>
+  <column>
+    <name>STA_CONF_NAME</name>
+    <datatype>TYPE_CHAR</datatype>
+    <description>station configuration name</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
+  </column>
+  <column>
+    <name>NIGHT_ID</name>
+    <datatype>TYPE_INT</datatype>
+    <description>night identifier</description>
+    <optional>false</optional>
+    <rules>
+    </rules>
+    <repeat>1</repeat>
+    <array>false</array>
+  </column>
+  <column>
     <name>HOUR_ANGLE</name>
     <datatype>TYPE_DBL</datatype>
     <description>hour angle</description>
@@ -3601,26 +3681,6 @@
       <name>RANGE_POSITIVE</name>
       <min>0.0</min>
     </datarange>
-  </column>
-  <column>
-    <name>NIGHT_ID</name>
-    <datatype>TYPE_INT</datatype>
-    <description>night identifier</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>1</repeat>
-    <array>false</array>
-  </column>
-  <column>
-    <name>STA_CONF</name>
-    <datatype>TYPE_SHORT</datatype>
-    <description>station configuration</description>
-    <optional>false</optional>
-    <rules>
-    </rules>
-    <repeat>2</repeat>
-    <array>true</array>
   </column>
   <column>
     <name>U1COORD_SPATIAL</name>
