@@ -1064,6 +1064,19 @@ public abstract class FitsTable extends FitsHDU {
     }
 
     /**
+     * Clear the Map storing min/max column values for the given column name
+     * @param name column name
+     */
+    protected final void clearColumnsRangeValue(final String name) {
+        if (this.columnsRangeValue != null) {
+            // see getColumnRange(name):
+            final String key = name + "_RANGE";
+            columnsRangeValue.remove(key); // Range
+            columnsRangeValue.remove(name); // [min;max] values
+        }
+    }
+
+    /**
      * Return the Map storing min/max column values
      *
      * @return Map storing min/max of column values
@@ -1086,7 +1099,7 @@ public abstract class FitsTable extends FitsHDU {
         final String key = name + "_RANGE";
 
         /* retrieve value in columnsRangeValue map of associated column */
-        Range cached = (Range) getColumnsRangeValue().get(key);
+        Range cached = (Range) getColumnsRangeValue().get(key); // Range
 
         if (cached == null) {
             final Object range = getMinMaxColumnValue(name);

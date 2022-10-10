@@ -312,7 +312,6 @@ public abstract class OIData extends OIAbstractData {
      * @throws RuntimeException
      */
     public void checkExpression(final String name, final String expression) throws RuntimeException {
-
         // Test if name conflicts with standard columns (VIS2DATA)
         if (getColumnDesc(name) != null) {
             throw new IllegalArgumentException("Column name [" + name + "] already existing (OIFITS standard) !");
@@ -331,11 +330,12 @@ public abstract class OIData extends OIAbstractData {
         // remove column (descriptor and values) if existing:
         removeExpressionColumn(name);
 
-        addDerivedColumnMeta(new WaveColumnMeta(name, "expression: " + expression,
-                Types.TYPE_DBL, this, expression));
+        final WaveColumnMeta colMeta = new WaveColumnMeta(name, "expression: " + expression,
+                Types.TYPE_DBL, this, expression);
+        addDerivedColumnMeta(colMeta);
 
         // Force computation now (not lazy):
-        getExprColumnDoubles(name, expression);
+        getExprColumnDoubles(name, colMeta);
     }
 
     /**
@@ -345,6 +345,9 @@ public abstract class OIData extends OIAbstractData {
     public void removeExpressionColumn(final String name) {
         final ColumnMeta column = getColumnDerivedDesc(name);
 
+        // anyway clear cached values:
+        clearColumnsRangeValue(name);
+        
         // check if the column has an expression
         if (column instanceof WaveColumnMeta) {
             final WaveColumnMeta colMeta = (WaveColumnMeta) column;
@@ -512,19 +515,19 @@ public abstract class OIData extends OIAbstractData {
     }
 
     /**
-     * Return the array with the given expression
+     * Return the computed expression f[x][y] for the given column name
      * @param name derived column name
-     * @param expression expression entered by the user
+     * @param colMeta the corresponding column descriptor
      * @return the computed expression f[x][y]
      */
-    protected double[][] getExprColumnDoubles(final String name, final String expression) {
+    protected double[][] getExprColumnDoubles(final String name, final WaveColumnMeta colMeta) {
         // lazy: get previously computed results:
         double[][] exprResults = this.getColumnDerivedDoubles(name);
 
         // check if expression changed ?
-        if (exprResults == null) {
+        if ((exprResults == null) && (colMeta.getExpression() != null)) {
             // not computed; do it now (LAZY):
-            exprResults = ExpressionEvaluator.getInstance().eval(this, name, expression, false);
+            exprResults = ExpressionEvaluator.getInstance().eval(this, name, colMeta.getExpression(), false);
 
             // store computed results for next time:
             this.setColumnDerivedValue(name, exprResults);
@@ -957,14 +960,12 @@ public abstract class OIData extends OIAbstractData {
             return getSpatialFreq();
         }
         // handle user expressions
-        for (ColumnMeta column : getColumnDerivedDescCollection()) {
-            if (column.getName().equals(name)) {
-                if (column instanceof WaveColumnMeta) {
-                    WaveColumnMeta colMeta = (WaveColumnMeta) column;
+        for (final ColumnMeta column : getColumnDerivedDescCollection()) {
+            if (column.getName().equals(name) && (column instanceof WaveColumnMeta)) {
+                final WaveColumnMeta colMeta = (WaveColumnMeta) column;
 
-                    if (colMeta.getExpression() != null) {
-                        return getExprColumnDoubles(name, colMeta.getExpression());
-                    }
+                if (colMeta.getExpression() != null) {
+                    return getExprColumnDoubles(name, colMeta);
                 }
             }
         }
