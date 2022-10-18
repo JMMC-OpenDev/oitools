@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <!-- Java Mariotti OITools -->
         <package name="OITools"
                  description="OITools is the JMMC library dedicated to OIFits manipulation (load, save and validation)"
-                 link="https://www.jmmc.fr/dev/oitools/"
+                 link="https://github.com/JMMC-OpenDev/oitools/"
                  jars="oitools.jar"
                  license="CECILL-B ???"/>     
 
