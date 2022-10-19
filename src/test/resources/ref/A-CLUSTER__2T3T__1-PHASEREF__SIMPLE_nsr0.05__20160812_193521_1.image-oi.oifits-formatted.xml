@@ -834,6 +834,8 @@
 </table>
 </OI_VIS2>
 <checkReport>
+36 warnings, 10 severe errors
+
 Analysing File: A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits
 SEVERE	Missing keyword 'AUTO_WGT'
 SEVERE	Missing keyword 'FLUX'
@@ -844,37 +846,37 @@ SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTR
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
-INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#4]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
-INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#5]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
-INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#6]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
-INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#7]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
-INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_ARRAY#8]
 SEVERE	Invalid value for keyword 'FRAME', found 'Geocentric' should be 'GEOCENTRIC|SKY'
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
-INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
+WARNING	Fixed ARRAY_X/Y/Z to 'VLTI'.
 Analysing table [OI_VIS#10]
 WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
@@ -911,8 +913,6 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
 Analysing table [OI_VIS2#21]
 WARNING	MJD [2457608.3125] is out of range, expected in [27073.5 - 106332.5]
 WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
-
-30 warnings, 10 severe errors
 
 </checkReport>
 <rules>
@@ -1021,7 +1021,7 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1081,7 +1081,7 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1141,7 +1141,7 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1201,7 +1201,7 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1261,7 +1261,7 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>
@@ -1321,7 +1321,7 @@ WARNING	MJD [2457608.6875] is out of range, expected in [27073.5 - 106332.5]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>A-CLUSTER__2T3T__1-PHASEREF__SIMPLE_nsr0.05__20160812_193521_1.image-oi.oifits</file>
     <extName>OI_ARRAY</extName>

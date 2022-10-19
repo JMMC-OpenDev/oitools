@@ -332,14 +332,14 @@
 </table>
 </OI_FLUX>
 <checkReport>
+0 warnings, 4 severe errors
+
 Analysing File: testdata_opt.fits
 Analysing table [OI_INSPOL#9]
 SEVERE	Can't check repeat for column 'JXX'
 SEVERE	Can't check repeat for column 'JXY'
 SEVERE	Can't check repeat for column 'JYX'
 SEVERE	Can't check repeat for column 'JYY'
-
-0 warnings, 4 severe errors
 
 </checkReport>
 <rules>

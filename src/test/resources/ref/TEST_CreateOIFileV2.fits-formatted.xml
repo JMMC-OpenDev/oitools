@@ -376,6 +376,8 @@
 </table>
 </OI_FLUX>
 <checkReport>
+0 warnings, 4 severe errors
+
 Analysing File: TEST_CreateOIFileV2.fits
 Analysing HDU [HDU#0]
 INFO	The keyword 'OBJECT' has the value 'MegaStar' but should be set to 'MULTI' for multiple observations
@@ -389,8 +391,6 @@ SEVERE	Can't check repeat for column 'JXX'
 SEVERE	Can't check repeat for column 'JXY'
 SEVERE	Can't check repeat for column 'JYX'
 SEVERE	Can't check repeat for column 'JYY'
-
-0 warnings, 4 severe errors
 
 </checkReport>
 <rules>

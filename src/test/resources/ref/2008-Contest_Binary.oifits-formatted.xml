@@ -360,13 +360,15 @@
 </table>
 </OI_T3>
 <checkReport>
+4 warnings, 2 severe errors
+
 Analysing File: 2008-Contest_Binary.oifits
 Analysing table [OI_ARRAY#1]
 SEVERE	STA_INDEX[0] cannot be &lt; 1 at row 0
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
-INFO	Fixed ARRAY_X/Y/Z to 'CHARA'.
+WARNING	Fixed ARRAY_X/Y/Z to 'CHARA'.
 Analysing table [OI_TARGET#2]
 SEVERE	TARGET_ID[0] cannot be &lt; 1 at row 0
 Analysing table [OI_VIS2#4]
@@ -375,8 +377,6 @@ Analysing table [OI_T3#5]
 INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
 INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0
-
-3 warnings, 2 severe errors
 
 </checkReport>
 <rules>
@@ -462,7 +462,7 @@ INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>2008-Contest_Binary.oifits</file>
     <extName>OI_ARRAY</extName>

@@ -3445,7 +3445,7 @@
     <message>Can't check repeat for column 'TARGET_ID'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:3</file>
     <extName>OI_VIS2</extName>
@@ -3459,7 +3459,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:3</file>
     <extName>OI_VIS</extName>
@@ -3473,7 +3473,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:3</file>
     <extName>OI_VIS</extName>
@@ -3487,7 +3487,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:3</file>
     <extName>OI_T3</extName>
@@ -3501,7 +3501,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:3</file>
     <extName>OI_T3</extName>
@@ -3515,7 +3515,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:4</file>
     <extName>OI_VIS2</extName>
@@ -3529,7 +3529,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:4</file>
     <extName>OI_VIS</extName>
@@ -3543,7 +3543,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:4</file>
     <extName>OI_VIS</extName>
@@ -3557,7 +3557,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:4</file>
     <extName>OI_VIS</extName>
@@ -3571,7 +3571,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:4</file>
     <extName>OI_VIS</extName>
@@ -3585,7 +3585,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:4</file>
     <extName>OI_T3</extName>
@@ -3599,7 +3599,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:4</file>
     <extName>OI_T3</extName>
@@ -3613,7 +3613,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>memory:4</file>
     <extName>OI_FLUX</extName>
@@ -3627,7 +3627,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -6323,7 +6323,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -9019,7 +9019,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -11715,7 +11715,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -12875,7 +12875,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -14035,7 +14035,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -14085,7 +14085,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -14135,7 +14135,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -14185,7 +14185,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -14235,7 +14235,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -14327,7 +14327,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -14461,7 +14461,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -14595,7 +14595,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_COL_ERR_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_FLUX</extName>
@@ -34311,7 +34311,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:3</file>
     <extName>OI_VIS2</extName>
@@ -34323,7 +34323,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:3</file>
     <extName>OI_VIS</extName>
@@ -34335,7 +34335,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:3</file>
     <extName>OI_T3</extName>
@@ -34347,7 +34347,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:4</file>
     <member>DATE-OBS</member>
@@ -34357,7 +34357,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:4</file>
     <extName>OI_VIS2</extName>
@@ -34369,7 +34369,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:4</file>
     <extName>OI_VIS</extName>
@@ -34381,7 +34381,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:4</file>
     <extName>OI_T3</extName>
@@ -34393,7 +34393,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>memory:4</file>
     <extName>OI_FLUX</extName>
@@ -34405,7 +34405,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -34417,7 +34417,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -34429,7 +34429,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -34441,7 +34441,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
@@ -34453,7 +34453,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -34465,7 +34465,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -34477,7 +34477,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -34489,7 +34489,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_DATE_OBS_STANDARD</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_FLUX</extName>
@@ -38511,7 +38511,7 @@
     <message>Missing keyword 'DATE'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>
     <file>memory:4</file>
     <member>INSMODE</member>
@@ -39264,7 +39264,7 @@
     <message>Missing keyword 'DATE'</message>
   </failure>
   <failure>
-    <severity>SEVERE</severity>
+    <severity>WARNING</severity>
     <rule>GENERIC_KEYWORD_MANDATORY</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
@@ -43025,7 +43025,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>memory:3</file>
     <extName>OI_ARRAY</extName>
@@ -43036,7 +43036,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>memory:4</file>
     <extName>OI_ARRAY</extName>
@@ -43047,7 +43047,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -43058,7 +43058,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -45324,7 +45324,7 @@
     <message>INSNAME identifier has blank value</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -45336,7 +45336,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -45348,7 +45348,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -45360,7 +45360,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -45372,7 +45372,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -45384,7 +45384,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -45396,7 +45396,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -45408,7 +45408,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -45420,7 +45420,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -45432,7 +45432,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -45444,7 +45444,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -45456,7 +45456,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -45468,7 +45468,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -45480,7 +45480,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -45492,7 +45492,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_FLUX</extName>
@@ -45504,7 +45504,7 @@
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>HDU</extName>
@@ -45512,7 +45512,7 @@
     <message>Skipping non-standard OIFITS 'HDU#0'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_ARRAY</extName>
@@ -45520,7 +45520,7 @@
     <message>Skipping non-standard OIFITS 'OI_ARRAY#1'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -45528,7 +45528,7 @@
     <message>Skipping non-standard OIFITS 'OI_WAVELENGTH#2'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_TARGET</extName>
@@ -45536,7 +45536,7 @@
     <message>Skipping non-standard OIFITS 'OI_TARGET#3'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS</extName>
@@ -45544,7 +45544,7 @@
     <message>Skipping non-standard OIFITS 'OI_VIS#4'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_VIS2</extName>
@@ -45552,7 +45552,7 @@
     <message>Skipping non-standard OIFITS 'OI_VIS2#5'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV1.fits</file>
     <extName>OI_T3</extName>
@@ -45560,7 +45560,7 @@
     <message>Skipping non-standard OIFITS 'OI_T3#6'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>HDU</extName>
@@ -45568,7 +45568,7 @@
     <message>Skipping non-standard OIFITS 'HDU#0'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_ARRAY</extName>
@@ -45576,7 +45576,7 @@
     <message>Skipping non-standard OIFITS 'OI_ARRAY#1'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_WAVELENGTH</extName>
@@ -45584,7 +45584,7 @@
     <message>Skipping non-standard OIFITS 'OI_WAVELENGTH#2'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_TARGET</extName>
@@ -45592,7 +45592,7 @@
     <message>Skipping non-standard OIFITS 'OI_TARGET#3'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_CORR</extName>
@@ -45600,7 +45600,7 @@
     <message>Skipping non-standard OIFITS 'OI_CORR#4'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_INSPOL</extName>
@@ -45608,7 +45608,7 @@
     <message>Skipping non-standard OIFITS 'OI_INSPOL#5'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS</extName>
@@ -45616,7 +45616,7 @@
     <message>Skipping non-standard OIFITS 'OI_VIS#6'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_VIS2</extName>
@@ -45624,7 +45624,7 @@
     <message>Skipping non-standard OIFITS 'OI_VIS2#7'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_T3</extName>
@@ -45632,7 +45632,7 @@
     <message>Skipping non-standard OIFITS 'OI_T3#8'</message>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>UNKNOWN_TABLE</rule>
     <file>src/test/resources/oifits/TEST_CreateOIFileV2.fits</file>
     <extName>OI_FLUX</extName>

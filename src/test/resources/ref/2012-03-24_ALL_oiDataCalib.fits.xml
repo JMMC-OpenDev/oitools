@@ -773,15 +773,15 @@
 </table>
 </OI_T3>
 <checkReport>
+4 warnings, 0 severe errors
+
 Analysing File: 2012-03-24_ALL_oiDataCalib.fits
 Analysing table [OI_ARRAY#3]
 INFO	Invalid value for column 'DIAMETER' line 0, found '0.0'  should be &gt; 0
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
-INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
-
-3 warnings, 0 severe errors
+WARNING	Fixed ARRAY_X/Y/Z to 'VLTI'.
 
 </checkReport>
 <rules>
@@ -852,7 +852,7 @@ INFO	Fixed ARRAY_X/Y/Z to 'VLTI'.
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
+    <severity>WARNING</severity>
     <rule>OI_ARRAY_XYZ_FIX</rule>
     <file>2012-03-24_ALL_oiDataCalib.fits</file>
     <extName>OI_ARRAY</extName>
