@@ -80,19 +80,19 @@ public final class RuleFailure {
             return false;
         }
         final RuleFailure other = (RuleFailure) obj;
-        if (this.rule != other.rule) {
+        if (this.rule != other.getRule()) {
             return false;
         }
-        if (!this.fileRef.equals(other.fileRef)) {
+        if (!this.fileRef.equals(other.getFileRef())) {
             return false;
         }
-        if ((this.extName == null) ? (other.extName != null) : !this.extName.equals(other.extName)) {
+        if ((this.extName == null) ? (other.getExtName() != null) : !this.extName.equals(other.getExtName())) {
             return false;
         }
-        if (this.extNb != other.extNb) {
+        if (this.extNb != other.getExtNb()) {
             return false;
         }
-        if ((this.member == null) ? (other.member != null) : !this.member.equals(other.member)) {
+        if ((this.member == null) ? (other.getMember() != null) : !this.member.equals(other.getMember())) {
             return false;
         }
         // Do not compare Severity (not in the key)
@@ -226,17 +226,18 @@ public final class RuleFailure {
      * @return a string representation of this class
      */
     public StringBuilder toString(final StringBuilder sb) {
-
         sb.append(getSeverity()).append('\t');
 
         if (getRule() != null) {
-            sb.append(getRule().name()).append('\t');
+            sb.append(getRule().name());
         }
+        sb.append('\t');
 
-        if (getFileRef() != null && getFileRef().getAbsoluteFilePath() != null) {
+        if ((getFileRef() != null) && (getFileRef().getAbsoluteFilePath() != null)) {
             sb.append(getFileRef().getAbsoluteFilePath());
         }
         sb.append('\t');
+
         if (getExtNb() >= 0) {
             sb.append((getExtName() == null) ? "HDU" : getExtName()).append('\t');
             sb.append(getExtNb()).append('\t');
@@ -267,11 +268,8 @@ public final class RuleFailure {
 
         //Display HDU#0
         if (getExtNb() >= 0) {
-            sb.append("    <extName>");
-            sb.append((getExtName() == null) ? "HDU" : getExtName());
-            sb.append("</extName>\n");
-            sb.append("    <extNb>");
-            sb.append(getExtNb()).append("</extNb>\n");
+            sb.append("    <extName>").append((getExtName() == null) ? "HDU" : getExtName()).append("</extName>\n");
+            sb.append("    <extNb>").append(getExtNb()).append("</extNb>\n");
         }
 
         if (getMember() != null) {

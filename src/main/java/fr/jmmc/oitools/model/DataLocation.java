@@ -30,6 +30,9 @@ import java.util.ArrayList;
  */
 public final class DataLocation {
 
+    /** shared empty instance */
+    final static DataLocation EMPTY = new DataLocation(null);
+
     /* members */
     /** associated Rule */
     private final Rule rule;
@@ -49,6 +52,20 @@ public final class DataLocation {
     DataLocation(final Rule rule) {
         // null table
         this.rule = rule;
+    }
+
+    /**
+     * Clear the temporary state (cleanup)
+     */
+    void cleanup() {
+        if (!isEmpty()) {
+            values.trimToSize();
+            limits.trimToSize();
+            expecteds.trimToSize();
+            rows.trimToSize();
+            cols.trimToSize();
+            details.trimToSize();
+        }
     }
 
     /* ------------  ALL HELPER FOR DIFFERENT ARGUMENTS  --------------- */
@@ -385,14 +402,15 @@ public final class DataLocation {
 
     private void ensureCapacity() {
         if (isEmpty()) {
-            values = new ArrayList<Object>(10);
-            limits = new ArrayList<Object>(10);
-            expecteds = new ArrayList<String>(10);
-            rows = new ArrayList<Integer>(10);
-            cols = new ArrayList<Integer>(10);
-            details = new ArrayList<String>(10);
+            final int newSize = 10;
+            values = new ArrayList<Object>(newSize);
+            limits = new ArrayList<Object>(newSize);
+            expecteds = new ArrayList<String>(newSize);
+            rows = new ArrayList<Integer>(newSize);
+            cols = new ArrayList<Integer>(newSize);
+            details = new ArrayList<String>(newSize);
         } else {
-            final int newSize = values.size() + 1;
+            final int newSize = values.size() * 2;
             values.ensureCapacity(newSize);
             limits.ensureCapacity(newSize);
             expecteds.ensureCapacity(newSize);
@@ -553,27 +571,27 @@ public final class DataLocation {
                 sb.append("    <data>\n");
                 sb.append("      <value>").append(getValues().get(i)).append("</value>\n");
 
-                Object limit = getLimits().get(i);
+                final Object limit = getLimits().get(i);
                 if (limit != null) {
                     sb.append("      <limit>").append(limit).append("</limit>\n");
                 }
 
-                String expected = getExpecteds().get(i);
+                final String expected = getExpecteds().get(i);
                 if (expected != null) {
                     sb.append("      <expected>").append(expected).append("</expected>\n");
                 }
 
-                Integer row = getRows().get(i);
+                final Integer row = getRows().get(i);
                 if (row != null) {
                     sb.append("      <row>").append(row).append("</row>\n");
                 }
 
-                Integer col = getCols().get(i);
+                final Integer col = getCols().get(i);
                 if (col != null) {
                     sb.append("      <col>").append(col).append("</col>\n");
                 }
 
-                String detail = getDetails().get(i);
+                final String detail = getDetails().get(i);
                 if (detail != null) {
                     sb.append("      <detail>").append(detail).append("</detail>\n");
                 }

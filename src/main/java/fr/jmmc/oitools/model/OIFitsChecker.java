@@ -207,6 +207,15 @@ public final class OIFitsChecker {
         setSkipFormat(false);
         fileRefStandards.clear();
         corrCheckers.clear();
+
+        /* prune failure storage */
+        for (Map.Entry<RuleFailure, DataLocation> entry : failures.entrySet()) {
+            if (entry.getValue().isEmpty()) {
+                entry.setValue(DataLocation.EMPTY);
+            } else {
+                entry.getValue().cleanup();
+            }
+        }
     }
 
     /**
@@ -500,6 +509,8 @@ public final class OIFitsChecker {
      * @return a string containing the analysis report
      */
     public StringBuilder appendFailuresReport(final boolean compact, final StringBuilder sb, final RuleFailureComparator comparator) {
+        sb.append(getCheckStatus()).append("\n\n");
+
         FileRef last = null;
         int lastExtNb = -1;
 
@@ -543,7 +554,6 @@ public final class OIFitsChecker {
                 }
             }
         }
-        sb.append('\n').append(getCheckStatus()).append('\n');
         return sb;
     }
 
