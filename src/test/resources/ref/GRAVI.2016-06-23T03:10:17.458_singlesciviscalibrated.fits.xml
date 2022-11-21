@@ -1927,7 +1927,7 @@ WARNING	Missing column 'FOV'
 WARNING	Missing column 'FOVTYPE'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
-WARNING	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
+WARNING	Skipping non-standard OIFITS column 'OI_ARRAY.MNTSTA' with format [1J]
 Analysing table [OI_TARGET#2]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
@@ -1951,21 +1951,21 @@ INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
 Analysing table [OI_VIS#9]
 SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
 SEVERE	Invalid format for column 'VISERR', found '210M' should be '210C'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_U' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_V' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_W' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_ZD' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.GDELAY_ASTROMETRY' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.OPD_DISP' with format [210D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_AZ' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_U' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_V' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_W' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_ZD' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.GDELAY_ASTROMETRY' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.OPD_DISP' with format [210D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.PHASE_ASTROMETRY' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.PHASE_REF_COEFF' with format [3D]
 Analysing table [OI_VIS2#10]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
@@ -1975,12 +1975,12 @@ INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#12]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.FT_POS' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.LKDT_MET_FC' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.FT_POS' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.LKDT_MET_FC' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.OPD_MET_FC' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.OPL_AIR' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.SC_POS' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
 
 </checkReport>
 <rules>
@@ -2067,7 +2067,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>MNTSTA</member>
     <data>
       <value>1J</value>
-      <message>Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]</message>
+      <message>Skipping non-standard OIFITS column 'OI_ARRAY.MNTSTA' with format [1J]</message>
     </data>
   </failure>
   <failure>
@@ -2267,7 +2267,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>TIME</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]</message>
     </data>
   </failure>
   <failure>
@@ -2329,7 +2329,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>E_AZ</member>
     <data>
       <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.E_AZ' with format [3D]</message>
     </data>
   </failure>
   <failure>
@@ -2341,7 +2341,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>E_U</member>
     <data>
       <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_U' with format [3D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.E_U' with format [3D]</message>
     </data>
   </failure>
   <failure>
@@ -2353,7 +2353,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>E_V</member>
     <data>
       <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_V' with format [3D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.E_V' with format [3D]</message>
     </data>
   </failure>
   <failure>
@@ -2365,7 +2365,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>E_W</member>
     <data>
       <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_W' with format [3D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.E_W' with format [3D]</message>
     </data>
   </failure>
   <failure>
@@ -2377,7 +2377,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>E_ZD</member>
     <data>
       <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.E_ZD' with format [3D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.E_ZD' with format [3D]</message>
     </data>
   </failure>
   <failure>
@@ -2389,7 +2389,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>GDELAY_ASTROMETRY</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.GDELAY_ASTROMETRY' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.GDELAY_ASTROMETRY' with format [1D]</message>
     </data>
   </failure>
   <failure>
@@ -2401,7 +2401,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>OPD_DISP</member>
     <data>
       <value>210D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.OPD_DISP' with format [210D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.OPD_DISP' with format [210D]</message>
     </data>
   </failure>
   <failure>
@@ -2413,7 +2413,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>PHASE_ASTROMETRY</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.PHASE_ASTROMETRY' with format [1D]</message>
     </data>
   </failure>
   <failure>
@@ -2425,7 +2425,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>PHASE_REF_COEFF</member>
     <data>
       <value>3D</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.PHASE_REF_COEFF' with format [3D]</message>
     </data>
   </failure>
   <failure>
@@ -2503,7 +2503,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>FT_POS</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.FT_POS' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX.FT_POS' with format [1D]</message>
     </data>
   </failure>
   <failure>
@@ -2515,7 +2515,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>LKDT_MET_FC</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.LKDT_MET_FC' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX.LKDT_MET_FC' with format [1D]</message>
     </data>
   </failure>
   <failure>
@@ -2527,7 +2527,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>OPD_MET_FC</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX.OPD_MET_FC' with format [1D]</message>
     </data>
   </failure>
   <failure>
@@ -2539,7 +2539,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>OPL_AIR</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX.OPL_AIR' with format [1D]</message>
     </data>
   </failure>
   <failure>
@@ -2551,7 +2551,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>SC_POS</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX.SC_POS' with format [1D]</message>
     </data>
   </failure>
   <failure>
@@ -2563,7 +2563,7 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
     <member>TIME</member>
     <data>
       <value>1D</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]</message>
     </data>
   </failure>
 </failures>

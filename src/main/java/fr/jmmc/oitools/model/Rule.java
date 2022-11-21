@@ -309,7 +309,7 @@ public enum Rule {
     OI_T3_CORRINDX("check if the referenced OI_CORR exists when the column CORRINDX_T3AMP or CORRINDX_T3PHI is present",
             "V2.7.2§4",
             RuleDataType.NONE,
-            "Missing OI_CORR table but the column {{MEMBER}} is defined."
+            "Missing OI_CORR table but the column '{{MEMBER}}' is defined."
     ),
     OI_VIS_CORRINDX("check if the referenced OI_CORR table exists when the column CORRINDX_VISAMP, CORRINDX_VISPHI, CORRINDX_RVIS or CORRINDX_IVIS is present",
             "V2.7.2§4",
@@ -366,7 +366,7 @@ public enum Rule {
             "check if the column belongs to the OIFITS standard and version",
             Const.JMMC,
             RuleDataType.VALUE,
-            "Skipping non-standard OIFITS column '{{HDU}}.{{MEMBER}}' with format [{{VALUE}}]"
+            "Skipping non-standard OIFITS column '{{EXTNAME}}.{{MEMBER}}' with format [{{VALUE}}]"
     ),
     UNKNOWN_TABLE("check if the table belongs to the OIFITS standard and version",
             "V2.4.2§3-4",

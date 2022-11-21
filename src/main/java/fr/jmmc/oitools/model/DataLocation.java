@@ -20,8 +20,10 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.NumberUtils;
+import static fr.jmmc.oitools.model.RuleFailure.replaceAll;
 import static fr.jmmc.oitools.model.XmlOutputVisitor.encodeTagContent;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Management of datas related to the creation of the error (toString/XML)
@@ -477,28 +479,43 @@ public final class DataLocation {
         return details;
     }
 
+    /* --- FORMAT MESSAGE --- */
+    /** RegExp expression to match {{VALUE}} */
+    private static final Pattern PATTERN_VALUE = Pattern.compile("\\{\\{VALUE\\}\\}");
+    /** RegExp expression to match {{LIMIT}} */
+    private static final Pattern PATTERN_LIMIT = Pattern.compile("\\{\\{LIMIT\\}\\}");
+    /** RegExp expression to match {{EXPECTED}} */
+    private static final Pattern PATTERN_EXPECTED = Pattern.compile("\\{\\{EXPECTED\\}\\}");
+    /** RegExp expression to match {{ROW}} */
+    private static final Pattern PATTERN_ROW = Pattern.compile("\\{\\{ROW\\}\\}");
+    /** RegExp expression to match {{COL}} */
+    private static final Pattern PATTERN_COL = Pattern.compile("\\{\\{COL\\}\\}");
+    /** RegExp expression to match {{DETAILS}} */
+    private static final Pattern PATTERN_DETAILS = Pattern.compile("\\{\\{DETAILS\\}\\}");
+
     String formatMessage(final String ruleMessage, final int index) {
         if (isEmpty()) {
             // rule message should be complete:
             return ruleMessage;
         }
         String msg = ruleMessage;
-        msg = msg.replaceAll("\\{\\{VALUE\\}\\}",
+
+        msg = replaceAll(PATTERN_VALUE, msg,
                 (getValues().get(index) != null) ? getValues().get(index).toString() : ""
         );
-        msg = msg.replaceAll("\\{\\{LIMIT\\}\\}",
+        msg = replaceAll(PATTERN_LIMIT, msg,
                 (getLimits().get(index) != null) ? getLimits().get(index).toString() : ""
         );
-        msg = msg.replaceAll("\\{\\{EXPECTED\\}\\}",
+        msg = replaceAll(PATTERN_EXPECTED, msg,
                 (getExpecteds().get(index) != null) ? getExpecteds().get(index) : ""
         );
-        msg = msg.replaceAll("\\{\\{ROW\\}\\}",
+        msg = replaceAll(PATTERN_ROW, msg,
                 (getRows().get(index) != null) ? getRows().get(index).toString() : ""
         );
-        msg = msg.replaceAll("\\{\\{COL\\}\\}",
+        msg = replaceAll(PATTERN_COL, msg,
                 (getCols().get(index) != null) ? getCols().get(index).toString() : ""
         );
-        msg = msg.replaceAll("\\{\\{DETAILS\\}\\}",
+        msg = replaceAll(PATTERN_DETAILS, msg,
                 (getDetails().get(index) != null) ? getDetails().get(index) : ""
         );
         return msg;

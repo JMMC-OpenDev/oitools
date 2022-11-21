@@ -22,6 +22,7 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.fits.FitsHDU;
 import fr.jmmc.oitools.image.FileRef;
+import java.util.regex.Pattern;
 
 /**
  * Management of objects related to the creation of the error (toString/XML)
@@ -188,6 +189,15 @@ public final class RuleFailure {
     }
 
     /* --- FORMAT MESSAGE --- */
+    /** RegExp expression to match {{FILE}} */
+    private static final Pattern PATTERN_FILE = Pattern.compile("\\{\\{FILE\\}\\}");
+    /** RegExp expression to match {{HDU}} */
+    private static final Pattern PATTERN_HDU = Pattern.compile("\\{\\{HDU\\}\\}");
+    /** RegExp expression to match {{EXTNAME}} */
+    private static final Pattern PATTERN_EXTNAME = Pattern.compile("\\{\\{EXTNAME\\}\\}");
+    /** RegExp expression to match {{MEMBER}} */
+    private static final Pattern PATTERN_MEMBER = Pattern.compile("\\{\\{MEMBER\\}\\}");
+
     /**
      * Returns a string representation for message
      * @return message
@@ -198,13 +208,16 @@ public final class RuleFailure {
         }
         String msg = getRule().getMessage();
 
-        msg = msg.replaceAll("\\{\\{FILE\\}\\}",
+        msg = replaceAll(PATTERN_FILE, msg,
                 (getFileRef() != null && getFileRef().getAbsoluteFilePath() != null) ? getFileRef().getAbsoluteFilePath() : ""
         );
-        msg = msg.replaceAll("\\{\\{HDU\\}\\}",
+        msg = replaceAll(PATTERN_HDU, msg,
                 FitsHDU.getHDUId(getExtName(), getExtNb())
         );
-        msg = msg.replaceAll("\\{\\{MEMBER\\}\\}",
+        msg = replaceAll(PATTERN_EXTNAME, msg,
+                (getExtName() != null) ? getExtName() : FitsHDU.getHDUId(null, getExtNb())
+        );
+        msg = replaceAll(PATTERN_MEMBER, msg,
                 (getMember() != null) ? getMember() : ""
         );
 
@@ -277,4 +290,9 @@ public final class RuleFailure {
         }
         return sb;
     }
+
+    static String replaceAll(final Pattern pattern, final String value, final String replacement) {
+        return pattern.matcher(value).replaceAll(replacement);
+    }
+
 }

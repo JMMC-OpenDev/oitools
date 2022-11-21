@@ -44315,7 +44315,7 @@
     <extName>OI_T3</extName>
     <extNb>7</extNb>
     <member>CORRINDX_T3AMP</member>
-    <message>Missing OI_CORR table but the column CORRINDX_T3AMP is defined.</message>
+    <message>Missing OI_CORR table but the column 'CORRINDX_T3AMP' is defined.</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>
@@ -44324,7 +44324,7 @@
     <extName>OI_T3</extName>
     <extNb>7</extNb>
     <member>CORRINDX_T3PHI</member>
-    <message>Missing OI_CORR table but the column CORRINDX_T3PHI is defined.</message>
+    <message>Missing OI_CORR table but the column 'CORRINDX_T3PHI' is defined.</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>
@@ -44333,7 +44333,7 @@
     <extName>OI_T3</extName>
     <extNb>8</extNb>
     <member>CORRINDX_T3AMP</member>
-    <message>Missing OI_CORR table but the column CORRINDX_T3AMP is defined.</message>
+    <message>Missing OI_CORR table but the column 'CORRINDX_T3AMP' is defined.</message>
   </failure>
   <failure>
     <severity>SEVERE</severity>
@@ -44342,7 +44342,7 @@
     <extName>OI_T3</extName>
     <extNb>8</extNb>
     <member>CORRINDX_T3PHI</member>
-    <message>Missing OI_CORR table but the column CORRINDX_T3PHI is defined.</message>
+    <message>Missing OI_CORR table but the column 'CORRINDX_T3PHI' is defined.</message>
   </failure>
   <failure>
     <severity>WARNING</severity>
@@ -45332,7 +45332,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_ARRAY#1.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_ARRAY.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45344,7 +45344,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_WAVELENGTH#2.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_WAVELENGTH.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45356,7 +45356,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_TARGET#3.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_TARGET.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45368,7 +45368,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#4.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45380,7 +45380,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS2#5.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS2.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45392,7 +45392,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_T3#6.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_T3.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45404,7 +45404,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_ARRAY#1.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_ARRAY.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45416,7 +45416,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_WAVELENGTH#2.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_WAVELENGTH.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45428,7 +45428,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_TARGET#3.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_TARGET.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45440,7 +45440,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_CORR#4.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_CORR.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45452,7 +45452,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_INSPOL#5.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_INSPOL.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45464,7 +45464,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS#6.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45476,7 +45476,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_VIS2#7.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_VIS2.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45488,7 +45488,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_T3#8.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_T3.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>
@@ -45500,7 +45500,7 @@
     <member>[[UNKNOWN]]</member>
     <data>
       <value>[FORMAT]</value>
-      <message>Skipping non-standard OIFITS column 'OI_FLUX#9.[[UNKNOWN]]' with format [[FORMAT]]</message>
+      <message>Skipping non-standard OIFITS column 'OI_FLUX.[[UNKNOWN]]' with format [[FORMAT]]</message>
     </data>
   </failure>
   <failure>

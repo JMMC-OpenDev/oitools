@@ -486,7 +486,7 @@ WARNING	Missing column 'FOV'
 WARNING	Missing column 'FOVTYPE'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
-WARNING	Skipping non-standard OIFITS column 'OI_ARRAY#1.MNTSTA' with format [1J]
+WARNING	Skipping non-standard OIFITS column 'OI_ARRAY.MNTSTA' with format [1J]
 Analysing table [OI_TARGET#2]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
@@ -510,21 +510,21 @@ INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
 Analysing table [OI_VIS#9]
 SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
 SEVERE	Invalid format for column 'VISERR', found '210M' should be '210C'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_AZ' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_U' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_V' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_W' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.E_ZD' with format [3D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.GDELAY_ASTROMETRY' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.OPD_DISP' with format [210D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_ASTROMETRY' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.PHASE_REF_COEFF' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_AZ' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_U' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_V' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_W' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_ZD' with format [3D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.GDELAY_ASTROMETRY' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.OPD_DISP' with format [210D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.PHASE_ASTROMETRY' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.PHASE_REF_COEFF' with format [3D]
 Analysing table [OI_VIS2#10]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 INFO	Fixed OI_REVN to 2.
@@ -534,34 +534,34 @@ INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#12]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.FT_POS' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.LKDT_MET_FC' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.OPD_MET_FC' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.OPL_AIR' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.SC_POS' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.FT_POS' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.LKDT_MET_FC' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.OPD_MET_FC' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.OPL_AIR' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.SC_POS' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
 Analysing File: GRAVITY.2016-01-09T05-37-06_singlesci_calibrated.fits
 Analysing table [OI_ARRAY#2]
-WARNING	Skipping non-standard OIFITS column 'OI_ARRAY#2.MNTSTA' with format [1J]
+WARNING	Skipping non-standard OIFITS column 'OI_ARRAY.MNTSTA' with format [1J]
 Analysing table [OI_WAVELENGTH#3]
-WARNING	Skipping non-standard OIFITS column 'OI_WAVELENGTH#3.POLAR' with format [1J]
+WARNING	Skipping non-standard OIFITS column 'OI_WAVELENGTH.POLAR' with format [1J]
 Analysing table [OI_WAVELENGTH#4]
-WARNING	Skipping non-standard OIFITS column 'OI_WAVELENGTH#4.POLAR' with format [1J]
+WARNING	Skipping non-standard OIFITS column 'OI_WAVELENGTH.POLAR' with format [1J]
 Analysing table [OI_FLUX#8]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'CALSTAT'
 SEVERE	Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3'
 SEVERE	Unsupported table OI_FLUX#8 in OIFITS V1.0
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#8.TIME' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
 Analysing table [OI_VIS#9]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.ASTROMETRIC_DELAY' with format [1D]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#9.ASTROMETRIC_PHASE' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.ASTROMETRIC_DELAY' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.ASTROMETRIC_PHASE' with format [1D]
 Analysing table [OI_FLUX#12]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'CALSTAT'
 SEVERE	Invalid value for keyword 'EXTNAME', found 'OI_FLUX' should be 'OI_ARRAY|OI_TARGET|OI_WAVELENGTH|OI_VIS|OI_VIS2|OI_T3'
 SEVERE	Unsupported table OI_FLUX#12 in OIFITS V1.0
-WARNING	Skipping non-standard OIFITS column 'OI_FLUX#12.TIME' with format [1D]
+WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
 Analysing File: Mystery-Med_H-AmberVISPHI.oifits
 Analysing table [OI_ARRAY#1]
 INFO	Invalid value for column 'DIAMETER' line 0, found '0.0'  should be > 0
@@ -577,9 +577,9 @@ Analysing File: PRODUCT_V838_Mon_1.90-2.53micron_2013-04-15T01_49_24.8034-------
 INFO	Missing unit for column 'VISDATA', should be ''
 INFO	Missing unit for column 'VISERR', should be ''
 WARNING	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#4.T3BIAS' with format [16C]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#4.T3INTERBIAS' with format [16C]
-WARNING	Skipping non-standard OIFITS column 'OI_VIS#4.VISCOVRI' with format [16D]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.T3BIAS' with format [16C]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.T3INTERBIAS' with format [16C]
+WARNING	Skipping non-standard OIFITS column 'OI_VIS.VISCOVRI' with format [16D]
 Analysing table [OI_VIS2#5]
 WARNING	The keyword DATE-OBS '' is not in a standard format 'YYYY-MM-DD'
 Analysing table [OI_T3#6]

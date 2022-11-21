@@ -18,12 +18,22 @@
 package fr.nom.tam.fits;
 
 import java.util.Formatter;
+import java.util.regex.Pattern;
 
 /** This class describes methods to access and manipulate the individual
  * cards for a FITS Header.
  */
 public final class HeaderCard {
+    /** Maximum length of a FITS keyword field */
+    public static final int MAX_KEYWORD_LENGTH = 8;
+    /** Maximum length of a FITS value field */
+    public static final int MAX_VALUE_LENGTH = 70;
+    /** padding for building card images */
+    private static String space80 = "                                                                                ";
+    /** RegExp expression to match starting white space */
+    private static final Pattern PATTERN_WS = Pattern.compile(" *$");
 
+    /* members */
     /** The keyword part of the card (set to null if there's no keyword) */
     private String key;
     /** The value part of the card (set to null if there's no value) */
@@ -34,13 +44,7 @@ public final class HeaderCard {
     private boolean nullable;
     /** A flag indicating whether or not this is a string value */
     private boolean isString;
-    /** Maximum length of a FITS keyword field */
-    public static final int MAX_KEYWORD_LENGTH = 8;
-    /** Maximum length of a FITS value field */
-    public static final int MAX_VALUE_LENGTH = 70;
-    /** padding for building card images */
-    private static String space80 = "                                                                                ";
-
+    
     /** Create a HeaderCard from its component parts
      * @param key keyword (null for a comment)
      * @param value value (null for a comment or keyword without an '=')
@@ -167,7 +171,8 @@ public final class HeaderCard {
         }
 
         if (value != null) {
-            value = value.replaceAll(" *$", "");
+            //value = value.replaceAll(" *$", "");
+            value = PATTERN_WS.matcher(value).replaceAll("");        
 
             if (value.length() > MAX_VALUE_LENGTH) {
                 throw new HeaderCardException("Value too long");
