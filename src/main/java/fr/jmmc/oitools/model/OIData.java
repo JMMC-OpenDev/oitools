@@ -21,6 +21,7 @@ package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.OIFitsConstants;
+import static fr.jmmc.oitools.OIFitsConstants.FIRST_ID_SHORT;
 import fr.jmmc.oitools.fits.FitsConstants;
 import fr.jmmc.oitools.fits.FitsHDU;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
@@ -347,7 +348,7 @@ public abstract class OIData extends OIAbstractData {
 
         // anyway clear cached values:
         clearColumnsRangeValue(name);
-        
+
         // check if the column has an expression
         if (column instanceof WaveColumnMeta) {
             final WaveColumnMeta colMeta = (WaveColumnMeta) column;
@@ -892,7 +893,7 @@ public abstract class OIData extends OIAbstractData {
             final int idxI = corrindx[row];
 
             // rule [GENERIC_CORRINDX_MIN] check if the CORRINDX values >= 1
-            if ((idxI < 1) || OIFitsChecker.isInspectRules()) {
+            if ((idxI < FIRST_ID_SHORT) || OIFitsChecker.isInspectRules()) {
                 if (checker != null) {
                     checker.ruleFailed(Rule.GENERIC_CORRINDX_MIN, oidata, colName).addValueAt(idxI, row);
                 }

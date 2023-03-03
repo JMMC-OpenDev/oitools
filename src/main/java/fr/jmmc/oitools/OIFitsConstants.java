@@ -28,7 +28,8 @@ public interface OIFitsConstants {
 
     /** UNKNOWN value */
     public final static String UNKNOWN_VALUE = "UNKNOWN";
-
+    /** first short value for ID = 1 */
+    public final static short FIRST_ID_SHORT = 1;
     /* OIFits standard 1.0 */
     /** Table OI_ARRAY */
     public final static String TABLE_OI_ARRAY = "OI_ARRAY";

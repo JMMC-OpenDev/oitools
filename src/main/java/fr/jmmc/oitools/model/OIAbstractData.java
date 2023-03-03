@@ -215,7 +215,9 @@ public abstract class OIAbstractData extends OITable {
         return getOIFitsFile().getAcceptedStaIndexes(getOiArray());
     }
 
-    /* --- Other methods --- */
+    /*
+     * --- Checker -------------------------------------------------------------
+     */
     /**
      * Check arrname / oiarray and MJD range in addition to OITable.checkKeywords()
      * @param checker checker component
@@ -290,7 +292,7 @@ public abstract class OIAbstractData extends OITable {
     /**
      * Return the targetId Matcher corresponding to the given Target (global) or null if missing
      * @param tm TargetManager instance
-     * @param globalTargets target (global)
+     * @param globalTarget target (global)
      * @return targetId Matcher corresponding to the given Target (global) or null if missing
      */
     public final TargetIdMatcher getTargetIdMatcher(final TargetManager tm, final Target globalTarget) {

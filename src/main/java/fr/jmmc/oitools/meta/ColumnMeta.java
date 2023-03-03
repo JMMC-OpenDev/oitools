@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.meta;
 
 import fr.jmmc.jmcs.util.NumberUtils;
+import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.fits.FitsTable;
 import fr.jmmc.oitools.model.ModelBase;
 import fr.jmmc.oitools.model.OIFitsChecker;
@@ -448,7 +449,10 @@ public class ColumnMeta extends CellMeta {
      */
     private void checkValues(final OIFitsChecker checker, final FitsTable table,
                              final Object value, final int columnRows) {
+
         final String colName = getName();
+
+        String acceptedValues = null;
         boolean error;
 
         final short[] intAcceptedValues = getIntAcceptedValues();
@@ -457,16 +461,15 @@ public class ColumnMeta extends CellMeta {
             // OIData: STA_INDEX (2D but nCols=[1,2 or 3]) or TARGET_ID (1D)
 
             // Skip checks if the column is missing (from file):
-            if (checker != null && !checker.hasRule(Rule.GENERIC_COL_MANDATORY, table, colName) || OIFitsChecker.isInspectRules()) {
+            if ((checker != null) && !checker.hasRule(Rule.GENERIC_COL_MANDATORY, table, colName) || OIFitsChecker.isInspectRules()) {
                 final boolean isArray = isArray();
 
                 if (!isArray) {
                     // OIData: TARGET_ID (1D)
                     final short[] sValues = (short[]) value;
 
-                    short val;
                     for (int r = 0; r < columnRows; r++) {
-                        val = sValues[r];
+                        final short val = sValues[r];
 
                         if (!ModelBase.isUndefined(val) || OIFitsChecker.isInspectRules()) {
                             error = true;
@@ -481,7 +484,16 @@ public class ColumnMeta extends CellMeta {
                             if (error || OIFitsChecker.isInspectRules()) {
                                 // rule [GENERIC_COL_VAL_ACCEPTED_INT] check if column values match the 'accepted' values (integer)
                                 if (checker != null) {
-                                    checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addValueAt(val, getIntAcceptedValuesAsString(), r);
+                                    if (!checker.hasFixRule(Rule.OI_TARGET_TARGETID_MIN) || !OIFitsConstants.COLUMN_TARGET_ID.equals(colName)) {
+                                        if (acceptedValues == null) {
+                                            acceptedValues = getIntAcceptedValuesAsString();
+                                        }
+                                        checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addValueAt(val, acceptedValues, r);
+                                    }
+                                    if (OIFitsChecker.FIX_BAD_ACCEPTED_FOR_SINGLE_MATCH && (intAcceptedValues.length == 1)) {
+                                        // TODO: use FIX RULE to log change ...
+                                        sValues[r] = intAcceptedValues[0];
+                                    }
                                 }
                             }
                         }
@@ -490,13 +502,11 @@ public class ColumnMeta extends CellMeta {
                     // OIData: STA_INDEX (2D but nCols=[1,2 or 3])
                     final short[][] sValues = (short[][]) value;
 
-                    short[] values;
-                    short val;
                     for (int r = 0; r < columnRows; r++) {
-                        values = sValues[r];
+                        final short[] values = sValues[r];
 
                         for (int c = 0, rlen = values.length; c < rlen; c++) {
-                            val = values[c];
+                            final short val = values[c];
 
                             if (!ModelBase.isUndefined(val) || OIFitsChecker.isInspectRules()) {
                                 error = true;
@@ -511,7 +521,15 @@ public class ColumnMeta extends CellMeta {
                                 if (error || OIFitsChecker.isInspectRules()) {
                                     // rule [GENERIC_COL_VAL_ACCEPTED_INT] check if column values match the 'accepted' values (integer)
                                     if (checker != null) {
-                                        checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addColValueAt(val, getIntAcceptedValuesAsString(), r, c);
+                                        if (acceptedValues == null) {
+                                            acceptedValues = getIntAcceptedValuesAsString();
+                                        }
+                                        checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_INT, table, colName).addColValueAt(val, acceptedValues, r, c);
+
+                                        if (OIFitsChecker.FIX_BAD_ACCEPTED_FOR_SINGLE_MATCH && (intAcceptedValues.length == 1)) {
+                                            // TODO: use FIX RULE to log change ...
+                                            values[c] = intAcceptedValues[0];
+                                        }
                                     }
                                 }
                             }
@@ -533,10 +551,9 @@ public class ColumnMeta extends CellMeta {
                 final String[] sValues = (String[]) value;
 
                 String val;
-                for (int rowNb = 0; rowNb < columnRows; rowNb++) {
+                for (int r = 0; r < columnRows; r++) {
+                    val = sValues[r];
                     error = true;
-
-                    val = sValues[rowNb];
 
                     if (val == null) {
                         val = "";
@@ -552,7 +569,15 @@ public class ColumnMeta extends CellMeta {
                     if (error || OIFitsChecker.isInspectRules()) {
                         // rule [GENERIC_COL_VAL_ACCEPTED_STR] check if column values match the 'accepted' values (string)
                         if (checker != null) {
-                            checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_STR, table, colName).addValueAt(val, getStringAcceptedValuesAsString(), rowNb);
+                            if (acceptedValues == null) {
+                                acceptedValues = getStringAcceptedValuesAsString();
+                            }
+                            checker.ruleFailed(Rule.GENERIC_COL_VAL_ACCEPTED_STR, table, colName).addValueAt(val, acceptedValues, r);
+
+                            if (OIFitsChecker.FIX_BAD_ACCEPTED_FOR_SINGLE_MATCH && (stringAcceptedValues.length == 1)) {
+                                // TODO: use FIX RULE to log change ...
+                                sValues[r] = stringAcceptedValues[0];
+                            }
                         }
                     }
                 }

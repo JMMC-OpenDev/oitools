@@ -21,6 +21,7 @@ package fr.jmmc.oitools.model;
 
 import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.OIFitsConstants;
+import static fr.jmmc.oitools.OIFitsConstants.FIRST_ID_SHORT;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
@@ -435,12 +436,18 @@ public final class OITarget extends OITable {
                     checker.ruleFailed(Rule.OI_TARGET_TARGET, this, OIFitsConstants.COLUMN_TARGET).addValueAt(targetNames[i], i);
                 }
             }
-            if ((targetNames[i] != null) || OIFitsChecker.isInspectRules()) {
+            if ((targetIds != null) || OIFitsChecker.isInspectRules()) {
                 final short refId = targetIds[i];
-                if ((refId < 1) || OIFitsChecker.isInspectRules()) {
+                if ((refId < FIRST_ID_SHORT) || OIFitsChecker.isInspectRules()) {
                     // rule [OI_TARGET_TARGETID_MIN] check if the TARGET_ID values >= 1
                     if (checker != null) {
                         checker.ruleFailed(Rule.OI_TARGET_TARGETID_MIN, this, OIFitsConstants.COLUMN_TARGET).addValueAt(refId, i);
+
+                        // if only 1 target, fix targetIds and tables later:
+                        if (len == 1) {
+                            targetIds[i] = FIRST_ID_SHORT;
+                            checker.addFixRule(Rule.OI_TARGET_TARGETID_MIN);
+                        }
                     }
                 }
                 final String refName = targetNames[i];

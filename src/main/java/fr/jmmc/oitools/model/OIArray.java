@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsConstants;
+import static fr.jmmc.oitools.OIFitsConstants.FIRST_ID_SHORT;
 import static fr.jmmc.oitools.OIFitsConstants.STA_NAME_SEPARATOR;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.DataRange;
@@ -452,7 +453,7 @@ public final class OIArray extends OITable {
                 final short refId = staIndexes[i];
                 final String refName = staNames[i];
                 // rule [OI_ARRAY_STA_INDEX_MIN] check if the STA_INDEX values >= 1
-                if ((refId < 1) || OIFitsChecker.isInspectRules()) {
+                if ((refId < FIRST_ID_SHORT) || OIFitsChecker.isInspectRules()) {
                     if (checker != null) {
                         checker.ruleFailed(Rule.OI_ARRAY_STA_INDEX_MIN, this, OIFitsConstants.COLUMN_STA_INDEX).addValueAt(refId, i);
                     }

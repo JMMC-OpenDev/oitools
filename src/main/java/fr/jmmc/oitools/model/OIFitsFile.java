@@ -538,7 +538,6 @@ public final class OIFitsFile extends FitsImageFile {
         if (oiTarget == null) {
             return EMPTY_SHORT_ARRAY;
         }
-
         return oiTarget.getTargetId();
     }
 
@@ -707,7 +706,7 @@ public final class OIFitsFile extends FitsImageFile {
         if (oiTable instanceof OITarget) {
             final OITarget oitarget = (OITarget) oiTable;
 
-            if (oitarget.getNbTargets() < 1 || OIFitsChecker.isInspectRules()) {
+            if ((oitarget.getNbTargets() < 1) || OIFitsChecker.isInspectRules()) {
                 // rule [OI_TARGET_TARGET_EXIST] check if the OI_TARGET table have at least one target
                 if (checker != null) {
                     checker.ruleFailed(Rule.OI_TARGET_TARGET_EXIST, oitarget);

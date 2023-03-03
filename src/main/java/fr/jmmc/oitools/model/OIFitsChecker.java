@@ -49,6 +49,9 @@ public final class OIFitsChecker {
 
     public final static int COMPACT_MAX_VALUES = 10;
 
+    /** flag to allow fixing bad integer/string values for single matches */
+    public final static boolean FIX_BAD_ACCEPTED_FOR_SINGLE_MATCH = true;
+
     /** enable checker flag */
     private static boolean ENABLE_CHECKER = "true".equalsIgnoreCase(System.getProperty("oitools.checker", "true"));
 
@@ -147,6 +150,9 @@ public final class OIFitsChecker {
     /** OIFITS2: temporary state to check correlation indexes (OIFitsCorrChecker) keyed by CORRNAME */
     private final Map<String, OIFitsCorrChecker> corrCheckers = new HashMap<String, OIFitsCorrChecker>();
 
+    /** temporary state to indicate Rules to fix */
+    private final Set<Rule> fixRules = new HashSet<Rule>();
+
     /**
      * Public constructor
      */
@@ -207,6 +213,7 @@ public final class OIFitsChecker {
         setSkipFormat(false);
         fileRefStandards.clear();
         corrCheckers.clear();
+        fixRules.clear();
 
         /* prune failure storage */
         for (Map.Entry<RuleFailure, DataLocation> entry : failures.entrySet()) {
@@ -652,6 +659,18 @@ public final class OIFitsChecker {
             corrCheckers.put(corrName, corrChecker);
         }
         return corrChecker;
+    }
+
+    Set<Rule> getFixRules() {
+        return fixRules;
+    }
+
+    public boolean hasFixRule(final Rule rule) {
+        return getFixRules().contains(rule);
+    }
+
+    void addFixRule(final Rule rule) {
+        getFixRules().add(rule);
     }
 
     /**

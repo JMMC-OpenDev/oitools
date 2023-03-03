@@ -20,6 +20,7 @@
 package fr.jmmc.oitools.model;
 
 import fr.jmmc.oitools.OIFitsConstants;
+import static fr.jmmc.oitools.OIFitsConstants.FIRST_ID_SHORT;
 import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.DataRange;
 import fr.jmmc.oitools.meta.KeywordMeta;
@@ -193,7 +194,7 @@ public final class OICorr extends OITable {
             final int idxJ = jIndx[i];
 
             // rule [OI_CORR_IINDEX_MIN] check if the IINDEX values >= 1 (JINDEX >= 2)
-            if ((idxI < 1) || OIFitsChecker.isInspectRules()) {
+            if ((idxI < FIRST_ID_SHORT) || OIFitsChecker.isInspectRules()) {
                 if (checker != null) {
                     checker.ruleFailed(Rule.OI_CORR_IINDEX_MIN, this, OIFitsConstants.COLUMN_IINDX).addValueAt(idxI, i);
                 }

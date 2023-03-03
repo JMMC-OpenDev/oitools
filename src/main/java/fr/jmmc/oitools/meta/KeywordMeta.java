@@ -140,7 +140,6 @@ public class KeywordMeta extends CellMeta {
      */
     private void checkAcceptedValues(final OIFitsChecker checker, final FitsHDU hdu, final Object value) {
         final short[] intAcceptedValues = getIntAcceptedValues();
-        final String[] stringAcceptedValues = getStringAcceptedValues();
 
         if (intAcceptedValues.length != 0) {
             final short val = ((Number) value).shortValue();
@@ -155,8 +154,16 @@ public class KeywordMeta extends CellMeta {
             // rule [GENERIC_KEYWORD_VAL_ACCEPTED_INT] check if the keyword value matches the 'accepted' values (integer)
             if (checker != null) {
                 checker.ruleFailed(Rule.GENERIC_KEYWORD_VAL_ACCEPTED_INT, hdu, this.getName()).addKeywordValue(val, getIntAcceptedValuesAsString());
+
+                if (OIFitsChecker.FIX_BAD_ACCEPTED_FOR_SINGLE_MATCH && (intAcceptedValues.length == 1)) {
+                    // TODO: use FIX RULE to log change ...
+                    hdu.setKeywordInt(this.getName(), intAcceptedValues[0]);
+                }
             }
         }
+
+        final String[] stringAcceptedValues = getStringAcceptedValues();
+
         if (stringAcceptedValues.length != 0) {
             final String val = (String) value;
 
@@ -170,6 +177,11 @@ public class KeywordMeta extends CellMeta {
             // rule [GENERIC_KEYWORD_VAL_ACCEPTED_STR] check if the keyword value matches the 'accepted' values (string)
             if (checker != null) {
                 checker.ruleFailed(Rule.GENERIC_KEYWORD_VAL_ACCEPTED_STR, hdu, this.getName()).addKeywordValue(val, getStringAcceptedValuesAsString());
+
+                if (OIFitsChecker.FIX_BAD_ACCEPTED_FOR_SINGLE_MATCH && (stringAcceptedValues.length == 1)) {
+                    // TODO: use FIX RULE to log change ...
+                    hdu.setKeyword(this.getName(), stringAcceptedValues[0]);
+                }
             }
         }
     }
