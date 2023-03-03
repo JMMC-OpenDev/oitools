@@ -68,8 +68,8 @@
     <extNb>4</extNb>
     <member>ARRNAME</member>
     <data>
-      <value>null</value>
-      <message>Missing OI_ARRAY table that describes the '' array</message>
+      <value>[[ARRNAME]]</value>
+      <message>Missing OI_ARRAY table that describes the '[[ARRNAME]]' array</message>
     </data>
   </failure>
   <failure>
@@ -30549,20 +30549,6 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
     <file>memory:3</file>
-    <extName>OI_VIS2</extName>
-    <extNb>3</extNb>
-    <member>TARGET_ID</member>
-    <data>
-      <value>-32768</value>
-      <expected>-4</expected>
-      <row>0</row>
-      <message>Invalid value for column 'TARGET_ID' at index , line 0, found '-32768' should be '-4'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
-    <file>memory:3</file>
     <extName>OI_VIS</extName>
     <extNb>4</extNb>
     <member>STA_INDEX</member>
@@ -30579,20 +30565,6 @@
       <row>0</row>
       <col>1</col>
       <message>Invalid value for column 'STA_INDEX' at index 1, line 0, found '-32768' should be '-6'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
-    <file>memory:3</file>
-    <extName>OI_VIS</extName>
-    <extNb>4</extNb>
-    <member>TARGET_ID</member>
-    <data>
-      <value>-32768</value>
-      <expected>-4</expected>
-      <row>0</row>
-      <message>Invalid value for column 'TARGET_ID' at index , line 0, found '-32768' should be '-4'</message>
     </data>
   </failure>
   <failure>
@@ -30622,20 +30594,6 @@
       <row>0</row>
       <col>2</col>
       <message>Invalid value for column 'STA_INDEX' at index 2, line 0, found '-32768' should be '-6'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
-    <file>memory:3</file>
-    <extName>OI_T3</extName>
-    <extNb>5</extNb>
-    <member>TARGET_ID</member>
-    <data>
-      <value>-32768</value>
-      <expected>-4</expected>
-      <row>0</row>
-      <message>Invalid value for column 'TARGET_ID' at index , line 0, found '-32768' should be '-4'</message>
     </data>
   </failure>
   <failure>
@@ -30644,12 +30602,13 @@
     <file>memory:4</file>
     <extName>OI_INSPOL</extName>
     <extNb>4</extNb>
-    <member>TARGET_ID</member>
+    <member>STA_INDEX</member>
     <data>
       <value>-32768</value>
-      <expected>-4</expected>
+      <expected>-6</expected>
       <row>0</row>
-      <message>Invalid value for column 'TARGET_ID' at index , line 0, found '-32768' should be '-4'</message>
+      <col>0</col>
+      <message>Invalid value for column 'STA_INDEX' at index 0, line 0, found '-32768' should be '-6'</message>
     </data>
   </failure>
   <failure>
@@ -30678,20 +30637,6 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
     <file>memory:4</file>
-    <extName>OI_VIS2</extName>
-    <extNb>5</extNb>
-    <member>TARGET_ID</member>
-    <data>
-      <value>-32768</value>
-      <expected>-4</expected>
-      <row>0</row>
-      <message>Invalid value for column 'TARGET_ID' at index , line 0, found '-32768' should be '-4'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
-    <file>memory:4</file>
     <extName>OI_VIS</extName>
     <extNb>6</extNb>
     <member>STA_INDEX</member>
@@ -30708,20 +30653,6 @@
       <row>0</row>
       <col>1</col>
       <message>Invalid value for column 'STA_INDEX' at index 1, line 0, found '-32768' should be '-6'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
-    <file>memory:4</file>
-    <extName>OI_VIS</extName>
-    <extNb>6</extNb>
-    <member>TARGET_ID</member>
-    <data>
-      <value>-32768</value>
-      <expected>-4</expected>
-      <row>0</row>
-      <message>Invalid value for column 'TARGET_ID' at index , line 0, found '-32768' should be '-4'</message>
     </data>
   </failure>
   <failure>
@@ -30757,20 +30688,6 @@
     <severity>SEVERE</severity>
     <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
     <file>memory:4</file>
-    <extName>OI_T3</extName>
-    <extNb>7</extNb>
-    <member>TARGET_ID</member>
-    <data>
-      <value>-32768</value>
-      <expected>-4</expected>
-      <row>0</row>
-      <message>Invalid value for column 'TARGET_ID' at index , line 0, found '-32768' should be '-4'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
-    <file>memory:4</file>
     <extName>OI_FLUX</extName>
     <extNb>8</extNb>
     <member>STA_INDEX</member>
@@ -30780,20 +30697,6 @@
       <row>0</row>
       <col>0</col>
       <message>Invalid value for column 'STA_INDEX' at index 0, line 0, found '-32768' should be '-6'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>SEVERE</severity>
-    <rule>GENERIC_COL_VAL_ACCEPTED_INT</rule>
-    <file>memory:4</file>
-    <extName>OI_FLUX</extName>
-    <extNb>8</extNb>
-    <member>TARGET_ID</member>
-    <data>
-      <value>-32768</value>
-      <expected>-4</expected>
-      <row>0</row>
-      <message>Invalid value for column 'TARGET_ID' at index , line 0, found '-32768' should be '-4'</message>
     </data>
   </failure>
   <failure>
@@ -41834,10 +41737,10 @@
     <extNb>3</extNb>
     <member>STA_INDEX</member>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>0 | 1</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 0 | 1</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 0 | 1</message>
     </data>
   </failure>
   <failure>
@@ -41848,10 +41751,10 @@
     <extNb>4</extNb>
     <member>STA_INDEX</member>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>0 | 1</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 0 | 1</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 0 | 1</message>
     </data>
   </failure>
   <failure>
@@ -41862,22 +41765,22 @@
     <extNb>5</extNb>
     <member>STA_INDEX</member>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>0 | 1</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 0 | 1</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 0 | 1</message>
     </data>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>0 | 2</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 0 | 2</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 0 | 2</message>
     </data>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>1 | 2</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 1 | 2</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 1 | 2</message>
     </data>
   </failure>
   <failure>
@@ -41888,10 +41791,10 @@
     <extNb>5</extNb>
     <member>STA_INDEX</member>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>0 | 1</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 0 | 1</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 0 | 1</message>
     </data>
   </failure>
   <failure>
@@ -41902,10 +41805,10 @@
     <extNb>6</extNb>
     <member>STA_INDEX</member>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>0 | 1</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 0 | 1</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 0 | 1</message>
     </data>
   </failure>
   <failure>
@@ -41916,22 +41819,22 @@
     <extNb>7</extNb>
     <member>STA_INDEX</member>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>0 | 1</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 0 | 1</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 0 | 1</message>
     </data>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>0 | 2</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 0 | 2</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 0 | 2</message>
     </data>
     <data>
-      <value>-32768</value>
+      <value>-6</value>
       <row>0</row>
       <detail>1 | 2</detail>
-      <message>STA_INDEX[-32768] duplicated at row 0 at indexes 1 | 2</message>
+      <message>STA_INDEX[-6] duplicated at row 0 at indexes 1 | 2</message>
     </data>
   </failure>
   <failure>

@@ -1926,28 +1926,21 @@ Analysing table [OI_ARRAY#1]
 WARNING	Missing column 'FOV'
 WARNING	Missing column 'FOVTYPE'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 WARNING	Skipping non-standard OIFITS column 'OI_ARRAY.MNTSTA' with format [1J]
 Analysing table [OI_TARGET#2]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 Analysing table [OI_WAVELENGTH#3]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 Analysing table [OI_WAVELENGTH#4]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 Analysing table [OI_VIS#5]
 SEVERE	Invalid format for column 'VISDATA', found '5M' should be '5C'
 SEVERE	Invalid format for column 'VISERR', found '5M' should be '5C'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 Analysing table [OI_VIS2#6]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 Analysing table [OI_T3#7]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#8]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
@@ -1956,7 +1949,6 @@ Analysing table [OI_VIS#9]
 SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
 SEVERE	Invalid format for column 'VISERR', found '210M' should be '210C'
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_AZ' with format [3D]
 WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_U' with format [3D]
 WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_V' with format [3D]
@@ -1968,10 +1960,8 @@ WARNING	Skipping non-standard OIFITS column 'OI_VIS.PHASE_ASTROMETRY' with forma
 WARNING	Skipping non-standard OIFITS column 'OI_VIS.PHASE_REF_COEFF' with format [3D]
 Analysing table [OI_VIS2#10]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 Analysing table [OI_T3#11]
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
-INFO	Fixed OI_REVN to 2.
 Analysing table [OI_FLUX#12]
 SEVERE	Missing column 'FLUXDATA'
 SEVERE	Missing keyword 'OI_REVN'
@@ -2003,11 +1993,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     <name>GENERIC_KEYWORD_VAL_ACCEPTED_INT</name>
     <description>check if the keyword value matches the 'accepted' values (integer)</description>
     <paragraph>V1-V2.Tables</paragraph>
-  </rule>
-  <rule>
-    <name>GENERIC_OIREV_FIX</name>
-    <description>Fix the OI_REV keyword when the table is not in the proper OIFITS version</description>
-    <paragraph>JMMC</paragraph>
   </rule>
   <rule>
     <name>UNKNOWN_COLUMN</name>
@@ -2048,17 +2033,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_ARRAY</extName>
-    <extNb>1</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
-    </data>
-  </failure>
-  <failure>
     <severity>WARNING</severity>
     <rule>UNKNOWN_COLUMN</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
@@ -2084,17 +2058,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_TARGET</extName>
-    <extNb>2</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
-    </data>
-  </failure>
-  <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
@@ -2108,17 +2071,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_WAVELENGTH</extName>
-    <extNb>3</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
-    </data>
-  </failure>
-  <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
@@ -2129,17 +2081,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
       <value>1</value>
       <expected>2</expected>
       <message>Invalid value for keyword 'OI_REVN', found '1' should be '2'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_WAVELENGTH</extName>
-    <extNb>4</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
     </data>
   </failure>
   <failure>
@@ -2182,17 +2123,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>5</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
-    </data>
-  </failure>
-  <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
@@ -2206,17 +2136,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>6</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
-    </data>
-  </failure>
-  <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
@@ -2227,17 +2146,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
       <value>1</value>
       <expected>2</expected>
       <message>Invalid value for keyword 'OI_REVN', found '1' should be '2'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>7</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
     </data>
   </failure>
   <failure>
@@ -2307,17 +2215,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
       <value>1</value>
       <expected>2</expected>
       <message>Invalid value for keyword 'OI_REVN', found '1' should be '2'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS</extName>
-    <extNb>9</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
     </data>
   </failure>
   <failure>
@@ -2442,17 +2339,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     </data>
   </failure>
   <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_VIS2</extName>
-    <extNb>10</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
-    </data>
-  </failure>
-  <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
@@ -2463,17 +2349,6 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
       <value>1</value>
       <expected>2</expected>
       <message>Invalid value for keyword 'OI_REVN', found '1' should be '2'</message>
-    </data>
-  </failure>
-  <failure>
-    <severity>INFO</severity>
-    <rule>GENERIC_OIREV_FIX</rule>
-    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
-    <extName>OI_T3</extName>
-    <extNb>11</extNb>
-    <data>
-      <value>2</value>
-      <message>Fixed OI_REVN to 2.</message>
     </data>
   </failure>
   <failure>

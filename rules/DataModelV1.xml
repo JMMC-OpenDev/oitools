@@ -1797,14 +1797,13 @@
     <description>target number as index into OI_TARGET table</description>
     <optional>false</optional>
     <values>
-      <short>[[REF::OI_TARGET.TARGET_ID]</short>
+      <short>1</short>
     </values>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
-      <applyrule>GENERIC_COL_VAL_ACCEPTED_INT</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
@@ -2085,14 +2084,13 @@
     <description>target number as index into OI_TARGET table</description>
     <optional>false</optional>
     <values>
-      <short>[[REF::OI_TARGET.TARGET_ID]</short>
+      <short>1</short>
     </values>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
-      <applyrule>GENERIC_COL_VAL_ACCEPTED_INT</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
@@ -2415,14 +2413,13 @@
     <description>target number as index into OI_TARGET table</description>
     <optional>false</optional>
     <values>
-      <short>[[REF::OI_TARGET.TARGET_ID]</short>
+      <short>1</short>
     </values>
     <rules>
       <applyrule>GENERIC_COL_DIM</applyrule>
       <applyrule>GENERIC_COL_FORMAT</applyrule>
       <applyrule>GENERIC_COL_MANDATORY</applyrule>
       <applyrule>GENERIC_COL_NBROWS</applyrule>
-      <applyrule>GENERIC_COL_VAL_ACCEPTED_INT</applyrule>
     </rules>
     <repeat>1</repeat>
     <array>false</array>
