@@ -163,8 +163,9 @@ public class OIFitsLoader {
             } catch (URISyntaxException use) {
                 throw new IOException("Can not parse the file location: " + fileLocation, use);
             }
-            if (fileURI.getScheme().equalsIgnoreCase("file")) {
-                absFilePath = new File(fileURI).getAbsolutePath();
+            if (fileURI.getScheme().equalsIgnoreCase("file")) {             
+                // use getPath() to remove the fragment part if any
+                absFilePath = new File(fileURI.getPath()).getAbsolutePath();
             } else {
                 // Only remote files are retrieved:
                 remote = true;
