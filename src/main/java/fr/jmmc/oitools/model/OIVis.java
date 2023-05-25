@@ -175,12 +175,14 @@ public final class OIVis extends OIData {
         }
 
         // Derived SPATIAL_U_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_UCOORD_SPATIAL, "spatial U frequency", Types.TYPE_DBL, this)
-                .setOrientationDependent(true));
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U,
+                "spatial U frequency", Types.TYPE_DBL, this).setOrientationDependent(true)
+                .setAlias(OIFitsConstants.COLUMN_UCOORD_SPATIAL));
 
         // Derived SPATIAL_V_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_VCOORD_SPATIAL, "spatial V frequency", Types.TYPE_DBL, this)
-                .setOrientationDependent(true));
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V,
+                "spatial V frequency", Types.TYPE_DBL, this).setOrientationDependent(true)
+                .setAlias(OIFitsConstants.COLUMN_VCOORD_SPATIAL));
 
         if (false) {
             // invalid SNR definition => disabled
@@ -462,10 +464,10 @@ public final class OIVis extends OIData {
      */
     @Override
     protected double[][] getDerivedColumnAsDoubles(final String name) {
-        if (OIFitsConstants.COLUMN_UCOORD_SPATIAL.equals(name)) {
+        if (OIFitsConstants.COLUMN_U.equals(name)) {
             return getSpatialUCoord();
         }
-        if (OIFitsConstants.COLUMN_VCOORD_SPATIAL.equals(name)) {
+        if (OIFitsConstants.COLUMN_V.equals(name)) {
             return getSpatialVCoord();
         }
         return super.getDerivedColumnAsDoubles(name);
@@ -518,7 +520,7 @@ public final class OIVis extends OIData {
      * @return the computed spatial coords r[x][y] (x,y for coordIndex,effWaveIndex) .
      */
     public double[][] getSpatialUCoord() {
-        return getSpatialCoord(OIFitsConstants.COLUMN_UCOORD_SPATIAL, OIFitsConstants.COLUMN_UCOORD);
+        return getSpatialCoord(OIFitsConstants.COLUMN_U, OIFitsConstants.COLUMN_UCOORD);
     }
 
     /**
@@ -528,7 +530,7 @@ public final class OIVis extends OIData {
      * @return the computed spatial coords r[x][y] (x,y for coordIndex,effWaveIndex) .
      */
     public double[][] getSpatialVCoord() {
-        return getSpatialCoord(OIFitsConstants.COLUMN_VCOORD_SPATIAL, OIFitsConstants.COLUMN_VCOORD);
+        return getSpatialCoord(OIFitsConstants.COLUMN_V, OIFitsConstants.COLUMN_VCOORD);
     }
 
     /**

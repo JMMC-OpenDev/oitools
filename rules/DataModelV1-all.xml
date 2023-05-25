@@ -2540,22 +2540,24 @@
     </datarange>
   </column>
   <column>
-    <name>UCOORD_SPATIAL</name>
+    <name>U</name>
     <datatype>TYPE_DBL</datatype>
     <description>spatial U frequency</description>
     <optional>false</optional>
     <rules>
     </rules>
+    <alias>UCOORD_SPATIAL</alias>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
   </column>
   <column>
-    <name>VCOORD_SPATIAL</name>
+    <name>V</name>
     <datatype>TYPE_DBL</datatype>
     <description>spatial V frequency</description>
     <optional>false</optional>
     <rules>
     </rules>
+    <alias>VCOORD_SPATIAL</alias>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
   </column>
@@ -3112,22 +3114,24 @@
     </datarange>
   </column>
   <column>
-    <name>UCOORD_SPATIAL</name>
+    <name>U</name>
     <datatype>TYPE_DBL</datatype>
     <description>spatial U frequency</description>
     <optional>false</optional>
     <rules>
     </rules>
+    <alias>UCOORD_SPATIAL</alias>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
   </column>
   <column>
-    <name>VCOORD_SPATIAL</name>
+    <name>V</name>
     <datatype>TYPE_DBL</datatype>
     <description>spatial V frequency</description>
     <optional>false</optional>
     <rules>
     </rules>
+    <alias>VCOORD_SPATIAL</alias>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
   </column>
@@ -3680,42 +3684,46 @@
     </datarange>
   </column>
   <column>
-    <name>U1COORD_SPATIAL</name>
+    <name>U1</name>
     <datatype>TYPE_DBL</datatype>
     <description>spatial U1 frequency</description>
     <optional>false</optional>
     <rules>
     </rules>
+    <alias>U1COORD_SPATIAL</alias>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
   </column>
   <column>
-    <name>V1COORD_SPATIAL</name>
+    <name>V1</name>
     <datatype>TYPE_DBL</datatype>
     <description>spatial V1 frequency</description>
     <optional>false</optional>
     <rules>
     </rules>
+    <alias>V1COORD_SPATIAL</alias>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
   </column>
   <column>
-    <name>U2COORD_SPATIAL</name>
+    <name>U2</name>
     <datatype>TYPE_DBL</datatype>
     <description>spatial U2 frequency</description>
     <optional>false</optional>
     <rules>
     </rules>
+    <alias>U2COORD_SPATIAL</alias>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
   </column>
   <column>
-    <name>V2COORD_SPATIAL</name>
+    <name>V2</name>
     <datatype>TYPE_DBL</datatype>
     <description>spatial V2 frequency</description>
     <optional>false</optional>
     <rules>
     </rules>
+    <alias>V2COORD_SPATIAL</alias>
     <repeat>[[NWAVE]]</repeat>
     <array>true</array>
   </column>

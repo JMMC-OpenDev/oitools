@@ -124,16 +124,24 @@ public final class OIT3 extends OIData {
 
         // TODO: make U/V 1/2 orientation dependent:
         // Derived SPATIAL_U1_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U1COORD_SPATIAL, "spatial U1 frequency", Types.TYPE_DBL, this));
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U1, 
+                "spatial U1 frequency", Types.TYPE_DBL, this)
+                .setAlias(OIFitsConstants.COLUMN_U1COORD_SPATIAL));
 
         // Derived SPATIAL_V1_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V1COORD_SPATIAL, "spatial V1 frequency", Types.TYPE_DBL, this));
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V1, 
+                "spatial V1 frequency", Types.TYPE_DBL, this)
+                .setAlias(OIFitsConstants.COLUMN_V1COORD_SPATIAL));
 
         // Derived SPATIAL_U2_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U2COORD_SPATIAL, "spatial U2 frequency", Types.TYPE_DBL, this));
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U2, 
+                "spatial U2 frequency", Types.TYPE_DBL, this)
+                .setAlias(OIFitsConstants.COLUMN_U2COORD_SPATIAL));
 
         // Derived SPATIAL_V2_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V2COORD_SPATIAL, "spatial V2 frequency", Types.TYPE_DBL, this));
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V2, 
+                "spatial V2 frequency", Types.TYPE_DBL, this)
+                .setAlias(OIFitsConstants.COLUMN_V2COORD_SPATIAL));
 
         if (false) {
             // invalid SNR definition => disabled
@@ -294,16 +302,16 @@ public final class OIT3 extends OIData {
      */
     @Override
     protected double[][] getDerivedColumnAsDoubles(final String name) {
-        if (OIFitsConstants.COLUMN_U1COORD_SPATIAL.equals(name)) {
+        if (OIFitsConstants.COLUMN_U1.equals(name)) {
             return getSpatialU1Coord();
         }
-        if (OIFitsConstants.COLUMN_V1COORD_SPATIAL.equals(name)) {
+        if (OIFitsConstants.COLUMN_V1.equals(name)) {
             return getSpatialV1Coord();
         }
-        if (OIFitsConstants.COLUMN_U2COORD_SPATIAL.equals(name)) {
+        if (OIFitsConstants.COLUMN_U2.equals(name)) {
             return getSpatialU2Coord();
         }
-        if (OIFitsConstants.COLUMN_V2COORD_SPATIAL.equals(name)) {
+        if (OIFitsConstants.COLUMN_V2.equals(name)) {
             return getSpatialV2Coord();
         }
         return super.getDerivedColumnAsDoubles(name);
@@ -454,7 +462,7 @@ public final class OIT3 extends OIData {
      * @return the computed spatial coords r[x][y] (x,y for coordIndex,effWaveIndex) .
      */
     public double[][] getSpatialU1Coord() {
-        return getSpatialCoord(OIFitsConstants.COLUMN_U1COORD_SPATIAL, OIFitsConstants.COLUMN_U1COORD);
+        return getSpatialCoord(OIFitsConstants.COLUMN_U1, OIFitsConstants.COLUMN_U1COORD);
     }
 
     /**
@@ -464,7 +472,7 @@ public final class OIT3 extends OIData {
      * @return the computed spatial coords r[x][y] (x,y for coordIndex,effWaveIndex) .
      */
     public double[][] getSpatialV1Coord() {
-        return getSpatialCoord(OIFitsConstants.COLUMN_V1COORD_SPATIAL, OIFitsConstants.COLUMN_V1COORD);
+        return getSpatialCoord(OIFitsConstants.COLUMN_V1, OIFitsConstants.COLUMN_V1COORD);
     }
 
     /**
@@ -474,7 +482,7 @@ public final class OIT3 extends OIData {
      * @return the computed spatial coords r[x][y] (x,y for coordIndex,effWaveIndex) .
      */
     public double[][] getSpatialU2Coord() {
-        return getSpatialCoord(OIFitsConstants.COLUMN_U2COORD_SPATIAL, OIFitsConstants.COLUMN_U2COORD);
+        return getSpatialCoord(OIFitsConstants.COLUMN_U2, OIFitsConstants.COLUMN_U2COORD);
     }
 
     /**
@@ -484,7 +492,7 @@ public final class OIT3 extends OIData {
      * @return the computed spatial coords r[x][y] (x,y for coordIndex,effWaveIndex) .
      */
     public double[][] getSpatialV2Coord() {
-        return getSpatialCoord(OIFitsConstants.COLUMN_V2COORD_SPATIAL, OIFitsConstants.COLUMN_V2COORD);
+        return getSpatialCoord(OIFitsConstants.COLUMN_V2, OIFitsConstants.COLUMN_V2COORD);
     }
 
     /* --- Other methods --- */

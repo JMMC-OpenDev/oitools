@@ -430,10 +430,22 @@ public interface OIFitsConstants {
     public final static String COLUMN_SPATIAL_FREQ = "SPATIAL_FREQ";
     /** NIGHT_ID derived OiData column as int[] */
     public final static String COLUMN_NIGHT_ID = "NIGHT_ID";
+    /** U derived OIData column as double[][] (replaced UCOORD_SPATIAL) */
+    public final static String COLUMN_U = "U";
+    /** V derived OIData column as double[][] (replaced VCOORD_SPATIAL) */
+    public final static String COLUMN_V = "V";
     /** UCOORD_SPATIAL derived OIData column as double[][] */
     public final static String COLUMN_UCOORD_SPATIAL = "UCOORD_SPATIAL";
     /** VCOORD_SPATIAL derived OIData column as double[][] */
     public final static String COLUMN_VCOORD_SPATIAL = "VCOORD_SPATIAL";
+    /** U1 derived OIData column as double[][] (replaced U1COORD_SPATIAL) */
+    public final static String COLUMN_U1 = "U1";
+    /** V1 derived OIData column as double[][] (replaced V1COORD_SPATIAL) */
+    public final static String COLUMN_V1 = "V1";
+    /** U2 derived OIData column as double[][] (replaced U2COORD_SPATIAL) */
+    public final static String COLUMN_U2 = "U2";
+    /** V2 derived OIData column as double[][] (replaced V2COORD_SPATIAL) */
+    public final static String COLUMN_V2 = "V2";
     /** U1COORD_SPATIAL derived OIData column as double[][] */
     public final static String COLUMN_U1COORD_SPATIAL = "U1COORD_SPATIAL";
     /** V1COORD_SPATIAL derived OIData column as double[][] */

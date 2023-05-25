@@ -885,6 +885,10 @@ public abstract class FitsTable extends FitsHDU {
      */
     public final void addDerivedColumnMeta(final ColumnMeta meta) {
         getColumnsDerivedDesc().put(meta.getName(), meta);
+
+        if (meta.getAlias() != null) {
+            getColumnsAliases().put(meta.getAlias(), meta.getName());
+        }
     }
 
     /**
