@@ -604,7 +604,6 @@ public class ColumnMeta extends CellMeta {
                                 checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addValueAt(val, r);
                             }
                         }
-                        return;
                     }
                 } else {
                     // OIData: UNUSED (2D)
@@ -626,9 +625,9 @@ public class ColumnMeta extends CellMeta {
                                 }
                             }
                         }
-                        return;
                     }
                 }
+                return;
             }
 
             if (getDataType() == Types.TYPE_DBL) {
@@ -647,7 +646,6 @@ public class ColumnMeta extends CellMeta {
                                 checker.ruleFailed(Rule.GENERIC_COL_VAL_POSITIVE, table, colName).addValueAt(val, r);
                             }
                         }
-                        return;
                     }
                 } else {
                     // OIData: UNUSED (2D)
@@ -669,12 +667,12 @@ public class ColumnMeta extends CellMeta {
                                 }
                             }
                         }
-                        return;
                     }
                 }
+                return;
             }
-
-            logger.log(Level.SEVERE, "Incompatible data type {0} with positive values for column ''{1}'' ...", new Object[]{getDataType(), colName});
+            logger.log(Level.SEVERE, "Incompatible data type {0} with positive values for column ''{1}'' ...",
+                    new Object[]{getDataType(), colName});
         }
     }
 
