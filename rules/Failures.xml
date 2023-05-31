@@ -32159,6 +32159,16 @@
       <row>0</row>
       <message>Invalid value for column 'DIAMETER' line 0, found '8.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>8.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'DIAMETER' line 1, found '8.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>8.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'DIAMETER' line 2, found '8.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32171,6 +32181,321 @@
       <value>5.48E-10</value>
       <row>0</row>
       <message>Invalid value for column 'EFF_BAND' line 0, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>1</row>
+      <message>Invalid value for column 'EFF_BAND' line 1, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>2</row>
+      <message>Invalid value for column 'EFF_BAND' line 2, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>3</row>
+      <message>Invalid value for column 'EFF_BAND' line 3, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>4</row>
+      <message>Invalid value for column 'EFF_BAND' line 4, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>5</row>
+      <message>Invalid value for column 'EFF_BAND' line 5, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>6</row>
+      <message>Invalid value for column 'EFF_BAND' line 6, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>7</row>
+      <message>Invalid value for column 'EFF_BAND' line 7, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>8</row>
+      <message>Invalid value for column 'EFF_BAND' line 8, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>9</row>
+      <message>Invalid value for column 'EFF_BAND' line 9, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>10</row>
+      <message>Invalid value for column 'EFF_BAND' line 10, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>11</row>
+      <message>Invalid value for column 'EFF_BAND' line 11, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>12</row>
+      <message>Invalid value for column 'EFF_BAND' line 12, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>13</row>
+      <message>Invalid value for column 'EFF_BAND' line 13, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>14</row>
+      <message>Invalid value for column 'EFF_BAND' line 14, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>15</row>
+      <message>Invalid value for column 'EFF_BAND' line 15, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>16</row>
+      <message>Invalid value for column 'EFF_BAND' line 16, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>17</row>
+      <message>Invalid value for column 'EFF_BAND' line 17, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>18</row>
+      <message>Invalid value for column 'EFF_BAND' line 18, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>19</row>
+      <message>Invalid value for column 'EFF_BAND' line 19, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>20</row>
+      <message>Invalid value for column 'EFF_BAND' line 20, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>21</row>
+      <message>Invalid value for column 'EFF_BAND' line 21, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>22</row>
+      <message>Invalid value for column 'EFF_BAND' line 22, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>23</row>
+      <message>Invalid value for column 'EFF_BAND' line 23, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>24</row>
+      <message>Invalid value for column 'EFF_BAND' line 24, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>25</row>
+      <message>Invalid value for column 'EFF_BAND' line 25, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>26</row>
+      <message>Invalid value for column 'EFF_BAND' line 26, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>27</row>
+      <message>Invalid value for column 'EFF_BAND' line 27, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>28</row>
+      <message>Invalid value for column 'EFF_BAND' line 28, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>29</row>
+      <message>Invalid value for column 'EFF_BAND' line 29, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>30</row>
+      <message>Invalid value for column 'EFF_BAND' line 30, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>31</row>
+      <message>Invalid value for column 'EFF_BAND' line 31, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>32</row>
+      <message>Invalid value for column 'EFF_BAND' line 32, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>33</row>
+      <message>Invalid value for column 'EFF_BAND' line 33, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>34</row>
+      <message>Invalid value for column 'EFF_BAND' line 34, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>35</row>
+      <message>Invalid value for column 'EFF_BAND' line 35, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>36</row>
+      <message>Invalid value for column 'EFF_BAND' line 36, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>37</row>
+      <message>Invalid value for column 'EFF_BAND' line 37, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>38</row>
+      <message>Invalid value for column 'EFF_BAND' line 38, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>39</row>
+      <message>Invalid value for column 'EFF_BAND' line 39, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>40</row>
+      <message>Invalid value for column 'EFF_BAND' line 40, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>41</row>
+      <message>Invalid value for column 'EFF_BAND' line 41, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>42</row>
+      <message>Invalid value for column 'EFF_BAND' line 42, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>43</row>
+      <message>Invalid value for column 'EFF_BAND' line 43, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>44</row>
+      <message>Invalid value for column 'EFF_BAND' line 44, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>45</row>
+      <message>Invalid value for column 'EFF_BAND' line 45, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>46</row>
+      <message>Invalid value for column 'EFF_BAND' line 46, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>47</row>
+      <message>Invalid value for column 'EFF_BAND' line 47, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>48</row>
+      <message>Invalid value for column 'EFF_BAND' line 48, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>49</row>
+      <message>Invalid value for column 'EFF_BAND' line 49, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>50</row>
+      <message>Invalid value for column 'EFF_BAND' line 50, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>51</row>
+      <message>Invalid value for column 'EFF_BAND' line 51, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>52</row>
+      <message>Invalid value for column 'EFF_BAND' line 52, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>53</row>
+      <message>Invalid value for column 'EFF_BAND' line 53, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>54</row>
+      <message>Invalid value for column 'EFF_BAND' line 54, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>55</row>
+      <message>Invalid value for column 'EFF_BAND' line 55, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>56</row>
+      <message>Invalid value for column 'EFF_BAND' line 56, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>57</row>
+      <message>Invalid value for column 'EFF_BAND' line 57, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>58</row>
+      <message>Invalid value for column 'EFF_BAND' line 58, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>59</row>
+      <message>Invalid value for column 'EFF_BAND' line 59, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>60</row>
+      <message>Invalid value for column 'EFF_BAND' line 60, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>61</row>
+      <message>Invalid value for column 'EFF_BAND' line 61, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>62</row>
+      <message>Invalid value for column 'EFF_BAND' line 62, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>63</row>
+      <message>Invalid value for column 'EFF_BAND' line 63, found '5.48E-10'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>
@@ -32185,6 +32510,321 @@
       <row>0</row>
       <message>Invalid value for column 'EFF_WAVE' line 0, found '1.54E-6'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>1.5444444E-6</value>
+      <row>1</row>
+      <message>Invalid value for column 'EFF_WAVE' line 1, found '1.5444444E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5488889E-6</value>
+      <row>2</row>
+      <message>Invalid value for column 'EFF_WAVE' line 2, found '1.5488889E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5533334E-6</value>
+      <row>3</row>
+      <message>Invalid value for column 'EFF_WAVE' line 3, found '1.5533334E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5577779E-6</value>
+      <row>4</row>
+      <message>Invalid value for column 'EFF_WAVE' line 4, found '1.5577779E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5622223E-6</value>
+      <row>5</row>
+      <message>Invalid value for column 'EFF_WAVE' line 5, found '1.5622223E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5666668E-6</value>
+      <row>6</row>
+      <message>Invalid value for column 'EFF_WAVE' line 6, found '1.5666668E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5711113E-6</value>
+      <row>7</row>
+      <message>Invalid value for column 'EFF_WAVE' line 7, found '1.5711113E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5755558E-6</value>
+      <row>8</row>
+      <message>Invalid value for column 'EFF_WAVE' line 8, found '1.5755558E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5800002E-6</value>
+      <row>9</row>
+      <message>Invalid value for column 'EFF_WAVE' line 9, found '1.5800002E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5844447E-6</value>
+      <row>10</row>
+      <message>Invalid value for column 'EFF_WAVE' line 10, found '1.5844447E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5888892E-6</value>
+      <row>11</row>
+      <message>Invalid value for column 'EFF_WAVE' line 11, found '1.5888892E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5933336E-6</value>
+      <row>12</row>
+      <message>Invalid value for column 'EFF_WAVE' line 12, found '1.5933336E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5977781E-6</value>
+      <row>13</row>
+      <message>Invalid value for column 'EFF_WAVE' line 13, found '1.5977781E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6022226E-6</value>
+      <row>14</row>
+      <message>Invalid value for column 'EFF_WAVE' line 14, found '1.6022226E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6066671E-6</value>
+      <row>15</row>
+      <message>Invalid value for column 'EFF_WAVE' line 15, found '1.6066671E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6111115E-6</value>
+      <row>16</row>
+      <message>Invalid value for column 'EFF_WAVE' line 16, found '1.6111115E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.615556E-6</value>
+      <row>17</row>
+      <message>Invalid value for column 'EFF_WAVE' line 17, found '1.615556E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6200005E-6</value>
+      <row>18</row>
+      <message>Invalid value for column 'EFF_WAVE' line 18, found '1.6200005E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.624445E-6</value>
+      <row>19</row>
+      <message>Invalid value for column 'EFF_WAVE' line 19, found '1.624445E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6288894E-6</value>
+      <row>20</row>
+      <message>Invalid value for column 'EFF_WAVE' line 20, found '1.6288894E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6333339E-6</value>
+      <row>21</row>
+      <message>Invalid value for column 'EFF_WAVE' line 21, found '1.6333339E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6377784E-6</value>
+      <row>22</row>
+      <message>Invalid value for column 'EFF_WAVE' line 22, found '1.6377784E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6422229E-6</value>
+      <row>23</row>
+      <message>Invalid value for column 'EFF_WAVE' line 23, found '1.6422229E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6466673E-6</value>
+      <row>24</row>
+      <message>Invalid value for column 'EFF_WAVE' line 24, found '1.6466673E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6511118E-6</value>
+      <row>25</row>
+      <message>Invalid value for column 'EFF_WAVE' line 25, found '1.6511118E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6555563E-6</value>
+      <row>26</row>
+      <message>Invalid value for column 'EFF_WAVE' line 26, found '1.6555563E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6600007E-6</value>
+      <row>27</row>
+      <message>Invalid value for column 'EFF_WAVE' line 27, found '1.6600007E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6644452E-6</value>
+      <row>28</row>
+      <message>Invalid value for column 'EFF_WAVE' line 28, found '1.6644452E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6688897E-6</value>
+      <row>29</row>
+      <message>Invalid value for column 'EFF_WAVE' line 29, found '1.6688897E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6733342E-6</value>
+      <row>30</row>
+      <message>Invalid value for column 'EFF_WAVE' line 30, found '1.6733342E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6777786E-6</value>
+      <row>31</row>
+      <message>Invalid value for column 'EFF_WAVE' line 31, found '1.6777786E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6822231E-6</value>
+      <row>32</row>
+      <message>Invalid value for column 'EFF_WAVE' line 32, found '1.6822231E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6866676E-6</value>
+      <row>33</row>
+      <message>Invalid value for column 'EFF_WAVE' line 33, found '1.6866676E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6911121E-6</value>
+      <row>34</row>
+      <message>Invalid value for column 'EFF_WAVE' line 34, found '1.6911121E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6955565E-6</value>
+      <row>35</row>
+      <message>Invalid value for column 'EFF_WAVE' line 35, found '1.6955565E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.700001E-6</value>
+      <row>36</row>
+      <message>Invalid value for column 'EFF_WAVE' line 36, found '1.700001E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7044455E-6</value>
+      <row>37</row>
+      <message>Invalid value for column 'EFF_WAVE' line 37, found '1.7044455E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.70889E-6</value>
+      <row>38</row>
+      <message>Invalid value for column 'EFF_WAVE' line 38, found '1.70889E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7133344E-6</value>
+      <row>39</row>
+      <message>Invalid value for column 'EFF_WAVE' line 39, found '1.7133344E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7177789E-6</value>
+      <row>40</row>
+      <message>Invalid value for column 'EFF_WAVE' line 40, found '1.7177789E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7222234E-6</value>
+      <row>41</row>
+      <message>Invalid value for column 'EFF_WAVE' line 41, found '1.7222234E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7266678E-6</value>
+      <row>42</row>
+      <message>Invalid value for column 'EFF_WAVE' line 42, found '1.7266678E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7311123E-6</value>
+      <row>43</row>
+      <message>Invalid value for column 'EFF_WAVE' line 43, found '1.7311123E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7355568E-6</value>
+      <row>44</row>
+      <message>Invalid value for column 'EFF_WAVE' line 44, found '1.7355568E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7400013E-6</value>
+      <row>45</row>
+      <message>Invalid value for column 'EFF_WAVE' line 45, found '1.7400013E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7444457E-6</value>
+      <row>46</row>
+      <message>Invalid value for column 'EFF_WAVE' line 46, found '1.7444457E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7488902E-6</value>
+      <row>47</row>
+      <message>Invalid value for column 'EFF_WAVE' line 47, found '1.7488902E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7533347E-6</value>
+      <row>48</row>
+      <message>Invalid value for column 'EFF_WAVE' line 48, found '1.7533347E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7577792E-6</value>
+      <row>49</row>
+      <message>Invalid value for column 'EFF_WAVE' line 49, found '1.7577792E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7622236E-6</value>
+      <row>50</row>
+      <message>Invalid value for column 'EFF_WAVE' line 50, found '1.7622236E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7666681E-6</value>
+      <row>51</row>
+      <message>Invalid value for column 'EFF_WAVE' line 51, found '1.7666681E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7711126E-6</value>
+      <row>52</row>
+      <message>Invalid value for column 'EFF_WAVE' line 52, found '1.7711126E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.775557E-6</value>
+      <row>53</row>
+      <message>Invalid value for column 'EFF_WAVE' line 53, found '1.775557E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7800015E-6</value>
+      <row>54</row>
+      <message>Invalid value for column 'EFF_WAVE' line 54, found '1.7800015E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.784446E-6</value>
+      <row>55</row>
+      <message>Invalid value for column 'EFF_WAVE' line 55, found '1.784446E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7888905E-6</value>
+      <row>56</row>
+      <message>Invalid value for column 'EFF_WAVE' line 56, found '1.7888905E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.793335E-6</value>
+      <row>57</row>
+      <message>Invalid value for column 'EFF_WAVE' line 57, found '1.793335E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7977794E-6</value>
+      <row>58</row>
+      <message>Invalid value for column 'EFF_WAVE' line 58, found '1.7977794E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.8022239E-6</value>
+      <row>59</row>
+      <message>Invalid value for column 'EFF_WAVE' line 59, found '1.8022239E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.8066684E-6</value>
+      <row>60</row>
+      <message>Invalid value for column 'EFF_WAVE' line 60, found '1.8066684E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.8111128E-6</value>
+      <row>61</row>
+      <message>Invalid value for column 'EFF_WAVE' line 61, found '1.8111128E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.8155573E-6</value>
+      <row>62</row>
+      <message>Invalid value for column 'EFF_WAVE' line 62, found '1.8155573E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.8200018E-6</value>
+      <row>63</row>
+      <message>Invalid value for column 'EFF_WAVE' line 63, found '1.8200018E-6'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32198,6 +32838,36 @@
       <row>0</row>
       <message>Invalid value for column 'INT_TIME' line 0, found '500.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>500.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'INT_TIME' line 1, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'INT_TIME' line 3, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'INT_TIME' line 4, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'INT_TIME' line 5, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>6</row>
+      <message>Invalid value for column 'INT_TIME' line 6, found '500.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32210,6 +32880,36 @@
       <value>57940.0</value>
       <row>0</row>
       <message>Invalid value for column 'MJD' line 0, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'MJD' line 1, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'MJD' line 2, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'MJD' line 3, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'MJD' line 4, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'MJD' line 5, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>6</row>
+      <message>Invalid value for column 'MJD' line 6, found '57940.0'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>
@@ -32224,6 +32924,36 @@
       <row>0</row>
       <message>Invalid value for column 'INT_TIME' line 0, found '500.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>500.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'INT_TIME' line 1, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'INT_TIME' line 3, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'INT_TIME' line 4, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'INT_TIME' line 5, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>6</row>
+      <message>Invalid value for column 'INT_TIME' line 6, found '500.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32236,6 +32966,36 @@
       <value>57940.0</value>
       <row>0</row>
       <message>Invalid value for column 'MJD' line 0, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'MJD' line 1, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'MJD' line 2, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'MJD' line 3, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'MJD' line 4, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'MJD' line 5, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>6</row>
+      <message>Invalid value for column 'MJD' line 6, found '57940.0'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>
@@ -32250,6 +33010,16 @@
       <row>0</row>
       <message>Invalid value for column 'INT_TIME' line 0, found '500.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>500.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'INT_TIME' line 1, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '500.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32262,6 +33032,16 @@
       <value>57940.0</value>
       <row>0</row>
       <message>Invalid value for column 'MJD' line 0, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'MJD' line 1, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'MJD' line 2, found '57940.0'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>
@@ -32276,6 +33056,16 @@
       <row>0</row>
       <message>Invalid value for column 'DIAMETER' line 0, found '8.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>8.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'DIAMETER' line 1, found '8.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>8.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'DIAMETER' line 2, found '8.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32288,6 +33078,16 @@
       <value>89.345</value>
       <row>0</row>
       <message>Invalid value for column 'FOV' line 0, found '89.345'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>2.35</value>
+      <row>1</row>
+      <message>Invalid value for column 'FOV' line 1, found '2.35'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>12457.2</value>
+      <row>2</row>
+      <message>Invalid value for column 'FOV' line 2, found '12457.2'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>
@@ -32302,6 +33102,36 @@
       <row>0</row>
       <message>Invalid value for column 'EFF_BAND' line 0, found '5.48E-10'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>1</row>
+      <message>Invalid value for column 'EFF_BAND' line 1, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>2</row>
+      <message>Invalid value for column 'EFF_BAND' line 2, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>3</row>
+      <message>Invalid value for column 'EFF_BAND' line 3, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>4</row>
+      <message>Invalid value for column 'EFF_BAND' line 4, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>5</row>
+      <message>Invalid value for column 'EFF_BAND' line 5, found '5.48E-10'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>5.48E-10</value>
+      <row>6</row>
+      <message>Invalid value for column 'EFF_BAND' line 6, found '5.48E-10'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32314,6 +33144,36 @@
       <value>1.54E-6</value>
       <row>0</row>
       <message>Invalid value for column 'EFF_WAVE' line 0, found '1.54E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.5866666E-6</value>
+      <row>1</row>
+      <message>Invalid value for column 'EFF_WAVE' line 1, found '1.5866666E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6333332E-6</value>
+      <row>2</row>
+      <message>Invalid value for column 'EFF_WAVE' line 2, found '1.6333332E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.6799999E-6</value>
+      <row>3</row>
+      <message>Invalid value for column 'EFF_WAVE' line 3, found '1.6799999E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7266665E-6</value>
+      <row>4</row>
+      <message>Invalid value for column 'EFF_WAVE' line 4, found '1.7266665E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.7733331E-6</value>
+      <row>5</row>
+      <message>Invalid value for column 'EFF_WAVE' line 5, found '1.7733331E-6'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>1.8199997E-6</value>
+      <row>6</row>
+      <message>Invalid value for column 'EFF_WAVE' line 6, found '1.8199997E-6'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>
@@ -32328,6 +33188,186 @@
       <row>0</row>
       <message>Invalid value for column 'CORR' line 0, found '0.26903221011161804'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>0.7594636082649231</value>
+      <row>1</row>
+      <message>Invalid value for column 'CORR' line 1, found '0.7594636082649231'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.36258256435394287</value>
+      <row>2</row>
+      <message>Invalid value for column 'CORR' line 2, found '0.36258256435394287'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.44956299662590027</value>
+      <row>3</row>
+      <message>Invalid value for column 'CORR' line 3, found '0.44956299662590027'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.4024547338485718</value>
+      <row>4</row>
+      <message>Invalid value for column 'CORR' line 4, found '0.4024547338485718'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.6667816042900085</value>
+      <row>5</row>
+      <message>Invalid value for column 'CORR' line 5, found '0.6667816042900085'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.6148108243942261</value>
+      <row>6</row>
+      <message>Invalid value for column 'CORR' line 6, found '0.6148108243942261'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.015158459544181824</value>
+      <row>7</row>
+      <message>Invalid value for column 'CORR' line 7, found '0.015158459544181824'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.12081748247146606</value>
+      <row>8</row>
+      <message>Invalid value for column 'CORR' line 8, found '0.12081748247146606'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.05875081941485405</value>
+      <row>9</row>
+      <message>Invalid value for column 'CORR' line 9, found '0.05875081941485405'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.7250460386276245</value>
+      <row>10</row>
+      <message>Invalid value for column 'CORR' line 10, found '0.7250460386276245'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.8711028695106506</value>
+      <row>11</row>
+      <message>Invalid value for column 'CORR' line 11, found '0.8711028695106506'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.853398323059082</value>
+      <row>12</row>
+      <message>Invalid value for column 'CORR' line 12, found '0.853398323059082'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.9767618775367737</value>
+      <row>13</row>
+      <message>Invalid value for column 'CORR' line 13, found '0.9767618775367737'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.45326024293899536</value>
+      <row>14</row>
+      <message>Invalid value for column 'CORR' line 14, found '0.45326024293899536'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.03551314026117325</value>
+      <row>15</row>
+      <message>Invalid value for column 'CORR' line 15, found '0.03551314026117325'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.8955093026161194</value>
+      <row>16</row>
+      <message>Invalid value for column 'CORR' line 16, found '0.8955093026161194'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.37485364079475403</value>
+      <row>17</row>
+      <message>Invalid value for column 'CORR' line 17, found '0.37485364079475403'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.5892037749290466</value>
+      <row>18</row>
+      <message>Invalid value for column 'CORR' line 18, found '0.5892037749290466'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.22368770837783813</value>
+      <row>19</row>
+      <message>Invalid value for column 'CORR' line 19, found '0.22368770837783813'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.009277214296162128</value>
+      <row>20</row>
+      <message>Invalid value for column 'CORR' line 20, found '0.009277214296162128'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.5127671360969543</value>
+      <row>21</row>
+      <message>Invalid value for column 'CORR' line 21, found '0.5127671360969543'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.25375860929489136</value>
+      <row>22</row>
+      <message>Invalid value for column 'CORR' line 22, found '0.25375860929489136'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.2668479382991791</value>
+      <row>23</row>
+      <message>Invalid value for column 'CORR' line 23, found '0.2668479382991791'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.1827029287815094</value>
+      <row>24</row>
+      <message>Invalid value for column 'CORR' line 24, found '0.1827029287815094'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.16110965609550476</value>
+      <row>25</row>
+      <message>Invalid value for column 'CORR' line 25, found '0.16110965609550476'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.473300576210022</value>
+      <row>26</row>
+      <message>Invalid value for column 'CORR' line 26, found '0.473300576210022'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.10066498816013336</value>
+      <row>27</row>
+      <message>Invalid value for column 'CORR' line 27, found '0.10066498816013336'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.8660601377487183</value>
+      <row>28</row>
+      <message>Invalid value for column 'CORR' line 28, found '0.8660601377487183'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.9169375896453857</value>
+      <row>29</row>
+      <message>Invalid value for column 'CORR' line 29, found '0.9169375896453857'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.021425660699605942</value>
+      <row>30</row>
+      <message>Invalid value for column 'CORR' line 30, found '0.021425660699605942'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.2776428759098053</value>
+      <row>31</row>
+      <message>Invalid value for column 'CORR' line 31, found '0.2776428759098053'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.2849689722061157</value>
+      <row>32</row>
+      <message>Invalid value for column 'CORR' line 32, found '0.2849689722061157'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.8567796349525452</value>
+      <row>33</row>
+      <message>Invalid value for column 'CORR' line 33, found '0.8567796349525452'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.5370422005653381</value>
+      <row>34</row>
+      <message>Invalid value for column 'CORR' line 34, found '0.5370422005653381'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.9955143928527832</value>
+      <row>35</row>
+      <message>Invalid value for column 'CORR' line 35, found '0.9955143928527832'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.9285016655921936</value>
+      <row>36</row>
+      <message>Invalid value for column 'CORR' line 36, found '0.9285016655921936'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32340,6 +33380,56 @@
       <value>57940.0</value>
       <row>0</row>
       <message>Invalid value for column 'MJD_END' line 0, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'MJD_END' line 1, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'MJD_END' line 2, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'MJD_END' line 3, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'MJD_END' line 4, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'MJD_END' line 5, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>6</row>
+      <message>Invalid value for column 'MJD_END' line 6, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>7</row>
+      <message>Invalid value for column 'MJD_END' line 7, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>8</row>
+      <message>Invalid value for column 'MJD_END' line 8, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>9</row>
+      <message>Invalid value for column 'MJD_END' line 9, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>10</row>
+      <message>Invalid value for column 'MJD_END' line 10, found '57940.0'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>
@@ -32354,6 +33444,56 @@
       <row>0</row>
       <message>Invalid value for column 'MJD_OBS' line 0, found '57930.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>57930.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'MJD_OBS' line 1, found '57930.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57930.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'MJD_OBS' line 2, found '57930.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57930.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'MJD_OBS' line 3, found '57930.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57930.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'MJD_OBS' line 4, found '57930.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57930.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'MJD_OBS' line 5, found '57930.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57930.0</value>
+      <row>6</row>
+      <message>Invalid value for column 'MJD_OBS' line 6, found '57930.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57930.0</value>
+      <row>7</row>
+      <message>Invalid value for column 'MJD_OBS' line 7, found '57930.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57930.0</value>
+      <row>8</row>
+      <message>Invalid value for column 'MJD_OBS' line 8, found '57930.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57930.0</value>
+      <row>9</row>
+      <message>Invalid value for column 'MJD_OBS' line 9, found '57930.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57930.0</value>
+      <row>10</row>
+      <message>Invalid value for column 'MJD_OBS' line 10, found '57930.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32393,6 +33533,11 @@
       <row>0</row>
       <message>Invalid value for column 'INT_TIME' line 0, found '500.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>500.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'INT_TIME' line 1, found '500.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32406,6 +33551,11 @@
       <row>0</row>
       <message>Invalid value for column 'MJD' line 0, found '57940.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>57940.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'MJD' line 1, found '57940.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32418,6 +33568,16 @@
       <value>500.0</value>
       <row>0</row>
       <message>Invalid value for column 'INT_TIME' line 0, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'INT_TIME' line 1, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '500.0'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>
@@ -32432,6 +33592,16 @@
       <row>0</row>
       <message>Invalid value for column 'MJD' line 0, found '57940.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>57940.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'MJD' line 1, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'MJD' line 2, found '57940.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32445,6 +33615,26 @@
       <row>0</row>
       <message>Invalid value for column 'INT_TIME' line 0, found '500.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>500.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'INT_TIME' line 1, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'INT_TIME' line 3, found '500.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>500.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'INT_TIME' line 4, found '500.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -32457,6 +33647,26 @@
       <value>57940.0</value>
       <row>0</row>
       <message>Invalid value for column 'MJD' line 0, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'MJD' line 1, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'MJD' line 2, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'MJD' line 3, found '57940.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>57940.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'MJD' line 4, found '57940.0'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>

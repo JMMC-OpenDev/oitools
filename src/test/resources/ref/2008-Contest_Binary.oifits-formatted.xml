@@ -373,10 +373,30 @@ Analysing table [OI_TARGET#2]
 SEVERE	TARGET_ID[0] cannot be &lt; 1 at row 0
 Analysing table [OI_VIS2#4]
 INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 1, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 3, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 4, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 5, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 6, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 7, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 8, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 9, found '0.0'  should be &gt; 0
+... (75 occurences)
 Analysing table [OI_T3#5]
 INFO	Missing unit for column 'T3PHI', should be 'deg|degree|degrees'
 INFO	Missing unit for column 'T3PHIERR', should be 'deg|degree|degrees'
 INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 1, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 3, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 4, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 5, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 6, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 7, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 8, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 9, found '0.0'  should be &gt; 0
+... (100 occurences)
 
 </checkReport>
 <rules>
@@ -497,6 +517,376 @@ INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0
       <row>0</row>
       <message>Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0</message>
     </data>
+    <data>
+      <value>0.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'INT_TIME' line 1, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'INT_TIME' line 3, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'INT_TIME' line 4, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'INT_TIME' line 5, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>6</row>
+      <message>Invalid value for column 'INT_TIME' line 6, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>7</row>
+      <message>Invalid value for column 'INT_TIME' line 7, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>8</row>
+      <message>Invalid value for column 'INT_TIME' line 8, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>9</row>
+      <message>Invalid value for column 'INT_TIME' line 9, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>10</row>
+      <message>Invalid value for column 'INT_TIME' line 10, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>11</row>
+      <message>Invalid value for column 'INT_TIME' line 11, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>12</row>
+      <message>Invalid value for column 'INT_TIME' line 12, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>13</row>
+      <message>Invalid value for column 'INT_TIME' line 13, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>14</row>
+      <message>Invalid value for column 'INT_TIME' line 14, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>15</row>
+      <message>Invalid value for column 'INT_TIME' line 15, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>16</row>
+      <message>Invalid value for column 'INT_TIME' line 16, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>17</row>
+      <message>Invalid value for column 'INT_TIME' line 17, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>18</row>
+      <message>Invalid value for column 'INT_TIME' line 18, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>19</row>
+      <message>Invalid value for column 'INT_TIME' line 19, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>20</row>
+      <message>Invalid value for column 'INT_TIME' line 20, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>21</row>
+      <message>Invalid value for column 'INT_TIME' line 21, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>22</row>
+      <message>Invalid value for column 'INT_TIME' line 22, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>23</row>
+      <message>Invalid value for column 'INT_TIME' line 23, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>24</row>
+      <message>Invalid value for column 'INT_TIME' line 24, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>25</row>
+      <message>Invalid value for column 'INT_TIME' line 25, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>26</row>
+      <message>Invalid value for column 'INT_TIME' line 26, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>27</row>
+      <message>Invalid value for column 'INT_TIME' line 27, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>28</row>
+      <message>Invalid value for column 'INT_TIME' line 28, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>29</row>
+      <message>Invalid value for column 'INT_TIME' line 29, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>30</row>
+      <message>Invalid value for column 'INT_TIME' line 30, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>31</row>
+      <message>Invalid value for column 'INT_TIME' line 31, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>32</row>
+      <message>Invalid value for column 'INT_TIME' line 32, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>33</row>
+      <message>Invalid value for column 'INT_TIME' line 33, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>34</row>
+      <message>Invalid value for column 'INT_TIME' line 34, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>35</row>
+      <message>Invalid value for column 'INT_TIME' line 35, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>36</row>
+      <message>Invalid value for column 'INT_TIME' line 36, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>37</row>
+      <message>Invalid value for column 'INT_TIME' line 37, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>38</row>
+      <message>Invalid value for column 'INT_TIME' line 38, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>39</row>
+      <message>Invalid value for column 'INT_TIME' line 39, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>40</row>
+      <message>Invalid value for column 'INT_TIME' line 40, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>41</row>
+      <message>Invalid value for column 'INT_TIME' line 41, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>42</row>
+      <message>Invalid value for column 'INT_TIME' line 42, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>43</row>
+      <message>Invalid value for column 'INT_TIME' line 43, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>44</row>
+      <message>Invalid value for column 'INT_TIME' line 44, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>45</row>
+      <message>Invalid value for column 'INT_TIME' line 45, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>46</row>
+      <message>Invalid value for column 'INT_TIME' line 46, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>47</row>
+      <message>Invalid value for column 'INT_TIME' line 47, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>48</row>
+      <message>Invalid value for column 'INT_TIME' line 48, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>49</row>
+      <message>Invalid value for column 'INT_TIME' line 49, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>50</row>
+      <message>Invalid value for column 'INT_TIME' line 50, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>51</row>
+      <message>Invalid value for column 'INT_TIME' line 51, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>52</row>
+      <message>Invalid value for column 'INT_TIME' line 52, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>53</row>
+      <message>Invalid value for column 'INT_TIME' line 53, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>54</row>
+      <message>Invalid value for column 'INT_TIME' line 54, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>55</row>
+      <message>Invalid value for column 'INT_TIME' line 55, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>56</row>
+      <message>Invalid value for column 'INT_TIME' line 56, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>57</row>
+      <message>Invalid value for column 'INT_TIME' line 57, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>58</row>
+      <message>Invalid value for column 'INT_TIME' line 58, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>59</row>
+      <message>Invalid value for column 'INT_TIME' line 59, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>60</row>
+      <message>Invalid value for column 'INT_TIME' line 60, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>61</row>
+      <message>Invalid value for column 'INT_TIME' line 61, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>62</row>
+      <message>Invalid value for column 'INT_TIME' line 62, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>63</row>
+      <message>Invalid value for column 'INT_TIME' line 63, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>64</row>
+      <message>Invalid value for column 'INT_TIME' line 64, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>65</row>
+      <message>Invalid value for column 'INT_TIME' line 65, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>66</row>
+      <message>Invalid value for column 'INT_TIME' line 66, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>67</row>
+      <message>Invalid value for column 'INT_TIME' line 67, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>68</row>
+      <message>Invalid value for column 'INT_TIME' line 68, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>69</row>
+      <message>Invalid value for column 'INT_TIME' line 69, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>70</row>
+      <message>Invalid value for column 'INT_TIME' line 70, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>71</row>
+      <message>Invalid value for column 'INT_TIME' line 71, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>72</row>
+      <message>Invalid value for column 'INT_TIME' line 72, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>73</row>
+      <message>Invalid value for column 'INT_TIME' line 73, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>74</row>
+      <message>Invalid value for column 'INT_TIME' line 74, found '0.0'  should be &gt; 0</message>
+    </data>
   </failure>
   <failure>
     <severity>INFO</severity>
@@ -533,6 +923,501 @@ INFO	Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0
       <value>0.0</value>
       <row>0</row>
       <message>Invalid value for column 'INT_TIME' line 0, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'INT_TIME' line 1, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'INT_TIME' line 3, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'INT_TIME' line 4, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'INT_TIME' line 5, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>6</row>
+      <message>Invalid value for column 'INT_TIME' line 6, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>7</row>
+      <message>Invalid value for column 'INT_TIME' line 7, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>8</row>
+      <message>Invalid value for column 'INT_TIME' line 8, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>9</row>
+      <message>Invalid value for column 'INT_TIME' line 9, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>10</row>
+      <message>Invalid value for column 'INT_TIME' line 10, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>11</row>
+      <message>Invalid value for column 'INT_TIME' line 11, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>12</row>
+      <message>Invalid value for column 'INT_TIME' line 12, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>13</row>
+      <message>Invalid value for column 'INT_TIME' line 13, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>14</row>
+      <message>Invalid value for column 'INT_TIME' line 14, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>15</row>
+      <message>Invalid value for column 'INT_TIME' line 15, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>16</row>
+      <message>Invalid value for column 'INT_TIME' line 16, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>17</row>
+      <message>Invalid value for column 'INT_TIME' line 17, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>18</row>
+      <message>Invalid value for column 'INT_TIME' line 18, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>19</row>
+      <message>Invalid value for column 'INT_TIME' line 19, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>20</row>
+      <message>Invalid value for column 'INT_TIME' line 20, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>21</row>
+      <message>Invalid value for column 'INT_TIME' line 21, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>22</row>
+      <message>Invalid value for column 'INT_TIME' line 22, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>23</row>
+      <message>Invalid value for column 'INT_TIME' line 23, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>24</row>
+      <message>Invalid value for column 'INT_TIME' line 24, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>25</row>
+      <message>Invalid value for column 'INT_TIME' line 25, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>26</row>
+      <message>Invalid value for column 'INT_TIME' line 26, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>27</row>
+      <message>Invalid value for column 'INT_TIME' line 27, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>28</row>
+      <message>Invalid value for column 'INT_TIME' line 28, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>29</row>
+      <message>Invalid value for column 'INT_TIME' line 29, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>30</row>
+      <message>Invalid value for column 'INT_TIME' line 30, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>31</row>
+      <message>Invalid value for column 'INT_TIME' line 31, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>32</row>
+      <message>Invalid value for column 'INT_TIME' line 32, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>33</row>
+      <message>Invalid value for column 'INT_TIME' line 33, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>34</row>
+      <message>Invalid value for column 'INT_TIME' line 34, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>35</row>
+      <message>Invalid value for column 'INT_TIME' line 35, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>36</row>
+      <message>Invalid value for column 'INT_TIME' line 36, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>37</row>
+      <message>Invalid value for column 'INT_TIME' line 37, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>38</row>
+      <message>Invalid value for column 'INT_TIME' line 38, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>39</row>
+      <message>Invalid value for column 'INT_TIME' line 39, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>40</row>
+      <message>Invalid value for column 'INT_TIME' line 40, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>41</row>
+      <message>Invalid value for column 'INT_TIME' line 41, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>42</row>
+      <message>Invalid value for column 'INT_TIME' line 42, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>43</row>
+      <message>Invalid value for column 'INT_TIME' line 43, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>44</row>
+      <message>Invalid value for column 'INT_TIME' line 44, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>45</row>
+      <message>Invalid value for column 'INT_TIME' line 45, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>46</row>
+      <message>Invalid value for column 'INT_TIME' line 46, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>47</row>
+      <message>Invalid value for column 'INT_TIME' line 47, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>48</row>
+      <message>Invalid value for column 'INT_TIME' line 48, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>49</row>
+      <message>Invalid value for column 'INT_TIME' line 49, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>50</row>
+      <message>Invalid value for column 'INT_TIME' line 50, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>51</row>
+      <message>Invalid value for column 'INT_TIME' line 51, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>52</row>
+      <message>Invalid value for column 'INT_TIME' line 52, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>53</row>
+      <message>Invalid value for column 'INT_TIME' line 53, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>54</row>
+      <message>Invalid value for column 'INT_TIME' line 54, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>55</row>
+      <message>Invalid value for column 'INT_TIME' line 55, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>56</row>
+      <message>Invalid value for column 'INT_TIME' line 56, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>57</row>
+      <message>Invalid value for column 'INT_TIME' line 57, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>58</row>
+      <message>Invalid value for column 'INT_TIME' line 58, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>59</row>
+      <message>Invalid value for column 'INT_TIME' line 59, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>60</row>
+      <message>Invalid value for column 'INT_TIME' line 60, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>61</row>
+      <message>Invalid value for column 'INT_TIME' line 61, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>62</row>
+      <message>Invalid value for column 'INT_TIME' line 62, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>63</row>
+      <message>Invalid value for column 'INT_TIME' line 63, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>64</row>
+      <message>Invalid value for column 'INT_TIME' line 64, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>65</row>
+      <message>Invalid value for column 'INT_TIME' line 65, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>66</row>
+      <message>Invalid value for column 'INT_TIME' line 66, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>67</row>
+      <message>Invalid value for column 'INT_TIME' line 67, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>68</row>
+      <message>Invalid value for column 'INT_TIME' line 68, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>69</row>
+      <message>Invalid value for column 'INT_TIME' line 69, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>70</row>
+      <message>Invalid value for column 'INT_TIME' line 70, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>71</row>
+      <message>Invalid value for column 'INT_TIME' line 71, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>72</row>
+      <message>Invalid value for column 'INT_TIME' line 72, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>73</row>
+      <message>Invalid value for column 'INT_TIME' line 73, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>74</row>
+      <message>Invalid value for column 'INT_TIME' line 74, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>75</row>
+      <message>Invalid value for column 'INT_TIME' line 75, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>76</row>
+      <message>Invalid value for column 'INT_TIME' line 76, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>77</row>
+      <message>Invalid value for column 'INT_TIME' line 77, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>78</row>
+      <message>Invalid value for column 'INT_TIME' line 78, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>79</row>
+      <message>Invalid value for column 'INT_TIME' line 79, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>80</row>
+      <message>Invalid value for column 'INT_TIME' line 80, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>81</row>
+      <message>Invalid value for column 'INT_TIME' line 81, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>82</row>
+      <message>Invalid value for column 'INT_TIME' line 82, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>83</row>
+      <message>Invalid value for column 'INT_TIME' line 83, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>84</row>
+      <message>Invalid value for column 'INT_TIME' line 84, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>85</row>
+      <message>Invalid value for column 'INT_TIME' line 85, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>86</row>
+      <message>Invalid value for column 'INT_TIME' line 86, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>87</row>
+      <message>Invalid value for column 'INT_TIME' line 87, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>88</row>
+      <message>Invalid value for column 'INT_TIME' line 88, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>89</row>
+      <message>Invalid value for column 'INT_TIME' line 89, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>90</row>
+      <message>Invalid value for column 'INT_TIME' line 90, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>91</row>
+      <message>Invalid value for column 'INT_TIME' line 91, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>92</row>
+      <message>Invalid value for column 'INT_TIME' line 92, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>93</row>
+      <message>Invalid value for column 'INT_TIME' line 93, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>94</row>
+      <message>Invalid value for column 'INT_TIME' line 94, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>95</row>
+      <message>Invalid value for column 'INT_TIME' line 95, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>96</row>
+      <message>Invalid value for column 'INT_TIME' line 96, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>97</row>
+      <message>Invalid value for column 'INT_TIME' line 97, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>98</row>
+      <message>Invalid value for column 'INT_TIME' line 98, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>99</row>
+      <message>Invalid value for column 'INT_TIME' line 99, found '0.0'  should be &gt; 0</message>
     </data>
   </failure>
 </failures>

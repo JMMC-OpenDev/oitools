@@ -778,6 +778,9 @@
 Analysing File: 2012-03-24_ALL_oiDataCalib.fits
 Analysing table [OI_ARRAY#3]
 INFO	Invalid value for column 'DIAMETER' line 0, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'DIAMETER' line 1, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'DIAMETER' line 2, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'DIAMETER' line 3, found '0.0'  should be &gt; 0
 WARNING	Invalid ARRAYX keyword '0.0'
 WARNING	Invalid ARRAYY keyword '0.0'
 WARNING	Invalid ARRAYZ keyword '0.0'
@@ -813,6 +816,21 @@ WARNING	Fixed ARRAY_X/Y/Z to 'VLTI'.
       <value>0.0</value>
       <row>0</row>
       <message>Invalid value for column 'DIAMETER' line 0, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'DIAMETER' line 1, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'DIAMETER' line 2, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'DIAMETER' line 3, found '0.0'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>

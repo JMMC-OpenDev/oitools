@@ -1948,6 +1948,9 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
 Analysing table [OI_VIS#9]
 SEVERE	Invalid format for column 'VISDATA', found '210M' should be '210C'
 SEVERE	Invalid format for column 'VISERR', found '210M' should be '210C'
+INFO	Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 4, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 5, found '0.0'  should be &gt; 0
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_AZ' with format [3D]
 WARNING	Skipping non-standard OIFITS column 'OI_VIS.E_U' with format [3D]
@@ -1959,8 +1962,14 @@ WARNING	Skipping non-standard OIFITS column 'OI_VIS.OPD_DISP' with format [210D]
 WARNING	Skipping non-standard OIFITS column 'OI_VIS.PHASE_ASTROMETRY' with format [1D]
 WARNING	Skipping non-standard OIFITS column 'OI_VIS.PHASE_REF_COEFF' with format [3D]
 Analysing table [OI_VIS2#10]
+INFO	Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 4, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 5, found '0.0'  should be &gt; 0
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 Analysing table [OI_T3#11]
+INFO	Invalid value for column 'INT_TIME' line 1, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0
+INFO	Invalid value for column 'INT_TIME' line 3, found '0.0'  should be &gt; 0
 SEVERE	Invalid value for keyword 'OI_REVN', found '1' should be '2'
 Analysing table [OI_FLUX#12]
 SEVERE	Missing column 'FLUXDATA'
@@ -1983,6 +1992,11 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     <name>GENERIC_COL_MANDATORY</name>
     <description>check if the required column is present</description>
     <paragraph>V1-V2.Tables</paragraph>
+  </rule>
+  <rule>
+    <name>GENERIC_COL_VAL_POSITIVE</name>
+    <description>check if column values are finite and positive</description>
+    <paragraph>JMMC</paragraph>
   </rule>
   <rule>
     <name>GENERIC_KEYWORD_MANDATORY</name>
@@ -2205,6 +2219,29 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     </data>
   </failure>
   <failure>
+    <severity>INFO</severity>
+    <rule>GENERIC_COL_VAL_POSITIVE</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_VIS</extName>
+    <extNb>9</extNb>
+    <member>INT_TIME</member>
+    <data>
+      <value>0.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'INT_TIME' line 4, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'INT_TIME' line 5, found '0.0'  should be &gt; 0</message>
+    </data>
+  </failure>
+  <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
@@ -2326,6 +2363,29 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
     </data>
   </failure>
   <failure>
+    <severity>INFO</severity>
+    <rule>GENERIC_COL_VAL_POSITIVE</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_VIS2</extName>
+    <extNb>10</extNb>
+    <member>INT_TIME</member>
+    <data>
+      <value>0.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>4</row>
+      <message>Invalid value for column 'INT_TIME' line 4, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>5</row>
+      <message>Invalid value for column 'INT_TIME' line 5, found '0.0'  should be &gt; 0</message>
+    </data>
+  </failure>
+  <failure>
     <severity>SEVERE</severity>
     <rule>GENERIC_KEYWORD_VAL_ACCEPTED_INT</rule>
     <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
@@ -2336,6 +2396,29 @@ WARNING	Skipping non-standard OIFITS column 'OI_FLUX.TIME' with format [1D]
       <value>1</value>
       <expected>2</expected>
       <message>Invalid value for keyword 'OI_REVN', found '1' should be '2'</message>
+    </data>
+  </failure>
+  <failure>
+    <severity>INFO</severity>
+    <rule>GENERIC_COL_VAL_POSITIVE</rule>
+    <file>GRAVI.2016-06-23T03:10:17.458_singlesciviscalibrated.fits</file>
+    <extName>OI_T3</extName>
+    <extNb>11</extNb>
+    <member>INT_TIME</member>
+    <data>
+      <value>0.0</value>
+      <row>1</row>
+      <message>Invalid value for column 'INT_TIME' line 1, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>2</row>
+      <message>Invalid value for column 'INT_TIME' line 2, found '0.0'  should be &gt; 0</message>
+    </data>
+    <data>
+      <value>0.0</value>
+      <row>3</row>
+      <message>Invalid value for column 'INT_TIME' line 3, found '0.0'  should be &gt; 0</message>
     </data>
   </failure>
   <failure>
