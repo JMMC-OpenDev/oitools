@@ -32,6 +32,7 @@ import java.util.Set;
  */
 public final class Range implements Comparable<Range> {
 
+    public final static Range EMPTY_RANGE = new Range();
     public final static Range UNDEFINED_RANGE = new Range(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
 
     /** minimum value */
