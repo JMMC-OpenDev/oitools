@@ -22,7 +22,6 @@ package fr.jmmc.oitools.image;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.model.OIFitsChecker;
-import fr.jmmc.oitools.model.OIFitsFile;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
