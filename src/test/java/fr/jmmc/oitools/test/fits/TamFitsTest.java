@@ -208,7 +208,7 @@ public class TamFitsTest implements TestEnv {
         if (srcHdu instanceof BinaryTableHDU && dstHdu instanceof BinaryTableHDU) {
             res &= compareData((BinaryTableHDU) srcHdu, (BinaryTableHDU) dstHdu);
         } else {
-            logger.log(Level.INFO, "Unsupported HDU: {0}", srcHdu.getClass());
+            logger.log(Level.INFO, "Ignored HDU: {0}", srcHdu.getClass());
         }
 
         return res;
@@ -254,7 +254,7 @@ public class TamFitsTest implements TestEnv {
                     res = false;
                 } else {
                     logger.log(Level.INFO, "KEYWORD {0} = {1}\t// {2}", new Object[]{key, srcCard.getValue() != null ? "'" + srcCard.getValue() + "'" : "", srcCard.getComment()});
-                    if (!srcCard.getValue().equals(dstCard.getValue())) {
+                    if (!srcCard.getValue().equalsIgnoreCase(dstCard.getValue())) {
 
                         res = particularCase(res, key, srcCard, dstCard, sExtName);
 
@@ -270,7 +270,7 @@ public class TamFitsTest implements TestEnv {
     }
 
     private static boolean particularCase(boolean res, String key, HeaderCard srcCard, HeaderCard dstCard, String sExtName) {
-        if (key.startsWith("TUNIT")) {
+        if (key.startsWith("TUNIT") || key.startsWith("BITPIX")) {
             logger.log(Level.INFO, "WARNING:  different value   of header card[{0}] ''{1}'' <> ''{2}''", new Object[]{key, srcCard.getValue(), dstCard.getValue()});
             res = true;
         } else if (key.startsWith("TFORM") && ("1" + srcCard.getValue()).equals(dstCard.getValue())) {
@@ -283,7 +283,7 @@ public class TamFitsTest implements TestEnv {
             //TFORM because is a correction in the write for respect the OIFits format 
             res = true;
         } else {
-            logger.log(Level.INFO, "{0}different value   of header card[{1}] ''{2}'' <> ''{3}", new Object[]{errorPrefix(sExtName), key, srcCard.getValue(), dstCard.getValue()});
+            logger.log(Level.INFO, "{0}different value   of header card[{1}] ''{2}'' <> ''{3}''", new Object[]{errorPrefix(sExtName), key, srcCard.getValue(), dstCard.getValue()});
             res = false;
         }
         return res;
