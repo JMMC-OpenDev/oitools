@@ -41,10 +41,12 @@ public final class FitsImage {
     private String imageIdentifier = null;
     /** wavelength position of the reference pixel (real starting from 1.0) */
     private double pixRefWL = 1.0;
-    /** wavelength value at the reference pixel column (meter) */
+    /** unit used by wavelength values (meter by default) */
+    private FitsUnit unitWL = FitsUnit.WAVELENGTH_METER;
+    /** wavelength value at the reference pixel column (see unitWL) */
     private double valRefWL = Double.NaN;
-    /** wavelength increment along the wavelength axis (meter per pixel) */
-    private double incWL = 1.0;
+    /** wavelength increment along the wavelength axis (see unitWL per pixel) */
+    private double incWL = Double.NaN;
     /** image wavelength in meters (NaN if undefined) */
     private Double wavelength = null;
     /* image related information (may changed during processing) */
@@ -225,16 +227,33 @@ public final class FitsImage {
     }
 
     /**
-     * Return the wavelength value at the reference pixel column (meter)
-     * @return wavelength value at the reference pixel column (meter)
+     * Return the unit used by wavelength values (meter by default)
+     * @return unit used by wavelength values (meter by default)
+     */
+    public FitsUnit getUnitWL() {
+        return unitWL;
+    }
+
+    /**
+     * Define the unit used by wavelength values (meter by default)
+     * @param unitWL unit used by wavelength values (meter by default)
+     */
+    public void setUnitWL(final FitsUnit unitWL) {
+        this.unitWL = ((unitWL == null) || (unitWL == FitsUnit.NO_UNIT)) ? FitsUnit.WAVELENGTH_METER : unitWL;
+        this.wavelength = null; // reset wavelength
+    }
+
+    /**
+     * Return the wavelength value at the reference pixel column (see unitWL)
+     * @return wavelength value at the reference pixel column (see unitWL)
      */
     public double getValRefWL() {
         return this.valRefWL;
     }
 
     /**
-     * Define the wavelength value at the reference pixel column (meter)
-     * @param valRefWL wavelength value at the reference pixel column (meter)
+     * Define the wavelength value at the reference pixel column (see unitWL)
+     * @param valRefWL wavelength value at the reference pixel column (see unitWL)
      */
     public void setValRefWL(final double valRefWL) {
         this.valRefWL = valRefWL;
@@ -242,21 +261,26 @@ public final class FitsImage {
     }
 
     /**
-     * Return the wavelength increment along the wavelength axis (meter per pixel)
-     * @return wavelength increment along the wavelength axis (meter per pixel)
+     * @return true if the wavelength increment along the wavelength axis is defined
+     */
+    public boolean hasIncWL() {
+        return !Double.isNaN(this.incWL);
+    }
+
+    /**
+     * Return the wavelength increment along the wavelength axis (see unitWL per pixel)
+     * @return wavelength increment along the wavelength axis (see unitWL per pixel)
      */
     public double getIncWL() {
         return this.incWL;
     }
 
     /**
-     * Define the wavelength increment along the wavelength axis (meter per pixel)
-     * @param incWL wavelength increment along the wavelength axis (meter per pixel)
+     * Define the wavelength increment along the wavelength axis (see unitWL per pixel)
+     * @param incWL wavelength increment along the wavelength axis (see unitWL per pixel)
      */
     public void setIncWL(final double incWL) {
-        if (incWL != 0.0) {
-            this.incWL = incWL;
-        }
+        this.incWL = (incWL != 0.0) ? incWL : Double.NaN;
         this.wavelength = null; // reset wavelength
     }
 
@@ -267,18 +291,26 @@ public final class FitsImage {
     public double getWaveLength() {
         if (this.wavelength == null) {
             // If increment is undefined (NaN):
-            if (Double.isNaN(this.incWL)) {
+            if (!hasIncWL()) {
                 if ((this.imageIndex > 1) || (this.pixRefWL > 1.0)) {
                     // wavelength is undefined:
                     this.wavelength = Double.valueOf(Double.NaN);
                 } else {
-                    this.wavelength = Double.valueOf(this.valRefWL);
+                    this.wavelength = Double.valueOf(convertWLToMeter(this.valRefWL));
                 }
             } else {
-                this.wavelength = Double.valueOf(this.valRefWL + ((this.imageIndex - 1) - (this.pixRefWL - 1.0)) * this.incWL);
+                this.wavelength = Double.valueOf(lerpWL(this.imageIndex));
             }
         }
         return this.wavelength.doubleValue();
+    }
+
+    private double lerpWL(final double index) {
+        return convertWLToMeter(this.valRefWL + ((index - 1.0) - (this.pixRefWL - 1.0)) * this.incWL);
+    }
+
+    private double convertWLToMeter(final double value) {
+        return unitWL.convert(value, FitsUnit.WAVELENGTH_METER);
     }
 
     /**
@@ -290,7 +322,11 @@ public final class FitsImage {
         if (Double.isNaN(wl)) {
             return Double.NaN;
         }
-        return wl - 0.5d * getIncWL();
+        // If increment is undefined (NaN):
+        if (!hasIncWL()) {
+            return wl;
+        }
+        return lerpWL(this.imageIndex - 0.5);
     }
 
     /**
@@ -302,7 +338,11 @@ public final class FitsImage {
         if (Double.isNaN(wl)) {
             return Double.NaN;
         }
-        return wl + 0.5d * getIncWL();
+        // If increment is undefined (NaN):
+        if (!hasIncWL()) {
+            return wl;
+        }
+        return lerpWL(this.imageIndex + 0.5);
     }
 
     /* image related information (may changed during processing) */
@@ -792,7 +832,8 @@ public final class FitsImage {
                 + " Max view angle (" + getAngleAsString(getMaxAngle()) + ')'
                 + " Initial Max angle (" + getAngleAsString(getOrigMaxAngle()) + ')'
                 + " Area " + getArea()
-                + " Lambda { RefPix " + getPixRefWL() + " RefVal " + getValRefWL()
-                + " Increment " + getIncWL() + "} = " + getWaveLength() + " m.";
+                + " Lambda { RefPix: " + getPixRefWL() + " RefVal: " + getValRefWL()
+                + " Increment: " + getIncWL() + " Unit: " + getUnitWL().getStandardRepresentation()
+                + "} = " + getWaveLength() + " m.";
     }
 }

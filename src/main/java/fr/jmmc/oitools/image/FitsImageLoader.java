@@ -725,7 +725,10 @@ public final class FitsImageLoader {
         // Parse all axis units:
         FitsUnit unit1 = FitsUnit.parseUnit(header.getStringValue(FitsImageConstants.KEYWORD_CUNIT1));
         FitsUnit unit2 = FitsUnit.parseUnit(header.getStringValue(FitsImageConstants.KEYWORD_CUNIT2));
-        final FitsUnit unit3 = FitsUnit.parseUnit(header.getStringValue(FitsImageConstants.KEYWORD_CUNIT3));
+
+        // Parse and store unit for 3rd axis = wavelength axis:
+        // conversions are handled by FitsImage itself (hertz or meter ...)
+        image.setUnitWL(FitsUnit.parseUnit(header.getStringValue(FitsImageConstants.KEYWORD_CUNIT3)));
 
         // Process reference pixel:
         /*
@@ -739,15 +742,15 @@ public final class FitsImageLoader {
 
         // Process coordinates at the reference pixel:
         // note: units are ignored but default unit is Degrees
-        if (unit2.equals(FitsUnit.NO_UNIT)) {
-            if (!unit1.equals(FitsUnit.NO_UNIT)) {
+        if (unit2 == FitsUnit.NO_UNIT) {
+            if (unit1 != FitsUnit.NO_UNIT) {
                 // use same unit (if missing)
                 unit2 = unit1;
             } else {
                 unit2 = FitsUnit.ANGLE_DEG;
             }
         }
-        if (unit1.equals(FitsUnit.NO_UNIT)) {
+        if (unit1 == FitsUnit.NO_UNIT) {
             unit1 = FitsUnit.ANGLE_DEG;
         }
         /*
@@ -757,7 +760,7 @@ public final class FitsImageLoader {
          */
         image.setValRefCol(unit1.convert(header.getDoubleValue(FitsImageConstants.KEYWORD_CRVAL1, FitsImageConstants.DEFAULT_CRVAL), FitsUnit.ANGLE_RAD));
         image.setValRefRow(unit2.convert(header.getDoubleValue(FitsImageConstants.KEYWORD_CRVAL2, FitsImageConstants.DEFAULT_CRVAL), FitsUnit.ANGLE_RAD));
-        image.setValRefWL(unit3.convert(header.getDoubleValue(FitsImageConstants.KEYWORD_CRVAL3, Double.NaN), FitsUnit.WAVELENGTH_METER));
+        image.setValRefWL(header.getDoubleValue(FitsImageConstants.KEYWORD_CRVAL3, Double.NaN));
 
         // Process increments along axes:
         /*
@@ -766,7 +769,7 @@ public final class FitsImageLoader {
          KEYWORD CDELT3 = '0.000000'
          */
         // but check before if we have data and that CDELT is defined if requested mandatory
-        if (image.getNbCols() > 0 && image.getNbRows() > 0 && requireCdeltKeywords
+        if ((image.getNbCols() > 0) && (image.getNbRows() > 0) && requireCdeltKeywords
                 && (header.getValue(FitsImageConstants.KEYWORD_CDELT1) == null
                 || header.getValue(FitsImageConstants.KEYWORD_CDELT2) == null)) {
             logger.log(Level.WARNING, " Missing keyword(s) [ " + FitsImageConstants.KEYWORD_CDELT1 + "={0} or "
@@ -775,10 +778,10 @@ public final class FitsImageLoader {
         }
         image.setSignedIncCol(unit1.convert(header.getDoubleValue(FitsImageConstants.KEYWORD_CDELT1, FitsImageConstants.DEFAULT_CDELT), FitsUnit.ANGLE_RAD));
         image.setSignedIncRow(unit2.convert(header.getDoubleValue(FitsImageConstants.KEYWORD_CDELT2, FitsImageConstants.DEFAULT_CDELT), FitsUnit.ANGLE_RAD));
-        image.setIncWL(unit3.convert(header.getDoubleValue(FitsImageConstants.KEYWORD_CDELT3, Double.NaN), FitsUnit.WAVELENGTH_METER));
+        image.setIncWL(header.getDoubleValue(FitsImageConstants.KEYWORD_CDELT3, Double.NaN));
 
         // Fix missing CUNIT3 but values given in microns instead of meters:
-        if (image.getValRefWL() > 1e-1d) {
+        if ((image.getUnitWL() == FitsUnit.WAVELENGTH_METER) && image.getValRefWL() > 1e-1d) {
             image.setValRefWL(image.getValRefWL() * 1e-6d);
             image.setIncWL(image.getIncWL() * 1e-6d);
 

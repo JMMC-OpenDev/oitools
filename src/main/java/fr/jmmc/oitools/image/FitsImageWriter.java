@@ -441,7 +441,7 @@ public final class FitsImageWriter {
         header.addValue(FitsImageConstants.KEYWORD_CUNIT1, exportUnit.getStandardRepresentation(), "Physical units for CDELT1 and CRVAL1");
         header.addValue(FitsImageConstants.KEYWORD_CUNIT2, exportUnit.getStandardRepresentation(), "Physical units for CDELT2 and CRVAL2");
         if (isFitsCube) {
-            header.addValue(FitsImageConstants.KEYWORD_CUNIT3, FitsUnit.WAVELENGTH_METER.getStandardRepresentation(),
+            header.addValue(FitsImageConstants.KEYWORD_CUNIT3, image.getUnitWL().getStandardRepresentation(),
                     "Physical units for CDELT3 and CRVAL3");
         }
 

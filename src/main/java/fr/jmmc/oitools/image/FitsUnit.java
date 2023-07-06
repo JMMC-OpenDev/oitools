@@ -116,15 +116,15 @@ public enum FitsUnit {
     /** representation array */
     private final String[] tokens;
     /** unit reference */
-    private final FitsUnit reference;
+    protected final FitsUnit reference;
     /** conversion factor to the unit reference factor*(value) */
-    private final double factor;
+    protected final double factor;
     /** conversion power factor*(value^power) to the unit reference */
-    private final double power;
+    protected final double power;
     /** conversion factor of the power value input^(power * factor_power) to the unit reference */
-    private final double factor_power;
+    protected final double factor_power;
     /** possible conversion to units */
-    private final HashSet<FitsUnit> convertTo;
+    protected final HashSet<FitsUnit> convertTo;
 
     /**
      * Custom constructor
