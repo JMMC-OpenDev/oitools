@@ -834,6 +834,8 @@ public final class FitsImage {
                 + " Area " + getArea()
                 + " Lambda { RefPix: " + getPixRefWL() + " RefVal: " + getValRefWL()
                 + " Increment: " + getIncWL() + " Unit: " + getUnitWL().getStandardRepresentation()
-                + "} = " + getWaveLength() + " m.";
+                + " = " + getWaveLength() + " m }"
+                + ((getNData() != 0) ? (" Data[" + getNData() + "] "
+                        + "{ min: " + getDataMin() + " max: " + getDataMax() + " sum: " + getSum() + ']') : "");
     }
 }
