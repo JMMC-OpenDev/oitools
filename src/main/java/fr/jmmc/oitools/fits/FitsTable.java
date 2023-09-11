@@ -699,7 +699,7 @@ public abstract class FitsTable extends FitsHDU {
      * @return true if removed; false otherwise
      */
     public final boolean removeColumn(final ColumnMeta meta) {
-        if (meta.isOptional()) {
+        if ((meta != null) && meta.isOptional()) {
             if (removeColumnMeta(meta)) {
                 return removeColumnValue(meta.getName());
             }
