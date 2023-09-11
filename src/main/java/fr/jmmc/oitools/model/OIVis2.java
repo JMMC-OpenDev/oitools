@@ -93,22 +93,22 @@ public final class OIVis2 extends OIData {
             // Optional extra columns for squared correlated and photometric fluxes (ASPRO - not OIFits) :
             // NS_CORRSQ column definition (User unit = photon)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_CORRSQ, "raw squared correlated flux",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits().setRepresentation("ph"), OIFitsConstants.COLUMN_NS_CORRSQ_ERR,
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, CustomUnits.createPhotonUnits(), OIFitsConstants.COLUMN_NS_CORRSQ_ERR,
                     DataRange.RANGE_POSITIVE, this));
 
             // COLUMN_NS_CORRSQ_ERR column definition (User unit = photon)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_CORRSQ_ERR, "error in raw squared correlated flux",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits().setRepresentation("ph"), null,
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, CustomUnits.createPhotonUnits(), null,
                     DataRange.RANGE_POSITIVE, this));
 
             // COLUMN_NS_PHOT column definition (User unit = photon)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_PHOT, "raw photometric flux (1T)",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits().setRepresentation("ph"), OIFitsConstants.COLUMN_NS_PHOT_ERR,
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, CustomUnits.createPhotonUnits(), OIFitsConstants.COLUMN_NS_PHOT_ERR,
                     DataRange.RANGE_POSITIVE, this));
 
             // COLUMN_NS_PHOT_ERR column definition (User unit = photon)
             addColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_NS_PHOT_ERR, "error in photometric flux (1T)",
-                    Types.TYPE_DBL, true, false, NO_STR_VALUES, new CustomUnits().setRepresentation("ph"), null,
+                    Types.TYPE_DBL, true, false, NO_STR_VALUES, CustomUnits.createPhotonUnits(), null,
                     DataRange.RANGE_POSITIVE, this));
         }
 

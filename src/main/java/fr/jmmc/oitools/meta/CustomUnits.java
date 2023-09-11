@@ -27,6 +27,14 @@ package fr.jmmc.oitools.meta;
  */
 public final class CustomUnits extends Units {
 
+    public static String UNIT_PHOTONS = "ph";
+    /**
+     * @return CustomUnits factory for photons
+     */
+    public static CustomUnits createPhotonUnits() {
+        return new CustomUnits().setRepresentation(UNIT_PHOTONS);
+    }
+
     /** flag indicating if the units is required */
     private final boolean required;
 
