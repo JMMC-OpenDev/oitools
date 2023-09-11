@@ -542,6 +542,21 @@ public abstract class FitsTable extends FitsHDU {
     }
 
     /**
+     * Remove the given column descriptor
+     *
+     * @param meta column descriptor
+     * @return true if removed; false otherwise
+     */
+    protected final boolean removeColumnMeta(final ColumnMeta meta) {
+        final boolean removed = getColumnsDesc().remove(meta.getName()) != null;
+
+        if (meta.getAlias() != null) {
+            getColumnsAliases().remove(meta.getAlias());
+        }
+        return removed;
+    }
+
+    /**
      * Return the ordered collection of all column descriptors
      * (standard then derived)
      *
@@ -675,10 +690,21 @@ public abstract class FitsTable extends FitsHDU {
      * @return true if the table contains the column
      */
     public final boolean hasColumn(final ColumnMeta meta) {
+        return getColumnValue(meta.getName()) != null;
+    }
+
+    /**
+     * Remove the optional column given its column descriptor
+     * @param meta column descriptor
+     * @return true if removed; false otherwise
+     */
+    public final boolean removeColumn(final ColumnMeta meta) {
         if (meta.isOptional()) {
-            return getColumnValue(meta.getName()) != null;
+            if (removeColumnMeta(meta)) {
+                return removeColumnValue(meta.getName());
+            }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -829,6 +855,16 @@ public abstract class FitsTable extends FitsHDU {
             logger.log(Level.FINE, "COLUMN [{0}] = {1}", new Object[]{name, (value != null) ? ArrayFuncs.arrayDescription(value) : ""});
         }
         getColumnsValue().put(name, value);
+    }
+
+    /**
+     * Removes the column value given its name
+     * 
+     * @param name column name
+     * @return true if removed; false otherwise
+     */
+    protected final boolean removeColumnValue(final String name) {
+        return getColumnsValue().remove(name) != null;
     }
 
     /*

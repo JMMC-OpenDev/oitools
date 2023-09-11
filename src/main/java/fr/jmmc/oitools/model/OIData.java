@@ -119,7 +119,7 @@ public abstract class OIData extends OIAbstractData {
     /**
      * Protected OIData class constructor
      * @param oifitsFile main OifitsFile
-     * @param useCommonCols flag indicating to addValueAtRows common columns (OI_VIS, OI_VIS2, OI_T3, OI_FLUX)
+     * @param useCommonCols flag indicating to common columns (OI_VIS, OI_VIS2, OI_T3)
      */
     protected OIData(final OIFitsFile oifitsFile, final boolean useCommonCols) {
         super(oifitsFile);
