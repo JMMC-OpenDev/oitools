@@ -167,3 +167,28 @@ Writing: output.fits
 target_name	s_ra	s_dec	t_exptime	t_min	t_max	em_res_power	em_min	em_max	facility_name	instrument_name	nb_vis	nb_vis2	nb_t3	nb_channels
 IRAS17216-3801	261.2771541666667	-38.066788888888894	300.0	57562.133972453696	57562.133972453696	988.1521592210469	2.1506698431039695E-6	2.1990908862790093E-6	VLTI	GRAVITY_SC	0	0	0	23
 ```
+
+## OIFitsViewer
+You may also define some other aliases to dump main informations of your oifits files through XML or TSV format or check content
+ ```bash
+  alias oiv="java -cp _path_/_to_/oitools-TRUNK.jar fr.jmmc.oitools.OIFitsViewer"
+  alias oicheck="oiv -check"
+  ```
+To get the command help, just type `oiv`:
+
+```text
+No file location given in arguments.
+-------------------------------------------------------------------------
+Usage: fr.jmmc.oitools.OIFitsViewer [-f|-format] [-v|-verbose] [-t|-tsv] <file locations>
+------------- Arguments help --------------------------------------------
+| Key          Value           Description                              |
+|-----------------------------------------------------------------------|
+| [-h|-help]                   Show arguments help                      |
+| [-l] or [-log]               Enable logging (quiet by default)        |
+| [-f] or [-format]            Use the number formatter                 |
+| [-v] or [-verbose]           Dump all column data                     |
+| [-t] or [-tsv]               Dump object table in tsv format          |
+| [-c] or [-check]             Check only given file(s)                 |
+| [-g] or [-granule]           Use Granules to get target metadata      |
+-------------------------------------------------------------------------
+```
