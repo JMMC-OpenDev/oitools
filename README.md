@@ -52,22 +52,75 @@ Usage: fr.jmmc.oitools.OIFitsProcessor command -o <path_output_file> <file locat
 |------------------------------------------------------------------------------------|
 | command      help           Show this help                                         |
 | command      list           List content of several oifits files                   |
-| command      list_baselines List baselines and triplets used by several oifits files      |
+| command      list_baselines List baselines and triplets used by several oifits files |
 | command      dump           Dump the given oifits files                            |
 | command      convert        Convert the given input file                           |
 | command      merge          Merge several oifits files                             |
 |------------------------------------------------------------------------------------|
 | [-l] or [-log]              Enable logging (quiet by default)                      |
+| [-v] or [-verbose]          Enable logging (quiet by default)                      |
 | [-c] or [-check]            Check output file before writing                       |
 | [-separation] <value>       Separation in arcsec for the target matcher            |
 | [-o] or [-output] <file_path> Complete path, absolute or relative, for output file |
-| [-target] <value>           Filter result on given Target                          |
-| [-insname] <value>          Filter result on given InsName                         |
-| [-night] <value>            Filter result on given Night (integer)                 |
+--------------------------------------------------------------------------------------
+| Filter options available to the command merge:                     |
+| [-target] <value>           Filter result on given Targets (comma-separated)       |
+| [-insname] <value>          Filter result on given InsNames (comma-separated)      |
+| [-night] <value>            Filter result on given Nights (integer, comma-separated) |
+|                                                                                    |
 | [-baselines] <values>       Filter result on given Baselines or Triplets (comma-separated) |
 | [-mjds] <values>            Filter result on given MJD ranges (comma-separated pairs) |
 | [-wavelengths] <values>     Filter result on given wavelength ranges (comma-separated pairs) |
+|                                                                                    |
+| <values> can be String or Range values (like 1e-6,2e-6) (comma-separated);         |
+|          use the prefix 'not:' to have an exclusive filter                         |
+|                                                                                    |
+| Following columns may be available (OIFITS2 standard):                             |
+| [-eff_wave] <values>     Filter result on given column values (comma-separated) |
+| [-eff_band] <values>     Filter result on given column values (comma-separated) |
+| [-sta_index] <values>     Filter result on given column values (comma-separated) |
+| [-sta_conf] <values>     Filter result on given column values (comma-separated) |
+| [-time] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-mjd] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-int_time] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-vis2data] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-vis2err] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-ucoord] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-vcoord] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-eff_wave] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-eff_band] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-hour_angle] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-radius] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-pos_angle] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-spatial_freq] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-u] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-v] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-snr_vis2] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-visamp] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-visamperr] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-visphi] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-visphierr] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-rvis] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-rviserr] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-ivis] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-iviserr] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-t3amp] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-t3amperr] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-t3phi] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-t3phierr] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-u1coord] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-v1coord] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-u2coord] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-v2coord] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-u1] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-v1] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-u2] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-v2] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-fluxdata] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-fluxerr] <values>     Filter result on given column ranges (comma-separated pairs) |
+| [-snr_flux] <values>     Filter result on given column ranges (comma-separated pairs) |
 --------------------------------------------------------------------------------------
+
 ```
 
 
