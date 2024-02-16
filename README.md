@@ -25,13 +25,13 @@ More detailed data model including dynamic columns:
     * type in shell:
 
         ```bash
-        java -cp _path_/_to_/oitools-TRUNK.jar fr.jmmc.oitools.OIFitsProcessor <parameters>
+        java -cp _path_/_to_/oitools-TRUNK-jar-with-dependencies.jar fr.jmmc.oitools.OIFitsProcessor <parameters>
         ```
 
     * HINT: you can define aliases in your (bashrc) as of:
 
         ```bash
-        alias oip="java -cp _path_/_to_/oitools-TRUNK.jar fr.jmmc.oitools.OIFitsProcessor"
+        alias oip="java -cp _path_/_to_/oitools-TRUNK-jar-with-dependencies.jar fr.jmmc.oitools.OIFitsProcessor"
         alias oilist="oip list"
         alias oiconvert="oip convert"
         alias oimerge="oip merge"
@@ -224,7 +224,7 @@ IRAS17216-3801	261.2771541666667	-38.066788888888894	300.0	57562.133972453696	57
 ## OIFitsViewer
 You may also define some other aliases to dump main informations of your oifits files through XML or TSV format or check content
  ```bash
-  alias oiv="java -cp _path_/_to_/oitools-TRUNK.jar fr.jmmc.oitools.OIFitsViewer"
+  alias oiv="java -cp _path_/_to_/oitools-TRUNK-jar-with-dependencies.jar fr.jmmc.oitools.OIFitsViewer"
   alias oicheck="oiv -check"
   ```
 To get the command help, just type `oiv`:
