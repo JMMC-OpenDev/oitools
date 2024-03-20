@@ -163,6 +163,18 @@ public final class NumberUtils {
     }
 
     /**
+     * Adjust the given double value to keep only 2 decimal digits
+     * @param value value to adjust
+     * @return double value with only 2 decimal digits
+     */
+    public static double trimTo2Digits(final double value) {
+        if (!Double.isFinite(value)) {
+            return value;
+        }
+        return ((long) (1e2d * value)) / 1e2d;
+    }
+
+    /**
      * Adjust the given double value to keep only 3 decimal digits
      * @param value value to adjust
      * @return double value with only 3 decimal digits
