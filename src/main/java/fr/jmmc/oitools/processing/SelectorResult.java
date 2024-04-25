@@ -266,6 +266,8 @@ public final class SelectorResult extends BaseSelectorResult {
                     }
                     continue;
                 }
+                
+                final boolean[] rowFlags = (flags != null) ? flags[i] : null;
 
                 // Iterate on wave channels (l):
                 for (int l = 0; l < nWaves; l++) {
@@ -288,7 +290,7 @@ public final class SelectorResult extends BaseSelectorResult {
                         continue;
                     }
 
-                    if (flags[i][l]) {
+                    if ((rowFlags != null) && rowFlags[l]) {
                         // data point is flagged so skip it:
                         continue;
                     }

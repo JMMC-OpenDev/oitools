@@ -162,16 +162,15 @@ public final class Analyzer implements ModelVisitor {
         // Count Flags:
         int nFlagged = 0;
 
-        if (oiData.getFlag() != null) {
-            final boolean[][] flags = oiData.getFlag();
-
+        final boolean[][] flags = oiData.getFlag();
+        if (flags != null) {
             final int nWaves = oiData.getNWave();
 
-            boolean[] row;
             for (int i = 0, j; i < nRows; i++) {
-                row = flags[i];
+                final boolean[] rowFlags = flags[i];
+
                 for (j = 0; j < nWaves; j++) {
-                    if (row[j]) {
+                    if ((rowFlags != null) && rowFlags[j]) {
                         nFlagged++;
                     }
                 }
@@ -451,7 +450,7 @@ public final class Analyzer implements ModelVisitor {
         if (nRows != 0) {
             // StaIndex column:
             final short[][] staIndexes = oiData.getStaIndex();
-            
+
             if (staIndexes != null) {
                 // Derived StaIndexName column:
                 final String[] staIndexNames = oiData.getStaIndexName();

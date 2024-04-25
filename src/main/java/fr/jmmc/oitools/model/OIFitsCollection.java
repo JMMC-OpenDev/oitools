@@ -1018,7 +1018,7 @@ public final class OIFitsCollection implements ToStringable {
         final int nRows = fitsTable.getNbRows();
 
         // prepare 1D mask to indicate rows to keep in the table:
-        final IndexMask maskRows = new IndexMask(nRows); // bits set to false by default
+        final IndexMask maskRows = IndexMask.createMask1D(nRows); // bits set to false by default
         boolean doFilter = false;
 
         // Iterate on table rows (i):
@@ -1118,9 +1118,8 @@ public final class OIFitsCollection implements ToStringable {
 
         // prepare 2D mask to indicate rows to keep in the table:
         // each mask row has 2 more bits to encode NONE/FULL row:
-        final int nCols = nWaves + 2;
-        final IndexMask mask2D = new IndexMask(nRows, nCols); // bits set to false by default
-
+        final IndexMask mask2D = IndexMask.createMask2D(nRows, nWaves); // bits set to false by default
+        // get special indices:
         final int idxNone = mask2D.getIndexNone();
         final int idxFull = mask2D.getIndexFull();
 

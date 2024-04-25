@@ -17,6 +17,29 @@ public final class IndexMask {
     public static final IndexMask FULL = new IndexMask(null, 0, 0);
 
     /**
+     * Create a 1D mask with every element masked
+     *
+     * @param nbRows number of rows. Must be > 0. the number of columns will be 1.
+     * @return 1D mask
+     */
+    public static IndexMask createMask1D(final int nbRows) {
+        return new IndexMask(nbRows, 1);
+    }
+
+    /**
+     * Create a 2D mask with every element masked
+     *
+     * @param nbRows Must be > 0
+     * @param nbCols Must be > 0
+     * @return 2D mask
+     */
+    public static IndexMask createMask2D(final int nbRows, final int nbCols) {
+        // each mask row has 2 more bits to encode NONE/FULL row (nbCols + 2):
+        return new IndexMask(nbRows, nbCols + 2);
+    }
+
+    /* members */
+    /**
      * the number of bits is (nbRows * nbCols). the order of elements is [row 0, col 0], then [row 0, col 1], etc. 
      * A bit set to false means the element is masked.
      */
@@ -37,21 +60,12 @@ public final class IndexMask {
     private final boolean vect1D;
 
     /**
-     * Builds a 1D BitSet with every element masked
-     *
-     * @param nbRows number of rows. Must be > 0. the number of columns will be 1.
-     */
-    public IndexMask(final int nbRows) {
-        this(nbRows, 1);
-    }
-
-    /**
      * Builds a 2D BitSet with every element masked
      *
      * @param nbRows Must be > 0
      * @param nbCols Must be > 0
      */
-    public IndexMask(final int nbRows, final int nbCols) {
+    private IndexMask(final int nbRows, final int nbCols) {
         this(new BitSet(nbRows * nbCols), nbRows, nbCols);
     }
 
@@ -154,7 +168,7 @@ public final class IndexMask {
     }
 
     /**
-     * @return the nbCols
+     * @return the nbCols (note for 2D masks, it corresponds to given nbCols +2)
      */
     public int getNbCols() {
         return nbCols;
