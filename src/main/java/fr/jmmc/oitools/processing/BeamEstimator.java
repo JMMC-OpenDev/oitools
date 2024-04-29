@@ -58,7 +58,7 @@ public class BeamEstimator {
                 u = vis2.getSpatialUCoord();
                 v = vis2.getSpatialVCoord();
                 /*
-            } 
+            }
             else if (oiData instanceof OIVis) {
                 final OIVis vis = (OIVis) oiData;
 
