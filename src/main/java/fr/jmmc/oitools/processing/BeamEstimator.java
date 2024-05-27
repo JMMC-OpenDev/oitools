@@ -7,6 +7,7 @@ import fr.jmmc.oitools.model.IndexMask;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsFile;
 import fr.jmmc.oitools.model.OIFitsLoader;
+import fr.jmmc.oitools.model.OIVis;
 import fr.jmmc.oitools.model.OIVis2;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -17,6 +18,7 @@ import java.awt.geom.Ellipse2D;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -40,104 +42,200 @@ public class BeamEstimator {
     private final static double SCALE_FACTOR = STDDEV_TO_HWHM / (2.0 * Math.PI);
     /** Specify the value of one milli arcsecond in degrees */
     public static final double DEG_IN_MILLI_ARCSEC = 3600000d;
+    /** rounding precision on (U,V) coordinates in meter ~ 5 mm */
+    public static final double PREC_UV = 5e-3;
+    /** rounding precision on wavelengths in meter ~ 5e-11 m = 0.5 angstrom */
+    public static final double PREC_WL = 5e-11;
 
     public static BeamInfo computeBeamInfo(final SelectorResult result) {
-        int n = 0;
+        int n = 0, t = 0;
         double s11 = 0.0;
         double s22 = 0.0;
         double s12 = 0.0;
 
-        // TODO: how to handle only OIVIS or OIT3 coords or mix (VIS/VIS2/T3) tables that may have repeated U-V coords ?
+        final TreeSet<UVTuple> uvSet = new TreeSet<>();
+
         for (final OIData oiData : result.getOIDatas()) {
-            final double[][] u; // rad-1
-            final double[][] v; // rad-1
+            final double[] ucoord; // m
+            final double[] vcoord; // m
 
             if (oiData instanceof OIVis2) {
                 final OIVis2 vis2 = (OIVis2) oiData;
-
-                u = vis2.getSpatialUCoord();
-                v = vis2.getSpatialVCoord();
-                /*
-            }
-            else if (oiData instanceof OIVis) {
+                ucoord = vis2.getUCoord();
+                vcoord = vis2.getVCoord();
+            } else if (oiData instanceof OIVis) {
                 final OIVis vis = (OIVis) oiData;
-
-                u = vis.getSpatialUCoord();
-                v = vis.getSpatialVCoord();
-                 */
+                ucoord = vis.getUCoord();
+                vcoord = vis.getVCoord();
             } else {
+                /** ignore OI_T3 as their UV coordinates should be redudant with OI_VIS/OI_VIS2 tables by design */
                 continue;
             }
-
-            // get the optional masks for this OIData table:
-            final IndexMask maskOIData1D = result.getDataMask1DNotFull(oiData);
-            final IndexMask maskOIData2D = result.getDataMask2DNotFull(oiData);
-            // get the optional wavelength mask for the OIData's wavelength table:
-            final IndexMask maskWavelength = result.getWavelengthMaskNotFull(oiData.getOiWavelength());
-
-            final int idxNone = (maskOIData2D != null) ? maskOIData2D.getIndexNone() : -1;
-            final int idxFull = (maskOIData2D != null) ? maskOIData2D.getIndexFull() : -1;
 
             final int nRows = oiData.getNbRows();
             final int nWaves = oiData.getNWave();
 
-            final boolean[][] flags = oiData.getFlag();
+            if (nWaves != 0) {
+                final double[] effWaves = oiData.getOiWavelength().getEffWaveAsDouble();
 
-            IndexMask maskOIData2DRow = null;
+                // get the optional masks for this OIData table:
+                final IndexMask maskOIData1D = result.getDataMask1DNotFull(oiData);
+                final IndexMask maskOIData2D = result.getDataMask2DNotFull(oiData);
+                // get the optional wavelength mask for the OIData's wavelength table:
+                final IndexMask maskWavelength = result.getWavelengthMaskNotFull(oiData.getOiWavelength());
 
-            // Iterate on table rows (i):
-            for (int i = 0; i < nRows; i++) {
+                final int idxNone = (maskOIData2D != null) ? maskOIData2D.getIndexNone() : -1;
+                final int idxFull = (maskOIData2D != null) ? maskOIData2D.getIndexFull() : -1;
 
-                // check optional data mask 1D:
-                if ((maskOIData1D != null) && !maskOIData1D.accept(i)) {
-                    // if bit is false for this row, we hide this row
-                    continue;
-                }
+                final boolean[][] flags = oiData.getFlag();
 
-                // check mask 2D for row None flag:
-                if (maskOIData2D != null) {
-                    if (maskOIData2D.accept(i, idxNone)) {
-                        // row flagged as None:
-                        continue;
-                    }
-                    // check row flagged as Full:
-                    maskOIData2DRow = (maskOIData2D.accept(i, idxFull)) ? null : maskOIData2D;
-                }
+                IndexMask maskOIData2DRow = null;
 
-                final boolean[] rowFlags = (flags != null) ? flags[i] : null;
+                // Iterate on table rows (i):
+                for (int i = 0; i < nRows; i++) {
 
-                // Iterate on wave channels (l):
-                for (int l = 0; l < nWaves; l++) {
-
-                    // check optional wavelength mask:
-                    if ((maskWavelength != null) && !maskWavelength.accept(l)) {
+                    // check optional data mask 1D:
+                    if ((maskOIData1D != null) && !maskOIData1D.accept(i)) {
                         // if bit is false for this row, we hide this row
                         continue;
                     }
 
-                    // check optional data mask 2D (and its Full flag):
-                    if ((maskOIData2DRow != null) && !maskOIData2DRow.accept(i, l)) {
-                        // if bit is false for this row, we hide this row
-                        continue;
+                    // check mask 2D for row None flag:
+                    if (maskOIData2D != null) {
+                        if (maskOIData2D.accept(i, idxNone)) {
+                            // row flagged as None:
+                            continue;
+                        }
+                        // check row flagged as Full:
+                        maskOIData2DRow = (maskOIData2D.accept(i, idxFull)) ? null : maskOIData2D;
                     }
 
-                    if ((rowFlags != null) && rowFlags[l]) {
-                        // data point is flagged so skip it:
-                        continue;
+                    final boolean[] rowFlags = (flags != null) ? flags[i] : null;
+
+                    final double u_g = snapToGrid(ucoord[i], PREC_UV);
+                    final double v_g = snapToGrid(vcoord[i], PREC_UV);
+
+                    // Iterate on wave channels (l):
+                    for (int l = 0; l < nWaves; l++) {
+
+                        // check optional wavelength mask:
+                        if ((maskWavelength != null) && !maskWavelength.accept(l)) {
+                            // if bit is false for this row, we hide this row
+                            continue;
+                        }
+
+                        // check optional data mask 2D (and its Full flag):
+                        if ((maskOIData2DRow != null) && !maskOIData2DRow.accept(i, l)) {
+                            // if bit is false for this row, we hide this row
+                            continue;
+                        }
+
+                        if ((rowFlags != null) && rowFlags[l]) {
+                            // data point is flagged so skip it:
+                            continue;
+                        }
+
+                        // data point is valid and not flagged:
+                        t++;
+                        final double wl_g = snapToGrid(effWaves[l], PREC_WL);
+
+                        final double uc = u_g / wl_g; // rad-1
+                        final double vc = v_g / wl_g; // rad-1
+
+                        // ensure (U,V) are unique (after rounding):
+                        if ((uc != 0.0) && (vc != 0.0) && uvSet.add(new UVTuple(uc, vc))) {
+                            s11 += 2.0 * (uc * uc);
+                            s22 += 2.0 * (vc * vc);
+                            s12 += 2.0 * (uc * vc);
+                            n++;
+                        }
                     }
-
-                    // data point is valid and not flagged:
-                    final double uc = u[i][l];
-                    final double vc = v[i][l];
-
-                    s11 += 2.0 * (uc * uc);
-                    s22 += 2.0 * (vc * vc);
-                    s12 += 2.0 * (uc * vc);
-                    n++;
                 }
             }
         }
+        logger.log(Level.FINE, "t: {0}", t);
         logger.log(Level.FINE, "n: {0}", n);
+        uvSet.clear();
+
+        if (n != 0) {
+            // normalize by (2n + 1) to take into account symetry and (0,0) once:
+            final double invNorm = 1.0 / (2.0 * n + 1.0);
+
+            s11 *= invNorm;
+            s22 *= invNorm;
+            s12 *= invNorm;
+
+            final double[] covMatrix = {s11, s12, s12, s22};
+            return computeBeam(covMatrix);
+        }
+        return null;
+    }
+
+    public static BeamInfo computeBeamInfo(final Collection<OIData> oiDatas) {
+        int n = 0, t = 0;
+        double s11 = 0.0;
+        double s22 = 0.0;
+        double s12 = 0.0;
+
+        final TreeSet<UVTuple> uvSet = new TreeSet<>();
+
+        for (OIData oiData : oiDatas) {
+            final double[] ucoord; // m
+            final double[] vcoord; // m
+
+            if (oiData instanceof OIVis2) {
+                final OIVis2 vis2 = (OIVis2) oiData;
+                ucoord = vis2.getUCoord();
+                vcoord = vis2.getVCoord();
+            } else if (oiData instanceof OIVis) {
+                final OIVis vis = (OIVis) oiData;
+                ucoord = vis.getUCoord();
+                vcoord = vis.getVCoord();
+            } else {
+                /** ignore OI_T3 as their UV coordinates should be redudant with OI_VIS/OI_VIS2 tables by design */
+                continue;
+            }
+
+            final boolean[][] flags = oiData.getFlag();
+
+            final int nRows = oiData.getNbRows();
+            final int nWaves = oiData.getNWave();
+
+            if (nWaves != 0) {
+                final double[] effWaves = oiData.getOiWavelength().getEffWaveAsDouble();
+
+                // Iterate on table rows (i):
+                for (int i = 0; i < nRows; i++) {
+                    final boolean[] rowFlags = (flags != null) ? flags[i] : null;
+
+                    final double u_g = snapToGrid(ucoord[i], PREC_UV);
+                    final double v_g = snapToGrid(vcoord[i], PREC_UV);
+
+                    // Iterate on wave channels (l):
+                    for (int l = 0; l < nWaves; l++) {
+
+                        if ((rowFlags == null) || !rowFlags[l]) {
+                            t++;
+                            final double wl_g = snapToGrid(effWaves[l], PREC_WL);
+
+                            final double uc = u_g / wl_g; // rad-1
+                            final double vc = v_g / wl_g; // rad-1
+
+                            // ensure (U,V) are unique (after rounding):
+                            if ((uc != 0.0) && (vc != 0.0) && uvSet.add(new UVTuple(uc, vc))) {
+                                s11 += 2.0 * (uc * uc);
+                                s22 += 2.0 * (vc * vc);
+                                s12 += 2.0 * (uc * vc);
+                                n++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        logger.log(Level.FINE, "t: {0}", t);
+        logger.log(Level.FINE, "n: {0}", n);
+        uvSet.clear();
 
         if (n != 0) {
             // normalize by (2n + 1):
@@ -153,69 +251,8 @@ public class BeamEstimator {
         return null;
     }
 
-    public static BeamInfo computeBeamInfo(final Collection<OIData> oiDatas) {
-        int n = 0;
-        double s11 = 0.0;
-        double s22 = 0.0;
-        double s12 = 0.0;
-
-        // TODO: how to handle only OIVIS or OIT3 coords or mix (VIS/VIS2/T3) tables that may have repeated U-V coords ?
-        for (OIData oiData : oiDatas) {
-            final double[][] u; // rad-1
-            final double[][] v; // rad-1
-
-            if (oiData instanceof OIVis2) {
-                final OIVis2 vis2 = (OIVis2) oiData;
-
-                u = vis2.getSpatialUCoord();
-                v = vis2.getSpatialVCoord();
-                /*
-            } 
-            else if (oiData instanceof OIVis) {
-                final OIVis vis = (OIVis) oiData;
-
-                u = vis.getSpatialUCoord();
-                v = vis.getSpatialVCoord();
-                 */
-            } else {
-                continue;
-            }
-
-            final boolean[][] flags = oiData.getFlag();
-
-            final int nRows = oiData.getNbRows();
-            final int nWaves = oiData.getNWave();
-
-            for (int i = 0, j; i < nRows; i++) {
-                final boolean[] rowFlags = (flags != null) ? flags[i] : null;
-
-                for (j = 0; j < nWaves; j++) {
-                    if ((rowFlags == null) || !rowFlags[j]) {
-                        final double uc = u[i][j];
-                        final double vc = v[i][j];
-
-                        s11 += 2.0 * (uc * uc);
-                        s22 += 2.0 * (vc * vc);
-                        s12 += 2.0 * (uc * vc);
-                        n++;
-                    }
-                }
-            }
-        }
-        logger.log(Level.FINE, "n: {0}", n);
-
-        if (n != 0) {
-            // normalize by (2n + 1):
-            final double invNorm = 1.0 / (2.0 * n + 1.0);
-
-            s11 *= invNorm;
-            s22 *= invNorm;
-            s12 *= invNorm;
-
-            final double[] covMatrix = {s11, s12, s12, s22};
-            return computeBeam(covMatrix);
-        }
-        return null;
+    private static double snapToGrid(final double value, final double eps) {
+        return Math.round(value / eps) * eps;
     }
 
     private static BeamInfo computeBeam(final double[] covMatrix) {
@@ -391,7 +428,10 @@ public class BeamEstimator {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         try {
-            OIFitsFile oiFits = OIFitsLoader.loadOIFits("/home/bourgesl/Documents/vlti2023/data/vlti/jmmctools/ImageReconstruction/data/RCar/R_CAR_all.fits");
+            final OIFitsFile oiFits = OIFitsLoader.loadOIFits(
+                    //                    "/home/bourgesl/Documents/vlti2023/data/vlti/jmmctools/ImageReconstruction/data/RCar/R_CAR_all.fits"
+                    "/home/bourgesl/ASPRO2/oifits/Aspro2_HIP1234_VLTI_MATISSE_LM_2.86542-4.18239-62ch_D0-G2-J3-K0_2023-10-29.fits"
+            );
 
             final BeamInfo beamInfo = computeBeamInfo(oiFits.getOiDataList());
 
@@ -456,4 +496,55 @@ public class BeamEstimator {
         frame.setVisible(true);
     }
 
+    final static class UVTuple implements Comparable<UVTuple> {
+
+        final double u;
+        final double v;
+
+        UVTuple(double u, double v) {
+            this.u = u;
+            this.v = v;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 7;
+            hash = 11 * hash + (int) (Double.doubleToLongBits(this.u) ^ (Double.doubleToLongBits(this.u) >>> 32));
+            hash = 11 * hash + (int) (Double.doubleToLongBits(this.v) ^ (Double.doubleToLongBits(this.v) >>> 32));
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final UVTuple other = (UVTuple) obj;
+            if (Double.doubleToLongBits(this.u) != Double.doubleToLongBits(other.u)) {
+                return false;
+            }
+            return Double.doubleToLongBits(this.v) == Double.doubleToLongBits(other.v);
+        }
+
+        @Override
+        public int compareTo(final UVTuple o) {
+            int res = Double.compare(u, o.u);
+            if (res == 0) {
+                res = Double.compare(v, o.v);
+            }
+            return res;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + "u=" + u + ", v=" + v + ')';
+        }
+
+    }
 }
