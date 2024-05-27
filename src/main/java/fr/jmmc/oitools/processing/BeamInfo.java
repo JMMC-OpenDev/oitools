@@ -3,6 +3,8 @@
  ******************************************************************************/
 package fr.jmmc.oitools.processing;
 
+import fr.jmmc.jmcs.util.NumberUtils;
+
 /**
  *
  * @author bourgesl
@@ -58,4 +60,9 @@ public final class BeamInfo {
         return "BeamInfo{" + "rx=" + rx + ", ry=" + ry + ", angle=" + angle + '}';
     }
 
+    public String getDisplayString() {
+        return "(rx = " + NumberUtils.trimTo3Digits(rx)
+                + " mas, ry = " + NumberUtils.trimTo3Digits(ry)
+                + " mas, angle = " + NumberUtils.trimTo2Digits(angle) + " deg)";
+    }
 }
