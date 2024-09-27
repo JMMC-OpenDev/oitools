@@ -3,6 +3,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.processing;
 
+import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.model.IndexMask;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsFile;
@@ -276,7 +277,7 @@ public class BeamEstimator {
             final double rx = Math.toDegrees(SCALE_FACTOR / Math.sqrt(results.ev1)) * DEG_IN_MILLI_ARCSEC;
             final double ry = Math.toDegrees(SCALE_FACTOR / Math.sqrt(results.ev2)) * DEG_IN_MILLI_ARCSEC;
 
-            double angle = Math.toDegrees(Math.atan2(results.vec1[0], results.vec1[1]));
+            double angle = NumberUtils.getArgumentInDegrees(results.vec1[1], results.vec1[0]);
 
             // correct angle in range [-90; 90] as collinearity !
             if (angle < -90.0) {

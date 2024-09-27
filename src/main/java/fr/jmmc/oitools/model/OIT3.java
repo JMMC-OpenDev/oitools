@@ -19,6 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.meta.ArrayColumnMeta;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
@@ -437,13 +438,13 @@ public final class OIT3 extends OIData {
 
                 switch (j) {
                     case 1: // AB
-                        angle[i] = Math.atan2(u1coord[i], v1coord[i]);
+                        angle[i] = NumberUtils.getArgument(v1coord[i], u1coord[i]);
                         break;
                     case 2: // BC
-                        angle[i] = Math.atan2(u2coord[i], v2coord[i]);
+                        angle[i] = NumberUtils.getArgument(v2coord[i], u2coord[i]);
                         break;
                     case 3: // AC
-                        angle[i] = Math.atan2(u3, v3);
+                        angle[i] = NumberUtils.getArgument(v3, u3);
                         break;
                     default:
                         angle[i] = 0d;

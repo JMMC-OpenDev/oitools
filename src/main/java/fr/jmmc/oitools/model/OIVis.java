@@ -19,6 +19,7 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.jmcs.util.NumberUtils;
 import fr.jmmc.oitools.OIFitsConstants;
 import fr.jmmc.oitools.meta.ArrayColumnMeta;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
@@ -578,7 +579,7 @@ public final class OIVis extends OIData {
             final double[] vcoord = getVCoord();
 
             for (int i = 0, j; i < nRows; i++) {
-                angle[i] = Math.toDegrees(Math.atan2(ucoord[i], vcoord[i]));
+                angle[i] = NumberUtils.getArgumentInDegrees(vcoord[i], ucoord[i]);
             }
 
             this.setColumnDerivedValue(OIFitsConstants.COLUMN_POS_ANGLE, angle);

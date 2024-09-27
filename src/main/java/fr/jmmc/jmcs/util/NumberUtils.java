@@ -48,7 +48,12 @@ import java.util.logging.Logger;
 public final class NumberUtils {
 
     /** Smallest positive number used in double comparisons (rounding). */
-    public final static double EPSILON = 1e-6d;
+    public final static double EPSILON = 1e-6;
+    /* PI and PI/2 constants */
+    public final static double PI = Math.PI;
+    public final static double PI_HALF = PI / 2.0;
+    /** Typical scale precision in re/im comparisons (rounding). */
+    public static final double ARG_EPSILON = Math.ulp(1.0);
     /* shared Double instances */
     /** shared Double = NaN instance */
     public final static Double DBL_NAN = Double.valueOf(Double.NaN);
@@ -60,6 +65,33 @@ public final class NumberUtils {
     private final static NumberFormat _fmtDef = new DecimalFormat("0.0##");
     /** scientific formatter */
     private final static NumberFormat _fmtScience = new DecimalFormat("0.0##E0");
+
+    public static double getArgumentInDegrees(final double re, final double im) {
+        return Math.toDegrees(getArgument(re, im));
+    }
+
+    public static double getArgument(final double re, final double im) {
+        // check |re| == 0
+        final double normRe = Math.abs(re);
+        if (normRe == 0.0) {
+            return (im >= 0.0) ? PI_HALF : -PI_HALF;
+        }
+        // check |im| == 0
+        final double normIm = Math.abs(im);
+        if (normIm == 0.0) {
+            return (re >= 0.0) ? 0.0 : PI;
+        }
+        final double epsilon = ARG_EPSILON * (normRe + normIm);
+        // check |re| << |im| or |im| << |re|
+        if (normIm <= epsilon) {
+            return (re >= 0.0) ? 0.0 : PI;
+        }
+        // check |im| << |re|
+        if (normRe <= epsilon) {
+            return (im >= 0.0) ? PI_HALF : -PI_HALF;
+        }
+        return Math.atan2(im, re);
+    }
 
     /**
      * Private constructor
