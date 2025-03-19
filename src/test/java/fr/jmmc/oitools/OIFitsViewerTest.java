@@ -102,22 +102,31 @@ public class OIFitsViewerTest extends AbstractFileBaseTest {
     public void existDB_to_xml() throws IOException, FitsException {
         for (String fileName : OIFITS_FILENAME) {
             try {
-                final String result = existDB_process(TEST_DIR_OIFITS + fileName, true);
-                logger.log(Level.INFO, "existDB_to_xml:\n{0}", result);
+                final String outputXML = existDB_process(TEST_DIR_OIFITS + fileName, true);
+                logger.log(Level.INFO, "existDB_to_xml:\n{0}", outputXML);
 
+                DocumentBuilderFactory dBF = null;
                 try {
-                    DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder builder = dBF.newDocumentBuilder();
-                    InputSource is = new InputSource(new StringReader(result));
-                    builder.parse(is);
+                    dBF = DocumentBuilderFactory.newInstance();
+                    // Disable secure processing (no limits):
+                    dBF.setFeature(javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING, false);
                 } catch (ParserConfigurationException ex) {
                     logger.log(Level.INFO, "existDB_to_xml:", ex);
                     // do not consider this case as a faulty xml output
-                } catch (SAXException ex) {
-                    logger.log(Level.INFO, "existDB_to_xml:", ex);
-                    Assert.fail("OIFitsViewer xml output is not well formed");
                 }
-
+                if (dBF != null) {
+                    try {
+                        DocumentBuilder builder = dBF.newDocumentBuilder();
+                        InputSource is = new InputSource(new StringReader(outputXML));
+                        builder.parse(is);
+                    } catch (ParserConfigurationException ex) {
+                        logger.log(Level.INFO, "existDB_to_xml:", ex);
+                        // do not consider this case as a faulty xml output
+                    } catch (SAXException ex) {
+                        logger.log(Level.INFO, "existDB_to_xml:", ex);
+                        Assert.fail("OIFitsViewer xml output is not well formed");
+                    }
+                }
             } catch (RuntimeException re) {
                 logger.log(Level.INFO, "existDB_to_xml:", re);
                 // unexpected
