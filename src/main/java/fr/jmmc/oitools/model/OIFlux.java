@@ -112,7 +112,7 @@ public final class OIFlux extends OIData {
 
         this.copyTable(src);
     }
-
+    
     /* --- Keywords --- */
     /**
      * Get the value of CALSTAT keyword
@@ -247,6 +247,17 @@ public final class OIFlux extends OIData {
     @Override
     public void checkSyntax(final OIFitsChecker checker) {
         super.checkSyntax(checker);
+        
+        /* TODO: add rules to validate (OIFits 2?)
+        - If CALSTAT is C (Calibrated), the spectrum of the ob-
+            ject does not depend on the telescope used: the table shall
+            not contain ARRNAME and STA_INDEX.
+        - If CALSTAT is U (Uncalibrated), ARRNAME and the
+            STA_INDEX column must be present, and the flux stored in
+            FLUXDATA is the flux measured on the telescope of array
+            ARRNAME indicated by STA_INDEX. In this case, the table shall
+            not contain FOV and FOVTYPE.
+        */
 
         checkColumnError(checker, getFlag(), getFluxErr(), this, OIFitsConstants.COLUMN_FLUXERR);
 

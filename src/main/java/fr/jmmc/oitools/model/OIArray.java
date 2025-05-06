@@ -529,7 +529,7 @@ public final class OIArray extends OITable {
      */
     public String getStaNames(final short[] staIndexes) {
         if (staIndexes == null) {
-            return UNDEFINED_STRING;
+            return UNDEFINED;
         }
         // warning: identity hashcode so use carefully using distinct array instances:
         String label = staIndexesToStaNames.get(staIndexes);

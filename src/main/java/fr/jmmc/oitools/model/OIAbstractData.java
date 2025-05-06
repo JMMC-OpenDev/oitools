@@ -25,7 +25,6 @@ import fr.jmmc.oitools.meta.ColumnMeta;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
-import static fr.jmmc.oitools.model.ModelBase.UNDEFINED_STRING;
 import static fr.jmmc.oitools.model.ModelBase.logger;
 import fr.jmmc.oitools.model.range.Range;
 import java.util.Arrays;
@@ -384,7 +383,7 @@ public abstract class OIAbstractData extends OITable {
      */
     public final String getStaNames(final short[] staIndexes) {
         if (staIndexes == null) {
-            return UNDEFINED_STRING;
+            return UNDEFINED;
         }
         final OIArray oiArray = getOiArray();
 
@@ -442,10 +441,10 @@ public abstract class OIAbstractData extends OITable {
                 logger.log(Level.WARNING, "getRealStaNames: bad staIndexesToSortedStaNamesDir: missing {0}", Arrays.toString(staIndexes));
             } else {
                 // find the previous (real) baseline corresponding to the sorted StaNames (stable):
-                return getRealStaNames(usedStaNamesMap, sortedStaNamesDir.getStaNames(), UNDEFINED_STRING);
+                return getRealStaNames(usedStaNamesMap, sortedStaNamesDir.getStaNames(), UNDEFINED);
             }
         }
-        return UNDEFINED_STRING;
+        return UNDEFINED;
     }
 
     /**
