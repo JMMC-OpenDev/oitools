@@ -68,10 +68,10 @@ public abstract class OIData extends OIAbstractData {
             "Integration time", Types.TYPE_DBL, Units.UNIT_SECOND, DataRange.RANGE_POSITIVE_STRICT);
     /** UCOORD column descriptor */
     protected final static ColumnMeta COLUMN_UCOORD = new ColumnMeta(OIFitsConstants.COLUMN_UCOORD,
-            "U coordinate of the data", Types.TYPE_DBL, Units.UNIT_METER).setOrientationDependent(true);
+            "U coordinate of the data", Types.TYPE_DBL, Units.UNIT_METER);
     /** VCOORD column descriptor */
     protected final static ColumnMeta COLUMN_VCOORD = new ColumnMeta(OIFitsConstants.COLUMN_VCOORD,
-            "V coordinate of the data", Types.TYPE_DBL, Units.UNIT_METER).setOrientationDependent(true);
+            "V coordinate of the data", Types.TYPE_DBL, Units.UNIT_METER);
 
     /** HOUR_ANGLE column descriptor */
     private final static ColumnMeta COLUMN_HOUR_ANGLE = new ColumnMeta(OIFitsConstants.COLUMN_HOUR_ANGLE,
@@ -81,8 +81,7 @@ public abstract class OIData extends OIAbstractData {
             "radius i.e. projected base line", Types.TYPE_DBL, Units.UNIT_METER, DataRange.RANGE_POSITIVE);
     /** POS_ANGLE column descriptor */
     private final static ColumnMeta COLUMN_POS_ANGLE = new ColumnMeta(OIFitsConstants.COLUMN_POS_ANGLE,
-            "position angle of the projected base line", Types.TYPE_DBL, Units.UNIT_DEGREE, DataRange.RANGE_ANGLE)
-            .setOrientationDependent(true);
+            "position angle of the projected base line", Types.TYPE_DBL, Units.UNIT_DEGREE, DataRange.RANGE_ANGLE);
 
     /** NIGHT_ID column descriptor */
     private final static ColumnMeta COLUMN_NIGHT_ID = new ColumnMeta(OIFitsConstants.COLUMN_NIGHT_ID,

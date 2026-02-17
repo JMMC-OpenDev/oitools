@@ -177,12 +177,12 @@ public final class OIVis extends OIData {
 
         // Derived SPATIAL_U_FREQ column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U,
-                "spatial U frequency", Types.TYPE_DBL, this).setOrientationDependent(true)
+                "spatial U frequency", Types.TYPE_DBL, this)
                 .setAlias(OIFitsConstants.COLUMN_UCOORD_SPATIAL));
 
         // Derived SPATIAL_V_FREQ column definition
         addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V,
-                "spatial V frequency", Types.TYPE_DBL, this).setOrientationDependent(true)
+                "spatial V frequency", Types.TYPE_DBL, this)
                 .setAlias(OIFitsConstants.COLUMN_VCOORD_SPATIAL));
 
         if (false) {
