@@ -157,7 +157,8 @@ public final class IndexMask {
 
     @Override
     public String toString() {
-        return "IndexMask{" + "nbRows=" + nbRows + ", nbCols=" + nbCols + ", bitSet=" + bitSet + '}';
+        return isFull(this) ? "IndexMask{FULL}" 
+                : "IndexMask{" + "nbRows=" + nbRows + ", nbCols=" + nbCols + ", bitSet=" + bitSet + '}';
     }
 
     /**
