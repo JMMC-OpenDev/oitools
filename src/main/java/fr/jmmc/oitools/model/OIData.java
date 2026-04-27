@@ -914,7 +914,7 @@ public abstract class OIData extends OIAbstractData {
             }
 
             // get the baseline (VIS / VIS2 / T3) for the current row:
-            final short[] staIndex = staIndexes[row];
+            final short[] staIndex = (staIndexes != null) ? staIndexes[row] : null;
 
             for (int l = 0; l < nWaves; l++) {
                 final Integer index = NumberUtils.valueOf(idxI + l);
