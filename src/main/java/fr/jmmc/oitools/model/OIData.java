@@ -876,7 +876,7 @@ public abstract class OIData extends OIAbstractData {
     protected static void checkCorrIndex(final OIFitsChecker checker, final OICorr oiCorr,
                                          final OIData oidata, final String colName, final int[] corrindx) {
 
-        // get OIFitsCorrChecker
+        // get OIFitsCorrChecker for this OI_CORR table:
         final OIFitsCorrChecker corrChecker = (checker != null) ? checker.getCorrChecker(oiCorr.getCorrName()) : null;
 
         if (corrChecker == null) {
@@ -884,6 +884,9 @@ public abstract class OIData extends OIAbstractData {
         }
 
         final int nWaves = oidata.getNWave();
+
+        // StaIndex column:
+        final short[][] staIndexes = oidata.getStaIndex();
 
         // ndata gives the square matrix dimension N [N x N]
         final int ndata = oiCorr.getNData();
@@ -903,17 +906,29 @@ public abstract class OIData extends OIAbstractData {
                     checker.ruleFailed(Rule.GENERIC_CORRINDX_MAX, oidata, colName).addValuesAt(idxI, ndata, row);
                 }
             }
+            final int lastIdxI = idxI + (nWaves - 1);
+            if ((lastIdxI > ndata) || OIFitsChecker.isInspectRules()) {
+                if (checker != null) {
+                    checker.ruleFailed(Rule.GENERIC_CORRINDX_MAX, oidata, colName).addValuesAt(lastIdxI, ndata, row);
+                }
+            }
+
+            // get the baseline (VIS / VIS2 / T3) for the current row:
+            final short[] staIndex = staIndexes[row];
 
             for (int l = 0; l < nWaves; l++) {
                 final Integer index = NumberUtils.valueOf(idxI + l);
 
                 // rule [GENERIC_CORRINDX_UNIQ] check duplicates or overlaps within correlation indexes (CORRINDX)
                 if (corrChecker.contains(index) || OIFitsChecker.isInspectRules()) {
-                    if (checker != null) {
-                        checker.ruleFailed(Rule.GENERIC_CORRINDX_UNIQ, oidata, colName).addColValueAt(index, row, l, ((OIFitsChecker.isInspectRules()) ? "[[ORIGIN]]" : corrChecker.getOriginAsString(index)));
+                    // verify if compatible (shared for the same baseline if theoretical correlations):
+                    if (!corrChecker.isValid(index, oidata.getExtName(), oidata.getExtNb(), colName, row, l, staIndex) || OIFitsChecker.isInspectRules()) {
+                        if (checker != null) {
+                            checker.ruleFailed(Rule.GENERIC_CORRINDX_UNIQ, oidata, colName).addColValueAt(index, row, l, ((OIFitsChecker.isInspectRules()) ? "[[ORIGIN]]" : corrChecker.getOriginAsString(index)));
+                        }
                     }
                 } else {
-                    corrChecker.put(index, oidata.getExtName(), oidata.getExtNb(), colName, row, l);
+                    corrChecker.put(index, oidata.getExtName(), oidata.getExtNb(), colName, row, l, staIndex);
                 }
             }
         }

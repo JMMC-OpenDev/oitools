@@ -22,7 +22,6 @@ package fr.jmmc.oitools.model;
 import fr.jmmc.oitools.OIFitsConstants;
 import static fr.jmmc.oitools.OIFitsConstants.FIRST_ID_SHORT;
 import fr.jmmc.oitools.meta.ColumnMeta;
-import fr.jmmc.oitools.meta.DataRange;
 import fr.jmmc.oitools.meta.KeywordMeta;
 import fr.jmmc.oitools.meta.Types;
 import fr.jmmc.oitools.meta.Units;
@@ -52,7 +51,7 @@ public final class OICorr extends OITable {
 
     /** CORR column descriptor */
     private final static ColumnMeta COLUMN_CORR = new ColumnMeta(OIFitsConstants.COLUMN_CORR,
-            "Matrix element (IINDX, JINDX)", Types.TYPE_DBL, Units.NO_UNIT, DataRange.RANGE_POSITIVE_STRICT);
+            "Matrix element (IINDX, JINDX)", Types.TYPE_DBL, Units.NO_UNIT);
 
     /**
      * Public OICorr class constructor
@@ -157,7 +156,12 @@ public final class OICorr extends OITable {
         return this.getColumnDouble(OIFitsConstants.COLUMN_CORR);
     }
 
-    /* --- Other methods --- */
+    /*
+     * As the correlation matrix is sparse, only non-zero correlations are stored in rows.
+     * Even if it can be big, it may be useful to build the full matrix 
+     * or at least have an API to get correlation(I,J) or extract sub-matrices for interesting index ranges.
+     */
+ /* --- Other methods --- */
     /**
      * Returns a string representation of this table
      * @return a string representation of this table
@@ -181,9 +185,10 @@ public final class OICorr extends OITable {
                 checker.ruleFailed(Rule.OI_CORR_CORRNAME, this, OIFitsConstants.KEYWORD_CORRNAME);
             }
         }
+        // nRows gives the number of non-zero correlations at (i,j) (triangle only) (<= ndata^2 / 2)
         final int nRows = getNbRows();
 
-        // ndata gives the square matrix dimensions [N x N]
+        // ndata gives the square matrix dimensions [N x N] (virtual, where the index axis is defined by other tables)
         final int ndata = getNData();
 
         final int[] iIndx = getIindx();

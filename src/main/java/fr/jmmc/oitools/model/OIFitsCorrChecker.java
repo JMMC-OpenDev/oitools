@@ -19,7 +19,9 @@
  ******************************************************************************/
 package fr.jmmc.oitools.model;
 
+import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.oitools.fits.FitsHDU;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +32,7 @@ import java.util.Map;
 public final class OIFitsCorrChecker {
 
     /** Map indexOrigins */
-    private final Map<Integer, Origin> indexOrigins = new HashMap<Integer, Origin>();
+    private final Map<Integer, CorrIndexOrigin> indexOrigins = new HashMap<Integer, CorrIndexOrigin>(512);
 
     /**
      * Return true if the map contains key at this index
@@ -41,58 +43,72 @@ public final class OIFitsCorrChecker {
         return indexOrigins.containsKey(index);
     }
 
+    public boolean isValid(final Integer index, String extName, int extNb, String column, int row, int channel, final short[] staIndex) {
+        // is index already used ?
+        final CorrIndexOrigin prev = indexOrigins.get(index);
+
+        // check more fields (ignore extNb, row):
+        return (prev != null)
+                && ObjectUtils.areEquals(extName, prev.extName)
+                && ObjectUtils.areEquals(column, prev.column)
+                && (channel == prev.channel)
+                && Arrays.equals(staIndex, prev.staIndex);
+    }
+
     /**
-     * Puts in the map at the given index, the new object Origin with OIData information
+     * Puts in the map at the given index, the new CorrIndexOrigin with OIData information
      * @param index index
      * @param extName Hdu extname
      * @param extNb Hdu extnumber
      * @param column column name
      * @param row row
      * @param channel channel
+     * @param staIndex baseline
      */
-    public void put(final Integer index, String extName, int extNb, String column, int row, int channel) {
-        indexOrigins.put(index, new Origin(extName, extNb, column, row, channel));
+    public void put(final Integer index, String extName, int extNb, String column, int row, int channel, final short[] staIndex) {
+        indexOrigins.put(index, new CorrIndexOrigin(extName, extNb, column, row, channel, staIndex));
     }
 
     /**
-     * Origin display call asString in Origin object
      * @param index index
-     * @return the map information at this index as a String
+     * @return Origin information at this index as a String
      */
     public String getOriginAsString(final Integer index) {
         return indexOrigins.get(index).asString();
     }
 
-    // Classic toString call Origin toString
     @Override
     public String toString() {
         return "CorrChecker{" + "usedIndexes=" + indexOrigins + '}';
     }
 
-    //Origin object for store OIData information for an index
-    private final static class Origin {
+    // Origin object for store OIData information for an index
+    private final static class CorrIndexOrigin {
 
-        String extName;
-        int extNb;
-        String column;
-        int row;
-        int channel;
+        final String extName;
+        final int extNb;
+        final String column;
+        final int row;
+        final int channel;
+        final short[] staIndex;
 
-        Origin(String extName, int extNb, String column, int row, int channel) {
+        CorrIndexOrigin(String extName, int extNb, String column, int row, int channel, final short[] staIndex) {
             this.extName = extName;
             this.extNb = extNb;
             this.column = column;
             this.row = row;
             this.channel = channel;
+            this.staIndex = staIndex;
         }
 
         @Override
         public String toString() {
-            return "Origin{" + "extName=" + extName + ", extNb=" + extNb + ", column=" + column + ", row=" + row + ", channel=" + channel + '}';
+            return "CorrIndexOrigin{" + "extName=" + extName + ", extNb=" + extNb + ", column=" + column + ", row=" + row + ", channel=" + channel
+                    + ", staIndex=" + Arrays.toString(staIndex) + '}';
         }
 
         private String asString() {
-            return FitsHDU.getHDUId(extName, extNb) + " in " + column + " column at index " + channel + ", row " + row;
+            return FitsHDU.getHDUId(extName, extNb) + " in " + column + " column at index " + channel + ", row " + row + ", staIndex=" + Arrays.toString(staIndex);
         }
 
     }
