@@ -735,7 +735,8 @@ public final class OIFitsFile extends FitsImageFile {
 
                     if (oiWlTables != null) {
                         for (Iterator<OIWavelength> it = oiWlTables.iterator(); it.hasNext();) {
-                            sb.append('|').append(it.next().idToString());
+                            sb.append('|');
+                            it.next().toString(sb, false);
                         }
                         sb.deleteCharAt(0);
                     }
@@ -768,7 +769,8 @@ public final class OIFitsFile extends FitsImageFile {
 
                     if (oiArrTables != null) {
                         for (Iterator<OIArray> it = oiArrTables.iterator(); it.hasNext();) {
-                            sb.append('|').append(it.next().idToString());
+                            sb.append('|');
+                            it.next().toString(sb, false);
                         }
                         sb.deleteCharAt(0);
                     }
@@ -803,7 +805,8 @@ public final class OIFitsFile extends FitsImageFile {
 
                     if (oiCorrTables != null) {
                         for (Iterator<OICorr> it = oiCorrTables.iterator(); it.hasNext();) {
-                            sb.append('|').append(it.next().idToString());
+                            sb.append('|');
+                            it.next().toString(sb, false);
                         }
                         sb.deleteCharAt(0);
                     }
@@ -848,7 +851,8 @@ public final class OIFitsFile extends FitsImageFile {
 
                     if (!oiInspolSet.isEmpty()) {
                         for (Iterator<OIInspol> it = oiInspolSet.iterator(); it.hasNext();) {
-                            sb.append('|').append(it.next().idToString());
+                            sb.append('|');
+                            it.next().toString(sb, false);
                         }
                         sb.deleteCharAt(0);
                     }
