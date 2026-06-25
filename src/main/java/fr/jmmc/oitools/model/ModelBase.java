@@ -58,6 +58,53 @@ public abstract class ModelBase {
     }
 
     /**
+     * From Object.equals():
+     *
+     * @implSpec
+     * The {@code equals} method for class {@code Object} implements
+     * the most discriminating possible equivalence relation on objects;
+     * that is, for any non-null reference values {@code x} and
+     * {@code y}, this method returns {@code true} if and only
+     * if {@code x} and {@code y} refer to the same object
+     * ({@code x == y} has the value {@code true}).
+     *
+     * In other words, under the reference equality equivalence
+     * relation, each equivalence class only has a single element.
+     *
+     * @apiNote
+     * It is generally necessary to override the {@link #hashCode() hashCode}
+     * method whenever this method is overridden, so as to maintain the
+     * general contract for the {@code hashCode} method, which states
+     * that equal objects must have equal hash codes.
+     *
+     * @param   obj   the reference object with which to compare.
+     * @return  {@code true} if this object is the same as the obj
+     *          argument; {@code false} otherwise.
+     * @see     #hashCode()
+     * @see     java.util.HashMap
+     *
+        @Override
+        public final boolean equals(final Object obj) {
+            return super.equals(obj);
+        }
+     */
+    /**
+     * From Object.hashCode():
+     *
+     * @implSpec
+     * As far as is reasonably practical, the {@code hashCode} method defined
+     * by class {@code Object} returns distinct integers for distinct objects.
+     *
+     * @return  a hash code value for this object.
+     * @see     java.lang.Object#equals(java.lang.Object)
+     * @see     java.lang.System#identityHashCode
+     *
+        @Override
+        public final int hashCode() {
+            return super.hashCode();
+        }
+     */
+    /**
      * Implements the Visitor pattern 
      * @param visitor visitor implementation
      */
@@ -109,7 +156,7 @@ public abstract class ModelBase {
      * @return HDU id [EXT_NAME # EXT_NB] as string
      */
     public static String getHDUId(final String extName, final int extNb) {
-        return getHDUId(new StringBuilder(), extName, extNb).toString();
+        return getHDUId(new StringBuilder(16), extName, extNb).toString();
     }
 
     /**

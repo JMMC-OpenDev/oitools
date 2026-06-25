@@ -181,7 +181,6 @@ public final class Analyzer implements ModelVisitor {
         // Extract Granules of this table (targetId, nightId, insMode, mjd):
         // Get referenced tables:
         final OITarget oiTarget = oiData.getOiTarget();
-        final OIWavelength oiWavelength = oiData.getOiWavelength();
 
         // Get targetId column:
         final short[] targetIds = oiData.getTargetId();
@@ -198,8 +197,7 @@ public final class Analyzer implements ModelVisitor {
         final Map<Short, Target> targetIdToTarget = (oiTarget != null) ? oiTarget.getTargetIdToTarget() : null;
 
         // Resolve instrument mode:
-        // Note: if no OIWaveLength but have insname => may create an InstrumentMode("Missing<insname>"):
-        final InstrumentMode insMode = (oiWavelength != null) ? oiWavelength.getInstrumentMode() : InstrumentMode.UNDEFINED;
+        final InstrumentMode insMode = oiData.getInsMode();
 
         // Outputs:
         // Fill distinct Target Id:
@@ -486,7 +484,7 @@ public final class Analyzer implements ModelVisitor {
             final int staLen = staIndexes[0].length;
             {
                 final StationIndex staList = new StationIndex(staLen);
-                final Map<StationIndex, short[]> mappingStaList = new HashMap<StationIndex, short[]>(128);
+                final Map<StationIndex, short[]> mappingStaList = new HashMap<StationIndex, short[]>(16);
 
                 for (int i = 0, j; i < nRows; i++) {
                     final short[] staIndex = staIndexes[i];
@@ -524,48 +522,31 @@ public final class Analyzer implements ModelVisitor {
                 final String[] staIndexNamesSorted = new String[staLen];
 
                 for (final short[] staIndex : distinctStaIndex) {
-                    // Note: use another array instance as Data.getStaNames(staIndexSorted) uses identity map
-                    final short[] staIndexSorted = new short[staLen];
+                    processStaIndex(oiData, staIndex, staIndexNamesSorted,
+                            staIndexesToSortedStaNamesDir, usedStaNamesMap, sortedStaNamesMap);
+                } // distinct staIndex
 
-                    // prepare Station names:
-                    for (int j = 0; j < staLen; j++) {
-                        staIndexSorted[j] = staIndex[j];
-                        staIndexNamesSorted[j] = oiData.getStaName(staIndexSorted[j]);
+                // OI_T3: split triplet in baselines:
+                if (staLen == 3) {
+                    final Map<short[], short[][]> staIndexesToBaselines = oiData.getStaIndexesToBaselines();
+
+                    final String[] staIndexNamesSortedBL = new String[2];
+
+                    for (final short[] staIndex : distinctStaIndex) {
+                        final short[] staIndexBL1 = new short[]{staIndex[0], staIndex[1]}; // 0-1
+                        final short[] staIndexBL2 = new short[]{staIndex[0], staIndex[2]}; // 0-2
+                        final short[] staIndexBL3 = new short[]{staIndex[1], staIndex[2]}; // 1-2
+
+                        processStaIndex(oiData, staIndexBL1, staIndexNamesSortedBL,
+                                staIndexesToSortedStaNamesDir, usedStaNamesMap, sortedStaNamesMap);
+                        processStaIndex(oiData, staIndexBL2, staIndexNamesSortedBL,
+                                staIndexesToSortedStaNamesDir, usedStaNamesMap, sortedStaNamesMap);
+                        processStaIndex(oiData, staIndexBL3, staIndexNamesSortedBL,
+                                staIndexesToSortedStaNamesDir, usedStaNamesMap, sortedStaNamesMap);
+                        
+                        // define baselines for this triplet:
+                        staIndexesToBaselines.put(staIndex, new short[][]{staIndexBL1, staIndexBL2, staIndexBL3});
                     }
-
-                    // Sort at least: 2 items:
-                    int perm = testAndSwap(staIndexSorted, staIndexNamesSorted, 0, 1);
-
-                    // now: indices (0 1) sorted
-                    if (staLen == 3) {
-                        // triplet:
-                        perm += testAndSwap(staIndexSorted, staIndexNamesSorted, 0, 2);
-                        perm += testAndSwap(staIndexSorted, staIndexNamesSorted, 1, 2);
-                    }
-
-                    final boolean orientation = (perm % 2 == 0);
-
-                    final String staNames = oiData.getStaNames(staIndex);
-                    final String sortedStaNames = oiData.getStaNames(staIndexSorted);
-
-                    if (isLogDebug) {
-                        logger.log(Level.FINE, "Baseline: [{0} = {1}], sorted: [{2} = {3}] perm: {4} orientation: {5}",
-                                new Object[]{Arrays.toString(staIndex), staNames,
-                                             Arrays.toString(staIndexSorted), Arrays.toString(staIndexNamesSorted),
-                                             perm, orientation});
-                    }
-
-                    final StaNamesDir sortedStaNamesDir = new StaNamesDir(sortedStaNames, orientation);
-                    staIndexesToSortedStaNamesDir.put(staIndex, sortedStaNamesDir);
-
-                    // global level (OIFits):
-                    // find the previous (real) baseline corresponding to the sorted StaNames (stable):
-                    final StaNamesDir refStaNamesDir = usedStaNamesMap.get(sortedStaNames);
-                    if (refStaNamesDir == null) {
-                        // store this (real) baseline corresponding to the sorted StaNames (stable) with the reference orientation flag:
-                        usedStaNamesMap.put(sortedStaNames, new StaNamesDir(staNames, sortedStaNamesDir.isOrientation()));
-                    }
-                    sortedStaNamesMap.put(staNames, sortedStaNames);
                 }
             } else {
                 // 1T (OI_FLUX):
@@ -592,6 +573,57 @@ public final class Analyzer implements ModelVisitor {
             }
         }
         processStaConf(oiData);
+    }
+
+    private void processStaIndex(final OIData oiData, final short[] staIndex,
+                                 final String[] staIndexNamesSorted,
+                                 final Map<short[], StaNamesDir> staIndexesToSortedStaNamesDir,
+                                 final Map<String, StaNamesDir> usedStaNamesMap,
+                                 final Map<String, String> sortedStaNamesMap) {
+        final int staLen = staIndex.length;
+
+        // Note: use another array instance as Data.getStaNames(staIndexSorted) uses identity map
+        final short[] staIndexSorted = new short[staLen];
+
+        // prepare Station names:
+        for (int j = 0; j < staLen; j++) {
+            staIndexSorted[j] = staIndex[j];
+            staIndexNamesSorted[j] = oiData.getStaName(staIndexSorted[j]);
+        }
+
+        // Sort at least: 2 items:
+        int perm = testAndSwap(staIndexSorted, staIndexNamesSorted, 0, 1);
+
+        // now: indices (0 1) sorted
+        if (staLen == 3) {
+            // triplet:
+            perm += testAndSwap(staIndexSorted, staIndexNamesSorted, 0, 2);
+            perm += testAndSwap(staIndexSorted, staIndexNamesSorted, 1, 2);
+        }
+
+        final boolean orientation = (perm % 2 == 0);
+
+        final String staNames = oiData.getStaNames(staIndex);
+        final String sortedStaNames = oiData.getStaNames(staIndexSorted);
+
+        if (isLogDebug) {
+            logger.log(Level.FINE, "Baseline: [{0} = {1}], sorted: [{2} = {3}] perm: {4} orientation: {5}",
+                    new Object[]{Arrays.toString(staIndex), staNames,
+                                 Arrays.toString(staIndexSorted), Arrays.toString(staIndexNamesSorted),
+                                 perm, orientation});
+        }
+
+        final StaNamesDir sortedStaNamesDir = new StaNamesDir(sortedStaNames, orientation);
+        staIndexesToSortedStaNamesDir.put(staIndex, sortedStaNamesDir);
+
+        // global level (OIFits):
+        // find the previous (real) baseline corresponding to the sorted StaNames (stable):
+        final StaNamesDir refStaNamesDir = usedStaNamesMap.get(sortedStaNames);
+        if (refStaNamesDir == null) {
+            // store this (real) baseline corresponding to the sorted StaNames (stable) with the reference orientation flag:
+            usedStaNamesMap.put(sortedStaNames, new StaNamesDir(staNames, sortedStaNamesDir.isOrientation()));
+        }
+        sortedStaNamesMap.put(staNames, sortedStaNames);
     }
 
     private static int testAndSwap(final short[] staIndexSorted, final String[] staIndexNamesSorted, final int i1, final int i2) {

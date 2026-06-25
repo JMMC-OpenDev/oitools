@@ -55,6 +55,8 @@ public abstract class OIAbstractData extends OITable {
     private final Map<short[], String> staIndexesToString = new IdentityHashMap<short[], String>();
     /** map of distinct StaIndex arrays to sorted StaNames + orientation (identity hashcode) */
     private final Map<short[], StaNamesDir> staIndexesToSortedStaNamesDir = new IdentityHashMap<short[], StaNamesDir>();
+    /** OI_T3: cached baselines corresponding to given triplet (identity hashcode) */
+    private Map<short[], short[][]> staIndexesToBaselines = null;
 
     /**
      * Protected OIAbstractData class constructor
@@ -256,6 +258,9 @@ public abstract class OIAbstractData extends OITable {
         distinctStaIndex.clear();
         staIndexesToString.clear();
         staIndexesToSortedStaNamesDir.clear();
+        if (staIndexesToBaselines != null) {
+            staIndexesToBaselines.clear();
+        }
     }
 
     /**
@@ -424,6 +429,13 @@ public abstract class OIAbstractData extends OITable {
      */
     public final StaNamesDir getSortedStaNamesDir(final short[] staIndexes) {
         return staIndexesToSortedStaNamesDir.get(staIndexes);
+    }
+
+    public Map<short[], short[][]> getStaIndexesToBaselines() {
+        if (staIndexesToBaselines == null) {
+            staIndexesToBaselines = new IdentityHashMap<>();
+        }
+        return staIndexesToBaselines;
     }
 
     /**

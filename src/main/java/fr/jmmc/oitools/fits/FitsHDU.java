@@ -20,7 +20,9 @@
 package fr.jmmc.oitools.fits;
 
 import fr.jmmc.jmcs.util.NumberUtils;
+import fr.jmmc.jmcs.util.ObjectUtils;
 import fr.jmmc.jmcs.util.StringUtils;
+import fr.jmmc.jmcs.util.ToStringable;
 import fr.jmmc.oitools.OIFitsConstants;
 import static fr.jmmc.oitools.meta.CellMeta.NO_STR_VALUES;
 import fr.jmmc.oitools.meta.KeywordMeta;
@@ -49,7 +51,7 @@ import java.util.logging.Level;
  * Abstract class to gather methods related to keywords and header cards for any HDU (image or binary table)
  * @author kempsc
  */
-public abstract class FitsHDU extends ModelBase {
+public abstract class FitsHDU extends ModelBase implements ToStringable {
 
     /* constants */
     /** assigns a value to undefined extNumber */
@@ -682,22 +684,38 @@ public abstract class FitsHDU extends ModelBase {
 
     /* --- Other methods --- */
     /**
+     * toString() implementation wrapper to get idToString()
+     * Note: prefer using @see #toString(java.lang.StringBuilder) instead
+     * @return string representation
+     */
+    @Override
+    public String toString() {
+        return idToString();
+    }
+
+    /**
      * Returns the HDU id[EXT_NAME # EXT_NB] as string
      *
      * @return HDU id[EXT_NAME # EXT_NB] as string
      */
     public final String idToString() {
-        return getHDUId(getExtName(), getExtNb());
+        final StringBuilder sb = new StringBuilder(16);
+        toString(sb, false);
+        return sb.toString();
     }
 
     /**
-     * Returns a string representation of this hdu
-     *
-     * @return a string representation of this hdu
+     * toString() implementation using string builder
+     * 
+     * @param sb string builder to append to
+     * @param full true to get complete information; false to get main information (shorter)
      */
     @Override
-    public String toString() {
-        return idToString();
+    public void toString(final StringBuilder sb, final boolean full) {
+        getHDUId(sb, getExtName(), getExtNb());
+        if (full) {
+            ObjectUtils.getObjectIdentity(sb, this);
+        }
     }
 
     /*
