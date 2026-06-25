@@ -230,7 +230,7 @@ public final class RuleFailure {
      */
     @Override
     public String toString() {
-        return toString(new StringBuilder()).toString();
+        return toString(new StringBuilder(32)).toString();
     }
 
     /**
