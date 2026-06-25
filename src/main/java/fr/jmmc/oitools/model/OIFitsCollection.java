@@ -48,6 +48,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -68,12 +69,20 @@ public final class OIFitsCollection implements ToStringable {
     /** flag to allow fixing bad UID for single matches */
     private final static boolean FIX_BAD_UID_FOR_SINGLE_MATCH;
 
+    private final static boolean DUMP_INDEX;
+    private final static boolean USE_INDEX_BL = true;
+
     static {
         FIX_BAD_UID_FOR_SINGLE_MATCH = System.getProperty("fix.bad.uid", "false").equalsIgnoreCase("true");
+        DUMP_INDEX = System.getProperty("index.dump", "false").equalsIgnoreCase("true");
 
         if (FIX_BAD_UID_FOR_SINGLE_MATCH) {
             logger.warning("OIFitsCollection: FIX_BAD_UID_FOR_SINGLE_MATCH enabled !");
         }
+        if (DUMP_INDEX) {
+            logger.warning("OIFitsCollection: DUMP_INDEX enabled !");
+        }
+        logger.log(Level.WARNING, "OIFitsCollection: INDEX mode: = {0}", USE_INDEX_BL ? "baselines" : "uv");
     }
     /* members */
     /** InstrumentMode manager */
@@ -665,13 +674,13 @@ public final class OIFitsCollection implements ToStringable {
                         // Create the filter chain:
 
                         // OIData filters:
+                        final ArrayList<FitsTableFilter<?>> filtersWL = result.getFiltersOIWavelength();
                         final ArrayList<FitsTableFilter<?>> filtersData1D = result.getFiltersOIData1D();
                         final ArrayList<FitsTableFilter<?>> filtersData2D = result.getFiltersOIData2D();
-                        final ArrayList<FitsTableFilter<?>> filtersWL = result.getFiltersOIWavelength();
                         // reset
+                        filtersWL.clear();
                         filtersData1D.clear();
                         filtersData2D.clear();
-                        filtersWL.clear();
 
                         // subset filters:
                         if (selector.getTargetUIDs() != null) {
@@ -723,6 +732,55 @@ public final class OIFitsCollection implements ToStringable {
                         }
                     }
 
+                    // Note: tables associated to granules may return multiple times the same table (several night id)
+                    // only distinct tables:
+                    final LinkedHashSet<OIData> distinctOiDatas = new LinkedHashSet<OIData>();
+
+                    // Index OIData from granules (targetUID, insModeUID, mjd,  u/v coord ...)
+                    for (final Granule g : granules) {
+                        final Set<OIData> oiDatas = oiDataPerGranule.get(g);
+
+                        if (oiDatas != null) {
+                            final String granuleTargetUID = g.getTarget().getTarget();
+                            // Apply table selection:
+                            if ((selector == null) || !selector.hasTable()) {
+                                // add all tables:
+                                for (final OIData oiData : oiDatas) {
+                                    if (distinctOiDatas.add(oiData)) {
+                                        indexOIData(result, granuleTargetUID, oiData);
+                                    }
+                                }
+                            } else {
+                                // test all data tables:
+                                for (final OIData oiData : oiDatas) {
+                                    // file path comparison:
+                                    final String oiFitsPath = oiData.getOIFitsFile().getAbsoluteFilePath();
+                                    if (oiFitsPath != null) {
+                                        final List<Integer> extNbs = selector.getTables(oiFitsPath);
+                                        // null means the path does not match:
+                                        if (extNbs != null) {
+                                            // extNb is null means add all tables from file
+                                            if (extNbs.isEmpty()
+                                                    || extNbs.contains(NumberUtils.valueOf(oiData.getExtNb()))) {
+                                                if (distinctOiDatas.add(oiData)) {
+                                                    indexOIData(result, granuleTargetUID, oiData);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    distinctOiDatas.clear();
+                    if (logger.isLoggable(Level.INFO)) {
+                        logger.log(Level.INFO, "indexOIData: duration = {0} ms.", 1e-6d * (System.nanoTime() - start));
+                    }
+                    if (DUMP_INDEX) {
+                        dumpIndexOIData(result);
+                    }
+
+                    // Filter OIData from granules:
                     for (final Granule g : granules) {
                         final Set<OIData> oiDatas = oiDataPerGranule.get(g);
 
@@ -803,7 +861,7 @@ public final class OIFitsCollection implements ToStringable {
         }
     }
 
-    private void addStaConfFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<String> filterValues) {
+    private static void addStaConfFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<String> filterValues) {
         if (filterValues.getIncludeValues() != null) {
             filters.add(new StaConfFilter(filterValues.getIncludeValues(), true));
         }
@@ -812,7 +870,7 @@ public final class OIFitsCollection implements ToStringable {
         }
     }
 
-    private void addDouble1DFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<Range> filterValues) {
+    private static void addDouble1DFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<Range> filterValues) {
         if (filterValues.getIncludeValues() != null) {
             filters.add(new Double1DFilter(filterValues.getColumnName(), filterValues.getIncludeValues(), true));
         }
@@ -821,7 +879,7 @@ public final class OIFitsCollection implements ToStringable {
         }
     }
 
-    private void addDouble2DFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<Range> filterValues) {
+    private static void addDouble2DFilters(final ArrayList<FitsTableFilter<?>> filters, final FilterValues<Range> filterValues) {
         if (filterValues.getIncludeValues() != null) {
             filters.add(new Double2DFilter(filterValues.getColumnName(), filterValues.getIncludeValues(), true));
         }
@@ -1302,4 +1360,155 @@ public final class OIFitsCollection implements ToStringable {
         }
         return granules;
     }
+
+    // --- index ---
+    private void indexOIData(final SelectorResult result, final String granuleTargetUID, final OIData oiData) {
+        final int nbCoords = oiData.getNbIndexCoords();
+        if (nbCoords <= 0) {
+            return;
+        }
+        final boolean isLogDebug = logger.isLoggable(Level.FINE);
+        if (isLogDebug) {
+            logger.log(Level.FINE, "indexOIData: oiData = {0}", oiData);
+        }
+
+        final String insModeUID = getInsModeUID(oiData);
+
+        final Map<IndexKey, ArrayList<IndexOIData>> indexMap = result.getIndexOIData();
+
+        // Iterate on table rows (i):
+        for (int r = 0, nRows = oiData.getNbRows(); r < nRows; r++) {
+            final String targetUID = getTargetUID(oiData, r);
+            // Only index rows matching global target:
+            if (ModelBase.areEquals(granuleTargetUID, targetUID)) {
+                // reference to this table row:
+                final IndexOIData indexOIData = new IndexOIData(oiData, r);
+
+                for (int c = 0; c < nbCoords; c++) {
+                    final IndexKey key = getIndexKey(oiData, r, c, targetUID, insModeUID);
+
+                    if (isLogDebug) {
+                        logger.log(Level.FINE, "indexOIData: key: {0} for {1}", new Object[]{key, oiData.getStaIndexName()[r]});
+                    }
+
+                    // Lookup pre-existing index mapping:
+                    ArrayList<IndexOIData> indexOIDataList = indexMap.get(key);
+                    if (indexOIDataList == null) {
+                        indexOIDataList = new ArrayList<>(4);
+                        indexMap.put(key, indexOIDataList);
+                    }
+                    // add reference:
+                    indexOIDataList.add(indexOIData);
+                } // coords
+            }
+        } // rows
+    }
+
+    private void dumpIndexOIData(final SelectorResult result) {
+        final StringBuilder sb = new StringBuilder(4096);
+
+        for (Map.Entry<IndexKey, ArrayList<IndexOIData>> entry : result.getIndexOIData().entrySet()) {
+            entry.getKey().toString(sb, false);
+            sb.append(":\n");
+            for (IndexOIData indexOiData : entry.getValue()) {
+                sb.append("  ");
+                indexOiData.toString(sb, true);
+                sb.append("\n");
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            logger.log(Level.INFO, "\n{0}", sb.toString());
+            sb.setLength(0);
+        }
+    }
+
+    public void getSiblingData(final SelectorResult result, final OIData oiData, final int row,
+                               final ArrayList<IndexOIData> indexOIDataOutputList) {
+        getIndexedData(result, oiData, row, false, indexOIDataOutputList);
+    }
+
+    public void getIndexedData(final SelectorResult result, final OIData oiData, final int row,
+                               final boolean include, final ArrayList<IndexOIData> indexOIDataOutputList) {
+        final int nbCoords = oiData.getNbIndexCoords();
+        if (nbCoords <= 0) {
+            return;
+        }
+        final boolean isLogDebug = logger.isLoggable(Level.FINE);
+        if (isLogDebug) {
+            logger.log(Level.FINE, "getIndexedData: oiData = {0}, row = {1}", new Object[]{oiData, row});
+        }
+
+        final Map<IndexKey, ArrayList<IndexOIData>> indexMap = result.getIndexOIData();
+
+        for (int c = 0; c < nbCoords; c++) {
+            // build keys:
+            final IndexKey key = getIndexKey(oiData, row, c);
+
+            // Lookup pre-existing index mapping:
+            final ArrayList<IndexOIData> indexOIDataList = indexMap.get(key);
+            if (indexOIDataList != null) {
+                // add immutable references:
+                if (include) {
+                    indexOIDataOutputList.addAll(indexOIDataList);
+                } else {
+                    // skip reference to given (oidata, row):
+                    for (IndexOIData indexOiData : indexOIDataList) {
+                        // avoid cycles (skip tables having the same OI type as the selected oidata):
+                        if (!oiData.getExtName().equals(indexOiData.getOiData().getExtName())) {
+                            indexOIDataOutputList.add(indexOiData);
+                        }
+                    }
+                }
+            }
+        } // coords
+    }
+
+    private IndexKey getIndexKey(final OIData oiData, final int row, final int idx) {
+        return getIndexKey(oiData, row, idx, null, null);
+    }
+
+    @SuppressWarnings("AssignmentToMethodParameter")
+    private IndexKey getIndexKey(final OIData oiData, final int row, final int idx, String targetUID, String insModeUID) {
+        if ((row < 0) || (row >= oiData.getNbRows())) {
+            return null;
+        }
+        // null gives UNDEFINED:
+        if (targetUID == null) {
+            targetUID = getTargetUID(oiData, row);
+        }
+        if (insModeUID == null) {
+            insModeUID = getInsModeUID(oiData);
+        }
+
+        final double mjd = oiData.getMjd(row); // raw value (NaN allowed)
+
+        if (true) {
+            return IndexKeyFactory.INSTANCE.create(targetUID, insModeUID, mjd,
+                    getSortedBaseline(oiData.getIndexBL(row, idx))
+            );
+        }
+        return IndexKeyFactory.INSTANCE.create(targetUID, insModeUID, mjd,
+                oiData.getIndexUCoord(row, idx),
+                oiData.getIndexVCoord(row, idx)
+        );
+    }
+
+    private String getTargetUID(final OIData oiData, final int row) {
+        return tm.getGlobal(oiData.getTarget(row)).getTarget(); // global
+    }
+
+    private String getInsModeUID(final OIData oiData) {
+        return imm.getGlobal(oiData.getInsMode()).getInsName(); // global
+    }
+
+    private String getSortedBaseline(final String baseline) {
+        if (baseline != null) {
+            // translate staNames to global sorted staNames:
+            final String sortedStaNames = sortedStaNamesMap.get(baseline);
+            if (sortedStaNames != null) {
+                return sortedStaNames;
+            }
+        }
+        return ModelBase.UNDEFINED;
+    }
+
 }

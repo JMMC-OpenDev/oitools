@@ -401,6 +401,31 @@ public final class OIVis2 extends OIData {
         return angle;
     }
 
+    /* --- indexing methods --- */
+    @Override
+    public int getNbIndexCoords() {
+        return 1;
+    }
+
+    @Override
+    public double getIndexUCoord(final int row, final int idx) {
+        return getUCoord()[row];
+    }
+
+    @Override
+    public double getIndexVCoord(final int row, final int idx) {
+        return getVCoord()[row];
+    }
+
+    @Override
+    public String getIndexBL(final int row, final int idx) {
+        final short[][] staIndexes = getStaIndex();
+        if (staIndexes != null) {
+            return getStaNames(staIndexes[row]);
+        }
+        return ModelBase.UNDEFINED;
+    }
+
     /* --- Other methods --- */
     /**
      * Do syntactical analysis.

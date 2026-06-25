@@ -16,7 +16,9 @@
  */
 package fr.jmmc.oitools.processing;
 
+import fr.jmmc.oitools.model.IndexKey;
 import fr.jmmc.oitools.model.IndexMask;
+import fr.jmmc.oitools.model.IndexOIData;
 import fr.jmmc.oitools.model.NightId;
 import fr.jmmc.oitools.model.OIData;
 import fr.jmmc.oitools.model.OIFitsCollection;
@@ -27,6 +29,8 @@ import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.logging.Level;
 
 /**
  * Basic selector result (OIData and Granule sets)
@@ -43,6 +47,10 @@ public final class SelectorResult extends BaseSelectorResult {
     /* applied filters */
     private final Set<String> usedColumnsFiltersOIData2D = new LinkedHashSet<>();
     private final Set<String> relatedColumnsFiltersOIData2D = new LinkedHashSet<>();
+
+    /* index on pre-selected tables (before filters) */
+//    private final Map<IndexKey, ArrayList<IndexOIData>> indexOIData = new HashMap<>(128); // not too small
+    private final Map<IndexKey, ArrayList<IndexOIData>> indexOIData = new TreeMap<>();
 
     /* masks */
     /** Map between OIWavelength table to BitSet (mask 1D) */
@@ -113,6 +121,24 @@ public final class SelectorResult extends BaseSelectorResult {
         return filtersUsed;
     }
 
+    public Set<String> getUsedColumnsFiltersOIData2D() {
+        return usedColumnsFiltersOIData2D;
+    }
+
+    public Set<String> getRelatedColumnsFiltersOIData2D() {
+        return relatedColumnsFiltersOIData2D;
+    }
+
+    // --- index ---
+    public Map<IndexKey, ArrayList<IndexOIData>> getIndexOIData() {
+        return indexOIData;
+    }
+
+    public void getSiblingData(final OIData oiData, final int row,
+                               final ArrayList<IndexOIData> indexOIDataOutputList) {
+        getOiFitsCollection().getSiblingData(this, oiData, row, indexOIDataOutputList);
+    }
+
     // --- masks ---
     /**
      * Retrieves the IndexMask for the given OIWavelength.
@@ -181,14 +207,6 @@ public final class SelectorResult extends BaseSelectorResult {
      */
     public void putDataMask2D(final OIData oiData, final IndexMask mask) {
         this.maskOIDatas2D.put(oiData, mask);
-    }
-
-    public Set<String> getUsedColumnsFiltersOIData2D() {
-        return usedColumnsFiltersOIData2D;
-    }
-
-    public Set<String> getRelatedColumnsFiltersOIData2D() {
-        return relatedColumnsFiltersOIData2D;
     }
 
     // --- statistics on masked OIData ---
@@ -266,7 +284,7 @@ public final class SelectorResult extends BaseSelectorResult {
                     }
                     continue;
                 }
-                
+
                 final boolean[] rowFlags = (flags != null) ? flags[i] : null;
 
                 // Iterate on wave channels (l):

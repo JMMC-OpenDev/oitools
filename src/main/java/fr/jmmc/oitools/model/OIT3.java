@@ -125,22 +125,22 @@ public final class OIT3 extends OIData {
 
         // TODO: make U/V 1/2 orientation dependent:
         // Derived SPATIAL_U1_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U1, 
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U1,
                 "spatial U1 frequency", Types.TYPE_DBL, this)
                 .setAlias(OIFitsConstants.COLUMN_U1COORD_SPATIAL));
 
         // Derived SPATIAL_V1_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V1, 
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V1,
                 "spatial V1 frequency", Types.TYPE_DBL, this)
                 .setAlias(OIFitsConstants.COLUMN_V1COORD_SPATIAL));
 
         // Derived SPATIAL_U2_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U2, 
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_U2,
                 "spatial U2 frequency", Types.TYPE_DBL, this)
                 .setAlias(OIFitsConstants.COLUMN_U2COORD_SPATIAL));
 
         // Derived SPATIAL_V2_FREQ column definition
-        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V2, 
+        addDerivedColumnMeta(new WaveColumnMeta(OIFitsConstants.COLUMN_V2,
                 "spatial V2 frequency", Types.TYPE_DBL, this)
                 .setAlias(OIFitsConstants.COLUMN_V2COORD_SPATIAL));
 
@@ -494,6 +494,56 @@ public final class OIT3 extends OIData {
      */
     public double[][] getSpatialV2Coord() {
         return getSpatialCoord(OIFitsConstants.COLUMN_V2, OIFitsConstants.COLUMN_V2COORD);
+    }
+
+    /* --- indexing methods (only use after Analyzer) --- */
+    @Override
+    public int getNbIndexCoords() {
+        return 3;
+    }
+
+    @Override
+    public double getIndexUCoord(final int row, final int idx) {
+        switch (idx) {
+            case 0:
+                return getU1Coord()[row];
+            case 1:
+                return getU2Coord()[row];
+            case 2:
+                // (u3, v3) = (u1, v1) + (u2, v2)
+                return getU1Coord()[row] + getU2Coord()[row];
+            default:
+                return Double.NaN;
+        }
+    }
+
+    @Override
+    public double getIndexVCoord(final int row, final int idx) {
+        switch (idx) {
+            case 0:
+                return getV1Coord()[row];
+            case 1:
+                return getV2Coord()[row];
+            case 2:
+                // (u3, v3) = (u1, v1) + (u2, v2)
+                return getV1Coord()[row] + getV2Coord()[row];
+            default:
+                return Double.NaN;
+        }
+    }
+
+    @Override
+    public String getIndexBL(final int row, final int idx) {
+        // idx represents the BL index:
+        final short[][] staIndexes = getStaIndex();
+        if (staIndexes != null) {
+            // get BL from triplet (cached by Analyzer):
+            final short[][] baselines = getStaIndexesToBaselines().get(staIndexes[row]);
+            if (baselines != null) {
+                return getStaNames(baselines[idx]); // local
+            }
+        }
+        return null;
     }
 
     /* --- Other methods --- */

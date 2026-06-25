@@ -112,7 +112,7 @@ public final class OIFlux extends OIData {
 
         this.copyTable(src);
     }
-    
+
     /* --- Keywords --- */
     /**
      * Get the value of CALSTAT keyword
@@ -225,6 +225,27 @@ public final class OIFlux extends OIData {
         return null; // undefined
     }
 
+    /* --- indexing methods --- */
+    @Override
+    public int getNbIndexCoords() {
+        return 0;
+    }
+
+    @Override
+    public double getIndexUCoord(final int row, final int idx) {
+        return Double.NaN;
+    }
+
+    @Override
+    public double getIndexVCoord(final int row, final int idx) {
+        return Double.NaN;
+    }
+
+    @Override
+    public String getIndexBL(final int row, final int idx) {
+        return null;
+    }
+
     /* 
      * --- public data access --------------------------------------------------------- 
      */
@@ -247,7 +268,7 @@ public final class OIFlux extends OIData {
     @Override
     public void checkSyntax(final OIFitsChecker checker) {
         super.checkSyntax(checker);
-        
+
         /* TODO: add rules to validate (OIFits 2?)
         - If CALSTAT is C (Calibrated), the spectrum of the ob-
             ject does not depend on the telescope used: the table shall
@@ -257,8 +278,7 @@ public final class OIFlux extends OIData {
             FLUXDATA is the flux measured on the telescope of array
             ARRNAME indicated by STA_INDEX. In this case, the table shall
             not contain FOV and FOVTYPE.
-        */
-
+         */
         checkColumnError(checker, getFlag(), getFluxErr(), this, OIFitsConstants.COLUMN_FLUXERR);
 
         // OIFITS2: check OI_CORR indexes

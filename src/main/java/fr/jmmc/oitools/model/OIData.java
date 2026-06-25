@@ -818,12 +818,11 @@ public abstract class OIData extends OIAbstractData {
         sb.append(super.toString());
         sb.append(" [ INSNAME=").append(getInsName());
         sb.append(" NB_MEASUREMENTS=").append(getNbMeasurements());
-
+        sb.append(" (");
         if (nFlagged > 0) {
-            sb.append(" (").append(nFlagged).append(" data flagged out - ");
-            sb.append(getNbDataPointsNotFlagged()).append(" data ok )");
+            sb.append(nFlagged).append(" data flagged out - ");
         }
-        sb.append(" ]");
+        sb.append(getNbDataPointsNotFlagged()).append(" data ok ) ]");
         return sb.toString();
     }
 
@@ -1134,4 +1133,41 @@ public abstract class OIData extends OIAbstractData {
             }
         }
     }
+
+    /* --- indexing methods (only use after Analyzer) --- */
+    public final Target getTarget(final int row) {
+        final OITarget oiTarget = getOiTarget();
+        if (oiTarget != null) {
+            final Short targetId = Short.valueOf(getTargetId()[row]);
+            // Get target:
+            final Target target = oiTarget.getTargetIdToTarget().get(targetId); // local
+            if (target != null) {
+                return target;
+            }
+        }
+        // note: if no OITarget table then the target will be Target.UNDEFINED
+        return Target.UNDEFINED;
+    }
+
+    public final InstrumentMode getInsMode() {
+        // Note: if no OIWaveLength but have insname => may create an InstrumentMode("Missing<insname>"):
+        final OIWavelength oiWavelength = getOiWavelength();
+        if (oiWavelength != null) {
+            return oiWavelength.getInstrumentMode(); // local
+        }
+        return InstrumentMode.UNDEFINED;
+    }
+
+    public double getMjd(final int row) {
+        final double[] mjds = getMJD();
+        return (mjds != null) ? mjds[row] : Double.NaN;
+    }
+
+    public abstract int getNbIndexCoords();
+
+    public abstract double getIndexUCoord(final int row, final int idx);
+
+    public abstract double getIndexVCoord(final int row, final int idx);
+
+    public abstract String getIndexBL(final int row, final int idx);
 }
