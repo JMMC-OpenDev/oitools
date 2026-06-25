@@ -104,6 +104,10 @@ public final class ObjectUtils {
     }
 
     /* toString helper methods */
+    public static void toString(final StringBuilder sb, final Object o) {
+        toString(sb, false, o);
+    }
+
     /**
      * toString(object) implementation using ToStringable interface if possible
      * @param sb string builder to append to
@@ -118,6 +122,10 @@ public final class ObjectUtils {
         } else {
             sb.append(o.toString());
         }
+    }
+
+    public static void toString(final StringBuilder sb, final Collection<?> collection) {
+        toString(sb, false, collection);
     }
 
     /**
@@ -140,6 +148,10 @@ public final class ObjectUtils {
             sb.setLength(sb.length() - 2);
             sb.append(']');
         }
+    }
+
+    public static void toString(final StringBuilder sb, final Map<?, ?> map) {
+        toString(sb, false, map);
     }
 
     /**
@@ -186,11 +198,36 @@ public final class ObjectUtils {
      * @param sb string builder to append to
      * @param o any object
      */
+    public static void getObjectType(final StringBuilder sb, final Object o) {
+        if (o == null) {
+            sb.append("null");
+        } else {
+            sb.append(o.getClass().getSimpleName());
+        }
+    }
+
+    /**
+     * Append the string representation "&lt;simple class name&gt;#&lt;hashCode&gt;"
+     * @param sb string builder to append to
+     * @param o any object
+     */
     public static void getObjectInfo(final StringBuilder sb, final Object o) {
         if (o == null) {
             sb.append("null");
         } else {
-            sb.append(o.getClass().getSimpleName()).append('@').append(Integer.toHexString(System.identityHashCode(o)));
+            sb.append(o.getClass().getSimpleName());
+            getObjectIdentity(sb, o);
+        }
+    }
+
+    /**
+     * Append the string representation "@&lt;hashCode&gt;"
+     * @param sb string builder to append to
+     * @param o any object
+     */
+    public static void getObjectIdentity(final StringBuilder sb, final Object o) {
+        if (o != null) {
+            sb.append("-@").append(Integer.toHexString(System.identityHashCode(o)));
         }
     }
 
@@ -255,7 +292,8 @@ public final class ObjectUtils {
         if (o == null) {
             sb.append("null");
         } else {
-            sb.append(o.getClass().getName()).append('@').append(Integer.toHexString(System.identityHashCode(o)));
+            sb.append(o.getClass().getName());
+            getObjectIdentity(sb, o);
         }
     }
 }

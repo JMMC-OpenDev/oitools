@@ -234,7 +234,8 @@ public final class NumberUtils {
         }
         final double abs = Math.abs(val);
 
-        if ((abs > 0.0) && ((abs < 1e-3) || (abs > 1e4))) {
+        // 1e5 for MJD:
+        if ((abs > 0.0) && ((abs < 1e-3) || (abs > 1e5))) {
             return FormatterUtils.format(_fmtScience, val);
         }
         return FormatterUtils.format(_fmtDef, val);
